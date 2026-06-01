@@ -13,12 +13,17 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
 
         builder.HasKey(r => r.Id);
 
-        builder.Property(r => r.GradeRaw)
-            .IsRequired()
-            .HasMaxLength(20);
+        builder.OwnsOne(r => r.Grade, gb =>
+        {
+            gb.Property(g => g.Raw)
+                .HasColumnName("grade_raw")
+                .IsRequired()
+                .HasMaxLength(20);
 
-        builder.Property(r => r.GradeIndex)
-            .IsRequired();
+            gb.Property(g => g.Index)
+                .HasColumnName("grade_index")
+                .IsRequired();
+        });
 
         builder.Property(r => r.Type)
             .HasConversion<string>()
@@ -42,7 +47,7 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
             .HasDefaultValue(true);
 
         builder.HasIndex(r => r.GymId);
-        builder.HasIndex(r => r.GradeIndex);
+        builder.HasIndex("Grade_Index");
 
         builder.HasOne(r => r.Gym)
             .WithMany(g => g.Routes)

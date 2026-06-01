@@ -6,8 +6,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Entities;
-using Domain.Enums;
-using Application.Interfaces;
+using Cruxa.Application.Common.Interfaces;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {

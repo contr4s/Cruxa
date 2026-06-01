@@ -1,43 +1,78 @@
 namespace Cruxa.Domain.Entities;
 
-using Enums;
+using Cruxa.Domain.Abstractions;
+using Cruxa.Domain.Common;
+using Cruxa.Domain.Enums;
+using Cruxa.Domain.Events;
 
 /// <summary>
-/// Пост-тренировка (отчет о посещении скалодрома)
+/// Пост-тренировка (отчет о посещении скалодрома) - Aggregate Root
 /// </summary>
-public class Post
+public class Post : AggregateRoot<Guid>
 {
-    public Guid Id { get; set; }
+    public Guid UserId { get; private set; }
+    public Guid GymId { get; private set; }
+    public string? Description { get; private set; }
+    public List<string> MediaUrls { get; private set; } = [];
+    public PostVisibility Visibility { get; private set; } = PostVisibility.Public;
+    public PostStatus Status { get; private set; } = PostStatus.Draft;
+    public DateTime CreatedAt { get; private set; }
 
-    public Guid UserId { get; set; }
+    private readonly List<Ascent> _ascents = [];
+    public IReadOnlyCollection<Ascent> Ascents => _ascents.AsReadOnly();
 
-    public Guid GymId { get; set; }
+    private readonly List<Like> _likes = [];
+    public IReadOnlyCollection<Like> Likes => _likes.AsReadOnly();
 
-    /// <summary>
-    /// Текст поста, впечатления о тренировке
-    /// </summary>
-    public string? Description { get; set; }
+    private readonly List<Comment> _comments = [];
+    public IReadOnlyCollection<Comment> Comments => _comments.AsReadOnly();
 
-    /// <summary>
-    /// Список ссылок на фото/видео с тренировки
-    /// </summary>
-    public List<string> MediaUrls { get; set; } = [];
+    private User _user = null!;
+    public User User => _user;
 
-    public PostVisibility Visibility { get; set; } = PostVisibility.Public;
+    private Gym _gym = null!;
+    public Gym Gym => _gym;
 
-    public PostStatus Status { get; set; } = PostStatus.Draft;
+    private Post() { }
 
-    public DateTime CreatedAt { get; set; }
+    public static Result<Post> Create(Guid userId, Guid gymId, string? description, List<string>? mediaUrls)
+    {
+        Guard.AgainstDefault(userId, nameof(userId));
+        Guard.AgainstDefault(gymId, nameof(gymId));
 
-    // Navigation properties
+        var post = new Post
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            GymId = gymId,
+            Description = description,
+            MediaUrls = mediaUrls ?? [],
+            CreatedAt = DateTime.UtcNow,
+            Status = PostStatus.Draft,
+            Visibility = PostVisibility.Public
+        };
 
-    public User User { get; set; } = null!;
+        post.AddDomainEvent(new PostCreatedEvent(post.Id, userId, gymId));
 
-    public Gym Gym { get; set; } = null!;
+        return Result.Success(post);
+    }
 
-    public ICollection<Ascent> Ascents { get; set; } = [];
+    public void Publish()
+    {
+        if (Status == PostStatus.Published) return;
+        Status = PostStatus.Published;
+        RaiseDomainEvent(new PostPublishedEvent(Id));
+    }
 
-    public ICollection<Like> Likes { get; set; } = [];
+    public void Update(string? description, List<string>? mediaUrls, PostVisibility? visibility)
+    {
+        if (description != null) Description = description;
+        if (mediaUrls != null) MediaUrls = mediaUrls;
+        if (visibility.HasValue) Visibility = visibility.Value;
+    }
 
-    public ICollection<Comment> Comments { get; set; } = [];
+    public void AddAscent(Ascent ascent)
+    {
+        _ascents.Add(ascent);
+    }
 }

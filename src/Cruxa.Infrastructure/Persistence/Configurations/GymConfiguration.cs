@@ -27,6 +27,12 @@ internal class GymConfiguration : IEntityTypeConfiguration<Gym>
             .IsRequired()
             .HasMaxLength(300);
 
+        builder.OwnsOne(g => g.Location, lb =>
+        {
+            lb.Property(l => l.Latitude).HasColumnName("latitude");
+            lb.Property(l => l.Longitude).HasColumnName("longitude");
+        });
+
         builder.Property(g => g.Prices)
             .HasColumnType("jsonb");
 
@@ -42,10 +48,13 @@ internal class GymConfiguration : IEntityTypeConfiguration<Gym>
         builder.Property(g => g.Website)
             .HasMaxLength(500);
 
+        builder.Property(g => g.Location)
+            .IsRequired();
+
         builder.HasIndex(g => g.City);
 
         builder.HasOne(g => g.GradingSystem)
-            .WithMany(gs => gs.Gyms)
+            .WithMany("_gyms")
             .HasForeignKey(g => g.GradingSystemId)
             .OnDelete(DeleteBehavior.SetNull);
     }

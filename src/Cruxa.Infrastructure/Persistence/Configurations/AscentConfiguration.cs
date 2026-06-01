@@ -3,7 +3,6 @@ namespace Cruxa.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Domain.Entities;
-using Domain.Enums;
 
 internal class AscentConfiguration : IEntityTypeConfiguration<Ascent>
 {

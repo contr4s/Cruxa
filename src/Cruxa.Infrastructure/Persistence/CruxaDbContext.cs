@@ -1,6 +1,5 @@
 namespace Cruxa.Infrastructure.Persistence;
 
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 
@@ -24,20 +23,21 @@ public class CruxaDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(CruxaDbContext).Assembly);
 
-        modelBuilder.Entity<GradingSystem>().HasData(new GradingSystem
-        {
-            Id = DefaultGradingSystemId,
-            Name = "Fontainebleau (Bouldering)",
-            GradeMapping = JsonSerializer.Serialize(new Dictionary<string, int>
-            {
-                ["4a"] = 400, ["4b"] = 420, ["4c"] = 440,
-                ["5a"] = 460, ["5b"] = 480, ["5c"] = 500,
-                ["6a"] = 520, ["6a+"] = 540, ["6b"] = 560,
-                ["6b+"] = 580, ["6c"] = 600, ["6c+"] = 620,
-                ["7a"] = 640, ["7a+"] = 660, ["7b"] = 680,
-                ["7b+"] = 700, ["7c"] = 720, ["7c+"] = 740,
-                ["8a"] = 760, ["8a+"] = 780, ["8b"] = 800
-            })
-        });
+        modelBuilder.Entity<GradingSystem>().HasData(
+            new GradingSystem(
+                DefaultGradingSystemId,
+                "Fontainebleau (Bouldering)",
+                new Dictionary<string, int>
+                {
+                    ["4a"] = 400, ["4b"] = 420, ["4c"] = 440,
+                    ["5a"] = 460, ["5b"] = 480, ["5c"] = 500,
+                    ["6a"] = 520, ["6a+"] = 540, ["6b"] = 560,
+                    ["6b+"] = 580, ["6c"] = 600, ["6c+"] = 620,
+                    ["7a"] = 640, ["7a+"] = 660, ["7b"] = 680,
+                    ["7b+"] = 700, ["7c"] = 720, ["7c+"] = 740,
+                    ["8a"] = 760, ["8a+"] = 780, ["8b"] = 800
+                }
+            )
+        );
     }
 }

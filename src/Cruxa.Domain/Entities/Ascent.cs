@@ -1,49 +1,68 @@
 namespace Cruxa.Domain.Entities;
 
-using Enums;
+using Cruxa.Domain.Abstractions;
+using Cruxa.Domain.Common;
+using Cruxa.Domain.Enums;
 
 /// <summary>
 /// Пролаз / Отметка о прохождении трассы
 /// </summary>
-public class Ascent
+public class Ascent : Entity<Guid>
 {
-    public Guid Id { get; set; }
+    public Guid PostId { get; private set; }
+    public Guid UserId { get; private set; }
+    public Guid RouteId { get; private set; }
+    public AscentStyle Style { get; private set; }
+    public int? Rating { get; private set; }
+    public List<string> MediaUrls { get; private set; } = [];
+    public string? PrivateNotes { get; private set; }
+    public string? PublicReview { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
-    public Guid PostId { get; set; }
+    // Navigation properties (lazy load not supported, but for relationships)
+    private readonly Post _post = null!;
+    public Post Post => _post;
 
-    public Guid UserId { get; set; }
+    private readonly Route _route = null!;
+    public Route Route => _route;
 
-    public Guid RouteId { get; set; }
+    private readonly User _user = null!;
+    public User User => _user;
 
-    public AscentStyle Style { get; set; }
+    private Ascent() { }
 
-    /// <summary>
-    /// Оценка трассы пользователем от 1 до 5
-    /// </summary>
-    public int? Rating { get; set; }
+    public static Result<Ascent> Create(
+        Guid postId,
+        Guid userId,
+        Guid routeId,
+        AscentStyle style,
+        int? rating = null,
+        List<string>? mediaUrls = null,
+        string? privateNotes = null,
+        string? publicReview = null)
+    {
+        Guard.AgainstDefault(postId, nameof(postId));
+        Guard.AgainstDefault(userId, nameof(userId));
+        Guard.AgainstDefault(routeId, nameof(routeId));
 
-    /// <summary>
-    /// Фото/видео конкретного пролаза
-    /// </summary>
-    public List<string> MediaUrls { get; set; } = [];
+        return Result.Success(new Ascent
+        {
+            Id = Guid.NewGuid(),
+            PostId = postId,
+            UserId = userId,
+            RouteId = routeId,
+            Style = style,
+            Rating = rating,
+            MediaUrls = mediaUrls ?? [],
+            PrivateNotes = privateNotes,
+            PublicReview = publicReview,
+            CreatedAt = DateTime.UtcNow
+        });
+    }
 
-    /// <summary>
-    /// Приватные заметки чисто для себя
-    /// </summary>
-    public string? PrivateNotes { get; set; }
-
-    /// <summary>
-    /// Публичный отзыв о трассе
-    /// </summary>
-    public string? PublicReview { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    // Navigation properties
-
-    public Post Post { get; set; } = null!;
-
-    public User User { get; set; } = null!;
-
-    public Route Route { get; set; } = null!;
+    public void UpdateReview(string? publicReview, int? rating)
+    {
+        PublicReview = publicReview;
+        Rating = rating;
+    }
 }

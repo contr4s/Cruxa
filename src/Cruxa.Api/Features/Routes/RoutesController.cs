@@ -1,0 +1,70 @@
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Features.Routes.DTOs;
+using Cruxa.Application.Features.Routes.Queries;
+using Cruxa.Application.Features.Routes.Commands;
+using System.Security.Claims;
+
+namespace Cruxa.Api.Features.Routes;
+
+[ApiController]
+[Route("api/[controller]")]
+public class RoutesController(IMediator mediator) : ControllerBase
+{
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<RouteDto>>> GetAll()
+    {
+        var result = await mediator.Send(new GetAllRoutesQuery());
+        return Ok(result.Value);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<RouteDto>> GetById(Guid id)
+    {
+        var result = await mediator.Send(new GetRouteByIdQuery(id));
+        return result.IsSuccess ? Ok(result.Value) : NotFound();
+    }
+
+    [HttpGet("gym/{gymId:guid}")]
+    public async Task<ActionResult<IEnumerable<RouteDto>>> GetByGym(Guid gymId)
+    {
+        var result = await mediator.Send(new GetRoutesByGymQuery(gymId));
+        return Ok(result.Value);
+    }
+
+    [HttpPost]
+    [Authorize(Policy = "RequireRoutesetter")]
+    public async Task<ActionResult<RouteDto>> Create(CreateRouteCommand command)
+    {
+        var authorId = GetCurrentUserId();
+        command = command with { AuthorId = authorId };
+        var result = await mediator.Send(command);
+        return result.IsSuccess
+            ? CreatedAtAction(nameof(GetById), new { id = result.Value!.Id }, result.Value)
+            : BadRequest(result.Error.Message);
+    }
+
+    [HttpPut("{id:guid}")]
+    [Authorize(Policy = "RequireRoutesetter")]
+    public async Task<IActionResult> Update(Guid id, UpdateRouteCommand command)
+    {
+        var result = await mediator.Send(command with {Id = id});
+        return result.IsSuccess ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [Authorize(Policy = "RequireGymAdmin")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await mediator.Send(new DeleteRouteCommand(id));
+        return result.IsSuccess ? NoContent() : NotFound();
+    }
+
+    private Guid? GetCurrentUserId()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? User.FindFirst("sub")?.Value;
+        return userIdClaim is null ? null : Guid.Parse(userIdClaim);
+    }
+}

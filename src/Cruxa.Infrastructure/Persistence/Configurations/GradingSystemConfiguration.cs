@@ -16,7 +16,8 @@ internal class GradingSystemConfiguration : IEntityTypeConfiguration<GradingSyst
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(gs => gs.GradeMapping)
+        builder.Property<string>("_gradeMappingJson")
+            .HasColumnName("grade_mapping")
             .HasColumnType("jsonb")
             .IsRequired();
     }

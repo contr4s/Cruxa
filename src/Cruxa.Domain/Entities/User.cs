@@ -1,39 +1,84 @@
 namespace Cruxa.Domain.Entities;
 
-using Enums;
+using Cruxa.Domain.Abstractions;
+using Cruxa.Domain.Common;
+using Cruxa.Domain.Enums;
+using Cruxa.Domain.Events;
+using Cruxa.Domain.ValueObjects;
 
 /// <summary>
-/// Пользователь системы
+/// Пользователь системы (Aggregate Root)
 /// </summary>
-public class User
+public class User : AggregateRoot<Guid>
 {
-    public Guid Id { get; set; }
-
-    public string Username { get; set; } = string.Empty;
-
-    public string Email { get; set; } = string.Empty;
-
-    public string PasswordHash { get; set; } = string.Empty;
-
-    public string? AvatarUrl { get; set; }
-
-    public string? City { get; set; }
-
-    public Role Role { get; set; } = Role.Climber;
-
-    public DateTime CreatedAt { get; set; }
+    public string Username { get; private set; }
+    public Email Email { get; private set; }
+    public string PasswordHash { get; private set; }
+    public string? AvatarUrl { get; private set; }
+    public string? City { get; private set; }
+    public Role Role { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     // Navigation properties
+    private readonly List<Post> _posts = [];
+    public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
 
-    public ICollection<Post> Posts { get; set; } = [];
+    private readonly List<Ascent> _ascents = [];
+    public IReadOnlyCollection<Ascent> Ascents => _ascents.AsReadOnly();
 
-    public ICollection<Ascent> Ascents { get; set; } = [];
+    private readonly List<Follower> _followers = [];
+    public IReadOnlyCollection<Follower> Followers => _followers.AsReadOnly();
+    private readonly List<Follower> _following = [];
+    public IReadOnlyCollection<Follower> Following => _following.AsReadOnly();
 
-    public ICollection<Follower> Followers { get; set; } = [];
+    private readonly List<Like> _likes = [];
+    public IReadOnlyCollection<Like> Likes => _likes.AsReadOnly();
 
-    public ICollection<Follower> Following { get; set; } = [];
+    private readonly List<Comment> _comments = [];
+    public IReadOnlyCollection<Comment> Comments => _comments.AsReadOnly();
 
-    public ICollection<Like> Likes { get; set; } = [];
+    // For EF Core
+    private User() { }
 
-    public ICollection<Comment> Comments { get; set; } = [];
+    public static Result<User> Create(Email email, string username, string passwordHash)
+    {
+        Guard.AgainstNullOrWhiteSpace(username, nameof(username));
+
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = email,
+            Username = username.Trim(),
+            PasswordHash = passwordHash,
+            Role = Role.Climber,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        user.AddDomainEvent(new UserRegisteredEvent(user.Id, user.Email.Value));
+
+        return Result.Success(user);
+    }
+
+    public Result ChangePassword(string currentPasswordHash, string newPasswordHash)
+    {
+        Guard.AgainstNullOrWhiteSpace(currentPasswordHash, nameof(currentPasswordHash));
+        Guard.AgainstNullOrWhiteSpace(newPasswordHash, nameof(newPasswordHash));
+
+        if (currentPasswordHash != PasswordHash)
+            return Result.Failure(Error.Validation("Current password is incorrect"));
+
+        PasswordHash = newPasswordHash;
+        return Result.Success();
+    }
+
+    public void UpdateProfile(string? avatarUrl, string? city)
+    {
+        if (avatarUrl is not null) AvatarUrl = avatarUrl;
+        if (city is not null) City = city;
+    }
+
+    public void ChangeRole(Role newRole)
+    {
+        Role = newRole;
+    }
 }

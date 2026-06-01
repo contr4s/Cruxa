@@ -1,54 +1,87 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Enums;
+using Cruxa.Domain.Abstractions;
+using Cruxa.Domain.Common;
+using Cruxa.Domain.ValueObjects;
 
 /// <summary>
-/// Скалодром
+/// Скалодром (Aggregate Root)
 /// </summary>
-public class Gym
+public class Gym : AggregateRoot<Guid>
 {
-    public Guid Id { get; set; }
+    public string Name { get; private set; }
+    public string? Description { get; private set; }
+    public string City { get; private set; }
+    public string Address { get; private set; }
 
-    public string Name { get; set; } = string.Empty;
+    private GeoCoordinate _location = default!;
+    public GeoCoordinate Location => _location;
 
-    public string? Description { get; set; }
+    public string? ContactInfo { get; private set; }
+    public string? Website { get; private set; }
+    public string? Prices { get; private set; }
+    public string? WorkingHours { get; private set; }
+    public List<string> PhotoUrls { get; private set; } = [];
+    public Guid? GradingSystemId { get; private set; }
+    public bool IsParsed { get; private set; }
 
-    public string City { get; set; } = string.Empty;
+    // Navigation
+    public GradingSystem? GradingSystem { get; private set; }
+    private readonly List<Route> _routes = [];
+    public IReadOnlyCollection<Route> Routes => _routes.AsReadOnly();
+    private readonly List<Post> _posts = [];
+    public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
 
-    public string Address { get; set; } = string.Empty;
+    private Gym() { }
 
-    public double Latitude { get; set; }
+    public static Result<Gym> Create(string name, string city, string address, double latitude, double longitude)
+    {
+        Guard.AgainstNullOrWhiteSpace(name, nameof(name));
+        Guard.AgainstNullOrWhiteSpace(city, nameof(city));
+        Guard.AgainstNullOrWhiteSpace(address, nameof(address));
 
-    public double Longitude { get; set; }
+        var locationResult = GeoCoordinate.Create(latitude, longitude);
+        if (locationResult.IsFailure) return Result.Failure<Gym>(locationResult.Error);
 
-    public string? ContactInfo { get; set; }
+        return Result.Success(new Gym
+        {
+            Id = Guid.NewGuid(),
+            Name = name.Trim(),
+            City = city.Trim(),
+            Address = address.Trim(),
+            _location = locationResult.Value
+        });
+    }
 
-    public string? Website { get; set; }
-
-    /// <summary>
-    /// Информация о ценах (JSONB)
-    /// </summary>
-    public string? Prices { get; set; }
-
-    /// <summary>
-    /// Часы работы (JSONB)
-    /// </summary>
-    public string? WorkingHours { get; set; }
-
-    /// <summary>
-    /// Список ссылок на фотографии (text[])
-    /// </summary>
-    public List<string> PhotoUrls { get; set; } = [];
-
-    public Guid? GradingSystemId { get; set; }
-
-    public bool IsParsed { get; set; }
-
-    // Navigation properties
-
-    public GradingSystem? GradingSystem { get; set; }
-
-    public ICollection<Route> Routes { get; set; } = [];
-
-    public ICollection<Post> Posts { get; set; } = [];
+    public void Update(
+        string? name = null,
+        string? description = null,
+        string? city = null,
+        string? address = null,
+        double? latitude = null,
+        double? longitude = null,
+        string? contactInfo = null,
+        string? website = null,
+        string? prices = null,
+        string? workingHours = null,
+        List<string>? photoUrls = null,
+        Guid? gradingSystemId = null)
+    {
+        if (name is not null) { Guard.AgainstNullOrWhiteSpace(name, nameof(name)); Name = name.Trim(); }
+        if (description is not null) Description = description;
+        if (city is not null) { Guard.AgainstNullOrWhiteSpace(city, nameof(city)); City = city.Trim(); }
+        if (address is not null) { Guard.AgainstNullOrWhiteSpace(address, nameof(address)); Address = address.Trim(); }
+        if (latitude.HasValue && longitude.HasValue)
+        {
+            var lr = GeoCoordinate.Create(latitude.Value, longitude.Value);
+            if (lr.IsFailure) throw new ArgumentException(lr.Error.Message);
+            _location = lr.Value;
+        }
+        if (contactInfo is not null) ContactInfo = contactInfo;
+        if (website is not null) Website = website;
+        if (prices is not null) Prices = prices;
+        if (workingHours is not null) WorkingHours = workingHours;
+        if (photoUrls is not null) PhotoUrls = photoUrls;
+        if (gradingSystemId.HasValue) GradingSystemId = gradingSystemId;
+    }
 }

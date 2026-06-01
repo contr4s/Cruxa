@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
-using Cruxa.Application.Mappings;
-using Cruxa.Application.Interfaces;
-using Cruxa.Application.Services;
+using Mapster;
+using Cruxa.Application.Features.Auth.Handlers;
+using Cruxa.Application.Common.Behaviors;
+using FluentValidation;
 
 namespace Cruxa.Application.Extensions;
 
@@ -11,17 +11,18 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        // AutoMapper
-        services.AddAutoMapper(typeof(MappingProfile));
+        // MediatR (CQRS)
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblyContaining<RegisterHandler>();
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+        });
 
-        // Services
-        services.AddScoped<IGradeMappingService, GradeMappingService>();
-        services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IGymService, GymService>();
-        services.AddScoped<IRouteService, RouteService>();
-        services.AddScoped<IPostService, PostService>();
-        services.AddScoped<IAscentService, AscentService>();
+        // FluentValidation
+        services.AddValidatorsFromAssemblyContaining<RegisterHandler>();
+
+        // Mapster
+        TypeAdapterConfig.GlobalSettings.Default.MapToConstructor(true);
 
         return services;
     }

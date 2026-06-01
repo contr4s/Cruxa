@@ -1,57 +1,81 @@
 namespace Cruxa.Domain.Entities;
 
-using Enums;
+using Cruxa.Domain.Abstractions;
+using Cruxa.Domain.Common;
+using Cruxa.Domain.Enums;
+using Cruxa.Domain.Events;
+using Cruxa.Domain.ValueObjects;
 
 /// <summary>
-/// Трасса на скалодроме
+/// Трасса на скалодроме (Entity, not aggregate root)
 /// </summary>
-public class Route
+public class Route : Entity<Guid>
 {
-    public Guid Id { get; set; }
+    public Grade Grade { get; private set; }
+    public RouteType Type { get; private set; }
+    public HoldColor HoldColor { get; private set; }
+    public List<string> PhotoUrls { get; private set; } = [];
+    public List<string> Tags { get; private set; } = [];
+    public string? Sector { get; private set; }
+    public bool IsActive { get; private set; } = true;
 
-    public Guid GymId { get; set; }
-
-    public Guid? AuthorId { get; set; }
-
-    /// <summary>
-    /// Оригинальная сложность от админа (выбирается из справочника GradingSystem)
-    /// </summary>
-    public string GradeRaw { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Нормализованная средняя сложность (0 - 1000) для статистики
-    /// </summary>
-    public int GradeIndex { get; set; }
-
-    public RouteType Type { get; set; }
-
-    public HoldColor HoldColor { get; set; }
-
-    /// <summary>
-    /// Фотографии трассы
-    /// </summary>
-    public List<string> PhotoUrls { get; set; } = [];
-
-    /// <summary>
-    /// Теги стиля трассы (text[])
-    /// </summary>
-    public List<string> Tags { get; set; } = [];
-
-    /// <summary>
-    /// Название зоны на скалодроме или расположение
-    /// </summary>
-    public string? Sector { get; set; }
-
-    /// <summary>
-    /// Активна ли трасса (не скручена)
-    /// </summary>
-    public bool IsActive { get; set; } = true;
+    public Guid GymId { get; private set; }
+    public Guid? AuthorId { get; private set; }
 
     // Navigation properties
+    private Gym _gym = null!;
+    public Gym Gym => _gym;
 
-    public Gym Gym { get; set; } = null!;
+    public User? Author { get; private set; }
 
-    public User? Author { get; set; }
+    private readonly List<Ascent> _ascents = [];
+    public IReadOnlyCollection<Ascent> Ascents => _ascents.AsReadOnly();
 
-    public ICollection<Ascent> Ascents { get; set; } = [];
+    // For EF Core
+    private Route() { }
+
+    public static Result<Route> Create(
+        Guid gymId,
+        Grade grade,
+        RouteType type,
+        HoldColor holdColor,
+        Guid? authorId = null,
+        List<string>? photoUrls = null,
+        List<string>? tags = null,
+        string? sector = null)
+    {
+        Guard.AgainstDefault(gymId, nameof(gymId));
+        Guard.AgainstNull(grade, nameof(grade));
+
+        var route = new Route
+        {
+            Id = Guid.NewGuid(),
+            GymId = gymId,
+            AuthorId = authorId,
+            Grade = grade,
+            Type = type,
+            HoldColor = holdColor,
+            PhotoUrls = photoUrls ?? [],
+            Tags = tags ?? [],
+            Sector = sector
+        };
+
+        return Result.Success(route);
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+        AddDomainEvent(new RouteDeactivatedEvent(Id));
+    }
+
+    public void Update(RouteType? type, HoldColor? holdColor, List<string>? photoUrls, List<string>? tags, string? sector, bool? isActive)
+    {
+        if (type.HasValue) Type = type.Value;
+        if (holdColor.HasValue) HoldColor = holdColor.Value;
+        if (photoUrls != null) PhotoUrls = photoUrls;
+        if (tags != null) Tags = tags;
+        if (sector != null) Sector = sector;
+        if (isActive.HasValue) IsActive = isActive.Value;
+    }
 }
