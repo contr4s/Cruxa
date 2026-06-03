@@ -1,7 +1,9 @@
 namespace Cruxa.Infrastructure.Persistence.Configurations;
 
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Domain.Entities;
 using Domain.Enums;
 
@@ -19,7 +21,10 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Email)
             .IsRequired()
-            .HasMaxLength(320);
+            .HasMaxLength(320)
+            .HasConversion(new ValueConverter<Email, string>(
+                email => email.Value,
+                value => Email.Create(value).Value));
 
         builder.Property(u => u.PasswordHash)
             .IsRequired();

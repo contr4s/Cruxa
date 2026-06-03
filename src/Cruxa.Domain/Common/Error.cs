@@ -3,17 +3,8 @@ namespace Cruxa.Domain.Common;
 /// <summary>
 /// Represents a domain error with code and message
 /// </summary>
-public sealed record Error
+public sealed record Error(string Code, string Message)
 {
-    public string Code { get; }
-    public string Message { get; }
-
-    public Error(string code, string message)
-    {
-        Code = code;
-        Message = message;
-    }
-
     public static readonly Error None = new("None", string.Empty);
 
     public static Error NotFound(string entity, params object[] args)

@@ -39,18 +39,6 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Property<Guid>("PostId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("PrivateNotes")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("PublicReview")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<int?>("Rating")
-                        .HasMaxLength(2)
-                        .HasColumnType("integer");
-
                     b.Property<Guid>("RouteId")
                         .HasColumnType("uuid");
 
@@ -128,14 +116,15 @@ namespace Cruxa.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("GradeMapping")
-                        .IsRequired()
-                        .HasColumnType("jsonb");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
+
+                    b.Property<string>("_gradeMappingJson")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("grade_mapping");
 
                     b.HasKey("Id");
 
@@ -145,8 +134,8 @@ namespace Cruxa.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            GradeMapping = "{\"4a\":400,\"4b\":420,\"4c\":440,\"5a\":460,\"5b\":480,\"5c\":500,\"6a\":520,\"6a\\u002B\":540,\"6b\":560,\"6b\\u002B\":580,\"6c\":600,\"6c\\u002B\":620,\"7a\":640,\"7a\\u002B\":660,\"7b\":680,\"7b\\u002B\":700,\"7c\":720,\"7c\\u002B\":740,\"8a\":760,\"8a\\u002B\":780,\"8b\":800}",
-                            Name = "Fontainebleau (Bouldering)"
+                            Name = "Fontainebleau (Bouldering)",
+                            _gradeMappingJson = "{\"4a\":400,\"4b\":420,\"4c\":440,\"5a\":460,\"5b\":480,\"5c\":500,\"6a\":520,\"6a\\u002B\":540,\"6b\":560,\"6b\\u002B\":580,\"6c\":600,\"6c\\u002B\":620,\"7a\":640,\"7a\\u002B\":660,\"7b\":680,\"7b\\u002B\":700,\"7c\":720,\"7c\\u002B\":740,\"8a\":760,\"8a\\u002B\":780,\"8b\":800}"
                         });
                 });
 
@@ -179,12 +168,6 @@ namespace Cruxa.Infrastructure.Migrations
 
                     b.Property<bool>("IsParsed")
                         .HasColumnType("boolean");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double precision");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -296,14 +279,6 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Property<Guid?>("AuthorId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("GradeIndex")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("GradeRaw")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
                     b.Property<Guid>("GymId")
                         .HasColumnType("uuid");
 
@@ -340,11 +315,51 @@ namespace Cruxa.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("GradeIndex");
-
                     b.HasIndex("GymId");
 
                     b.ToTable("routes", (string)null);
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.RouteReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PrivateNotes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<string>("PublicReview")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<int?>("Rating")
+                        .HasMaxLength(2)
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("RouteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RouteId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("RouteId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("route_reviews", (string)null);
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.User", b =>
@@ -468,7 +483,31 @@ namespace Cruxa.Infrastructure.Migrations
                         .HasForeignKey("GradingSystemId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.OwnsOne("Cruxa.Domain.ValueObjects.GeoCoordinate", "Location", b1 =>
+                        {
+                            b1.Property<Guid>("GymId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<double>("Latitude")
+                                .HasColumnType("double precision")
+                                .HasColumnName("latitude");
+
+                            b1.Property<double>("Longitude")
+                                .HasColumnType("double precision")
+                                .HasColumnName("longitude");
+
+                            b1.HasKey("GymId");
+
+                            b1.ToTable("gyms");
+
+                            b1.WithOwner()
+                                .HasForeignKey("GymId");
+                        });
+
                     b.Navigation("GradingSystem");
+
+                    b.Navigation("Location")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.Like", b =>
@@ -522,9 +561,56 @@ namespace Cruxa.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("Cruxa.Domain.ValueObjects.Grade", "Grade", b1 =>
+                        {
+                            b1.Property<Guid>("RouteId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Index")
+                                .HasColumnType("integer")
+                                .HasColumnName("grade_index");
+
+                            b1.Property<string>("Raw")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("grade_raw");
+
+                            b1.HasKey("RouteId");
+
+                            b1.HasIndex("Index");
+
+                            b1.ToTable("routes");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RouteId");
+                        });
+
                     b.Navigation("Author");
 
+                    b.Navigation("Grade")
+                        .IsRequired();
+
                     b.Navigation("Gym");
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.RouteReview", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.Route", "Route")
+                        .WithMany("Reviews")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cruxa.Domain.Entities.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Route");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.GradingSystem", b =>
@@ -551,6 +637,8 @@ namespace Cruxa.Infrastructure.Migrations
             modelBuilder.Entity("Cruxa.Domain.Entities.Route", b =>
                 {
                     b.Navigation("Ascents");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.User", b =>
@@ -566,6 +654,8 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Posts");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

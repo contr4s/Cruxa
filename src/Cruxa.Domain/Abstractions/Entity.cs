@@ -1,6 +1,6 @@
 namespace Cruxa.Domain.Abstractions;
 
-using Cruxa.Domain.Events;
+using Events;
 
 /// <summary>
 /// Базовый класс для Entity (DDD)
@@ -25,13 +25,13 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
         => _domainEvents.Clear();
 
     public override bool Equals(object? obj)
-        => obj is Entity<TId> other && Id!.Equals(other.Id);
+        => obj is Entity<TId> other && Id.Equals(other.Id);
 
     public bool Equals(Entity<TId>? other)
-        => other is not null && Id!.Equals(other.Id);
+        => other is not null && Id.Equals(other.Id);
 
     public override int GetHashCode()
-        => Id!.GetHashCode();
+        => Id.GetHashCode();
 
     public static bool operator ==(Entity<TId> left, Entity<TId> right)
         => left is null ? right is null : left.Equals(right);

@@ -1,10 +1,10 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.Enums;
-using Cruxa.Domain.Events;
-using Cruxa.Domain.ValueObjects;
+using Abstractions;
+using Common;
+using Enums;
+using Events;
+using ValueObjects;
 
 /// <summary>
 /// Пользователь системы (Aggregate Root)
@@ -36,6 +36,9 @@ public class User : AggregateRoot<Guid>
 
     private readonly List<Comment> _comments = [];
     public IReadOnlyCollection<Comment> Comments => _comments.AsReadOnly();
+
+    private readonly List<RouteReview> _reviews = [];
+    public IReadOnlyCollection<RouteReview> Reviews => _reviews.AsReadOnly();
 
     // For EF Core
     private User() { }

@@ -8,12 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoBogus" Version="2.13.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="FluentAssertions" Version="8.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
     <PackageReference Include="Moq" Version="4.20.72" />
-    <PackageReference Include="Testcontainers" Version="4.12.0" />
+    <PackageReference Include="Testcontainers.PostgreSql" Version="4.12.0" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,13 +23,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="AutoBogus" />
     <Using Include="Xunit" />
+    <Using Include="Cruxa.Application.Features.Ascents.Commands" />
+    <Using Include="Cruxa.Application.Features.Auth.Commands" />
+    <Using Include="Cruxa.Application.Features.Gyms.Commands" />
+    <Using Include="Cruxa.Application.Features.Posts.DTOs" />
+    <Using Include="Cruxa.Application.Features.Routes.Commands" />
+    <Using Include="Cruxa.Application.Features.Routes.Reviews.Commands" />
+    <Using Include="Cruxa.Application.Features.Social.Commands" />
+    <Using Include="Cruxa.Application.Features.Users.Commands" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Cruxa.Domain\Cruxa.Domain.csproj" />
     <ProjectReference Include="..\..\src\Cruxa.Application\Cruxa.Application.csproj" />
     <ProjectReference Include="..\..\src\Cruxa.Infrastructure\Cruxa.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Cruxa.Api\Cruxa.Api.csproj" />
   </ItemGroup>
 
 </Project>

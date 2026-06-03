@@ -32,7 +32,9 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
             {
                 var resultType = typeof(TResponse).GetGenericArguments()[0];
-                var failureMethod = typeof(Result).GetMethod(nameof(Result.Failure))!.MakeGenericMethod(resultType);
+                var failureMethod = typeof(Result).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
+                    .First(m => m.Name == nameof(Result.Failure) && m.IsGenericMethodDefinition)
+                    .MakeGenericMethod(resultType);
                 return (TResponse)failureMethod.Invoke(null, [Error.Validation(message)])!;
             }
         }

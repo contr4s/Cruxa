@@ -1,6 +1,6 @@
 namespace Cruxa.Domain.ValueObjects;
 
-using Cruxa.Domain.Common;
+using Common;
 
 /// <summary>
 /// GradeMapping value object - dictionary mapping raw grade string to normalized index

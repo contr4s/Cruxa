@@ -5,6 +5,7 @@ using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Domain.Entities;
+// removed invalid reference to infrastructure
 
 namespace Cruxa.Application.Features.Gyms.Handlers;
 
@@ -16,9 +17,10 @@ public class CreateGymHandler(IGymRepository gyms) : IRequestHandler<CreateGymCo
         if (result.IsFailure) return Result.Failure<GymDto>(result.Error);
 
         var gym = result.Value;
-        gym.Update(description: cmd.Description, contactInfo: cmd.ContactInfo, website: cmd.Website,
+        var gradingSystemId = cmd.GradingSystemId ?? new Guid("00000000-0000-0000-0000-000000000001");
+            gym.Update(description: cmd.Description, contactInfo: cmd.ContactInfo, website: cmd.Website,
             prices: cmd.Prices, workingHours: cmd.WorkingHours, photoUrls: cmd.PhotoUrls,
-            gradingSystemId: cmd.GradingSystemId);
+            gradingSystemId: gradingSystemId);
 
         await gyms.AddAsync(gym);
         return gym.Adapt<GymDto>();
@@ -44,6 +46,10 @@ public class DeleteGymHandler(IGymRepository gyms) : IRequestHandler<DeleteGymCo
 {
     public async Task<Result> Handle(DeleteGymCommand cmd, CancellationToken ct)
     {
+        var gym = await gyms.GetByIdAsync(cmd.Id);
+        if (gym is null)
+            return Result.Failure(Error.NotFound("Gym"));
+
         await gyms.DeleteAsync(cmd.Id);
         return Result.Success();
     }

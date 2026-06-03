@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Entities;
-using Cruxa.Application.Common.Interfaces;
+using Application.Common.Interfaces;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
@@ -35,8 +35,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.Name, user.Username),
-            new(ClaimTypes.Role, user.Role.ToString()),
-            new("role", user.Role.ToString())
+            new(ClaimTypes.Role, user.Role.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));

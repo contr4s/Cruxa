@@ -1,9 +1,9 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.Enums;
-using Cruxa.Domain.Events;
+using Abstractions;
+using Common;
+using Enums;
+using Events;
 
 /// <summary>
 /// Пост-тренировка (отчет о посещении скалодрома) - Aggregate Root

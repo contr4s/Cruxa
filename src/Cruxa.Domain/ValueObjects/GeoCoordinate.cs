@@ -1,6 +1,6 @@
 namespace Cruxa.Domain.ValueObjects;
 
-using Cruxa.Domain.Common;
+using Common;
 
 /// <summary>
 /// Geographic coordinate (latitude/longitude)

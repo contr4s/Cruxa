@@ -23,6 +23,8 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
             gb.Property(g => g.Index)
                 .HasColumnName("grade_index")
                 .IsRequired();
+
+            gb.HasIndex(g => g.Index);
         });
 
         builder.Property(r => r.Type)
@@ -47,7 +49,6 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
             .HasDefaultValue(true);
 
         builder.HasIndex(r => r.GymId);
-        builder.HasIndex("Grade_Index");
 
         builder.HasOne(r => r.Gym)
             .WithMany(g => g.Routes)
@@ -58,5 +59,10 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
             .WithMany()
             .HasForeignKey(r => r.AuthorId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasMany(r => r.Reviews)
+            .WithOne(rr => rr.Route)
+            .HasForeignKey(rr => rr.RouteId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

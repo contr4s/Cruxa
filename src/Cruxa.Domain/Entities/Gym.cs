@@ -1,8 +1,8 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.ValueObjects;
+using Abstractions;
+using Common;
+using ValueObjects;
 
 /// <summary>
 /// Скалодром (Aggregate Root)

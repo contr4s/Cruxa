@@ -1,10 +1,10 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.Enums;
-using Cruxa.Domain.Events;
-using Cruxa.Domain.ValueObjects;
+using Abstractions;
+using Common;
+using Enums;
+using Events;
+using ValueObjects;
 
 /// <summary>
 /// Трасса на скалодроме (Entity, not aggregate root)
@@ -30,6 +30,9 @@ public class Route : Entity<Guid>
 
     private readonly List<Ascent> _ascents = [];
     public IReadOnlyCollection<Ascent> Ascents => _ascents.AsReadOnly();
+
+    private readonly List<RouteReview> _reviews = [];
+    public IReadOnlyCollection<RouteReview> Reviews => _reviews.AsReadOnly();
 
     // For EF Core
     private Route() { }

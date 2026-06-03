@@ -24,6 +24,10 @@ public class DeleteUserHandler(IUserRepository users) : IRequestHandler<DeleteUs
 {
     public async Task<Result> Handle(DeleteUserCommand cmd, CancellationToken ct)
     {
+        var user = await users.GetByIdAsync(cmd.Id);
+        if (user is null)
+            return Result.Failure(Error.NotFound("User"));
+
         await users.DeleteAsync(cmd.Id);
         return Result.Success();
     }

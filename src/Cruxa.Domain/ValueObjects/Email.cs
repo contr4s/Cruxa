@@ -1,7 +1,7 @@
 namespace Cruxa.Domain.ValueObjects;
 
 using System.Text.RegularExpressions;
-using Cruxa.Domain.Common;
+using Common;
 
 /// <summary>
 /// Email value object with validation

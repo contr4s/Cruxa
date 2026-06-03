@@ -97,8 +97,7 @@ out/
 ### VS Code
 # VSCode settings (keep shared configuration)
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
+!.vscode/settings.json!.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
@@ -107,3 +106,7 @@ out/
 
 # Built Visual Studio Code Extensions
 *.vsix
+.vscode
+
+### Local app settings (secrets, connection strings)
+appsettings.local.json

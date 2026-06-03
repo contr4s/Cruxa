@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Auth.DTOs;
@@ -12,7 +11,7 @@ using Cruxa.Domain.ValueObjects;
 
 namespace Cruxa.Application.Features.Auth.Handlers;
 
-public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt)
+public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPasswordHasher passwordHasher)
     : IRequestHandler<RegisterCommand, Result<AuthResponse>>
 {
     public async Task<Result<AuthResponse>> Handle(RegisterCommand cmd, CancellationToken ct)
@@ -27,7 +26,7 @@ public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt)
         if (emailResult.IsFailure)
             return Result.Failure<AuthResponse>(emailResult.Error);
 
-        var passwordHash = HashPassword(cmd.Password);
+        var passwordHash = passwordHasher.Hash(cmd.Password);
 
         var userResult = User.Create(emailResult.Value, cmd.Username, passwordHash);
         if (userResult.IsFailure)
@@ -45,15 +44,4 @@ public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt)
         return new AuthResponse { Token = token, User = userDto };
     }
 
-    private static string HashPassword(string password)
-    {
-        using var rng = RandomNumberGenerator.Create();
-        var salt = new byte[16];
-        rng.GetBytes(salt);
-        var hash = Rfc2898DeriveBytes.Pbkdf2(password, salt, 100000, HashAlgorithmName.SHA256, 32);
-        var hashBytes = new byte[48];
-        Array.Copy(salt, 0, hashBytes, 0, 16);
-        Array.Copy(hash, 0, hashBytes, 16, 32);
-        return Convert.ToBase64String(hashBytes);
-    }
 }

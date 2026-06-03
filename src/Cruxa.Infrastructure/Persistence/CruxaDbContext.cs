@@ -18,6 +18,7 @@ public class CruxaDbContext : DbContext
     public DbSet<Follower> Followers => Set<Follower>();
     public DbSet<Like> Likes => Set<Like>();
     public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<RouteReview> RouteReviews => Set<RouteReview>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

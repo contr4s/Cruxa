@@ -11,8 +11,6 @@ public class AscentDto
     public Guid RouteId { get; set; }
     public string GradeRaw { get; set; } = string.Empty;
     public AscentStyle Style { get; set; }
-    public int? Rating { get; set; }
     public List<string> MediaUrls { get; set; } = [];
-    public string? PublicReview { get; set; }
     public DateTime CreatedAt { get; set; }
 }

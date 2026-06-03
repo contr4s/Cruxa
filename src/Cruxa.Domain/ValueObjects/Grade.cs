@@ -1,6 +1,6 @@
 namespace Cruxa.Domain.ValueObjects;
 
-using Cruxa.Domain.Common;
+using Common;
 
 /// <summary>
 /// Grade value object (Raw representation + Normalized Index)

@@ -1,5 +1,3 @@
-using Cruxa.Domain.Common;
-
 namespace Cruxa.Infrastructure.Extensions;
 
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +19,8 @@ using Cruxa.Application.Features.GradingSystems.Interfaces;
 using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Ascents.Interfaces;
 using Cruxa.Application.Features.Social.Interfaces;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Features.Routes.Reviews.Interfaces;
+using Application.Common.Interfaces;
 
 public static class ServiceCollectionExtensions
 {
@@ -44,9 +43,13 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<IFollowerRepository, FollowerRepository>();
+        services.AddScoped<IRouteReviewRepository, RouteReviewRepository>();
 
         // JWT Token Generator
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        // Password hasher
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
 
         return services;
     }

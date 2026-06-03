@@ -48,13 +48,10 @@ internal class GymConfiguration : IEntityTypeConfiguration<Gym>
         builder.Property(g => g.Website)
             .HasMaxLength(500);
 
-        builder.Property(g => g.Location)
-            .IsRequired();
-
         builder.HasIndex(g => g.City);
 
         builder.HasOne(g => g.GradingSystem)
-            .WithMany("_gyms")
+            .WithMany(gs => gs.Gyms)
             .HasForeignKey(g => g.GradingSystemId)
             .OnDelete(DeleteBehavior.SetNull);
     }

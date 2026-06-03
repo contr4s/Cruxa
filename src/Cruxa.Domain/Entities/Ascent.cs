@@ -1,8 +1,8 @@
 namespace Cruxa.Domain.Entities;
 
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.Enums;
+using Abstractions;
+using Common;
+using Enums;
 
 /// <summary>
 /// Пролаз / Отметка о прохождении трассы
@@ -13,10 +13,8 @@ public class Ascent : Entity<Guid>
     public Guid UserId { get; private set; }
     public Guid RouteId { get; private set; }
     public AscentStyle Style { get; private set; }
-    public int? Rating { get; private set; }
     public List<string> MediaUrls { get; private set; } = [];
-    public string? PrivateNotes { get; private set; }
-    public string? PublicReview { get; private set; }
+
     public DateTime CreatedAt { get; private set; }
 
     // Navigation properties (lazy load not supported, but for relationships)
@@ -36,10 +34,7 @@ public class Ascent : Entity<Guid>
         Guid userId,
         Guid routeId,
         AscentStyle style,
-        int? rating = null,
-        List<string>? mediaUrls = null,
-        string? privateNotes = null,
-        string? publicReview = null)
+        List<string>? mediaUrls = null)
     {
         Guard.AgainstDefault(postId, nameof(postId));
         Guard.AgainstDefault(userId, nameof(userId));
@@ -52,17 +47,10 @@ public class Ascent : Entity<Guid>
             UserId = userId,
             RouteId = routeId,
             Style = style,
-            Rating = rating,
             MediaUrls = mediaUrls ?? [],
-            PrivateNotes = privateNotes,
-            PublicReview = publicReview,
             CreatedAt = DateTime.UtcNow
         });
     }
 
-    public void UpdateReview(string? publicReview, int? rating)
-    {
-        PublicReview = publicReview;
-        Rating = rating;
-    }
+
 }

@@ -16,17 +16,8 @@ internal class AscentConfiguration : IEntityTypeConfiguration<Ascent>
             .HasConversion<string>()
             .HasMaxLength(20);
 
-        builder.Property(a => a.Rating)
-            .HasMaxLength(2); // 1-5
-
         builder.Property(a => a.MediaUrls)
             .HasColumnType("text[]");
-
-        builder.Property(a => a.PrivateNotes)
-            .HasMaxLength(1000);
-
-        builder.Property(a => a.PublicReview)
-            .HasMaxLength(1000);
 
         builder.Property(a => a.CreatedAt)
             .IsRequired();

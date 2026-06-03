@@ -20,5 +20,10 @@ internal class GradingSystemConfiguration : IEntityTypeConfiguration<GradingSyst
             .HasColumnName("grade_mapping")
             .HasColumnType("jsonb")
             .IsRequired();
+
+        // Map backing field for collection navigation
+        builder.Navigation(gs => gs.Gyms)
+            .HasField("_gyms")
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

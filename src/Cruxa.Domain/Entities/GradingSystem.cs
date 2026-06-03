@@ -1,9 +1,9 @@
 namespace Cruxa.Domain.Entities;
 
 using System.Text.Json;
-using Cruxa.Domain.Abstractions;
-using Cruxa.Domain.Common;
-using Cruxa.Domain.ValueObjects;
+using Abstractions;
+using Common;
+using ValueObjects;
 
 /// <summary>
 /// Система оценок/грейдов (Aggregate Root)
