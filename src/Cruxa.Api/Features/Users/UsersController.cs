@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Users.DTOs;
 using Cruxa.Application.Features.Users.Queries;
 using Cruxa.Application.Features.Users.Commands;
@@ -10,7 +11,7 @@ namespace Cruxa.Api.Features.Users;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class UsersController(IMediator mediator) : ControllerBase
+public class UsersController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<UserDto>> GetById(Guid id)
@@ -37,7 +38,7 @@ public class UsersController(IMediator mediator) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<UserDto>> Update(Guid id, UpdateUserCommand command)
     {
-        var result = await mediator.Send(command with {Id = id});
+        var result = await mediator.Send(command with { Id = id, CurrentUserId = currentUser.GetRequiredUserId() });
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 

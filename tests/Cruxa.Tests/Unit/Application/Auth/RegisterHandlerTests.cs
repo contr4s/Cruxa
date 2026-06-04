@@ -18,8 +18,7 @@ public class RegisterHandlerTests
     public RegisterHandlerTests()
     {
         _jwt.Setup(j => j.GenerateTokenAsync(It.IsAny<User>())).ReturnsAsync("token");
-        var _uow = new Mock<IUnitOfWork>();
-        _handler = new RegisterHandler(_userRepo.Object, _jwt.Object, _passwordHasher.Object, _uow.Object);
+        _handler = new RegisterHandler(_userRepo.Object, _jwt.Object, _passwordHasher.Object);
     }
 
     [Fact]

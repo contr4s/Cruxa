@@ -1,7 +1,7 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Application.Features.Routes.DTOs;
@@ -11,11 +11,8 @@ namespace Cruxa.Api.Features.Routes;
 [ApiController]
 [Route("api/routes/{routeId:guid}/reviews")]
 [Authorize]
-public class RouteReviewsController(IMediator mediator) : ControllerBase
+public class RouteReviewsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
-    private Guid GetUserId() =>
-        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
     /// <summary>Get all reviews for a route (public)</summary>
     [AllowAnonymous]
     [HttpGet]
@@ -29,8 +26,7 @@ public class RouteReviewsController(IMediator mediator) : ControllerBase
     [HttpGet("my")]
     public async Task<ActionResult<RouteReviewDto?>> GetMyReview(Guid routeId)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new GetRouteReviewByUserRouteQuery(routeId, userId));
+        var result = await mediator.Send(new GetRouteReviewByUserRouteQuery(routeId, currentUser.GetRequiredUserId()));
         return Ok(result.Value);
     }
 
@@ -38,8 +34,7 @@ public class RouteReviewsController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<RouteReviewDto>> Add(Guid routeId, [FromBody] AddRouteReviewCommand command)
     {
-        var userId = GetUserId();
-        var cmd = command with { RouteId = routeId, UserId = userId };
+        var cmd = command with { RouteId = routeId, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
         return result.IsSuccess
             ? CreatedAtAction(nameof(GetMyReview), new { routeId }, result.Value)
@@ -50,8 +45,7 @@ public class RouteReviewsController(IMediator mediator) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<RouteReviewDto>> Update(Guid routeId, Guid id, [FromBody] UpdateRouteReviewCommand command)
     {
-        var userId = GetUserId();
-        var cmd = command with { Id = id, UserId = userId };
+        var cmd = command with { Id = id, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
@@ -60,8 +54,7 @@ public class RouteReviewsController(IMediator mediator) : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Remove(Guid routeId, Guid id)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new DeleteRouteReviewCommand(id, userId));
+        var result = await mediator.Send(new DeleteRouteReviewCommand(id, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

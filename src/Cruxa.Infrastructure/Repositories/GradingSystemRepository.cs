@@ -32,4 +32,14 @@ public class GradingSystemRepository : IGradingSystemRepository
 
         return gym?.GradingSystem;
     }
+
+    public async Task AddAsync(GradingSystem gradingSystem, CancellationToken ct = default)
+    {
+        await _context.GradingSystems.AddAsync(gradingSystem, ct);
+    }
+
+    public void Remove(GradingSystem gradingSystem)
+    {
+        _context.GradingSystems.Remove(gradingSystem);
+    }
 }

@@ -55,6 +55,18 @@ public class GradingSystem : AggregateRoot<Guid>
         return Mapping.ResolveGrade(raw);
     }
 
+    public void Update(string name, Dictionary<string, int> mapping)
+    {
+        Guard.AgainstNullOrWhiteSpace(name, nameof(name));
+
+        var mappingResult = GradeMapping.Create(mapping);
+        if (mappingResult.IsFailure)
+            throw new ArgumentException(mappingResult.Error.Message);
+
+        Name = name.Trim();
+        _gradeMappingJson = JsonSerializer.Serialize(mapping);
+    }
+
     // Navigation properties
     private readonly List<Gym> _gyms = [];
     public IReadOnlyCollection<Gym> Gyms => _gyms.AsReadOnly();

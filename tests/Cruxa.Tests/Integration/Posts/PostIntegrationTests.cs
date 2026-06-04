@@ -1,5 +1,7 @@
 using System.Net.Http.Json;
 using Cruxa.Application.Features.Gyms.DTOs;
+using Cruxa.Application.Features.Posts.DTOs;
+using Cruxa.Application.Common.Models;
 using Cruxa.Domain.Enums;
 using FluentAssertions;
 
@@ -176,9 +178,9 @@ public class PostIntegrationTests : IntegrationTestBase
 
         var feedResponse = await Client.GetAsync("/api/posts/feed");
         feedResponse.EnsureSuccessStatusCode();
-        var feed = await DeserializeAsync<List<PostDto>>(feedResponse);
+        var feed = await DeserializeAsync<OffsetPaginatedList<PostDto>>(feedResponse);
 
         feed.Should().NotBeNull();
-        feed.Should().NotBeEmpty();
+        feed.Items.Should().NotBeEmpty();
     }
 }

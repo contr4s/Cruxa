@@ -13,7 +13,6 @@ public class GymHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IGymRepository> _gymRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
 
     private Gym CreateGym()
     {
@@ -59,7 +58,7 @@ public class GymHandlerTests
     public async Task UpdateGym_WhenExists_ReturnsSuccess()
     {
         var gym = CreateGym();
-        var handler = new UpdateGymHandler(_gymRepo.Object, _uow.Object);
+        var handler = new UpdateGymHandler(_gymRepo.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(gym.Id)).ReturnsAsync(gym);
 
         var name = _fixture.Faker.Company.CompanyName();
@@ -75,7 +74,7 @@ public class GymHandlerTests
     public async Task UpdateGym_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new UpdateGymHandler(_gymRepo.Object, _uow.Object);
+        var handler = new UpdateGymHandler(_gymRepo.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
         var result = await handler.Handle(
@@ -89,7 +88,7 @@ public class GymHandlerTests
     public async Task DeleteGym_WhenExists_ReturnsSuccess()
     {
         var gym = CreateGym();
-        var handler = new DeleteGymHandler(_gymRepo.Object, _uow.Object);
+        var handler = new DeleteGymHandler(_gymRepo.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(gym.Id)).ReturnsAsync(gym);
 
         var result = await handler.Handle(
@@ -103,7 +102,7 @@ public class GymHandlerTests
     public async Task DeleteGym_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new DeleteGymHandler(_gymRepo.Object, _uow.Object);
+        var handler = new DeleteGymHandler(_gymRepo.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
         var result = await handler.Handle(
@@ -118,7 +117,7 @@ public class GymHandlerTests
     {
         var gyms = new[] { CreateGym(), CreateGym(), CreateGym() };
         var handler = new GetAllGymsHandler(_gymRepo.Object);
-        _gymRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(gyms);
+        _gymRepo.Setup(r => r.GetAllPagedAsync(1, 2)).ReturnsAsync((gyms.Take(2).ToList(), 3));
 
         var result = await handler.Handle(new GetAllGymsQuery(1, 2), CancellationToken.None);
 
@@ -133,16 +132,16 @@ public class GymHandlerTests
     public async Task GetGymsByCity_ReturnsPaginatedList()
     {
         var city = "TestCity";
-        var gyms = new[] { CreateGym(), CreateGym() };
+        var gyms = new List<Gym> { CreateGym(), CreateGym() };
         // Force city value for test
         foreach (var g in gyms)
         {
             typeof(Gym).GetProperty("City")?.SetValue(g, city);
         }
         var handler = new GetGymsByCityHandler(_gymRepo.Object);
-        _gymRepo.Setup(r => r.GetByCityAsync(city)).ReturnsAsync(gyms);
+        _gymRepo.Setup(r => r.GetByCityPagedAsync(city, 1, 20)).ReturnsAsync((gyms, 2));
 
-        var result = await handler.Handle(new GetGymsByCityQuery(city, 1, 2), CancellationToken.None);
+        var result = await handler.Handle(new GetGymsByCityQuery(city, 1, 20), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Items.Should().HaveCount(2);

@@ -3,19 +3,15 @@ using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Application.Features.Posts.DTOs;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
-
 namespace Cruxa.Application.Features.Posts.Handlers;
 
 public sealed class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Result<PostDto>>
 {
     private readonly IPostRepository _repository;
-    private readonly IUnitOfWork _uow;
 
-    public UpdatePostHandler(IPostRepository repository, IUnitOfWork uow)
+    public UpdatePostHandler(IPostRepository repository)
     {
         _repository = repository;
-        _uow = uow;
     }
 
     public async Task<Result<PostDto>> Handle(UpdatePostCommand request, CancellationToken ct)
@@ -29,7 +25,6 @@ public sealed class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Resul
 
         post.Update(request.Description, request.MediaUrls, request.Visibility);
         await _repository.UpdateAsync(post);
-        await _uow.SaveChangesAsync(ct);
 
         return Result.Success(new PostDto
         {

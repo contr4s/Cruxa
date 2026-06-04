@@ -28,6 +28,31 @@ public class GymRepository : IGymRepository
             .ToListAsync();
     }
 
+    public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.Gyms
+            .Include(g => g.GradingSystem);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderBy(g => g.Name)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
+    public async Task<(List<Gym> Items, int TotalCount)> GetByCityPagedAsync(string city, int page, int pageSize)
+    {
+        var query = _context.Gyms.Where(g => g.City == city);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderBy(g => g.Name)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
     public async Task<IEnumerable<Gym>> GetAllAsync()
     {
         return await _context.Gyms

@@ -1,23 +1,38 @@
-using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Interfaces;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Common.Interfaces;
 using Cruxa.Domain.Entities;
+using Cruxa.Domain.ValueObjects;
 
 namespace Cruxa.Application.Features.Routes.Handlers;
 
 public class UpdateRouteHandler(
     IRouteRepository routes,
     ITagRepository tagRepo,
-    IUnitOfWork uow) : IRequestHandler<UpdateRouteCommand, Result>
+    IGradingSystemRepository systems
+    ) : IRequestHandler<UpdateRouteCommand, Result>
 {
     public async Task<Result> Handle(UpdateRouteCommand cmd, CancellationToken ct)
     {
         var route = await routes.GetByIdAsync(cmd.Id);
         if (route is null) return Result.Failure(Error.NotFound("Route"));
+
+        // Resolve grade if GradeRaw is provided
+        Grade? newGrade = null;
+        if (cmd.GradeRaw is not null)
+        {
+            var gradingSystem = await systems.GetByGymIdAsync(route.GymId);
+            if (gradingSystem is null)
+                return Result.Failure(Error.NotFound("GradingSystem for the route's gym"));
+
+            var gradeResult = gradingSystem.ResolveGrade(cmd.GradeRaw);
+            if (gradeResult.IsFailure)
+                return Result.Failure(gradeResult.Error);
+            newGrade = gradeResult.Value;
+        }
 
         // Validate and resolve tags if provided
         List<Tag>? tagEntities = null;
@@ -31,15 +46,14 @@ public class UpdateRouteHandler(
                 tagEntities = tagResult.Value;
             }
 
-            route.Update(cmd.Type, cmd.HoldColor, cmd.PhotoUrls, tagEntities, cmd.Sector, cmd.IsActive);
+            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.PhotoUrls, tagEntities, cmd.Sector, cmd.IsActive);
         }
         else
         {
-            route.Update(cmd.Type, cmd.HoldColor, cmd.PhotoUrls, null, cmd.Sector, cmd.IsActive);
+            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.PhotoUrls, null, cmd.Sector, cmd.IsActive);
         }
 
         await routes.UpdateAsync(route);
-        await uow.SaveChangesAsync(ct);
         return Result.Success();
     }
 }

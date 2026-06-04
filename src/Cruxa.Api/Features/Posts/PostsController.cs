@@ -1,7 +1,8 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
@@ -11,11 +12,8 @@ namespace Cruxa.Api.Features.Posts;
 [ApiController]
 [Route("api/posts")]
 [Authorize]
-public class PostsController(IMediator mediator) : ControllerBase
+public class PostsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
-    private Guid GetUserId() =>
-        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
     /// <summary>Get post by ID</summary>
     [AllowAnonymous]
     [HttpGet("{id:guid}")]
@@ -36,10 +34,9 @@ public class PostsController(IMediator mediator) : ControllerBase
 
     /// <summary>Get feed (posts from followed users + own)</summary>
     [HttpGet("feed")]
-    public async Task<ActionResult<IEnumerable<PostDto>>> GetFeed([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<ActionResult<OffsetPaginatedList<PostDto>>> GetFeed([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new GetFeedQuery(userId, page, pageSize));
+        var result = await mediator.Send(new GetFeedQuery(currentUser.GetRequiredUserId(), page, pageSize));
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
@@ -56,9 +53,8 @@ public class PostsController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<PostDto>> Create([FromBody] CreatePostRequest request)
     {
-        var userId = GetUserId();
         var command = new CreatePostCommand(
-            userId, request.GymId, request.Description,
+            currentUser.GetRequiredUserId(), request.GymId, request.Description,
             request.MediaUrls, request.Visibility);
         var result = await mediator.Send(command);
         return result.IsSuccess
@@ -70,9 +66,8 @@ public class PostsController(IMediator mediator) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<PostDto>> Update(Guid id, [FromBody] CreatePostRequest request)
     {
-        var userId = GetUserId();
         var command = new UpdatePostCommand(
-            id, userId, request.Description,
+            id, currentUser.GetRequiredUserId(), request.Description,
             request.MediaUrls, request.Visibility);
         var result = await mediator.Send(command);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
@@ -82,8 +77,7 @@ public class PostsController(IMediator mediator) : ControllerBase
     [HttpPut("{id:guid}/publish")]
     public async Task<ActionResult> Publish(Guid id)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new PublishPostCommand(id, userId));
+        var result = await mediator.Send(new PublishPostCommand(id, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 
@@ -91,8 +85,7 @@ public class PostsController(IMediator mediator) : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new DeletePostCommand(id, userId));
+        var result = await mediator.Send(new DeletePostCommand(id, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

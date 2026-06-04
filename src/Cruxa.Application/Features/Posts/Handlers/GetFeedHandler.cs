@@ -1,4 +1,5 @@
 using MediatR;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
@@ -8,7 +9,7 @@ using Cruxa.Domain.Enums;
 
 namespace Cruxa.Application.Features.Posts.Handlers;
 
-public sealed class GetFeedHandler : IRequestHandler<GetFeedQuery, Result<IEnumerable<PostDto>>>
+public sealed class GetFeedHandler : IRequestHandler<GetFeedQuery, Result<OffsetPaginatedList<PostDto>>>
 {
     private readonly IPostRepository _postRepository;
     private readonly IFollowerRepository _followerRepository;
@@ -19,23 +20,24 @@ public sealed class GetFeedHandler : IRequestHandler<GetFeedQuery, Result<IEnume
         _followerRepository = followerRepository;
     }
 
-    public async Task<Result<IEnumerable<PostDto>>> Handle(GetFeedQuery request, CancellationToken ct)
+    public async Task<Result<OffsetPaginatedList<PostDto>>> Handle(GetFeedQuery request, CancellationToken ct)
     {
         var following = await _followerRepository.GetFollowingAsync(request.UserId);
         var userIds = new List<Guid>(following) { request.UserId };
 
-        var allPosts = new List<Domain.Entities.Post>();
-        foreach (var uid in userIds)
-        {
-            var posts = await _postRepository.GetByUserIdAsync(uid);
-            allPosts.AddRange(posts.Where(p => p.Status == PostStatus.Published));
-        }
+        var allPosts = await _postRepository.GetByUserIdsAsync(userIds);
+        var publishedPosts = allPosts.Where(p => p.Status == PostStatus.Published).ToList();
 
-        var feed = allPosts
+        var totalCount = publishedPosts.Count;
+
+        var feed = publishedPosts
             .OrderByDescending(p => p.CreatedAt)
             .Skip((request.Page - 1) * request.PageSize)
-            .Take(request.PageSize);
+            .Take(request.PageSize)
+            .Select(GetPostByIdHandler.MapToDto)
+            .ToList();
 
-        return Result.Success(feed.Select(GetPostByIdHandler.MapToDto));
+        return Result.Success(new OffsetPaginatedList<PostDto>(
+            feed, totalCount, request.Page, request.PageSize));
     }
 }

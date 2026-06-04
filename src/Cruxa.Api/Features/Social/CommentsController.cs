@@ -1,7 +1,7 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Social.Commands;
 using Cruxa.Application.Features.Social.Queries;
 
@@ -9,14 +9,12 @@ namespace Cruxa.Api.Features.Social;
 
 [ApiController]
 [Authorize]
-public class CommentsController(IMediator mediator) : ControllerBase
+[Route("api/posts")]
+public class CommentsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
-    private Guid GetUserId() =>
-        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
     /// <summary>Get comments for a post</summary>
     [AllowAnonymous]
-    [HttpGet("api/posts/{postId:guid}/comments")]
+    [HttpGet("{postId:guid}/comments")]
     public async Task<ActionResult<IEnumerable<CommentDto>>> GetComments(Guid postId)
     {
         var result = await mediator.Send(new GetCommentsByPostQuery(postId));
@@ -24,21 +22,19 @@ public class CommentsController(IMediator mediator) : ControllerBase
     }
 
     /// <summary>Add a comment to a post</summary>
-    [HttpPost("api/posts/{postId:guid}/comments")]
+    [HttpPost("{postId:guid}/comments")]
     public async Task<ActionResult<CommentDto>> AddComment(Guid postId, [FromBody] AddCommentCommand command)
     {
-        var userId = GetUserId();
-        var cmd = command with { PostId = postId, UserId = userId };
+        var cmd = command with { PostId = postId, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
         return result.IsSuccess ? CreatedAtAction(nameof(GetComments), new { postId }, result.Value) : BadRequest(result.Error);
     }
 
     /// <summary>Delete a comment</summary>
-    [HttpDelete("api/comments/{commentId:guid}")]
+    [HttpDelete("/api/comments/{commentId:guid}")]
     public async Task<ActionResult> DeleteComment(Guid commentId)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new DeleteCommentCommand(commentId, userId));
+        var result = await mediator.Send(new DeleteCommentCommand(commentId, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

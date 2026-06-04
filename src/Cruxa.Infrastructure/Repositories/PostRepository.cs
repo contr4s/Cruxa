@@ -35,6 +35,16 @@ public class PostRepository : IPostRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Post>> GetByUserIdsAsync(List<Guid> userIds)
+    {
+        return await _context.Posts
+            .Include(p => p.Gym)
+            .Include(p => p.Ascents)
+            .Where(p => userIds.Contains(p.UserId))
+            .OrderByDescending(p => p.CreatedAt)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Post>> GetByGymIdAsync(Guid gymId)
     {
         return await _context.Posts

@@ -1,6 +1,7 @@
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.Handlers;
 using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Interfaces;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
@@ -16,7 +17,7 @@ public class RouteHandlerTests
     private readonly TestFixture _fixture = new();
     private readonly Mock<IRouteRepository> _routeRepo = new();
     private readonly Mock<ITagRepository> _tagRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
+    private readonly Mock<IGradingSystemRepository> _systemsRepo = new();
 
     private Route CreateRoute()
     {
@@ -64,11 +65,11 @@ public class RouteHandlerTests
     public async Task UpdateRoute_WhenExists_ReturnsSuccess()
     {
         var route = CreateRoute();
-        var handler = new UpdateRouteHandler(_routeRepo.Object, _tagRepo.Object, _uow.Object);
+        var handler = new UpdateRouteHandler(_routeRepo.Object, _tagRepo.Object, _systemsRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(route.Id)).ReturnsAsync(route);
 
         var result = await handler.Handle(
-            _fixture.Create<UpdateRouteCommand>() with { Id = route.Id, IsActive = false, Tags = null },
+            _fixture.Create<UpdateRouteCommand>() with { Id = route.Id, Tags = null, GradeRaw = null },
             CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
@@ -79,7 +80,7 @@ public class RouteHandlerTests
     public async Task UpdateRoute_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new UpdateRouteHandler(_routeRepo.Object, _tagRepo.Object, _uow.Object);
+        var handler = new UpdateRouteHandler(_routeRepo.Object, _tagRepo.Object, _systemsRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Route?)null);
 
         var result = await handler.Handle(
@@ -93,7 +94,7 @@ public class RouteHandlerTests
     public async Task DeleteRoute_WhenExists_ReturnsSuccess()
     {
         var route = CreateRoute();
-        var handler = new DeleteRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new DeleteRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(route.Id)).ReturnsAsync(route);
 
         var result = await handler.Handle(
@@ -107,7 +108,7 @@ public class RouteHandlerTests
     public async Task DeleteRoute_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new DeleteRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new DeleteRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Route?)null);
 
         var result = await handler.Handle(
@@ -121,7 +122,7 @@ public class RouteHandlerTests
     public async Task DeactivateRoute_WhenExists_ReturnsSuccess()
     {
         var route = CreateRoute();
-        var handler = new DeactivateRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new DeactivateRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(route.Id)).ReturnsAsync(route);
 
         var result = await handler.Handle(
@@ -136,7 +137,7 @@ public class RouteHandlerTests
     public async Task DeactivateRoute_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new DeactivateRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new DeactivateRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Route?)null);
 
         var result = await handler.Handle(
@@ -151,7 +152,7 @@ public class RouteHandlerTests
     {
         var route = CreateRoute();
         route.Deactivate();
-        var handler = new ReactivateRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new ReactivateRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(route.Id)).ReturnsAsync(route);
 
         var result = await handler.Handle(
@@ -166,7 +167,7 @@ public class RouteHandlerTests
     public async Task ReactivateRoute_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new ReactivateRouteHandler(_routeRepo.Object, _uow.Object);
+        var handler = new ReactivateRouteHandler(_routeRepo.Object);
         _routeRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Route?)null);
 
         var result = await handler.Handle(
@@ -181,7 +182,7 @@ public class RouteHandlerTests
     {
         var routes = new[] { CreateRoute(), CreateRoute(), CreateRoute() };
         var handler = new GetAllRoutesHandler(_routeRepo.Object);
-        _routeRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(routes);
+        _routeRepo.Setup(r => r.GetAllPagedAsync(1, 2)).ReturnsAsync((routes.Take(2).ToList(), 3));
 
         var result = await handler.Handle(new GetAllRoutesQuery(1, 2), CancellationToken.None);
 
@@ -200,7 +201,7 @@ public class RouteHandlerTests
         var gymId = Guid.NewGuid();
         var routes = new[] { CreateRoute(), CreateRoute(), CreateRoute() };
         var handler = new GetRoutesByGymHandler(_routeRepo.Object);
-        _routeRepo.Setup(r => r.GetByGymIdAsync(gymId)).ReturnsAsync(routes);
+        _routeRepo.Setup(r => r.GetByGymPagedAsync(gymId, 2, 2)).ReturnsAsync((routes.Skip(2).Take(2).ToList(), 3));
 
         var result = await handler.Handle(new GetRoutesByGymQuery(gymId, 2, 2), CancellationToken.None);
 

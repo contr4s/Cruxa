@@ -1,21 +1,35 @@
 namespace Cruxa.Domain.Entities;
 
+using Abstractions;
+using Common;
+
 /// <summary>
 /// Лайк на посте
 /// </summary>
-public class Like
+public class Like : Entity<Guid>
 {
-    public Guid Id { get; set; }
-
-    public Guid PostId { get; set; }
-
-    public Guid UserId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
+    public Guid PostId { get; private set; }
+    public Guid UserId { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     // Navigation properties
+    public Post Post { get; private set; } = null!;
+    public User User { get; private set; } = null!;
 
-    public Post Post { get; set; } = null!;
+    // For EF Core
+    private Like() { }
 
-    public User User { get; set; } = null!;
+    public static Result<Like> Create(Guid postId, Guid userId)
+    {
+        Guard.AgainstDefault(postId, nameof(postId));
+        Guard.AgainstDefault(userId, nameof(userId));
+
+        return Result.Success(new Like
+        {
+            Id = Guid.NewGuid(),
+            PostId = postId,
+            UserId = userId,
+            CreatedAt = DateTime.UtcNow
+        });
+    }
 }

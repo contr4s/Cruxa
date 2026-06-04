@@ -21,6 +21,34 @@ public class AscentRepository : IAscentRepository
             .FirstOrDefaultAsync(a => a.Id == id);
     }
 
+    public async Task<(List<Ascent> Items, int TotalCount)> GetByPostPagedAsync(Guid postId, int page, int pageSize)
+    {
+        var query = _context.Ascents
+            .Include(a => a.Route)
+            .Where(a => a.PostId == postId);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderByDescending(a => a.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
+    public async Task<(List<Ascent> Items, int TotalCount)> GetByUserPagedAsync(Guid userId, int page, int pageSize)
+    {
+        var query = _context.Ascents
+            .Include(a => a.Route)
+            .Where(a => a.UserId == userId);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderByDescending(a => a.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
     public async Task<IEnumerable<Ascent>> GetByPostIdAsync(Guid postId)
     {
         return await _context.Ascents

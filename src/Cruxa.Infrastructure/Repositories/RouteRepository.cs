@@ -31,6 +31,34 @@ public class RouteRepository : IRouteRepository
             .ToListAsync();
     }
 
+    public async Task<(List<Route> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.Routes
+            .Include(r => r.Gym)
+            .Include(r => r.Tags);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderBy(r => r.Grade.Index)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
+    public async Task<(List<Route> Items, int TotalCount)> GetByGymPagedAsync(Guid gymId, int page, int pageSize)
+    {
+        var query = _context.Routes
+            .Include(r => r.Tags)
+            .Where(r => r.GymId == gymId);
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderBy(r => r.Grade.Index)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
     public async Task<IEnumerable<Route>> GetAllAsync()
     {
         return await _context.Routes

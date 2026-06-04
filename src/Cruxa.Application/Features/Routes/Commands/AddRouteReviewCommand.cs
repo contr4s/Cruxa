@@ -1,6 +1,7 @@
 using MediatR;
 using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Routes.DTOs;
+using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Routes.Commands;
 
@@ -9,4 +10,4 @@ public record AddRouteReviewCommand(
     Guid UserId,
     int? Rating = null,
     string? PrivateNotes = null,
-    string? PublicReview = null) : IRequest<Result<RouteReviewDto>>;
+    string? PublicReview = null) : IRequest<Result<RouteReviewDto>>, ICommand;

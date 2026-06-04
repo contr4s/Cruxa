@@ -43,7 +43,6 @@ public class CommentRepository : ICommentRepository
 
     public async Task AddAsync(Comment comment)
     {
-        comment.CreatedAt = DateTime.UtcNow;
         await _context.Comments.AddAsync(comment);
     }
 

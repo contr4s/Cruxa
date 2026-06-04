@@ -108,7 +108,7 @@ public class RouteIntegrationTests : IntegrationTestBase
         var gym = await CreateGymAsync();
         var route = await CreateRouteAsync(gym.Id);
 
-        var updateCmd = Fixture.Create<UpdateRouteCommand>() with { Tags = null };
+        var updateCmd = Fixture.Create<UpdateRouteCommand>() with { GradeRaw = "6a" };
         var updateResponse = await Client.PutAsJsonAsync($"/api/routes/{route.Id}", updateCmd);
         updateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
     }

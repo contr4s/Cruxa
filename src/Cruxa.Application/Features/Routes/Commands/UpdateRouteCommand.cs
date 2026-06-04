@@ -2,9 +2,16 @@ using MediatR;
 using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Domain.Common;
 using Cruxa.Domain.Enums;
+using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Routes.Commands;
 
-public record UpdateRouteCommand(Guid Id, RouteType? Type = null, HoldColor? HoldColor = null,
-    List<string>? PhotoUrls = null, List<string>? Tags = null, string? Sector = null,
-    bool? IsActive = null) : IRequest<Result>;
+public record UpdateRouteCommand(
+    Guid Id,
+    RouteType? Type = null,
+    HoldColor? HoldColor = null,
+    string? GradeRaw = null,
+    List<string>? PhotoUrls = null,
+    List<string>? Tags = null,
+    string? Sector = null,
+    bool? IsActive = null) : IRequest<Result>, ICommand;

@@ -117,4 +117,42 @@ public class FollowerIntegrationTests : IntegrationTestBase
         following.Should().Contain(target1.User.Id);
         following.Should().Contain(target2.User.Id);
     }
+
+    [Fact]
+    public async Task IsFollowing_AfterFollow_ReturnsTrue()
+    {
+        var target = await ActAsNewUserAsync();
+        ClearToken();
+
+        await ActAsNewUserAsync();
+        await Client.PostAsync($"/api/users/{target.User.Id}/follow", null);
+
+        var response = await Client.GetAsync($"/api/users/{target.User.Id}/is-following");
+        response.EnsureSuccessStatusCode();
+        var isFollowing = await DeserializeAsync<bool>(response);
+
+        isFollowing.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task IsFollowing_WithoutFollow_ReturnsFalse()
+    {
+        var target = await ActAsNewUserAsync();
+        ClearToken();
+
+        await ActAsNewUserAsync();
+
+        var response = await Client.GetAsync($"/api/users/{target.User.Id}/is-following");
+        response.EnsureSuccessStatusCode();
+        var isFollowing = await DeserializeAsync<bool>(response);
+
+        isFollowing.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task IsFollowing_WithoutAuth_ReturnsUnauthorized()
+    {
+        var response = await Client.GetAsync($"/api/users/{Fixture.Create<Guid>()}/is-following");
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
+    }
 }

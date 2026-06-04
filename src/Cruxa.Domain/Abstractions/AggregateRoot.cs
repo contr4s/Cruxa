@@ -1,5 +1,3 @@
-using Cruxa.Domain.Events;
-
 namespace Cruxa.Domain.Abstractions;
 
 /// <summary>
@@ -11,10 +9,4 @@ public abstract class AggregateRoot<TId> : Entity<TId>
     protected AggregateRoot() { }
 
     protected AggregateRoot(TId id) : base(id) { }
-
-    public void RaiseDomainEvent(IDomainEvent domainEvent)
-        => AddDomainEvent(domainEvent);
-
-    protected void ClearUncommittedEvents()
-        => ClearDomainEvents();
 }

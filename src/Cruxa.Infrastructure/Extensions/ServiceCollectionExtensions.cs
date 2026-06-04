@@ -14,7 +14,7 @@ using Cruxa.Application.Features.GradingSystems.Interfaces;
 using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Ascents.Interfaces;
 using Cruxa.Application.Features.Social.Interfaces;
-using Application.Common.Interfaces;
+using Cruxa.Application.Common.Interfaces;
 
 public static class ServiceCollectionExtensions
 {
@@ -28,9 +28,6 @@ public static class ServiceCollectionExtensions
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found."),
                 b => b.MigrationsAssembly(typeof(CruxaDbContext).Assembly.FullName)));
 
-        // Unit of Work
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IGymRepository, GymRepository>();
         services.AddScoped<IRouteRepository, RouteRepository>();
@@ -42,6 +39,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<IFollowerRepository, FollowerRepository>();
         services.AddScoped<IRouteReviewRepository, RouteReviewRepository>();
+
+        // Transaction manager
+        services.AddScoped<ITransactionManager, TransactionManager>();
 
         // JWT Token Generator
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

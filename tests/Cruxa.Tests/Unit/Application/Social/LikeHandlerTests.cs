@@ -10,12 +10,11 @@ public class LikeHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<ILikeRepository> _likeRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
 
     [Fact]
     public async Task LikePost_WhenNotLiked_ReturnsSuccess()
     {
-        var handler = new LikePostHandler(_likeRepo.Object, _uow.Object);
+        var handler = new LikePostHandler(_likeRepo.Object);
         var cmd = _fixture.Create<LikePostCommand>();
         _likeRepo.Setup(r => r.LikePostAsync(cmd.PostId, cmd.UserId)).ReturnsAsync(true);
 
@@ -28,7 +27,7 @@ public class LikeHandlerTests
     [Fact]
     public async Task LikePost_WhenAlreadyLiked_ReturnsConflict()
     {
-        var handler = new LikePostHandler(_likeRepo.Object, _uow.Object);
+        var handler = new LikePostHandler(_likeRepo.Object);
         _likeRepo.Setup(r => r.LikePostAsync(It.IsAny<Guid>(), It.IsAny<Guid>())).ReturnsAsync(false);
 
         var result = await handler.Handle(
@@ -41,7 +40,7 @@ public class LikeHandlerTests
     [Fact]
     public async Task UnlikePost_ReturnsSuccess()
     {
-        var handler = new UnlikePostHandler(_likeRepo.Object, _uow.Object);
+        var handler = new UnlikePostHandler(_likeRepo.Object);
         var cmd = _fixture.Create<UnlikePostCommand>();
         _likeRepo.Setup(r => r.UnlikePostAsync(cmd.PostId, cmd.UserId)).ReturnsAsync(true);
 

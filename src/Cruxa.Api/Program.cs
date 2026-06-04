@@ -1,4 +1,6 @@
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Extensions;
+using Cruxa.Api.Common;
 using Cruxa.Infrastructure.Extensions;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +58,25 @@ try
     // ──────────────────────────────────────────
     builder.Services.AddHealthChecks()
         .AddDbContextCheck<CruxaDbContext>();
+
+    // ──────────────────────────────────────────
+    // Current User Service
+    // ──────────────────────────────────────────
+    builder.Services.AddHttpContextAccessor();
+    builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+    // ──────────────────────────────────────────
+    // CORS (allow frontend dev servers)
+    // ──────────────────────────────────────────
+    var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? ["http://localhost:5173"];
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+            policy.WithOrigins(corsOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials());
+    });
 
     // ──────────────────────────────────────────
     // Infrastructure & Application layers
@@ -124,7 +145,15 @@ try
     // Health Checks endpoint
     app.MapHealthChecks("/_health");
 
-    app.UseHttpsRedirection();
+    app.UseCors();
+
+    // HTTPS redirect only in non-Docker / non-Production scenarios.
+    // In Docker (Production), TLS is terminated at the reverse proxy level.
+    if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
+    {
+        app.UseHttpsRedirection();
+    }
+
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();

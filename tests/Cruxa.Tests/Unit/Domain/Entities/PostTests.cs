@@ -93,12 +93,4 @@ public class PostTests
 
         post.Ascents.Should().Contain(ascent);
     }
-
-    [Fact]
-    public void Create_RaisesDomainEvent()
-    {
-        var post = Post.Create(_userId, _gymId, _fixture.Faker.Lorem.Sentence(), null).Value!;
-
-        post.DomainEvents.Should().NotBeEmpty();
-    }
 }

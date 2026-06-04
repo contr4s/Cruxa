@@ -12,10 +12,8 @@ public class GetAllRoutesHandler(IRouteRepository routes) : IRequestHandler<GetA
 {
     public async Task<Result<OffsetPaginatedList<RouteDto>>> Handle(GetAllRoutesQuery q, CancellationToken ct)
     {
-        var result = await routes.GetAllAsync();
-        var dtos = result.Select(r => r.Adapt<RouteDto>()).ToList();
-        var total = dtos.Count;
-        var paged = dtos.Skip((q.Page - 1) * q.PageSize).Take(q.PageSize).ToList();
-        return Result.Success(new OffsetPaginatedList<RouteDto>(paged, total, q.Page, q.PageSize));
+        var (items, totalCount) = await routes.GetAllPagedAsync(q.Page, q.PageSize);
+        var dtos = items.Select(r => r.Adapt<RouteDto>()).ToList();
+        return Result.Success(new OffsetPaginatedList<RouteDto>(dtos, totalCount, q.Page, q.PageSize));
     }
 }

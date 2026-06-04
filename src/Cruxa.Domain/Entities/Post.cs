@@ -3,7 +3,6 @@ namespace Cruxa.Domain.Entities;
 using Abstractions;
 using Common;
 using Enums;
-using Events;
 
 /// <summary>
 /// Пост-тренировка (отчет о посещении скалодрома) - Aggregate Root
@@ -52,8 +51,6 @@ public class Post : AggregateRoot<Guid>
             Visibility = PostVisibility.Public
         };
 
-        post.AddDomainEvent(new PostCreatedEvent(post.Id, userId, gymId));
-
         return Result.Success(post);
     }
 
@@ -61,7 +58,6 @@ public class Post : AggregateRoot<Guid>
     {
         if (Status == PostStatus.Published) return;
         Status = PostStatus.Published;
-        RaiseDomainEvent(new PostPublishedEvent(Id));
     }
 
     public void Update(string? description, List<string>? mediaUrls, PostVisibility? visibility)

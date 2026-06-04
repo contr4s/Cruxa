@@ -3,7 +3,6 @@ namespace Cruxa.Domain.Entities;
 using Abstractions;
 using Common;
 using Enums;
-using Events;
 using ValueObjects;
 
 /// <summary>
@@ -69,16 +68,28 @@ public class Route : Entity<Guid>
     public void Deactivate()
     {
         IsActive = false;
-        AddDomainEvent(new RouteDeactivatedEvent(Id));
     }
 
-    public void Update(RouteType? type, HoldColor? holdColor, List<string>? photoUrls, List<Tag>? tags, string? sector, bool? isActive)
+    public void Update(
+        RouteType? type,
+        HoldColor? holdColor,
+        Grade? grade,
+        List<string>? photoUrls,
+        List<Tag>? tags,
+        string? sector,
+        bool? isActive)
     {
         if (type.HasValue) Type = type.Value;
         if (holdColor.HasValue) HoldColor = holdColor.Value;
+        if (grade is not null) Grade = grade;
         if (photoUrls != null) PhotoUrls = photoUrls;
         if (tags != null) Tags = tags;
         if (sector != null) Sector = sector;
         if (isActive.HasValue) IsActive = isActive.Value;
+    }
+
+    public void Reactivate()
+    {
+        IsActive = true;
     }
 }

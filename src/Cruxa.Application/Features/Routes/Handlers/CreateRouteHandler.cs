@@ -13,8 +13,8 @@ namespace Cruxa.Application.Features.Routes.Handlers;
 public class CreateRouteHandler(
     IRouteRepository routes,
     ITagRepository tagRepo,
-    IGradingSystemRepository systems,
-    IUnitOfWork uow) : IRequestHandler<CreateRouteCommand, Result<RouteDto>>
+    IGradingSystemRepository systems
+    ) : IRequestHandler<CreateRouteCommand, Result<RouteDto>>
 {
     public async Task<Result<RouteDto>> Handle(CreateRouteCommand cmd, CancellationToken ct)
     {
@@ -39,7 +39,6 @@ public class CreateRouteHandler(
         if (routeResult.IsFailure) return Result.Failure<RouteDto>(routeResult.Error);
 
         await routes.AddAsync(routeResult.Value);
-        await uow.SaveChangesAsync(ct);
         return Result.Success(routeResult.Value.Adapt<RouteDto>());
     }
 }

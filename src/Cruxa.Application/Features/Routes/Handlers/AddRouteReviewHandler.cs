@@ -4,7 +4,6 @@ using Cruxa.Application.Features.Routes.Interfaces;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
 using DomainRouteReview = Cruxa.Domain.Entities.RouteReview;
 
 namespace Cruxa.Application.Features.Routes.Handlers;
@@ -12,12 +11,10 @@ namespace Cruxa.Application.Features.Routes.Handlers;
 public sealed class AddRouteReviewHandler : IRequestHandler<AddRouteReviewCommand, Result<RouteReviewDto>>
 {
     private readonly IRouteReviewRepository _repository;
-    private readonly IUnitOfWork _uow;
 
-    public AddRouteReviewHandler(IRouteReviewRepository repository, IUnitOfWork uow)
+    public AddRouteReviewHandler(IRouteReviewRepository repository)
     {
         _repository = repository;
-        _uow = uow;
     }
 
     public async Task<Result<RouteReviewDto>> Handle(AddRouteReviewCommand request, CancellationToken ct)
@@ -33,7 +30,6 @@ public sealed class AddRouteReviewHandler : IRequestHandler<AddRouteReviewComman
             return Result.Failure<RouteReviewDto>(reviewResult.Error);
 
         await _repository.AddAsync(reviewResult.Value);
-        await _uow.SaveChangesAsync(ct);
         return Result.Success(reviewResult.Value.Adapt<RouteReviewDto>());
     }
 }

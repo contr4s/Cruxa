@@ -1,6 +1,7 @@
 using MediatR;
 using Cruxa.Domain.Common;
+using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Routes.Commands;
 
-public record DeleteRouteCommand(Guid Id) : IRequest<Result>;
+public record DeleteRouteCommand(Guid Id) : IRequest<Result>, ICommand;

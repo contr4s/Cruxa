@@ -2,19 +2,15 @@ using MediatR;
 using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
-
 namespace Cruxa.Application.Features.Posts.Handlers;
 
 public sealed class PublishPostHandler : IRequestHandler<PublishPostCommand, Result>
 {
     private readonly IPostRepository _repository;
-    private readonly IUnitOfWork _uow;
 
-    public PublishPostHandler(IPostRepository repository, IUnitOfWork uow)
+    public PublishPostHandler(IPostRepository repository)
     {
         _repository = repository;
-        _uow = uow;
     }
 
     public async Task<Result> Handle(PublishPostCommand request, CancellationToken ct)
@@ -28,7 +24,6 @@ public sealed class PublishPostHandler : IRequestHandler<PublishPostCommand, Res
 
         post.Publish();
         await _repository.UpdateAsync(post);
-        await _uow.SaveChangesAsync(ct);
         return Result.Success();
     }
 }

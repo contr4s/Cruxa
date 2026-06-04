@@ -6,7 +6,6 @@ using Cruxa.Application.Features.Ascents.Queries;
 using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Common.Models;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
 using DomainAscent = Cruxa.Domain.Entities.Ascent;
 
 namespace Cruxa.Application.Features.Ascents.Handlers;
@@ -15,13 +14,11 @@ public sealed class AddAscentHandler : IRequestHandler<AddAscentCommand, Result>
 {
     private readonly IAscentRepository _ascentRepository;
     private readonly IPostRepository _postRepository;
-    private readonly IUnitOfWork _uow;
 
-    public AddAscentHandler(IAscentRepository ascentRepository, IPostRepository postRepository, IUnitOfWork uow)
+    public AddAscentHandler(IAscentRepository ascentRepository, IPostRepository postRepository)
     {
         _ascentRepository = ascentRepository;
         _postRepository = postRepository;
-        _uow = uow;
     }
 
     public async Task<Result> Handle(AddAscentCommand request, CancellationToken ct)
@@ -41,7 +38,6 @@ public sealed class AddAscentHandler : IRequestHandler<AddAscentCommand, Result>
             return ascentResult;
 
         await _ascentRepository.AddAsync(ascentResult.Value);
-        await _uow.SaveChangesAsync(ct);
         return Result.Success();
     }
 }

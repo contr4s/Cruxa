@@ -1,37 +1,29 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Social.Commands;
 
 namespace Cruxa.Api.Features.Social;
 
 [ApiController]
 [Authorize]
-public class LikesController : ControllerBase
+[Route("api/posts")]
+public class LikesController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public LikesController(IMediator mediator) => _mediator = mediator;
-
-    private Guid GetUserId() =>
-        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
     /// <summary>Like a post</summary>
-    [HttpPost("api/posts/{postId:guid}/like")]
+    [HttpPost("{postId:guid}/like")]
     public async Task<ActionResult> LikePost(Guid postId)
     {
-        var userId = GetUserId();
-        var result = await _mediator.Send(new LikePostCommand(postId, userId));
+        var result = await mediator.Send(new LikePostCommand(postId, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 
     /// <summary>Unlike a post</summary>
-    [HttpDelete("api/posts/{postId:guid}/unlike")]
+    [HttpDelete("{postId:guid}/unlike")]
     public async Task<ActionResult> UnlikePost(Guid postId)
     {
-        var userId = GetUserId();
-        var result = await _mediator.Send(new UnlikePostCommand(postId, userId));
+        var result = await mediator.Send(new UnlikePostCommand(postId, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

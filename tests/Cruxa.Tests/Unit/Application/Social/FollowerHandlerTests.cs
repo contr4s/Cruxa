@@ -11,12 +11,11 @@ public class FollowerHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IFollowerRepository> _followerRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
 
     [Fact]
     public async Task FollowUser_WhenNotFollowing_ReturnsSuccess()
     {
-        var handler = new FollowUserHandler(_followerRepo.Object, _uow.Object);
+        var handler = new FollowUserHandler(_followerRepo.Object);
         var cmd = _fixture.Create<FollowUserCommand>();
         _followerRepo.Setup(r => r.FollowAsync(cmd.FollowerId, cmd.FolloweeId)).ReturnsAsync(true);
 
@@ -30,7 +29,7 @@ public class FollowerHandlerTests
     public async Task FollowUser_SelfFollow_ReturnsValidationError()
     {
         var id = Guid.NewGuid();
-        var handler = new FollowUserHandler(_followerRepo.Object, _uow.Object);
+        var handler = new FollowUserHandler(_followerRepo.Object);
 
         var result = await handler.Handle(
             new FollowUserCommand(FollowerId: id, FolloweeId: id), CancellationToken.None);

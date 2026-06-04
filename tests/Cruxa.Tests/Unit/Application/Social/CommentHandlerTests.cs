@@ -12,12 +12,11 @@ public class CommentHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<ICommentRepository> _commentRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
 
     [Fact]
     public async Task AddComment_ReturnsCommentDto()
     {
-        var handler = new AddCommentHandler(_commentRepo.Object, _uow.Object);
+        var handler = new AddCommentHandler(_commentRepo.Object);
 
         var content = _fixture.Faker.Lorem.Sentence();
         var result = await handler.Handle(
@@ -30,7 +29,7 @@ public class CommentHandlerTests
     [Fact]
     public async Task DeleteComment_WhenNotFound_ReturnsNotFound()
     {
-        var handler = new DeleteCommentHandler(_commentRepo.Object, _uow.Object);
+        var handler = new DeleteCommentHandler(_commentRepo.Object);
         _commentRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Comment?)null);
 
         var result = await handler.Handle(
@@ -43,15 +42,9 @@ public class CommentHandlerTests
     [Fact]
     public async Task DeleteComment_WhenNotOwn_ReturnsUnauthorized()
     {
-        var comment = new Comment
-        {
-            Id = Guid.NewGuid(),
-            UserId = Guid.NewGuid(),
-            PostId = Guid.NewGuid(),
-            Content = _fixture.Faker.Lorem.Sentence(),
-            CreatedAt = DateTime.UtcNow
-        };
-        var handler = new DeleteCommentHandler(_commentRepo.Object, _uow.Object);
+        var userId = Guid.NewGuid();
+        var comment = Comment.Create(Guid.NewGuid(), userId, _fixture.Faker.Lorem.Sentence()).Value!;
+        var handler = new DeleteCommentHandler(_commentRepo.Object);
         _commentRepo.Setup(r => r.GetByIdAsync(comment.Id)).ReturnsAsync(comment);
 
         var result = await handler.Handle(
@@ -65,9 +58,11 @@ public class CommentHandlerTests
     public async Task GetCommentsByPost_ReturnsComments()
     {
         var postId = Guid.NewGuid();
-        var comments = _fixture.CreateMany<Comment>(2);
-        comments[0].PostId = postId;
-        comments[1].PostId = postId;
+        var comments = new[]
+        {
+            Comment.Create(postId, Guid.NewGuid(), _fixture.Faker.Lorem.Sentence()).Value!,
+            Comment.Create(postId, Guid.NewGuid(), _fixture.Faker.Lorem.Sentence()).Value!
+        };
         var handler = new GetCommentsByPostHandler(_commentRepo.Object);
         _commentRepo.Setup(r => r.GetByPostIdAsync(postId)).ReturnsAsync(comments);
 

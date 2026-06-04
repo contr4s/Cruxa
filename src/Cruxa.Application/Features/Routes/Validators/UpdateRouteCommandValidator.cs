@@ -21,5 +21,10 @@ public class UpdateRouteCommandValidator : AbstractValidator<UpdateRouteCommand>
         RuleFor(x => x.Sector)
             .MaximumLength(100).WithMessage("Sector must not exceed 100 characters")
             .When(x => x.Sector != null);
+
+        RuleFor(x => x.GradeRaw)
+            .NotEmpty().WithMessage("GradeRaw must not be empty when provided")
+            .MaximumLength(20).WithMessage("GradeRaw must not exceed 20 characters")
+            .When(x => x.GradeRaw != null);
     }
 }

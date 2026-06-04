@@ -2,7 +2,7 @@
 
 Base URL: `http://localhost:5000` (default)
 
-> **OpenAPI Specification:** [`cruxa_api_v1.yaml`](./cruxa_api_v1.yaml) — полная машиночитаемая спецификация API в формате OpenAPI 3.1.1.
+> **OpenAPI Specification:** [`cruxa_api_v1.json`](./cruxa_api_v1.json) — полная машиночитаемая спецификация API в формате OpenAPI 3.1.1.
 
 ---
 
@@ -41,6 +41,9 @@ Base URL: `http://localhost:5000` (default)
 | GET | `/api/grading-systems` | ❌ Anon | — | — | — | `IEnumerable<GradingSystemDto>` |
 | GET | `/api/grading-systems/{id}` | ❌ Anon | — | — | — | `GradingSystemDto` |
 | GET | `/api/grading-systems/gym/{gymId}` | ❌ Anon | — | — | — | `GradingSystemDto` |
+| POST | `/api/grading-systems` | ✅ Auth | `RequireAdmin` | — | `CreateGradingSystemCommand` | `GradingSystemDto` |
+| PUT | `/api/grading-systems/{id}` | ✅ Auth | `RequireAdmin` | — | `UpdateGradingSystemCommand` | `GradingSystemDto` |
+| DELETE | `/api/grading-systems/{id}` | ✅ Auth | `RequireAdmin` | — | — | 204 No Content |
 
 ## Трассы (Routes)
 
@@ -61,7 +64,7 @@ Base URL: `http://localhost:5000` (default)
 |--------|-----|------|--------|-------|------|----------|
 | GET | `/api/posts/{id}` | ❌ Anon | — | — | — | `PostDto` |
 | GET | `/api/posts/user/{userId}` | ❌ Anon | — | — | — | `IEnumerable<PostDto>` |
-| GET | `/api/posts/feed` | ✅ Auth | — | `page` (1), `pageSize` (20) | — | `IEnumerable<PostDto>` |
+| GET | `/api/posts/feed` | ✅ Auth | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<PostDto>` |
 | GET | `/api/posts/gym/{gymId}` | ❌ Anon | — | — | — | `IEnumerable<PostDto>` |
 | POST | `/api/posts` | ✅ Auth | — | — | `CreatePostRequest` | `PostDto` |
 | PUT | `/api/posts/{id}` | ✅ Auth | — | — | `CreatePostRequest` | `PostDto` |
@@ -77,6 +80,22 @@ Base URL: `http://localhost:5000` (default)
 | PUT | `/api/posts/{postId}/ascents/{id}` | ✅ Auth | — | — | `UpdateAscentCommand` | `AscentDto` |
 | DELETE | `/api/posts/{postId}/ascents/{id}` | ✅ Auth | — | — | — | 204 No Content |
 | GET | `/api/ascents/user/{userId}` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<AscentDto>` |
+
+## Отзывы о трассах (Route Reviews)
+
+| Method | URL | Auth | Policy | Query | Body | Response |
+|--------|-----|------|--------|-------|------|----------|
+| GET | `/api/routes/{routeId}/reviews` | ❌ Anon | — | — | — | `IEnumerable<RouteReviewDto>` |
+| GET | `/api/routes/{routeId}/reviews/my` | ✅ Auth | — | — | — | `RouteReviewDto` |
+| POST | `/api/routes/{routeId}/reviews` | ✅ Auth | — | — | `AddRouteReviewCommand` | 201 Created |
+| PUT | `/api/routes/{routeId}/reviews/{id}` | ✅ Auth | — | — | `UpdateRouteReviewCommand` | `RouteReviewDto` |
+| DELETE | `/api/routes/{routeId}/reviews/{id}` | ✅ Auth | — | — | — | 204 No Content |
+
+## Тэги (Tags)
+
+| Method | URL | Auth | Policy | Query | Body | Response |
+|--------|-----|------|--------|-------|------|----------|
+| GET | `/api/routes/tags` | ❌ Anon | — | — | — | `List<string>` |
 
 ## Комментарии (Comments)
 
@@ -101,6 +120,7 @@ Base URL: `http://localhost:5000` (default)
 | DELETE | `/api/users/{userId}/follow` | ✅ Auth | — | — | — | 204 No Content |
 | GET | `/api/users/{userId}/followers` | ❌ Anon | — | — | — | `IEnumerable<Guid>` |
 | GET | `/api/users/{userId}/following` | ❌ Anon | — | — | — | `IEnumerable<Guid>` |
+| GET | `/api/users/{userId}/is-following` | ✅ Auth | — | — | — | `bool` |
 
 ---
 
@@ -111,14 +131,16 @@ Base URL: `http://localhost:5000` (default)
 | Auth | 2 | 0 | 0 |
 | Users | 5 | 4 | 2 |
 | Gyms | 6 | 3 | 1 |
-| GradingSystems | 3 | 0 | 0 |
+| GradingSystems | 6 | 3 | 3 |
 | Routes | 8 | 4 | 1 |
+| Route Reviews | 5 | 4 | 0 |
+| Tags | 1 | 0 | 0 |
 | Posts | 8 | 5 | 0 |
 | Ascents | 5 | 3 | 0 |
 | Comments | 3 | 2 | 0 |
 | Likes | 2 | 2 | 0 |
-| Followers | 4 | 2 | 0 |
-| **Итого** | **46** | **25** | **4** |
+| Followers | 5 | 3 | 0 |
+| **Итого** | **56** | **32** | **7** |
 
 ## Политики авторизации
 

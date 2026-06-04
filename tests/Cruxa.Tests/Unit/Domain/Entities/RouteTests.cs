@@ -70,7 +70,7 @@ public class RouteTests
         var holdColor = _fixture.Create<HoldColor>();
         var sector = _fixture.Faker.Lorem.Word();
         var tag = Tag.CreateUnsafe("tag1");
-        route.Update(type, holdColor, ["photo.jpg"],
+        route.Update(type, holdColor, null, ["photo.jpg"],
             [tag], sector, false);
 
         route.Type.Should().Be(type);
@@ -88,7 +88,7 @@ public class RouteTests
         var type = route.Type;
         var holdColor = route.HoldColor;
 
-        route.Update(null, null, null, null, null, null);
+        route.Update(null, null, null, null, null, null, null);
 
         route.Type.Should().Be(type);
         route.IsActive.Should().BeTrue();

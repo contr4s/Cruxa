@@ -3,7 +3,6 @@ namespace Cruxa.Domain.Entities;
 using Abstractions;
 using Common;
 using Enums;
-using Events;
 using ValueObjects;
 
 /// <summary>
@@ -56,8 +55,6 @@ public class User : AggregateRoot<Guid>
             Role = Role.Climber,
             CreatedAt = DateTime.UtcNow
         };
-
-        user.AddDomainEvent(new UserRegisteredEvent(user.Id, user.Email.Value));
 
         return Result.Success(user);
     }

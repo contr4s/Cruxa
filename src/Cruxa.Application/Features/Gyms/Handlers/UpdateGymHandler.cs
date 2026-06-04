@@ -3,12 +3,11 @@ using MediatR;
 using Cruxa.Application.Features.Gyms.Interfaces;
 using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Gyms.DTOs;
-using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Gyms.Commands;
 
 namespace Cruxa.Application.Features.Gyms.Handlers;
 
-public class UpdateGymHandler(IGymRepository gyms, IUnitOfWork uow) : IRequestHandler<UpdateGymCommand, Result<GymDto>>
+public class UpdateGymHandler(IGymRepository gyms) : IRequestHandler<UpdateGymCommand, Result<GymDto>>
 {
     public async Task<Result<GymDto>> Handle(UpdateGymCommand cmd, CancellationToken ct)
     {
@@ -19,7 +18,6 @@ public class UpdateGymHandler(IGymRepository gyms, IUnitOfWork uow) : IRequestHa
             cmd.ContactInfo, cmd.Website, cmd.Prices, cmd.WorkingHours, cmd.PhotoUrls, cmd.GradingSystemId);
 
         await gyms.UpdateAsync(gym);
-        await uow.SaveChangesAsync(ct);
         return gym.Adapt<GymDto>();
     }
 }

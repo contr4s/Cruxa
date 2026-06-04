@@ -1,7 +1,7 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Ascents.Commands;
 using Cruxa.Application.Features.Ascents.Queries;
@@ -12,11 +12,8 @@ namespace Cruxa.Api.Features.Ascents;
 [ApiController]
 [Route("api/posts/{postId:guid}/ascents")]
 [Authorize]
-public class AscentsController(IMediator mediator) : ControllerBase
+public class AscentsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
-    private Guid GetUserId() =>
-        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
     /// <summary>Get all ascents for a post</summary>
     [AllowAnonymous]
     [HttpGet]
@@ -30,8 +27,7 @@ public class AscentsController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Add(Guid postId, [FromBody] AddAscentCommand command)
     {
-        var userId = GetUserId();
-        var cmd = command with { PostId = postId, UserId = userId };
+        var cmd = command with { PostId = postId, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
         return result.IsSuccess ? Created() : BadRequest(result.Error);
     }
@@ -40,8 +36,7 @@ public class AscentsController(IMediator mediator) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<AscentDto>> Update(Guid postId, Guid id, [FromBody] UpdateAscentCommand command)
     {
-        var userId = GetUserId();
-        var cmd = command with { Id = id, UserId = userId };
+        var cmd = command with { Id = id, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
@@ -50,8 +45,7 @@ public class AscentsController(IMediator mediator) : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Remove(Guid postId, Guid id)
     {
-        var userId = GetUserId();
-        var result = await mediator.Send(new RemoveAscentCommand(id, userId));
+        var result = await mediator.Send(new RemoveAscentCommand(id, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

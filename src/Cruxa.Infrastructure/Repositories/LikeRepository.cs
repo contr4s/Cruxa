@@ -19,14 +19,7 @@ public class LikeRepository : ILikeRepository
         if (await IsLikedAsync(postId, userId))
             return false;
 
-        var like = new Like
-        {
-            Id = Guid.NewGuid(),
-            PostId = postId,
-            UserId = userId,
-            CreatedAt = DateTime.UtcNow
-        };
-
+        var like = Like.Create(postId, userId).Value!;
         await _context.Likes.AddAsync(like);
         return true;
     }

@@ -19,13 +19,7 @@ public class FollowerRepository : IFollowerRepository
         if (await IsFollowingAsync(followerId, followeeId))
             return false;
 
-        var follower = new Follower
-        {
-            FollowerId = followerId,
-            FolloweeId = followeeId,
-            CreatedAt = DateTime.UtcNow
-        };
-
+        var follower = Follower.Create(followerId, followeeId).Value!;
         await _context.Followers.AddAsync(follower);
         return true;
     }

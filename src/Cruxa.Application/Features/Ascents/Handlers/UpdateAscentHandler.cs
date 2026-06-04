@@ -3,19 +3,16 @@ using Cruxa.Application.Features.Ascents.Interfaces;
 using Cruxa.Application.Features.Ascents.Commands;
 using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Ascents.Handlers;
 
 public sealed class UpdateAscentHandler : IRequestHandler<UpdateAscentCommand, Result<AscentDto>>
 {
     private readonly IAscentRepository _repository;
-    private readonly IUnitOfWork _uow;
 
-    public UpdateAscentHandler(IAscentRepository repository, IUnitOfWork uow) 
+    public UpdateAscentHandler(IAscentRepository repository) 
     { 
         _repository = repository; 
-        _uow = uow; 
     }
 
     public async Task<Result<AscentDto>> Handle(UpdateAscentCommand request, CancellationToken ct)
@@ -29,7 +26,6 @@ public sealed class UpdateAscentHandler : IRequestHandler<UpdateAscentCommand, R
 
         ascent.UpdateStyle(request.Style, request.MediaUrls);
         await _repository.UpdateAsync(ascent);
-        await _uow.SaveChangesAsync(ct);
 
         var dto = new AscentDto
         {

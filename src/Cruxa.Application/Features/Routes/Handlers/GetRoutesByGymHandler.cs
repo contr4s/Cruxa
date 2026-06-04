@@ -12,10 +12,8 @@ public class GetRoutesByGymHandler(IRouteRepository routes) : IRequestHandler<Ge
 {
     public async Task<Result<OffsetPaginatedList<RouteDto>>> Handle(GetRoutesByGymQuery q, CancellationToken ct)
     {
-        var result = await routes.GetByGymIdAsync(q.GymId);
-        var dtos = result.Select(r => r.Adapt<RouteDto>()).ToList();
-        var total = dtos.Count;
-        var paged = dtos.Skip((q.Page - 1) * q.PageSize).Take(q.PageSize).ToList();
-        return Result.Success(new OffsetPaginatedList<RouteDto>(paged, total, q.Page, q.PageSize));
+        var (items, totalCount) = await routes.GetByGymPagedAsync(q.GymId, q.Page, q.PageSize);
+        var dtos = items.Select(r => r.Adapt<RouteDto>()).ToList();
+        return Result.Success(new OffsetPaginatedList<RouteDto>(dtos, totalCount, q.Page, q.PageSize));
     }
 }

@@ -1,17 +1,17 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Common.Models;
-using System.Security.Claims;
 
 namespace Cruxa.Api.Features.Routes;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoutesController(IMediator mediator) : ControllerBase
+public class RoutesController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<OffsetPaginatedList<RouteDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
@@ -38,8 +38,7 @@ public class RoutesController(IMediator mediator) : ControllerBase
     [Authorize(Policy = "RequireRoutesetter")]
     public async Task<ActionResult<RouteDto>> Create(CreateRouteCommand command)
     {
-        var authorId = GetCurrentUserId();
-        command = command with { AuthorId = authorId };
+        command = command with { AuthorId = currentUser.GetUserId() };
         var result = await mediator.Send(command);
         return result.IsSuccess
             ? CreatedAtAction(nameof(GetById), new { id = result.Value!.Id }, result.Value)
@@ -78,10 +77,4 @@ public class RoutesController(IMediator mediator) : ControllerBase
         return result.IsSuccess ? NoContent() : NotFound();
     }
 
-    private Guid? GetCurrentUserId()
-    {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-            ?? User.FindFirst("sub")?.Value;
-        return userIdClaim is null ? null : Guid.Parse(userIdClaim);
-    }
 }

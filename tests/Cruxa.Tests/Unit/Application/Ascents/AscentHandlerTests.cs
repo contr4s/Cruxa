@@ -16,7 +16,6 @@ public class AscentHandlerTests
     private readonly TestFixture _fixture = new();
     private readonly Mock<IAscentRepository> _ascentRepo = new();
     private readonly Mock<IPostRepository> _postRepo = new();
-    private readonly Mock<IUnitOfWork> _uow = new();
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _gymId = Guid.NewGuid();
 
@@ -29,7 +28,7 @@ public class AscentHandlerTests
     [Fact]
     public async Task AddAscent_WhenPostNotFound_ReturnsNotFound()
     {
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _uow.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Post?)null);
 
         var result = await handler.Handle(
@@ -43,7 +42,7 @@ public class AscentHandlerTests
     public async Task AddAscent_WhenNotOwnPost_ReturnsUnauthorized()
     {
         var post = CreatePost();
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _uow.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(
@@ -58,7 +57,7 @@ public class AscentHandlerTests
     {
         var post = CreatePost();
         var cmd = _fixture.Create<AddAscentCommand>() with { PostId = post.Id, UserId = _userId };
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _uow.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(cmd, CancellationToken.None);
@@ -78,7 +77,7 @@ public class AscentHandlerTests
         var ascent2 = Ascent.Create(postId, _userId, routeId, style).Value!;
         var ascents = new[] { ascent1, ascent2 };
         var handler = new GetAscentsByPostHandler(_ascentRepo.Object);
-        _ascentRepo.Setup(r => r.GetByPostIdAsync(postId)).ReturnsAsync(ascents);
+        _ascentRepo.Setup(r => r.GetByPostPagedAsync(postId, 1, 20)).ReturnsAsync((ascents.ToList(), 2));
 
         var result = await handler.Handle(new GetAscentsByPostQuery(postId), CancellationToken.None);
 
@@ -92,7 +91,7 @@ public class AscentHandlerTests
     {
         var routeId = Guid.NewGuid();
         var ascent = Ascent.Create(Guid.NewGuid(), _userId, routeId, AscentStyle.Onsight).Value!;
-        var handler = new UpdateAscentHandler(_ascentRepo.Object, _uow.Object);
+        var handler = new UpdateAscentHandler(_ascentRepo.Object);
         _ascentRepo.Setup(r => r.GetByIdAsync(ascent.Id)).ReturnsAsync(ascent);
 
         var result = await handler.Handle(
@@ -107,7 +106,7 @@ public class AscentHandlerTests
     public async Task UpdateAscent_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new UpdateAscentHandler(_ascentRepo.Object, _uow.Object);
+        var handler = new UpdateAscentHandler(_ascentRepo.Object);
         _ascentRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Ascent?)null);
 
         var result = await handler.Handle(
@@ -122,7 +121,7 @@ public class AscentHandlerTests
     {
         var routeId = Guid.NewGuid();
         var ascent = Ascent.Create(Guid.NewGuid(), _userId, routeId, AscentStyle.Onsight).Value!;
-        var handler = new UpdateAscentHandler(_ascentRepo.Object, _uow.Object);
+        var handler = new UpdateAscentHandler(_ascentRepo.Object);
         _ascentRepo.Setup(r => r.GetByIdAsync(ascent.Id)).ReturnsAsync(ascent);
 
         var result = await handler.Handle(
@@ -137,7 +136,7 @@ public class AscentHandlerTests
     {
         var routeId = Guid.NewGuid();
         var ascent = Ascent.Create(Guid.NewGuid(), _userId, routeId, AscentStyle.Onsight).Value!;
-        var handler = new RemoveAscentHandler(_ascentRepo.Object, _uow.Object);
+        var handler = new RemoveAscentHandler(_ascentRepo.Object);
         _ascentRepo.Setup(r => r.GetByIdAsync(ascent.Id)).ReturnsAsync(ascent);
 
         var result = await handler.Handle(
@@ -152,7 +151,7 @@ public class AscentHandlerTests
     {
         var routeId = Guid.NewGuid();
         var ascent = Ascent.Create(Guid.NewGuid(), _userId, routeId, AscentStyle.Onsight).Value!;
-        var handler = new RemoveAscentHandler(_ascentRepo.Object, _uow.Object);
+        var handler = new RemoveAscentHandler(_ascentRepo.Object);
         _ascentRepo.Setup(r => r.GetByIdAsync(ascent.Id)).ReturnsAsync(ascent);
 
         var result = await handler.Handle(
@@ -171,7 +170,7 @@ public class AscentHandlerTests
         var ascent2 = Ascent.Create(Guid.NewGuid(), _userId, routeId, style).Value!;
         var ascents = new[] { ascent1, ascent2 };
         var handler = new GetAscentsByUserHandler(_ascentRepo.Object);
-        _ascentRepo.Setup(r => r.GetByUserIdAsync(_userId)).ReturnsAsync(ascents);
+        _ascentRepo.Setup(r => r.GetByUserPagedAsync(_userId, 1, 20)).ReturnsAsync((ascents.ToList(), 2));
 
         var result = await handler.Handle(new GetAscentsByUserQuery(_userId), CancellationToken.None);
 
@@ -189,7 +188,7 @@ public class AscentHandlerTests
             .Select(_ => Ascent.Create(postId, _userId, routeId, AscentStyle.Onsight).Value!)
             .ToArray();
         var handler = new GetAscentsByPostHandler(_ascentRepo.Object);
-        _ascentRepo.Setup(r => r.GetByPostIdAsync(postId)).ReturnsAsync(ascents);
+        _ascentRepo.Setup(r => r.GetByPostPagedAsync(postId, 2, 2)).ReturnsAsync((ascents.Skip(2).Take(2).ToList(), 5));
 
         var result = await handler.Handle(new GetAscentsByPostQuery(postId, 2, 2), CancellationToken.None);
 

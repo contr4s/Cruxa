@@ -16,10 +16,8 @@ public sealed class GetAscentsByUserHandler : IRequestHandler<GetAscentsByUserQu
 
     public async Task<Result<OffsetPaginatedList<AscentDto>>> Handle(GetAscentsByUserQuery request, CancellationToken ct)
     {
-        var ascents = await _repository.GetByUserIdAsync(request.UserId);
-        var dtos = ascents.Select(a => a.Adapt<AscentDto>()).ToList();
-        var total = dtos.Count;
-        var paged = dtos.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList();
-        return Result.Success(new OffsetPaginatedList<AscentDto>(paged, total, request.Page, request.PageSize));
+        var (items, totalCount) = await _repository.GetByUserPagedAsync(request.UserId, request.Page, request.PageSize);
+        var dtos = items.Select(a => a.Adapt<AscentDto>()).ToList();
+        return Result.Success(new OffsetPaginatedList<AscentDto>(dtos, totalCount, request.Page, request.PageSize));
     }
 }
