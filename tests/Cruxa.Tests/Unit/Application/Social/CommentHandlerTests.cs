@@ -3,6 +3,7 @@ using Cruxa.Application.Features.Social.Interfaces;
 using Cruxa.Application.Features.Social.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Cruxa.Application.Common.Interfaces;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Social;
@@ -11,11 +12,12 @@ public class CommentHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<ICommentRepository> _commentRepo = new();
+    private readonly Mock<IUnitOfWork> _uow = new();
 
     [Fact]
     public async Task AddComment_ReturnsCommentDto()
     {
-        var handler = new AddCommentHandler(_commentRepo.Object);
+        var handler = new AddCommentHandler(_commentRepo.Object, _uow.Object);
 
         var content = _fixture.Faker.Lorem.Sentence();
         var result = await handler.Handle(
@@ -28,7 +30,7 @@ public class CommentHandlerTests
     [Fact]
     public async Task DeleteComment_WhenNotFound_ReturnsNotFound()
     {
-        var handler = new DeleteCommentHandler(_commentRepo.Object);
+        var handler = new DeleteCommentHandler(_commentRepo.Object, _uow.Object);
         _commentRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Comment?)null);
 
         var result = await handler.Handle(
@@ -49,7 +51,7 @@ public class CommentHandlerTests
             Content = _fixture.Faker.Lorem.Sentence(),
             CreatedAt = DateTime.UtcNow
         };
-        var handler = new DeleteCommentHandler(_commentRepo.Object);
+        var handler = new DeleteCommentHandler(_commentRepo.Object, _uow.Object);
         _commentRepo.Setup(r => r.GetByIdAsync(comment.Id)).ReturnsAsync(comment);
 
         var result = await handler.Handle(

@@ -19,6 +19,7 @@ public class CruxaDbContext : DbContext
     public DbSet<Like> Likes => Set<Like>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<RouteReview> RouteReviews => Set<RouteReview>();
+    public DbSet<Tag> Tags => Set<Tag>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,7 +28,7 @@ public class CruxaDbContext : DbContext
         modelBuilder.Entity<GradingSystem>().HasData(
             new GradingSystem(
                 DefaultGradingSystemId,
-                "Fontainebleau (Bouldering)",
+                "Фонтенбло (Боулдеринг)",
                 new Dictionary<string, int>
                 {
                     ["4a"] = 400, ["4b"] = 420, ["4c"] = 440,
@@ -39,6 +40,36 @@ public class CruxaDbContext : DbContext
                     ["8a"] = 760, ["8a+"] = 780, ["8b"] = 800
                 }
             )
+        );
+
+        modelBuilder.Entity<Tag>().HasData(
+            // тип
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000101"), "боулдеринг", "тип"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000102"), "скорость", "тип"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000103"), "трудность", "тип"),
+            // рельеф
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000104"), "арка", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000105"), "вертикаль", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000106"), "камин", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000107"), "нависание", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000108"), "полка", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000109"), "положилово", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010a"), "потолок", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010b"), "распор", "рельеф"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010c"), "щель", "рельеф"),
+            // стиль
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010d"), "баланс", "стиль"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010e"), "динамика", "стиль"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-00000000010f"), "кампус", "стиль"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000110"), "силовой", "стиль"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000111"), "статика", "стиль"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000112"), "техничный", "стиль"),
+            // зацеп
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000113"), "карман", "зацеп"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000114"), "мизера", "зацеп"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000115"), "пассив", "зацеп"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000116"), "подхват", "зацеп"),
+            Tag.CreateUnsafe(new Guid("00000000-0000-0000-0000-000000000117"), "щипок", "зацеп")
         );
     }
 }

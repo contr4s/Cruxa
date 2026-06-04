@@ -16,6 +16,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
 {
     protected readonly HttpClient Client = factory.CreateClient();
     protected readonly TestFixture Fixture = new();
+    protected Guid CurrentUserId { get; private set; }
 
     protected static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -33,6 +34,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     {
         ClearToken();
         var auth = await RegisterAsync(Fixture.Create<RegisterCommand>());
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         return auth;
     }
@@ -79,6 +81,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     {
         var cmd = Fixture.Create<RegisterCommand>();
         var auth = await RegisterAsync(cmd);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         using var scope = factory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CruxaDbContext>();
@@ -87,6 +90,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
         await db.SaveChangesAsync();
 
         auth = await LoginAsync(cmd.Email, cmd.Password);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         return cmd;
     }
@@ -110,6 +114,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     {
         var cmd = Fixture.Create<RegisterCommand>();
         var auth = await RegisterAsync(cmd);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         using var scope = factory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CruxaDbContext>();
@@ -118,6 +123,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
         await db.SaveChangesAsync();
 
         auth = await LoginAsync(cmd.Email, cmd.Password);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         return cmd;
     }
@@ -129,6 +135,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     {
         var cmd = Fixture.Create<RegisterCommand>();
         var auth = await RegisterAsync(cmd);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         using var scope = factory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CruxaDbContext>();
@@ -137,6 +144,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
         await db.SaveChangesAsync();
 
         auth = await LoginAsync(cmd.Email, cmd.Password);
+        CurrentUserId = auth.User.Id;
         SetToken(auth.Token);
         return cmd;
     }

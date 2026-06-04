@@ -2,6 +2,7 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Ascents.Commands;
 using Cruxa.Application.Features.Ascents.Queries;
 using Cruxa.Application.Features.Ascents.DTOs;
@@ -19,9 +20,9 @@ public class AscentsController(IMediator mediator) : ControllerBase
     /// <summary>Get all ascents for a post</summary>
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AscentDto>>> GetByPost(Guid postId)
+    public async Task<ActionResult<OffsetPaginatedList<AscentDto>>> GetByPost(Guid postId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var result = await mediator.Send(new GetAscentsByPostQuery(postId));
+        var result = await mediator.Send(new GetAscentsByPostQuery(postId, page, pageSize));
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
@@ -35,6 +36,16 @@ public class AscentsController(IMediator mediator) : ControllerBase
         return result.IsSuccess ? Created() : BadRequest(result.Error);
     }
 
+    /// <summary>Update an ascent (style, media)</summary>
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<AscentDto>> Update(Guid postId, Guid id, [FromBody] UpdateAscentCommand command)
+    {
+        var userId = GetUserId();
+        var cmd = command with { Id = id, UserId = userId };
+        var result = await mediator.Send(cmd);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+    }
+
     /// <summary>Remove an ascent</summary>
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Remove(Guid postId, Guid id)
@@ -44,3 +55,5 @@ public class AscentsController(IMediator mediator) : ControllerBase
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }
+
+

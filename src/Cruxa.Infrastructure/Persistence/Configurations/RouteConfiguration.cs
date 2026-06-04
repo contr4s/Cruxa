@@ -39,14 +39,15 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
         builder.Property(r => r.PhotoUrls)
             .HasColumnType("text[]");
 
-        builder.Property(r => r.Tags)
-            .HasColumnType("text[]");
-
         builder.Property(r => r.Sector)
             .HasMaxLength(50);
 
         builder.Property(r => r.IsActive)
             .HasDefaultValue(true);
+
+        builder.HasMany(r => r.Tags)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("route_tags"));
 
         builder.HasIndex(r => r.GymId);
 

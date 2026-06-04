@@ -69,12 +69,14 @@ public class RouteTests
         var type = _fixture.Create<RouteType>();
         var holdColor = _fixture.Create<HoldColor>();
         var sector = _fixture.Faker.Lorem.Word();
-        route.Update(type, holdColor, ["photo.jpg"], ["tag1"], sector, false);
+        var tag = Tag.CreateUnsafe("tag1");
+        route.Update(type, holdColor, ["photo.jpg"],
+            [tag], sector, false);
 
         route.Type.Should().Be(type);
         route.HoldColor.Should().Be(holdColor);
         route.PhotoUrls.Should().Contain("photo.jpg");
-        route.Tags.Should().Contain("tag1");
+        route.Tags.Should().ContainSingle(t => t.Value == "tag1");
         route.Sector.Should().Be(sector);
         route.IsActive.Should().BeFalse();
     }

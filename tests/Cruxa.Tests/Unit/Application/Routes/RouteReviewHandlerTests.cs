@@ -1,8 +1,9 @@
-using Cruxa.Application.Features.Routes.Reviews.Handlers;
-using Cruxa.Application.Features.Routes.Reviews.Interfaces;
-using Cruxa.Application.Features.Routes.Reviews.Queries;
+using Cruxa.Application.Features.Routes.Handlers;
+using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Cruxa.Application.Common.Interfaces;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Routes;
@@ -11,13 +12,14 @@ public class RouteReviewHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IRouteReviewRepository> _reviewRepo = new();
+    private readonly Mock<IUnitOfWork> _uow = new();
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _routeId = Guid.NewGuid();
 
     [Fact]
     public async Task AddReview_WhenNoExistingReview_ReturnsSuccess()
     {
-        var handler = new AddRouteReviewHandler(_reviewRepo.Object);
+        var handler = new AddRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId))
             .ReturnsAsync((RouteReview?)null);
 
@@ -33,7 +35,7 @@ public class RouteReviewHandlerTests
     [Fact]
     public async Task AddReview_WhenReviewExists_ReturnsConflict()
     {
-        var handler = new AddRouteReviewHandler(_reviewRepo.Object);
+        var handler = new AddRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         var existing = RouteReview.Create(_routeId, _userId).Value!;
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId))
             .ReturnsAsync(existing);
@@ -54,7 +56,7 @@ public class RouteReviewHandlerTests
         var newPrivateNotes = _fixture.Faker.Lorem.Sentence();
         var newPublicReview = _fixture.Faker.Lorem.Sentence();
         var review = RouteReview.Create(_routeId, _userId, rating: initialRating).Value!;
-        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
+        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
         var result = await handler.Handle(
@@ -69,7 +71,7 @@ public class RouteReviewHandlerTests
     [Fact]
     public async Task UpdateReview_WhenNotExists_ReturnsNotFound()
     {
-        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
+        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteReview?)null);
 
         var result = await handler.Handle(
@@ -83,7 +85,7 @@ public class RouteReviewHandlerTests
     public async Task UpdateReview_WhenNotOwnReview_ReturnsUnauthorized()
     {
         var review = RouteReview.Create(_routeId, _userId).Value!;
-        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
+        var handler = new UpdateRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
         var result = await handler.Handle(
@@ -97,7 +99,7 @@ public class RouteReviewHandlerTests
     public async Task DeleteReview_WhenExistsAndOwn_ReturnsSuccess()
     {
         var review = RouteReview.Create(_routeId, _userId).Value!;
-        var handler = new DeleteRouteReviewHandler(_reviewRepo.Object);
+        var handler = new DeleteRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
         var result = await handler.Handle(
@@ -111,7 +113,7 @@ public class RouteReviewHandlerTests
     [Fact]
     public async Task DeleteReview_WhenNotExists_ReturnsNotFound()
     {
-        var handler = new DeleteRouteReviewHandler(_reviewRepo.Object);
+        var handler = new DeleteRouteReviewHandler(_reviewRepo.Object, _uow.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteReview?)null);
 
         var result = await handler.Handle(

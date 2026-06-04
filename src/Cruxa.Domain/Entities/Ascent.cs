@@ -52,5 +52,10 @@ public class Ascent : Entity<Guid>
         });
     }
 
-
+    public void UpdateStyle(AscentStyle style, List<string>? mediaUrls = null)
+    {
+        Style = style;
+        if (mediaUrls is not null)
+            MediaUrls = mediaUrls;
+    }
 }

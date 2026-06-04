@@ -15,7 +15,7 @@ public class Route : Entity<Guid>
     public RouteType Type { get; private set; }
     public HoldColor HoldColor { get; private set; }
     public List<string> PhotoUrls { get; private set; } = [];
-    public List<string> Tags { get; private set; } = [];
+    public List<Tag> Tags { get; private set; } = [];
     public string? Sector { get; private set; }
     public bool IsActive { get; private set; } = true;
 
@@ -44,7 +44,7 @@ public class Route : Entity<Guid>
         HoldColor holdColor,
         Guid? authorId = null,
         List<string>? photoUrls = null,
-        List<string>? tags = null,
+        List<Tag>? tags = null,
         string? sector = null)
     {
         Guard.AgainstDefault(gymId, nameof(gymId));
@@ -72,7 +72,7 @@ public class Route : Entity<Guid>
         AddDomainEvent(new RouteDeactivatedEvent(Id));
     }
 
-    public void Update(RouteType? type, HoldColor? holdColor, List<string>? photoUrls, List<string>? tags, string? sector, bool? isActive)
+    public void Update(RouteType? type, HoldColor? holdColor, List<string>? photoUrls, List<Tag>? tags, string? sector, bool? isActive)
     {
         if (type.HasValue) Type = type.Value;
         if (holdColor.HasValue) HoldColor = holdColor.Value;

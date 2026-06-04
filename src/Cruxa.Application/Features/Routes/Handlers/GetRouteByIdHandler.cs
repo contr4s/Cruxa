@@ -1,0 +1,17 @@
+using Mapster;
+using MediatR;
+using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.Routes.DTOs;
+using Cruxa.Application.Features.Routes.Queries;
+using Cruxa.Domain.Common;
+
+namespace Cruxa.Application.Features.Routes.Handlers;
+
+public class GetRouteByIdHandler(IRouteRepository routes) : IRequestHandler<GetRouteByIdQuery, Result<RouteDto>>
+{
+    public async Task<Result<RouteDto>> Handle(GetRouteByIdQuery q, CancellationToken ct)
+    {
+        var route = await routes.GetByIdAsync(q.Id);
+        return route is null ? Result.Failure<RouteDto>(Error.NotFound("Route")) : Result.Success(route.Adapt<RouteDto>());
+    }
+}

@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using Cruxa.Application.Features.Routes.Reviews.DTOs;
+using Cruxa.Application.Features.Routes.DTOs;
 using FluentAssertions;
 
 namespace Cruxa.Tests.Integration.Routes;

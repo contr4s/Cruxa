@@ -2,9 +2,9 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Cruxa.Application.Features.Routes.Reviews.Commands;
-using Cruxa.Application.Features.Routes.Reviews.Queries;
-using Cruxa.Application.Features.Routes.Reviews.DTOs;
+using Cruxa.Application.Features.Routes.Commands;
+using Cruxa.Application.Features.Routes.Queries;
+using Cruxa.Application.Features.Routes.DTOs;
 
 namespace Cruxa.Api.Features.Routes;
 

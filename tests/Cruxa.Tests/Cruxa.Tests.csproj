@@ -30,7 +30,7 @@
     <Using Include="Cruxa.Application.Features.Gyms.Commands" />
     <Using Include="Cruxa.Application.Features.Posts.DTOs" />
     <Using Include="Cruxa.Application.Features.Routes.Commands" />
-    <Using Include="Cruxa.Application.Features.Routes.Reviews.Commands" />
+    <Using Include="Cruxa.Application.Features.Routes.Commands" />
     <Using Include="Cruxa.Application.Features.Social.Commands" />
     <Using Include="Cruxa.Application.Features.Users.Commands" />
   </ItemGroup>

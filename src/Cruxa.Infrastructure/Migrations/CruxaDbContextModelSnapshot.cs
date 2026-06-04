@@ -134,7 +134,7 @@ namespace Cruxa.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Name = "Fontainebleau (Bouldering)",
+                            Name = "Фонтенбло (Боулдеринг)",
                             _gradeMappingJson = "{\"4a\":400,\"4b\":420,\"4c\":440,\"5a\":460,\"5b\":480,\"5c\":500,\"6a\":520,\"6a\\u002B\":540,\"6b\":560,\"6b\\u002B\":580,\"6c\":600,\"6c\\u002B\":620,\"7a\":640,\"7a\\u002B\":660,\"7b\":680,\"7b\\u002B\":700,\"7c\":720,\"7c\\u002B\":740,\"8a\":760,\"8a\\u002B\":780,\"8b\":800}"
                         });
                 });
@@ -300,10 +300,6 @@ namespace Cruxa.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.PrimitiveCollection<List<string>>("Tags")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -362,6 +358,169 @@ namespace Cruxa.Infrastructure.Migrations
                     b.ToTable("route_reviews", (string)null);
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Category")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
+
+                    b.ToTable("tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000101"),
+                            Category = "тип",
+                            Value = "боулдеринг"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000102"),
+                            Category = "тип",
+                            Value = "скорость"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000103"),
+                            Category = "тип",
+                            Value = "трудность"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000104"),
+                            Category = "рельеф",
+                            Value = "арка"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000105"),
+                            Category = "рельеф",
+                            Value = "вертикаль"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000106"),
+                            Category = "рельеф",
+                            Value = "камин"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000107"),
+                            Category = "рельеф",
+                            Value = "нависание"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000108"),
+                            Category = "рельеф",
+                            Value = "полка"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000109"),
+                            Category = "рельеф",
+                            Value = "положилово"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010a"),
+                            Category = "рельеф",
+                            Value = "потолок"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010b"),
+                            Category = "рельеф",
+                            Value = "распор"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010c"),
+                            Category = "рельеф",
+                            Value = "щель"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010d"),
+                            Category = "стиль",
+                            Value = "баланс"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010e"),
+                            Category = "стиль",
+                            Value = "динамика"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-00000000010f"),
+                            Category = "стиль",
+                            Value = "кампус"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000110"),
+                            Category = "стиль",
+                            Value = "силовой"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000111"),
+                            Category = "стиль",
+                            Value = "статика"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000112"),
+                            Category = "стиль",
+                            Value = "техничный"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000113"),
+                            Category = "зацеп",
+                            Value = "карман"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000114"),
+                            Category = "зацеп",
+                            Value = "мизера"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000115"),
+                            Category = "зацеп",
+                            Value = "пассив"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000116"),
+                            Category = "зацеп",
+                            Value = "подхват"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000117"),
+                            Category = "зацеп",
+                            Value = "щипок"
+                        });
+                });
+
             modelBuilder.Entity("Cruxa.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -409,6 +568,21 @@ namespace Cruxa.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("RouteTag", b =>
+                {
+                    b.Property<Guid>("RouteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("RouteId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("route_tags", (string)null);
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.Ascent", b =>
@@ -611,6 +785,21 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("Route");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RouteTag", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.Route", null)
+                        .WithMany()
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cruxa.Domain.Entities.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.GradingSystem", b =>

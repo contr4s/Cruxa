@@ -1,8 +1,10 @@
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Gyms.Handlers;
 using Cruxa.Application.Features.Gyms.Interfaces;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Cruxa.Application.Common.Interfaces;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Gyms;
@@ -11,6 +13,7 @@ public class GymHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IGymRepository> _gymRepo = new();
+    private readonly Mock<IUnitOfWork> _uow = new();
 
     private Gym CreateGym()
     {
@@ -56,7 +59,7 @@ public class GymHandlerTests
     public async Task UpdateGym_WhenExists_ReturnsSuccess()
     {
         var gym = CreateGym();
-        var handler = new UpdateGymHandler(_gymRepo.Object);
+        var handler = new UpdateGymHandler(_gymRepo.Object, _uow.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(gym.Id)).ReturnsAsync(gym);
 
         var name = _fixture.Faker.Company.CompanyName();
@@ -72,7 +75,7 @@ public class GymHandlerTests
     public async Task UpdateGym_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new UpdateGymHandler(_gymRepo.Object);
+        var handler = new UpdateGymHandler(_gymRepo.Object, _uow.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
         var result = await handler.Handle(
@@ -86,7 +89,7 @@ public class GymHandlerTests
     public async Task DeleteGym_WhenExists_ReturnsSuccess()
     {
         var gym = CreateGym();
-        var handler = new DeleteGymHandler(_gymRepo.Object);
+        var handler = new DeleteGymHandler(_gymRepo.Object, _uow.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(gym.Id)).ReturnsAsync(gym);
 
         var result = await handler.Handle(
@@ -100,7 +103,7 @@ public class GymHandlerTests
     public async Task DeleteGym_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new DeleteGymHandler(_gymRepo.Object);
+        var handler = new DeleteGymHandler(_gymRepo.Object, _uow.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
         var result = await handler.Handle(
@@ -108,5 +111,41 @@ public class GymHandlerTests
 
         result.IsSuccess.Should().BeFalse();
         result.Error.Code.Should().Be("NotFound");
+    }
+
+    [Fact]
+    public async Task GetAllGyms_ReturnsPaginatedList()
+    {
+        var gyms = new[] { CreateGym(), CreateGym(), CreateGym() };
+        var handler = new GetAllGymsHandler(_gymRepo.Object);
+        _gymRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(gyms);
+
+        var result = await handler.Handle(new GetAllGymsQuery(1, 2), CancellationToken.None);
+
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Items.Should().HaveCount(2);
+        result.Value.TotalCount.Should().Be(3);
+        result.Value.HasNextPage.Should().BeTrue();
+        result.Value.HasPreviousPage.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task GetGymsByCity_ReturnsPaginatedList()
+    {
+        var city = "TestCity";
+        var gyms = new[] { CreateGym(), CreateGym() };
+        // Force city value for test
+        foreach (var g in gyms)
+        {
+            typeof(Gym).GetProperty("City")?.SetValue(g, city);
+        }
+        var handler = new GetGymsByCityHandler(_gymRepo.Object);
+        _gymRepo.Setup(r => r.GetByCityAsync(city)).ReturnsAsync(gyms);
+
+        var result = await handler.Handle(new GetGymsByCityQuery(city, 1, 2), CancellationToken.None);
+
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Items.Should().HaveCount(2);
+        result.Value.TotalCount.Should().Be(2);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Application.Features.Gyms.Commands;
+using Cruxa.Application.Common.Models;
 
 namespace Cruxa.Api.Features.Gyms;
 
@@ -12,9 +13,9 @@ namespace Cruxa.Api.Features.Gyms;
 public class GymsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GymDto>>> GetAll()
+    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var result = await mediator.Send(new GetAllGymsQuery());
+        var result = await mediator.Send(new GetAllGymsQuery(page, pageSize));
         return Ok(result.Value);
     }
 
@@ -26,9 +27,9 @@ public class GymsController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("city/{city}")]
-    public async Task<ActionResult<IEnumerable<GymDto>>> GetByCity(string city)
+    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetByCity(string city, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var result = await mediator.Send(new GetGymsByCityQuery(city));
+        var result = await mediator.Send(new GetGymsByCityQuery(city, page, pageSize));
         return Ok(result.Value);
     }
 

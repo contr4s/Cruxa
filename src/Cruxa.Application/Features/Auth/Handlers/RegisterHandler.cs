@@ -11,7 +11,7 @@ using Cruxa.Domain.ValueObjects;
 
 namespace Cruxa.Application.Features.Auth.Handlers;
 
-public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPasswordHasher passwordHasher)
+public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPasswordHasher passwordHasher, IUnitOfWork uow)
     : IRequestHandler<RegisterCommand, Result<AuthResponse>>
 {
     public async Task<Result<AuthResponse>> Handle(RegisterCommand cmd, CancellationToken ct)
@@ -37,6 +37,7 @@ public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPas
             user.UpdateProfile(null, cmd.City);
 
         await users.AddAsync(user);
+        await uow.SaveChangesAsync(ct);
 
         var token = await jwt.GenerateTokenAsync(user);
         var userDto = user.Adapt<UserDto>();

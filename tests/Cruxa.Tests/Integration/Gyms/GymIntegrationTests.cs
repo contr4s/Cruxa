@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Gyms.DTOs;
 using FluentAssertions;
 
@@ -52,12 +53,13 @@ public class GymIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync("/api/gyms");
         response.EnsureSuccessStatusCode();
-        var allGyms = await DeserializeAsync<List<GymDto>>(response);
+        var allGyms = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
 
-        allGyms.Should().NotBeEmpty();
-        allGyms.Count.Should().BeGreaterThanOrEqualTo(2);
-        allGyms.Should().Contain(g => g.Id == gym1.Id);
-        allGyms.Should().Contain(g => g.Id == gym2.Id);
+        allGyms.Should().NotBeNull();
+        allGyms.Items.Should().NotBeEmpty();
+        allGyms.Items.Count.Should().BeGreaterThanOrEqualTo(2);
+        allGyms.Items.Should().Contain(g => g.Id == gym1.Id);
+        allGyms.Items.Should().Contain(g => g.Id == gym2.Id);
     }
 
     [Fact]
@@ -92,10 +94,11 @@ public class GymIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/gyms/city/{gym.City}");
         response.EnsureSuccessStatusCode();
-        var gyms = await DeserializeAsync<List<GymDto>>(response);
+        var gyms = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
 
-        gyms.Should().NotBeEmpty();
-        gyms.All(g => g.City == gym.City).Should().BeTrue();
+        gyms.Should().NotBeNull();
+        gyms.Items.Should().NotBeEmpty();
+        gyms.Items.All(g => g.City == gym.City).Should().BeTrue();
     }
 
     [Fact]
@@ -141,5 +144,41 @@ public class GymIntegrationTests : IntegrationTestBase
 
         var deleteResponse = await Client.DeleteAsync($"/api/gyms/{gym.Id}");
         deleteResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task GetAll_ReturnsPaginatedList()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync("/api/gyms?page=1&pageSize=1");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().HaveCount(1);
+        result.TotalCount.Should().BeGreaterThanOrEqualTo(2);
+        result.HasNextPage.Should().BeTrue();
+        result.HasPreviousPage.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task GetByCity_ReturnsPaginatedList()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync($"/api/gyms/city/{gym.City}?page=1&pageSize=10");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().NotBeEmpty();
+        result.Page.Should().Be(1);
+        result.PageSize.Should().Be(10);
     }
 }

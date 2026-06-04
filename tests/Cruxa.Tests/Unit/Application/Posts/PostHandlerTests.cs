@@ -5,6 +5,7 @@ using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Social.Interfaces;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Cruxa.Application.Common.Interfaces;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Posts;
@@ -14,6 +15,7 @@ public class PostHandlerTests
     private readonly TestFixture _fixture = new();
     private readonly Mock<IPostRepository> _postRepo = new();
     private readonly Mock<IFollowerRepository> _followerRepo = new();
+    private readonly Mock<IUnitOfWork> _uow = new();
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _gymId = Guid.NewGuid();
 
@@ -26,7 +28,7 @@ public class PostHandlerTests
     [Fact]
     public async Task CreatePost_ReturnsSuccess()
     {
-        var handler = new CreatePostHandler(_postRepo.Object);
+        var handler = new CreatePostHandler(_postRepo.Object, _uow.Object);
         var desc = _fixture.Faker.Lorem.Sentence();
 
         var result = await handler.Handle(
@@ -40,7 +42,7 @@ public class PostHandlerTests
     [Fact]
     public async Task UpdatePost_WhenNotFound_ReturnsNotFound()
     {
-        var handler = new UpdatePostHandler(_postRepo.Object);
+        var handler = new UpdatePostHandler(_postRepo.Object, _uow.Object);
         _postRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Post?)null);
 
         var result = await handler.Handle(
@@ -54,7 +56,7 @@ public class PostHandlerTests
     public async Task UpdatePost_WhenNotOwn_ReturnsUnauthorized()
     {
         var post = CreatePost();
-        var handler = new UpdatePostHandler(_postRepo.Object);
+        var handler = new UpdatePostHandler(_postRepo.Object, _uow.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(
@@ -68,7 +70,7 @@ public class PostHandlerTests
     public async Task PublishPost_WhenOwn_ReturnsSuccess()
     {
         var post = CreatePost();
-        var handler = new PublishPostHandler(_postRepo.Object);
+        var handler = new PublishPostHandler(_postRepo.Object, _uow.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(
@@ -82,7 +84,7 @@ public class PostHandlerTests
     public async Task DeletePost_WhenNotOwn_ReturnsUnauthorized()
     {
         var post = CreatePost();
-        var handler = new DeletePostHandler(_postRepo.Object);
+        var handler = new DeletePostHandler(_postRepo.Object, _uow.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(

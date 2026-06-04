@@ -4,6 +4,7 @@ using Cruxa.Application.Features.Users.Queries;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.ValueObjects;
 using FluentAssertions;
+using Cruxa.Application.Common.Interfaces;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Users;
@@ -12,6 +13,7 @@ public class UserHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IUserRepository> _userRepo = new();
+    private readonly Mock<IUnitOfWork> _uow = new();
 
     private User CreateUser()
     {
@@ -67,7 +69,7 @@ public class UserHandlerTests
     public async Task UpdateUser_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new UpdateUserHandler(_userRepo.Object);
+        var handler = new UpdateUserHandler(_userRepo.Object, _uow.Object);
         _userRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((User?)null);
 
         var result = await handler.Handle(
@@ -81,7 +83,7 @@ public class UserHandlerTests
     public async Task UpdateUser_WhenExists_ReturnsSuccess()
     {
         var user = CreateUser();
-        var handler = new UpdateUserHandler(_userRepo.Object);
+        var handler = new UpdateUserHandler(_userRepo.Object, _uow.Object);
         _userRepo.Setup(r => r.GetByIdAsync(user.Id)).ReturnsAsync(user);
 
         string city = _fixture.Faker.Address.City();
@@ -97,7 +99,7 @@ public class UserHandlerTests
     public async Task DeleteUser_WhenExists_ReturnsSuccess()
     {
         var user = CreateUser();
-        var handler = new DeleteUserHandler(_userRepo.Object);
+        var handler = new DeleteUserHandler(_userRepo.Object, _uow.Object);
         _userRepo.Setup(r => r.GetByIdAsync(user.Id)).ReturnsAsync(user);
 
         var result = await handler.Handle(
@@ -111,7 +113,7 @@ public class UserHandlerTests
     public async Task DeleteUser_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new DeleteUserHandler(_userRepo.Object);
+        var handler = new DeleteUserHandler(_userRepo.Object, _uow.Object);
         _userRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((User?)null);
 
         var result = await handler.Handle(

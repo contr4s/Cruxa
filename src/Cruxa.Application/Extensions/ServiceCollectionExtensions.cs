@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Mapster;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Common.Behaviors;
+using Cruxa.Domain.Entities;
 using FluentValidation;
 
 namespace Cruxa.Application.Extensions;
@@ -23,6 +24,12 @@ public static class ServiceCollectionExtensions
 
         // Mapster
         TypeAdapterConfig.GlobalSettings.Default.MapToConstructor(true);
+
+        // Tag entity ↔ string mapping for DTOs
+        TypeAdapterConfig<Tag, string>.NewConfig()
+            .MapWith(src => src.Value);
+        TypeAdapterConfig<string, Tag>.NewConfig()
+            .MapWith(src => Tag.CreateUnsafe(src));
 
         return services;
     }

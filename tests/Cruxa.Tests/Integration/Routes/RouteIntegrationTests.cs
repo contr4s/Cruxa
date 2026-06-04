@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.DTOs;
 using FluentAssertions;
 
@@ -53,9 +54,10 @@ public class RouteIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync("/api/routes");
         response.EnsureSuccessStatusCode();
-        var routes = await DeserializeAsync<List<RouteDto>>(response);
+        var routes = await DeserializeAsync<OffsetPaginatedList<RouteDto>>(response);
 
-        routes.Should().NotBeEmpty();
+        routes.Should().NotBeNull();
+        routes.Items.Should().NotBeEmpty();
     }
 
     [Fact]
@@ -92,10 +94,11 @@ public class RouteIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/routes/gym/{gym.Id}");
         response.EnsureSuccessStatusCode();
-        var routes = await DeserializeAsync<List<RouteDto>>(response);
+        var routes = await DeserializeAsync<OffsetPaginatedList<RouteDto>>(response);
 
-        routes.Should().NotBeEmpty();
-        routes.All(r => r.GymId == gym.Id).Should().BeTrue();
+        routes.Should().NotBeNull();
+        routes.Items.Should().NotBeEmpty();
+        routes.Items.All(r => r.GymId == gym.Id).Should().BeTrue();
     }
 
     [Fact]
@@ -105,7 +108,7 @@ public class RouteIntegrationTests : IntegrationTestBase
         var gym = await CreateGymAsync();
         var route = await CreateRouteAsync(gym.Id);
 
-        var updateCmd = Fixture.Create<UpdateRouteCommand>();
+        var updateCmd = Fixture.Create<UpdateRouteCommand>() with { Tags = null };
         var updateResponse = await Client.PutAsJsonAsync($"/api/routes/{route.Id}", updateCmd);
         updateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
     }
@@ -134,5 +137,112 @@ public class RouteIntegrationTests : IntegrationTestBase
         deleteResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
     }
 
+    [Fact]
+    public async Task Deactivate_ByRoutesetter_ReturnsNoContent()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        var route = await CreateRouteAsync(gym.Id);
+
+        // Switch to routesetter for deactivate
+        await SetupRoutesetterAsync();
+
+        var deactivateResponse = await Client.PatchAsync($"/api/routes/{route.Id}/deactivate", null);
+        deactivateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+
+        // Verify route is inactive
+        ClearToken();
+        var getResponse = await Client.GetAsync($"/api/routes/{route.Id}");
+        var found = await DeserializeAsync<RouteDto>(getResponse);
+        found!.IsActive.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task Reactivate_ByRoutesetter_ReturnsNoContent()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        var route = await CreateRouteAsync(gym.Id);
+
+        // Deactivate as admin
+        await Client.PatchAsync($"/api/routes/{route.Id}/deactivate", null);
+
+        // Switch to routesetter for reactivate
+        await SetupRoutesetterAsync();
+
+        var reactivateResponse = await Client.PatchAsync($"/api/routes/{route.Id}/reactivate", null);
+        reactivateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+
+        // Verify route is active again
+        ClearToken();
+        var getResponse = await Client.GetAsync($"/api/routes/{route.Id}");
+        var found = await DeserializeAsync<RouteDto>(getResponse);
+        found!.IsActive.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task Deactivate_ByRegularUser_ReturnsForbidden()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        var route = await CreateRouteAsync(gym.Id);
+
+        await ActAsNewUserAsync();
+
+        var response = await Client.PatchAsync($"/api/routes/{route.Id}/deactivate", null);
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task Delete_ByRegularUser_NowForbidden()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        var route = await CreateRouteAsync(gym.Id);
+
+        await ActAsNewUserAsync();
+
+        var deleteResponse = await Client.DeleteAsync($"/api/routes/{route.Id}");
+        deleteResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task GetAll_ReturnsPaginatedList()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        await CreateRouteAsync(gym.Id);
+        await CreateRouteAsync(gym.Id);
+
+        ClearToken();
+        var response = await Client.GetAsync("/api/routes?page=1&pageSize=1");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<RouteDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().HaveCount(1);
+        result.TotalCount.Should().BeGreaterThanOrEqualTo(2);
+        result.HasNextPage.Should().BeTrue();
+        result.HasPreviousPage.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task GetByGym_ReturnsPaginatedList()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+        await CreateRouteAsync(gym.Id);
+        await CreateRouteAsync(gym.Id);
+
+        ClearToken();
+        var response = await Client.GetAsync($"/api/routes/gym/{gym.Id}?page=1&pageSize=1");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<RouteDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().HaveCount(1);
+        result.TotalCount.Should().Be(2);
+        result.HasNextPage.Should().BeTrue();
+    }
 
 }

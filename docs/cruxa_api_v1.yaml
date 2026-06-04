@@ -1,0 +1,2095 @@
+openapi: 3.1.1
+info:
+  title: Cruxa.Api | v1
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/
+paths:
+  /api/Users/{id}:
+    get:
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+    put:
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+    delete:
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Users/username/{username}:
+    get:
+      tags:
+        - Users
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+  /api/Users:
+    get:
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDto"
+  /api/posts/{postId}/comments:
+    get:
+      tags:
+        - Comments
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CommentDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CommentDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CommentDto"
+    post:
+      tags:
+        - Comments
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddCommentCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddCommentCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddCommentCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CommentDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommentDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CommentDto"
+  /api/comments/{commentId}:
+    delete:
+      tags:
+        - Comments
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/users/{userId}/follow:
+    post:
+      tags:
+        - Followers
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - Followers
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/users/{userId}/followers:
+    get:
+      tags:
+        - Followers
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+  /api/users/{userId}/following:
+    get:
+      tags:
+        - Followers
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+  /api/posts/{postId}/like:
+    post:
+      tags:
+        - Likes
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/posts/{postId}/unlike:
+    delete:
+      tags:
+        - Likes
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/routes/{routeId}/reviews:
+    get:
+      tags:
+        - RouteReviews
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RouteReviewDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RouteReviewDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RouteReviewDto"
+    post:
+      tags:
+        - RouteReviews
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddRouteReviewCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddRouteReviewCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddRouteReviewCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+  /api/routes/{routeId}/reviews/my:
+    get:
+      tags:
+        - RouteReviews
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+  /api/routes/{routeId}/reviews/{id}:
+    put:
+      tags:
+        - RouteReviews
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteReviewCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteReviewCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteReviewCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RouteReviewDto"
+    delete:
+      tags:
+        - RouteReviews
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Routes:
+    get:
+      tags:
+        - Routes
+      parameters:
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+    post:
+      tags:
+        - Routes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRouteCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateRouteCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateRouteCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+  /api/Routes/{id}:
+    get:
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RouteDto"
+    put:
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateRouteCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Routes/gym/{gymId}:
+    get:
+      tags:
+        - Routes
+      parameters:
+        - name: gymId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfRouteDto"
+  /api/Routes/{id}/deactivate:
+    patch:
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Routes/{id}/reactivate:
+    patch:
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/routes/Tags:
+    get:
+      tags:
+        - Tags
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/posts/{id}:
+    get:
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+    put:
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+    delete:
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/posts/user/{userId}:
+    get:
+      tags:
+        - Posts
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+  /api/posts/feed:
+    get:
+      tags:
+        - Posts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+  /api/posts/gym/{gymId}:
+    get:
+      tags:
+        - Posts
+      parameters:
+        - name: gymId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PostDto"
+  /api/posts:
+    post:
+      tags:
+        - Posts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PostDto"
+  /api/posts/{id}/publish:
+    put:
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Gyms:
+    get:
+      tags:
+        - Gyms
+      parameters:
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+    post:
+      tags:
+        - Gyms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+  /api/Gyms/{id}:
+    get:
+      tags:
+        - Gyms
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+    put:
+      tags:
+        - Gyms
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateGymCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GymDto"
+    delete:
+      tags:
+        - Gyms
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/Gyms/city/{city}:
+    get:
+      tags:
+        - Gyms
+      parameters:
+        - name: city
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfGymDto"
+  /api/grading-systems:
+    get:
+      tags:
+        - GradingSystems
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingSystemDto"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingSystemDto"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingSystemDto"
+  /api/grading-systems/{id}:
+    get:
+      tags:
+        - GradingSystems
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+  /api/grading-systems/gym/{gymId}:
+    get:
+      tags:
+        - GradingSystems
+      parameters:
+        - name: gymId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GradingSystemDto"
+  /api/Auth/register:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RegisterCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RegisterCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/Auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginQuery"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/LoginQuery"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/LoginQuery"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/posts/{postId}/ascents:
+    get:
+      tags:
+        - Ascents
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+    post:
+      tags:
+        - Ascents
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddAscentCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddAscentCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddAscentCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/posts/{postId}/ascents/{id}:
+    put:
+      tags:
+        - Ascents
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAscentCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAscentCommand"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateAscentCommand"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AscentDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AscentDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AscentDto"
+    delete:
+      tags:
+        - Ascents
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+  /api/ascents/user/{userId}:
+    get:
+      tags:
+        - AscentsUser
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OffsetPaginatedListOfAscentDto"
+components:
+  schemas:
+    AddAscentCommand:
+      required:
+        - postId
+        - userId
+        - routeId
+        - style
+      type: object
+      properties:
+        postId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        routeId:
+          type: string
+          format: uuid
+        style:
+          $ref: "#/components/schemas/AscentStyle"
+        mediaUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+    AddCommentCommand:
+      required:
+        - postId
+        - userId
+        - content
+      type: object
+      properties:
+        postId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        content:
+          type: string
+    AddRouteReviewCommand:
+      required:
+        - routeId
+        - userId
+      type: object
+      properties:
+        routeId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        rating:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - "null"
+            - integer
+            - string
+          format: int32
+        privateNotes:
+          type:
+            - "null"
+            - string
+        publicReview:
+          type:
+            - "null"
+            - string
+    AscentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        routeId:
+          type: string
+          format: uuid
+        gradeRaw:
+          type: string
+        style:
+          $ref: "#/components/schemas/AscentStyle"
+        mediaUrls:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+    AscentStyle:
+      type: integer
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/UserDto"
+    CommentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        postId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    CreateGymCommand:
+      required:
+        - name
+        - city
+        - address
+        - latitude
+        - longitude
+      type: object
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        latitude:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$
+          type:
+            - number
+            - string
+          format: double
+        longitude:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$
+          type:
+            - number
+            - string
+          format: double
+        description:
+          type:
+            - "null"
+            - string
+        contactInfo:
+          type:
+            - "null"
+            - string
+        website:
+          type:
+            - "null"
+            - string
+        prices:
+          type:
+            - "null"
+            - string
+        workingHours:
+          type:
+            - "null"
+            - string
+        photoUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        gradingSystemId:
+          type:
+            - "null"
+            - string
+          format: uuid
+    CreatePostRequest:
+      type: object
+      properties:
+        gymId:
+          type: string
+          format: uuid
+        description:
+          type:
+            - "null"
+            - string
+        mediaUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        visibility:
+          $ref: "#/components/schemas/PostVisibility"
+    CreateRouteCommand:
+      required:
+        - gymId
+        - gradeRaw
+        - type
+        - holdColor
+      type: object
+      properties:
+        gymId:
+          type: string
+          format: uuid
+        gradeRaw:
+          type: string
+        type:
+          $ref: "#/components/schemas/RouteType"
+        holdColor:
+          $ref: "#/components/schemas/HoldColor"
+        authorId:
+          type:
+            - "null"
+            - string
+          format: uuid
+        photoUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        tags:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        sector:
+          type:
+            - "null"
+            - string
+    GradingSystemDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        gradeMapping:
+          type: object
+          additionalProperties:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+              - integer
+              - string
+            format: int32
+    GymDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type:
+            - "null"
+            - string
+        city:
+          type: string
+        address:
+          type: string
+        latitude:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$
+          type:
+            - number
+            - string
+          format: double
+        longitude:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$
+          type:
+            - number
+            - string
+          format: double
+        contactInfo:
+          type:
+            - "null"
+            - string
+        website:
+          type:
+            - "null"
+            - string
+        prices:
+          type:
+            - "null"
+            - string
+        workingHours:
+          type:
+            - "null"
+            - string
+        photoUrls:
+          type: array
+          items:
+            type: string
+        gradingSystemId:
+          type:
+            - "null"
+            - string
+          format: uuid
+        isParsed:
+          type: boolean
+    HoldColor:
+      type: integer
+    LoginQuery:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    OffsetPaginatedListOfAscentDto:
+      required:
+        - items
+        - page
+        - pageSize
+        - totalCount
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AscentDto"
+        page:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+    OffsetPaginatedListOfGymDto:
+      required:
+        - items
+        - page
+        - pageSize
+        - totalCount
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/GymDto"
+        page:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+    OffsetPaginatedListOfRouteDto:
+      required:
+        - items
+        - page
+        - pageSize
+        - totalCount
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/RouteDto"
+        page:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+    PostDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+        gymId:
+          type: string
+          format: uuid
+        gymName:
+          type: string
+        description:
+          type:
+            - "null"
+            - string
+        mediaUrls:
+          type: array
+          items:
+            type: string
+        visibility:
+          $ref: "#/components/schemas/PostVisibility"
+        status:
+          $ref: "#/components/schemas/PostStatus"
+        createdAt:
+          type: string
+          format: date-time
+        likesCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        commentsCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        ascents:
+          type: array
+          items:
+            $ref: "#/components/schemas/AscentDto"
+    PostStatus:
+      type: integer
+    PostVisibility:
+      type: integer
+    RegisterCommand:
+      required:
+        - username
+        - email
+        - password
+        - city
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        city:
+          type:
+            - "null"
+            - string
+    RouteDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        gymId:
+          type: string
+          format: uuid
+        authorId:
+          type:
+            - "null"
+            - string
+          format: uuid
+        gradeRaw:
+          type: string
+        gradeIndex:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - integer
+            - string
+          format: int32
+        type:
+          $ref: "#/components/schemas/RouteType"
+        holdColor:
+          $ref: "#/components/schemas/HoldColor"
+        photoUrls:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        sector:
+          type:
+            - "null"
+            - string
+        isActive:
+          type: boolean
+    RouteReviewDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        routeId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        username:
+          type:
+            - "null"
+            - string
+        rating:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - "null"
+            - integer
+            - string
+          format: int32
+        privateNotes:
+          type:
+            - "null"
+            - string
+        publicReview:
+          type:
+            - "null"
+            - string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+            - "null"
+            - string
+          format: date-time
+    RouteType:
+      type: integer
+    UpdateAscentCommand:
+      required:
+        - id
+        - userId
+        - style
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        style:
+          $ref: "#/components/schemas/AscentStyle"
+        mediaUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+    UpdateRouteCommand:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          oneOf:
+            - type: "null"
+            - $ref: "#/components/schemas/RouteType"
+        holdColor:
+          oneOf:
+            - type: "null"
+            - $ref: "#/components/schemas/HoldColor"
+        photoUrls:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        tags:
+          type:
+            - "null"
+            - array
+          items:
+            type: string
+        sector:
+          type:
+            - "null"
+            - string
+        isActive:
+          type:
+            - "null"
+            - boolean
+    UpdateRouteReviewCommand:
+      required:
+        - id
+        - userId
+        - rating
+        - privateNotes
+        - publicReview
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        rating:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+            - "null"
+            - integer
+            - string
+          format: int32
+        privateNotes:
+          type:
+            - "null"
+            - string
+        publicReview:
+          type:
+            - "null"
+            - string
+    UpdateUserCommand:
+      required:
+        - id
+        - city
+        - avatarUrl
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        city:
+          type:
+            - "null"
+            - string
+        avatarUrl:
+          type:
+            - "null"
+            - string
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        email:
+          type: string
+        avatarUrl:
+          type:
+            - "null"
+            - string
+        city:
+          type:
+            - "null"
+            - string
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+tags:
+  - name: Users
+  - name: Comments
+  - name: Followers
+  - name: Likes
+  - name: RouteReviews
+  - name: Routes
+  - name: Tags
+  - name: Posts
+  - name: Gyms
+  - name: GradingSystems
+  - name: Auth
+  - name: Ascents
+  - name: AscentsUser
