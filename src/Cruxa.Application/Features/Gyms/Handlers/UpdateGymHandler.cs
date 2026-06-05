@@ -15,7 +15,9 @@ public class UpdateGymHandler(IGymRepository gyms) : IRequestHandler<UpdateGymCo
         if (gym is null) return Error.NotFound("Gym");
 
         gym.Update(cmd.Name, cmd.Description, cmd.City, cmd.Address, cmd.Latitude, cmd.Longitude,
-            cmd.ContactInfo, cmd.Website, cmd.Prices, cmd.WorkingHours, cmd.PhotoUrls, cmd.GradingSystemId);
+            cmd.ContactInfo, null, null, cmd.Website, cmd.Prices, cmd.WorkingHours, cmd.PhotoUrls, cmd.GradingSystemId,
+            cmd.WallArea, cmd.MaxHeight, cmd.YearFounded, cmd.MetroStations, cmd.Tags);
+
 
         await gyms.UpdateAsync(gym);
         return gym.Adapt<GymDto>();

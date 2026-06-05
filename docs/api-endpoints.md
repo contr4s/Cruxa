@@ -33,6 +33,7 @@ Base URL: `http://localhost:5000` (default)
 | POST | `/api/gyms` | ✅ Auth | `RequireGymAdmin` | — | `CreateGymCommand` | `GymDto` |
 | PUT | `/api/gyms/{id}` | ✅ Auth | `RequireGymAdmin` | — | `UpdateGymCommand` | `GymDto` |
 | DELETE | `/api/gyms/{id}` | ✅ Auth | `RequireAdmin` | — | — | 204 No Content |
+| POST | `/api/gyms/import` | ✅ Auth | `RequireAdmin` | — | `BulkImportGymsCommand` | `BulkImportResult` |
 
 ## Системы грейдов (GradingSystems)
 
@@ -130,7 +131,7 @@ Base URL: `http://localhost:5000` (default)
 |-----------|-----------|---------------|------------|
 | Auth | 2 | 0 | 0 |
 | Users | 5 | 4 | 2 |
-| Gyms | 6 | 3 | 1 |
+| Gyms | 7 | 4 | 2 |
 | GradingSystems | 6 | 3 | 3 |
 | Routes | 8 | 4 | 1 |
 | Route Reviews | 5 | 4 | 0 |
@@ -140,7 +141,7 @@ Base URL: `http://localhost:5000` (default)
 | Comments | 3 | 2 | 0 |
 | Likes | 2 | 2 | 0 |
 | Followers | 5 | 3 | 0 |
-| **Итого** | **56** | **32** | **7** |
+| **Итого** | **58** | **33** | **8** |
 
 ## Политики авторизации
 

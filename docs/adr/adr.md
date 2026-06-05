@@ -13,6 +13,7 @@
 | [005](005-ddd-patterns.md) | DDD Patterns | Active | 2026-06-01 | Value Objects, Aggregates, Domain Events |
 | [006](006-cqrs-mediatr.md) | CQRS with MediatR | Active | 2026-06-01 | Commands/Queries separation |
 | [007](007-feature-slices.md) | Feature Slices | Active | 2026-06-01 | Группировка по бизнес-фичам |
+| [008](008-parser-architecture.md) | Parser Architecture | Active | 2026-06-04 | CLI-парсер + API import endpoint |
 
 ## ADR Lifecycle
 

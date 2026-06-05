@@ -60,4 +60,30 @@ public class GymsController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new DeleteGymCommand(id));
         return result.IsSuccess ? NoContent() : NotFound();
     }
+
+    /// <summary>
+    /// Clear all gyms from the database. Admin-only.
+    /// </summary>
+    [HttpDelete("clear")]
+    [Authorize(Policy = "RequireAdmin")]
+    public async Task<IActionResult> Clear()
+    {
+        await mediator.Send(new ClearGymsCommand());
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Bulk import gyms from an external parser source.
+    /// Admin-only. Validates and deduplicates each gym.
+    /// </summary>
+    [HttpPost("import")]
+    [Authorize(Policy = "RequireAdmin")]
+    public async Task<ActionResult<BulkImportResult>> BulkImport(BulkImportGymsCommand command)
+    {
+        var result = await mediator.Send(command);
+        if (result.IsFailure)
+            return BadRequest(result.Error.Message);
+
+        return Ok(result.Value);
+    }
 }

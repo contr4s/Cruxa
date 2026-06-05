@@ -26,8 +26,12 @@ public class CruxaApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
             services.RemoveAll<DbContextOptions<CruxaDbContext>>();
 
             // Register DbContext with Testcontainers connection string
+            var dataSourceBuilder = new Npgsql.NpgsqlDataSourceBuilder(_postgres.GetConnectionString());
+            dataSourceBuilder.EnableDynamicJson();
+            var dataSource = dataSourceBuilder.Build();
+
             services.AddDbContext<CruxaDbContext>(options =>
-                options.UseNpgsql(_postgres.GetConnectionString(),
+                options.UseNpgsql(dataSource,
                     b => b.MigrationsAssembly(typeof(CruxaDbContext).Assembly.FullName)));
         });
 

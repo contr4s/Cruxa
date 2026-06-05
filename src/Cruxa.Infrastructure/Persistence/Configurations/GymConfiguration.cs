@@ -42,11 +42,24 @@ internal class GymConfiguration : IEntityTypeConfiguration<Gym>
         builder.Property(g => g.PhotoUrls)
             .HasColumnType("text[]");
 
+        builder.Property(g => g.SocialLinks)
+            .HasColumnType("text[]");
+
         builder.Property(g => g.ContactInfo)
             .HasMaxLength(300);
 
         builder.Property(g => g.Website)
             .HasMaxLength(500);
+
+        builder.Property(g => g.WallArea);
+        builder.Property(g => g.MaxHeight);
+        builder.Property(g => g.YearFounded);
+
+        builder.Property(g => g.MetroStations)
+            .HasColumnType("jsonb");
+
+        builder.Property(g => g.Tags)
+            .HasColumnType("jsonb");
 
         builder.HasIndex(g => g.City);
 

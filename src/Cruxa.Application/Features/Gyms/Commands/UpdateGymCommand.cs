@@ -5,7 +5,11 @@ using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Gyms.Commands;
 
+using Cruxa.Domain.ValueObjects;
+
 public record UpdateGymCommand(Guid Id, string? Name = null, string? City = null, string? Address = null,
     double? Latitude = null, double? Longitude = null, string? Description = null,
-    string? ContactInfo = null, string? Website = null, string? Prices = null,
-    string? WorkingHours = null, List<string>? PhotoUrls = null, Guid? GradingSystemId = null) : IRequest<Result<GymDto>>, ICommand;
+    string? ContactInfo = null, string? Website = null, List<PriceItem>? Prices = null,
+    List<WorkingHoursEntry>? WorkingHours = null, List<string>? PhotoUrls = null, Guid? GradingSystemId = null,
+    double? WallArea = null, double? MaxHeight = null, int? YearFounded = null,
+    List<string>? MetroStations = null, List<string>? Tags = null) : IRequest<Result<GymDto>>, ICommand;

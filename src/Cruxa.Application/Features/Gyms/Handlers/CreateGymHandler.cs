@@ -5,6 +5,7 @@ using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Domain.Entities;
+using Cruxa.Domain.ValueObjects;
 
 namespace Cruxa.Application.Features.Gyms.Handlers;
 

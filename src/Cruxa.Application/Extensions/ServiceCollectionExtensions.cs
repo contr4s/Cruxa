@@ -4,6 +4,8 @@ using Mapster;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Common.Behaviors;
 using Cruxa.Domain.Entities;
+using Cruxa.Domain.ValueObjects;
+using Cruxa.Application.Features.Gyms.DTOs;
 using FluentValidation;
 
 namespace Cruxa.Application.Extensions;
@@ -32,6 +34,11 @@ public static class ServiceCollectionExtensions
             .MapWith(src => src.Value);
         TypeAdapterConfig<string, Tag>.NewConfig()
             .MapWith(src => Tag.CreateUnsafe(src));
+
+        // Gym → GymDto: flatten GeoCoordinate.Location into Latitude/Longitude
+        TypeAdapterConfig<Gym, GymDto>.NewConfig()
+            .Map(dest => dest.Latitude, src => src.Location != null ? src.Location.Latitude : (double?)null)
+            .Map(dest => dest.Longitude, src => src.Location != null ? src.Location.Longitude : (double?)null);
 
         return services;
     }

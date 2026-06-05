@@ -5,7 +5,9 @@ using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Gyms.Commands;
 
-public record CreateGymCommand(string Name, string City, string Address, double Latitude, double Longitude,
+using Cruxa.Domain.ValueObjects;
+
+public record CreateGymCommand(string Name, string City, string Address, double? Latitude = null, double? Longitude = null,
     string? Description = null, string? ContactInfo = null, string? Website = null,
-    string? Prices = null, string? WorkingHours = null,
+    List<PriceItem>? Prices = null, List<WorkingHoursEntry>? WorkingHours = null,
     List<string>? PhotoUrls = null, Guid? GradingSystemId = null) : IRequest<Result<GymDto>>, ICommand;

@@ -1,0 +1,1453 @@
+[
+  {
+    "name": "El Capitan",
+    "city": "Санкт-Петербург",
+    "address": "г. Санкт-Петербург, ул. Арсенальная, 2, ст.м. «Площадь Ленина»",
+    "latitude": 59.955417,
+    "longitude": 30.373513,
+    "description": "«El Capitan» это современный скалодром европейского уровня с 47 дорожками. Общая площадь лазательной поверхности составляет более 1 000 кв. метров, максимальная высота – 14 метров, длина стендов до 15-ти метров, трассы различной категории сложности (до 8а) протяженностью от 6-ти до 16-ти метров. Также в распоряжении посетителей находятся разнообразные тренажеры для скалолазания, зоны ОФП и СФП, комфортные раздевалки и душевые комнаты, уютное кафе и удобно расположенная парковка.\r\nИмеется возможность необычно провести празднование любого торжественного мероприятия на территории скалодрома. Команда профессионалов «El Capitan» гарантирует незабываемые эмоции и активный отдых с пользой для здоровья.",
+    "contactInfo": "+7 (812) 347-84-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/Elcapitanspb/",
+      "https://www.instagram.com/elcapitanspb/",
+      "https://www.youtube.com/channel/UC7rgZS6f032E9c8ymaAnzhg/featured?view_as=subscriber",
+      "https://vk.com/elcapitanclimbing"
+    ],
+    "website": "http://elcapitan.club/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "8:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "1 занятие с тренером для двоих индивидуально",
+        "price": "3200 руб"
+      },
+      {
+        "name": "1 занятие с тренером индивидуально",
+        "price": "2200 руб"
+      },
+      {
+        "name": "1 занятие с тренером для двоих в группе",
+        "price": "2100 руб"
+      },
+      {
+        "name": "1 занятие с тренером в группе",
+        "price": "1200 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий &quot;Ранняя пташка&quot; (вход до 16:00)",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий &quot;Ранняя пташка&quot; (вход до 10:00)",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Полгода безлимитного посещения",
+        "price": "13900 руб"
+      },
+      {
+        "name": "Год безлимитного посещения",
+        "price": "25900 руб"
+      },
+      {
+        "name": "Вводное занятие по скалолазанию",
+        "price": "900 руб"
+      },
+      {
+        "name": "Базовый курс по скалолазанию",
+        "price": "2900 руб"
+      },
+      {
+        "name": "Абонемент детский на 6 месяцев безлимитного посещения",
+        "price": "10000 руб"
+      }
+    ],
+    "photoUrls": [],
+    "wallArea": 1067,
+    "maxHeight": 14,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Энергия Высоты",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Софийская, 14",
+    "latitude": 59.88115,
+    "longitude": 30.397579,
+    "description": "Скалодром «Энергия высоты» отличается от других наличием стенда на трудность высотой 17 метров, и тем, что плоскости здесь варьируются от положительных до сильного нависания. Посетителей порадует многообразие дорожек – для лазания с веревкой их 68, помимо этого имеется 2 дорожки эталонной скорости с автоматическими страховками. Для самых маленьких любителей скалолазного спорта имеется интерактивный скалодром.\r\nЗдесь Вы можете провести массовое мероприятие весело, спортивно и необычно – от дня рождения до корпоратива. В программу входит свободное прохождение веревочного парка, лазание на скалодроме и участие в увлекательных конкурсах.",
+    "contactInfo": "+7 (812) 335-65-55",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/energija_visoti",
+      "https://www.facebook.com/highenergyspb",
+      "http://instagram.com/highenergyspb"
+    ],
+    "website": "http://энергиявысоты.рф/skalodrom/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "300 руб"
+      },
+      {
+        "name": "Вводный курс скалолазания (4 занятия)",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Абонемент на 1 месяц",
+        "price": "3300 руб"
+      },
+      {
+        "name": "Абонемент на 3 месяца",
+        "price": "8400 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев",
+        "price": "9900 руб"
+      },
+      {
+        "name": "Абонемент на 1 год",
+        "price": "19500 руб"
+      },
+      {
+        "name": "Абонемент на 10 посещений",
+        "price": "3600 руб"
+      },
+      {
+        "name": "Абонемент на 25 посещений",
+        "price": "8600 руб"
+      },
+      {
+        "name": "Групповая тренировка",
+        "price": "350 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка",
+        "price": "1000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/G6ELN6-kXy8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hLX6T_YxaHs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Mf9R-mDp3Mk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xjKFGZ3Tmtc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Gb7iVQ9-em0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/D1CTdHP1c24-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uTsOHNrqhvg-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 17,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Igels Club",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Набережная обводного канала 134 к 71",
+    "latitude": 59.906959,
+    "longitude": 30.281247,
+    "description": "Скалодром спортивного клуба «Igels Club» отличается огромным количеством трасс разного уровня сложности, которые обновляются каждые 2 недели. Помимо большого боулдерингового зала, здесь имеется тренажерный комплекс для отработки общей физической подготовки и основных навыков для занятий скалолазанием.\r\nШкола скалолазания и альпинизма для взрослых и детей предоставляет обучение базовым элементам скалолазного спорта, опытный тренерский состав клуба помогает отрабатывать все технические приемы на практике. Благодаря грамотно распределенной физической нагрузке, Вы ощутите бодрость и прилив жизненных сил.",
+    "contactInfo": "+7 (812) 622 09 66",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/igelsclub",
+      "https://vk.com/igelsclub",
+      "https://www.instagram.com/igelsclub/"
+    ],
+    "website": "http://www.igelsclub.ru",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "8:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вводное занятие со снаряжением",
+        "price": "800 руб"
+      },
+      {
+        "name": "Групповая тренировка без снаряжения",
+        "price": "800 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка для групп со снаряжением для коллектива от 3-х человек",
+        "price": "1300 руб"
+      },
+      {
+        "name": "10 тренировок без снаряжения (3 месяца)",
+        "price": "6500 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка со снаряжением до 2-х человек вкл.",
+        "price": "1500 руб"
+      },
+      {
+        "name": "Разовое посещение",
+        "price": "100 руб"
+      },
+      {
+        "name": "Абонемент на 10 посещений (3 месяца)",
+        "price": "3900 руб"
+      },
+      {
+        "name": "Абонемент 1 месяц (безлимит)",
+        "price": "4200 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев (безлимит)",
+        "price": "21000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/simGoxnPwqQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dwTzgzGN8dQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/a_LkEpMX9uA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KDuAQ8czL6k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wcjFF5NtRrE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/PSjNaYZKaIY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oaGa59dMRvo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZqQvWSwvsbU-min.jpg"
+    ],
+    "wallArea": 750,
+    "maxHeight": 6.4,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Северная стена",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Фучика 10 к. 2Е",
+    "latitude": 59.885435,
+    "longitude": 30.37902,
+    "description": "Скалодром «Северная стена» открыл свои двери на территории спортивной базы МЧС для всех желающих только в марте 2018-го года, но уже признан лучшим скалодромом России среди любителей и профессионалов скалолазного спорта. Тренеры скалодрома ведут занятия в группах для взрослых начинающих и опытных скалолазов. С детьми на тренировках занимаются всеми 3-мя видами скалолазания.\r\nОбщая площадь зала составляет около 2 500 кв. метров, высота – 17 метров. Здесь посетителей ждет зона боулдеринга, которая занимает площадь в 400 кв. метров, 50 дорожек на трудность и 2 полноразмерные дорожки на эталонную скорость. Максимально доступная длина трассы – 25 метров.",
+    "contactInfo": "+7 (812) 7791515",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/climbingspb/",
+      "https://www.instagram.com/severnayastena/",
+      "https://vk.com/severnayastena",
+      "https://www.youtube.com/channel/UCDcdPhf0onLbCwlAUuiO_Jg"
+    ],
+    "website": "http://severnayastena.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "8:00",
+        "to": "23:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "3 подъема",
+        "price": "500 руб"
+      },
+      {
+        "name": "Вводное занятие в группе",
+        "price": "800 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка (без оплаты входа)",
+        "price": "1700 руб"
+      },
+      {
+        "name": "Индивидуальная для двоих",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Базовый курс 4 занятия",
+        "price": "2900 руб"
+      },
+      {
+        "name": "Утренняя групповая тренировка",
+        "price": "600 руб"
+      },
+      {
+        "name": "1 групповая тренировка",
+        "price": "800 руб"
+      },
+      {
+        "name": "10 групповых тренировок",
+        "price": "6900 руб"
+      },
+      {
+        "name": "25 групповых тренировок",
+        "price": "16700 руб"
+      },
+      {
+        "name": "Свободное посещение (10:00 - 16:00)",
+        "price": "400 руб"
+      },
+      {
+        "name": "Свободное посещение (8:00 - 10:00)",
+        "price": "250 руб"
+      },
+      {
+        "name": "Абонемент на 10 посещений",
+        "price": "3900 руб"
+      },
+      {
+        "name": "Свободное посещение (16:00 - 23:30)",
+        "price": "500 руб"
+      },
+      {
+        "name": "Абонемент на 25 посещений",
+        "price": "9200 руб"
+      },
+      {
+        "name": "Абонемент на 1 месяц",
+        "price": "3600 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев",
+        "price": "14900 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/H9qB9TcmMSk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/k4zEgvARubw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kEau5OHb-GA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-8ynnX0uAhU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LteXiF1J7HM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/UkAgS7XXqEY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oS737kulbIQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/O7cMZnQmbl8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/249Pc5pwnTE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6wgc55ifxNg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ff3FTDKCIaM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/PSPR7RYp1yY-min.jpg"
+    ],
+    "wallArea": 2500,
+    "maxHeight": 17,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Трамонтана",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Бронницкая, 24",
+    "latitude": 59.913992,
+    "longitude": 30.323899,
+    "description": "Центр скалолазания «Трамонтана» был открыт в 2011-ом году для всех любителей и профессионалов скалолазного спорта, альпинизма. Особое внимание здесь уделяют безопасности, комфорту и атмосфере, ценят опытный и квалифицированный персонал скалодрома. Здесь используется только современное и профессиональное скалолазное снаряжение и оборудование, что гарантирует эффективность и безопасность всех занятий.\r\nКоманда центра состоит из профессиональных тренеров, которые всегда готовы помочь всем, вне зависимости от уровня подготовки. Под руководством инструкторов можно научиться основам скалолазания, правильному дыханию и расстановке конечностей во время лазания и чтению трассы.",
+    "contactInfo": "+7 (812) 640-38-44",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/tramontana_climb",
+      "https://www.instagram.com/tramontana_climb/",
+      "https://www.youtube.com/user/TramontanaRU"
+    ],
+    "website": "http://climbingcenter.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "23:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вводный урок",
+        "price": "1000 руб"
+      },
+      {
+        "name": "Начальный курс скалолазания (4 занятия)",
+        "price": "3200 руб"
+      },
+      {
+        "name": "Персональная тренировка",
+        "price": "1600 руб"
+      },
+      {
+        "name": "Разовое посещение",
+        "price": "300 руб"
+      },
+      {
+        "name": "Разовая тренировка в группе",
+        "price": "400 руб"
+      },
+      {
+        "name": "10 посещений",
+        "price": "2500 руб"
+      },
+      {
+        "name": "5 посещений",
+        "price": "1350 руб"
+      },
+      {
+        "name": "20 посещений",
+        "price": "4550 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/zd5QV9jsfLU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/PfOF7QWB2ZI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HJLUQjyzhiA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/R5bCI22RjtM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JyKzm2e60hY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/j07XiZt9t9M-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xcABT_7X8JM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NkZXmWriJHY-min.jpg"
+    ],
+    "wallArea": 660,
+    "maxHeight": 8,
+    "yearFounded": 2011,
+    "metroStations": [
+      "Технологический институт"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Луч",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Динамо, 44",
+    "latitude": 59.968259,
+    "longitude": 30.265419,
+    "description": "«Луч» это новые трассы для тренировок каждую неделю, широкий ассортимент зацепов от разных производителей, проведение групповых и индивидуальных тренировок, летний уличный скалодром, участие в междугородних соревнованиях и фестивалях.\r\nВ тренерский состав входят мастера спорта и кандидаты в мастера спорта по альпинизму и скалолазанию, готовые поделиться опытом в лазании и тонкостями эффективных занятий на скалодроме.\r\nДля юных любителей скалолазания функционирует школа, к обучению в которой допускаются дети от 5-ти лет. Тренировки включают в себя общую физическую подготовку, лазание, подвижные игры, и проходят под руководством инструктора.",
+    "contactInfo": "+7 (812) 931-77-16",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/lu4.climbing",
+      "https://www.instagram.com/lu4climbing/",
+      "https://vk.com/lu4su"
+    ],
+    "website": "http://www.lu4.su",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "10:00",
+        "to": "23:30"
+      },
+      {
+        "days": "Вт",
+        "from": "9:00",
+        "to": "23:30"
+      },
+      {
+        "days": "Ср",
+        "from": "10:00",
+        "to": "23:30"
+      },
+      {
+        "days": "Чт",
+        "from": "9:00",
+        "to": "23:30"
+      },
+      {
+        "days": "Пт-Вс",
+        "from": "10:00",
+        "to": "23:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Занятие с тренером в группе",
+        "price": "700 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка на одного",
+        "price": "1600 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка на двоих",
+        "price": "2450 руб"
+      },
+      {
+        "name": "Посещение без тренера",
+        "price": "400 руб"
+      },
+      {
+        "name": "Посещение без тренера по будням до 16",
+        "price": "00250 руб"
+      },
+      {
+        "name": "Занятие с тренером в группе (без абонемента)",
+        "price": "700 руб"
+      },
+      {
+        "name": "Занятие с тренером в группе по будням до 16:00 (без абонемента)",
+        "price": "550 руб"
+      },
+      {
+        "name": "Занятие с тренером в группе (с абонементом)",
+        "price": "300 руб"
+      },
+      {
+        "name": "Безлимитный вход на 1 месяц",
+        "price": "3400 руб"
+      },
+      {
+        "name": "Безлимитный вход на 3 месяца",
+        "price": "7900 руб"
+      },
+      {
+        "name": "Безлимитный вход на полгода",
+        "price": "12900 руб"
+      },
+      {
+        "name": "Пакет на 5 посещений в течение месяца",
+        "price": "1900 руб"
+      },
+      {
+        "name": "Пакет на 10 посещений в течение 2 месяцев",
+        "price": "3500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/LIbKTbBjSOQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Pa1IcrxKlYw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/007TbxZ-2Mc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y59e_T_XL9k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ow9E_hk6hBI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TQfbFOHplc8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TWzKrnx9tpY-min.jpg"
+    ],
+    "wallArea": 450,
+    "maxHeight": 4.5,
+    "yearFounded": 2006,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Неолит",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, метро Пионерская, ул. Матроса Железняка, 57А",
+    "latitude": 60.00029,
+    "longitude": 30.316254,
+    "description": "«Неолит», основанный в 2015-ом году, является одним из самых крупных боулдеринговых скалодромов северной столицы России. Здесь в распоряжении посетителей находятся профессиональные тренажеры по скалолазанию, современно оборудованная зона разминки, размеченные трассы разной сложности.\r\nТренерский состав состоит из мастеров спорта и кандидатов в мастера спорта по скалолазанию, профессионалов своего дела, которые имеют огромный опыт лазания и участия во всероссийских и международных соревнованиях. Всего здесь организовано 4 основные группы для занятий на скалодроме: взрослые, дети, подростки, взрослые с детьми.",
+    "contactInfo": "+7 (921) 650-04-31",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/neolitgym",
+      "https://www.instagram.com/skalodromneolit/",
+      "https://vk.com/neolitgym"
+    ],
+    "website": "http://www.neolit.club/",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "10:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Вт",
+        "from": "9:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Ср",
+        "from": "10:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Чт",
+        "from": "9:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Пт-Вс",
+        "from": "10:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Пробное занятие с тренером",
+        "price": "400 руб"
+      },
+      {
+        "name": "Абонемент &quot;Студенческий&quot;",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Абонемент &quot;Взрослый&quot;",
+        "price": "12500 руб"
+      },
+      {
+        "name": "Абонемент &quot;Взрослый&quot; 3 мес",
+        "price": "9800 руб"
+      },
+      {
+        "name": "Абонемент &quot;Взрослый&quot; 1 мес",
+        "price": "3900 руб"
+      },
+      {
+        "name": "Абонемент 8 занятий с тренером",
+        "price": "4300 руб"
+      },
+      {
+        "name": "10 посещений",
+        "price": "3700 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/WheOMoxH29Y-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/0DdhlWD4cJE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vv4nVmH4p0w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JLHCWEVIU-g-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IC0qkmmu7Vw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xZZvyLov4hg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HkwbdJjkDbs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kxCn7B13ydg-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2015,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Чемпион",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. Симонова, 15",
+    "latitude": 60.062319,
+    "longitude": 30.3284,
+    "description": "Скалодром «ЧемпИон» это комплекс скалолазных возможностей, образовавшийся в 2016-ом году, который включает в себя разного рода поверхности с установленными на них зацепами. В зависимости от программы занятий, лазание может быть направлено на развитие простейших навыков координации или сложного мышления с помощью восхождения к определенной цели.\r\nДля детей в возрасте от 5-ти до 14-ти лет в школе спортивного скалолазания «Юный ЧемпИон» проводятся регулярные занятия под руководством опытных и внимательных тренеров и инструкторов. Тренировки проходят во всех 3-х олимпийских дисциплинах. Для взрослых было создано новое направление «Skalofit», позволяющее привести тело в идеальный вид.",
+    "contactInfo": "+7 (981) 196-74-11",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/championskala/",
+      "https://www.youtube.com/channel/UCDNrRHjs5Z_SGaIgsdiL3CQ",
+      "https://vk.com/championskala"
+    ],
+    "website": "http://championskala.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "11:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "SkaloFit групповое занятие для взрослых",
+        "price": "1490 руб"
+      },
+      {
+        "name": "SkaloFit персональное занятие для взрослых",
+        "price": "1900 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/X89LrLcIitE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/qbvoaGUeK9s-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/A9hVcL8mAiM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YS8rFvOHLN0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IFRc0W_Mirg-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 7.2,
+    "yearFounded": 2016,
+    "metroStations": [
+      "Проспект Просвещения"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Магазин «Планета-спорт»",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Б. Сампсониевский пр., 45",
+    "latitude": 59.969605,
+    "longitude": 30.341991,
+    "description": "Скалолазная стенка гипермаркета \"Планет Спорт\"  - это уникальное дизайнерское решение, несущее в себе практическую ценность. Превратив одну из стен магазина в небольшой скалолазный стенд, администрация торговой сети создала целую зону для досуга и место, где покупатели могут опробовать в действии купленный скалолазный инвентарь, например, скальные туфли. Отправившись за покупками, можно приятно и полезно провести свое время, посоревноваться с друзьями, а также проверить свой навык скалолазания. За безопасность на треке отвечают верхняя и нижняя страховки.",
+    "contactInfo": "+7 (812) 643-00-86",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/redfoxoutdoor_planetasport"
+    ],
+    "website": "https://www.planeta-sport.ru/about/sankt_peterburg/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/kKoT7nBaMaI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/qBJgH1FU5zs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/PwFTF-hlKFc-min.jpg"
+    ],
+    "wallArea": 70,
+    "maxHeight": null,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Жесть",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Космонавтов, 38, к. 3А",
+    "latitude": 59.855886,
+    "longitude": 30.355735,
+    "description": "Скалодром \"Жесть\" входит в состав одноименного центра современного молодежного спорта. Наряду с агрессивными роликами, скейтбордингом, ВМХ и т.д. посетители постигают азы скалолазания на огромном стенде. Его совокупная площадь составляет порядка 390 кв.м., а высота потолка - около 12 м. Здесь спортсмены и любители могут осваивать все виды скалолазания - от боулдеринга до испытаний на скорость. У скалодрома рельеф повышенной сложности, поэтому рекомендуется для достаточно опытных спортсменов (за исключением редким участков для новичков). При строительстве стенда учитывались рекомендации Федерации скалолазания России.",
+    "contactInfo": "+7 (812) 379-18-58",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/centr_sporta"
+    ],
+    "website": "https://vk.com/centr_sporta",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "500 руб"
+      },
+      {
+        "name": "Индивидуальное занятие с инструктором",
+        "price": "1200 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/157702ca659e1c630edcfbeec7ad2f76-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IMG_7494_big-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/zhest-2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/zhest-5-min.jpg"
+    ],
+    "wallArea": 390,
+    "maxHeight": 12,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Горный институт",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, 22-я линия Васильевского острова, 1",
+    "latitude": 59.930444,
+    "longitude": 30.266784,
+    "description": "Занимаюсь в секции Горного, тренировки (ОФП, скалолазание) по расписанию, вся инфа всегда кидается в нашей группе. Если есть какая-то отмена или правка, то все моментально публикуется. Тренировочный процесс поставлен на достойный уровень. К самим занятиям отношение у меня скорее положительное, негативные моменты тоже бывают, но это уже человеческий фактор. Так учат толково, разминаемся, тренируемся, лазаем. Скалодром простенький, но для тренировок в вузе круче и не надо.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/spmi_climb"
+    ],
+    "website": "https://vk.com/spmi_climb",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:45",
+        "to": "22:00"
+      },
+      {
+        "days": "Вт",
+        "from": "18:30",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "17:45",
+        "to": "19:45"
+      },
+      {
+        "days": "Чт",
+        "from": "17:45",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7RsRd33tNx0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/a51mA0e8baM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/cxDoCX35YAQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/w5fSQoi0Iao-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Университет",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Университетская наб., 7/9",
+    "latitude": 59.94074,
+    "longitude": 30.300246,
+    "description": "Отличный скалодром, меня в нем устраивает все от высоты до площади и рельефа. Тренировки ведет очень компетентный тренер, она мастер спорта и многократный чемпион. Научила меня всему, что я сейчас могу показать на соревнованиях. Они проводятся тут же. Последний раз весной гоняли трудность. Сейчас я ударился в боулдеринг, и хожу в Трамонтану.",
+    "contactInfo": "+7 (911)271-25-71",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club7383352"
+    ],
+    "website": "https://vk.com/club7383352",
+    "workingHours": [
+      {
+        "days": "Пн-Вт",
+        "from": "17:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Чт",
+        "from": "17:00",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/db39be5b34a6f5206a9d3deedd6201ee-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fce75c8f54931182a2a1b92ab6c70bc8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xG3bGGoZsLA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_16-6-19.915-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 11,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Танрэн",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул.Ольховая, 18",
+    "latitude": 60.016451,
+    "longitude": 30.254639,
+    "description": "Мне нравится, хожу пешком от м.Комендантский Проспект, там буквально 10-15 минут идти. Приморский район это не ближний свет, но я не в претензии, а местным так вообще круто. Зал просторный, но скалолазный стенд в нем занимает не особо много площади. Тем не менее, для лазания ее хватает с избытком. Особенно цепляет самая длинная дорожка, которая большей частью идет по потолку. Дорожек тут не очень много, из-за чего разом много людей тут полазать не смогут. Если не тренироваться с инструкторами, то посещение стоит 300 рублей. Я хожу не особо часто, примерно раз в 1-2 недели, параллельно беру напрокат скальники, систему и магнезию. Выходит примерно вдвое дороже, чем если ходить со своим. Я профессионально не занимаюсь, хожу чисто для себя, так что не вижу смысла закупаться всем необходимым.",
+    "contactInfo": "+7 (921)950-61-20",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club1198551"
+    ],
+    "website": "https://vk.com/club1198551",
+    "workingHours": [
+      {
+        "days": "Сб",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Вс",
+        "from": "12:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_16-20-50.323-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_16-21-1.801-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Балтийский берег",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. Черняховского, 49А",
+    "latitude": 59.919477,
+    "longitude": 30.36011,
+    "description": "В скалолазной секции \"Балтийского берега\" занимается болдерингом мой сын, я сама приходила сюда буквально пару раз, чтобы оценить место, персонал и самой попробовать, что это такое. Что мне, что ребенку все понравилось. Выбрали именно эту секцию потому, что сами живем в нескольких минутах ходьбы, и не приходится ездить через полгорода на метро. Зал довольно просторный, но не высокий. В нем нет стен до 10-ти метров, а самые высокие участки буквально 3 метра. Для безопасности используется специальное покрытие пола по типу гимнастических матов. Они мягкие, падала не один раз, даже синяков нет.",
+    "contactInfo": "+7 (812) 967-11-61",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://www.balticbereg.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Чт",
+        "from": "9:30",
+        "to": "18:00"
+      },
+      {
+        "days": "Пт",
+        "from": "9:30",
+        "to": "17:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/baltijskij-bereg-1-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/baltijskij-bereg-2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/baltijskij-bereg-3-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/baltijskij-bereg-6-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Политехник",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург,  Политехническая ул., 27",
+    "latitude": null,
+    "longitude": null,
+    "description": "Раньше считался одним из топовых питерских скалодромов. Много различных нависаний, всяческих карнизов, потолков, углов, пирамидок. Благодаря такому рельефу накручиваются трассы не только вертикально вверх, но и вбок, по диагонали. Новичкам заниматься немного тяжелее, чем на большинстве других скалодромов. Но зато любители довольно.\rСегодня в городе открылось куча скалодромов и боулдеринговых залов, где рельеф ничуть не уступает этому. Так что выбирать уже приходится из-за удобства. Но Политех еще хорош тем, что стоит буквально в паре-тройке минут от Площади Мужества. Вышел из метро, прошел улице - и уже на месте.",
+    "contactInfo": "+7 (836) 268-28-77",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://old.volgatech.net/fok-polytechnic/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 9,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №87",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Введенская ул., 16-18",
+    "latitude": 59.955741,
+    "longitude": 30.305996,
+    "description": "На этом скалодроме лично меня порадовало то, что инструкторы всегда рядом. Их можно спросить о чем угодно – сразу придут на помощь. Интерьер здесь стандартный, как и на других школьных скалодромах. Все сделано добротно и удобно. Было интересно, планирую приходить еще!",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ЦФК",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, проспект Космонавтов, 47",
+    "latitude": 59.850346,
+    "longitude": 30.351998,
+    "description": "В ЦФК на Космонавтов хороший скалодром, подходящий преимущественно для более опытных спортсменов. Конечно, это не исключает возможность тренировки новичков. Стенд высокий и просторный, представлен разнообразный рельеф - слабые/сильные нависания, потолок, есть участки с относительно ровными стенами, есть небольшой участков для болдеринга.\rСложность трасс на уровне от 6А, лазать можно с верхней или нижней страховкой, в зоне боулдеринга маты сложены в несколько слоев, чтобы было мягко падать. В целом, зал действительно неплохой.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Skalodrom_TsFK_2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Skalodrom_TsFK-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-29-12.886-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-29-24.415-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №495",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Варшавская улица, 33 лит. А",
+    "latitude": 59.861458,
+    "longitude": 30.311682,
+    "description": "Шикарный скалодром в спортзале является изюминкой школы. У нас - реально полноценный скалодром. Конечно, его высота ограничена высотой спортзала, а тут всего лишь 7 метров. Но зато скалолазная площадь просто огромная. Да что там, даже потолок имеет трассы. О рельефе и говорить не стоит, здесь такие карнизы, такие нависания. Даже на скорость полазать толком негде, одна трудность. Причем с самой нижней части - уже нужно иметь какой-то опыт.\rВся стенка в зацепках и оттяжках. Трасс море - с нижней/верхней страховкой, снизу - боулдеринговые. Сама школа находится в км от метро, даже меньше. Жаль, что я закончил школу и теперь приходится платить и ходить на другой скалодром.",
+    "contactInfo": "+7 (812) 375-58-16",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/school495spb"
+    ],
+    "website": "http://www.school495.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-33-37.471-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-33-45.741-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ПМК «Спасатель»",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Руставели ул., 66",
+    "latitude": 60.037526,
+    "longitude": 30.430358,
+    "description": "Подростково-молодежный клуб \"Спасатель\" имеет 2 зала, в которых проводятся занятия для туристов и скалолазов. Высота скалолазного стенда составляет 3,8 м, он отлично подходит для занятий болдерингом. Также зал оснащен кампус-бордами и веревочными трассами. Занятия скалолазанием проводятся в группах по будням (в вечернее время) и выходным. Минимальный возраст воспитанников - 9 лет. Для комфорта занимающихся создаются различные возрастные группы. Тренировки проводятся квалифицированными инструкторами, мастерами спорта, КМС - по спортивному туризму, альпинизму, а также призерами различных первенств.",
+    "contactInfo": "+7 (952) 222-33-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/pmkspasatel"
+    ],
+    "website": "https://vk.com/pmkspasatel",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "19:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/TLYIq__Xe4o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8TQgQNd0Kzg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hoFy55sCwKc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/l2hZtFW-wZ8-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": null,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Скалодром «Бастион»",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. Демьяна Бедного, д.9, лит.А",
+    "latitude": 60.038038,
+    "longitude": 30.386233,
+    "description": "Важно! Скалодром бесплатный. Ежегодный набор открывается в сентябре. Летом скалодром не работает, и ученики выезжают на скалы.\r\nВ 2018 г. в Центре Спорта Калининского района (Санкт-Петербург) был основан скалодром \"Бастион\". На современном скалолазном стенде учатся покорять вершины как взрослые, так и дети. Занятия проводятся под пристальным вниманием компетентных инструкторов. Опытные скалолазы преодолевают специально подготовленные маршруты, а дети занимаются в игровой форме. Общая площадь скалолазных стен составляет 250 кв.м. Высота стенда достигает 11 м. Рельеф разной степени сложности, зацепы различной формы, уровень наклона поверхности и т.д. делают скалодром оптимальным как для начинающих скалолазов, так и профессионалов. Также здесь проводятся первенства местного уровня между воспитанниками различных спортивных школ и скалолазных секций.",
+    "contactInfo": "+7 (812)597-72-64",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/public176686609"
+    ],
+    "website": "http://fokalin.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/SyrgIXqsVTk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/J3FMjC9Zz7c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8i5o_ibgjoQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TZbQRZGVF0g-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gxzo8clnrVs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/orXQtlt9o6Y-min.jpg"
+    ],
+    "wallArea": 250,
+    "maxHeight": 11,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Gorilla Park",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. Долгоозёрная, д. 14 «ТРК 5 Озёр»",
+    "latitude": 60.017423,
+    "longitude": 30.246374,
+    "description": "Скалодром «GorillaPark», открывший свои двери в 2016-ом году, порадует своих посетителей наличием 22-х активных зон, различными по степени крутости спусками, разнообразием маршрутов, благодаря которому дистанцию могут проходить более 30-ти человек одновременно.\r\nМинимальный рекомендованный возраст детей, которым разрешено посещение скалодрома – 6 лет. Каждый посетитель проходит обязательный инструктаж по технике безопасности и выполняет разминочные упражнения до того, как можно будет лазать. Также здесь можно провести любой праздник от обычной вечеринки для друзей в честь дня рождения до корпоратива с коллегами.",
+    "contactInfo": "+7 812 677-72-05",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/gorillaparkspb/",
+      "https://www.instagram.com/gorillaparkspb/",
+      "https://vk.com/gorillaparkspb",
+      "https://www.youtube.com/channel/UCtsTppo8p93IpEny4tSBIvQ"
+    ],
+    "website": "http://gorillapark.ru/attractions/climbing-wall-2-0/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/XDRXbGIQoJA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/B62mUyMu4SE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bFCQsbzqucI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3fvmLMD-zNI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7sceDYUvd-8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jzrwYSNjKhA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/u-jLI57DjeA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bTMjRmC9Yyc-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6.5,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Ориентир",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, пр. Ветеранов, 16",
+    "latitude": 59.845596,
+    "longitude": 30.254118,
+    "description": "Скалодром «Ориентир» всем желающим предоставляет возможность занятий скалолазанием, располагая при этом высотой зала в 7 метров и общей площадью стен более 200 кв. метров. Количество и разнообразие имеющихся здесь дорожек (более 20-ти) позволяет чувствовать себя комфортно как начинающим, так и профессиональным скалолазам.\r\nОпытные тренеры и инструкторы в короткие сроки могут обучить всем азам скалолазного спорта, при этом доступно объяснив нюансы правильного использования снаряжения и оборудования. Для детей тренировки проходят в возрастных группах 5-7 и 8-15 лет по программам общеподготовительных занятий с элементами скалолазания и спортивного скалолазания.",
+    "contactInfo": "8-911-735-77-44",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/orientir_climb"
+    ],
+    "website": "https://orientir.club/climbingspb/",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "20:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Вт",
+        "from": "19:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Ср",
+        "from": "20:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Чт",
+        "from": "19:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Пт",
+        "from": "20:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Вс",
+        "from": "19:00",
+        "to": "21:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Самостоятельное посещение",
+        "price": "300 руб"
+      },
+      {
+        "name": "Занятие с тренером",
+        "price": "550 руб"
+      },
+      {
+        "name": "Абонемент на 4 занятия",
+        "price": "1100 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/rPu6XgwqGfU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Q9ie624Ovh0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WJt_-uTLInc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/lY_hjS1Sk4I-min.jpg"
+    ],
+    "wallArea": 210,
+    "maxHeight": 7,
+    "yearFounded": 1996,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СКА-лодром",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Дивенская, 4",
+    "latitude": 59.95985,
+    "longitude": 30.318877,
+    "description": "Скалодром СКА - один из ведущих скалодромов Санкт-Петербурга. Располагается почти в самом центре города (до ближайшей станции метро - 10 минут) и организует подготовку к региональным и всероссийским соревнованиям. На скалолазных стенках разного рельефа и уровня сложности высотой до 10 метров тренируются начинающие скалолазы и профессиональные спортсмены, а занятия проводятся квалифицированными тренерами, участниками международных турниров с многолетним спортивным и тренерским опытом. Возможен прокат всего необходимого снаряжения - от обвязок и веревок до мешочков с магнезией и страховочных устройств на любой вкус.",
+    "contactInfo": "+7 (921) 746-56-01",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club49293681"
+    ],
+    "website": "http://skalodromska.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "17:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб",
+        "from": "15:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Вс",
+        "from": "13:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/aHMw4qtST1w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/V8IMLMw2kOY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Xrwr8iNYP3o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZLPy5-schNM-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ПКиО имени И. В. Бабушкина",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, пр. Обуховской Обороны, 159",
+    "latitude": 59.8791,
+    "longitude": 30.447902,
+    "description": "На территории ПКиО им. И.В.Бабушкина (\"Парка Сказок\") наряду с множеством развлечений для детей расположился скалодром под открытым небом. Он представляет собой часть веревочного парка в виде небольшой скалолазной стенки, оснащенной зацепами и страховочной системой. Рельеф стенки достаточно простой для профессионалов и даже любителей, поэтому идеально подходит новичками и детям. В подъеме Вам помогут профессиональные инструкторы, которые обеспечат Вашу безопасность и подскажут, как правильно выполнять подъем и использовать страховочное оборудование. Стоимость 3 подходов на скалодроме составляет 200 рублей.",
+    "contactInfo": "+7 921 969-29-02",
+    "contactEmail": null,
+    "socialLinks": [
+      "http://vk.com/parkskazok"
+    ],
+    "website": "http://parkskazok.ru",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Прохождения трассы",
+        "price": "500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/03F7uUc0_F4-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Метеор",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. М.Тухачевского, 41",
+    "latitude": 59.973208,
+    "longitude": 30.416956,
+    "description": "Несколько лет назад ходил сюда на скалолазание. Правда, это было не чистое скалолазание, а общая физподготовка с элементами скалолазания. Единственное, что мне не нравилось - сюда добираться тяжело. До метро далеко, поэтому приходилось с \"Лесной\" еще на 185-ом автобусе ехать. Поэтому со временем перешел на скалодром, что ближе к дому.\rИз плюсов: хорошие тренеры, неплохой зал для скалолазания, много тренажеров. За несколько месяцев отлично укрепил свою силу, стал намного выносливее. Ну и научился неплохо лазать, что пригодилось сейчас, когда занимаюсь уже на высоком скалодроме. Советую в первую очередь тем, кто живет неподалеку, чтобы не приходилось добираться с другого конца Питера, как мне. Остальным - по желанию, но есть места не хуже, но ближе.",
+    "contactInfo": "+7 (921)970-51-25",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/pmk_meteor"
+    ],
+    "website": "https://vk.com/pmk_meteor",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "14:00",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-17-10.178-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-17-19.25-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_17-18-22.740-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "WallDream",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Приморский пр., 72 ТЦ «Питерленд», 4 этаж",
+    "latitude": 59.981712,
+    "longitude": 30.209894,
+    "description": "«WallDream» располагается в одном из самых красивых мест Санкт-Петербурга – на берегу финского залива. Скалодром имеет высоту около 10-ти метров, его стены выполнены из материала, напоминающего настоящую скалу. Здесь посетители имеют возможность лазать как с верхней, так и с нижней страховкой. Профессиональные тренеры-инструкторы погружают во все тонкости подъема по вертикальной стене, обучают правильно управлять своим телом во время лазания.\r\nТакже на территории скалодрома находится один из самых крупных батутных центров города. Он включает в себя 15 батутов, 2 поролоновые ямы и различные вышки для прыжков.",
+    "contactInfo": "+7 (812) 385-43-33",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodromwalldream"
+    ],
+    "website": "https://walldream.spb.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "12:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "3 подъема",
+        "price": "300 руб"
+      },
+      {
+        "name": "Вводный урок",
+        "price": "790 руб"
+      },
+      {
+        "name": "Персональная тренировка",
+        "price": "1190 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/walldream-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/walldream-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/walldream-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/walldream-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/walldream-05-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": 2015,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №285",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, ул. Пограничника Гарькавого, 46, к. 4",
+    "latitude": 59.827492,
+    "longitude": 30.151423,
+    "description": "Скалодром школы №285 располагается в специально оборудованном школьном спортзале. На всей поверхности стены расположены зацепы, формирующие трассу с участками разной степени сложности. Для безопасности посетителей используется как верхняя страховка, так и гимнастические маты. Занятия проводятся в рамках школьного спортивного клуба \"Перевал\", где скалолазанию и другим видам активности (футбол, волейбол, туризм и пр.) обучают компетентные преподаватели, имеющие за плечами спортивные разряды и богатый преподавательский опыт. Клуб принимает в свои ряды всех желающих, регулярно устраивает первенства местного уровня и организует учебно-тренировочные сборы за стенами школы.",
+    "contactInfo": "+7 (921) 301-04-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/school285spb"
+    ],
+    "website": "http://school285.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/VOOcZkOCyPo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oCdT3_xJtik-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GOrjcRgUE4w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7bA9onN43nw-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ПМК «Юность»",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Колпино, ул. Танкистов, 28а",
+    "latitude": 59.744714,
+    "longitude": 30.56153,
+    "description": "Подростково-молодежный клуб \"Юность\" наряду с секциями рукопашного боя, дзюдо, самбо, танцев, настольного тенниса и пр. проводит обучение детей и подростков скалолазанию. Занятия проводятся в дневное время 3 раза в неделю опытными инструкторами. Преподаватели имеют профессиональную подготовку, спортивные разряды и являются участниками многих турниров, поэтому с удовольствием передают свой опыт начинающим спортсменам. Скалолазная стенка имеет неоднородный рельеф, благодаря чему участки оптимальны и для начинающих скалолазов, и для более опытных спортсменов. Вся необходимая экипировка выдается.",
+    "contactInfo": "+7 (812) 460 95 40",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/pablikskalolaza"
+    ],
+    "website": "https://vk.com/pablikskalolaza",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/NdnNJ_n7rQU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VrYZLzYRXU8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2QB31lE-g1g-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/r6Yqp6sVIT0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6CNgYaVJ-Ro-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/_HbhgFniNu8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oZdZ99SoxFs-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ИТМО",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, Вяземский пер., 5/7",
+    "latitude": 59.97237,
+    "longitude": 30.30198,
+    "description": "Скалодром \"ИТМО\" работает на базе одноименного университета, но доступен для всех желающих, а не только студентов вуза. Общая площадь стен для скалолазания составляет 140 кв.м, а наибольшая высота - 12 м. Рельеф не подходит для новичков, скалодром рекомендуется к посещению профессионалами и любителями. Для тренировок выделена отдельная секция с тренажерами - шведскими стенками, турниками, фингербордами и т.д. Аренда снаряжения не предусмотрена, поэтому посетители должны иметь не только спортивную одежду, но и весь скалолазный инвентарь - от магнезии и до веревки с обвязкой. При посещении высокого скалодрома обязательно требуется напарник для страховки.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club28049058"
+    ],
+    "website": "https://vk.com/club28049058",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Skalodrom_ITMO_3-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Skalodrom_ITMO_4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Skalodrom_ITMO-min.jpg"
+    ],
+    "wallArea": 140,
+    "maxHeight": 12,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ПМК им. Лени Голикова",
+    "city": "Санкт-Петербург",
+    "address": "Санкт-Петербург, пр. Ветеранов 53/56",
+    "latitude": 59.840826,
+    "longitude": 30.238559,
+    "description": "На скалодроме ПМК им. Лени Голикова представлены 2 скалолазные стенки: 55 и 65 кв.м. площадью и 6 и 7,2м высотой соответственно. Используется гимнастическая и верхняя страховки, рельеф скалолазной поверхности разнообразный, включая расположение зацепов, их удаленность друг от друга, наклон стенки и многое другое. На стенде занимаются дети от 7 лет, регулярно проводятся местные турниры. Действует местная секция \"Скальный заяц\". Занятия проводятся в утепленном зале со всей необходимой инфраструктурой (раздевалки и т.д.) Обучение проводят опытные инструкторы.",
+    "contactInfo": "+7 (921) 908-59-38",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/fun_climb",
+      "https://vk.com/pmk_leni_golikova"
+    ],
+    "website": "https://vk.com/fun_climb",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "17:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/3aBtpPpOybE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5XOGWojeNLw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WTZCys5fvn4-min.jpg"
+    ],
+    "wallArea": 120,
+    "maxHeight": 7.2,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  }
+]

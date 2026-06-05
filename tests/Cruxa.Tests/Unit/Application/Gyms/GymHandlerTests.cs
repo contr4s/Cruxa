@@ -62,9 +62,8 @@ public class GymHandlerTests
         _gymRepo.Setup(r => r.GetByIdAsync(gym.Id)).ReturnsAsync(gym);
 
         var name = _fixture.Faker.Company.CompanyName();
-        var result = await handler.Handle(
-            _fixture.Create<UpdateGymCommand>() with { Id = gym.Id, Name = name },
-            CancellationToken.None);
+        var cmd = _fixture.Create<UpdateGymCommand>() with { Id = gym.Id, Name = name };
+        var result = await handler.Handle(cmd, CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         result.Value!.Name.Should().Be(name);
@@ -77,8 +76,8 @@ public class GymHandlerTests
         var handler = new UpdateGymHandler(_gymRepo.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
-        var result = await handler.Handle(
-            _fixture.Create<UpdateGymCommand>() with { Id = id }, CancellationToken.None);
+        var cmd = _fixture.Create<UpdateGymCommand>() with { Id = id };
+        var result = await handler.Handle(cmd, CancellationToken.None);
 
         result.IsSuccess.Should().BeFalse();
         result.Error.Code.Should().Be("NotFound");

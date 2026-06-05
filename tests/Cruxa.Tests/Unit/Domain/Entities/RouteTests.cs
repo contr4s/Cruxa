@@ -40,7 +40,7 @@ public class RouteTests
     public void Create_WithEmptyGymId_Throws()
     {
         var route = CreateRoute();
-        var act = () => Route.Create(Guid.Empty, route.Grade!, _fixture.Create<RouteType>(), _fixture.Create<HoldColor>());
+        var act = () => Route.Create(Guid.Empty, route.Grade, _fixture.Create<RouteType>(), _fixture.Create<HoldColor>());
         act.Should().Throw<ArgumentException>();
     }
 

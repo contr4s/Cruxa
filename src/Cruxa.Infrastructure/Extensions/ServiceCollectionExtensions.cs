@@ -5,6 +5,7 @@ namespace Cruxa.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using Persistence;
 using Security;
 using Cruxa.Application.Features.Users.Interfaces;
@@ -22,10 +23,15 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+        dataSourceBuilder.EnableDynamicJson();
+        var dataSource = dataSourceBuilder.Build();
+
         services.AddDbContext<CruxaDbContext>(options =>
-            options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection") ??
-                throw new InvalidOperationException("Connection string 'DefaultConnection' not found."),
+            options.UseNpgsql(dataSource,
                 b => b.MigrationsAssembly(typeof(CruxaDbContext).Assembly.FullName)));
 
         services.AddScoped<IUserRepository, UserRepository>();

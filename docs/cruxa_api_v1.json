@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5033/"
+      "url": "http://localhost:5000/"
     }
   ],
   "paths": {
@@ -1806,6 +1806,55 @@
         }
       }
     },
+    "/api/Gyms/import": {
+      "post": {
+        "tags": [
+          "Gyms"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkImportGymsCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkImportGymsCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkImportGymsCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkImportResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkImportResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkImportResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/grading-systems": {
       "get": {
         "tags": [
@@ -2560,6 +2609,47 @@
           }
         }
       },
+      "BulkImportGymsCommand": {
+        "required": [
+          "gyms"
+        ],
+        "type": "object",
+        "properties": {
+          "gyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportGymDto"
+            }
+          }
+        }
+      },
+      "BulkImportResult": {
+        "type": "object",
+        "properties": {
+          "imported": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "skipped": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "CommentDto": {
         "type": "object",
         "properties": {
@@ -2880,6 +2970,72 @@
       },
       "HoldColor": {
         "type": "integer"
+      },
+      "ImportGymDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "latitude": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "longitude": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactInfo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "website": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "prices": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "workingHours": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "photoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "LoginQuery": {
         "required": [
@@ -3385,6 +3541,12 @@
               {
                 "$ref": "#/components/schemas/HoldColor"
               }
+            ]
+          },
+          "gradeRaw": {
+            "type": [
+              "null",
+              "string"
             ]
           },
           "photoUrls": {

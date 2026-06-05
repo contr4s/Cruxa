@@ -1,0 +1,1367 @@
+[
+  {
+    "name": "Marina Club",
+    "city": "Москва",
+    "address": "Ленинградское шоссе,\u00A025а, ст4\u00A0–\u00A01 этаж",
+    "latitude": 55.827403,
+    "longitude": 37.478226,
+    "description": "Скалодром «Marina Club» придется по душе, как новичкам, так и более опытным скалолазам. Рельеф лазательной поверхности максимально приближен к естественному, максимальная высота составляет 15 метров, а ширина – 12 метров. Уровень сложности предлагаемых трасс варьируется в пределах от 5b до 7с. Все дорожки оборудованы как верхней, так и нижней страховкой, стенд для скалолазания имеет европейский сертификат соответствия.\r\nЕжедневно проходят занятия в школе скалолазания для детей и взрослых, где Вы получите безопасные физические нагрузки и возможность заниматься как под руководством опытного тренера, так и самостоятельно. Также на территории скалодрома регулярно проходит празднование любых семейных и корпоративных мероприятий.",
+    "contactInfo": "+7 (495) 127-82-85 доб.121",
+    "contactEmail": null,
+    "socialLinks": [
+      "http://www.youtube.com/user/marinaclub1?feature=watch",
+      "http://www.facebook.com/pages/Фитнес-центр-Marina-Club/487665051264407",
+      "https://twitter.com/Fit_Marina_Club",
+      "http://vk.com/club397401",
+      "https://www.instagram.com/fitmarinaclub/"
+    ],
+    "website": "http://www.marina-club.ru",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Разовое самостоятельное посещение для взрослых",
+        "price": "390-450 руб"
+      },
+      {
+        "name": "Разовое занятие для детей",
+        "price": "300 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/6ShjJQO6eXI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NgKlm4rF8UU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LHKB0-AgzwM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/QE7LwJLAHzs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dk7ZBej8xCk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6XCSa9YIdWQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2psDApeeCk0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KoVLwwfOmZ0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TXL5ep68hk8-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 15,
+    "yearFounded": 2001,
+    "metroStations": [
+      "Войковская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Клуб скалолазания ProClimb",
+    "city": "Москва",
+    "address": "г. Москва, Вятская ул., 27, стр. 12",
+    "latitude": 55.797088,
+    "longitude": 37.580876,
+    "description": "Клуб скалолазания «ProClimb», основанный в 2016-ом году профессиональными тренерами по скалолазанию с огромным опытом, проводит групповые и индивидуальные тренировки, регулярные выезды на скалы и спортивные сборы для детей и взрослых. Всем желающим предоставляется возможность посещения занятий по фитнес- и спорт-скалолазанию, скальному альпинизму и принять участие в скалолазных турах по всему миру.\r\nВсе имеющиеся тренировочные программы рассчитаны на начинающих, опытных и профессиональных скалолазов. Пользование всем необходимым снаряжением на территории скалодрома является бесплатным, как и посещение 1-го пробного или индивидуального занятия.",
+    "contactInfo": "+7 (977) 713-08-73",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://facebook.com/proclimb.ru",
+      "https://instagram.com/proclimb.ru",
+      "https://vk.com/proclimb",
+      "https://www.youtube.com/channel/UCguEf7hj3-Qe93u4wjVuHhQ"
+    ],
+    "website": "https://proclimb.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Чт",
+        "from": "17:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "11:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Пробное занятие по скалолазанию в группе",
+        "price": "450 руб"
+      },
+      {
+        "name": "Разовое занятие по скалолазанию в группе",
+        "price": "650 руб"
+      },
+      {
+        "name": "Абонемент на 16 занятий по скалолазанию в группе",
+        "price": "8100 руб"
+      },
+      {
+        "name": "Абонемент на 8 занятий по скалолазанию в группе",
+        "price": "4600 руб"
+      },
+      {
+        "name": "Индивидуальное занятие по скалолазанию",
+        "price": "1500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ZkrmxedDnZA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/AOflOunxNiw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/d5ne4xnX2IU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KKsTw2IWmgs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HJnBIfvvgeo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8v3JXzYg_HU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eEHzMNvLXGA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vwKPJMVgu9E-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2016,
+    "metroStations": [
+      "Савёловская",
+      "Дмитровская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ТОКИО",
+    "city": "Москва",
+    "address": "Москва, ул. Новодмитровская 5А, стр 3, 1 подьезд, 3 этаж",
+    "latitude": 55.80614,
+    "longitude": 37.58385,
+    "description": "Скалодром «ТОКИО», спроектированный и построенный под руководством известного чемпиона мира по боулдерингу А. Рубцова, был открыт в 2018-ом году. Здесь комфортно и полноценно могут заниматься как начинающие скалолазы, так и профессионалы.\r\nДля детей и взрослых функционирует школа скалолазания, обучение в которой проводится как в индивидуальной, так и групповой форме (до 10-ти человек). В тренерский состав входят только мастера спорта и кандидаты в мастера спорта по скалолазанию. Имеется возможность проведения празднования любого торжественного мероприятия на территории скалодрома.",
+    "contactInfo": "+7 929 654 79 12",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/climbintokyo/",
+      "https://www.instagram.com/climbin.tokyo/"
+    ],
+    "website": "https://www.climbin.ru/",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "15:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Вт-Чт",
+        "from": "7:30",
+        "to": "23:00"
+      },
+      {
+        "days": "Пт",
+        "from": "15:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вход до 16",
+        "price": "00400 руб"
+      },
+      {
+        "name": "Вход после 16",
+        "price": "00600 руб"
+      },
+      {
+        "name": "Вход по выходным и праздникам",
+        "price": "600 руб"
+      },
+      {
+        "name": "Безлимитный абонемент на 1 мес.",
+        "price": "4800 руб"
+      },
+      {
+        "name": "Разовое занятие с тренером",
+        "price": "1300 руб"
+      },
+      {
+        "name": "Разовое занятие в группе у тренера",
+        "price": "1200 руб"
+      },
+      {
+        "name": "Абонемент 4 тренировки в группе у тренера",
+        "price": "4400 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/tokyo-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tokyo-07-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2018,
+    "metroStations": [
+      "Дмитровская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "RedPoint",
+    "city": "Москва",
+    "address": "Москва, улица Вятская дом 27, корпус 12",
+    "latitude": 55.797088,
+    "longitude": 37.580876,
+    "description": "«RedPoint», начавший свою работу в 2012-ом году, порадует всех пришедших наличием большого скалодрома высотой 12,5 метров, который состоит из 6-ти модулей: нависающий и слабонависающий, ширина которых составляет по 9 метров, 2 вертикальных и частично положительных, шириной по 6 и 9 метров соответственно, а также «скворечник» и стена «каньон».\r\nМинимальный рекомендованный возраст детей, которым разрешено посещение скалодрома – 7 лет. Для начинающих скалолазов проводятся занятия в детской и взрослой школах скалолазания. Помимо организации празднования любых мероприятий на территории скалодрома, также проходят коллективные выезды на скалы России и зарубежья.",
+    "contactInfo": "+7 985 351 56 03",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/redpoint_msk",
+      "http://www.facebook.com/SkalodromRedPoint"
+    ],
+    "website": "http://redpoint.msk.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:00",
+        "to": "22:50"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "21:50"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "350 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий",
+        "price": "4300 руб"
+      },
+      {
+        "name": "Абонемент на 20 занятий",
+        "price": "7600 руб"
+      },
+      {
+        "name": "Абонемент на 3 месяца (безлимитный)",
+        "price": "8600 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев (безлимитный)",
+        "price": "16000 руб"
+      },
+      {
+        "name": "Абонемент на 1 год",
+        "price": "28000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4_7_m-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/L1000273-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/L1000273-2-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/mb-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ka05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/stroi07_01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/stroi07_02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/stroi07_06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/stroi07_08-min.jpg"
+    ],
+    "wallArea": 500,
+    "maxHeight": 12.5,
+    "yearFounded": 2012,
+    "metroStations": [
+      "Савёловская",
+      "Дмитровская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Limestone",
+    "city": "Москва",
+    "address": "Москва, Леснорядский пер., д. 18, стр. 6",
+    "latitude": 55.783124,
+    "longitude": 37.678272,
+    "description": "Скалодром «Limestone» признан самым большим в стране, является официальным партнером федерации скалолазания России с начала своей работы (2015-й год). Площадь скалолазных поверхностей центра составляет более 800 кв. метров, также присутствует деление территории на зоны в соответствии с уровнем подготовки посетителей.\r\nДля юных любителей скалолазания функционирует специально оборудованная детская зона, где в их распоряжении находится отдельный скалодром. Все занятия и тренировки проходят под руководством опытнейших инструктором скалолазного центра. В «Limestone» регулярно проводятся фестивали и соревнования по скалолазному спорту среди всех желающих.",
+    "contactInfo": "+7 (499) 519-01-66",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/lmstn",
+      "https://www.instagram.com/limestonerussia/",
+      "https://vk.com/club95748376",
+      "https://www.youtube.com/channel/UCRSWiRmydGdw4xaCc5P4l4A"
+    ],
+    "website": "https://lmstn.ru/",
+    "workingHours": [
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вводное занятие",
+        "price": "1100 руб"
+      },
+      {
+        "name": "Начальный курс - &quot;LevelUp&quot;",
+        "price": "4200 руб"
+      },
+      {
+        "name": "1 занятие в группе",
+        "price": "800 руб"
+      },
+      {
+        "name": "Страхование с веревкой инструктором",
+        "price": "500 руб"
+      },
+      {
+        "name": "Разовое посещение",
+        "price": "400 руб"
+      },
+      {
+        "name": "12 посещений",
+        "price": "3900 руб"
+      },
+      {
+        "name": "24 посещения",
+        "price": "7200 руб"
+      },
+      {
+        "name": "1 мес. безлимитный",
+        "price": "4400 руб"
+      },
+      {
+        "name": "3 мес. безлимитный",
+        "price": "11500 руб"
+      },
+      {
+        "name": "6 мес. безлимитный",
+        "price": "23500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Fg1pQerSEgA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/MHwPB27k2G0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BChGOo4BNPY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/c2wAmPlgMEM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ddNJFxMnR9Q-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JjRI2k-pkDk-min.jpg"
+    ],
+    "wallArea": 800,
+    "maxHeight": 10,
+    "yearFounded": 2015,
+    "metroStations": [
+      "Сокольники",
+      "Красносельская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Гравитация",
+    "city": "Москва",
+    "address": "Москва, ул. Новоостаповская 5, с. 2",
+    "latitude": 55.723486,
+    "longitude": 37.677463,
+    "description": "Скалолазный центр «Гравитация» ежедневно радует своих посетителей площадью лазательной поверхности более 800 кв. метров и максимальной высотой скалодрома для лазания на трудность - 12 метров. В распоряжении любого желающего находятся также боулдер-зал с выходом «TopOut», более 6 500 различных зацепок и рельефов, обилие разнообразных лазательных поверхностей, тренажеры для скалолазания (кампус- и мунборд), а также комфортная вместительная разминочная зона.\r\nНа территории скалодрома регулярно организовывается празднование мероприятий для детей и взрослых, в развлекательную программу которых входят интересные игры и квесты, лазание под контролем опытных тренеров и ценные подарки.",
+    "contactInfo": "+7 (495) 9377707",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/gravitaciaclub/",
+      "https://vk.com/public127762889",
+      "https://www.instagram.com/gravitacia_club/"
+    ],
+    "website": "https://gravitacia-club.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "500 руб"
+      },
+      {
+        "name": "Безлимит 1 мес.",
+        "price": "4500 руб"
+      },
+      {
+        "name": "Безлимит 3 мес",
+        "price": "11000 руб"
+      },
+      {
+        "name": "Безлимит 6 мес.",
+        "price": "21600 руб"
+      },
+      {
+        "name": "Безлимит 12 мес.",
+        "price": "37800 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/IMG_5844-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uYddyDgM9a4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6izTxibQztc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3gQYUFfYjxY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8Zh0ZDMU-co-min.jpg"
+    ],
+    "wallArea": 800,
+    "maxHeight": 12,
+    "yearFounded": 2017,
+    "metroStations": [
+      "Дубровка",
+      "Волгоградский проспект"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Экстрим",
+    "city": "Москва",
+    "address": "Москва, Ул. Смольная, д. 63-Б",
+    "latitude": 55.870112,
+    "longitude": 37.469808,
+    "description": "«Экстрим», начав свою работу для всех желающих в 2003-м году, до сих пор радует посетителей искусственным рельефом площадью более 300 кв. метров. Высота скалодрома составляет 7 метров, потолочного лазания – 15 метров. Имеется возможность лазать боулдеринг, а также трассы с верхней и нижней страховкой. В распоряжении посетителей находятся многочисленные скалолазные тренажеры для подтягивания и закачки пресса, фингерборды и мунборды.\r\nОпытные тренеры и инструкторы скалодрома обучают детей (от 6-ти до 18-ти лет) и взрослых в школе скалолазания. Здесь можно узнать об основах техники лазания и улучшить уже имеющиеся навыки с помощью грамотного индивидуального подхода.",
+    "contactInfo": "+7-926-527-27-53",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodrom_extreme",
+      "https://www.instagram.com/skalodrom_extrime/",
+      "https://www.facebook.com/profile.php?id=100000493378950"
+    ],
+    "website": "https://www.rock-climbing.ru/climbing-gym/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "15:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "2 пробных подъема",
+        "price": "400 руб"
+      },
+      {
+        "name": "3 пробных подъема",
+        "price": "500 руб"
+      },
+      {
+        "name": "Урок страховки",
+        "price": "100 руб"
+      },
+      {
+        "name": "Занятие с инструктором",
+        "price": "1200 руб"
+      },
+      {
+        "name": "Школа скалолазания для взрослых",
+        "price": "600 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/51544841_2572171962809224_4150632935743029248_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/51435104_2572175422808878_3479162967071653888_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LaRZVwOXUww-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/51018133_2572175562808864_7184972659728318464_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/50714000_2555654314460989_657655257903398912_n-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/50112124_2548577358502018_3640858817794670592_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XaGjKBJJsKI-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 7.5,
+    "yearFounded": 2003,
+    "metroStations": [
+      "Беломорская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "RockZona",
+    "city": "Москва",
+    "address": "Москва, Проспект Андропова, д. 22",
+    "latitude": 55.682651,
+    "longitude": 37.661922,
+    "description": "Скалодром «RockZona» с самого открытия (2017-й год) радует посетителей боулдеринговым залом площадью более 650 кв. метров, регулярно обновляющимися трассами  для занятий начинающих и опытных скалолазов. Для разминок были оборудованы 3 зоны с тренажерами и фингербордами, изготовленными на заказ.\r\n«RockZona» славится самым большим в Москве клубом детского скалолазания, где ежедневно занимаются более 500 ребят возрастом от 3-х до 17-ти лет. Помимо этого имеется возможность отметить детский день рождения или любой другой праздник на скалодроме в форме увлекательного скалолазного квеста.",
+    "contactInfo": "8 (499) 450-25-26",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rzclimbing",
+      "https://www.facebook.com/rzclimbing/",
+      "https://www.instagram.com/rzclimbing/"
+    ],
+    "website": "http://rzclimbing.ru/",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "11:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Вт",
+        "from": "13:30",
+        "to": "23:00"
+      },
+      {
+        "days": "Ср",
+        "from": "11:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Чт",
+        "from": "13:30",
+        "to": "23:00"
+      },
+      {
+        "days": "Пт",
+        "from": "11:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб",
+        "from": "8:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Вс",
+        "from": "8:30",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "400 руб"
+      },
+      {
+        "name": "Вход для членов ФАР",
+        "price": "320 руб"
+      },
+      {
+        "name": "Абонемент на 12 посещений",
+        "price": "5300 руб"
+      },
+      {
+        "name": "Абонемент на 25 посещений",
+        "price": "10000 руб"
+      },
+      {
+        "name": "Абонемент студенческий на 12 посещений",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Абонемент утренний на 12 посещений",
+        "price": "3500 руб"
+      },
+      {
+        "name": "Безлимитный 30 дней",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Безлимитный 3 мес",
+        "price": "11500 руб"
+      },
+      {
+        "name": "Безлимитный 6 мес",
+        "price": "22500 руб"
+      },
+      {
+        "name": "Безлимитный 12 мес",
+        "price": "35000 руб"
+      },
+      {
+        "name": "Разовое занятий с тренером",
+        "price": "1000 руб"
+      },
+      {
+        "name": "Абонемент в школу 4 занятия",
+        "price": "3800 руб"
+      },
+      {
+        "name": "Абонемент в школу 8 занятий",
+        "price": "7500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/XaGjKBJJsKI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kEzV5aGM4J4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oQroBkLs0_w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-DB979vQtqc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VQOCTwG3hJY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sQuJZgtZUpQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nBwQilAW7gA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ftgu4OHDO7U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nI5hA5EyY4U-min.jpg"
+    ],
+    "wallArea": 650,
+    "maxHeight": 3.5,
+    "yearFounded": 2012,
+    "metroStations": [
+      "Коломенская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "МГТУ им. Баумана",
+    "city": "Москва",
+    "address": "Москва, Госпитальная набережная, дом 4/2",
+    "latitude": 55.772229,
+    "longitude": 37.698034,
+    "description": "Основной (большой) скалодром МГТУ им. Баумана, который отличается высотой в 12 метров, оснащен специализированными оттяжками для нижней и веревками для верхней страховки. Малый скалодром имеет высоту 5 метров и длину 24 метра, был создан для болдер-контестов, так как имеет множество плоскостей и сложные навесные конструкции. Болдер-зал при высоте в 4 метра обладает общей площадью поверхности в 160 кв. метров, и предназначен для тренировок спортивных групп.\r\nЗдесь регулярно проводятся занятия для взрослых и детей, где опытные тренеры и инструкторы скального центра готовы помочь начать свой путь в скалолазном спорте или повысить уже имеющиеся навыки.",
+    "contactInfo": "+7 (916) 3117752",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/goclimb.bmstu"
+    ],
+    "website": "http://goclimb.ru/ru/",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Занятия в группе",
+        "price": "800 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/большой1-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/большой2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/W9XDXMFFabI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/болдер3-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/болдер1-min.jpg"
+    ],
+    "wallArea": 600,
+    "maxHeight": 12,
+    "yearFounded": 2006,
+    "metroStations": [
+      "Бауманская",
+      "Электрозаводская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Школа № 185",
+    "city": "Москва",
+    "address": "Москва, ул. Михалковская, 3",
+    "latitude": 55.836893,
+    "longitude": 37.535475,
+    "description": "Скалодром в школе №185 в первую очередь предназначен для учеников, которые занимаются на нем начиная с первого класса. Разумеется, перед практическими занятиями на искусственном рельеф, все ребята проходят курс теоретических занятий. Данный скалодром был произведён компанией \"Альпагор-спорт\". Максимальная высота спортивной конструкции - 6 м., площадь - 45 кв. м. Скалодром открыт для всех учеников и сотрудников школы. В школе регулярно проводятся небольшие соревнования по скалолазанию как среди учеников, так и среди учителей школы.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 45,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [
+      "Войковская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Школа № 1414",
+    "city": "Москва",
+    "address": "Москва, ул. Советской Армии, 9",
+    "latitude": 55.788905,
+    "longitude": 37.616,
+    "description": "Школа №1414 является одной из самых продвинутых и интересных школ Москвы. Изюминкой учебного заведения является скалодром высотой 6 м. Спортивная конструкция, созданная компанией \"Альпагор-спорт\", установлена в спортивном зале школы. Площадь лазательной поверхности - 45 кв.м. Данный скалодром доступен для всех учеников, начиная с первого класса, учителей и сотрудников школы. Также, в определённое время, скалодром открыт и для посторонних людей. Трассы скалодрома не очень сложные, поскольку предназначены в первую очередь для детей, и идеально подойдут новичкам.",
+    "contactInfo": "+7 (495) 689-02-98",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 45,
+    "maxHeight": 6,
+    "yearFounded": 2000,
+    "metroStations": [
+      "Марьина Роща"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ЦСКА",
+    "city": "Москва",
+    "address": "Москва, Ленинградский проспект, 39 стр. 1",
+    "latitude": 55.79056,
+    "longitude": 37.539877,
+    "description": "Скалодром «ЦСКА» был основан в начале 2013-го года на территории ЛФК ЦСКА. Само сооружение представляет собой комплекс, состоящий из сектора на трудность с большим углом нависания, скалу, поверхность которой имитирует естественный рельеф (RockTopia) и эталонную трассу, высота которой составляет 15 метров. Площадь всего скалодрома – более 350 кв. метров, что позволяет единовременно тренироваться 30-ти людям.\r\n«ЦСКА» - основная тренировочная база сборных команд России и города Москва в дисциплине «Скорость». В тренерский состав скалодрома входят профессиональные тренеры и инструкторы. Для взрослых и детей функционируют секции скалолазания.",
+    "contactInfo": "+7 (917) 546-39-68",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodromcska"
+    ],
+    "website": "https://vk.com/skalodromcska",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/6e8aSWG-iSA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8QbBdaumHHA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/lGV39sh75R8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vgisuMtA2RQ-min.jpg"
+    ],
+    "wallArea": 350,
+    "maxHeight": 15,
+    "yearFounded": 2013,
+    "metroStations": [
+      "Аэропорт"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ЦВР Синяя птица",
+    "city": "Москва",
+    "address": "Москва, ул. Свободы, 89 к5",
+    "latitude": 55.865884,
+    "longitude": 37.442293,
+    "description": "В ЦВР \"Синяя птица\" работает секция скалолазания для детей в возрасте от 8 до 17 лет. Для занятий здесь предусмотрены два боулдеринговых зала. Общая площадь скалолазной поверхности в центре составляет 70 кв. м. Максимальная высота стены 3,5 м. Скалодромы имеют очень разнообразную поверхность, которая подойдёт как для новичков, так и для более опытных скалолазов. Здесь есть наклонные участки, нависающие и полностью вертикальные, под скалодром задействован также и потолок помещения.",
+    "contactInfo": "+7 (495) 495-70-37",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/Центр-внешкольной-работы-Синяя-птица-205093676304404/"
+    ],
+    "website": "https://www.facebook.com/Центр-внешкольной-работы-Синяя-птица-205093676304404/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "14:30",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Волок_01_display-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/Волок_02_display-min.JPG"
+    ],
+    "wallArea": 70,
+    "maxHeight": 3.5,
+    "yearFounded": 2000,
+    "metroStations": [
+      "Планерная"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ЦВР «Синегория»",
+    "city": "Москва",
+    "address": "Москва, ул. Партизанская, 45",
+    "latitude": 55.739438,
+    "longitude": 37.402408,
+    "description": "Скалодром в ЦВР \"Синегория\" представляет собой 6-ти метровую конструкцию, на которой расположено несколько дорожек разного уровня сложности. Данный скалодром закрытого типа и доступен только для воспитанников \"Синегории\". Здесь проводятся тренировки для детей в возрасте от 8 до 17 лет, которые включают в себя как теоретическую, так и практическую часть. Площадь данного скалодрома 40 квадратных метров, на этой поверхности ребята совершают подъемы на скорость и трудность и выполняют спасательные работы.",
+    "contactInfo": "+7 (905) 749-03-74",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/cvrsinegoria",
+      "https://www.facebook.com/secretary.sin",
+      "https://www.instagram.com/sinegoriya_do/",
+      "https://www.youtube.com/channel/UCZZUFZWEgAbPHxd1jmAJDtw?view_as=subscriber"
+    ],
+    "website": "http://sinegoriya.mskobr.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/C-boJtSvehY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ByOX6Uj9nWM-min.jpg"
+    ],
+    "wallArea": 40,
+    "maxHeight": 6,
+    "yearFounded": 2015,
+    "metroStations": [
+      "Кунцево",
+      "Молодежная"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ФА и С «Сокольники»",
+    "city": "Москва",
+    "address": "Москва, ул. Русаковская, д. 18/20",
+    "latitude": 55.785407,
+    "longitude": 37.676664,
+    "description": "Федерация альпинизма и скалолазания Москвы поспособствовала открытию множества скалодромов. Также организации принадлежит несколько скалодромов в городе, один из них боулдеринговый зал \"Сокольники\", расположенный на ул. Русаковской. Высота здешнего скалодрома всего 2.5 м., однако его площадь позволяет развернуться и составляет 140 кв.м. Данный скалодром открыт для всех и посещать его могут как опытные спортсмены, так и новички. В зале постоянно работают опытные инструкторы, которые помогут составить маршрут и подстрахуют в случае необходимости.",
+    "contactInfo": "+7 (495) 720-02-82",
+    "contactEmail": null,
+    "socialLinks": [
+      "http://vk.com/alpclubdemchenko"
+    ],
+    "website": "http://straxy.net",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 140,
+    "maxHeight": 2.5,
+    "yearFounded": 2000,
+    "metroStations": [
+      "Сокольники"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Спорткомплекс МГСУ",
+    "city": "Москва",
+    "address": "Москва, Ярославское шоссе, 26",
+    "latitude": 55.856417,
+    "longitude": 37.690048,
+    "description": "Важно! Скалодром только для студентов МГСУ. Коммерческие посещения не предусмотрены.\r\nСкалодром МГСУ имеет достаточно внушительные размеры: высота конструкции - 10 м., площадь - 300 кв. м. Основная центральная часть скалодрома состоит из четырех полос с маршрутами разного уровня сложности. Ширина каждой полосы 1,5 м. Данный скалодром имеет ломаную поверхность и разнообразный рельеф. Для новичков подойдут наклонные участки, опытные скалолазы оценят вертикальные и нависающие поверхности. Очень удобно, что здесь представлены все три скалолазные дисциплины: скорость, трудность и боулдеринг. \r\nВ МГСУ есть своя сборная по скалолазанию, которая регулярно тренируется на этом скалодроме, но открыт он для всех студентов и сотрудников университета.",
+    "contactInfo": "+7 (917) 579-02-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club76753659"
+    ],
+    "website": "https://vk.com/club76753659",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "14:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 300,
+    "maxHeight": 10,
+    "yearFounded": 2000,
+    "metroStations": [
+      "Лосиноостровская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Спорткомплекс РГУФКСМиТ",
+    "city": "Москва",
+    "address": "Москва, Сиреневый бульвар, 4",
+    "latitude": 55.801081,
+    "longitude": 37.760081,
+    "description": "Скалолазная база РГУФКСМиТ состоит из двух скалодромов, общая площадь которых 93 кв. м. Площадь маленького скалодрома 33 кв. м., высота - 6 м. Это сборно-разборный скалодром, созданный компанией Алтьпагор-спорт. Максимальная высота стены большого скалодрома - 8 м., площадь - 60 кв. м. Скалодром принадлежит одной из кафедр университета, на нем проводятся тренировки для студентов. Тем не менее, заниматься на скалодроме могут не только студенты и сотрудники университета, за весьма скромную плату полазать здесь может каждый желающий.",
+    "contactInfo": "+7 (925) 771-05-80",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rsupe_life"
+    ],
+    "website": "https://vk.com/rsupe_life",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 93,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Сосулька",
+    "city": "Москва",
+    "address": "Москва, Факультетский пер, д. 10",
+    "latitude": 55.812449,
+    "longitude": 37.495743,
+    "description": "\"Сосулька\" - по-настоящему уникальный скалодром. Данный спортивный объект, высотой 12 м. может предложить спортсменам большое разнообразие рельефов. На скалодроме есть положительные стенки для начинающих скалолазов и вертикальные и отрицательные для опытных спортсменов. \"Сосулька\" используется для тренировок и проведения соревнований по скалолазанию, драйтулингу и альпинистским связкам. Данный скалодром находится на улице и открыт круглосуточно, лазать на нем можно совершенно бесплатно.\r\nОсобенности: приобретение трехмесячного или полугодового безлимитного посещения (нет инструкторов, которые дежурят там регулярно).",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/event39388620"
+    ],
+    "website": "http://www.alpclb.ru/treining.php",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Ср-Чт",
+        "from": "19:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/12_big-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/198554-1200-min.jpeg",
+      "https://maps.climbingpro.ru/media/photo/lavina-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 12,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Соколиная скала",
+    "city": "Москва",
+    "address": "Москва, Парк «Сокольники», 3-й Лучевой просек",
+    "latitude": 55.801678,
+    "longitude": 37.667016,
+    "description": "Московский скалодром \"Соколиная скала\" является одним из самых больших скалодромов под открытым небом в России. Высота конструкции - 15 м., площадь скалолазной поверхности - 500 кв. м. На этой поверхности расположены пять плоскостей, рассчитанных на разный уровень подготовки. Здесь присутствует одно сильное нависание, несколько небольших и одна положительная стенка высотой 9 м. Полазать на скалодроме могут и дети (допуск только с родителями), за новичками наблюдает опытный инструктор, а профессиональны могут купить безлимитный билет и заниматься самостоятельно.",
+    "contactInfo": "+7 (916) 989-56-76",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/sokolinayaskala"
+    ],
+    "website": "https://vk.com/sokolinayaskala",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "15:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/72923_1338994146-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/JHAPswjSJ2k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/orig-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sokolinayagora-533b25ee717ac_620_416-min.jpeg"
+    ],
+    "wallArea": 500,
+    "maxHeight": 15,
+    "yearFounded": null,
+    "metroStations": [
+      "Сокольники"
+    ],
+    "tags": []
+  },
+  {
+    "name": "МУЦ МЧС",
+    "city": "Москва",
+    "address": "Москва, ул. Голубинская, д. 6а",
+    "latitude": 55.612146,
+    "longitude": 37.508912,
+    "description": "МУЦ МЧС - старинное учебное заведение для спасателей и пожарных, история которого насчитывает почти сто лет. Скалодром здесь появился не так давно, но именно на нем проводится огромное количество тренировок. Размеры здешнего скалодрома достаточно внушительные: максимальная высота - 8,8 м., площадь скалолазной поверхности - 61 кв.м. Помимо тренировок воспитанников МУЦ, скалодром используется для проведения спортивных мероприятий и соревнований.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/mucfps_fa"
+    ],
+    "website": "http://www.mucfps1.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/07-min.jpg"
+    ],
+    "wallArea": 61,
+    "maxHeight": 8.8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Колледж предпринимательства №11",
+    "city": "Москва",
+    "address": "Москва, Ленинградское ш., 13а",
+    "latitude": 55.818235,
+    "longitude": 37.496201,
+    "description": "Занятия скалолазанием являются важной составляющей жизни Колледжа предпринимательства №11, многие сотрудники увлекаются туризмом и альпинизмом. В 2007 году здесь был разработан проект скалодрома, который воплотила в жизнь компания Алтьпагор-спорт. В 2008 году скалодром площадью 84 кв.м. был готов. Максимальная высота спортивного сооружения - 7,5 м., ширина - 8 м. Скалодром прилегает к стене здания колледжа. Здесь могут тренироваться все желающие, причем как самостоятельно, так и под руководством инструктора. Для студентов и преподавателей скалодром бесплатен.",
+    "contactInfo": "+7 (499) 150-45-04",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/gapoukp11"
+    ],
+    "website": "http://www.kp11.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 84,
+    "maxHeight": 7.5,
+    "yearFounded": 2008,
+    "metroStations": [
+      "Войковская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Клуб скалолазов Эдельвейс",
+    "city": "Москва",
+    "address": "Москва, Синичкина 2-я, 19",
+    "latitude": 55.761295,
+    "longitude": 37.716675,
+    "description": "Клуб скалолазов \"Эдельвейс\" имеет богатую историю. Клуб был создан в конце 80-х гг. руками московских энтузиастов из спортивного общества \"Спартак\". На сегодняшний день \"Эдельвейс\" является клубом для детских внешкольных занятий. На скалодроме клуба, высота которого 2.5 м., тренируются юные воспитанники секции скалолазния. Площадь данного скалодрома 125 кв.м. На этой поверхности расположены различные по сложности трассы и самые разнообразные рельефы.",
+    "contactInfo": "+7 (495) 360-49-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/edelweiss_climb"
+    ],
+    "website": "http://www.edelweyss.ru/",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "15:00",
+        "to": "20:30"
+      },
+      {
+        "days": "Чт",
+        "from": "15:00",
+        "to": "20:30"
+      },
+      {
+        "days": "Сб",
+        "from": "15:00",
+        "to": "20:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ksKwl2O-sOs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wxiXnxGYKQo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Xk7k9pdYSJk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xloQC-nvXTE-min.jpg"
+    ],
+    "wallArea": 125,
+    "maxHeight": 2.5,
+    "yearFounded": 2015,
+    "metroStations": [
+      "Авиамоторная"
+    ],
+    "tags": []
+  },
+  {
+    "name": "High Wall",
+    "city": "Москва",
+    "address": "Москва, Воротынская, 18",
+    "latitude": 55.889967,
+    "longitude": 37.388394,
+    "description": "HighWall является самым высоким скалодромом на севере Москвы. Высота конструкции - 17 м. На данном скалодроме проводятся тренировки для воспитанников секции братьев Фофоновых, также здесь могут заниматься все желающие. Все необходимое снаряжение, включая скальные туфли, можно взять напрокат. На скалодроме HighWall представлены все три скалолазные дисциплины: скорость, трудность и боулдеринг. Занятия скалолазанием могут посещать дети начиная с 4-х лет. Безопасность на скалодроме достигается при помощи опытных инструкторов и оборудования, соответствующего стандартам СЕ и UIAA.",
+    "contactInfo": "+7 (903) 965-08-04",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/highwall",
+      "https://www.facebook.com/HighWallSkalodrom"
+    ],
+    "website": "http://highwall.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "14:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "11:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/8rVlrf_b7_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/12523871_1063161163736799_8890758326198395927_n-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/12920451_1063162943736621_4918516800946396465_n-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/17201064_1358144897571756_2579539033459104288_n-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 17,
+    "yearFounded": 2014,
+    "metroStations": [
+      "Планерная"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Горизонт",
+    "city": "Москва",
+    "address": "Москва, ул. Белореченская, 25 ст. 2",
+    "latitude": 55.670585,
+    "longitude": 37.765767,
+    "description": "Скалодром спортивного клуба \"Горизонт\" в районе Люблино является одним из самых маленьких в Москве. Площадь данного скалодрома 50 кв. м., максимальная высота стены всего 2,5 м. Несмотря на свои скромные размеры, этот скалодрома имеет большой тренировочный потенциал. Он очень интересен тем, что на его поверхности имеется множество разнообразных зацепов, которые постоянно дополняются новыми и перекручиваются. В этом зале занимаются юные воспитанники СК \"Горизонт\", в группах обычно не более 8 человек. Для детей младше 5 лет здесь проводятся индивидуальные занятия. Также, данный скалодром могут посещать и взрослые.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/gorizont_sk/",
+      "https://vk.com/sk_gorizont"
+    ],
+    "website": "http://skgorizont.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Вт",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Чт-Пт",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "10:00",
+        "to": "15:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/_D64jMaZMvc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1XOHf5ti4gA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Z9CGe_TJlac-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/G8eLLURVvaA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/F2V3a58nPlg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fXGOELIvd-0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OrcdVett1HU-min.jpg"
+    ],
+    "wallArea": 50,
+    "maxHeight": 2.5,
+    "yearFounded": null,
+    "metroStations": [
+      "Люблино"
+    ],
+    "tags": []
+  },
+  {
+    "name": "ДДС",
+    "city": "Москва",
+    "address": "Москва, ул. Рабочая, 53",
+    "latitude": 55.740765,
+    "longitude": 37.690534,
+    "description": "Скалодром ДДС является одним из самых крупнейших не только в Москве, но и в России. Общая площадь скалолазной поверхности здесь 1000 кв. м. У скалолазов столицы большим успехом пользуется большой скалодром ДДС, максимальная высота которого 12 м. Помимо него в ДДС есть небольшие залы со скалодромам небольшой высоты для боулдеринга. Большой скалодром поделён на секторы, окрашенные в разные цвета. У каждого сектора свои особенности, какие-то нависающие и рельефные, какие-то наоборот вертикальные и гладкие. На этом скалодроме расположено более 90 трасс разного уровня сложности.",
+    "contactInfo": "+7 (495) 670-21-70",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/public78061409"
+    ],
+    "website": "http://www.dds-mossport.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "11:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/47166-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/329359ab3da6dea217ed6af3b7545993-min.jpeg",
+      "https://maps.climbingpro.ru/media/photo/DSC01477-small-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/dvorets_detskogo_sporta_skalodrom-min.jpg"
+    ],
+    "wallArea": 1000,
+    "maxHeight": 12,
+    "yearFounded": 1990,
+    "metroStations": [
+      "Римская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Бауманка",
+    "city": "Москва",
+    "address": "Москва, Госпитальная наб., 4/2",
+    "latitude": 55.772229,
+    "longitude": 37.698034,
+    "description": "Скальный центр МГТУ им. Н. Э. Баумана - это три зала разной площади и высоты. Высота большого скалодрома 12 м., на нем можно лазить с веревкой. Малый зал представляет собой 4-х метровый модуль длиной 24 м. Здесь расположены интересные навесные конструкции, занятия проходят без страховки, используются только крешпады. Третий зал предназначен для боулдеринга. Площадь скалодрома 160 кв. м., высота - 4 м.\r\nТренироваться в этих залах может каждый желающий, но для занятий на большом скалодроме нужна помощь напарника или тренера для страховки. Также здесь действует секция детского скалолазания для детей от 7 лет.",
+    "contactInfo": "+7(916)-311-77-52",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/goclimb.bmstu",
+      "https://www.instagram.com/the_goclimb/"
+    ],
+    "website": "http://www.goclimb.ru/ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:30",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/_5zdq6Z0lH8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OSe7_czJx04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/roeeIVmBvM0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vDenUjGVcdg-min.jpg"
+    ],
+    "wallArea": 180,
+    "maxHeight": 12,
+    "yearFounded": 2000,
+    "metroStations": [
+      "Электрозаводская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Черепаха",
+    "city": "Москва",
+    "address": "Москва, Волоколамское ш., д.4. корп.12",
+    "latitude": 55.809317,
+    "longitude": 37.499525,
+    "description": "\"Черепаха\" МАИ - это боулдериговый зал с площадью скалознлй поверхности 250 кв. м. Максимальная высота стены - 4,5 м. Данный скалодром, в первую очередь, предназначен для опытных спортсменов, студентов и членов альпклуба МАИ. Членом клуба может стать каждый скалолаз, имеющий достаточно опыта, нужно только дождаться своей очереди. Данный скалодром отличается большим разнообразием зацепов и поверхностей различной конфигурации. \"Черепаха\" используется не только для тренировок членов альпклуба, здесь также проводят соревнования и фестивали по боулдерингу.",
+    "contactInfo": "+7 (495) 158-48-46",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club62813613"
+    ],
+    "website": "https://vk.com/club62813613",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/cqAQIoZrJIo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DlnpAVEM3E0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NZsVQ9tUNJM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XReMnvrqYLM-min.jpg"
+    ],
+    "wallArea": 250,
+    "maxHeight": 4.5,
+    "yearFounded": 2013,
+    "metroStations": [
+      "Войковская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Спорткомплекс МИФИ",
+    "city": "Москва",
+    "address": "Москва, Каширское шоссе, 31",
+    "latitude": 55.64987,
+    "longitude": 37.664393,
+    "description": "В жизни большинства университетов спорт занимает значительное место, поскольку спортивные секции позволяют студентам и преподавателям с интересом и пользой проводить свой досуг. Поэтому в стенах МИФИ действует большое количество самых разнообразных спортивных секций, а скалолазание среди них одно из самых популярных.\r\nДля занятий скалолазанием в университете созданы все условия и в спорткомплексе МИФИ имеется два скалодрома: в теплую погоду можно заниматься на открытом скалодроме без крыши, для занятий в ненастную погоду есть скалодром в помещении, обустроенный в Башне альпинистов. Занятия на открытом скалодроме высотой 6 м. позволяют спортсменам испытать практически такие же эмоции и ощущения, как и при занятиях альпинизмом. Это одна из причин того, что скалолазы выбирают занятия на этом скалодроме, даже если погодные условия не отличаются особой благосклонностью.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/alpmephi"
+    ],
+    "website": "https://vk.com/alpmephi",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "18:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Ср",
+        "from": "18:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Пт",
+        "from": "18:30",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_17-33-33.97-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_17-33-41.414-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_17-33-54.942-min_1.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [
+      "Каширская",
+      "Кантемировская"
+    ],
+    "tags": []
+  },
+  {
+    "name": "РХТУ",
+    "city": "Москва",
+    "address": "Москва, ул. Вилиса Лациса, 21",
+    "latitude": 55.863192,
+    "longitude": 37.421452,
+    "description": "Кафедра физического воспитания РХТУ предлагает своим студентам и преподавателям множество разнообразных спортивных секций. Одна из самых трендовых и популярных секций - скалолазание. Студенты университета настолько преуспели в этом виде спорта, что вместе со своим инструктором даже открыли новую вершину в Осетии, которая была названа \"Менделеевец\" в честь альма-матер.\r\nВ скалодроме РХТУ опытные инструкторы обучают азам боулдеринга. Помимо занятий здесь проводится множество фестивалей и состязаний по этому виду спорта, которые объединяют вместе любителей скалолазания и боулдеринга.",
+    "contactInfo": "+7 (926)793-40-65",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbing_muctr"
+    ],
+    "website": "https://vk.com/climbing_muctr",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_18-55-2.109-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 4,
+    "yearFounded": 2014,
+    "metroStations": [
+      "Планерная"
+    ],
+    "tags": []
+  },
+  {
+    "name": "Школа № 1294",
+    "city": "Москва",
+    "address": "Москва, ул. Глебовская, 10",
+    "latitude": 55.813202,
+    "longitude": 37.715525,
+    "description": "Московская школа №1294 входит в список лучших общеобразовательных учреждений города. Место в этом рейтинге школа заняла не только благодаря академическим успехам своих учеников, но и благодаря упору на разнообразные внеклассные занятия. Одним из таких занятий является скалолазание - в спортзале школы оборудован восьмиметровый скалодром. Площадь поверхности скалодрома 50 кв.м. \r\nПосещать занятия по скалолазанию можно уже с первого класса, также предусмотрено посещение родителями. Скалодром могут арендовать все желающие, услуги инструктора оплачиваются отдельно.",
+    "contactInfo": "+7 (903)779-84-49",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_19-7-2.722-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/шк1294-1_display-min.jpg"
+    ],
+    "wallArea": 80,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [
+      "Бульвар Рокоссовского"
+    ],
+    "tags": []
+  }
+]

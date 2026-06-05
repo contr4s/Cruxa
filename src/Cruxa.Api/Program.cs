@@ -1,11 +1,13 @@
 using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Extensions;
 using Cruxa.Api.Common;
+using Cruxa.Domain.Common;
 using Cruxa.Infrastructure.Extensions;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Serilog;
+using System.Text.Json.Serialization;
 
 // ──────────────────────────────────────────────
 // Serilog bootstrap (catches startup errors)
@@ -46,7 +48,11 @@ try
     // Controllers
     // ──────────────────────────────────────────
     builder.Services.AddControllers()
-    .AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
+    .AddJsonOptions(opts =>
+    {
+        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        opts.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+    });
 
     // ──────────────────────────────────────────
     // OpenAPI / Scalar

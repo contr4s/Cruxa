@@ -11,4 +11,19 @@ public interface IGymRepository
     Task AddAsync(Gym gym);
     Task UpdateAsync(Gym gym);
     Task DeleteAsync(Guid id);
+
+    /// <summary>
+    /// Checks if a gym with the given name and city already exists (case-insensitive).
+    /// </summary>
+    Task<bool> ExistsByNameAndCityAsync(string name, string city);
+
+    /// <summary>
+    /// Adds multiple gyms in a single batch operation.
+    /// </summary>
+    Task AddRangeAsync(List<Gym> gyms);
+
+    /// <summary>
+    /// Removes all gyms from the database.
+    /// </summary>
+    Task ClearAllAsync();
 }

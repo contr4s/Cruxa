@@ -33,8 +33,8 @@ public class GymTests
         result.Value!.Name.Should().Be(name.Trim());
         result.Value.City.Should().Be(city.Trim());
         result.Value.Address.Should().Be(address.Trim());
-        result.Value.Location.Latitude.Should().Be(lat);
-        result.Value.Location.Longitude.Should().Be(lon);
+        result.Value.Location!.Latitude.Should().Be(lat);
+        result.Value.Location!.Longitude.Should().Be(lon);
     }
 
     [Fact]
@@ -66,12 +66,15 @@ public class GymTests
 
         var name = _fixture.Faker.Company.CompanyName();
         var city = _fixture.Faker.Address.City();
-        var prices = _fixture.Faker.Lorem.Word();
+        var prices = new List<Cruxa.Domain.ValueObjects.PriceItem>
+        {
+            new() { Name = "Разовое", Price = "500 руб" }
+        };
         gym.Update(name: name, city: city, prices: prices);
 
         gym.Name.Should().Be(name);
         gym.City.Should().Be(city);
-        gym.Prices.Should().Be(prices);
+        gym.Prices.Should().BeEquivalentTo(prices);
     }
 
     [Fact]
@@ -106,7 +109,7 @@ public class GymTests
         var lon = _fixture.Faker.Random.Double(-180, 180);
         gym.Update(latitude: lat, longitude: lon);
 
-        gym.Location.Latitude.Should().Be(lat);
-        gym.Location.Longitude.Should().Be(lon);
+        gym.Location!.Latitude.Should().Be(lat);
+        gym.Location!.Longitude.Should().Be(lon);
     }
 }

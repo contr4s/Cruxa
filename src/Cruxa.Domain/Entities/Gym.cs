@@ -1,5 +1,6 @@
 namespace Cruxa.Domain.Entities;
 
+using System.Text.Json.Serialization;
 using Abstractions;
 using Common;
 using ValueObjects;
@@ -14,16 +15,25 @@ public class Gym : AggregateRoot<Guid>
     public string City { get; private set; }
     public string Address { get; private set; }
 
-    private GeoCoordinate _location = default!;
-    public GeoCoordinate Location => _location;
+    private GeoCoordinate? _location;
+    public GeoCoordinate? Location => _location;
 
     public string? ContactInfo { get; private set; }
+    public string? ContactEmail { get; private set; }
+    public List<string> SocialLinks { get; private set; } = [];
     public string? Website { get; private set; }
-    public string? Prices { get; private set; }
-    public string? WorkingHours { get; private set; }
+    public List<PriceItem> Prices { get; private set; } = [];
+    public List<WorkingHoursEntry> WorkingHours { get; private set; } = [];
     public List<string> PhotoUrls { get; private set; } = [];
     public Guid? GradingSystemId { get; private set; }
     public bool IsParsed { get; private set; }
+
+    // New fields from climbingpro.ru
+    public double? WallArea { get; private set; }
+    public double? MaxHeight { get; private set; }
+    public int? YearFounded { get; private set; }
+    public List<string> MetroStations { get; private set; } = [];
+    public List<string> Tags { get; private set; } = [];
 
     // Navigation
     public GradingSystem? GradingSystem { get; private set; }
@@ -34,14 +44,24 @@ public class Gym : AggregateRoot<Guid>
 
     private Gym() { }
 
-    public static Result<Gym> Create(string name, string city, string address, double latitude, double longitude)
+    public static Result<Gym> Create(
+        string name,
+        string city,
+        string address,
+        double? latitude = null,
+        double? longitude = null)
     {
         Guard.AgainstNullOrWhiteSpace(name, nameof(name));
         Guard.AgainstNullOrWhiteSpace(city, nameof(city));
         Guard.AgainstNullOrWhiteSpace(address, nameof(address));
 
-        var locationResult = GeoCoordinate.Create(latitude, longitude);
-        if (locationResult.IsFailure) return Result.Failure<Gym>(locationResult.Error);
+        GeoCoordinate? location = null;
+        if (latitude.HasValue && longitude.HasValue)
+        {
+            var locationResult = GeoCoordinate.Create(latitude.Value, longitude.Value);
+            if (locationResult.IsFailure) return Result.Failure<Gym>(locationResult.Error);
+            location = locationResult.Value;
+        }
 
         return Result.Success(new Gym
         {
@@ -49,7 +69,7 @@ public class Gym : AggregateRoot<Guid>
             Name = name.Trim(),
             City = city.Trim(),
             Address = address.Trim(),
-            _location = locationResult.Value
+            _location = location
         });
     }
 
@@ -61,11 +81,18 @@ public class Gym : AggregateRoot<Guid>
         double? latitude = null,
         double? longitude = null,
         string? contactInfo = null,
+        string? contactEmail = null,
+        List<string>? socialLinks = null,
         string? website = null,
-        string? prices = null,
-        string? workingHours = null,
+        List<PriceItem>? prices = null,
+        List<WorkingHoursEntry>? workingHours = null,
         List<string>? photoUrls = null,
-        Guid? gradingSystemId = null)
+        Guid? gradingSystemId = null,
+        double? wallArea = null,
+        double? maxHeight = null,
+        int? yearFounded = null,
+        List<string>? metroStations = null,
+        List<string>? tags = null)
     {
         if (name is not null) { Guard.AgainstNullOrWhiteSpace(name, nameof(name)); Name = name.Trim(); }
         if (description is not null) Description = description;
@@ -78,10 +105,25 @@ public class Gym : AggregateRoot<Guid>
             _location = lr.Value;
         }
         if (contactInfo is not null) ContactInfo = contactInfo;
+        if (contactEmail is not null) ContactEmail = contactEmail;
+        if (socialLinks is not null) SocialLinks = socialLinks;
+        if (workingHours is not null) WorkingHours = workingHours;
         if (website is not null) Website = website;
         if (prices is not null) Prices = prices;
-        if (workingHours is not null) WorkingHours = workingHours;
         if (photoUrls is not null) PhotoUrls = photoUrls;
         if (gradingSystemId.HasValue) GradingSystemId = gradingSystemId;
+        if (wallArea.HasValue) WallArea = wallArea;
+        if (maxHeight.HasValue) MaxHeight = maxHeight;
+        if (yearFounded.HasValue) YearFounded = yearFounded;
+        if (metroStations is not null) MetroStations = metroStations;
+        if (tags is not null) Tags = tags;
+    }
+
+    /// <summary>
+    /// Marks this gym as imported from an external parser source.
+    /// </summary>
+    public void MarkAsParsed()
+    {
+        IsParsed = true;
     }
 }

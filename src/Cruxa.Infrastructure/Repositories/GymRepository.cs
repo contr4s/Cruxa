@@ -78,4 +78,21 @@ public class GymRepository : IGymRepository
             _context.Gyms.Remove(gym);
         }
     }
+
+    public async Task<bool> ExistsByNameAndCityAsync(string name, string city)
+    {
+        return await _context.Gyms
+            .AnyAsync(g => g.Name.ToLower() == name.ToLower()
+                        && g.City.ToLower() == city.ToLower());
+    }
+
+    public async Task AddRangeAsync(List<Gym> gyms)
+    {
+        await _context.Gyms.AddRangeAsync(gyms);
+    }
+
+    public async Task ClearAllAsync()
+    {
+        _context.Gyms.RemoveRange(await _context.Gyms.ToListAsync());
+    }
 }
