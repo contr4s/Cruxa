@@ -1,0 +1,11 @@
+#rsub1:checked ~ .main-layout .rsub-dash,
+#rsub2:checked ~ .main-layout .rsub-routes,
+#rsub3:checked ~ .main-layout .rsub-reviews,
+#rsub4:checked ~ .main-layout .rsub-gyms { display:block; }
+
+#rsub1:checked ~ .main-layout .sidebar label[for="rsub1"],
+#rsub2:checked ~ .main-layout .sidebar label[for="rsub2"],
+#rsub3:checked ~ .main-layout .sidebar label[for="rsub3"],
+#rsub4:checked ~ .main-layout .sidebar label[for="rsub4"] {
+  background:var(--surface2); color:var(--text); border-left:3px solid var(--primary);
+}

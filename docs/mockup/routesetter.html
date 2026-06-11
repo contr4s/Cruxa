@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — Routesetter Dashboard</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="routesetter.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <span class="logo">▲ Крукса</span>
+    <span class="badge badge-primary">Routesetter</span>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-secondary btn-sm">+ Новая трасса</button>
+    <button class="btn btn-primary btn-sm">📄 QR-лист PDF</button>
+    <div class="avatar">Р</div>
+  </div>
+</div>
+
+<input type="radio" name="rsub" id="rsub1" class="sub-input" checked>
+<input type="radio" name="rsub" id="rsub2" class="sub-input">
+<input type="radio" name="rsub" id="rsub3" class="sub-input">
+<input type="radio" name="rsub" id="rsub4" class="sub-input">
+
+<div class="main-layout">
+
+  <div class="sidebar">
+    <label for="rsub1" class="sidebar-item">📊 Дашборд</label>
+    <label for="rsub2" class="sidebar-item">🪢 Мои трассы</label>
+    <label for="rsub3" class="sidebar-item">⭐ Отзывы</label>
+    <label for="rsub4" class="sidebar-item">🏢 Скалодромы</label>
+  </div>
+
+  <div class="content">
+
+    <div class="sub-page rsub-dash">
+      <div class="grid-3 mb-16">
+        <div class="card card-sm stat"><div class="stat-num">24</div><div class="stat-label">Активных трасс</div></div>
+        <div class="card card-sm stat"><div class="stat-num">4.3</div><div class="stat-label">Средний рейтинг</div></div>
+        <div class="card card-sm stat"><div class="stat-num">182</div><div class="stat-label">Всего пролазов</div></div>
+      </div>
+      <div class="card">
+        <div class="flex items-c jc-sb mb-12">
+          <h3 class="fw-6">🪢 Быстрый обзор трасс</h3>
+          <span class="text-2">🔄 5 обновлений за неделю</span>
+        </div>
+        <div class="grid-3 text-sm">
+          <div><span class="text-3">Самый популярный:</span><br><span class="fw-6">6A (Красная) · 23 пролаза</span></div>
+          <div><span class="text-3">Самый рейтинг:</span><br><span class="fw-6">6B+ (Синяя) · ⭐ 4.8</span></div>
+          <div><span class="text-3">Новых за неделю:</span><br><span class="fw-6">3 трассы</span></div>
+        </div>
+      </div>
+    </div><!-- /rsub-dash -->
+
+    <div class="sub-page rsub-routes">
+      <div class="card">
+        <div class="flex items-c jc-sb mb-12">
+          <h3 class="fw-6">🪢 Мои трассы</h3>
+          <div class="flex gap-8">
+            <span class="badge badge-green">12 активных</span>
+            <span class="badge badge-gray">8 архивных</span>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr><th>Цвет</th><th>Грейд</th><th>Тип</th><th>Зал</th><th>Сектор</th><th>Рейтинг</th><th>Пролазы</th><th>Статус</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="route-dot hold-Red"></span></td><td class="fw-6">6A</td><td>Boulder</td><td><span class="badge badge-location gym-rockzone">RockZone</span></td><td>Стена А</td><td class="rating">⭐ 4.5</td><td>23</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><span class="route-dot hold-Blue"></span></td><td class="fw-6">6B+</td><td>Boulder</td><td><span class="badge badge-location gym-rockzone">RockZone</span></td><td>Нависание</td><td class="rating">⭐ 4.8</td><td>31</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><span class="route-dot hold-Black"></span></td><td class="fw-6">7A</td><td>Lead</td><td><span class="badge badge-location gym-limeit">Лимейт</span></td><td>Трудность</td><td class="rating">⭐ 3.9</td><td>8</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td><span class="route-dot hold-Yellow"></span></td><td class="fw-6">5C</td><td>Boulder</td><td><span class="badge badge-location gym-rockzone">RockZone</span></td><td>Стена Б</td><td class="rating">⭐ 4.2</td><td>45</td><td><span class="badge badge-gray">Archived</span></td></tr>
+            <tr><td><span class="route-dot hold-Green"></span></td><td class="fw-6">6C</td><td>Lead</td><td><span class="badge badge-location gym-bigwall">BigWall</span></td><td>—</td><td class="rating">⭐ 4.0</td><td>12</td><td><span class="badge badge-green">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /rsub-routes -->
+
+    <div class="sub-page rsub-reviews">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">⭐ Отзывы на трассы</h2>
+        <span class="text-2">Всего 12 отзывов</span>
+      </div>
+      <div class="card">
+        <div class="flex items-c jc-sb mb-12">
+          <h3 class="fw-6">Последние</h3>
+          <div class="flex gap-8">
+            <span class="badge badge-secondary">За неделю: 4</span>
+            <span class="badge badge-gray">За всё время: 12</span>
+          </div>
+        </div>
+        <div class="flex flex-c gap-12">
+          <div class="flex gap-12">
+            <div class="avatar avatar-sm" style="background:#8E24AA;">Н</div>
+            <div><span class="fw-6">Никита</span> <span class="text-2">на <strong>Красная стрела</strong>:</span> «Классная динамика, но зацепки мелковаты» ⭐⭐⭐⭐</div>
+          </div>
+          <div class="flex gap-12">
+            <div class="avatar avatar-sm" style="background:#FB8C00;">А</div>
+            <div><span class="fw-6">Анна</span> <span class="text-2">на <strong>Синий мув</strong>:</span> «Идеальный мув! Любимая трасса» ⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="flex gap-12">
+            <div class="avatar avatar-sm" style="background:#E53935;">Д</div>
+            <div><span class="fw-6">Дмитрий</span> <span class="text-2">на <strong>Чёрная молния</strong>:</span> «Перехваты нелогичные, переставить бы» ⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-3 mt-16 text-sm">
+        <div class="card card-sm"><span class="text-3">Средняя оценка</span><br><span class="fw-6 rating">⭐ 4.3</span></div>
+        <div class="card card-sm"><span class="text-3">Больше всего ⭐⭐⭐⭐⭐</span><br><span class="fw-6">Синий мув · 5 звёзд</span></div>
+        <div class="card card-sm"><span class="text-3">Требует внимания</span><br><span class="fw-6">Чёрная молния · ⭐ 3.0</span></div>
+      </div>
+    </div><!-- /rsub-reviews -->
+
+    <div class="sub-page rsub-gyms">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">🏢 Мои скалодромы</h2>
+        <button class="btn btn-secondary btn-sm">+ Привязать зал</button>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="gym-img"><span>🧗 <span class="badge badge-location gym-rockzone">RockZone</span> · фото зала</span></div>
+          <div class="flex items-c gap-14">
+            <div class="flex-1">
+              <h3 class="fw-6"><span class="badge badge-location gym-rockzone">RockZone</span></h3>
+              <div class="text-2 text-sm">📍 ул. Ленина, 12 · Москва</div>
+              <div class="gym-meta" style="margin-top:6px;">
+                <span>⭐ 4.5</span><span>·</span><span>14 активных трасс</span><span>·</span><span>🕐 08:00–23:00</span>
+              </div>
+              <div class="gym-colors" style="margin-top:8px;">
+                <span class="route-dot route-dot-sm hold-Red"></span>
+                <span class="route-dot route-dot-sm hold-Blue"></span>
+                <span class="route-dot route-dot-sm hold-Yellow"></span>
+                <span class="route-dot route-dot-sm hold-Black"></span>
+                <span class="text-3">+12</span>
+              </div>
+            </div>
+            <span class="badge badge-green">Привязан</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="gym-img"><span>🧗 <span class="badge badge-location gym-limeit">Лимейт</span> · фото зала</span></div>
+          <div class="flex items-c gap-14">
+            <div class="flex-1">
+              <h3 class="fw-6"><span class="badge badge-location gym-limeit">Лимейт</span></h3>
+              <div class="text-2 text-sm">📍 пр. Мира, 45 · Москва</div>
+              <div class="gym-meta" style="margin-top:6px;">
+                <span>⭐ 4.2</span><span>·</span><span>8 активных трасс</span><span>·</span><span>🕐 07:00–01:00</span>
+              </div>
+              <div class="gym-colors" style="margin-top:8px;">
+                <span class="route-dot route-dot-sm hold-Purple"></span>
+                <span class="route-dot route-dot-sm hold-Orange"></span>
+                <span class="route-dot route-dot-sm hold-Blue"></span>
+                <span class="text-3">+6</span>
+              </div>
+            </div>
+            <span class="badge badge-green">Привязан</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /rsub-gyms -->
+
+  </div>
+</div>
+
+</body>
+</html>

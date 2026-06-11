@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — GymAdmin Dashboard</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="gymadmin.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <span class="logo">▲ Крукса</span>
+    <span class="badge badge-primary">GymAdmin</span>
+    <span class="text-2 fw-6">«<span class="badge badge-location gym-rockzone">RockZone</span>»</span>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-outline btn-sm">⚙ Настройки зала</button>
+    <div class="avatar" style="background:#2E7D32;">В</div>
+  </div>
+</div>
+
+<input type="radio" name="gsub" id="gsub1" class="sub-input" checked>
+<input type="radio" name="gsub" id="gsub2" class="sub-input">
+<input type="radio" name="gsub" id="gsub3" class="sub-input">
+<input type="radio" name="gsub" id="gsub4" class="sub-input">
+<input type="radio" name="gsub" id="gsub5" class="sub-input">
+
+<div class="main-layout">
+
+  <div class="sidebar">
+    <label for="gsub1" class="sidebar-item">📊 Дашборд зала</label>
+    <label for="gsub2" class="sidebar-item">🪢 Трассы</label>
+    <label for="gsub3" class="sidebar-item">👥 Рутсеттеры</label>
+    <label for="gsub4" class="sidebar-item">📋 Редактировать профиль</label>
+    <label for="gsub5" class="sidebar-item">📦 Данные парсера</label>
+  </div>
+
+  <div class="content">
+
+    <div class="sub-page gsub-dash">
+      <div class="card-teal flex items-c gap-16 mb-16">
+        <div style="width:80px;height:80px;background:var(--surface3);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:2rem;">🧗</div>
+        <div class="flex-c gap-4 flex-1">
+          <h2 class="fw-7"><span class="badge badge-location gym-rockzone">RockZone</span></h2>
+          <span class="text-2">📍 ул. Ленина, 12 · Москва</span>
+          <div class="flex gap-12 text-2 mt-4">
+            <span class="rating">⭐ 4.5</span><span> · 48 трасс</span>
+            <span>🕐 08:00–23:00</span>
+            <span>🏷 12 рутсеттеров</span>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm">Редактировать</button>
+      </div>
+      <div class="grid-3 mb-16">
+        <div class="card card-sm stat"><div class="stat-num">48</div><div class="stat-label">Трасс всего</div></div>
+        <div class="card card-sm stat"><div class="stat-num">38</div><div class="stat-label">Активных</div></div>
+        <div class="card card-sm stat"><div class="stat-num">1,247</div><div class="stat-label">Пролазов за месяц</div></div>
+      </div>
+      <div class="card">
+        <h3 class="fw-6 mb-12">⚡ Активность за неделю</h3>
+        <div class="flex flex-c gap-8 text-sm">
+          <div class="flex jc-sb"><span>➕ Новых трасс</span><span class="fw-6">5</span></div>
+          <div class="flex jc-sb"><span>🧗 Пролазов</span><span class="fw-6">142</span></div>
+          <div class="flex jc-sb"><span>⭐ Новых отзывов</span><span class="fw-6">8</span></div>
+          <div class="flex jc-sb"><span>👥 Новых посетителей</span><span class="fw-6">23</span></div>
+        </div>
+      </div>
+    </div><!-- /gsub-dash -->
+
+    <div class="sub-page gsub-routes">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">🪢 Все трассы зала</h2>
+        <div class="flex gap-8">
+          <span class="badge badge-green">38 активных</span>
+          <span class="badge badge-gray">10 архивных</span>
+          <button class="btn btn-secondary btn-sm">+ Добавить</button>
+        </div>
+      </div>
+      <div class="card-sm mb-12" style="background:var(--surface2);padding:10px 14px;">
+        <div class="flex items-c gap-12 text-sm wrap">
+          <span>🎨 <select class="filter-select"><option>Все цвета</option></select></span>
+          <span>🏷 <select class="filter-select"><option>Все рутсеттеры</option><option>Михаил</option><option>Александра</option></select></span>
+          <span>📋 <select class="filter-select"><option>Все статусы</option><option>Активные</option><option>Архивные</option></select></span>
+          <span class="ml-auto rating">📥 Экспорт</span>
+        </div>
+      </div>
+      <table class="table">
+        <thead><tr><th>Цвет</th><th>Грейд</th><th>Тип</th><th>Рутсеттер</th><th>Сектор</th><th>Рейтинг</th><th>Пролазы</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td><span class="route-dot hold-Red"></span></td><td class="fw-6">6A</td><td>Boulder</td><td>Михаил</td><td>Стена А</td><td class="rating">⭐ 4.5</td><td>23</td><td><span class="badge badge-green">Active</span></td></tr>
+          <tr><td><span class="route-dot hold-Blue"></span></td><td class="fw-6">6B+</td><td>Boulder</td><td>Михаил</td><td>Нависание</td><td class="rating">⭐ 4.8</td><td>31</td><td><span class="badge badge-green">Active</span></td></tr>
+          <tr><td><span class="route-dot hold-Black"></span></td><td class="fw-6">7A</td><td>Lead</td><td>Александра</td><td>Трудность</td><td class="rating">⭐ 3.9</td><td>8</td><td><span class="badge badge-green">Active</span></td></tr>
+          <tr><td><span class="route-dot hold-Yellow"></span></td><td class="fw-6">5C</td><td>Boulder</td><td>Михаил</td><td>Стена Б</td><td class="rating">⭐ 4.2</td><td>45</td><td><span class="badge badge-gray">Archived</span></td></tr>
+          <tr><td><span class="route-dot hold-Green"></span></td><td class="fw-6">6C</td><td>Lead</td><td>Денис</td><td>—</td><td class="rating">⭐ 4.0</td><td>12</td><td><span class="badge badge-green">Active</span></td></tr>
+        </tbody>
+      </table>
+    </div><!-- /gsub-routes -->
+
+    <div class="sub-page gsub-setters">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">👥 Рутсеттеры зала</h2>
+        <button class="btn btn-secondary btn-sm">+ Привязать</button>
+      </div>
+      <table class="table">
+        <thead><tr><th>Пользователь</th><th>Активных трасс</th><th>Ср. рейтинг</th><th>Действия</th></tr></thead>
+        <tbody>
+          <tr><td><div class="flex items-c gap-8"><div class="avatar avatar-sm" style="background:#1E88E5;">М</div> Михаил</div></td><td>14</td><td class="rating">⭐ 4.4</td><td><span class="text-3">Отвязать</span></td></tr>
+          <tr><td><div class="flex items-c gap-8"><div class="avatar avatar-sm" style="background:#E53935;">А</div> Александра</div></td><td>10</td><td class="rating">⭐ 4.6</td><td><span class="text-3">Отвязать</span></td></tr>
+          <tr><td><div class="flex items-c gap-8"><div class="avatar avatar-sm" style="background:#43A047;">Д</div> Денис</div></td><td>8</td><td class="rating">⭐ 3.8</td><td><span class="text-3">Отвязать</span></td></tr>
+        </tbody>
+      </table>
+    </div><!-- /gsub-setters -->
+
+    <div class="sub-page gsub-edit">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">📋 Редактировать профиль зала</h2>
+        <button class="btn btn-primary btn-sm">💾 Сохранить</button>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="fw-6 mb-12">Основная информация</h3>
+          <div class="flex flex-c gap-12">
+            <div><label class="text-3">Название</label><div class="card-sm display-field"><span class="badge badge-location gym-rockzone">RockZone</span></div></div>
+            <div><label class="text-3">Описание</label><div class="card-sm display-field" style="min-height:60px;">Современный скалодром с зонами боулдеринга и трудности…</div></div>
+            <div><label class="text-3">Адрес</label><div class="card-sm display-field">ул. Ленина, 12, Москва</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="fw-6 mb-12">💰 Цены и часы</h3>
+          <div class="flex flex-c gap-12 text-sm">
+            <div class="flex jc-sb"><span>Разовое посещение</span><span class="fw-6">от 500 ₽</span></div>
+            <div class="flex jc-sb"><span>Абонемент 8 занятий</span><span class="fw-6">3 200 ₽</span></div>
+            <div class="flex jc-sb"><span>Месячный безлимит</span><span class="fw-6">5 500 ₽</span></div>
+            <hr style="border:none;border-top:1px solid var(--border);margin:4px 0;">
+            <div class="flex jc-sb text-2"><span>Пн-Пт</span><span>08:00 – 23:00</span></div>
+            <div class="flex jc-sb text-2"><span>Сб-Вс</span><span>09:00 – 22:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /gsub-edit -->
+
+    <div class="sub-page gsub-parser">
+      <div class="flex items-c jc-sb mb-16">
+        <h2 class="fw-7">📦 Данные парсера</h2>
+        <div class="flex gap-8">
+          <span class="badge badge-green">Последний импорт: сегодня 05:34</span>
+          <button class="btn btn-secondary btn-sm">⟳ Импортировать</button>
+        </div>
+      </div>
+      <div class="grid-3 mb-16">
+        <div class="card card-sm stat"><div class="stat-num">12</div><div class="stat-label">Залогов найдено</div></div>
+        <div class="card card-sm stat"><div class="stat-num">48</div><div class="stat-label">Трасс распарсено</div></div>
+        <div class="card card-sm stat"><div class="stat-num">3</div><div class="stat-label">Новых за неделю</div></div>
+      </div>
+      <div class="card">
+        <div class="flex items-c jc-sb mb-12">
+          <h3 class="fw-6">📄 Сырые данные с climbingpro.ru</h3>
+          <span class="text-3">Источник: <span style="color:var(--primary);">climbingpro.ru/gyms/rockzone</span></span>
+        </div>
+        <table class="table">
+          <thead><tr><th>Название</th><th>Грейд</th><th>Тип</th><th>Цвет</th><th>Статус</th><th>🧹 Маппинг</th></tr></thead>
+          <tbody>
+            <tr><td>Красная стрела</td><td>6A</td><td>Boulder</td><td><span class="route-dot hold-Red"></span></td><td><span class="badge badge-green">Новая</span></td><td><span class="text-3">✅ Совпадает</span></td></tr>
+            <tr><td>Синий мув</td><td>6B+</td><td>Boulder</td><td><span class="route-dot hold-Blue"></span></td><td><span class="badge badge-green">Новая</span></td><td><span class="text-3">✅ Совпадает</span></td></tr>
+            <tr><td>Чёрная молния</td><td>7A</td><td>Lead</td><td><span class="route-dot hold-Black"></span></td><td><span class="badge badge-secondary">Обновлена</span></td><td><span class="text-3">⚠️ Грейд 7A → 7A</span></td></tr>
+            <tr><td>Жёлтая волна</td><td>5C</td><td>Boulder</td><td><span class="route-dot hold-Yellow"></span></td><td><span class="badge badge-gray">Архив</span></td><td><span class="text-3">✅ Совпадает</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /gsub-parser -->
+
+  </div>
+</div>
+
+</body>
+</html>

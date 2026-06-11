@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — Mobile</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+  <div class="mobile-header">
+    <span style="font-size:1.1rem;">▲ Крукса</span>
+    <div class="flex gap-8">
+      <span style="font-size:1.2rem;">🔍</span>
+      <span style="font-size:1.2rem;">⚡</span>
+    </div>
+  </div>
+
+  <div class="feed-card">
+    <div class="flex items-c gap-10 mb-12">
+      <div class="avatar avatar-sm">Е</div>
+      <div class="flex-1">
+        <div class="fw-6 text-sm">Екатерина</div>
+        <div class="text-2xs"><span class="badge badge-location gym-rockzone">RockZone</span> · 2 часа назад</div>
+      </div>
+      <span class="icon-share">↗</span>
+    </div>
+    <div class="mock-img" style="aspect-ratio:4/3;margin-bottom:10px;">
+      <span>📸 Фото с тренировки</span>
+    </div>
+    <p class="text-sm mb-12">Отличная тренировка! Пролезла свою первую 6B на редпоинт 💪</p>
+    <div class="feed-routes" style="line-height:1.4;">
+      📋 Пролезла: <strong>6A</strong> (Flash), <strong>6B</strong> (Redpoint 🎉), <strong>5C</strong> (Flash)
+    </div>
+    <div class="flex items-c gap-6 wrap" style="margin-bottom:10px;">
+      <span class="route-dot route-dot-sm hold-Red"></span>
+      <span class="text-2xs">6A · Flash</span>
+      <span class="route-dot route-dot-sm hold-Blue"></span>
+      <span class="text-2xs">6B · Redpoint</span>
+      <span class="route-dot route-dot-sm hold-Yellow"></span>
+      <span class="text-2xs">5C · Flash</span>
+    </div>
+    <div class="flex items-c jc-sb mt-8 text-2xs">
+      <span class="flex gap-12"><span>❤ 24</span><span>💬 5</span></span>
+      <span class="text-3">⭐ Пост: публичный</span>
+    </div>
+  </div>
+
+  <div class="feed-card">
+    <div class="flex items-c gap-10 mb-12">
+      <div class="avatar avatar-sm" style="background:#1E88E5;">М</div>
+      <div class="flex-1">
+        <div class="fw-6 text-sm">Михаил</div>
+        <div class="text-2xs"><span class="badge badge-location gym-limeit">Лимейт</span> · 5 часов назад</div>
+      </div>
+      <span class="icon-share">↗</span>
+    </div>
+    <div class="mock-img" style="aspect-ratio:4/3;margin-bottom:10px;">
+      <span>📸 Видео пролаза 7A</span>
+    </div>
+    <p class="text-sm mb-12">Наконец-то закрыл этот проект! 7A в зале <span class="badge badge-location gym-limeit">Лимейт</span> 🔥</p>
+    <div class="feed-routes" style="line-height:1.4;">
+      📋 Пролез: <strong>7A</strong> (Redpoint), <strong>6B+</strong> (Flash)
+    </div>
+    <div class="flex items-c gap-6 wrap">
+      <span class="route-dot route-dot-sm hold-Black"></span>
+      <span class="text-2xs">7A · Redpoint 🎉</span>
+      <span class="route-dot route-dot-sm hold-Blue"></span>
+      <span class="text-2xs">6B+ · Flash</span>
+    </div>
+    <div class="flex items-c jc-sb mt-8 text-2xs">
+      <span class="flex gap-12"><span>❤ 18</span><span>💬 4</span></span>
+      <span class="text-3">⭐ Пост: публичный</span>
+    </div>
+  </div>
+
+  <div class="card-sm" style="background:linear-gradient(135deg,var(--primary-dim) 0%,var(--surface) 100%);border-radius:var(--radius);padding:16px;border:1px solid var(--primary);margin-bottom:12px;">
+    <div class="flex items-c gap-10 mb-10">
+      <span style="font-size:1.3rem;">⚡</span>
+      <div class="flex-1">
+        <div class="fw-6 text-sm">Активная тренировка</div>
+        <div class="text-2xs"><span class="badge badge-location gym-rockzone">RockZone</span> · Сектор C (Нависание)</div>
+      </div>
+      <span class="badge badge-primary">Draft</span>
+    </div>
+    <div class="flex items-c gap-6 text-sm mb-6">
+      <span class="route-dot route-dot-sm hold-Purple"></span>
+      <span>6A+ · Проект · 2 попытки</span>
+    </div>
+    <div class="flex items-c gap-6 text-sm">
+      <span class="route-dot route-dot-sm hold-Green"></span>
+      <span>5C · Redpoint ✓</span>
+    </div>
+    <div class="flex gap-8 mt-12">
+      <button class="btn btn-primary btn-sm flex-1">+ Добавить пролаз</button>
+      <button class="btn btn-outline btn-sm flex-1">Завершить</button>
+    </div>
+  </div>
+
+  <div class="mobile-bottom-nav">
+    <div class="mobile-nav-item active"><span class="nav-icon">📰</span><span>Лента</span></div>
+    <div class="mobile-nav-item"><span class="nav-icon">🗺</span><span>Залы</span></div>
+    <div class="mobile-nav-item"><span class="nav-icon">⚡</span><span>Старт</span></div>
+    <div class="mobile-nav-item"><span class="nav-icon">📊</span><span>Стата</span></div>
+    <div class="mobile-nav-item"><span class="nav-icon">👤</span><span>Профиль</span></div>
+  </div>
+</div>
+
+<p class="text-2 text-sm mt-12" style="text-align:center;">📱 Mobile view</p>
+
+</body>
+</html>

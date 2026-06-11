@@ -1,0 +1,13 @@
+#gsub1:checked ~ .main-layout .gsub-dash,
+#gsub2:checked ~ .main-layout .gsub-routes,
+#gsub3:checked ~ .main-layout .gsub-setters,
+#gsub4:checked ~ .main-layout .gsub-edit,
+#gsub5:checked ~ .main-layout .gsub-parser { display:block; }
+
+#gsub1:checked ~ .main-layout .sidebar label[for="gsub1"],
+#gsub2:checked ~ .main-layout .sidebar label[for="gsub2"],
+#gsub3:checked ~ .main-layout .sidebar label[for="gsub3"],
+#gsub4:checked ~ .main-layout .sidebar label[for="gsub4"],
+#gsub5:checked ~ .main-layout .sidebar label[for="gsub5"] {
+  background:var(--surface2); color:var(--text); border-left:3px solid var(--primary);
+}

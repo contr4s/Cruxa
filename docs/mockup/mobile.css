@@ -1,0 +1,23 @@
+.mobile-frame {
+  max-width:380px; margin:0 auto;
+  background:var(--bg); border:2px solid var(--border); border-radius:32px;
+  padding:16px 12px; overflow:hidden;
+}
+.mobile-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 0 12px;
+}
+.mobile-bottom-nav {
+  display:flex; justify-content:space-around; padding:10px 0 4px;
+  border-top:1px solid var(--border); margin-top:12px;
+}
+.mobile-nav-item {
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  font-size:.7rem; color:var(--text3); cursor:default;
+}
+.mobile-nav-item.active { color:var(--primary); }
+.mobile-nav-item .nav-icon { font-size:1.3rem; }
+.feed-card {
+  background:var(--surface); border-radius:var(--radius);
+  padding:16px; margin-bottom:14px; border:1px solid var(--border);
+}
