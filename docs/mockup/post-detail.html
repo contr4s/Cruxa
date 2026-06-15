@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — Тренировка на RockZone</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="climber.css">
+<link rel="stylesheet" href="post-detail.css">
+<script src="climber.js" defer></script>
+<script src="post-detail.js" defer></script>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mob-header">
+  <div class="mob-header-left">
+    <a href="climber.html" class="mob-back-btn">←</a>
+    <span class="mob-logo">▲ Крукса</span>
+  </div>
+  <div class="mob-header-right">
+    <div class="mob-header-search">
+      <span class="mob-search-icon">🔍</span>
+      <span class="mob-search-placeholder">Поиск</span>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-item sidebar-logo">
+    <span class="si-icon">▲</span>
+    <span class="si-label logo-text">Крукса</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">←</span>
+      <span class="si-label">Назад</span>
+    </a>
+    <div class="sidebar-item sidebar-search-item">
+      <span class="si-icon">🔍</span>
+      <span class="si-label">Поиск</span>
+    </div>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">🏋️</span>
+      <span class="si-label">Тренировки</span>
+    </a>
+    <a href="gym-detail.html" class="sidebar-item">
+      <span class="si-icon">🗺</span>
+      <span class="si-label">Скалодромы</span>
+    </a>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">📰</span>
+      <span class="si-label">Лента</span>
+    </a>
+  </nav>
+</div>
+
+<div class="main-wrapper">
+<div class="main-layout">
+  <div class="content">
+
+    <!-- ===== DATA STATE ===== -->
+    <div class="mode-data-content">
+
+      <!-- Two-column Instagram layout -->
+      <div class="post-detail-layout">
+
+        <!-- LEFT COLUMN: media + info -->
+        <div class="pd-left">
+
+          <!-- Tabs: Photo / Statistics -->
+          <div class="pd-tabs">
+            <span class="pd-tab pd-tab-active" data-tab="photo" onclick="switchPdTab('photo')">📸 Фото</span>
+            <span class="pd-tab" data-tab="stats" onclick="switchPdTab('stats')">📊 Статистика</span>
+          </div>
+
+          <!-- Carousel container -->
+          <div class="pd-carousel-wrap">
+            <!-- Photo mode carousel -->
+            <div class="pd-carousel pd-carousel-photo active" id="pdCarouselPhoto">
+              <div class="post-media carousel" id="postCarousel">
+                <div class="carousel-track" id="postCarouselTrack">
+                  <div class="carousel-slide">📸 Старт — первый подход</div>
+                  <div class="carousel-slide">📸 Ключевой перехват на Красной молнии</div>
+                  <div class="carousel-slide">📸 Финиш и улыбка 😄</div>
+                  <div class="carousel-slide">📸 Общий вид зала после тренировки</div>
+                  <div class="carousel-slide">📸 Разминка и растяжка</div>
+                </div>
+                <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
+                <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+                <div class="carousel-dots" id="postCarouselDots">
+                  <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,2)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,3)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,4)"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats mode carousel -->
+            <div class="pd-carousel pd-carousel-stats" id="pdCarouselStats">
+              <div class="post-media carousel" id="statsCarousel">
+                <div class="carousel-track" id="statsCarouselTrack">
+
+                  <!-- Slide 1: Pyramid -->
+                  <div class="carousel-slide pd-stats-slide">
+                    <div class="pd-slide-label">📊 Пирамида грейдов</div>
+                    <div class="pyramid pd-pyramid">
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">7A</span>
+                        <div class="pyramid-bar" style="width:36px;background:var(--hold-red);--bar-glow:rgba(229,57,53,.3);"></div>
+                        <span class="pyramid-val">1</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">6C</span>
+                        <div class="pyramid-bar" style="width:72px;background:var(--secondary);--bar-glow:rgba(255,179,0,.3);"></div>
+                        <span class="pyramid-val">2</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">6B</span>
+                        <div class="pyramid-bar" style="width:108px;background:var(--primary);--bar-glow:rgba(38,166,154,.3);"></div>
+                        <span class="pyramid-val">3</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">6A</span>
+                        <div class="pyramid-bar" style="width:144px;background:var(--hold-green);--bar-glow:rgba(67,160,71,.3);"></div>
+                        <span class="pyramid-val">4</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">5C</span>
+                        <div class="pyramid-bar" style="width:180px;background:var(--hold-blue);--bar-glow:rgba(30,136,229,.3);"></div>
+                        <span class="pyramid-val">5</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">5B</span>
+                        <div class="pyramid-bar" style="width:144px;background:var(--hold-purple);--bar-glow:rgba(142,36,170,.3);"></div>
+                        <span class="pyramid-val">4</span>
+                      </div>
+                      <div class="pyramid-row">
+                        <span class="pyramid-label">5A</span>
+                        <div class="pyramid-bar" style="width:108px;background:var(--hold-orange);--bar-glow:rgba(251,140,0,.3);"></div>
+                        <span class="pyramid-val">3</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 2: Donut -->
+                  <div class="carousel-slide pd-stats-slide">
+                    <div class="pd-slide-label">🥧 Типы пролазов</div>
+                    <div class="ascent-donut-wrap" style="padding:8px 0;">
+                      <svg class="ascent-donut" viewBox="0 0 180 180">
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--surface2)" stroke-width="28"/>
+                        <!-- Donut segments -->
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--primary)" stroke-width="28" stroke-dasharray="120 332" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--secondary)" stroke-width="28" stroke-dasharray="85 367" stroke-dashoffset="-120" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--hold-red)" stroke-width="28" stroke-dasharray="55 397" stroke-dashoffset="-205" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--hold-green)" stroke-width="28" stroke-dasharray="42 410" stroke-dashoffset="-260" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--hold-purple)" stroke-width="28" stroke-dasharray="30 422" stroke-dashoffset="-302" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                        <circle cx="90" cy="90" r="72" fill="none" stroke="var(--hold-blue)" stroke-width="28" stroke-dasharray="20 432" stroke-dashoffset="-332" stroke-linecap="round" transform="rotate(-90,90,90)"/>
+                      </svg>
+                      <div class="ascent-legend">
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--primary);"></span> Flash<span class="legend-val">8</span></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--secondary);"></span> Onsight<span class="legend-val">5</span></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--hold-red);"></span> Redpoint<span class="legend-val">3</span></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--hold-green);"></span> Attempt<span class="legend-val">2</span></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--hold-purple);"></span> Project<span class="legend-val">1</span></div>
+                        <div class="legend-item"><span class="legend-dot" style="background:var(--hold-blue);"></span> Repeat<span class="legend-val">1</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 3: Radar -->
+                  <div class="carousel-slide pd-stats-slide">
+                    <div class="pd-slide-label">📡 Радар тегов трасс</div>
+                    <div class="radar-container" style="padding:4px 0;">
+                      <div class="radar-glass">
+                        <svg id="radarSvg" viewBox="0 0 300 300" width="100%" style="max-width:280px;display:block;margin:0 auto;"></svg>
+                        <div class="flex items-c jc-c gap-16" style="margin-top:0;padding:4px 8px;">
+                          <div class="flex items-c gap-4"><span id="radarStrongIcon">🎯</span><span class="text-2xs text-2">Сильная: </span><span id="radarStrong" class="fw-6 text-2xs"></span></div>
+                          <div class="flex items-c gap-4"><span id="radarGrowthIcon">📈</span><span class="text-2xs text-2">Рост: </span><span id="radarGrowth" class="fw-6 text-2xs"></span></div>
+                        </div>
+                        <div id="chartLegend" class="flex items-c jc-c gap-12 wrap" style="padding:4px 8px;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
+                <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+                <div class="carousel-dots" id="statsCarouselDots">
+                  <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
+                  <span class="carousel-dot" onclick="carouselGo(this,2)"></span>
+                </div>
+                <div class="pd-slide-counter" id="statsSlideCounter">1 / 3</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compact stats row below media -->
+          <div class="pd-compact-stats card card-sm">
+            <span>🔥 Крускор +42</span>
+            <span>📈 Ср. грейд: 5C</span>
+            <span>⏱ 1ч 45м</span>
+            <span>🏋️ 22 трассы</span>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: social block (Instagram-style) -->
+        <div class="pd-right">
+          <div class="pd-right-scroll">
+
+            <div class="pd-right-top">
+              <!-- Author -->
+              <div class="pd-author">
+                <div class="pd-author-avatar" style="background:var(--hold-purple);">А</div>
+                <div class="pd-author-info">
+                  <span class="pd-author-name">Алексей</span>
+                  <span class="pd-author-meta text-3" style="display:flex;gap:6px;">
+                    <a href="gym-detail.html" class="pd-gym-link">RockZone</a>
+                    <span>·</span>
+                    <span>12 мар 2025</span>
+                    <span>·</span>
+                    <span class="pd-visibility">🌍 Публично</span>
+                  </span>
+                </div>
+                <button class="btn btn-outline btn-xs pd-follow-btn">Подписаться</button>
+              </div>
+
+              <!-- Post text -->
+              <div class="pd-post-text">
+                <p>Отличная тренировка на RockZone! Наконец-то закрыл Красную молнию — динамика огонь 🔥 Попробовал несколько новых трасс, доволен прогрессом. Цель на месяц — 7A 💪</p>
+              </div>
+            </div>
+
+            <div class="pd-right-bottom">
+              <!-- Ascent summary -->
+              <div class="pd-ascents card card-sm">
+                <h4 class="fw-6 mb-8 text-sm">🧗 Пролазы</h4>
+                <div class="pd-ascents-list">
+                  <a href="route-detail.html" class="pd-ascent-row">
+                    <span class="route-dot hold-Red" style="width:14px;height:14px;"></span>
+                    <span class="pd-ascent-name">Красная молния</span>
+                    <span class="pd-ascent-grade">6C</span>
+                    <span class="pd-ascent-style">Redpoint</span>
+                  </a>
+                  <a href="route-detail.html" class="pd-ascent-row">
+                    <span class="route-dot hold-Blue" style="width:14px;height:14px;"></span>
+                    <span class="pd-ascent-name">Синий мув</span>
+                    <span class="pd-ascent-grade">6B+</span>
+                    <span class="pd-ascent-style">Flash</span>
+                  </a>
+                  <a href="route-detail.html" class="pd-ascent-row">
+                    <span class="route-dot hold-Green" style="width:14px;height:14px;"></span>
+                    <span class="pd-ascent-name">Зелёный гоблин</span>
+                    <span class="pd-ascent-grade">5C</span>
+                    <span class="pd-ascent-style">Flash</span>
+                  </a>
+                  <a href="route-detail.html" class="pd-ascent-row">
+                    <span class="route-dot hold-Black" style="width:14px;height:14px;"></span>
+                    <span class="pd-ascent-name">Чёрная жемчужина</span>
+                    <span class="pd-ascent-grade">7A</span>
+                    <span class="pd-ascent-style">Attempt</span>
+                  </a>
+                  <a href="route-detail.html" class="pd-ascent-row">
+                    <span class="route-dot hold-Purple" style="width:14px;height:14px;"></span>
+                    <span class="pd-ascent-name">Пурпурный шторм</span>
+                    <span class="pd-ascent-grade">6A</span>
+                    <span class="pd-ascent-style">Onsight</span>
+                  </a>
+                  <div class="pd-ascents-more text-3 text-center">+ ещё 17 пролазов</div>
+                </div>
+              </div>
+
+              <!-- Likes -->
+              <div class="pd-likes">
+                <span class="pd-like-icon">❤️</span>
+                <span class="pd-like-count"><strong>24</strong> отметки «Нравится»</span>
+                <div class="pd-like-avatars">
+                  <span class="pd-like-avatar" style="background:var(--hold-orange);">М</span>
+                  <span class="pd-like-avatar" style="background:var(--hold-purple);">К</span>
+                  <span class="pd-like-avatar" style="background:var(--hold-green);">Д</span>
+                  <span class="pd-like-more text-3">и ещё 3</span>
+                </div>
+              </div>
+
+              <!-- Comments -->
+              <div class="pd-comments">
+              <div class="pd-comment">
+                <span class="pd-comment-author">Марина</span>
+                <span class="pd-comment-text">Крутой результат! 🔥</span>
+                <span class="pd-comment-time text-3">2ч</span>
+              </div>
+              <div class="pd-comment">
+                <span class="pd-comment-author">Дмитрий</span>
+                <span class="pd-comment-text">Красная молния — огонь! А заход справа пробовал?</span>
+                <span class="pd-comment-time text-3">4ч</span>
+              </div>
+              <div class="pd-comment">
+                <span class="pd-comment-author">Катя</span>
+                <span class="pd-comment-text">Ты быстро прогрессируешь! 👏</span>
+                <span class="pd-comment-time text-3">6ч</span>
+              </div>
+              <button class="pd-comments-more btn btn-outline btn-sm w-full mt-8">Показать ещё 3 комментария ↓</button>
+
+              <div class="pd-comment-empty text-center mt-16">
+                <p class="text-3">💬 Комментариев пока нет. Будьте первым!</p>
+              </div>
+            </div>
+
+          <!-- Action buttons -->
+          <div class="pd-actions">
+            <span class="pd-action-btn post-action-like" onclick="this.classList.toggle('liked')">
+              <svg class="like-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </span>
+            <span class="pd-action-btn" onclick="document.querySelector('.pd-comment-input')?.focus()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+            <span class="pd-action-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Comment form -->
+          <div class="pd-comment-form">
+            <input class="pd-comment-input" type="text" placeholder="Написать комментарий..." maxlength="500">
+            <button class="pd-comment-submit" disabled>📤</button>
+          </div>
+
+        </div><!-- /pd-right-bottom -->
+
+      </div>
+
+    </div><!-- /mode-data-content -->
+
+    <!-- ===== EMPTY STATE (закомментировано) =====
+    <div class="mode-empty-content">
+      ...
+    </div>
+    -->
+
+  </div><!-- /content -->
+</div><!-- /main-layout -->
+</div><!-- /main-wrapper -->
+
+</body>
+</html>

@@ -13,7 +13,7 @@
 }
 
 .cal-table th {
-  font-size:.65rem;
+  font-size:.7rem;
   font-weight:600;
   color:var(--text3);
   text-transform:uppercase;
@@ -143,9 +143,18 @@
 .feed-route-row:hover {
   background:var(--surface2);
 }
-.route-row {
+.route-row,
+a.route-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
   padding:6px 8px;
   border-radius:8px;
+  text-decoration:none;
+  color:var(--text);
+}
+a.route-row {
+  color:var(--text);
 }
 .feed-route-row {
   padding:3px 6px;
@@ -409,10 +418,10 @@
 }
 
 .pyramid-val {
-  font-size:.78rem;
-  font-weight:600;
-  color:var(--text3);
-  width:20px;
+  font-size:.92rem;
+  font-weight:700;
+  color:var(--text2);
+  width:24px;
   flex-shrink:0;
 }
 
@@ -446,6 +455,7 @@
   padding:4px 8px;
   border-radius:6px;
   transition:background .15s;
+  line-height:1.5;
 }
 
 .legend-item:hover {
@@ -811,7 +821,7 @@
 
 /* ── Visibility badge (public / private) ── */
 .post-visibility {
-  font-size: .65rem;
+  font-size: .7rem;
   padding: 2px 8px;
   border-radius: 10px;
   font-weight: 700;
@@ -1086,6 +1096,22 @@
 }
 .post-actions .ml-auto:hover {
   color: var(--secondary);
+}
+
+/* Social SVG icons */
+.like-icon, .share-icon {
+  flex-shrink: 0;
+  transition: transform .2s ease;
+}
+.post-action-like:hover .like-icon {
+  animation: heartBeat .4s ease;
+}
+.post-action-share:hover .share-icon {
+  transform: scale(1.15);
+}
+.post-action-like.liked .like-icon {
+  fill: var(--hold-red);
+  stroke: var(--hold-red);
 }
 
 /* =================================================================

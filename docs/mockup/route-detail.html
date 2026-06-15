@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — Красная молния</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="climber.css">
+<link rel="stylesheet" href="route-detail.css">
+<script src="climber.js" defer></script>
+<script src="route-detail.js" defer></script>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mob-header">
+  <div class="mob-header-left">
+    <a href="gym-detail.html" class="mob-back-btn">←</a>
+    <span class="mob-logo">▲ Крукса</span>
+  </div>
+  <div class="mob-header-right">
+    <div class="mob-header-search">
+      <span class="mob-search-icon">🔍</span>
+      <span class="mob-search-placeholder">Поиск</span>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-item sidebar-logo">
+    <span class="si-icon">▲</span>
+    <span class="si-label logo-text">Крукса</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">←</span>
+      <span class="si-label">Назад</span>
+    </a>
+    <div class="sidebar-item sidebar-search-item">
+      <span class="si-icon">🔍</span>
+      <span class="si-label">Поиск</span>
+    </div>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">🏋️</span>
+      <span class="si-label">Тренировки</span>
+    </a>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">🗺</span>
+      <span class="si-label">Скалодромы</span>
+    </a>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">📰</span>
+      <span class="si-label">Лента</span>
+    </a>
+  </nav>
+</div>
+
+<div class="main-wrapper">
+<div class="main-layout">
+  <div class="content">
+
+    <!-- ===== DATA STATE ===== -->
+    <div class="mode-data-content">
+
+      <!-- HERO: 2-column grid -->
+      <div class="route-hero gap-24 mb-24">
+
+        <div class="route-hero-left">
+          <div class="route-hero-media">
+            <div class="post-media carousel" id="routeCarousel">
+              <div class="carousel-track" id="routeCarouselTrack">
+                <div class="carousel-slide">🧗 Красная молния — общий вид</div>
+                <div class="carousel-slide">🧗 Ключевой перехват</div>
+              </div>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <div class="carousel-dots" id="routeCarouselDots">
+                <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
+                <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="route-hero-right">
+          <div class="route-hero-info">
+            <div class="route-hero-header">
+              <span class="route-dot hold-Red" style="width:20px;height:20px;"></span>
+              <h1 class="route-hero-title">Красная молния</h1>
+              <span class="route-hero-grade">6C</span>
+            </div>
+
+            <div class="route-hero-meta">
+              <span class="badge badge-sm badge-location gym-rockzone">RockZone</span>
+              <span class="route-hero-sector">Сектор А</span>
+              <span class="badge badge-primary badge-sm">Bouldering</span>
+              <span class="badge badge-sm badge-gray">Накручена 4 дня назад</span>
+            </div>
+
+            <div class="route-setter-row">
+              <div class="route-setter">
+                <div class="avatar avatar-sm" style="background:var(--primary-dark);">А</div>
+                <div class="route-setter-info">
+                  <span class="route-setter-name">Александр К.</span>
+                  <span class="route-setter-label">Рутсеттер</span>
+                </div>
+              </div>
+              <div class="route-setter-stats">
+                <div class="route-stat-card">
+                  <span class="route-stat-value route-consensus">👥 6B+</span>
+                  <span class="route-stat-sub">42 голоса</span>
+                </div>
+                <div class="route-stat-card">
+                  <span class="route-stat-value route-rating">⭐ 4.2</span>
+                  <span class="route-stat-sub">23 оценки</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="route-tags flex gap-6 wrap">
+              <span class="badge badge-sm badge-blue">динамика</span>
+              <span class="badge badge-sm badge-green">нависание</span>
+              <span class="badge badge-sm badge-red">силовой</span>
+              <span class="badge badge-sm badge-secondary">мизера</span>
+            </div>
+
+            <!-- Private notes (collapsible) -->
+            <details class="route-private-notes">
+              <summary class="text-sm fw-6" style="cursor:pointer;">📝 Мои заметки</summary>
+              <textarea class="route-notes-textarea" placeholder="Ключ на 3-й — подтянуться на левую, зацепка ребром...">Ключ на 3-й — подтянуться на левую, зацепка ребром. Правую под высокий пассив.</textarea>
+            </details>
+
+            <button class="fab-train" onclick="alert('Пролез! Добавлено в текущую тренировку')" title="Пролез!">
+              <span class="fab-icon">🧗</span>
+              <span class="fab-label">Пролез!</span>
+            </button>
+          </div>
+
+          <div class="route-hero-consensus">
+            <div class="card">
+              <h4 class="fw-6 mb-12">👥 Оценка сложности сообществом</h4>
+              <div class="consensus-section">
+                <div class="consensus-header">
+                  <span class="consensus-value">6B+</span>
+                  <span class="text-3"> на основе 42 голосов</span>
+
+                </div>
+              </div>
+
+              <div class="scatter-chart">
+                <div class="scatter-labels">
+                  <span>5A</span><span>5A+</span><span>5B</span><span>5B+</span>
+                  <span>6A</span><span>6A+</span><span class="scatter-label-active">6B</span>
+                  <span>6B+</span><span>6C</span>
+                </div>
+                <div class="scatter-bars">
+                  <div class="scatter-bar" style="height:10px;"></div>
+                  <div class="scatter-bar" style="height:14px;"></div>
+                  <div class="scatter-bar" style="height:8px;"></div>
+                  <div class="scatter-bar" style="height:18px;"></div>
+                  <div class="scatter-bar" style="height:24px;"></div>
+                  <div class="scatter-bar" style="height:36px;"></div>
+                  <div class="scatter-bar scatter-bar-consensus" style="height:52px;"></div>
+                  <div class="scatter-bar" style="height:42px;"></div>
+                  <div class="scatter-bar" style="height:20px;"></div>
+                </div>
+                <div class="scatter-your-vote">
+                  🟡 Вы оценили: <strong>6B</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="route-hero-reviews">
+            <div class="card">
+              <h4 class="fw-6 mb-12">💬 Отзывы <span class="text-3 fw-4">(12)</span></h4>
+              <div class="reviews-list">
+                <div class="review-item">
+                  <div class="review-avatar" style="background:#8E24AA;">А</div>
+                  <div class="review-body">
+                    <div class="review-header">
+                      <span class="review-author">Анна</span>
+                      <span class="review-stars">★★★★☆</span>
+                      <span class="review-date text-3">2 нед. назад</span>
+                    </div>
+                    <p class="review-text">Классная динамика! Зацепки удобные, но перехват на 3-ю очень далеко. Новичкам может быть сложно.</p>
+                  </div>
+                </div>
+                <div class="review-item">
+                  <div class="review-avatar" style="background:#FB8C00;">М</div>
+                  <div class="review-body">
+                    <div class="review-header">
+                      <span class="review-author">Марк</span>
+                      <span class="review-stars">★★★★☆</span>
+                      <span class="review-date text-3">1 нед. назад</span>
+                    </div>
+                    <p class="review-text">Согласен, что 6B+, а не 6C. Ключевой перехват далеко, но если растянуться — берётся.</p>
+                  </div>
+                </div>
+                <div class="review-item">
+                  <div class="review-avatar" style="background:#E53935;">Д</div>
+                  <div class="review-body">
+                    <div class="review-header">
+                      <span class="review-author">Дмитрий</span>
+                      <span class="review-stars">★★★☆☆</span>
+                      <span class="review-date text-3">3 дн. назад</span>
+                    </div>
+                    <p class="review-text">Не понравилась. Зацепки неудобные, трасса нелогичная. Очень много пассивов подряд.</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm w-full mt-12">Показать ещё 9 ↓</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /route-hero -->
+
+    </div><!-- /mode-data-content -->
+
+    <!-- ===== EMPTY STATE (закомментировано) =====
+    <div class="mode-empty-content">
+      ...
+    </div>
+    -->
+
+  </div><!-- /content -->
+</div><!-- /main-layout -->
+</div><!-- /main-wrapper -->
+
+</body>
+</html>

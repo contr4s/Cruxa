@@ -1,11 +1,66 @@
-#rsub1:checked ~ .main-layout .rsub-dash,
-#rsub2:checked ~ .main-layout .rsub-routes,
-#rsub3:checked ~ .main-layout .rsub-reviews,
-#rsub4:checked ~ .main-layout .rsub-gyms { display:block; }
+/* ===== Routesetter Dashboard Styles ===== */
 
-#rsub1:checked ~ .main-layout .sidebar label[for="rsub1"],
-#rsub2:checked ~ .main-layout .sidebar label[for="rsub2"],
-#rsub3:checked ~ .main-layout .sidebar label[for="rsub3"],
-#rsub4:checked ~ .main-layout .sidebar label[for="rsub4"] {
-  background:var(--surface2); color:var(--text); border-left:3px solid var(--primary);
+/* Sidebar link styling (back button) */
+.sidebar-nav a.sidebar-item {
+  text-decoration: none;
+}
+
+/* Gym cards */
+.gym-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.gym-card-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.gym-thumb {
+  width: 60px;
+  height: 60px;
+  background: var(--surface3);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive .table {
+  min-width: 700px;
+}
+
+/* Responsive */
+@media(max-width:768px) {
+  .gym-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Inherit mobile styles from shared.css */
+  body {
+    padding: 0;
+    flex-direction: column;
+  }
+
+  .sidebar-nav a.sidebar-item {
+    order: 0;
+  }
+  .sidebar-nav .sidebar-avatar-item {
+    order: 1;
+  }
+  /* Hide "Назад" label text on mobile */
+  .sidebar-nav a.sidebar-item .si-label {
+    font-size: .65rem;
+  }
 }

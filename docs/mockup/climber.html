@@ -73,6 +73,9 @@
   <!-- Content -->
   <div class="content">
 
+    <!-- Real content (shown when mode=DATA) -->
+    <div class="mode-data-content">
+
 <div class="sub-page sub-dash">
 
   <!-- Публичный профиль -->
@@ -96,7 +99,9 @@
           <span class="badge badge-primary badge-sm">🎯 50 трасс</span>
           <span class="badge badge-primary-dark badge-sm">⭐ 10 отзывов</span>
           <span class="badge badge-secondary badge-sm">🏆 5 залов</span>
-          <span class="badge badge-blue badge-sm">📸 8 фото</span>
+          <span class="badge badge-blue badge-sm badge-extra" style="display:none;">📸 8 фото</span>
+          <button class="badge badge-more-btn" onclick="this.style.display='none';document.querySelector('.badge-extra').style.display='inline-flex';this.nextElementSibling.style.display='';">+ ещё 1</button>
+          <button class="badge badge-more-btn" style="display:none;" onclick="this.previousElementSibling.style.display='';document.querySelector('.badge-extra').style.display='none';">▴ Свернуть</button>
         </div>
       </div>
       <button class="btn btn-outline btn-sm profile-edit-btn" style="flex-shrink:0;font-size:.85rem;padding:6px 18px;">
@@ -119,48 +124,48 @@
     <div class="card">
       <h3 class="fw-6 mb-12">🏆 Лучшие трассы</h3>
       <div class="flex flex-c" style="gap:13.5px;">
-        <div class="flex items-c gap-12 route-row">
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Red"></span>
           <div class="flex-1"><span class="fw-6">Красная стрела</span> <span class="text-2">6A · <span class="badge badge-flash badge-xs">Flash</span></span></div>
           <span class="badge badge-location gym-rockzone">RockZone</span>
           <span class="badge badge-green badge-sm">⭐ 5.0</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Blue"></span>
           <div class="flex-1"><span class="fw-6">Синий мув</span> <span class="text-2">6B+ · <span class="badge badge-repeat badge-xs">Repeat</span></span></div>
           <span class="badge badge-location gym-rockzone">RockZone</span>
           <span class="badge badge-green badge-sm">⭐ 4.8</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Orange"></span>
           <div class="flex-1"><span class="fw-6">Апельсин</span> <span class="text-2">5C · <span class="badge badge-onsight badge-xs">Onsight 🎯</span></span></div>
           <span class="badge badge-location gym-limeit">Лимейт</span>
           <span class="badge badge-green badge-sm">⭐ 4.6</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Black"></span>
           <div class="flex-1"><span class="fw-6">Чёрная молния</span> <span class="text-2">7A · <span class="badge badge-project badge-xs">Project</span></span></div>
           <span class="badge badge-location gym-limeit">Лимейт</span>
           <span class="badge badge-gray badge-sm">⭐ 3.9</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Green"></span>
           <div class="flex-1"><span class="fw-6">Зелёный дракон</span> <span class="text-2">6C · <span class="badge badge-project badge-xs">Project</span></span></div>
           <span class="badge badge-location gym-rockzone">RockZone</span>
           <span class="badge badge-green badge-sm">⭐ 4.3</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-Purple"></span>
           <div class="flex-1"><span class="fw-6">Пурпурный туман</span> <span class="text-2">6A · <span class="badge badge-flash badge-xs">Flash</span></span></div>
           <span class="badge badge-location gym-limeit">Лимейт</span>
           <span class="badge badge-green badge-sm">⭐ 4.9</span>
-        </div>
-        <div class="flex items-c gap-12 route-row">
+        </a>
+        <a href="route-detail.html" class="flex items-c gap-12 route-row">
           <span class="route-dot hold-White"></span>
           <div class="flex-1"><span class="fw-6">Белый рывок</span> <span class="text-2">6B · <span class="badge badge-redpoint badge-xs">Redpoint ✓</span></span></div>
           <span class="badge badge-location gym-bigwall">BigWall</span>
           <span class="badge badge-green badge-sm">⭐ 4.5</span>
-        </div>
+        </a>
       </div>
     </div>
     <div class="card">
@@ -249,19 +254,21 @@
 
   <hr class="divider-gradient">
 
-  <!-- Крускор график -->
+  <!-- Комбинированный график: Крускор + Грейд -->
   <div class="card mb-24">
     <div class="flex items-c jc-sb mb-12">
-      <h3 class="fw-6">📈 Крускор</h3>
+      <h3 class="fw-6">📈 Крускор + Грейд</h3>
       <div class="dropdown-group">
-        <select onchange="switchChart(this.value)">
+        <label for="chartType" class="sr-only">Тип графика</label>
+        <select id="chartType" onchange="switchChart(this.value)">
           <option value="all">📊 Общий</option>
           <option value="style">🎨 Стиль</option>
           <option value="relief">🏔 Рельеф</option>
           <option value="hold">🤲 Зацеп</option>
           <option value="type">📌 Тип</option>
         </select>
-        <select onchange="console.log('Период:',this.value)">
+        <label for="chartPeriod" class="sr-only">Период графика</label>
+        <select id="chartPeriod" onchange="console.log('Период:',this.value)">
           <option value="3m">3 мес.</option>
           <option value="6m" selected>6 мес.</option>
           <option value="1y">1 год</option>
@@ -270,38 +277,78 @@
       </div>
     </div>
     <div class="card-surface" style="padding:16px;">
-      <svg viewBox="0 0 600 200" class="svg-responsive" id="chartSvg">
-        <line x1="40" y1="20" x2="590" y2="20" stroke="var(--border)" stroke-width=".5"/>
-        <line x1="40" y1="65" x2="590" y2="65" stroke="var(--border)" stroke-width=".5"/>
-        <line x1="40" y1="110" x2="590" y2="110" stroke="var(--border)" stroke-width=".5"/>
-        <line x1="40" y1="155" x2="590" y2="155" stroke="var(--border)" stroke-width=".5"/>
-        <text x="38" y="24" fill="var(--text3)" font-size="10" text-anchor="end" id="axis1">600</text>
-        <text x="38" y="69" fill="var(--text3)" font-size="10" text-anchor="end" id="axis2">450</text>
-        <text x="38" y="114" fill="var(--text3)" font-size="10" text-anchor="end" id="axis3">300</text>
-        <text x="38" y="159" fill="var(--text3)" font-size="10" text-anchor="end" id="axis4">150</text>
-        <text x="50" y="195" fill="var(--text2)" font-size="9" text-anchor="middle">Янв</text>
-        <text x="155" y="195" fill="var(--text2)" font-size="9" text-anchor="middle">Фев</text>
-        <text x="260" y="195" fill="var(--text2)" font-size="9" text-anchor="middle">Мар</text>
-        <text x="365" y="195" fill="var(--text2)" font-size="9" text-anchor="middle">Апр</text>
-        <text x="455" y="195" fill="var(--text2)" font-size="9" text-anchor="middle">Май</text>
-        <text x="565" y="195" fill="var(--secondary)" font-size="9" font-weight="600" text-anchor="middle">Июн</text>
-        <defs><linearGradient id="gradeGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--primary)" stop-opacity=".6"/><stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/></linearGradient></defs>
-        <g id="chartLines">
-          <path d="M 50 140 C 130 135, 200 100, 260 90 C 320 80, 380 55, 455 45 C 500 38, 530 32, 565 30 L 565 175 L 50 175 Z" fill="url(#gradeGrad)" opacity=".3"/>
-          <path d="M 50 140 C 130 135, 200 100, 260 90 C 320 80, 380 55, 455 45 C 500 38, 530 32, 565 30" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="50" cy="140" r="4" fill="var(--primary)"/>
-          <circle cx="155" cy="115" r="4" fill="var(--primary)"/>
-          <circle cx="260" cy="90" r="4" fill="var(--primary)"/>
-          <circle cx="365" cy="65" r="4" fill="var(--primary)"/>
-          <circle cx="455" cy="45" r="4" fill="var(--primary)"/>
-          <circle cx="565" cy="30" r="5" fill="var(--secondary)" stroke="var(--bg)" stroke-width="2"/>
-          <text x="555" y="20" fill="var(--secondary)" font-size="9" font-weight="700" text-anchor="end">🏆 534</text>
-        </g>
+      <svg viewBox="0 0 600 220" class="svg-responsive" id="chartSvg">
+        <!-- Left grid lines (Крускор scale) -->
+        <line x1="55" y1="20" x2="580" y2="20" stroke="var(--border)" stroke-width=".5"/>
+        <line x1="55" y1="57" x2="580" y2="57" stroke="var(--border)" stroke-width=".5"/>
+        <line x1="55" y1="94" x2="580" y2="94" stroke="var(--border)" stroke-width=".5"/>
+        <line x1="55" y1="131" x2="580" y2="131" stroke="var(--border)" stroke-width=".5"/>
+        <line x1="55" y1="168" x2="580" y2="168" stroke="var(--border)" stroke-width=".5"/>
+        <!-- Left Y-axis: Крускор -->
+        <text x="52" y="24" fill="var(--primary)" font-size="9" text-anchor="end" font-weight="600">600</text>
+        <text x="52" y="61" fill="var(--primary)" font-size="9" text-anchor="end" font-weight="600">450</text>
+        <text x="52" y="98" fill="var(--primary)" font-size="9" text-anchor="end" font-weight="600">300</text>
+        <text x="52" y="135" fill="var(--primary)" font-size="9" text-anchor="end" font-weight="600">150</text>
+        <text x="52" y="172" fill="var(--primary)" font-size="9" text-anchor="end" font-weight="600">0</text>
+        <!-- Left axis label -->
+        <text x="12" y="105" fill="var(--primary)" font-size="8" text-anchor="middle" font-weight="600" transform="rotate(-90 12 105)" opacity=".7">Крускор</text>
+        <!-- Right Y-axis: Грейд -->
+        <text x="590" y="24" fill="var(--secondary)" font-size="9" text-anchor="start" font-weight="600">7A</text>
+        <text x="590" y="57" fill="var(--secondary)" font-size="9" text-anchor="start" font-weight="600">6C</text>
+        <text x="590" y="94" fill="var(--secondary)" font-size="9" text-anchor="start" font-weight="600">6B</text>
+        <text x="590" y="131" fill="var(--secondary)" font-size="9" text-anchor="start" font-weight="600">6A</text>
+        <text x="590" y="168" fill="var(--secondary)" font-size="9" text-anchor="start" font-weight="600">5C</text>
+        <!-- Right axis label -->
+        <text x="598" y="105" fill="var(--secondary)" font-size="8" text-anchor="middle" font-weight="600" transform="rotate(90 598 105)" opacity=".7">Грейд</text>
+        <!-- X-axis: Months -->
+        <text x="100" y="198" fill="var(--text2)" font-size="9" text-anchor="middle">Янв</text>
+        <text x="190" y="198" fill="var(--text2)" font-size="9" text-anchor="middle">Фев</text>
+        <text x="280" y="198" fill="var(--text2)" font-size="9" text-anchor="middle">Мар</text>
+        <text x="370" y="198" fill="var(--text2)" font-size="9" text-anchor="middle">Апр</text>
+        <text x="460" y="198" fill="var(--text2)" font-size="9" text-anchor="middle">Май</text>
+        <text x="550" y="198" fill="var(--secondary)" font-size="9" font-weight="700" text-anchor="middle">Июн</text>
+        <!-- Defs -->
+        <defs>
+          <linearGradient id="combinedArea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--primary)" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- === Крускор: area + line (teal) === -->
+        <path d="M 100 140 C 140 135, 170 110, 190 100 C 230 85, 255 72, 280 70 C 310 65, 340 55, 370 52 C 410 45, 435 38, 460 35 C 500 28, 530 25, 550 22 L 550 185 L 100 185 Z" fill="url(#combinedArea)" opacity=".35"/>
+        <path d="M 100 140 C 140 135, 170 110, 190 100 C 230 85, 255 72, 280 70 C 310 65, 340 55, 370 52 C 410 45, 435 38, 460 35 C 500 28, 530 25, 550 22" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="100" cy="140" r="4" fill="var(--primary)"/>
+        <circle cx="190" cy="100" r="4" fill="var(--primary)"/>
+        <circle cx="280" cy="70" r="4" fill="var(--primary)"/>
+        <circle cx="370" cy="52" r="4" fill="var(--primary)"/>
+        <circle cx="460" cy="35" r="4" fill="var(--primary)"/>
+        <circle cx="550" cy="22" r="5" fill="var(--primary)" stroke="var(--bg)" stroke-width="2"/>
+        <text x="545" y="15" fill="var(--primary)" font-size="9" font-weight="700" text-anchor="end">534</text>
+        <!-- === Грейд: dashed line + dots (amber) === -->
+        <path d="M 100 168 C 140 160, 165 140, 190 135 C 225 125, 255 110, 280 105 C 310 97, 340 82, 370 75 C 410 65, 435 55, 460 50 C 500 40, 530 33, 550 28" fill="none" stroke="var(--secondary)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 3"/>
+        <circle cx="100" cy="168" r="4" fill="var(--secondary)"/>
+        <text x="100" y="180" fill="var(--text3)" font-size="7" text-anchor="middle">5C</text>
+        <circle cx="190" cy="135" r="4" fill="var(--secondary)"/>
+        <text x="190" y="147" fill="var(--text3)" font-size="7" text-anchor="middle">6A</text>
+        <circle cx="280" cy="105" r="4" fill="var(--secondary)"/>
+        <text x="280" y="117" fill="var(--text3)" font-size="7" text-anchor="middle">6B</text>
+        <circle cx="370" cy="75" r="4" fill="var(--secondary)"/>
+        <text x="370" y="87" fill="var(--text3)" font-size="7" text-anchor="middle">6B+</text>
+        <circle cx="460" cy="50" r="4" fill="var(--secondary)"/>
+        <text x="460" y="62" fill="var(--text3)" font-size="7" text-anchor="middle">6C</text>
+        <circle cx="550" cy="28" r="5" fill="var(--secondary)" stroke="var(--bg)" stroke-width="2"/>
+        <text x="550" y="20" fill="var(--secondary)" font-size="8" font-weight="700" text-anchor="middle">🎯7A</text>
       </svg>
-      <div id="chartStats" class="flex items-c jc-sb mt-8 text-3">
-        <span class="text-2">📊 Рост: <strong class="rating">+234</strong></span>
-        <span class="text-2">⚡ Всего: <strong>47</strong></span>
-        <span class="text-2">🏆 Пик: <strong>534</strong></span>
+      <!-- Legend + Stats -->
+      <div class="flex items-c jc-sb mt-8 text-3 wrap" style="gap:6px;">
+        <div class="flex items-c gap-12 wrap">
+          <span class="flex items-c gap-4"><span style="display:inline-block;width:16px;height:3px;background:var(--primary);border-radius:2px;"></span> Крускор</span>
+          <span class="flex items-c gap-4"><span style="display:inline-block;width:16px;height:3px;background:var(--secondary);border-radius:2px;border-top:1px dashed var(--secondary);"></span> Макс. грейд</span>
+        </div>
+        <div class="flex items-c gap-12 wrap">
+          <span class="text-2">📊 Крускор: <strong class="rating">+234</strong> (пик <strong>534</strong>)</span>
+          <span class="text-2">🏆 Грейд: <strong class="rating">5C → 7A</strong></span>
+        </div>
       </div>
       <div id="chartLegend" style="display:none;margin-top:10px;"></div>
     </div>
@@ -313,7 +360,8 @@
       <div class="flex items-c jc-sb mb-12 wrap" style="gap:8px;">
         <h3 class="fw-6">📡 Навыки</h3>
         <div class="dropdown-group">
-          <select onchange="switchRadar(this.value)">
+          <label for="radarType" class="sr-only">Категория навыков</label>
+          <select id="radarType" onchange="switchRadar(this.value)">
             <option value="style">🎨 Стиль</option>
             <option value="relief">🏔 Рельеф</option>
             <option value="hold">🤲 Зацеп</option>
@@ -420,7 +468,7 @@
         <div class="card post-card is-expanded">
           <div class="post-header">
             <div class="post-header-left">
-              <h3>2 июня · <span class="badge badge-location gym-rockzone">RockZone</span></h3>
+              <h3><a href="post-detail.html" style="text-decoration:none;color:var(--text);">2 июня · <span class="badge badge-location gym-rockzone">RockZone</span></a></h3>
             </div>
             <div class="post-header-right">
               <span class="post-visibility public">Public</span>
@@ -447,8 +495,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 2 — Красная стрела</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 3 — Команда</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -482,7 +530,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 12</span><span>💬 3</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 12</span><span>💬 3</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -490,7 +538,7 @@
         <div class="card post-card is-expanded">
           <div class="post-header">
             <div class="post-header-left">
-              <h3>30 мая · <span class="badge badge-location gym-limeit">Лимейт</span></h3>
+              <h3><a href="post-detail.html" style="text-decoration:none;color:var(--text);">30 мая · <span class="badge badge-location gym-limeit">Лимейт</span></a></h3>
             </div>
             <div class="post-header-right">
               <span class="post-visibility private">Private</span>
@@ -516,8 +564,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 1 — Зелёный дракон</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 2 — Зал</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -544,7 +592,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 4</span><span>💬 1</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 4</span><span>💬 1</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -552,7 +600,7 @@
         <div class="card post-card is-expanded">
           <div class="post-header">
             <div class="post-header-left">
-              <h3>25 мая · <span class="badge badge-location gym-bigwall">BigWall</span></h3>
+              <h3><a href="post-detail.html" style="text-decoration:none;color:var(--text);">25 мая · <span class="badge badge-location gym-bigwall">BigWall</span></a></h3>
             </div>
             <div class="post-header-right">
               <span class="post-visibility public">Public</span>
@@ -579,8 +627,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 2 — Апельсин 5B</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 3 — Вид сверху</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -605,7 +653,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 8</span><span>💬 2</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 8</span><span>💬 2</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -678,8 +726,8 @@
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 RockZone — трассы</span></div>
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 RockZone — зона боулдеринга</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -688,7 +736,7 @@
             </div>
           </div>
           <div class="gym-badge-row">
-            <h3 class="gym-name">RockZone</h3>
+            <a href="gym-detail.html" class="gym-name" style="text-decoration:none;color:var(--text);">RockZone</a>
             <span class="gym-rating">⭐ 4.5</span>
             <button class="gym-fav-btn" title="В избранное">♡</button>
           </div>
@@ -708,8 +756,8 @@
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 Лимейт — зал</span></div>
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 Лимейт — трассы на рельефе</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -717,7 +765,7 @@
             </div>
           </div>
           <div class="gym-badge-row">
-            <h3 class="gym-name">Лимейт</h3>
+            <a href="gym-detail.html" class="gym-name" style="text-decoration:none;color:var(--text);">Лимейт</a>
             <span class="gym-rating">⭐ 4.2</span>
             <button class="gym-fav-btn gym-fav-active" title="В избранном">♥</button>
           </div>
@@ -738,8 +786,8 @@
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 BigWall — скоростной участок</span></div>
                 <div class="carousel-slide gym-carousel-slide"><span>🧗 BigWall — зона отдыха</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" tabindex="-1" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" tabindex="-1" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -748,7 +796,7 @@
             </div>
           </div>
           <div class="gym-badge-row">
-            <h3 class="gym-name">BigWall</h3>
+            <a href="gym-detail.html" class="gym-name" style="text-decoration:none;color:var(--text);">BigWall</a>
             <span class="gym-rating">⭐ 4.7</span>
             <button class="gym-fav-btn gym-fav-active" title="В избранном">♥</button>
           </div>
@@ -771,7 +819,8 @@
       <div class="sub-main">
       <div class="flex items-c gap-12 mb-16" style="max-width:600px;">
         <div class="dropdown-group">
-          <select onchange="switchFeed(this.value)">
+          <label for="feedFilter" class="sr-only">Фильтр ленты</label>
+          <select id="feedFilter" onchange="switchFeed(this.value)">
             <option value="subs">Подписки</option>
             <option value="recommended">Рекомендуемое</option>
           </select>
@@ -799,8 +848,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 2 — Результат</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото 3 — Команда</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -834,7 +883,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 24</span><span>💬 5</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 24</span><span>💬 5</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -856,8 +905,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>🎬 Видео пролаза 7A</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото — Чёрная молния</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -884,7 +933,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 18</span><span>💬 4</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 18</span><span>💬 4</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -907,8 +956,8 @@
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото — Стена BigWall</span></div>
                 <div class="carousel-slide mock-img mock-img-wide"><span>📸 Фото — Результат</span></div>
               </div>
-              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
-              <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+              <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)" aria-label="Предыдущее">‹</button>
+              <button class="carousel-btn carousel-next" onclick="carouselNext(this)" aria-label="Следующее">›</button>
               <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
                 <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
@@ -931,7 +980,7 @@
             </div>
           </div>
           <div class="post-actions">
-            <span>❤ 8</span><span>💬 2</span><span class="ml-auto">↗ Поделиться</span>
+            <span class="post-action-like"><svg class="like-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 8</span><span>💬 2</span><span class="ml-auto post-action-share"><svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Поделиться</span>
           </div>
         </div>
 
@@ -995,6 +1044,27 @@
       </aside>
       </div><!-- /sub-inner -->
     </div><!-- /sub-feed -->
+
+    </div><!-- /mode-data-content -->
+
+    <!-- Empty state: нет тренировок (показать когда sub-train пуст) -->
+    <div class="empty-state" style="display:none;">
+      <div class="empty-icon">🏋️</div>
+      <div class="empty-title">У вас пока нет тренировок</div>
+      <div class="empty-desc">Добавьте первую тренировку после посещения скалодрома — нажмите «+» внизу экрана.</div>
+    </div>
+
+    <!--
+    Skeleton content
+    <div class="mode-skeleton-content">
+      ...
+    </div>
+
+    Empty state content
+    <div class="mode-empty-content">
+      ...
+    </div>
+    -->
 
   </div><!-- /content -->
 </div><!-- /main-layout -->

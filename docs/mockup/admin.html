@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — Admin Dashboard</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-item sidebar-logo">
+    <span class="si-icon">▲</span>
+    <span class="si-label logo-text">Крукса</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">←</span>
+      <span class="si-label">Назад</span>
+    </a>
+    <div class="sidebar-item sidebar-avatar-item">
+      <span class="si-icon"><span class="avatar" style="width:28px;height:28px;font-size:.7rem;background:#E53935;">А</span></span>
+      <span class="si-label">Admin</span>
+    </div>
+  </nav>
+</div>
+
+<div class="main-wrapper">
+<div class="main-layout">
+  <div class="content">
+
+    <!-- Header -->
+    <div class="flex items-c jc-sb mb-24 wrap gap-12">
+      <div class="flex items-c gap-12">
+        <h1 class="fw-7" style="font-size:1.5rem;">⚙️ Панель администратора</h1>
+        <span class="badge badge-red badge-sm">Super Admin</span>
+      </div>
+      <div class="flex gap-8">
+        <span class="text-2" style="padding:6px 0;">📍 Москва, СПб</span>
+        <button class="btn btn-outline btn-sm">📊 Экспорт данных</button>
+      </div>
+    </div>
+
+    <!-- Global stats -->
+    <div class="card-teal mb-24">
+      <div class="grid-4">
+        <div class="card-sm stat" style="background:transparent;border:none;padding:8px;"><div class="stat-num">8</div><div class="stat-label">Скалодромов</div></div>
+        <div class="card-sm stat" style="background:transparent;border:none;padding:8px;"><div class="stat-num">312</div><div class="stat-label">Трасс всего</div></div>
+        <div class="card-sm stat" style="background:transparent;border:none;padding:8px;"><div class="stat-num stat-num-secondary">48</div><div class="stat-label">Рутсеттеров</div></div>
+        <div class="card-sm stat" style="background:transparent;border:none;padding:8px;"><div class="stat-num">12.4K</div><div class="stat-label">Пролазов за месяц</div></div>
+      </div>
+    </div>
+
+    <!-- Recent activity -->
+    <div class="grid-2 mb-24">
+      <div class="card">
+        <h3 class="fw-6 mb-12">⚡ Последние обновления</h3>
+        <div class="flex flex-c gap-8 text-sm">
+          <div class="flex items-c gap-8"><span class="status-dot online"></span><span class="badge badge-location gym-rockzone">RockZone</span> — 5 новых трасс (сегодня)</div>
+          <div class="flex items-c gap-8"><span class="status-dot online"></span><span class="badge badge-location gym-limeit">Лимейт</span> — обновление цен (вчера)</div>
+          <div class="flex items-c gap-8"><span class="status-dot online"></span><span class="badge badge-location gym-bigwall">BigWall</span> — +2 рутсеттера (3 дня назад)</div>
+          <div class="flex items-c gap-8"><span class="status-dot offline"></span><span class="badge badge-location gym-rockzone" style="background:#757575;--loc-glow:#757575;border-bottom:1px dashed #757575;cursor:help;" title="Зал не присылает данные неделю. Возможно, закрыт или сменил владельца.">Батут</span> — нет данных (неделю)</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="fw-6 mb-12">🏆 Топ залов по активностям</h3>
+        <div class="flex flex-c gap-8 text-sm">
+          <div class="flex jc-sb"><span><span class="badge badge-location gym-rockzone">RockZone</span></span><span class="fw-6">1 247 пролазов</span></div>
+          <div class="flex jc-sb"><span><span class="badge badge-location gym-bigwall">BigWall</span></span><span class="fw-6">982 пролаза</span></div>
+          <div class="flex jc-sb"><span><span class="badge badge-location gym-limeit">Лимейт</span></span><span class="fw-6">756 пролазов</span></div>
+          <div class="flex jc-sb"><span><span class="badge badge-location gym-rockzone" style="background:var(--hold-orange);--loc-glow:var(--hold-orange);">Высота</span></span><span class="fw-6">534 пролаза</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Все залы -->
+    <div class="card mb-24">
+      <div class="flex items-c jc-sb mb-16">
+        <h3 class="fw-6">🏢 Все скалодромы</h3>
+        <div class="flex gap-8">
+          <span class="badge badge-green">8 активных</span>
+          <span class="badge badge-gray">2 на модерации</span>
+          <button class="btn btn-secondary btn-sm">+ Добавить зал</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <div class="card-sm mb-12 flex items-c gap-12 text-sm wrap" style="background:var(--surface2);padding:10px 14px;">
+          <span>🏙 <label for="filterCity" class="sr-only">Город</label><select id="filterCity" class="filter-select"><option>Все города</option><option>Москва</option><option>СПб</option></select></span>
+          <span>📋 <label for="filterStatus" class="sr-only">Статус</label><select id="filterStatus" class="filter-select"><option>Все статусы</option><option>Активные</option><option>На модерации</option></select></span>
+        </div>
+        <table class="table table-sortable">
+          <thead><tr>
+              <th class="sort-th" data-sort="name">Зал <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="city">Город <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="routes">Трасс <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="setters">Рутсеттеров <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="rating">Рейтинг <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="ascents">Пролазов/мес <span class="sort-indicator">↕</span></th>
+              <th class="sort-th" data-sort="status">Статус <span class="sort-indicator">↕</span></th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Зал"><span class="badge badge-location gym-rockzone">RockZone</span></td>
+              <td data-label="Город">Москва</td>
+              <td data-label="Трасс" class="fw-6">48</td>
+              <td data-label="Рутсеттеров">12</td>
+              <td data-label="Рейтинг" class="rating">⭐ 4.5</td>
+              <td data-label="Пролазов/мес">1 247</td>
+              <td data-label="Статус"><span class="badge badge-green">Active</span></td>
+              <td data-label=""><div class="flex gap-4"><a href="gymadmin.html" class="btn btn-outline btn-sm">Управлять</a><button class="btn btn-outline btn-xs btn-action-del">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td data-label="Зал"><span class="badge badge-location gym-limeit">Лимейт</span></td>
+              <td data-label="Город">Москва</td>
+              <td data-label="Трасс" class="fw-6">36</td>
+              <td data-label="Рутсеттеров">8</td>
+              <td data-label="Рейтинг" class="rating">⭐ 4.2</td>
+              <td data-label="Пролазов/мес">756</td>
+              <td data-label="Статус"><span class="badge badge-green">Active</span></td>
+              <td data-label=""><div class="flex gap-4"><a href="gymadmin.html" class="btn btn-outline btn-sm">Управлять</a><button class="btn btn-outline btn-xs btn-action-del">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td data-label="Зал"><span class="badge badge-location gym-bigwall">BigWall</span></td>
+              <td data-label="Город">СПб</td>
+              <td data-label="Трасс" class="fw-6">62</td>
+              <td data-label="Рутсеттеров">14</td>
+              <td data-label="Рейтинг" class="rating">⭐ 4.7</td>
+              <td data-label="Пролазов/мес">982</td>
+              <td data-label="Статус"><span class="badge badge-green">Active</span></td>
+              <td data-label=""><div class="flex gap-4"><a href="gymadmin.html" class="btn btn-outline btn-sm">Управлять</a><button class="btn btn-outline btn-xs btn-action-del">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td data-label="Зал"><span class="badge badge-location gym-rockzone" style="background:var(--hold-orange);--loc-glow:var(--hold-orange);">Высота</span></td>
+              <td data-label="Город">Москва</td>
+              <td data-label="Трасс" class="fw-6">28</td>
+              <td data-label="Рутсеттеров">5</td>
+              <td data-label="Рейтинг" class="rating">⭐ 4.0</td>
+              <td data-label="Пролазов/мес">534</td>
+              <td data-label="Статус"><span class="badge badge-gray">Pending</span></td>
+              <td data-label=""><div class="flex gap-4"><a href="gymadmin.html" class="btn btn-outline btn-sm">Управлять</a><button class="btn btn-outline btn-xs btn-action-restore">↩️</button></div></td>
+            </tr>
+            <tr>
+              <td data-label="Зал"><span class="badge badge-location gym-rockzone" style="background:var(--hold-green);--loc-glow:var(--hold-green);">Скала</span></td>
+              <td data-label="Город">СПб</td>
+              <td data-label="Трасс" class="fw-6">44</td>
+              <td data-label="Рутсеттеров">9</td>
+              <td data-label="Рейтинг" class="rating">⭐ 4.3</td>
+              <td data-label="Пролазов/мес">891</td>
+              <td data-label="Статус"><span class="badge badge-green">Active</span></td>
+              <td data-label=""><div class="flex gap-4"><a href="gymadmin.html" class="btn btn-outline btn-sm">Управлять</a><button class="btn btn-outline btn-xs btn-action-del">🗑️</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="btn btn-outline btn-xs" disabled>‹</button>
+        <span class="page-btn page-active">1</span>
+        <span class="page-btn">2</span>
+        <span class="page-btn">3</span>
+        <button class="btn btn-outline btn-xs">›</button>
+        <span class="page-info">1–5 из 8</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+</body>
+</html>

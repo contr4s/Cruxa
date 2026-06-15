@@ -1,0 +1,572 @@
+/* ===== Post Detail Page Styles (Instagram‑style) ===== */
+
+/* ── Two‑column layout ── */
+.post-detail-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pd-left {
+  flex: 1 1 580px;
+  min-width: 0;
+  max-width: 620px;
+}
+
+.pd-right {
+  width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 100px);
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* ── Scrollable right column content ── */
+.pd-right-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Tabs ── */
+.pd-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  width: fit-content;
+}
+
+.pd-tab {
+  padding: 5px 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all .15s;
+  user-select: none;
+}
+
+.pd-tab:hover {
+  color: var(--text2);
+}
+
+.pd-tab-active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+
+/* ── Carousel wrapper ── */
+.pd-carousel-wrap {
+  position: relative;
+}
+
+.pd-carousel {
+  display: none;
+}
+
+.pd-carousel.active {
+  display: block;
+}
+
+.pd-carousel .carousel-slide {
+  aspect-ratio: 4/3;
+  font-size: 1rem;
+}
+
+/* Stats slides */
+.pd-stats-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.pd-slide-label {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--text2);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.pd-pyramid {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Stats slide counter */
+.pd-slide-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: .72rem;
+  color: var(--text3);
+  background: rgba(0,0,0,.5);
+  padding: 2px 8px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* ── Compact stats row ── */
+.pd-compact-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  color: var(--text2);
+  margin-top: 8px;
+  padding: 10px 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Right column: Author ── */
+.pd-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pd-author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.pd-author-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pd-author-name {
+  font-weight: 700;
+  font-size: .88rem;
+}
+
+.pd-author-meta {
+  font-size: .72rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pd-gym-link {
+  color: var(--primary-light);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.pd-right-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-right-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pd-gym-link:hover {
+  text-decoration: underline;
+}
+
+.pd-follow-btn {
+  font-size: .72rem;
+  padding: 3px 10px;
+}
+
+.pd-visibility {
+  color: var(--text3);
+  font-size: .72rem;
+}
+
+/* ── Post text ── */
+.pd-post-text {
+  font-size: .85rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.pd-post-text p {
+  margin: 0;
+}
+
+/* ── Ascents summary ── */
+.pd-ascents {
+  padding: 12px;
+}
+
+.pd-ascents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pd-ascent-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+  transition: background .15s;
+  font-size: .82rem;
+}
+
+.pd-ascent-row:hover {
+  background: var(--surface2);
+}
+
+.pd-ascent-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pd-ascent-grade {
+  font-weight: 700;
+  color: var(--secondary);
+  font-size: .8rem;
+  white-space: nowrap;
+}
+
+.pd-ascent-style {
+  font-size: .72rem;
+  color: var(--text3);
+  white-space: nowrap;
+  min-width: 52px;
+  text-align: right;
+}
+
+.pd-ascents-more {
+  padding: 6px 0 0;
+  font-size: .78rem;
+}
+
+/* ── Likes ── */
+.pd-likes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: .85rem;
+}
+
+.pd-like-icon {
+  font-size: 1rem;
+}
+
+.pd-like-count {
+  font-size: .82rem;
+  color: var(--text2);
+}
+
+.pd-like-avatars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.pd-like-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+  font-weight: 700;
+  color: #fff;
+  border: 2px solid var(--surface);
+  margin-left: -6px;
+}
+
+.pd-like-avatar:first-child {
+  margin-left: 0;
+}
+
+.pd-like-more {
+  font-size: .72rem;
+  margin-left: 2px;
+}
+
+/* ── Comments ── */
+.pd-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: .82rem;
+  line-height: 1.4;
+}
+
+.pd-comment-author {
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.pd-comment-text {
+  color: var(--text2);
+  flex: 1;
+  min-width: 0;
+}
+
+.pd-comment-time {
+  font-size: .7rem;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+.pd-comments-more {
+  font-size: .78rem;
+}
+
+.pd-comment-empty {
+  padding: 12px 0;
+}
+
+/* ── Action buttons ── */
+.pd-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.pd-action-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: transform .15s, color .15s;
+}
+
+.pd-action-btn:hover {
+  transform: scale(1.12);
+}
+
+.pd-action-btn:hover svg {
+  stroke: var(--primary);
+}
+
+.post-action-like.liked svg {
+  fill: var(--hold-red);
+  stroke: var(--hold-red) !important;
+}
+
+/* ── Comment form ── */
+.pd-comment-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+}
+
+.pd-comment-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: .85rem;
+}
+
+.pd-comment-input::placeholder {
+  color: var(--text3);
+}
+
+.pd-comment-submit {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--primary);
+  padding: 0;
+  line-height: 1;
+  transition: transform .15s;
+}
+
+.pd-comment-submit:hover {
+  transform: scale(1.15);
+}
+
+.pd-comment-submit:disabled {
+  opacity: .4;
+  cursor: default;
+  transform: none;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 12px;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  opacity: .5;
+}
+
+/* ── Override carousel dots position for stats carousel (slide counter on right) ── */
+#statsCarousel .carousel-dots {
+  bottom: 8px;
+}
+
+/* ── Mobile (< 768px) ── */
+@media(max-width:768px) {
+  .post-detail-layout {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pd-left {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    order: 2;
+    margin-bottom: 16px;
+  }
+
+  .pd-right {
+    width: 100%;
+    position: static;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    display: contents;
+  }
+
+  .pd-right-scroll {
+    padding: 12px 0;
+    overflow-y: visible;
+    gap: 12px;
+    display: contents;
+  }
+
+  .pd-right-top {
+    order: 1;
+    padding: 0 16px;
+    margin-bottom: 12px;
+  }
+
+  .pd-right-bottom {
+    order: 3;
+    padding: 0 16px 16px;
+  }
+
+  .pd-compact-stats {
+    font-size: .72rem;
+    gap: 4px;
+    padding: 8px 12px;
+  }
+
+  .pd-tabs {
+    width: 100%;
+  }
+
+  .pd-tab {
+    flex: 1;
+    text-align: center;
+  }
+
+  .pd-pyramid {
+    max-width: 260px;
+  }
+
+  .pd-stats-slide {
+    padding: 12px 14px;
+  }
+
+  /* Mobile: comment form stays inline inside pd-right-bottom */
+  .pd-comment-form {
+    padding: 10px 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Add padding at bottom of scrollable area */
+  .pd-right-scroll {
+    padding-bottom: 60px;
+  }
+
+  /* Hide action buttons on mobile (they're in feed) */
+  .pd-actions {
+    display: none;
+  }
+
+  .pd-likes {
+    font-size: .8rem;
+  }
+
+  .pd-ascent-row {
+    font-size: .78rem;
+    padding: 4px 6px;
+  }
+
+  .pd-ascent-grade {
+    font-size: .75rem;
+  }
+
+  .pd-ascent-style {
+    min-width: 44px;
+    font-size: .68rem;
+  }
+
+  .pd-comment {
+    font-size: .8rem;
+  }
+
+  /* Reduce avatar size mobile */
+  .pd-like-avatar {
+    width: 20px;
+    height: 20px;
+    font-size: .65rem;
+  }
+}

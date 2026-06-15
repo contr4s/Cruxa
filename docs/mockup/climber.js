@@ -50,7 +50,7 @@ function switchChart(val) {
   }
   var grp = groups[val];
   if (!grp) return;
-  ax.forEach(function(t,i){if(t)t.textContent=[100,75,50,25][i];});
+  ax.forEach(function(t,i){if(t)t.textContent=[100,75,50,25][i]+'%';});
   var h = '';
   grp.tags.forEach(function(tag){
     var pts = tag.d.map(function(v,i){ var y = 175 - v*1.55; return xs[i]+','+y; }).join(' ');
@@ -343,7 +343,22 @@ function carouselSet(car, idx) {
 
 // Auto-init on page load
 document.addEventListener('DOMContentLoaded', function() {
-  renderRadar('style');
+  if (document.getElementById('radarSvg')) {
+    renderRadar('style');
+  }
+
+  // Like toggle with heartbeat animation
+  document.querySelectorAll('.post-action-like').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var wasLiked = this.classList.toggle('liked');
+      var svg = this.querySelector('.like-icon');
+      if (svg) {
+        svg.style.animation = 'none';
+        void svg.offsetHeight;
+        svg.style.animation = wasLiked ? 'heartBeat .4s ease' : '';
+      }
+    });
+  });
 });
 
 // ===== Feed filter =====

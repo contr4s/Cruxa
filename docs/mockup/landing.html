@@ -3,57 +3,259 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Крукса — Landing</title>
+<title>Крукса — Социальная сеть для скалолазов</title>
 <link rel="stylesheet" href="shared.css">
 <link rel="stylesheet" href="landing.css">
 </head>
 <body>
 
-<div class="hero">
-  <div class="logo" style="font-size:2rem;">▲ Крукса</div>
-  <h1>Социальная сеть для скалолазов</h1>
-  <p>Трекинг пролазов, каталог скалодромов по всей России, аналитика прогресса и общение с единомышленниками.</p>
-  <div class="hero-actions">
-    <button class="btn btn-primary" style="padding:12px 32px;">Присоединиться</button>
-    <button class="btn btn-outline" style="padding:12px 32px;">Узнать больше</button>
-  </div>
+<div class="landing-page">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">▲ Крукса</a>
+    <div class="nav-links">
+      <a href="#" class="nav-link nav-login">Войти</a>
+      <button class="btn btn-primary btn-sm">Присоединиться</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <!-- Топографический паттерн — линии скал -->
+    <svg class="hero-pattern" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0,250 Q300,100 600,250 T1200,200" fill="none" stroke="var(--primary)" stroke-width="1.5" opacity=".12"/>
+      <path d="M0,270 Q300,120 600,270 T1200,220" fill="none" stroke="var(--primary)" stroke-width="1" opacity=".1"/>
+      <path d="M0,290 Q300,140 600,290 T1200,240" fill="none" stroke="var(--primary)" stroke-width="1" opacity=".08"/>
+      <path d="M0,230 Q300,80  600,230 T1200,180" fill="none" stroke="var(--primary)" stroke-width="1" opacity=".1"/>
+      <path d="M0,210 Q300,60  600,210 T1200,160" fill="none" stroke="var(--primary)" stroke-width=".8" opacity=".07"/>
+      <path d="M0,310 Q300,160 600,310 T1200,260" fill="none" stroke="var(--primary)" stroke-width=".8" opacity=".07"/>
+      <path d="M0,330 Q300,180 600,330 T1200,280" fill="none" stroke="var(--primary)" stroke-width=".5" opacity=".05"/>
+    </svg>
+
+    <!-- Блик -->
+    <div class="hero-shine"></div>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Социальная сеть для скалолазов
+        </div>
+        <h1 class="hero-title">
+          Встречай<br>
+          <span class="hero-title-gradient">единомышленников</span><br>
+          покоряй вершины
+        </h1>
+        <p class="hero-text">Трекинг пролазов, каталог скалодромов по всей России, аналитика прогресса и общение с единомышленниками.</p>
+        <div class="hero-actions">
+          <button class="btn btn-hero-primary">
+            Присоединиться
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <button class="btn btn-hero-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Узнать больше
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="phone-mockup">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="phone-status">
+                <span class="phone-time">9:41</span>
+                <div class="phone-icons">
+                  <span class="phone-signal">●●●●</span>
+                  <span class="phone-battery">▇▇▇▇</span>
+                </div>
+              </div>
+              <div class="phone-header-bar">
+                <span class="phone-header-title">▲ Крукса</span>
+                <span class="phone-header-icon">⋯</span>
+              </div>
+              <div class="phone-welcome">С возвращением, Алекс!</div>
+              <div class="phone-dashboard">
+                <div class="phone-stat-item">
+                  <span class="phone-stat-value">7</span>
+                  <span class="phone-stat-label">пролазов</span>
+                </div>
+                <div class="phone-stat-item">
+                  <span class="phone-stat-value">5A</span>
+                  <span class="phone-stat-label">лучший</span>
+                </div>
+                <div class="phone-stat-item">
+                  <span class="phone-stat-value">12</span>
+                  <span class="phone-stat-label">дней</span>
+                </div>
+              </div>
+              <div class="phone-activity-label">Недавние пролазы</div>
+              <div class="phone-route-list">
+                <div class="phone-route-row">
+                  <span class="route-dot hold-Red"></span>
+                  <div class="phone-route-info">
+                    <span class="phone-route-name">Speed 6A</span>
+                    <span class="phone-route-gym">RockZona · Боулдеринг</span>
+                  </div>
+                  <span class="phone-route-check">✓</span>
+                </div>
+                <div class="phone-route-row">
+                  <span class="route-dot hold-Blue"></span>
+                  <div class="phone-route-info">
+                    <span class="phone-route-name">Фараон 7A+</span>
+                    <span class="phone-route-gym">BigWall · Трудность</span>
+                  </div>
+                  <span class="phone-route-check">✓</span>
+                </div>
+                <div class="phone-route-row">
+                  <span class="route-dot hold-Yellow"></span>
+                  <div class="phone-route-info">
+                    <span class="phone-route-name">Баланс 6C</span>
+                    <span class="phone-route-gym">Limestone · Боулдеринг</span>
+                  </div>
+                  <span class="phone-route-check">✓</span>
+                </div>
+              </div>
+              <div class="phone-tab-bar">
+                <span class="phone-tab active">🏠</span>
+                <span class="phone-tab">📊</span>
+                <span class="phone-tab">👥</span>
+                <span class="phone-tab">👤</span>
+              </div>
+            </div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features scroll-reveal">
+    <div class="section-header">
+      <span class="section-tag">Возможности</span>
+      <h2 class="section-title">Что вас ждёт в <span class="hero-title-gradient">Круксе</span></h2>
+      <p class="section-desc">Всё, что нужно скалолазу — от трекинга до общения с комьюнити</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="card feature-card scroll-reveal" style="animation-delay:.1s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">Каталог залов</h3>
+        <p class="text-2 text-sm">50+ скалодромов Москвы и СПб с контактами, ценами и часами работы.</p>
+      </div>
+      <div class="card feature-card scroll-reveal" style="animation-delay:.2s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">Аналитика прогресса</h3>
+        <p class="text-2 text-sm">Единый Крускор — отслеживай рост в любой системе оценок. Графики и достижения.</p>
+      </div>
+      <div class="card feature-card scroll-reveal" style="animation-delay:.3s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">Сообщество</h3>
+        <p class="text-2 text-sm">Лента тренировок, лайки, комментарии, подписки. Делиcь успехами с друзьями.</p>
+      </div>
+      <div class="card feature-card scroll-reveal" style="animation-delay:.4s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">QR-сканер</h3>
+        <p class="text-2 text-sm">Сканируй QR на стене — мгновенное логирование пролаза. Mobile App скоро.</p>
+      </div>
+      <div class="card feature-card scroll-reveal" style="animation-delay:.5s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">База трасс</h3>
+        <p class="text-2 text-sm">Тысячи трасс с цветами зацепок, тегами стиля и отзывами. Фильтруй что угодно.</p>
+      </div>
+      <div class="card feature-card scroll-reveal" style="animation-delay:.6s">
+        <div class="feature-icon-box">
+          <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="fw-6 mb-8">Роли и доступ</h3>
+        <p class="text-2 text-sm">Скалолаз, Рутсеттер, Администратор зала. Инструменты для каждого участника экосистемы.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section scroll-reveal">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Скалодромов</span>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Скалолазов</span>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">1 000+</span>
+        <span class="stat-label">Трасс в базе</span>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Доступно</span>
+        <div class="stat-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section scroll-reveal">
+    <div class="cta-card">
+      <h2 class="cta-title">Готовы начать?</h2>
+      <p class="cta-text">Присоединяйтесь к сообществу скалолазов. Трекинг, аналитика и новые друзья — всё в одном месте.</p>
+      <button class="btn btn-hero-primary">
+        Присоединиться бесплатно
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer scroll-reveal">
+    <span class="footer-brand">▲ Крукса — 2026</span>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Документация</a>
+      <a href="#" class="footer-link">API</a>
+      <a href="#" class="footer-link">GitHub</a>
+      <a href="#" class="footer-link">Telegram</a>
+    </div>
+  </footer>
+
 </div>
 
-<div class="feature-grid">
-  <div class="card">
-    <div class="text-xl mb-8">🗺</div>
-    <h3 class="fw-6 mb-12">Каталог залов</h3>
-    <p class="text text-sm">50+ скалодромов Москвы и СПб с контактами, ценами и часами работы. Карта и поиск.</p>
-  </div>
-  <div class="card">
-    <div class="text-xl mb-8">📊</div>
-    <h3 class="fw-6 mb-12">Аналитика прогресса</h3>
-    <p class="text text-sm">Единый Крускор — отслеживай рост в любой системе оценок. Графики и достижения.</p>
-  </div>
-  <div class="card">
-    <div class="text-xl mb-8">👥</div>
-    <h3 class="fw-6 mb-12">Сообщество</h3>
-    <p class="text text-sm">Лента тренировок, лайки, комментарии, подписки. Делиcь успехами с друзьями.</p>
-  </div>
-  <div class="card">
-    <div class="text-xl mb-8">📱</div>
-    <h3 class="fw-6 mb-12">QR-сканер</h3>
-    <p class="text text-sm">Сканируй QR на стене — мгновенное логирование пролаза. Mobile App скоро.</p>
-  </div>
-  <div class="card">
-    <div class="text-xl mb-8">🏷</div>
-    <h3 class="fw-6 mb-12">База трасс</h3>
-    <p class="text text-sm">Тысячи трасс с цветами зацепок, тегами стиля и отзывами. Фильтруй что угодно.</p>
-  </div>
-  <div class="card">
-    <div class="text-xl mb-8">🔐</div>
-    <h3 class="fw-6 mb-12">Роли и доступ</h3>
-    <p class="text text-sm">Climber, Routesetter, GymAdmin. Инструменты для каждого участника экосистемы.</p>
-  </div>
-</div>
+<!-- Scroll-reveal script -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: .15 });
 
-<div class="card mt-20" style="text-align:center;">
-  <p class="text-2">Уже пользуются 10+ скалодромов и 500+ скалолазов ▼</p>
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+</script>
+
+<!-- Sticky CTA for mobile -->
+<div class="mob-cta-bar">
+  <button class="btn btn-hero-primary mob-cta-btn">
+    Присоединиться
+    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
 </div>
 
 </body>

@@ -1,0 +1,107 @@
+/* ===== Admin Dashboard Styles ===== */
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive .table {
+  min-width: 700px;
+}
+
+/* Sidebar link */
+.sidebar-nav a.sidebar-item {
+  text-decoration: none;
+}
+
+/* Gym admin card link */
+.gym-admin-link {
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* Status dot */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot.online {
+  background: #43A047;
+  box-shadow: 0 0 6px rgba(67, 160, 71, 0.5);
+}
+
+.status-dot.offline {
+  background: #757575;
+}
+
+/* Admin badge row */
+.admin-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Compact pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+.pagination .page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .15s;
+  padding: 0 6px;
+}
+
+.pagination .page-btn:hover {
+  background: var(--surface2);
+  border-color: var(--text3);
+  color: var(--text);
+}
+
+.pagination .page-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.pagination .page-active:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.pagination .page-info {
+  font-size: .78rem;
+  color: var(--text3);
+  margin-left: 8px;
+}
+
+@media(max-width:768px) {
+  body {
+    padding: 0;
+    flex-direction: column;
+  }
+  .table-responsive .table {
+    min-width: 600px;
+  }
+}

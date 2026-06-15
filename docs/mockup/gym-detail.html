@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Крукса — RockZone</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="climber.css">
+<link rel="stylesheet" href="gym-detail.css">
+<script src="climber.js" defer></script>
+<script src="gym-detail.js" defer></script>
+</head>
+<body>
+
+<!-- Mobile header -->
+<div class="mob-header">
+  <div class="mob-header-left">
+    <a href="climber.html" class="mob-back-btn">←</a>
+    <span class="mob-logo">▲ Крукса</span>
+  </div>
+  <div class="mob-header-right">
+    <div class="mob-header-search">
+      <span class="mob-search-icon">🔍</span>
+      <span class="mob-search-placeholder">Поиск</span>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-item sidebar-logo">
+    <span class="si-icon">▲</span>
+    <span class="si-label logo-text">Крукса</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">←</span>
+      <span class="si-label">Назад</span>
+    </a>
+    <div class="sidebar-item sidebar-search-item">
+      <span class="si-icon">🔍</span>
+      <span class="si-label">Поиск</span>
+    </div>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">🏋️</span>
+      <span class="si-label">Тренировки</span>
+    </a>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">🗺</span>
+      <span class="si-label">Скалодромы</span>
+    </a>
+    <a href="climber.html" class="sidebar-item">
+      <span class="si-icon">📰</span>
+      <span class="si-label">Лента</span>
+    </a>
+  </nav>
+</div>
+
+<!-- FAB -->
+<button class="fab-train" onclick="alert('Новая тренировка')">
+  <span class="fab-icon">＋</span>
+  <span class="fab-label">Новая тренировка</span>
+</button>
+
+<div class="main-wrapper">
+<div class="main-layout">
+  <div class="content">
+
+    <!-- ===== DATA STATE ===== -->
+    <div class="mode-data-content">
+
+      <!-- HERO -->
+      <div class="gym-hero flex gap-24 items-c">
+        <!-- Left: carousel + mini cards -->
+        <div class="gym-hero-carousel">
+          <div class="post-media carousel" id="gymCarousel">
+            <div class="carousel-track" id="gymCarouselTrack">
+              <div class="carousel-slide" style="aspect-ratio:16/10;">🧗 Основной зал</div>
+              <div class="carousel-slide" style="aspect-ratio:16/10;">🧗 Тренажёрный зал</div>
+              <div class="carousel-slide" style="aspect-ratio:16/10;">🧗 Зона бouldering</div>
+            </div>
+            <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">‹</button>
+            <button class="carousel-btn carousel-next" onclick="carouselNext(this)">›</button>
+            <div class="carousel-dots" id="gymCarouselDots">
+              <span class="carousel-dot active" onclick="carouselGo(this,0)"></span>
+              <span class="carousel-dot" onclick="carouselGo(this,1)"></span>
+              <span class="carousel-dot" onclick="carouselGo(this,2)"></span>
+            </div>
+          </div>
+          <!-- Mini detail cards under carousel -->
+          <div class="gym-hero-details-mini">
+            <div class="gym-detail-mini-card">
+              <span class="gym-detail-mini-icon">📐</span>
+              <span class="gym-detail-mini-body">
+                <span class="gym-detail-mini-label">Площадь</span>
+                <span class="gym-detail-mini-value">1200 м²</span>
+              </span>
+            </div>
+            <div class="gym-detail-mini-card">
+              <span class="gym-detail-mini-icon">�</span>
+              <span class="gym-detail-mini-body">
+                <span class="gym-detail-mini-label">Высота</span>
+                <span class="gym-detail-mini-value">4.5 м</span>
+              </span>
+            </div>
+            <div class="gym-detail-mini-card">
+              <span class="gym-detail-mini-icon">🗓️</span>
+              <span class="gym-detail-mini-body">
+                <span class="gym-detail-mini-label">Открыт</span>
+                <span class="gym-detail-mini-value">2018</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: all info -->
+        <div class="gym-hero-info">
+          <div class="gym-hero-info-top">
+            <div class="gym-hero-header">
+              <h1 class="gym-hero-title">RockZone</h1>
+              <span class="gym-hero-rating">⭐ 4.5</span>
+              <button class="gym-fav-btn" title="В избранное">♡</button>
+            </div>
+
+            <div class="gym-hero-address">
+              <a href="https://yandex.ru/maps/?ll=37.478226,55.827403&z=17" target="_blank" class="gym-hero-addr-link">📍 Ленинградское шоссе, 25а</a>
+              <span class="gym-hero-metro">🚇 м. Войковская</span>
+            </div>
+
+            <p class="gym-hero-desc">RockZone — крупнейший скалолазный центр в центре Москвы. Более 1200 м² лазательной поверхности, зоны боулдеринга и трудности.</p>
+          </div>
+
+          <div class="gym-hero-info-bottom">
+            <div class="gym-hero-section">
+              <div class="gym-hero-section-title">🕐 Часы работы</div>
+              <div class="gym-hero-hours">Пн-Пт 08:00–23:00 · Сб-Вс 09:00–22:00</div>
+            </div>
+
+            <div class="gym-hero-section">
+              <div class="gym-hero-section-title">💰 Цены</div>
+              <div class="gym-hero-prices">
+                <div class="gym-price-row"><span>Разовое посещение</span><span class="gym-price-val">500 ₽</span></div>
+                <div class="gym-price-row"><span>Абонемент 8</span><span class="gym-price-val">3 200 ₽</span></div>
+                <div class="gym-price-row"><span>Абонемент 12</span><span class="gym-price-val">4 200 ₽</span></div>
+              </div>
+              <button class="btn btn-outline btn-xs gym-prices-more">📋 Все цены и услуги</button>
+            </div>
+
+            <div class="gym-hero-contacts">
+              <div>📞 +7 (495) 123-45-67</div>
+              <div>✉️ info@rockzone.ru</div>
+              <div class="gym-hero-socials">
+                <a href="#" class="btn btn-outline btn-xs">📱 VK</a>
+                <a href="#" class="btn btn-outline btn-xs">📷 Instagram</a>
+                <a href="#" class="btn btn-outline btn-xs">▶️ YouTube</a>
+                <a href="http://www.marina-club.ru" target="_blank" class="btn btn-outline btn-xs">🌐 Сайт</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="gym-stats grid-3 mb-24">
+        <div class="card card-sm stat"><div class="stat-num stat-num-secondary">84</div><div class="stat-label">Активных трасс</div></div>
+        <div class="card card-sm stat"><div class="stat-num">4.2</div><div class="stat-label">Средний рейтинг ⭐</div></div>
+        <div class="card card-sm stat"><div class="stat-num">5B – 8A</div><div class="stat-label">Категории</div></div>
+      </div>
+
+      <!-- ROUTE DATABASE -->
+      <div class="gym-routes card mb-24">
+        <div class="gym-routes-header">
+          <h3 class="fw-6">🧗 База трасс</h3>
+          <div class="flex gap-8">
+            <span class="filter-chip active">Bouldering</span>
+            <span class="filter-chip">Lead</span>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="gym-routes-filters">
+          <details class="gym-routes-more-filters">
+            <summary class="text-3 text-sm" style="cursor:pointer;">🔍 Ещё фильтры</summary>
+            <div class="flex gap-8 wrap mt-8">
+              <span class="route-dot hold-Red" title="Красный"></span>
+              <span class="route-dot hold-Blue" title="Синий"></span>
+              <span class="route-dot hold-Green" title="Зелёный"></span>
+              <span class="route-dot hold-Yellow" title="Жёлтый"></span>
+              <span class="route-dot hold-Black" title="Чёрный"></span>
+              <span class="route-dot hold-White" title="Белый"></span>
+              <span class="route-dot hold-Purple" title="Фиолетовый"></span>
+              <span class="text-3">Все</span>
+            </div>
+            <div class="flex gap-8 wrap mt-8 items-c">
+              <span class="text-3">Сложность:</span>
+              <div class="difficulty-range-wrap">
+                <div class="range-track-bg"></div>
+                <input type="range" class="range-input range-min" min="0" max="100" value="20">
+                <input type="range" class="range-input range-max" min="0" max="100" value="55">
+                <div class="range-labels">
+                  <span>4A</span>
+                  <span>5A</span>
+                  <span>6B</span>
+                  <span>7A</span>
+                  <span>8C</span>
+                </div>
+              </div>
+              <span class="text-3">Теги:</span>
+              <select class="filter-select"><option>Все теги</option></select>
+              <span class="text-3">Рутсеттер:</span>
+              <select class="filter-select"><option>Все рутсеттеры</option></select>
+              <!-- сортировка вынесена в заголовки колонок -->
+            </div>
+          </details>
+        </div>
+
+        <!-- Route table -->
+        <div class="gym-routes-list table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="sortable">Название <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Грейд <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Тип <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Рейтинг <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Пролазы <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Рутсеттер <span class="sort-arrow">⇅</span></th>
+                <th class="sortable">Дата <span class="sort-arrow">⇅</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gym-route-row-link" onclick="location.href='route-detail.html'">
+                <td data-label=""><span class="route-dot hold-Red"></span></td>
+                <td data-label="Название" class="fw-6">Красная молния</td>
+                <td data-label="Грейд">6C</td>
+                <td data-label="Тип"><span class="badge badge-sm badge-primary">Boulder</span></td>
+                <td data-label="Рейтинг">⭐ 4.2</td>
+                <td data-label="Пролазы">23</td>
+                <td data-label="Рутсеттер"><a href="climber.html" class="setter-link" onclick="event.stopPropagation()"><span class="avatar avatar-sm" style="background:#E53935;">А</span> Антон</a></td>
+                <td data-label="Дата" class="text-3">15.06.2026</td>
+              </tr>
+              <tr class="gym-route-row-link" onclick="location.href='route-detail.html'">
+                <td data-label=""><span class="route-dot hold-Blue"></span></td>
+                <td data-label="Название" class="fw-6">Синий мув</td>
+                <td data-label="Грейд">6B+</td>
+                <td data-label="Тип"><span class="badge badge-sm badge-primary">Boulder</span></td>
+                <td data-label="Рейтинг">⭐ 4.8</td>
+                <td data-label="Пролазы">31</td>
+                <td data-label="Рутсеттер"><a href="climber.html" class="setter-link" onclick="event.stopPropagation()"><span class="avatar avatar-sm" style="background:#43A047;">М</span> Мария</a></td>
+                <td data-label="Дата" class="text-3">10.06.2026</td>
+              </tr>
+              <tr class="gym-route-row-link" onclick="location.href='route-detail.html'">
+                <td data-label=""><span class="route-dot hold-Black"></span></td>
+                <td data-label="Название" class="fw-6">Чёрная жемчужина</td>
+                <td data-label="Грейд">7A</td>
+                <td data-label="Тип"><span class="badge badge-sm badge-red">Lead</span></td>
+                <td data-label="Рейтинг">⭐ 3.9</td>
+                <td data-label="Пролазы">8</td>
+                <td data-label="Рутсеттер"><a href="climber.html" class="setter-link" onclick="event.stopPropagation()"><span class="avatar avatar-sm" style="background:#8E24AA;">И</span> Илья</a></td>
+                <td data-label="Дата" class="text-3">01.06.2026</td>
+              </tr>
+              <tr class="gym-route-row-link" onclick="location.href='route-detail.html'">
+                <td data-label=""><span class="route-dot hold-Green"></span></td>
+                <td data-label="Название" class="fw-6">Зелёный гоблин</td>
+                <td data-label="Грейд">5C</td>
+                <td data-label="Тип"><span class="badge badge-sm badge-primary">Boulder</span></td>
+                <td data-label="Рейтинг">⭐ 4.5</td>
+                <td data-label="Пролазы">45</td>
+                <td data-label="Рутсеттер"><a href="climber.html" class="setter-link" onclick="event.stopPropagation()"><span class="avatar avatar-sm" style="background:#1E88E5;">А</span> Антон</a></td>
+                <td data-label="Дата" class="text-3">20.05.2026</td>
+              </tr>
+              <tr class="gym-route-row-link" onclick="location.href='route-detail.html'">
+                <td data-label=""><span class="route-dot hold-Yellow"></span></td>
+                <td data-label="Название" class="fw-6">Жёлтый бит</td>
+                <td data-label="Грейд">6A</td>
+                <td data-label="Тип"><span class="badge badge-sm badge-primary">Boulder</span></td>
+                <td data-label="Рейтинг">⭐ 4.0</td>
+                <td data-label="Пролазы">17</td>
+                <td data-label="Рутсеттер"><a href="climber.html" class="setter-link" onclick="event.stopPropagation()"><span class="avatar avatar-sm" style="background:#FB8C00;">М</span> Мария</a></td>
+                <td data-label="Дата" class="text-3">15.05.2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="gym-routes-pagination">
+          <button class="btn btn-outline btn-xs pagination-btn" disabled>‹</button>
+          <button class="btn btn-outline btn-xs pagination-btn active">1</button>
+          <button class="btn btn-outline btn-xs pagination-btn">2</button>
+          <button class="btn btn-outline btn-xs pagination-btn">3</button>
+          <span class="pagination-dots">…</span>
+          <button class="btn btn-outline btn-xs pagination-btn">12</button>
+          <button class="btn btn-outline btn-xs pagination-btn">›</button>
+        </div>
+      </div>
+
+    </div><!-- /mode-data-content -->
+
+    <!-- ===== EMPTY STATE (закомментировано) =====
+    <div class="mode-empty-content">
+      ...
+    </div>
+    -->
+
+  </div><!-- /content -->
+</div><!-- /main-layout -->
+</div><!-- /main-wrapper -->
+
+</body>
+</html>

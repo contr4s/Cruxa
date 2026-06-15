@@ -1,13 +1,54 @@
-#gsub1:checked ~ .main-layout .gsub-dash,
-#gsub2:checked ~ .main-layout .gsub-routes,
-#gsub3:checked ~ .main-layout .gsub-setters,
-#gsub4:checked ~ .main-layout .gsub-edit,
-#gsub5:checked ~ .main-layout .gsub-parser { display:block; }
+/* ===== GymAdmin Dashboard Styles ===== */
 
-#gsub1:checked ~ .main-layout .sidebar label[for="gsub1"],
-#gsub2:checked ~ .main-layout .sidebar label[for="gsub2"],
-#gsub3:checked ~ .main-layout .sidebar label[for="gsub3"],
-#gsub4:checked ~ .main-layout .sidebar label[for="gsub4"],
-#gsub5:checked ~ .main-layout .sidebar label[for="gsub5"] {
-  background:var(--surface2); color:var(--text); border-left:3px solid var(--primary);
+/* Sidebar link styling */
+.sidebar-nav a.sidebar-item {
+  text-decoration: none;
+}
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive .table {
+  min-width: 700px;
+}
+
+/* Filter select */
+.filter-select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: var(--text);
+  font-size: .82rem;
+}
+
+/* Edit button: hide icon on desktop, show on mobile */
+.gymadmin .profile-edit-icon {
+  display: none;
+}
+
+.profile-edit-btn {
+  align-self: flex-start;
+}
+
+/* Display field */
+.display-field {
+  background: var(--surface2);
+  margin-top: 4px;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+/* Inherit shared mobile styles */
+@media(max-width:768px) {
+  body {
+    padding: 0;
+    flex-direction: column;
+  }
+  .table-responsive .table {
+    min-width: 600px;
+  }
 }
