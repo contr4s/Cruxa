@@ -41,7 +41,7 @@
 - `AuthorId` (FK -> User) *Опционально (рутсеттер)*
 - `GradeRaw` (string) *Оригинальная сложность от админа (выбирается из справочника GradingSystem)*
 - `GradeIndex` (int) *Нормализованная средняя сложность (0 - 1000) для статистики*
-- `Type` (enum: Bouldering, Lead, Speed)
+- `Type` (enum: Bouldering, Lead) *Speed-трассы пока не рассматриваются*
 - `HoldColor` (enum: Red, Blue, Green, Yellow, Purple, Orange, etc.) *Цвет зацепок*
 - `PhotoUrls` (string[]) *Опционально.Фотографии трассы*
 - `Tags` (string[]) *Теги стиля трассы: "динамика", "пассивы", "мизера", "нависание" и т.д.*
