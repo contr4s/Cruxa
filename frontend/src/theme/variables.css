@@ -1,28 +1,5 @@
-/* ===== CSS Variables from Cruxa Mockup (shared.css) ===== */
+/* ===== Root Tokens (только hold-colors + анимации) ===== */
 :root {
-  --bg: #121212;
-  --surface: #1C2221;
-  --surface2: #26302E;
-  --surface3: #2D3A37;
-  --primary: #26A69A;
-  --primary-dim: #26A69ACC;
-  --primary-light: #4DB6AC;
-  --primary-dark: #00897B;
-  --emerald: #2ECC71;
-  --gradient-accent: linear-gradient(135deg, var(--primary), var(--emerald));
-  --gradient-hero: linear-gradient(180deg, rgba(38,166,154,.08) 0%, transparent 60%);
-  --secondary: #FFB300;
-  --secondary-dim: #FFB300CC;
-  --text: #F0F0F0;
-  --text2: #BDBDBD;
-  --text3: #9E9E9E;
-  --border: #2D3D3A;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 2px 12px rgba(0,0,0,.4);
-  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-
-  /* Hold colors */
   --hold-red: #E53935;
   --hold-blue: #1E88E5;
   --hold-green: #43A047;
@@ -34,32 +11,7 @@
   --hold-black: #424242;
   --hold-brown: #8D6E63;
   --hold-gray: #757575;
-  --hold-multi: linear-gradient(135deg,#E53935,#FDD835,#1E88E5,#43A047);
-}
-
-/* ===== Global Styles ===== */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  --hold-multi: linear-gradient(135deg, #E53935, #FDD835, #1E88E5, #43A047);
 }
 
 /* ===== Route Dots (hold colors) ===== */
@@ -83,57 +35,54 @@ a {
 .hold-Gray   { background: var(--hold-gray); }
 .hold-Multi  { background: var(--hold-multi); }
 
-/* ===== Text gradient ===== */
-.hero-title-gradient {
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ===== Global Styles (не покрыто CssBaseline) ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== Scrollbar (тонкий, ненавязчивый) ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }
 
 /* ===== Animations ===== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes heroGlow {
   0%, 100% { opacity: .4; }
-  50% { opacity: .8; }
+  50%      { opacity: .8; }
 }
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
-  50% { opacity: .3; }
+  50%      { opacity: .3; }
 }
 
-/* ===== Load animations (page entry) ===== */
-.hero-content {
-  animation: fadeInUp .7s ease-out;
-}
-
-.phone-mockup {
-  animation: fadeInScale .9s ease-out;
-}
-
-/* ===== Scroll-reveal ===== */
+/* ===== Scroll-reveal (landing + dashboard) ===== */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -145,12 +94,17 @@ a {
   transform: translateY(0);
 }
 
-/* ===== Landing Page ===== */
-.landing-page {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+.scroll-reveal-delay-1 { transition-delay: .1s; }
+.scroll-reveal-delay-2 { transition-delay: .2s; }
+.scroll-reveal-delay-3 { transition-delay: .3s; }
+.scroll-reveal-delay-4 { transition-delay: .4s; }
+
+/* ===== Text gradient ===== */
+.hero-title-gradient {
+  background: linear-gradient(135deg, #26A69A, #2ECC71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ===== Nav ===== */

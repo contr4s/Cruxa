@@ -114,3 +114,7 @@ appsettings.local.json
 
 ### Logs
 logs/
+
+
+.vite/
+.env.production

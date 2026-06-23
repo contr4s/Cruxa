@@ -5,18 +5,28 @@ declare module '@mui/material/styles' {
     custom?: {
       surface2?: string;
       surface3?: string;
+      text3?: string;
+      text4?: string;
       border?: string;
+      radiusSm?: string;
       gradientAccent?: string;
       gradientHero?: string;
+      spacing?: { card?: number };
+      fontSizes?: { sectionTitle?: string; subsectionTitle?: string };
     };
   }
   interface Theme {
     custom: {
       surface2: string;
       surface3: string;
+      text3: string;
+      text4: string;
       border: string;
+      radiusSm: string;
       gradientAccent: string;
       gradientHero: string;
+      spacing: { card: number };
+      fontSizes: { sectionTitle: string; subsectionTitle: string };
     };
   }
 }
@@ -45,9 +55,19 @@ export const darkTheme = createTheme({
   custom: {
     surface2: '#26302E',
     surface3: '#2D3A37',
+    text3: '#9E9E9E',
+    text4: '#6B6B6B',
     border: '#2D3D3A',
+    radiusSm: '8px',
     gradientAccent: 'linear-gradient(135deg, #26A69A, #2ECC71)',
     gradientHero: 'linear-gradient(180deg, rgba(38,166,154,.08) 0%, transparent 60%)',
+    spacing: {
+      card: 2.5,
+    },
+    fontSizes: {
+      sectionTitle: '1.1rem',
+      subsectionTitle: '0.95rem',
+    },
   },
   typography: {
     fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",

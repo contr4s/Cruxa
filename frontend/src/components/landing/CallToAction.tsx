@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { GradientButton } from '../ui/GradientButton';
 
 export function CallToAction() {
   const navigate = useNavigate();
@@ -11,28 +11,7 @@ export function CallToAction() {
         <p className="cta-text">
           Присоединяйтесь к сообществу скалолазов. Трекинг, аналитика и новые друзья — всё в одном месте.
         </p>
-        <Button
-          onClick={() => navigate('/register')}
-          variant="contained"
-          sx={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 1,
-            py: 1.8,
-            px: 4,
-            borderRadius: 3,
-            fontSize: '0.95rem',
-            fontWeight: 600,
-            background: 'var(--gradient-accent)',
-            color: '#fff',
-            boxShadow: '0 4px 24px rgba(38,166,154,.3)',
-            '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 8px 32px rgba(38,166,154,.4)',
-              background: 'var(--gradient-accent)',
-            },
-          }}
-        >
+        <GradientButton onClick={() => navigate('/register')}>
           Присоединиться бесплатно
           <svg
             className="btn-arrow"
@@ -48,7 +27,7 @@ export function CallToAction() {
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
           </svg>
-        </Button>
+        </GradientButton>
       </div>
     </section>
   );

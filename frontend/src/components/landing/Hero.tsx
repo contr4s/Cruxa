@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, useTheme } from '@mui/material';
 import { PhoneMockup } from './PhoneMockup';
+import { GradientButton } from '../ui/GradientButton';
 
 export function Hero() {
+  const theme = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -14,13 +16,13 @@ export function Hero() {
         preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
-        <path d="M0,250 Q300,100 600,250 T1200,200" fill="none" stroke="var(--primary)" strokeWidth="1.5" opacity=".12" />
-        <path d="M0,270 Q300,120 600,270 T1200,220" fill="none" stroke="var(--primary)" strokeWidth="1" opacity=".1" />
-        <path d="M0,290 Q300,140 600,290 T1200,240" fill="none" stroke="var(--primary)" strokeWidth="1" opacity=".08" />
-        <path d="M0,230 Q300,80  600,230 T1200,180" fill="none" stroke="var(--primary)" strokeWidth="1" opacity=".1" />
-        <path d="M0,210 Q300,60  600,210 T1200,160" fill="none" stroke="var(--primary)" strokeWidth=".8" opacity=".07" />
-        <path d="M0,310 Q300,160 600,310 T1200,260" fill="none" stroke="var(--primary)" strokeWidth=".8" opacity=".07" />
-        <path d="M0,330 Q300,180 600,330 T1200,280" fill="none" stroke="var(--primary)" strokeWidth=".5" opacity=".05" />
+        <path d="M0,250 Q300,100 600,250 T1200,200" fill="none" stroke={theme.palette.primary.main} strokeWidth="1.5" opacity=".12" />
+        <path d="M0,270 Q300,120 600,270 T1200,220" fill="none" stroke={theme.palette.primary.main} strokeWidth="1" opacity=".1" />
+        <path d="M0,290 Q300,140 600,290 T1200,240" fill="none" stroke={theme.palette.primary.main} strokeWidth="1" opacity=".08" />
+        <path d="M0,230 Q300,80  600,230 T1200,180" fill="none" stroke={theme.palette.primary.main} strokeWidth="1" opacity=".1" />
+        <path d="M0,210 Q300,60  600,210 T1200,160" fill="none" stroke={theme.palette.primary.main} strokeWidth=".8" opacity=".07" />
+        <path d="M0,310 Q300,160 600,310 T1200,260" fill="none" stroke={theme.palette.primary.main} strokeWidth=".8" opacity=".07" />
+        <path d="M0,330 Q300,180 600,330 T1200,280" fill="none" stroke={theme.palette.primary.main} strokeWidth=".5" opacity=".05" />
       </svg>
 
       {/* Shine */}
@@ -44,28 +46,7 @@ export function Hero() {
           </p>
 
           <div className="hero-actions">
-            <Button
-              onClick={() => navigate('/register')}
-              variant="contained"
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 1,
-                py: 1.8,
-                px: 4,
-                borderRadius: 3,
-                fontSize: '0.95rem',
-                fontWeight: 600,
-                background: 'var(--gradient-accent)',
-                color: '#fff',
-                boxShadow: '0 4px 24px rgba(38,166,154,.3)',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 8px 32px rgba(38,166,154,.4)',
-                  background: 'var(--gradient-accent)',
-                },
-              }}
-            >
+            <GradientButton onClick={() => navigate('/register')}>
               Присоединиться
               <svg
                 className="btn-arrow"
@@ -81,7 +62,7 @@ export function Hero() {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
-            </Button>
+            </GradientButton>
 
             <Button
               variant="outlined"
@@ -94,10 +75,10 @@ export function Hero() {
                 borderRadius: 3,
                 fontSize: '0.95rem',
                 fontWeight: 500,
-                borderColor: 'var(--border)',
-                color: 'var(--text)',
+                borderColor: theme.palette.divider,
+                color: theme.palette.text.primary,
                 '&:hover': {
-                  borderColor: 'var(--text2)',
+                  borderColor: theme.palette.text.secondary,
                   background: 'rgba(255,255,255,.03)',
                 },
               }}
