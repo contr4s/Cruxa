@@ -69,7 +69,7 @@ const gradientFillPlugin = {
 
 export const CombinedChart = memo(function CombinedChart() {
   const theme = useTheme();
-  const userId = useAuthStore((s) => s.userId) ?? '550e8400-e29b-41d4-a716-446655440001';
+  const userId = useAuthStore((s) => s.userId);
   const [period, setPeriod] = useState('all');
   const { data: kruskorPoints, isLoading } = useKruskorHistory(userId, period);
 

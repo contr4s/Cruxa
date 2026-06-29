@@ -28,7 +28,7 @@ export interface RouteReviewDto {
   id: string;
   routeId: string;
   userId: string;
-  userName: string;
+  displayName: string;
   userAvatarUrl?: string;
   rating: number;
   comment: string;

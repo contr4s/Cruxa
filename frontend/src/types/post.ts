@@ -4,7 +4,7 @@ export type AscentStyle = 'Flash' | 'Onsight' | 'Redpoint' | 'Attempt' | 'Projec
 export interface PostDto {
   id: string;
   userId: string;
-  userName: string;
+  displayName: string;
   userAvatarUrl?: string;
   gymId?: string;
   gymName?: string;
@@ -25,6 +25,7 @@ export interface PostStats {
   avgGrade: string;
   duration?: number; // minutes
   totalRoutes: number;
+  maxGrade?: string;
 }
 
 export interface PostAscentDto {
@@ -36,16 +37,27 @@ export interface PostAscentDto {
   style: AscentStyle;
   isFlash?: boolean;
   notes?: string;
+  tags?: { name: string; category: string }[];
 }
 
 export interface CommentDto {
   id: string;
   postId: string;
   userId: string;
-  userName: string;
+  displayName: string;
   userAvatarUrl?: string;
   text: string;
   createdAt: string;
+}
+
+export interface PostDetailDto extends PostDto {
+  likedBy: LikedUserDto[];
+}
+
+export interface LikedUserDto {
+  id: string;
+  displayName: string;
+  userAvatarUrl?: string;
 }
 
 export interface CreatePostRequest {
@@ -61,4 +73,40 @@ export interface CreateAscentRequest {
   routeId: string;
   style: AscentStyle;
   notes?: string;
+}
+
+// Feed
+export type FeedFilter = 'subs' | 'recommended';
+
+export interface RecommendedUserDto {
+  id: string;
+  displayName: string;
+  userAvatarUrl?: string;
+  commonFollowers: number;
+  isFollowed: boolean;
+}
+
+export interface RecommendedRouteDto {
+  id: string;
+  name: string;
+  grade: string;
+  holdColor: string;
+  rating: number;
+  gymName: string;
+  gymId: string;
+}
+
+export interface RecommendedGymDto {
+  id: string;
+  name: string;
+  rating: number;
+  distance: string;
+  area?: number;
+  maxHeight?: number;
+}
+
+export interface FeedSuggestionsDto {
+  users: RecommendedUserDto[];
+  routes: RecommendedRouteDto[];
+  gyms: RecommendedGymDto[];
 }

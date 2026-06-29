@@ -30,7 +30,7 @@ const DAYS_OF_WEEK = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
 export const ActivityCalendar = memo(function ActivityCalendar() {
   const theme = useTheme();
-  const userId = useAuthStore((s) => s.userId) ?? '550e8400-e29b-41d4-a716-446655440001';
+  const userId = useAuthStore((s) => s.userId);
   const { data: activityData, isLoading } = useMonthlyActivity(userId);
   const data = activityData;
   const [currentMonth, setCurrentMonth] = useState(data?.month ?? 5);

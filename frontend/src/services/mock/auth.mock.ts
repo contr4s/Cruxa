@@ -18,6 +18,7 @@ export async function mockLogin(data: LoginRequest): Promise<AuthResponse> {
     token: MOCK_TOKEN,
     userId: '550e8400-e29b-41d4-a716-446655440001',
     username: 'alexey',
+    displayName: 'Алексей Кузнецов',
     email: data.email,
     role: 'Climber',
   };
@@ -38,6 +39,7 @@ export async function mockRegister(data: RegisterRequest): Promise<AuthResponse>
     token: MOCK_TOKEN,
     userId: '550e8400-e29b-41d4-a716-446655440001',
     username: data.username,
+    displayName: 'Алексей Кузнецов',
     email: data.email,
     role: 'Climber',
   };

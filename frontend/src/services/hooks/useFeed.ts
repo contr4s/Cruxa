@@ -1,11 +1,19 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getFeed, toggleLike, getComments, addComment } from '../posts.service';
-import type { PostDto, CommentDto } from '../../types/post';
+import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions } from '../posts.service';
+import type { PostDto, CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
 
-export function useFeed() {
+export function useFeed(filter?: FeedFilter) {
   return useQuery<PostDto[]>({
-    queryKey: ['feed'],
-    queryFn: getFeed,
+    queryKey: ['feed', filter],
+    queryFn: () => getFeed(filter),
+  });
+}
+
+export function usePost(postId: string) {
+  return useQuery<PostDetailDto | null>({
+    queryKey: ['post', postId],
+    queryFn: () => getPostById(postId),
+    enabled: !!postId,
   });
 }
 
@@ -25,6 +33,33 @@ export function useToggleLike() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feed'] });
     },
+  });
+}
+
+export function useDeletePost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (postId: string) => deletePost(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feed'] });
+    },
+  });
+}
+
+export function useCreatePost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => createPost(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feed'] });
+    },
+  });
+}
+
+export function useFeedSuggestions() {
+  return useQuery<FeedSuggestionsDto>({
+    queryKey: ['feedSuggestions'],
+    queryFn: getFeedSuggestions,
   });
 }
 

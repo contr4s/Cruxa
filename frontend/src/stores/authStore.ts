@@ -6,6 +6,7 @@ interface AuthState {
   token: string | null;
   userId: string | null;
   username: string | null;
+  displayName: string | null;
   role: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -20,6 +21,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   token: null,
   userId: null,
   username: null,
+  displayName: null,
   role: null,
   isAuthenticated: false,
   isLoading: false,
@@ -35,6 +37,7 @@ export const useAuthStore = create<AuthState>((set) => ({
           token,
           userId: user.userId,
           username: user.username,
+          displayName: user.displayName,
           role: user.role,
           isAuthenticated: true,
         });
@@ -55,6 +58,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         token: response.token,
         userId: response.userId,
         username: response.username,
+        displayName: response.displayName,
         role: response.role,
         isAuthenticated: true,
         isLoading: false,
@@ -75,6 +79,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         token: response.token,
         userId: response.userId,
         username: response.username,
+        displayName: response.displayName,
         role: response.role,
         isAuthenticated: true,
         isLoading: false,
@@ -92,6 +97,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       token: null,
       userId: null,
       username: null,
+      displayName: null,
       role: null,
       isAuthenticated: false,
     });

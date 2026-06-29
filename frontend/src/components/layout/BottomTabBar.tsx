@@ -8,10 +8,10 @@ export function BottomTabBar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { username } = useAuthStore();
+  const { displayName } = useAuthStore();
 
   const currentPath = location.pathname;
-  const initial = username ? username[0].toUpperCase() : '?';
+  const initial = displayName ? displayName[0].toUpperCase() : '?';
 
   const handleTabClick = (path: string) => {
     navigate(path);

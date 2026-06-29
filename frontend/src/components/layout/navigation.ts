@@ -27,8 +27,8 @@ export const NAV_ITEMS: NavItem[] = [
  * Список пунктов для нижней панели (без разделителей).
  */
 export const TAB_ITEMS: NavItem[] = [
-  { path: '/profile', label: 'Профиль' },
+  { path: '/feed', icon: NewspaperIcon, label: 'Лента' },
   { path: '/workouts', icon: FitnessCenterIcon, label: 'Тренировки' },
   { path: '/gyms', icon: MapIcon, label: 'Скалодромы' },
-  { path: '/feed', icon: NewspaperIcon, label: 'Лента' },
+  { path: '/profile', label: 'Профиль' },
 ];

@@ -1,27 +1,22 @@
-import { useState } from 'react';
-import { Box, Typography, FormControl, Select, MenuItem, CircularProgress, useTheme } from '@mui/material';
-import { PostCard } from './PostCard';
-import { filterSelectStyle } from '../../theme/cardStyles';
+import { Box, CircularProgress, Typography, useTheme } from '@mui/material';
+import { FitnessCenter, Newspaper } from '@mui/icons-material';
+import { PostCard } from '../posts/PostCard';
+import { useAuthStore } from '../../stores/authStore';
 import type { PostDto, CommentDto } from '../../types/post';
 
 interface WorkoutFeedProps {
   posts: PostDto[];
   isLoading?: boolean;
+  emptyStateMessage?: string;
+  defaultTab?: number;
   getComments: (postId: string) => Promise<CommentDto[]>;
   onLikeToggle: (postId: string, wasLiked: boolean) => void;
-  onCommentAdded: (postId: string) => void;
+  onCommentAdded: () => void;
 }
 
-const SORT_OPTIONS = [
-  { value: 'recent', label: 'Сначала новые' },
-  { value: 'popular', label: 'Популярные' },
-  { value: 'subs', label: 'Подписки' },
-  { value: 'recommended', label: 'Рекомендуемые' },
-];
-
-export function WorkoutFeed({ posts, isLoading, getComments, onLikeToggle, onCommentAdded }: WorkoutFeedProps) {
+export function WorkoutFeed({ posts, isLoading, emptyStateMessage, defaultTab = 1, getComments, onLikeToggle, onCommentAdded }: WorkoutFeedProps) {
   const theme = useTheme();
-  const [sort, setSort] = useState('recent');
+  const currentUserId = useAuthStore((s) => s.userId);
 
   if (isLoading) {
     return (
@@ -33,57 +28,32 @@ export function WorkoutFeed({ posts, isLoading, getComments, onLikeToggle, onCom
 
   return (
     <Box>
-      {/* Header */}
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, flexWrap: 'wrap', gap: 1 }}>
-        <Typography variant="h3" sx={{ fontSize: '1.15rem', fontWeight: 700, color: theme.palette.text.primary }}>
-          💪 Тренировки
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <FormControl size="small" sx={{ minWidth: 140 }}>
-            <Select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              sx={filterSelectStyle(theme)}
-            >
-              {SORT_OPTIONS.map((opt) => (
-                <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-
-      {/* Create post CTA */}
-      <Box
-        sx={{
-          background: theme.palette.background.paper,
-          borderRadius: `${theme.shape.borderRadius}px`,
-          border: `1px dashed ${theme.palette.divider}`,
-          p: 2,
-          mb: 2,
-          cursor: 'pointer',
-          transition: 'background .15s',
-          '&:hover': { background: theme.custom.surface2 },
-        }}
-      >
-        <Typography sx={{ fontSize: '0.85rem', color: theme.custom.text3, textAlign: 'center' }}>
-          ✏️ Написать о тренировке...
-        </Typography>
-      </Box>
-
-      {/* Post list */}
       {posts.length === 0 ? (
-        <Box sx={{ textAlign: 'center', py: 4 }}>
-          <Typography sx={{ fontSize: '0.9rem', color: theme.custom.text3 }}>
-            Пока нет записей
-          </Typography>
+        <Box sx={{ textAlign: 'center', py: 6 }}>
+          {emptyStateMessage ? (
+            <>
+              <Newspaper sx={{ fontSize: 40, color: theme.palette.text.secondary, mb: 1 }} />
+              <Typography sx={{ fontSize: '0.9rem', color: theme.palette.text.secondary }}>
+                {emptyStateMessage}
+              </Typography>
+            </>
+          ) : (
+            <>
+              <FitnessCenter sx={{ fontSize: 40, color: theme.palette.text.secondary, mb: 1 }} />
+              <Typography sx={{ fontSize: '0.9rem', color: theme.palette.text.secondary }}>
+                У вас пока нет тренировок. Нажмите ＋ внизу экрана.
+              </Typography>
+            </>
+          )}
         </Box>
       ) : (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2}}>
           {posts.map((post) => (
             <PostCard
               key={post.id}
               post={post}
+              isOwner={post.userId === currentUserId}
+              defaultTab={defaultTab}
               getComments={getComments}
               onLikeToggle={onLikeToggle}
               onCommentAdded={onCommentAdded}

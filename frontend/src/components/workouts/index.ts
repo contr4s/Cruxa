@@ -1,3 +1,3 @@
 export { WorkoutFeed } from './WorkoutFeed';
-export { PostCard } from './PostCard';
-export { CommentSection } from './CommentSection';
+export { WeekStats } from './WeekStats';
+export { AchievementsPanel } from './AchievementsPanel';

@@ -9,7 +9,7 @@ export function Sidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { username, logout } = useAuthStore();
+  const { displayName, logout } = useAuthStore();
 
   const currentPath = location.pathname;
 
@@ -18,7 +18,7 @@ export function Sidebar() {
     navigate('/login', { replace: true });
   };
 
-  const initial = username ? username[0].toUpperCase() : '?';
+  const initial = displayName ? displayName[0].toUpperCase() : '?';
 
   return (
     <Box

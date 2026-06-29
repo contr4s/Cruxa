@@ -5,7 +5,7 @@ export const MOCK_POSTS: PostDto[] = [
   {
     id: 'p1',
     userId: '550e8400-e29b-41d4-a716-446655440001',
-    userName: 'Алексей К.',
+    displayName: 'Алексей Кузнецов',
     gymId: 'g1',
     gymName: 'RockZone',
     body: 'Отличная тренировка! Наконец-то закрыл проект 6C 🎉',
@@ -26,7 +26,7 @@ export const MOCK_POSTS: PostDto[] = [
   {
     id: 'p2',
     userId: '660e8400-e29b-41d4-a716-446655440002',
-    userName: 'Мария С.',
+    displayName: 'Мария Соколова',
     gymId: 'g2',
     gymName: 'Big Wall',
     body: 'Утренняя сессия перед работой 🔥',
@@ -46,7 +46,7 @@ export const MOCK_POSTS: PostDto[] = [
   {
     id: 'p3',
     userId: '770e8400-e29b-41d4-a716-446655440003',
-    userName: 'Дмитрий В.',
+    displayName: 'Дмитрий Волков',
     gymId: 'g3',
     gymName: 'LimeIt',
     body: 'Работаем над динамикой 💪',
@@ -67,19 +67,19 @@ export const MOCK_POSTS: PostDto[] = [
 
 const MOCK_COMMENTS: Record<string, CommentDto[]> = {
   p1: [
-    { id: 'c1', postId: 'p1', userId: 'u2', userName: 'Мария С.', text: 'Красава! 🔥', createdAt: '2026-06-15T20:00:00Z' },
-    { id: 'c2', postId: 'p1', userId: 'u3', userName: 'Дмитрий В.', text: 'Классная тренировка!', createdAt: '2026-06-15T21:15:00Z' },
-    { id: 'c3', postId: 'p1', userId: 'u4', userName: 'Анна П.', text: 'Сколько раз ходил на дракона?', createdAt: '2026-06-15T22:00:00Z' },
-    { id: 'c4', postId: 'p1', userId: '550e8400-e29b-41d4-a716-446655440001', userName: 'Алексей К.', text: 'Анна, 3 попытки, зафлешил 💪', createdAt: '2026-06-15T22:30:00Z' },
+    { id: 'c1', postId: 'p1', userId: 'u2', displayName: 'Мария Соколова', text: 'Красава! 🔥', createdAt: '2026-06-15T20:00:00Z' },
+    { id: 'c2', postId: 'p1', userId: 'u3', displayName: 'Дмитрий Волков', text: 'Классная тренировка!', createdAt: '2026-06-15T21:15:00Z' },
+    { id: 'c3', postId: 'p1', userId: 'u4', displayName: 'Анна Павлова', text: 'Сколько раз ходил на дракона?', createdAt: '2026-06-15T22:00:00Z' },
+    { id: 'c4', postId: 'p1', userId: '550e8400-e29b-41d4-a716-446655440001', displayName: 'Алексей Кузнецов', text: 'Анна, 3 попытки, зафлешил 💪', createdAt: '2026-06-15T22:30:00Z' },
   ],
   p2: [
-    { id: 'c5', postId: 'p2', userId: 'u3', userName: 'Дмитрий В.', text: 'Утренние — самые лучшие!', createdAt: '2026-06-14T09:00:00Z' },
-    { id: 'c6', postId: 'p2', userId: 'u5', userName: 'Елена К.', text: 'Согласна 👍', createdAt: '2026-06-14T10:30:00Z' },
+    { id: 'c5', postId: 'p2', userId: 'u3', displayName: 'Дмитрий Волков', text: 'Утренние — самые лучшие!', createdAt: '2026-06-14T09:00:00Z' },
+    { id: 'c6', postId: 'p2', userId: 'u5', displayName: 'Елена Крылова', text: 'Согласна 👍', createdAt: '2026-06-14T10:30:00Z' },
   ],
   p3: [
-    { id: 'c7', postId: 'p3', userId: 'u2', userName: 'Мария С.', text: 'Динамика огонь!', createdAt: '2026-06-13T21:00:00Z' },
-    { id: 'c8', postId: 'p3', userId: 'u4', userName: 'Анна П.', text: 'Какой зал?', createdAt: '2026-06-13T21:30:00Z' },
-    { id: 'c9', postId: 'p3', userId: '770e8400-e29b-41d4-a716-446655440003', userName: 'Дмитрий В.', text: 'LimeIt', createdAt: '2026-06-13T22:00:00Z' },
+    { id: 'c7', postId: 'p3', userId: 'u2', displayName: 'Мария Соколова', text: 'Динамика огонь!', createdAt: '2026-06-13T21:00:00Z' },
+    { id: 'c8', postId: 'p3', userId: 'u4', displayName: 'Анна Павлова', text: 'Какой зал?', createdAt: '2026-06-13T21:30:00Z' },
+    { id: 'c9', postId: 'p3', userId: '770e8400-e29b-41d4-a716-446655440003', displayName: 'Дмитрий Волков', text: 'LimeIt', createdAt: '2026-06-13T22:00:00Z' },
   ],
 };
 
@@ -100,3 +100,4 @@ export async function mockToggleLike(_postId: string, _isLiked: boolean): Promis
   // In mock mode, just return success
   return;
 }
+

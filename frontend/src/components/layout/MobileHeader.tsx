@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material';
+import { Search } from '@mui/icons-material';
 
 export function MobileHeader() {
   const theme = useTheme();
@@ -48,7 +49,7 @@ export function MobileHeader() {
           cursor: 'default',
         }}
       >
-        <Box component="span" sx={{ fontSize: '1rem', opacity: 0.6, lineHeight: 1 }}>🔍</Box>
+        <Search sx={{ fontSize: 18, opacity: 0.6 }} />
         <Box component="span" sx={{ color: theme.custom.text3, fontSize: '0.85rem' }}>Поиск</Box>
       </Box>
     </Box>

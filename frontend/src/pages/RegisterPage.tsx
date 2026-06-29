@@ -8,7 +8,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const { register, isLoading, error } = useAuthStore();
 
-  const [username, setUsername] = useState('');
+  const [username, setusername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -58,7 +58,7 @@ export default function RegisterPage() {
       <TextField
         label="Имя пользователя"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => setusername(e.target.value)}
         fullWidth
         required
         autoFocus
