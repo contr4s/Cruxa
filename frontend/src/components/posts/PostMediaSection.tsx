@@ -41,7 +41,7 @@ export function PostMediaSection({ ascents, mediaUrls, tab, onTabChange, onPhoto
           />
         )}
       </Box>
-      {!isMobile && <PostAscentList ascents={ascents} maxVisible={tab === 0 ? 16 : 8} direction={isMobile ? 'row' : 'column'} />}
+      {!isMobile && <PostAscentList ascents={ascents} maxVisible={tab === 0 ? 16 : 10} direction={isMobile ? 'row' : 'column'} />}
     </Box>
   );
 }

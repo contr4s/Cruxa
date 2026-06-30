@@ -1,6 +1,6 @@
 import { Box, Avatar, Typography, useTheme, Button } from '@mui/material';
-import { LocationOn, PersonAdd } from '@mui/icons-material';
-import { getGymBadgeColor } from '../../constants/gymBadges';
+import { PersonAdd } from '@mui/icons-material';
+import { GymChip } from '../ui/GymChip';
 
 interface PostDetailAuthorProps {
   avatar?: string;
@@ -12,10 +12,9 @@ interface PostDetailAuthorProps {
   onSubscribe?: () => void;
 }
 
-export function PostDetailAuthor({ avatar, displayName, gymName, createdAt, isOwner, onSubscribe }: PostDetailAuthorProps) {
+export function PostDetailAuthor({ avatar, displayName, gymName, gymId, createdAt, isOwner, onSubscribe }: PostDetailAuthorProps) {
   const theme = useTheme();
   const initial = displayName.charAt(0).toUpperCase();
-  const gymColor = gymName ? getGymBadgeColor(gymName) : undefined;
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, px: 2.5, py: 2 }}>
@@ -42,9 +41,9 @@ export function PostDetailAuthor({ avatar, displayName, gymName, createdAt, isOw
         <Typography sx={{ fontSize: '0.78rem', color: theme.palette.text.secondary, mt: 0.5 }}>
           {new Date(createdAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </Typography>
-        {gymName && gymColor && (
-          <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.3, mt: 0.5, background: `${gymColor}22`, color: gymColor, borderRadius: '100px', px: 1, py: 0.25, fontSize: '0.78rem', fontWeight: 700 }}>
-            <LocationOn sx={{ fontSize: 14 }} /> {gymName}
+        {gymName && (
+          <Box sx={{ mt: 0.5 }}>
+            <GymChip name={gymName} gymId={gymId} />
           </Box>
         )}
       </Box>

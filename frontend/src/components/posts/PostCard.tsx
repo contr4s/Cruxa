@@ -65,6 +65,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>(
         <PostHeader
           displayName={post.displayName}
           gymName={post.gymName}
+          gymId={post.gymId}
           visibility={post.visibility}
           isOwner={isOwner}
           isRecommended={isRecommended}
@@ -76,8 +77,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>(
           }
         />
 
-        {/* Description + stats — кликабельные */
-        }
+        {/* Description + stats — кликабельные */}
         <Box
           sx={{ cursor: "pointer", "&:hover": { opacity: 0.95 } }}
           onClick={openPost}

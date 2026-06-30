@@ -31,16 +31,16 @@ export function FeedRouteRecommendations({ routes }: FeedRouteRecommendationsPro
           sx={{
             display: 'flex', alignItems: 'center', gap: 1, py: 0.5, px: 0.5, mx: -0.5, borderRadius: 1,
             transition: 'background .2s ease',
-            cursor: 'pointer',
-            '&:hover': { bgcolor: theme.custom.surface2 },
           }}
         >
           <RouteFull
+            routeId={route.id}
             name={route.name}
             grade={route.grade}
             holdColor={route.holdColor}
             rating={route.rating}
             gymName={route.gymName}
+            gymId={route.gymId}
           />
         </Box>
       ))}

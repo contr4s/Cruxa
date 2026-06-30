@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, memo, useRef } from 'react';
 import { Box, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
@@ -20,6 +20,7 @@ import { CHART_TOOLTIP, CHART_ANIMATION } from '../../../constants/chart';
 import { useKruskorHistory } from '../../../services/hooks/useUser';
 import { useAuthStore } from '../../../stores/authStore';
 import { LazyCard } from '../../ui/LazyCard';
+import { useChartResize } from '../../../hooks/useChartResize';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler);
 // gradientFillPlugin is passed via plugins prop to <Line>
@@ -69,8 +70,11 @@ const gradientFillPlugin = {
 
 export const CombinedChart = memo(function CombinedChart() {
   const theme = useTheme();
-  const userId = useAuthStore((s) => s.userId);
   const [period, setPeriod] = useState('all');
+  const chartRef = useRef<ChartJS>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useChartResize(chartRef, containerRef, [period]);
+  const userId = useAuthStore((s) => s.userId);
   const { data: kruskorPoints, isLoading } = useKruskorHistory(userId, period);
 
   const data = kruskorPoints ?? [];
@@ -110,7 +114,7 @@ export const CombinedChart = memo(function CombinedChart() {
   };
 
   const options = {
-    responsive: true,
+    responsive: false,
     maintainAspectRatio: false,
     interaction: {
       intersect: false,
@@ -212,9 +216,9 @@ export const CombinedChart = memo(function CombinedChart() {
       />
 
       {/* Chart */}
-      <Box sx={{ width: '100%', height: { xs: 340, md: 400 } }}>
+      <Box ref={containerRef} sx={{ width: '100%', height: { xs: 340, md: 400 } }}>
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <Line data={chartData} options={options as any} plugins={[gradientFillPlugin]} />
+        <Line ref={chartRef} data={chartData} options={options as any} plugins={[gradientFillPlugin]} />
       </Box>
 
       {/* Bottom stats */}

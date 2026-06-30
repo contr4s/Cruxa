@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Card } from '../../theme/cardStyles';
 import { SectionHeader } from '../ui/SectionHeader';
@@ -9,12 +10,13 @@ import { useAuthStore } from '../../stores/authStore';
 import { LazyCard } from '../ui/LazyCard';
 
 export function TopRoutes() {
-  const userId = useAuthStore((s) => s.userId);
-  const { data: routesData, isLoading } = useTopRoutes(userId);
+  const userId = useAuthStore((s) => s.userId ?? '');
+  const { data: routesData, isLoading } = useTopRoutes(userId as string);
   const routes = routesData?.routes ?? [];
   const totalRoutes = routesData?.totalRoutes;
   const avgGrade = routesData?.avgGrade;
   const maxGrade = routesData?.maxGrade;
+  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <LazyCard loading={isLoading} minHeight={360}>
@@ -34,19 +36,17 @@ export function TopRoutes() {
               gap: 1.5,
               p: '6px 8px',
               borderRadius: '8px',
-              cursor: 'pointer',
               transition: 'background .15s',
-              textDecoration: 'none',
-              color: theme.palette.text.primary,
-              '&:hover': { background: theme.custom.surface2 },
             }}
           >
             <RouteFull
+              routeId={route.id}
               name={route.name}
               grade={route.grade}
               holdColor={route.holdColor}
               rating={route.rating}
               gymName={route.gymName}
+              gymId={route.gymId}
               ascentStyle={route.ascentType}
             />
           </Box>

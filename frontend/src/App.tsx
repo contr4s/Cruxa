@@ -15,10 +15,10 @@ const FeedPage = lazy(() => import('./pages/FeedPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const WorkoutsPage = lazy(() => import('./pages/WorkoutsPage'));
 const GymsPage = lazy(() => import('./pages/GymsPage'));
+const GymDetailPage = lazy(() => import('./pages/GymDetailPage'));
 const PostDetailPage = lazy(() => import('./pages/PostDetailPage'));
-
-function AppRoutes() {
-  const location = useLocation();
+const RouteDetailPage = lazy(() => import('./pages/RouteDetailPage'));
+function AppRoutes() {  const location = useLocation();
   const state = location.state as { backgroundLocation?: Location } | null;
 
   return (
@@ -34,11 +34,12 @@ function AppRoutes() {
           <Route path="/workouts/new" element={<StateDisplay type="empty" icon={<FitnessCenterIcon />} message="Скоро" description="Форма создания тренировки — скоро" />} />
           <Route path="/post/:id" element={<PostDetailPage />} />
           <Route path="/gyms" element={<GymsPage />} />
-        </Route>
-      </Routes>
-      {state?.backgroundLocation && (
+          <Route path="/gyms/:id" element={<GymDetailPage />} />
+          <Route path="/route/:id" element={<RouteDetailPage />} />
+        </Route>      </Routes>      {state?.backgroundLocation && (
         <Routes>
           <Route path="/post/:id" element={<PostDetailPage />} />
+          <Route path="/route/:id" element={<RouteDetailPage />} />
         </Routes>
       )}
     </>

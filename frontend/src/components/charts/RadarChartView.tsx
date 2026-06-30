@@ -1,9 +1,11 @@
+import { useRef } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 import { CHART_TOOLTIP, CHART_ANIMATION } from '../../constants/chart';
 import { createCenterTextPlugin } from '../profile/analytics/centerTextPlugin';
 import { CATEGORY_COLORS } from '../../constants/gymPalette';
+import { useChartResize } from '../../hooks/useChartResize';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
@@ -20,6 +22,9 @@ interface RadarChartViewProps {
 
 export function RadarChartView({ labels, values, unit = '%', centerValue, height = 280, showCenter = true }: RadarChartViewProps) {
   const theme = useTheme();
+  const chartRef = useRef<ChartJS<'radar'>>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useChartResize(chartRef, containerRef, [labels, values, height]);
   const maxVal = Math.max(...values, 1);
   const avg = centerValue ?? Math.round(values.reduce((s, x) => s + x, 0) / values.length);
   const plugins = showCenter ? [centerTextPlugin] : [];
@@ -43,7 +48,7 @@ export function RadarChartView({ labels, values, unit = '%', centerValue, height
   };
 
   const options = {
-    responsive: true,
+    responsive: false,
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
@@ -66,11 +71,14 @@ export function RadarChartView({ labels, values, unit = '%', centerValue, height
         ticks: { color: '#9E9E9E', backdropColor: 'transparent', stepSize: unit === '%' ? 10 : Math.ceil(scaleMax / 5), display: false },
       },
     },
+    layout: {
+      padding: { bottom: 30 },
+    },
   };
 
   return (
-    <Box sx={{ width: '100%', height, p: 1 }}>
-      <Radar data={chartData} options={options} plugins={plugins} />
+    <Box ref={containerRef} sx={{ width: '100%', height, p: 1 }}>
+      <Radar ref={chartRef} data={chartData} options={options} plugins={plugins} />
     </Box>
   );
 }

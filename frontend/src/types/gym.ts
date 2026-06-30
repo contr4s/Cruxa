@@ -24,6 +24,7 @@ export interface GymDto {
   routeCount: number;
   activeRouteCount: number;
   isFavorite: boolean;
+  distance?: string;
 }
 
 export interface GymHours {

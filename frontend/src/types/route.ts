@@ -14,6 +14,7 @@ export interface RouteDto {
   setterId: string;
   setterName: string;
   setterAvatarUrl?: string;
+  setterGender?: 'male' | 'female';
   tags: string[];
   description?: string;
   photoUrls: string[];

@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { useMemo, useRef, useEffect } from 'react';
+import { Box, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFeed, useToggleLike } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
@@ -11,19 +12,46 @@ import { AsidePanel } from '../components/layout/AsidePanel';
 
 export default function WorkoutsPage() {
   const navigate = useNavigate();
-  const { data: posts, isLoading } = useFeed();
+  const {
+    data: pages,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useFeed();
+  const posts = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
   const toggleLikeMutation = useToggleLike();
+
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) fetchNextPage();
+      },
+      { rootMargin: '300px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, pages]);
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', gap: 1 }}>
       <PageContainer sx={{ mx: 0, maxWidth: 720 }}>
         <WorkoutFeed
-          posts={posts ?? []}
+          posts={posts}
           isLoading={isLoading}
           getComments={getComments}
           onLikeToggle={(postId, wasLiked) => toggleLikeMutation.mutate({ postId, isLiked: wasLiked })}
           onCommentAdded={() => {}}
         />
+        {isFetchingNextPage && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
+            <CircularProgress size={24} />
+          </Box>
+        )}
+        <div ref={sentinelRef} />
         <Fab onClick={() => navigate('/workouts/new')} />
       </PageContainer>
       <AsidePanel>

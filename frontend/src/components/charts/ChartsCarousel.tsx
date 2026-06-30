@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { BarChart, Radar, DonutLarge } from '@mui/icons-material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -30,26 +30,22 @@ export function ChartsCarousel({ pyramid, distribution, categories }: ChartsCaro
   const slides: React.ReactNode[] = [];
 
   // Skills radar — всегда первый
-  slides.push(
-    <ChartSlide
-      icon={<Radar sx={{ fontSize: 18 }} />}
-      title="Трассы"
-      action={categoryKeys.length > 1 ? <RadarCategorySelect categories={categories} value={category} onChange={setCategory} /> : undefined}
-    >
-      {skills.length > 0 ? (
+  if (skills.length > 0) {
+    slides.push(
+      <ChartSlide
+        icon={<Radar sx={{ fontSize: 18 }} />}
+        title="Трассы"
+        action={categoryKeys.length > 1 ? <RadarCategorySelect categories={categories} value={category} onChange={setCategory} /> : undefined}
+      >
         <RadarChartView
           labels={skills.map((s) => s.name)}
           values={skills.map((s) => s.value)}
           unit="шт"
           showCenter={false}
         />
-      ) : (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
-          <Typography sx={{ color: theme.palette.text.secondary, fontSize: '0.85rem' }}>Нет данных</Typography>
-        </Box>
-      )}
-    </ChartSlide>
-  );
+      </ChartSlide>
+    );
+  }
 
   slides.push(
     <ChartSlide icon={<BarChart sx={{ fontSize: 18 }} />} title="Сложность">

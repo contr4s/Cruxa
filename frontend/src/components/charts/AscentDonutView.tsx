@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -5,6 +6,7 @@ import { ASCENT_COLORS } from '../../constants/ascent';
 import { CHART_TOOLTIP, CHART_ANIMATION } from '../../constants/chart';
 import { createCenterTextPlugin } from '../profile/analytics/centerTextPlugin';
 import type { AscentTypeDistribution } from '../../types/user';
+import { useChartResize } from '../../hooks/useChartResize';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -16,6 +18,9 @@ interface AscentDonutViewProps {
 
 export function AscentDonutView({ data }: AscentDonutViewProps) {
   const theme = useTheme();
+  const chartRef = useRef<ChartJS<'doughnut'>>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useChartResize(chartRef, containerRef, [data]);
   const total = data.reduce((s, x) => s + x.count, 0);
 
   const chartData = {
@@ -30,7 +35,7 @@ export function AscentDonutView({ data }: AscentDonutViewProps) {
   };
 
   const options = {
-    responsive: true,
+    responsive: false,
     maintainAspectRatio: false,
     cutout: '65%',
     animation: { animateRotate: true, ...CHART_ANIMATION },
@@ -43,8 +48,8 @@ export function AscentDonutView({ data }: AscentDonutViewProps) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 3 }, alignItems: 'center', p: 2 }}>
-      <Box sx={{ width: 160, height: 160, flexShrink: 0 }}>
-        <Doughnut data={chartData} options={options} plugins={[centerTextPlugin]} />
+      <Box ref={containerRef} sx={{ width: 160, height: 160, flexShrink: 0 }}>
+        <Doughnut ref={chartRef} data={chartData} options={options} plugins={[centerTextPlugin]} />
       </Box>
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4px 16px', flex: 1, width: '100%' }}>
         {data.map((item) => (

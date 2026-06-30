@@ -4,10 +4,11 @@ import type { SxProps } from '@mui/system';
 interface FabProps {
   onClick: () => void;
   label?: string;
+  icon?: string;
   sx?: SxProps;
 }
 
-export function Fab({ onClick, label = 'Новая тренировка', sx }: FabProps) {
+export function Fab({ onClick, label = 'Новая тренировка', icon, sx }: FabProps) {
   return (
     <Box
       component="button"
@@ -47,7 +48,7 @@ export function Fab({ onClick, label = 'Новая тренировка', sx }: 
         ...sx,
       }}
     >
-      <Box sx={{ fontSize: '1.3rem', lineHeight: 1 }}>＋</Box>
+      <Box sx={{ fontSize: '1.3rem', lineHeight: 1 }}>{icon || '＋'}</Box>
       <Box
         component="span"
         sx={{

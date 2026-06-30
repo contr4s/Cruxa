@@ -1,11 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions } from '../posts.service';
 import type { PostDto, CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
 
 export function useFeed(filter?: FeedFilter) {
-  return useQuery<PostDto[]>({
+  return useInfiniteQuery({
     queryKey: ['feed', filter],
-    queryFn: () => getFeed(filter),
+    queryFn: ({ pageParam = 1 }) => getFeed(filter, pageParam, 10),
+    getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.page + 1 : undefined),
+    initialPageParam: 1,
   });
 }
 

@@ -28,6 +28,7 @@ export function PostAscentList({ ascents, maxVisible = Infinity, direction = 'co
       {visible.map((ascent) => (
         <AscentRow
           key={ascent.id}
+          routeId={ascent.routeId}
           routeName={ascent.routeName}
           grade={ascent.grade}
           style={ascent.style}

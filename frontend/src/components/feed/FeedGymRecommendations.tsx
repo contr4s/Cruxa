@@ -1,7 +1,10 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { FitnessCenter, Star, Height, SpaceDashboard } from '@mui/icons-material';
+import { FitnessCenter, Star, Height, ShowChart, NearMe } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import type { RecommendedGymDto } from '../../types/post';
 import { getRatingColor } from '../../constants/rating';
+import { GymBadge } from '../ui/GymBadge';
+import { pluralize } from '../../utils/pluralize';
 
 interface FeedGymRecommendationsProps {
   gyms: RecommendedGymDto[];
@@ -9,6 +12,7 @@ interface FeedGymRecommendationsProps {
 
 export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Box sx={{
@@ -28,6 +32,7 @@ export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
       {gyms.map((gym) => (
         <Box
           key={gym.id}
+          onClick={() => navigate(`/gyms/${gym.id}`)}
           sx={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 0.5, px: 0.5, mx: -0.5, borderRadius: 1,
             transition: 'background .2s ease',
@@ -35,28 +40,28 @@ export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
             '&:hover': { bgcolor: theme.custom.surface2 },
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flex: 1, minWidth: 0 }}>
-            <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary, pr: 0.5 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flex: 1, minWidth: 0, p: 0.25 }}>
+            <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary, pr: 0.25 }}>
               {gym.name}
             </Typography>
-            {gym.maxHeight !== undefined && (
-              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.25, px: 0.5, py: 0.15, borderRadius: '8px', bgcolor: theme.custom.surface2, fontSize: '0.62rem', fontWeight: 600, color: theme.palette.text.secondary }}>
-                <Height sx={{ fontSize: 12 }} /> {gym.maxHeight}м
-              </Box>
+            {gym.activeRouteCount != null && (
+              <GymBadge icon={<ShowChart sx={{ fontSize: 12 }} />} label={`${gym.activeRouteCount} ${pluralize(gym.activeRouteCount, ['трасса', 'трассы', 'трасс'])}`} />
             )}
-            {gym.area !== undefined && (
-              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.25, px: 0.5, py: 0.15, borderRadius: '8px', bgcolor: theme.custom.surface2, fontSize: '0.62rem', fontWeight: 600, color: theme.palette.text.secondary }}>
-                <SpaceDashboard sx={{ fontSize: 12 }} /> {gym.area}м²
-              </Box>
+            {gym.maxHeight !== undefined && (
+              <GymBadge icon={<Height sx={{ fontSize: 12 }} />} label={`${gym.maxHeight}м`} />
             )}
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
             <Typography sx={{ fontSize: '0.72rem', fontWeight: 600, color: getRatingColor(gym.rating), display: 'flex', alignItems: 'center', gap: 0.25 }}>
               <Star sx={{ fontSize: 14 }} /> {gym.rating.toFixed(1)}
             </Typography>
-            <Typography sx={{ fontSize: '0.72rem', color: theme.palette.text.secondary }}>
-              {gym.distance}
-            </Typography>
+            {gym.distance && (
+              <GymBadge
+                icon={<NearMe sx={{ fontSize: 12 }} />}
+                label={gym.distance}
+                sx={{ bgcolor: 'transparent', border: `1px solid ${theme.palette.divider}`, color: theme.palette.text.primary }}
+              />
+            )}
           </Box>
         </Box>
       ))}

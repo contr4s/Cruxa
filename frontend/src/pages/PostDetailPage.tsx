@@ -1,5 +1,4 @@
-import { Box, Typography, useTheme, IconButton, useMediaQuery } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { usePost } from '../services/hooks/useFeed';
@@ -9,6 +8,7 @@ import { CommentSection } from '../components/workouts/CommentSection';
 import { PostDetailAuthor, PostDescription, PostActions, MediaToggle, PostMediaCarousel, PostAscentList } from '../components/posts';
 import { ChartsCarousel } from '../components/charts/ChartsCarousel';
 import { PageContainer } from '../components/layout/PageContainer';
+import { ModalOverlay } from '../components/ui/ModalOverlay';
 import { computePyramid, computeDistribution, computeCategories } from '../utils/ascentStats';
 
 export default function PostDetailPage() {
@@ -140,6 +140,7 @@ export default function PostDetailPage() {
           <PostDetailAuthor
             displayName={post.displayName}
             gymName={post.gymName}
+            gymId={post.gymId}
             createdAt={post.createdAt}
             isOwner={post.userId === currentUserId}
           />
@@ -184,6 +185,7 @@ export default function PostDetailPage() {
         <PostDetailAuthor
           displayName={post.displayName}
           gymName={post.gymName}
+          gymId={post.gymId}
           createdAt={post.createdAt}
           isOwner={post.userId === currentUserId}
         />
@@ -230,52 +232,9 @@ export default function PostDetailPage() {
   );
   if (isModal) {
     return (
-      <Box
-        sx={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 1300,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: 'rgba(0,0,0,0.85)',
-          p: { xs: 0, sm: 2 },
-        }}
-        onClick={handleClose}
-      >
-        <Box
-          onClick={(e) => e.stopPropagation()}
-          sx={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: 990,
-            maxHeight: { xs: '100vh', sm: '90vh' },
-            height: '100%',
-            bgcolor: 'background.paper',
-            borderRadius: { xs: 0, sm: 2 },
-            border: `1px solid ${theme.palette.divider}`,
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <IconButton
-            onClick={handleClose}
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              zIndex: 10,
-              color: '#fff',
-              bgcolor: 'rgba(0,0,0,0.4)',
-              '&:hover': { bgcolor: 'rgba(0,0,0,0.6)' },
-            }}
-          >
-            <Close />
-          </IconButton>
-          {content}
-        </Box>
-      </Box>
+      <ModalOverlay open onClose={handleClose}>
+        {content}
+      </ModalOverlay>
     );
   }
 

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Box } from '@mui/material';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { Box, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFeed, useToggleLike, useFeedSuggestions } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
@@ -15,9 +15,30 @@ import { AsidePanel } from '../components/layout/AsidePanel';
 export default function FeedPage() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState<'subs' | 'recommended'>('subs');
-  const { data: posts, isLoading } = useFeed(filter);
+  const {
+    data: pages,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useFeed(filter);
+  const posts = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
   const toggleLikeMutation = useToggleLike();
   const { data: suggestions } = useFeedSuggestions();
+
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) fetchNextPage();
+      },
+      { rootMargin: '300px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, pages]);
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', gap: 2 }}>
@@ -29,7 +50,7 @@ export default function FeedPage() {
         />
         <Box sx={{ mt: 2 }}>
           <WorkoutFeed
-            posts={posts ?? []}
+            posts={posts}
             isLoading={isLoading}
             defaultTab={0}
             emptyStateMessage="В ленте пока пусто. Подпишитесь на других скалолазов!"
@@ -37,10 +58,16 @@ export default function FeedPage() {
             onLikeToggle={(postId, wasLiked) => toggleLikeMutation.mutate({ postId, isLiked: wasLiked })}
             onCommentAdded={() => {}}
           />
+          {isFetchingNextPage && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
+              <CircularProgress size={24} />
+            </Box>
+          )}
+          <div ref={sentinelRef} />
         </Box>
         <Fab onClick={() => navigate('/workouts/new')} />
       </PageContainer>
-      <AsidePanel sx={{ width: 300 }}>
+      <AsidePanel sx={{ width: 320 }}>
         <FeedUserSuggestions users={suggestions?.users ?? []} />
         <FeedGymRecommendations gyms={suggestions?.gyms ?? []} />
         <FeedRouteRecommendations routes={suggestions?.routes ?? []} />

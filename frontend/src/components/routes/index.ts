@@ -1,2 +1,9 @@
 export { RouteLabel } from './RouteLabel';
 export { RouteFull } from './RouteFull';
+export { RouteSetterInfo } from './RouteSetterInfo';
+export { RoutePhotoBlock } from './detail/RoutePhotoBlock';
+export { RouteInfoBlock } from './detail/RouteInfoBlock';
+export { RouteStats } from './detail/RouteStats';
+export { RouteConsensusChart } from './detail/RouteConsensusChart';
+export { RouteReviews } from './detail/RouteReviews';
+export { PrivateNotes } from './detail/PrivateNotes';

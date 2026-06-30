@@ -7,26 +7,29 @@ interface RouteLabelProps {
   grade: string;
   holdColor: string;
   dotSize?: number;
+  variant?: 'default' | 'heading';
 }
 
 /**
  * Цветная точка + название трассы + сложность.
  * Возвращает фрагмент (dot + typography) — должен быть внутри flex-контейнера.
  */
-export function RouteLabel({ name, grade, holdColor, dotSize = 14 }: RouteLabelProps) {
+export function RouteLabel({ name, grade, holdColor, dotSize = 14, variant = 'default' }: RouteLabelProps) {
   const theme = useTheme();
   const hex = HOLD_COLORS[holdColor] || '#757575';
+  const isHeading = variant === 'heading';
 
   return (
     <>
       <Box sx={{ ...colorDot(dotSize), background: hex }} />
       <Typography
-        sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary, }}
+        component="span"
+        sx={{ fontSize: isHeading ? '1.4rem' : '0.82rem', fontWeight: 800, lineHeight: 1.2, color: theme.palette.text.primary }}
       >
         {name}
         <Typography
           component="span"
-          sx={{ fontSize: '0.78rem', color: theme.palette.primary.main, fontWeight: 600, ml: 0.5 }}
+          sx={{ fontSize: isHeading ? '1.2rem' : '0.78rem', color: isHeading ? theme.palette.secondary.main : theme.palette.primary.main, fontWeight: 800, ml: 0.5 }}
         >
           {grade}
         </Typography>

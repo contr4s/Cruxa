@@ -1,7 +1,7 @@
 import { Box, Avatar, Typography, useTheme, IconButton } from '@mui/material';
-import { LocationOn, Public, Lock, People, Edit, Delete, LocalFireDepartment } from '@mui/icons-material';
-import { getGymBadgeColor } from '../../constants/gymBadges';
+import { Public, Lock, People, Edit, Delete, LocalFireDepartment } from '@mui/icons-material';
 import { relativeTime } from './relativeTime';
+import { GymChip } from '../ui/GymChip';
 import type { ReactNode } from 'react';
 
 interface PostHeaderProps {
@@ -18,10 +18,9 @@ interface PostHeaderProps {
   mediaToggle?: ReactNode;
 }
 
-export function PostHeader({ displayName, gymName, visibility, isOwner, isRecommended, createdAt, onEdit, onDelete, mediaToggle }: PostHeaderProps) {
+export function PostHeader({ displayName, gymName, gymId, visibility, isOwner, isRecommended, createdAt, onEdit, onDelete, mediaToggle }: PostHeaderProps) {
   const theme = useTheme();
   const initial = displayName.charAt(0).toUpperCase();
-  const gymColor = gymName ? getGymBadgeColor(gymName) : undefined;
 
   const visibilityIcon = visibility === 'Private' ? <Lock sx={{ fontSize: 14 }} /> : visibility === 'Followers' ? <People sx={{ fontSize: 14 }} /> : <Public sx={{ fontSize: 14 }} />;
 
@@ -37,11 +36,7 @@ export function PostHeader({ displayName, gymName, visibility, isOwner, isRecomm
           </Typography>
           <Typography sx={{ fontSize: '0.72rem', color: theme.palette.text.secondary, display: 'flex', alignItems: 'center', gap: 0.5 }}>
             {relativeTime(createdAt)}
-            {gymName && gymColor && (
-              <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.3, background: `${gymColor}22`, color: gymColor, borderRadius: '100px', px: 1, py: 0.15, fontSize: '0.65rem', fontWeight: 700 }}>
-                <LocationOn sx={{ fontSize: 10 }} /> {gymName}
-              </Box>
-            )}
+            {gymName && <GymChip name={gymName} gymId={gymId} />}
           </Typography>
         </Box>
         {mediaToggle && (

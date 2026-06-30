@@ -103,6 +103,7 @@ export interface RecommendedGymDto {
   distance: string;
   area?: number;
   maxHeight?: number;
+  activeRouteCount?: number;
 }
 
 export interface FeedSuggestionsDto {

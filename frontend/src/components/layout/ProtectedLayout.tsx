@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../ui/ProtectedRoute';
 import { BackgroundPattern } from '../ui/BackgroundPattern';
 import { Sidebar } from './Sidebar';
@@ -9,6 +9,9 @@ import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { Fab } from '../ui/Fab';
 
 export function ProtectedLayout() {
+  const location = useLocation();
+  const isRouteDetail = /^\/route\/\w+/.test(location.pathname);
+
   return (
     <ProtectedRoute>
       <BackgroundPattern intensity={0.25} />
@@ -22,7 +25,7 @@ export function ProtectedLayout() {
         </Box>
       </Box>
       <BottomTabBar />
-      <Fab onClick={() => alert('Новая тренировка')} />
+      {!isRouteDetail && <Fab onClick={() => alert('Новая тренировка')} />}
     </ProtectedRoute>
   );
 }
