@@ -7,6 +7,7 @@ import { darkTheme } from './theme/darkTheme';
 import { AuthProvider } from './providers/AuthProvider';
 import { ProtectedLayout } from './components/layout/ProtectedLayout';
 import { StateDisplay } from './components/ui/StateDisplay';
+import { RoleGuard } from './components/ui/RoleGuard';
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -18,7 +19,12 @@ const GymsPage = lazy(() => import('./pages/GymsPage'));
 const GymDetailPage = lazy(() => import('./pages/GymDetailPage'));
 const PostDetailPage = lazy(() => import('./pages/PostDetailPage'));
 const RouteDetailPage = lazy(() => import('./pages/RouteDetailPage'));
-function AppRoutes() {  const location = useLocation();
+const RoutesetterDashboardPage = lazy(() => import('./pages/RoutesetterDashboardPage'));
+const GymAdminDashboardPage = lazy(() => import('./pages/GymAdminDashboardPage'));
+const SuperAdminDashboardPage = lazy(() => import('./pages/SuperAdminDashboardPage'));
+
+function AppRoutes() {
+  const location = useLocation();
   const state = location.state as { backgroundLocation?: Location } | null;
 
   return (
@@ -36,7 +42,12 @@ function AppRoutes() {  const location = useLocation();
           <Route path="/gyms" element={<GymsPage />} />
           <Route path="/gyms/:id" element={<GymDetailPage />} />
           <Route path="/route/:id" element={<RouteDetailPage />} />
-        </Route>      </Routes>      {state?.backgroundLocation && (
+          <Route path="/routesetter" element={<RoleGuard role="Routesetter"><RoutesetterDashboardPage /></RoleGuard>} />
+          <Route path="/gym-admin" element={<RoleGuard role="GymAdmin"><GymAdminDashboardPage /></RoleGuard>} />
+          <Route path="/admin" element={<RoleGuard role="Admin"><SuperAdminDashboardPage /></RoleGuard>} />
+        </Route>
+      </Routes>
+      {state?.backgroundLocation && (
         <Routes>
           <Route path="/post/:id" element={<PostDetailPage />} />
           <Route path="/route/:id" element={<RouteDetailPage />} />

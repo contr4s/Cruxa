@@ -4,3 +4,6 @@ export * from './user';
 export * from './gym';
 export * from './route';
 export * from './post';
+export * from './routesetter';
+export * from './gymAdmin';
+export * from './admin';

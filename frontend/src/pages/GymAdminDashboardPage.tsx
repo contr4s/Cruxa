@@ -1,0 +1,155 @@
+import { useState, useMemo } from 'react';
+import { Box, Typography, useTheme } from '@mui/material';
+import { Route, People, EditNote, FilterList } from '@mui/icons-material';
+import { ExpandMore, ExpandLess } from '@mui/icons-material';
+import { PageContainer } from '../components/layout/PageContainer';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { StateDisplay } from '../components/ui/StateDisplay';
+import { Pagination } from '../components/ui/Pagination';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import {
+  useGymAdminStats,
+  useAdminRoutes,
+  useGymActivity,
+  useGymSetters,
+} from '../services/hooks/useGymAdmin';
+import { useGym } from '../services/hooks/useGyms';
+import { useManagedGym } from '../services/hooks/useManagedGym';
+import type { AdminRouteFilterState } from '../types/gymAdmin';
+import type { RouteDto } from '../types/route';
+import { GymInfoCard } from '../components/gymAdmin/GymInfoCard';
+import { GymActivityCard } from '../components/gymAdmin/GymActivityCard';
+import { AdminRouteTable } from '../components/gymAdmin/AdminRouteTable';
+import { AdminRouteFilters } from '../components/gymAdmin/AdminRouteFilters';
+import { SettersManagement } from '../components/gymAdmin/SettersManagement';
+import { GymProfileEditor } from '../components/gymAdmin/GymProfileEditor';
+
+const DEFAULT_FILTERS: AdminRouteFilterState = {
+  searchQuery: '',
+  type: 'all',
+  holdColor: 'all',
+  minGradeIndex: 0,
+  maxGradeIndex: 20,
+  sort: 'newest',
+  status: 'all',
+  sector: 'all',
+  setterId: 'all',
+  minRating: 0,
+  maxRating: 5,
+  minAscents: 0,
+  maxAscents: 10000,
+  createdWithin: 0,
+  tags: '',
+};
+
+export default function GymAdminDashboardPage() {
+  const theme = useTheme();
+  useScrollReveal();
+  const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState<AdminRouteFilterState>(DEFAULT_FILTERS);
+
+  // GymAdmin управляет своим залом (через отдельный эндпоинт)
+  const { data: managedGym, isLoading: managedLoading } = useManagedGym();
+  const gymId = managedGym?.gymId ?? '';
+  const { data: gym, isLoading: gymLoading } = useGym(gymId);
+  const { data: stats, isLoading: statsLoading } = useGymAdminStats(gymId);
+  const { data: activity } = useGymActivity(gymId);
+  const { data: routesData, isLoading: routesLoading } = useAdminRoutes(gymId, { ...filters, page, pageSize: 10 });
+  const { data: setters, isLoading: settersLoading } = useGymSetters(gymId);
+
+  const sectors = useMemo(() => {
+    const map = new Map<string, string>();
+    (routesData?.items ?? []).forEach((r: RouteDto) => {
+      if (r.sector) map.set(r.sector, r.sector);
+    });
+    return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
+  }, [routesData]);
+
+  const setterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    (routesData?.items ?? []).forEach((r: RouteDto) => {
+      if (r.setterId) map.set(r.setterId, r.setterName);
+    });
+    return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
+  }, [routesData]);
+
+  if (managedLoading || gymLoading || !gym) {
+    return (
+      <PageContainer>
+        <StateDisplay type="loading" message="Загрузка зала…" />
+      </PageContainer>
+    );
+  }
+
+  return (
+    <PageContainer>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>
+          Управление залом
+        </Typography>
+
+        <GymInfoCard gym={gym} onEdit={() => alert('Редактирование профиля — скоро')} />
+
+        {statsLoading || !stats ? (
+          <StateDisplay type="loading" message="Загрузка статистики…" />
+        ) : (
+          <GymActivityCard activity={activity ?? { newRoutes: 0, ascents: 0, reviews: 0, visitors: 0, period: '—' }} />
+        )}
+
+        <Box>
+          <AdminRouteFilters
+            filters={filters}
+            onChange={setFilters}
+            sectors={sectors}
+            setters={setterOptions}
+            filterTrigger={({ open, toggle, activeCount }) => (
+              <SectionHeader
+                icon={<Route sx={{ fontSize: 20, color: theme.palette.primary.main }} />}
+                title="Все трассы зала"
+                action={
+                  <Box onClick={toggle} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'pointer', color: theme.palette.text.secondary, '&:hover': { color: theme.palette.text.primary } }}>
+                    <FilterList sx={{ fontSize: 18 }} />
+                    {activeCount > 0 && (
+                      <Box sx={{ background: theme.palette.primary.main, color: '#fff', borderRadius: '10px', px: 0.75, py: 0.1, fontSize: '0.65rem', fontWeight: 700 }}>{activeCount}</Box>
+                    )}
+                    {open ? <ExpandLess sx={{ fontSize: 18 }} /> : <ExpandMore sx={{ fontSize: 18 }} />}
+                  </Box>
+                }
+              />
+            )}
+          />
+          {routesLoading ? (
+            <StateDisplay type="loading" message="Загрузка трасс…" />
+          ) : (
+            <>
+              <AdminRouteTable routes={routesData?.items ?? []} />
+              {routesData && routesData.totalPages > 1 && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                  <Pagination page={page} count={routesData.totalPages} onChange={(_, v) => setPage(v)} />
+                </Box>
+              )}
+            </>
+          )}
+        </Box>
+
+        <Box>
+          <SectionHeader icon={<People sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Рутсеттеры" />
+          {settersLoading ? (
+            <StateDisplay type="loading" message="Загрузка…" />
+          ) : (
+            <SettersManagement
+              setters={setters ?? []}
+              onUnlink={(id) => alert(`Отвязать ${id} — скоро`)}
+              onLink={() => alert('Привязать рутсеттера — скоро')}
+            />
+          )}
+        </Box>
+
+        <Box>
+          <SectionHeader icon={<EditNote sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Профиль зала" />
+          <GymProfileEditor gym={gym} />
+        </Box>
+      </Box>
+    </PageContainer>
+  );
+}

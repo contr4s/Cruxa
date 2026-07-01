@@ -14,13 +14,21 @@ export async function mockLogin(data: LoginRequest): Promise<AuthResponse> {
     throw new Error('Неверный email или пароль');
   }
 
+  const roleMap: Record<string, { role: 'Climber' | 'Routesetter' | 'GymAdmin' | 'Admin'; userId: string; username: string; displayName: string }> = {
+    'routesetter@cruxa.ru': { role: 'Routesetter', userId: 's1', username: 'setter', displayName: 'Сеттер Петров' },
+    'gymadmin@cruxa.ru': { role: 'GymAdmin', userId: 'g1', username: 'gymadmin', displayName: 'Админ Залова' },
+    'admin@cruxa.ru': { role: 'Admin', userId: 'a1', username: 'superadmin', displayName: 'Супер Админ' },
+  };
+
+  const user = roleMap[data.email.toLowerCase()] ?? { role: 'Climber', userId: '550e8400-e29b-41d4-a716-446655440001', username: 'alexey', displayName: 'Алексей Кузнецов' };
+
   return {
     token: MOCK_TOKEN,
-    userId: '550e8400-e29b-41d4-a716-446655440001',
-    username: 'alexey',
-    displayName: 'Алексей Кузнецов',
+    userId: user.userId,
+    username: user.username,
+    displayName: user.displayName,
     email: data.email,
-    role: 'Climber',
+    role: user.role,
   };
 }
 
@@ -35,12 +43,20 @@ export async function mockRegister(data: RegisterRequest): Promise<AuthResponse>
     throw new Error('Пароль должен быть не менее 6 символов');
   }
 
+  const roleMap: Record<string, { role: 'Climber' | 'Routesetter' | 'GymAdmin' | 'Admin'; userId: string; displayName: string }> = {
+    'routesetter@cruxa.ru': { role: 'Routesetter', userId: 's1', displayName: 'Сеттер Петров' },
+    'gymadmin@cruxa.ru': { role: 'GymAdmin', userId: 'g1', displayName: 'Админ Залова' },
+    'admin@cruxa.ru': { role: 'Admin', userId: 'a1', displayName: 'Супер Админ' },
+  };
+
+  const user = roleMap[data.email.toLowerCase()] ?? { role: 'Climber', userId: '550e8400-e29b-41d4-a716-446655440001', displayName: 'Алексей Кузнецов' };
+
   return {
     token: MOCK_TOKEN,
-    userId: '550e8400-e29b-41d4-a716-446655440001',
+    userId: user.userId,
     username: data.username,
-    displayName: 'Алексей Кузнецов',
+    displayName: user.displayName,
     email: data.email,
-    role: 'Climber',
+    role: user.role,
   };
 }

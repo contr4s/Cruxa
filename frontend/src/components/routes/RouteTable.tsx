@@ -10,7 +10,11 @@ import {
   Typography,
   Chip,
   useTheme,
+  IconButton,
 } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RestoreIcon from '@mui/icons-material/Restore';
 import type { RouteDto } from '../../types/route';
 import { RatingBadge } from '../ui/RatingBadge';
 import { HOLD_COLORS } from '../../constants/routes';
@@ -19,9 +23,23 @@ import { RouteSetterInfo } from './RouteSetterInfo';
 
 interface RouteTableProps {
   routes: RouteDto[];
+  showStatus?: boolean;
+  showActions?: boolean;
+  showSetter?: boolean;
+  onEdit?: (route: RouteDto) => void;
+  onArchive?: (route: RouteDto) => void;
+  onRestore?: (route: RouteDto) => void;
 }
 
-export function RouteTable({ routes }: RouteTableProps) {
+export function RouteTable({
+  routes,
+  showStatus = false,
+  showActions = false,
+  showSetter = true,
+  onEdit,
+  onArchive,
+  onRestore,
+}: RouteTableProps) {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,6 +47,11 @@ export function RouteTable({ routes }: RouteTableProps) {
   if (routes.length === 0) {
     return <StateDisplay type="empty" message="Нет трасс" description="Попробуйте изменить фильтры" />;
   }
+
+  const headers = ['', 'Название', 'Грейд', 'Тип', 'Рейтинг', 'Пролазы'];
+  if (showSetter) headers.push('Рутсеттер');
+  if (showStatus) headers.push('Статус');
+  if (showActions) headers.push('Действия');
 
   return (
     <TableContainer
@@ -41,7 +64,7 @@ export function RouteTable({ routes }: RouteTableProps) {
       <Table size="small" sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow sx={{ background: theme.custom.surface2 }}>
-            {['', 'Название', 'Грейд', 'Тип', 'Рейтинг', 'Пролазы', 'Рутсеттер', 'Дата'].map((h) => (
+            {headers.map((h) => (
               <TableCell
                 key={h}
                 sx={{
@@ -116,10 +139,24 @@ export function RouteTable({ routes }: RouteTableProps) {
                     <Box sx={{ display: { xs: 'inline-flex', sm: 'none' }, alignItems: 'center', gap: 0.25 }}>
                       <RatingBadge rating={route.rating} size="sm" />
                     </Box>
+                    {showStatus && (
+                      <Chip
+                        label={route.status === 'Active' ? 'Активна' : 'Архив'}
+                        size="small"
+                        sx={{
+                          height: 18,
+                          fontSize: '0.7rem',
+                          fontWeight: 700,
+                          background: route.status === 'Active' ? theme.palette.success.dark : theme.custom.surface3,
+                          color: route.status === 'Active' ? theme.palette.success.contrastText : theme.palette.text.secondary,
+                          display: { sm: 'none' },
+                        }}
+                      />
+                    )}
                   </Box>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, alignItems: 'center', mt: 0.25 }}>
                     <Box sx={{ display: { xs: 'inline-flex', sm: 'none' }, alignItems: 'center', gap: 0.25 }}>
-                      <RouteSetterInfo route={route} size="sm" />
+                      {showSetter && <RouteSetterInfo route={route} size="sm" />}
                     </Box>
                   </Box>
                 </Box>
@@ -152,9 +189,59 @@ export function RouteTable({ routes }: RouteTableProps) {
                   {route.ascentsCount}
                 </Typography>
               </TableCell>
-              <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }} colSpan={2}>
-                <RouteSetterInfo route={route} />
-              </TableCell>
+              {showSetter && (
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                  <RouteSetterInfo route={route} />
+                </TableCell>
+              )}
+              {showStatus && (
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                  <Chip
+                    label={route.status === 'Active' ? 'Активна' : 'Архив'}
+                    size="small"
+                    sx={{
+                      height: 20,
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      background: route.status === 'Active' ? theme.palette.success.dark : theme.custom.surface3,
+                      color: route.status === 'Active' ? theme.palette.success.contrastText : theme.palette.text.secondary,
+                    }}
+                  />
+                </TableCell>
+              )}
+              {showActions && (
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                  <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    {onEdit && (
+                      <IconButton
+                        size="small"
+                        onClick={(e) => { e.stopPropagation(); onEdit(route); }}
+                        sx={{ color: theme.palette.text.secondary }}
+                      >
+                        <EditIcon sx={{ fontSize: 16 }} />
+                      </IconButton>
+                    )}
+                    {route.status === 'Active' && onArchive && (
+                      <IconButton
+                        size="small"
+                        onClick={(e) => { e.stopPropagation(); onArchive(route); }}
+                        sx={{ color: theme.palette.text.secondary }}
+                      >
+                        <DeleteIcon sx={{ fontSize: 16 }} />
+                      </IconButton>
+                    )}
+                    {route.status === 'Archived' && onRestore && (
+                      <IconButton
+                        size="small"
+                        onClick={(e) => { e.stopPropagation(); onRestore(route); }}
+                        sx={{ color: theme.palette.text.secondary }}
+                      >
+                        <RestoreIcon sx={{ fontSize: 16 }} />
+                      </IconButton>
+                    )}
+                  </Box>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

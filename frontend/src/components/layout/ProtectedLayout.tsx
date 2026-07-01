@@ -10,7 +10,7 @@ import { Fab } from '../ui/Fab';
 
 export function ProtectedLayout() {
   const location = useLocation();
-  const isRouteDetail = /^\/route\/\w+/.test(location.pathname);
+  const hideFab = /^\/route\/\w+/.test(location.pathname) || location.pathname === '/routesetter' || location.pathname === '/gym-admin' || location.pathname === '/admin';
 
   return (
     <ProtectedRoute>
@@ -25,7 +25,7 @@ export function ProtectedLayout() {
         </Box>
       </Box>
       <BottomTabBar />
-      {!isRouteDetail && <Fab onClick={() => alert('Новая тренировка')} />}
+      {!hideFab && <Fab onClick={() => alert('Новая тренировка')} />}
     </ProtectedRoute>
   );
 }

@@ -6,12 +6,20 @@ const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 export interface GetRoutesParams {
   page?: number;
   pageSize?: number;
+  searchQuery?: string;
   type?: string;
   holdColor?: string;
   minGradeIndex?: number;
   maxGradeIndex?: number;
   setterId?: string;
   sort?: string;
+  status?: string;
+  minRating?: number;
+  maxRating?: number;
+  minAscents?: number;
+  maxAscents?: number;
+  createdWithin?: number;
+  tags?: string;
 }
 
 export async function getRoutesByGym(gymId: string, params?: GetRoutesParams): Promise<PaginatedList<RouteDto>> {

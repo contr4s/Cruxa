@@ -1,30 +1,59 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Collapse, IconButton, CircularProgress, useTheme } from '@mui/material';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
+import { Box, CircularProgress, useTheme } from '@mui/material';
 import { useGym, useToggleFavorite } from '../services/hooks/useGyms';
 import { useInfiniteRoutesByGym } from '../services/hooks/useRoutes';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { FilterList, ExpandMore, ExpandLess } from '@mui/icons-material';
 import { GymInfoBlock } from '../components/gyms/detail/GymInfoBlock';
 import { GymPhotoBlock } from '../components/gyms/detail/GymPhotoBlock';
 import { GymContactsBlock } from '../components/gyms/detail/GymContactsBlock';
 import { GymHoursPricesBlock } from '../components/gyms/detail/GymHoursPricesBlock';
 import { GymStats } from '../components/gyms/detail/GymStats';
 import { RouteTable } from '../components/routes/RouteTable';
-import { RouteFilters, type RouteFilterState } from '../components/routes/RouteFilters';
+import { RouteFilters, type RouteFiltersValues } from '../components/ui/RouteFilters';
 
 export default function GymDetailPage() {
   const { id } = useParams<{ id: string }>();
   const theme = useTheme();
-  const [filters, setFilters] = useState<RouteFilterState>({
+  const [filters, setFilters] = useState<RouteFiltersValues>({
+    searchQuery: '',
     type: 'all',
     holdColor: 'all',
+    status: 'all',
+    sort: 'newest',
+    gymId: id ?? '',
+    sector: 'all',
+    setterId: 'all',
     minGradeIndex: 0,
     maxGradeIndex: 20,
-    setterId: 'all',
-    sort: 'newest',
+    minRating: 0,
+    maxRating: 5,
+    minAscents: 0,
+    maxAscents: 10000,
+    createdWithin: 0,
+    tags: '',
   });
+
+  const routeParams = useMemo(() => ({
+    pageSize: 10,
+    searchQuery: filters.searchQuery || undefined,
+    type: filters.type,
+    holdColor: filters.holdColor,
+    minGradeIndex: filters.minGradeIndex,
+    maxGradeIndex: filters.maxGradeIndex,
+    setterId: filters.setterId,
+    sort: filters.sort,
+    status: filters.status !== 'all' ? filters.status : undefined,
+    minRating: filters.minRating > 0 || filters.maxRating < 5 ? filters.minRating : undefined,
+    maxRating: filters.minRating > 0 || filters.maxRating < 5 ? filters.maxRating : undefined,
+    minAscents: filters.minAscents > 0 || filters.maxAscents < 10000 ? filters.minAscents : undefined,
+    maxAscents: filters.minAscents > 0 || filters.maxAscents < 10000 ? filters.maxAscents : undefined,
+    createdWithin: filters.createdWithin > 0 ? filters.createdWithin : undefined,
+    tags: filters.tags || undefined,
+  } as const), [filters.searchQuery, filters.type, filters.holdColor, filters.minGradeIndex, filters.maxGradeIndex, filters.setterId, filters.sort, filters.status, filters.minRating, filters.maxRating, filters.minAscents, filters.maxAscents, filters.createdWithin, filters.tags]);
 
   const { data: gym, isLoading: gymLoading, error: gymError } = useGym(id ?? '');
   const {
@@ -33,19 +62,11 @@ export default function GymDetailPage() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteRoutesByGym(id ?? '', {
-    pageSize: 10,
-    ...filters,
-  });
+  } = useInfiniteRoutesByGym(id ?? '', routeParams);
 
   const routes = useMemo(() => routesPages?.pages.flatMap((p) => p.items) ?? [], [routesPages]);
 
   const toggleFavorite = useToggleFavorite();
-  const [showFilters, setShowFilters] = useState(false);
-
-  const handleFilterChange = (next: RouteFilterState) => {
-    setFilters(next);
-  };
 
   const sentinelRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -128,27 +149,26 @@ export default function GymDetailPage() {
       />
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Box
-          onClick={() => setShowFilters(!showFilters)}
-          sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer', '&:hover': { opacity: 0.8 } }}
-        >
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              color: theme.palette.text.primary,
-            }}
-          >
-            Трассы
-          </Typography>
-          <IconButton size="small" sx={{ color: theme.palette.text.secondary }}>
-            {showFilters ? <ExpandLess /> : <ExpandMore />}
-          </IconButton>
-        </Box>
-        <Collapse in={showFilters}>
-          <RouteFilters filters={filters} onChange={handleFilterChange} setters={setters} />
-        </Collapse>
+        <RouteFilters
+          filters={filters}
+          onChange={setFilters}
+          slots={{ setters }}
+          filterTrigger={({ open, toggle, activeCount }) => (
+            <SectionHeader
+              icon={<FilterList sx={{ fontSize: 20 }} />}
+              title="Трассы"
+              action={
+                <Box onClick={toggle} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'pointer', color: theme.palette.text.secondary, '&:hover': { color: theme.palette.text.primary } }}>
+                  <FilterList sx={{ fontSize: 18 }} />
+                  {activeCount > 0 && (
+                    <Box sx={{ background: theme.palette.primary.main, color: '#fff', borderRadius: '10px', px: 0.75, py: 0.1, fontSize: '0.65rem', fontWeight: 700 }}>{activeCount}</Box>
+                  )}
+                  {open ? <ExpandLess sx={{ fontSize: 18 }} /> : <ExpandMore sx={{ fontSize: 18 }} />}
+                </Box>
+              }
+            />
+          )}
+        />
         {routesLoading && !routesPages ? (
           <StateDisplay type="loading" message="Загрузка трасс…" />
         ) : (

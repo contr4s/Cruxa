@@ -16,6 +16,10 @@ interface RouteFiltersProps {
   filters: RouteFilterState;
   onChange: (filters: RouteFilterState) => void;
   setters: { id: string; name: string }[];
+  showStatusFilter?: boolean;
+  showSectorFilter?: boolean;
+  sectors?: { id: string; name: string }[];
+  gyms?: { id: string; name: string }[];
 }
 
 const TYPES = [
@@ -34,6 +38,12 @@ const SORTS = [
   { value: 'ascents', label: 'По пролазам' },
 ];
 
+const STATUS_OPTIONS = [
+  { value: 'all', label: 'Все' },
+  { value: 'Active', label: 'Активные' },
+  { value: 'Archived', label: 'Архив' },
+];
+
 const MIN_GRADE = 0;
 const MAX_GRADE = 20;
 const GRADE_LABELS: Record<number, string> = {
@@ -41,7 +51,7 @@ const GRADE_LABELS: Record<number, string> = {
   10: '6B', 11: '6B+', 12: '6C', 13: '6C+', 14: '7A', 15: '7A+', 16: '7B', 17: '7B+', 18: '7C', 19: '8A', 20: '8B',
 };
 
-export function RouteFilters({ filters, onChange, setters }: RouteFiltersProps) {
+export function RouteFilters({ filters, onChange, setters, showStatusFilter, showSectorFilter, sectors, gyms }: RouteFiltersProps) {
   const theme = useTheme();
 
   const update = useCallback(
@@ -148,6 +158,59 @@ export function RouteFilters({ filters, onChange, setters }: RouteFiltersProps) 
             ))}
           </Select>
         </FormControl>
+
+        {showSectorFilter && sectors && sectors.length > 0 && (
+          <FormControl size="small" sx={{ minWidth: 150 }}>
+            <Select
+              value={(filters as unknown as Record<string, string>).sector ?? 'all'}
+              onChange={(e) => update({ sector: e.target.value } as Partial<RouteFilterState>)}
+              sx={filterSelectStyle(theme)}
+              displayEmpty
+            >
+              <MenuItem value="all" sx={{ fontSize: '0.82rem' }}>Все сектора</MenuItem>
+              {sectors.map((s) => (
+                <MenuItem key={s.id} value={s.id} sx={{ fontSize: '0.82rem' }}>
+                  {s.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+
+        {showStatusFilter && (
+          <FormControl size="small" sx={{ minWidth: 130 }}>
+            <Select
+              value={(filters as unknown as Record<string, string>).status ?? 'all'}
+              onChange={(e) => update({ status: e.target.value } as Partial<RouteFilterState>)}
+              sx={filterSelectStyle(theme)}
+              displayEmpty
+            >
+              {STATUS_OPTIONS.map((s) => (
+                <MenuItem key={s.value} value={s.value} sx={{ fontSize: '0.82rem' }}>
+                  {s.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+
+        {gyms && gyms.length > 0 && (
+          <FormControl size="small" sx={{ minWidth: 150 }}>
+            <Select
+              value={(filters as unknown as Record<string, string>).gymId ?? 'all'}
+              onChange={(e) => update({ gymId: e.target.value } as Partial<RouteFilterState>)}
+              sx={filterSelectStyle(theme)}
+              displayEmpty
+            >
+              <MenuItem value="all" sx={{ fontSize: '0.82rem' }}>Все залы</MenuItem>
+              {gyms.map((g) => (
+                <MenuItem key={g.id} value={g.id} sx={{ fontSize: '0.82rem' }}>
+                  {g.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
 
         <FormControl size="small" sx={{ minWidth: 140 }}>
           <Select

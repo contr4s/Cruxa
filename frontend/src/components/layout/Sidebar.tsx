@@ -9,7 +9,7 @@ export function Sidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { displayName, logout } = useAuthStore();
+  const { displayName, logout, role } = useAuthStore();
 
   const currentPath = location.pathname;
 
@@ -19,6 +19,11 @@ export function Sidebar() {
   };
 
   const initial = displayName ? displayName[0].toUpperCase() : '?';
+
+  const visibleItems = NAV_ITEMS.filter((item) => {
+    if (!item.roles) return true;
+    return role ? item.roles.includes(role) : false;
+  });
 
   return (
     <Box
@@ -82,7 +87,7 @@ export function Sidebar() {
           justifyContent: 'center',
         }}
       >
-        {NAV_ITEMS.map((item) => (
+        {visibleItems.map((item) => (
           <Box
             key={item.path}
             onClick={() => item.path && navigate(item.path)}

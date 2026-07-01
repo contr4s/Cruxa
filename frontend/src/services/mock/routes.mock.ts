@@ -3,7 +3,7 @@ import type { PaginatedList } from '../../types/common';
 import { mockDelay } from './helpers';
 import type { GetRoutesParams } from '../routes.service';
 
-const MOCK_ROUTES: RouteDto[] = [
+export const MOCK_ROUTES: RouteDto[] = [
   // RockZone g1
   {
     id: 'r1', name: 'Красная стрела', grade: '6A', gradeIndex: 10, type: 'Lead', holdColor: 'Red', sector: 'Главная стена', gymId: 'g1', gymName: 'RockZone',
@@ -340,6 +340,33 @@ export async function mockGetRoutesByGym(gymId: string, params?: GetRoutesParams
   if (params?.setterId && params.setterId !== 'all') {
     items = items.filter((r) => r.setterId === params.setterId);
   }
+  if (params?.status && params.status !== 'all') {
+    items = items.filter((r) => r.status === params.status);
+  }
+  if (params?.searchQuery) {
+    const q = params.searchQuery.toLowerCase();
+    items = items.filter((r) => r.name.toLowerCase().includes(q));
+  }
+  if (params?.minRating !== undefined) {
+    items = items.filter((r) => r.rating >= (params.minRating ?? 0));
+  }
+  if (params?.maxRating !== undefined) {
+    items = items.filter((r) => r.rating <= (params.maxRating ?? 5));
+  }
+  if (params?.minAscents !== undefined) {
+    items = items.filter((r) => r.ascentsCount >= (params.minAscents ?? 0));
+  }
+  if (params?.maxAscents !== undefined) {
+    items = items.filter((r) => r.ascentsCount <= (params.maxAscents ?? 10000));
+  }
+  if (params?.createdWithin && params.createdWithin > 0) {
+    const cutoff = Date.now() - params.createdWithin * 86400000;
+    items = items.filter((r) => new Date(r.createdAt).getTime() >= cutoff);
+  }
+  if (params?.tags) {
+    const tags = params.tags.split(',').map((t) => t.trim().toLowerCase());
+    items = items.filter((r) => tags.some((t) => r.tags.some((rt) => rt.toLowerCase().includes(t))));
+  }
 
   if (params?.sort) {
     if (params.sort === 'grade_asc') {
@@ -352,6 +379,12 @@ export async function mockGetRoutesByGym(gymId: string, params?: GetRoutesParams
       items.sort((a, b) => b.ascentsCount - a.ascentsCount);
     } else if (params.sort === 'newest') {
       items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else if (params.sort === 'oldest') {
+      items.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    } else if (params.sort === 'name_asc') {
+      items.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (params.sort === 'name_desc') {
+      items.sort((a, b) => b.name.localeCompare(a.name));
     }
   }
 

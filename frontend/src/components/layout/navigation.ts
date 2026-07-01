@@ -3,12 +3,16 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import MapIcon from '@mui/icons-material/Map';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SearchIcon from '@mui/icons-material/Search';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import type { UserRole } from '../../types/user';
 
 export interface NavItem {
   path: string;
   icon?: ComponentType<{ sx?: object }>;
   label: string;
   isDivider?: boolean;
+  roles?: UserRole[];
 }
 
 /**
@@ -21,6 +25,9 @@ export const NAV_ITEMS: NavItem[] = [
   { path: '/workouts', icon: FitnessCenterIcon, label: 'Тренировки' },
   { path: '/gyms', icon: MapIcon, label: 'Скалодромы' },
   { path: '/feed', icon: NewspaperIcon, label: 'Лента' },
+  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter', 'Admin'] },
+  { path: '/gym-admin', icon: AdminPanelSettingsIcon, label: 'Управление', roles: ['GymAdmin'] },
+  { path: '/admin', icon: AdminPanelSettingsIcon, label: 'Администрирование', roles: ['Admin'] },
 ];
 
 /**
@@ -31,4 +38,7 @@ export const TAB_ITEMS: NavItem[] = [
   { path: '/workouts', icon: FitnessCenterIcon, label: 'Тренировки' },
   { path: '/gyms', icon: MapIcon, label: 'Скалодромы' },
   { path: '/profile', label: 'Профиль' },
+  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter', 'Admin'] },
+  { path: '/gym-admin', icon: AdminPanelSettingsIcon, label: 'Управление', roles: ['GymAdmin', 'Admin'] },
+  { path: '/admin', icon: AdminPanelSettingsIcon, label: 'Администрирование', roles: ['Admin'] },
 ];

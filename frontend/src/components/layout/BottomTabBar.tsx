@@ -8,7 +8,7 @@ export function BottomTabBar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { displayName } = useAuthStore();
+  const { displayName, role } = useAuthStore();
 
   const currentPath = location.pathname;
   const initial = displayName ? displayName[0].toUpperCase() : '?';
@@ -16,6 +16,11 @@ export function BottomTabBar() {
   const handleTabClick = (path: string) => {
     navigate(path);
   };
+
+  const visibleItems = TAB_ITEMS.filter((item) => {
+    if (!item.roles) return true;
+    return role ? item.roles.includes(role) : false;
+  });
 
   return (
     <Box
@@ -35,7 +40,7 @@ export function BottomTabBar() {
         },
       }}
     >
-      {TAB_ITEMS.map((item) => {
+      {visibleItems.map((item) => {
         const active = currentPath === item.path;
         return (
           <Box
