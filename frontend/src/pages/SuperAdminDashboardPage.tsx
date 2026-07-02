@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
-import { BadgeOutlined } from '@mui/icons-material';
+import {
+  Box, Typography, Button, Dialog, DialogTitle, DialogContent,
+  TextField, DialogActions, useTheme,
+} from '@mui/material';
+import { BadgeOutlined, Add } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { Pagination } from '../components/ui/Pagination';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useCreateGym } from '../services/hooks/useGyms';
 import {
   useAdminStats,
   useRecentActivity,
@@ -32,11 +36,13 @@ export default function SuperAdminDashboardPage() {
   useScrollReveal();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<AdminGymFilterState>(DEFAULT_FILTERS);
+  const [createOpen, setCreateOpen] = useState(false);
 
   const { data: stats, isLoading: statsLoading } = useAdminStats();
   const { data: recentActivity, isLoading: activityLoading } = useRecentActivity();
   const { data: topGyms, isLoading: topGymsLoading } = useTopGyms();
   const { data: gymsData, isLoading: gymsLoading } = useAdminGyms({ ...filters, page, pageSize: 10 });
+  const { mutateAsync: createGymMutate, isPending: creatingGym } = useCreateGym();
 
   return (
     <PageContainer>
@@ -66,6 +72,9 @@ export default function SuperAdminDashboardPage() {
             </Box>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Button size="small" variant="outlined" startIcon={<Add />} onClick={() => setCreateOpen(true)} sx={{ fontSize: '0.82rem' }}>
+              Создать зал
+            </Button>
             <Typography sx={{ fontSize: '0.88rem', color: theme.palette.text.secondary }}>
               Москва, СПб
             </Typography>
@@ -102,13 +111,17 @@ export default function SuperAdminDashboardPage() {
 
         {/* Activity + Top gyms */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 2 }}>
-          {activityLoading || !recentActivity ? (
+          {activityLoading ? (
             <StateDisplay type="loading" message="Загрузка активности…" size="sm" />
+          ) : !recentActivity || recentActivity.length === 0 ? (
+            <StateDisplay type="empty" message="Нет активности" description="За последнее время нет новых действий" size="sm" />
           ) : (
             <ActivityFeed items={recentActivity} />
           )}
-          {topGymsLoading || !topGyms ? (
+          {topGymsLoading ? (
             <StateDisplay type="loading" message="Загрузка топа…" size="sm" />
+          ) : !topGyms || topGyms.length === 0 ? (
+            <StateDisplay type="empty" message="Нет данных" description="Топ залов пока не сформирован" size="sm" />
           ) : (
             <TopGymsList items={topGyms} />
           )}
@@ -161,6 +174,54 @@ export default function SuperAdminDashboardPage() {
           )}
         </Box>
       </Box>
+
+      <CreateGymDialog open={createOpen} onClose={() => setCreateOpen(false)} onSave={createGymMutate} saving={creatingGym} />
     </PageContainer>
+  );
+}
+
+function CreateGymDialog({ open, onClose, onSave, saving }: {
+  open: boolean;
+  onClose: () => void;
+  onSave: (data: Record<string, unknown>) => Promise<unknown>;
+  saving: boolean;
+}) {
+  const theme = useTheme();
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async () => {
+    if (!name.trim() || !city.trim() || !address.trim()) {
+      setError('Заполните название, город и адрес');
+      return;
+    }
+    setError('');
+    await onSave({ name: name.trim(), city: city.trim(), address: address.trim(), description: description.trim() || null });
+    setName(''); setCity(''); setAddress(''); setDescription('');
+    onClose();
+  };
+
+  const fieldSx = { '& .MuiInputBase-root': { fontSize: '0.85rem' } };
+
+  return (
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth slotProps={{ paper: { sx: { bgcolor: theme.palette.background.paper } } }}>
+      <DialogTitle sx={{ fontWeight: 700 }}>Создать скалодром</DialogTitle>
+      <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: '16px !important' }}>
+        {error && <Typography sx={{ color: 'error.main', fontSize: '0.82rem' }}>{error}</Typography>}
+        <TextField label="Название" size="small" value={name} onChange={e => setName(e.target.value)} sx={fieldSx} required />
+        <TextField label="Город" size="small" value={city} onChange={e => setCity(e.target.value)} sx={fieldSx} required />
+        <TextField label="Адрес" size="small" value={address} onChange={e => setAddress(e.target.value)} sx={fieldSx} required />
+        <TextField label="Описание" size="small" multiline minRows={2} value={description} onChange={e => setDescription(e.target.value)} sx={fieldSx} />
+      </DialogContent>
+      <DialogActions sx={{ px: 3, pb: 2 }}>
+        <Button onClick={onClose} disabled={saving}>Отмена</Button>
+        <Button variant="contained" onClick={handleSubmit} disabled={saving}>
+          {saving ? 'Создание…' : 'Создать'}
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

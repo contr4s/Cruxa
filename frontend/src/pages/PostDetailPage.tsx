@@ -35,25 +35,34 @@ export default function PostDetailPage() {
     else navigate('/feed');
   };
 
-  if (isLoading || !post) {
-    const fallback = (
-      <Box sx={{ p: 4 }}>
-        <Typography>Загрузка...</Typography>
-      </Box>
-    );
+  if (isLoading) {
+    const fallback = <StateDisplay type="loading" message="Загрузка поста…" />;
     if (isModal) {
       return (
         <Box
           sx={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 1300,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            position: 'fixed', inset: 0, zIndex: 1300,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
             bgcolor: 'rgba(0,0,0,0.85)',
           }}
-          onClick={handleClose}
+        >
+          {fallback}
+        </Box>
+      );
+    }
+    return <PageContainer>{fallback}</PageContainer>;
+  }
+
+  if (!post) {
+    const fallback = <StateDisplay type="error" message="Пост не найден" />;
+    if (isModal) {
+      return (
+        <Box
+          sx={{
+            position: 'fixed', inset: 0, zIndex: 1300,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            bgcolor: 'rgba(0,0,0,0.85)',
+          }}
         >
           {fallback}
         </Box>

@@ -32,17 +32,22 @@ export function RouteReviewsList({ reviews }: RouteReviewsListProps) {
             border: `1px solid ${theme.palette.divider}`,
           }}
         >
-          <UserLink username={review.username} displayName={review.displayName} avatarUrl={review.userAvatarUrl} size="md" withAvatar />
+          <UserLink
+            username={review.username}
+            displayName={review.displayName}
+            avatarUrl={review.userAvatarUrl}
+            size="md"
+            withAvatar
+            subtitle={
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75, flexWrap: 'wrap' }}>
+                <Typography component="span" sx={{ fontSize: '0.72rem', color: theme.custom.text3 }}>
+                  {review.routeName} · {review.routeGrade}
+                </Typography>
+                <RatingBadge rating={review.rating} size="sm" />
+              </Box>
+            }
+          />
           <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-              <Typography sx={{ fontSize: '0.85rem', fontWeight: 600, color: theme.palette.text.primary }}>
-                {review.displayName}
-              </Typography>
-              <Typography sx={{ fontSize: '0.72rem', color: theme.custom.text3 }}>
-                {review.routeName} · {review.routeGrade}
-              </Typography>
-              <RatingBadge rating={review.rating} size="sm" />
-            </Box>
             <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, mt: 0.5, lineHeight: 1.4 }}>
               {review.comment}
             </Typography>

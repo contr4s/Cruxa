@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
-import { Box, Typography, Fab, useTheme } from '@mui/material';
-import { Route, People, EditNote, FilterList, QrCodeScanner } from '@mui/icons-material';
+import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
+import { Route, People, EditNote, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
@@ -16,16 +16,18 @@ import {
   useGymActivity,
   useGymSetters,
 } from '../services/hooks/useGymAdmin';
-import { useGym } from '../services/hooks/useGyms';
+import { useGym, useUpdateGym } from '../services/hooks/useGyms';
 import { useManagedGym } from '../services/hooks/useManagedGym';
 import type { AdminRouteFilterState } from '../types/gymAdmin';
 import type { RouteDto } from '../types/route';
+import type { UpdateGymPayload } from '../types/gym';
 import { GymInfoCard } from '../components/gymAdmin/GymInfoCard';
 import { GymActivityCard } from '../components/gymAdmin/GymActivityCard';
 import { AdminRouteTable } from '../components/gymAdmin/AdminRouteTable';
 import { AdminRouteFilters } from '../components/gymAdmin/AdminRouteFilters';
 import { SettersManagement } from '../components/gymAdmin/SettersManagement';
 import { GymProfileEditor } from '../components/gymAdmin/GymProfileEditor';
+import { RouteFormModal } from '../components/routes/RouteFormModal';
 
 const DEFAULT_FILTERS: AdminRouteFilterState = {
   searchQuery: '',
@@ -51,6 +53,9 @@ export default function GymAdminDashboardPage() {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<AdminRouteFilterState>(DEFAULT_FILTERS);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [routeFormOpen, setRouteFormOpen] = useState(false);
+  const [editingRoute, setEditingRoute] = useState<RouteDto | undefined>();
 
   const { selectedIds, setSelected } = useSelectableRows();
   const selectedRoutesRef = useRef<RouteDto[]>([]);
@@ -95,6 +100,8 @@ export default function GymAdminDashboardPage() {
     return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
   }, [routesData]);
 
+  const { mutateAsync: updateGymMutate, isPending: savingGym } = useUpdateGym(gymId);
+
   const handleQrConfirm = useCallback(async (qrPerPage: number, baseUrl: string) => {
     setQrDialogOpen(false);
     const routes = selectedRoutesRef.current.filter((r) => selectedIds.has(r.id));
@@ -107,7 +114,22 @@ export default function GymAdminDashboardPage() {
     }
   }, [selectedIds]);
 
-  if (managedLoading || gymLoading || !gym) {
+  const handleSaveGym = useCallback(async (data: UpdateGymPayload) => {
+    await updateGymMutate(data);
+    setEditorOpen(false);
+  }, [updateGymMutate]);
+
+  const handleEditRoute = useCallback((route: RouteDto) => {
+    setEditingRoute(route);
+    setRouteFormOpen(true);
+  }, []);
+
+  const handleCloseRouteForm = useCallback(() => {
+    setRouteFormOpen(false);
+    setEditingRoute(undefined);
+  }, []);
+
+  if (managedLoading || gymLoading) {
     return (
       <PageContainer>
         <StateDisplay type="loading" message="Загрузка зала…" />
@@ -115,20 +137,41 @@ export default function GymAdminDashboardPage() {
     );
   }
 
+  if (!managedGym || !gym) {
+    return (
+      <PageContainer>
+        <StateDisplay type="error" message="Не удалось загрузить данные зала" description="Проверьте, что у вас есть права на управление залом" />
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>
-          Управление залом
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>
+            Управление залом
+          </Typography>
+        </Box>
 
-        <GymInfoCard gym={gym} onEdit={() => alert('Редактирование профиля — скоро')} />
+        <GymInfoCard gym={gym} onEdit={() => setEditorOpen(true)} />
 
-        {statsLoading || !stats ? (
+         {statsLoading || !stats ? (
           <StateDisplay type="loading" message="Загрузка статистики…" />
         ) : (
           <GymActivityCard activity={activity ?? { newRoutes: 0, ascents: 0, reviews: 0, visitors: 0, period: '—' }} />
         )}
+
+        <Box>
+          <SectionHeader icon={<EditNote sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Профиль зала" />
+          <GymProfileEditor
+            gym={gym}
+            editing={editorOpen}
+            onSave={handleSaveGym}
+            onCancel={() => setEditorOpen(false)}
+            saving={savingGym}
+          />
+        </Box>
 
         <Box>
           <AdminRouteFilters
@@ -141,12 +184,17 @@ export default function GymAdminDashboardPage() {
                 icon={<Route sx={{ fontSize: 20, color: theme.palette.primary.main }} />}
                 title="Все трассы зала"
                 action={
-                  <Box onClick={toggle} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'pointer', color: theme.palette.text.secondary, '&:hover': { color: theme.palette.text.primary } }}>
-                    <FilterList sx={{ fontSize: 18 }} />
-                    {activeCount > 0 && (
-                      <Box sx={{ background: theme.palette.primary.main, color: '#fff', borderRadius: '10px', px: 0.75, py: 0.1, fontSize: '0.65rem', fontWeight: 700 }}>{activeCount}</Box>
-                    )}
-                    {open ? <ExpandLess sx={{ fontSize: 18 }} /> : <ExpandMore sx={{ fontSize: 18 }} />}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Button size="small" variant="outlined" startIcon={<Add />} onClick={() => setRouteFormOpen(true)} sx={{ fontSize: '0.78rem' }}>
+                      Новая трасса
+                    </Button>
+                    <Box onClick={toggle} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'pointer', color: theme.palette.text.secondary, '&:hover': { color: theme.palette.text.primary } }}>
+                      <FilterList sx={{ fontSize: 18 }} />
+                      {activeCount > 0 && (
+                        <Box sx={{ background: theme.palette.primary.main, color: '#fff', borderRadius: '10px', px: 0.75, py: 0.1, fontSize: '0.65rem', fontWeight: 700 }}>{activeCount}</Box>
+                      )}
+                      {open ? <ExpandLess sx={{ fontSize: 18 }} /> : <ExpandMore sx={{ fontSize: 18 }} />}
+                    </Box>
                   </Box>
                 }
               />
@@ -173,6 +221,7 @@ export default function GymAdminDashboardPage() {
                 selectable
                 selectedIds={selectedIds}
                 onSelectionChange={setSelected}
+                onEdit={handleEditRoute}
               />
               <QrPdfDialog
                 open={qrDialogOpen}
@@ -201,12 +250,17 @@ export default function GymAdminDashboardPage() {
             />
           )}
         </Box>
-
-        <Box>
-          <SectionHeader icon={<EditNote sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Профиль зала" />
-          <GymProfileEditor gym={gym} />
-        </Box>
       </Box>
+
+      {routeFormOpen && (
+        <RouteFormModal
+          open={routeFormOpen}
+          route={editingRoute}
+          gymId={gymId}
+          setterOptions={setters?.map((s) => ({ id: s.id, name: s.name }))}
+          onClose={handleCloseRouteForm}
+        />
+      )}
     </PageContainer>
   );
 }

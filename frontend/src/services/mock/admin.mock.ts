@@ -47,8 +47,6 @@ function buildAdminGyms(): AdminGymItem[] {
   }));
 }
 
-const CACHED_ADMIN_GYMS = buildAdminGyms();
-
 /* ---------- mocks ---------- */
 
 export async function mockGetAdminStats(): Promise<AdminDashboardStats> {
@@ -94,7 +92,7 @@ export async function mockGetAdminGyms(
 ): Promise<PaginatedList<AdminGymItem>> {
   await mockDelay(400);
 
-  let items = [...CACHED_ADMIN_GYMS];
+  let items = buildAdminGyms();
 
   if (params?.city && params.city !== 'all') {
     items = items.filter((g) => g.city === params.city);

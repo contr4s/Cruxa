@@ -1,7 +1,8 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getGyms, getGymById, toggleGymFavorite } from '../gyms.service';
+import { getGyms, getGymById, toggleGymFavorite, updateGym } from '../gyms.service';
 import type { GetGymsParams } from '../gyms.service';
 import type { GymDto } from '../../types/gym';
+import type { UpdateGymPayload } from '../../types/gym';
 
 export function useGyms(params?: GetGymsParams) {
   return useQuery({
@@ -34,6 +35,30 @@ export function useToggleFavorite() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['gyms'] });
       queryClient.invalidateQueries({ queryKey: ['gym'] });
+    },
+  });
+}
+
+import { createGym } from '../gyms.service';
+
+export function useCreateGym() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: Record<string, unknown>) => createGym(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin'] });
+      queryClient.invalidateQueries({ queryKey: ['gyms'] });
+    },
+  });
+}
+
+export function useUpdateGym(gymId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: UpdateGymPayload) => updateGym(gymId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['gym', gymId] });
+      queryClient.invalidateQueries({ queryKey: ['gyms'] });
     },
   });
 }

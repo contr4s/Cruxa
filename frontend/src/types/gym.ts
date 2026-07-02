@@ -41,3 +41,32 @@ export interface GymSector {
   name: string;
   gymId: string;
 }
+
+export interface WorkingHoursEntry {
+  days: string;
+  from: string;
+  to: string;
+}
+
+export interface UpdateGymPayload {
+  name?: string;
+  city?: string;
+  address?: string;
+  latitude?: number | null;
+  longitude?: number | null;
+  description?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  website?: string | null;
+  vkUrl?: string | null;
+  instagramUrl?: string | null;
+  youtubeUrl?: string | null;
+  photoUrls?: string[];
+  area?: number | null;
+  maxHeight?: number | null;
+  yearOpened?: number | null;
+  metroStations?: string[];
+  tags?: string[];
+  hours?: WorkingHoursEntry[];
+  prices?: GymPrice[];
+}

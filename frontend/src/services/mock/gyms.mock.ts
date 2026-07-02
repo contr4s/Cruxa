@@ -235,10 +235,61 @@ export async function mockGetGymById(id: string): Promise<GymDto | null> {
   return MOCK_GYMS.find((g) => g.id === id) ?? null;
 }
 
+let _mockGymNextId = 100;
+
+export async function mockCreateGym(data: Record<string, unknown>): Promise<GymDto> {
+  await mockDelay(300);
+  const id = `g${_mockGymNextId++}`;
+  const gym: GymDto = {
+    id,
+    name: (data.name as string) || 'Новый зал',
+    city: (data.city as string) || '',
+    address: (data.address as string) || '',
+    description: (data.description as string) || '',
+    phone: (data.phone as string) || '',
+    email: (data.email as string) || '',
+    website: (data.website as string) || '',
+    vkUrl: (data.vkUrl as string) || '',
+    instagramUrl: (data.instagramUrl as string) || '',
+    youtubeUrl: (data.youtubeUrl as string) || '',
+    photoUrls: (data.photoUrls as string[]) || [],
+    area: (data.area as number) || undefined,
+    maxHeight: (data.maxHeight as number) || undefined,
+    yearOpened: (data.yearOpened as number) || undefined,
+    metroStations: (data.metroStations as string[]) || [],
+    tags: (data.tags as string[]) || [],
+    hours: {},
+    prices: [],
+    rating: 0,
+    routeCount: 0,
+    activeRouteCount: 0,
+    isFavorite: false,
+    distance: undefined,
+  };
+  MOCK_GYMS.push(gym);
+  return gym;
+}
+
 export async function mockToggleGymFavorite(id: string): Promise<void> {
   await mockDelay(150);
   const gym = MOCK_GYMS.find((g) => g.id === id);
   if (gym) {
     gym.isFavorite = !gym.isFavorite;
   }
+}
+
+export async function mockUpdateGym(id: string, data: Record<string, unknown>): Promise<GymDto | null> {
+  await mockDelay(400);
+  const gym = MOCK_GYMS.find((g) => g.id === id);
+  if (!gym) return null;
+  Object.assign(gym, data);
+  // convert hours from WorkingHoursEntry[] back to GymHours for read display
+  if (Array.isArray(data.hours)) {
+    const map: Record<string, string> = {};
+    for (const entry of data.hours as { days: string; from: string; to: string }[]) {
+      if (entry.days) map[entry.days] = `${entry.from} – ${entry.to}`;
+    }
+    gym.hours = map;
+  }
+  return { ...gym };
 }

@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
-import { Box, Typography, Fab, useTheme } from '@mui/material';
-import { Construction, Route, Reviews, LocationOn, FilterList, QrCodeScanner } from '@mui/icons-material';
+import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
+import { Construction, Route, Reviews, LocationOn, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
@@ -26,6 +26,7 @@ import { SetterRouteFilters } from '../components/routesetter/SetterRouteFilters
 import { RouteReviewsList } from '../components/routesetter/RouteReviewsList';
 import { ReviewsSummary } from '../components/routesetter/ReviewsSummary';
 import { LinkedGyms } from '../components/routesetter/LinkedGyms';
+import { RouteFormModal } from '../components/routes/RouteFormModal';
 
 const DEFAULT_FILTERS: SetterRouteFilterState = {
   searchQuery: '',
@@ -50,6 +51,8 @@ export default function RoutesetterDashboardPage() {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<SetterRouteFilterState>(DEFAULT_FILTERS);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
+  const [routeFormOpen, setRouteFormOpen] = useState(false);
+  const [editingRoute, setEditingRoute] = useState<RouteDto | undefined>();
 
   const { selectedIds, setSelected } = useSelectableRows();
   const selectedRoutesRef = useRef<RouteDto[]>([]);
@@ -121,12 +124,27 @@ export default function RoutesetterDashboardPage() {
     }
   }, [selectedIds]);
 
+  const handleEditRoute = useCallback((route: RouteDto) => {
+    setEditingRoute(route);
+    setRouteFormOpen(true);
+  }, []);
+
+  const handleCloseRouteForm = useCallback(() => {
+    setRouteFormOpen(false);
+    setEditingRoute(undefined);
+  }, []);
+
   return (
     <PageContainer>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>
-          Дашборд рутсеттера
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>
+            Дашборд рутсеттера
+          </Typography>
+          <Button variant="contained" size="small" startIcon={<Add />} onClick={() => setRouteFormOpen(true)} sx={{ fontSize: '0.82rem' }}>
+            Новая трасса
+          </Button>
+        </Box>
 
         {statsLoading || !stats ? (
           <StateDisplay type="loading" message="Загрузка статистики…" />
@@ -185,7 +203,7 @@ export default function RoutesetterDashboardPage() {
                 selectable
                 selectedIds={selectedIds}
                 onSelectionChange={setSelected}
-                onEdit={(r) => alert(`Редактировать ${r.name} — скоро`)}
+                onEdit={handleEditRoute}
                 onArchive={handleArchive}
                 onRestore={handleRestore}
               />
@@ -227,6 +245,16 @@ export default function RoutesetterDashboardPage() {
           )}
         </Box>
       </Box>
+
+      {routeFormOpen && (
+        <RouteFormModal
+          open={routeFormOpen}
+          route={editingRoute}
+          gymId={editingRoute?.gymId}
+          gymOptions={editingRoute ? undefined : gymOptions}
+          onClose={handleCloseRouteForm}
+        />
+      )}
     </PageContainer>
   );
 }

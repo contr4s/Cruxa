@@ -7,3 +7,4 @@ export { RouteStats } from './detail/RouteStats';
 export { RouteConsensusChart } from './detail/RouteConsensusChart';
 export { RouteReviews } from './detail/RouteReviews';
 export { PrivateNotes } from './detail/PrivateNotes';
+export { RouteFormModal } from './RouteFormModal';

@@ -54,22 +54,27 @@ export function RouteReviews({ reviews }: RouteReviewsProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {visibleReviews.map((review) => (
           <Box key={review.id} sx={{ display: 'flex', gap: 1.5 }}>
-            <UserLink username={review.username} displayName={review.displayName} avatarUrl={review.userAvatarUrl} size="sm" withAvatar />
-            <Box sx={{ flex: 1, minWidth: 0 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-                <Typography sx={{ fontSize: '0.88rem', fontWeight: 700, color: theme.palette.text.primary }}>
-                  {review.displayName}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} sx={{ fontSize: 12, color: i < review.rating ? theme.palette.secondary.main : theme.custom.surface3 }} />
-                  ))}
+            <UserLink
+              username={review.username}
+              displayName={review.displayName}
+              avatarUrl={review.userAvatarUrl}
+              size="sm"
+              withAvatar
+              subtitle={
+                <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5, flexWrap: 'wrap' }}>
+                  <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.15 }}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} sx={{ fontSize: 10, color: i < review.rating ? theme.palette.secondary.main : theme.custom.surface3 }} />
+                    ))}
+                  </Box>
+                  <Typography component="span" sx={{ fontSize: '0.68rem', color: theme.custom.text3 }}>
+                    {new Date(review.createdAt).toLocaleDateString('ru-RU')}
+                  </Typography>
                 </Box>
-                <Typography sx={{ fontSize: '0.68rem', color: theme.custom.text3 }}>
-                  {new Date(review.createdAt).toLocaleDateString('ru-RU')}
-                </Typography>
-              </Box>
-              <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, lineHeight: 1.4, mt: 0.5, wordBreak: 'break-word' }}>
+              }
+            />
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, lineHeight: 1.4, wordBreak: 'break-word' }}>
                 {review.comment}
               </Typography>
             </Box>

@@ -171,6 +171,8 @@ export default function GymDetailPage() {
         />
         {routesLoading && !routesPages ? (
           <StateDisplay type="loading" message="Загрузка трасс…" />
+        ) : routes.length === 0 ? (
+          <StateDisplay type="empty" message="Нет трасс" description="Попробуйте изменить фильтры" />
         ) : (
           <RouteTable routes={routes} />
         )}

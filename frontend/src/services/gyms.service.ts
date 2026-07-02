@@ -39,3 +39,25 @@ export async function toggleGymFavorite(id: string): Promise<void> {
   const { default: api } = await import('./api');
   await api.post(`/gyms/${id}/favorite`);
 }
+
+import type { UpdateGymPayload } from '../types/gym';
+
+export async function createGym(data: Record<string, unknown>): Promise<GymDto> {
+  if (USE_MOCK) {
+    const { mockCreateGym } = await import('./mock/gyms.mock');
+    return mockCreateGym(data);
+  }
+  const { default: api } = await import('./api');
+  const response = await api.post<GymDto>('/gyms', data);
+  return response.data;
+}
+
+export async function updateGym(id: string, data: UpdateGymPayload): Promise<GymDto | null> {
+  if (USE_MOCK) {
+    const { mockUpdateGym } = await import('./mock/gyms.mock');
+    return mockUpdateGym(id, data as unknown as Record<string, unknown>);
+  }
+  const { default: api } = await import('./api');
+  const response = await api.put<GymDto>(`/gyms/${id}`, data);
+  return response.data;
+}

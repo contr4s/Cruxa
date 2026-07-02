@@ -2,6 +2,8 @@ import type { RouteDto, RouteReviewDto, GradeConsensus } from '../../types/route
 import type { PaginatedList } from '../../types/common';
 import { mockDelay } from './helpers';
 import type { GetRoutesParams } from '../routes.service';
+import { MOCK_GYMS } from './gyms.mock';
+import { GRADE_LABELS } from '../../constants/filters';
 
 export const MOCK_ROUTES: RouteDto[] = [
   // RockZone g1
@@ -318,6 +320,65 @@ export function mockGetRouteConsensus(routeId: string): GradeConsensus | null {
 
 export function mockGetRouteReviews(routeId: string): RouteReviewDto[] {
   return MOCK_REVIEWS[routeId] || generateReviews(routeId);
+}
+
+let _mockRouteNextId = 100;
+
+export function mockCreateRoute(data: Record<string, unknown>): RouteDto {
+  const id = `r${_mockRouteNextId++}`;
+  const now = new Date().toISOString();
+  const route: RouteDto = {
+    id,
+    name: (data.name as string) || 'Новая трасса',
+    grade: (data.gradeRaw as string) || '5A',
+    gradeIndex: GRADE_LABELS_LOOKUP[(data.gradeRaw as string)] ?? 3,
+    type: (data.type as RouteType) || 'Boulder',
+    holdColor: (data.holdColor as string) || 'Red',
+    sector: data.sector as string | undefined,
+    gymId: data.gymId as string,
+    gymName: '',
+    setterId: (data.setterId as string) || 's1',
+    setterUsername: '',
+    setterName: '',
+    tags: (data.tags as string[]) || [],
+    description: data.description as string | undefined,
+    photoUrls: (data.photoUrls as string[]) || [],
+    rating: 0,
+    ascentsCount: 0,
+    status: data.isActive !== false ? 'Active' : 'Archived',
+    createdAt: now,
+    isFavorite: false,
+  };
+  const gym = MOCK_GYMS.find((g) => g.id === data.gymId);
+  if (gym) route.gymName = gym.name;
+  MOCK_ROUTES.push(route);
+  return route;
+}
+
+export function mockUpdateRoute(id: string, data: Record<string, unknown>): RouteDto | null {
+  const idx = MOCK_ROUTES.findIndex((r) => r.id === id);
+  if (idx === -1) return null;
+  const route = MOCK_ROUTES[idx];
+  if (data.name !== undefined) route.name = data.name as string;
+  if (data.gradeRaw !== undefined) {
+    route.grade = data.gradeRaw as string;
+    route.gradeIndex = GRADE_LABELS_LOOKUP[data.gradeRaw as string] ?? route.gradeIndex;
+  }
+  if (data.type !== undefined) route.type = data.type as RouteType;
+  if (data.holdColor !== undefined) route.holdColor = data.holdColor as string;
+  if (data.sector !== undefined) route.sector = (data.sector as string) || undefined;
+  if (data.tags !== undefined) route.tags = data.tags as string[];
+  if (data.description !== undefined) route.description = (data.description as string) || undefined;
+  if (data.photoUrls !== undefined) route.photoUrls = data.photoUrls as string[];
+  if (data.isActive !== undefined) route.status = data.isActive ? 'Active' : 'Archived';
+  if (data.setterId !== undefined) route.setterId = data.setterId as string;
+  return { ...route };
+}
+
+// lookup from GRADE_LABELS
+const GRADE_LABELS_LOOKUP: Record<string, number> = {};
+for (const [idx, label] of Object.entries(GRADE_LABELS)) {
+  GRADE_LABELS_LOOKUP[label] = Number(idx);
 }
 
 export async function mockGetRoutesByGym(gymId: string, params?: GetRoutesParams): Promise<PaginatedList<RouteDto>> {

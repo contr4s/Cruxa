@@ -61,3 +61,25 @@ export async function getRouteReviews(routeId: string): Promise<RouteReviewDto[]
   const response = await api.get<RouteReviewDto[]>(`/routes/${routeId}/reviews`);
   return response.data;
 }
+
+import type { CreateRoutePayload, UpdateRoutePayload } from '../types/route';
+
+export async function createRoute(data: CreateRoutePayload): Promise<RouteDto> {
+  if (USE_MOCK) {
+    const { mockCreateRoute } = await import('./mock/routes.mock');
+    return mockCreateRoute(data as unknown as Record<string, unknown>);
+  }
+  const { default: api } = await import('./api');
+  const response = await api.post<RouteDto>('/routes', data);
+  return response.data;
+}
+
+export async function updateRoute(id: string, data: UpdateRoutePayload): Promise<RouteDto | null> {
+  if (USE_MOCK) {
+    const { mockUpdateRoute } = await import('./mock/routes.mock');
+    return mockUpdateRoute(id, data as unknown as Record<string, unknown>);
+  }
+  const { default: api } = await import('./api');
+  const response = await api.put<RouteDto>(`/routes/${id}`, data);
+  return response.data;
+}

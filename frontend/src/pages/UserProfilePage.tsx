@@ -61,8 +61,6 @@ export default function UserProfilePage() {
     return () => observer.disconnect();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const posts = postsPages?.pages.flatMap((p) => p.items) ?? [];
-
   if (userLoading || statsLoading) {
     return (
       <PageContainer>
@@ -78,6 +76,8 @@ export default function UserProfilePage() {
       </PageContainer>
     );
   }
+
+  const posts = postsPages?.pages.flatMap((p) => p.items) ?? [];
 
   return (
     <PageContainer sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

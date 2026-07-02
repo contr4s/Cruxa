@@ -1,6 +1,7 @@
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews } from '../routes.service';
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews, createRoute, updateRoute } from '../routes.service';
 import type { GetRoutesParams } from '../routes.service';
+import type { CreateRoutePayload, UpdateRoutePayload } from '../../types/route';
 
 export function useRoutesByGym(gymId: string, params?: GetRoutesParams) {
   return useQuery({
@@ -41,5 +42,30 @@ export function useInfiniteRoutesByGym(gymId: string, params?: Omit<GetRoutesPar
     getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.page + 1 : undefined),
     initialPageParam: 1,
     enabled: !!gymId,
+  });
+}
+
+export function useCreateRoute() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateRoutePayload) => createRoute(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['routes'] });
+      queryClient.invalidateQueries({ queryKey: ['gymAdmin'] });
+      queryClient.invalidateQueries({ queryKey: ['routesetter'] });
+    },
+  });
+}
+
+export function useUpdateRoute(routeId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: UpdateRoutePayload) => updateRoute(routeId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['routes'] });
+      queryClient.invalidateQueries({ queryKey: ['route', routeId] });
+      queryClient.invalidateQueries({ queryKey: ['gymAdmin'] });
+      queryClient.invalidateQueries({ queryKey: ['routesetter'] });
+    },
   });
 }

@@ -52,3 +52,30 @@ export interface GradeVoteCount {
   gradeIndex: number;
   count: number;
 }
+
+export interface CreateRoutePayload {
+  gymId: string;
+  name: string;
+  gradeRaw: string;
+  type: RouteType;
+  holdColor: string;
+  sector?: string;
+  tags?: string[];
+  description?: string;
+  photoUrls?: string[];
+  isActive?: boolean;
+  setterId?: string;
+}
+
+export interface UpdateRoutePayload {
+  name?: string;
+  gradeRaw?: string;
+  type?: RouteType;
+  holdColor?: string;
+  sector?: string | null;
+  tags?: string[];
+  description?: string | null;
+  photoUrls?: string[];
+  isActive?: boolean;
+  setterId?: string;
+}

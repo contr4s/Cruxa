@@ -6,6 +6,7 @@ interface AdminRouteTableProps {
   selectable?: boolean;
   selectedIds?: Set<string>;
   onSelectionChange?: (selectedIds: Set<string>) => void;
+  onEdit?: (route: RouteDto) => void;
 }
 
 export function AdminRouteTable({
@@ -13,15 +14,18 @@ export function AdminRouteTable({
   selectable,
   selectedIds,
   onSelectionChange,
+  onEdit,
 }: AdminRouteTableProps) {
   return (
     <RouteTable
       routes={routes}
       showStatus
       showSetter
+      showActions
       selectable={selectable}
       selectedIds={selectedIds}
       onSelectionChange={onSelectionChange}
+      onEdit={onEdit}
     />
   );
 }
