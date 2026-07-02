@@ -1,7 +1,8 @@
-import { Box, Typography, useTheme, IconButton } from '@mui/material';
-import { PersonAdd, People } from '@mui/icons-material';
+import { Box, Typography, useTheme, IconButton, CircularProgress } from '@mui/material';
+import { PersonAdd, PersonRemove, People } from '@mui/icons-material';
 import type { RecommendedUserDto } from '../../types/post';
-import { avatarInitial } from '../../theme/commonStyles';
+import { UserLink } from '../user/UserLink';
+import { useFollowUser, useUnfollowUser } from '../../services/hooks/useUser';
 
 interface FeedUserSuggestionsProps {
   users: RecommendedUserDto[];
@@ -9,6 +10,16 @@ interface FeedUserSuggestionsProps {
 
 export function FeedUserSuggestions({ users }: FeedUserSuggestionsProps) {
   const theme = useTheme();
+  const { mutate: doFollow, isPending: followPending } = useFollowUser();
+  const { mutate: doUnfollow, isPending: unfollowPending } = useUnfollowUser();
+
+  const handleToggleFollow = (user: RecommendedUserDto) => {
+    if (user.isFollowed) {
+      doUnfollow(user.id);
+    } else {
+      doFollow(user.id);
+    }
+  };
 
   return (
     <Box sx={{
@@ -25,32 +36,34 @@ export function FeedUserSuggestions({ users }: FeedUserSuggestionsProps) {
       <Typography sx={{ fontWeight: 700, fontSize: '0.82rem', mb: 1.5, color: theme.palette.text.primary, display: 'flex', alignItems: 'center', gap: 0.75 }}>
         <People sx={{ fontSize: 16, color: theme.palette.primary.main }} /> Рекомендуем подписаться
       </Typography>
-      {users.map((user) => (
-        <Box
-          key={user.id}
-          sx={{
-            display: 'flex', alignItems: 'center', gap: 1, py: 0.75, px: 0.5, mx: -0.5, borderRadius: 1,
-            transition: 'background .2s ease',
-            cursor: 'pointer',
-            '&:hover': { bgcolor: theme.custom.surface2 },
-          }}
-        >
-          <Box sx={avatarInitial(32)}>
-            {user.displayName.charAt(0)}
-          </Box>
-          <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Typography sx={{ fontSize: '0.8rem', fontWeight: 600, color: theme.palette.text.primary }}>
-              {user.displayName}
-            </Typography>
-            <Typography sx={{ fontSize: '0.7rem', color: theme.palette.text.secondary }}>
-              {user.commonFollowers} общих подписок
-            </Typography>
-          </Box>
-          {!user.isFollowed && (
+      {users.map((user) => {
+        const loading = followPending || unfollowPending;
+        return (
+          <Box
+            key={user.id}
+            sx={{
+              display: 'flex', alignItems: 'center', gap: 1, py: 0.75, px: 0.5, mx: -0.5, borderRadius: 1,
+              transition: 'background .2s ease',
+              '&:hover': { bgcolor: theme.custom.surface2 },
+            }}
+          >
+            <UserLink
+              username={user.username}
+              displayName={user.displayName}
+              avatarUrl={user.userAvatarUrl}
+              size="md"
+              withAvatar
+              subtitle={<>{user.commonFollowers} общих подписок</>}
+            />
             <IconButton
               size="small"
+              disabled={loading}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleFollow(user);
+              }}
               sx={{
-                color: theme.palette.text.secondary,
+                color: user.isFollowed ? theme.palette.primary.main : theme.palette.text.secondary,
                 transition: 'color .2s ease, background .2s ease',
                 '&:hover': {
                   color: theme.palette.primary.main,
@@ -58,11 +71,17 @@ export function FeedUserSuggestions({ users }: FeedUserSuggestionsProps) {
                 },
               }}
             >
-              <PersonAdd sx={{ fontSize: 18 }} />
+              {loading ? (
+                <CircularProgress size={16} />
+              ) : user.isFollowed ? (
+                <PersonRemove sx={{ fontSize: 18 }} />
+              ) : (
+                <PersonAdd sx={{ fontSize: 18 }} />
+              )}
             </IconButton>
-          )}
-        </Box>
-      ))}
+          </Box>
+        );
+      })}
     </Box>
   );
 }

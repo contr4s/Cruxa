@@ -2,7 +2,8 @@ import type { UserDto, UserStats, KruskorPoint, RadarSkillsResponse, GradePyrami
 import {
   mockGetUserProfile, mockGetUserStats, mockGetKruskorHistory,
   mockGetRadarSkills, mockGetGradePyramid, mockGetAscentDistribution,
-  mockGetTopRoutes, mockGetMonthlyActivity
+  mockGetTopRoutes, mockGetMonthlyActivity, mockGetUserByUsername,
+  mockFollowUser, mockUnfollowUser, mockIsFollowing,
 } from './mock/climber.mock';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
@@ -67,5 +68,31 @@ export async function getMonthlyActivity(userId: string): Promise<MonthlyActivit
   if (USE_MOCK) return mockGetMonthlyActivity();
   const { default: api } = await import('./api');
   const response = await api.get<MonthlyActivity>(`/users/${userId}/monthly-activity`);
+  return response.data;
+}
+
+export async function getUserByUsername(username: string): Promise<UserDto> {
+  if (USE_MOCK) return mockGetUserByUsername(username);
+  const { default: api } = await import('./api');
+  const response = await api.get<UserDto>(`/users/username/${username}`);
+  return response.data;
+}
+
+export async function followUser(userId: string): Promise<void> {
+  if (USE_MOCK) return mockFollowUser(userId);
+  const { default: api } = await import('./api');
+  await api.post(`/users/${userId}/follow`);
+}
+
+export async function unfollowUser(userId: string): Promise<void> {
+  if (USE_MOCK) return mockUnfollowUser(userId);
+  const { default: api } = await import('./api');
+  await api.delete(`/users/${userId}/follow`);
+}
+
+export async function isFollowing(userId: string): Promise<boolean> {
+  if (USE_MOCK) return mockIsFollowing(userId);
+  const { default: api } = await import('./api');
+  const response = await api.get<boolean>(`/users/${userId}/is-following`);
   return response.data;
 }

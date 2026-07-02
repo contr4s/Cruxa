@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Box, Typography, Avatar, useTheme } from '@mui/material';
+import { Box, Typography, Avatar, useTheme, Button } from '@mui/material';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import PeopleIcon from '@mui/icons-material/People';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditIcon from '@mui/icons-material/Edit';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import CheckIcon from '@mui/icons-material/Check';
 import { Card } from '../../theme/cardStyles';
 import type { UserDto } from '../../types/user';
 
@@ -32,9 +34,102 @@ interface ProfileHeaderProps {
   followingCount: number;
   kruskorScore: number;
   totalWorkouts: number;
+  isOwner?: boolean;
+  isFollowed?: boolean;
+  isFollowLoading?: boolean;
+  onToggleFollow?: () => void;
 }
 
-export function ProfileHeader({ user, followersCount, followingCount, kruskorScore, totalWorkouts }: ProfileHeaderProps) {
+// ponytail: EditButton остаётся no-op заглушкой — форма редактирования профиля ещё не реализована (Roadmap 3.22)
+function EditButton({ theme }: { theme: ReturnType<typeof useTheme> }) {
+  return (
+    <Box
+      component="button"
+      sx={{
+        flexShrink: 0,
+        mt: 0.5,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1,
+        px: 2,
+        py: 0.5,
+        border: `1px solid ${theme.palette.divider}`,
+        borderRadius: '8px',
+        background: 'transparent',
+        cursor: 'pointer',
+        color: theme.palette.text.secondary,
+        fontSize: '0.85rem',
+        fontWeight: 600,
+        fontFamily: 'inherit',
+        transition: 'background .15s, color .15s',
+        '&:hover': { borderColor: theme.palette.text.secondary, color: theme.palette.text.primary },
+      }}
+    >
+      <EditIcon sx={{ fontSize: 18 }} />
+      <Box component="span">Редактировать</Box>
+    </Box>
+  );
+}
+
+function FollowButton({
+  theme,
+  isFollowed,
+  isLoading,
+  onClick,
+}: {
+  theme: ReturnType<typeof useTheme>;
+  isFollowed: boolean;
+  isLoading: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <Button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      disabled={isLoading}
+      variant={isFollowed ? 'contained' : 'outlined'}
+      startIcon={isFollowed ? <CheckIcon /> : <PersonAddIcon />}
+      sx={{
+        flexShrink: 0,
+        mt: 0.5,
+        borderRadius: '50px',
+        textTransform: 'none',
+        fontSize: '0.82rem',
+        fontWeight: 600,
+        px: 2,
+        py: 0.5,
+        minWidth: 130,
+        borderColor: theme.palette.primary.main,
+        color: isFollowed ? '#fff' : theme.palette.primary.main,
+        bgcolor: isFollowed ? theme.palette.primary.main : 'transparent',
+        '&:hover': {
+          borderColor: theme.palette.primary.main,
+          bgcolor: isFollowed
+            ? theme.palette.primary.dark ?? '#1F8A80'
+            : `${theme.palette.primary.main}15`,
+        },
+        '&.Mui-disabled': { opacity: 0.6 },
+      }}
+    >
+      {isFollowed ? 'Вы подписаны' : 'Подписаться'}
+    </Button>
+  );
+}
+
+export function ProfileHeader({
+  user,
+  followersCount,
+  followingCount,
+  kruskorScore,
+  totalWorkouts,
+  isOwner = true,
+  isFollowed = false,
+  isFollowLoading = false,
+  onToggleFollow,
+}: ProfileHeaderProps) {
   const theme = useTheme();
   const [showAllAchievements, setShowAllAchievements] = useState(false);
 
@@ -183,32 +278,11 @@ export function ProfileHeader({ user, followersCount, followingCount, kruskorSco
           </Box>
         </Box>
 
-        <Box
-          component="button"
-          sx={{
-            flexShrink: 0,
-            mt: 0.5,
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1,
-            px: 2,
-            py: 0.5,
-            border: `1px solid ${theme.palette.divider}`,
-            borderRadius: '8px',
-            background: 'transparent',
-            cursor: 'pointer',
-            color: theme.palette.text.secondary,
-            fontSize: '0.85rem',
-            fontWeight: 600,
-            fontFamily: 'inherit',
-            transition: 'background .15s, color .15s',
-            '&:hover': { borderColor: theme.palette.text.secondary, color: theme.palette.text.primary },
-          }}
-        >
-          <EditIcon sx={{ fontSize: 18 }} />
-          <Box component="span">Редактировать</Box>
-        </Box>
+        {isOwner ? (
+          <EditButton theme={theme} />
+        ) : (
+          <FollowButton theme={theme} isFollowed={isFollowed} isLoading={isFollowLoading} onClick={onToggleFollow ?? (() => {})} />
+        )}
       </Box>
 
       {/* Mobile layout: avatar + name row, then stats/achievements full width below */}
@@ -287,31 +361,11 @@ export function ProfileHeader({ user, followersCount, followingCount, kruskorSco
 
           </Box>
 
-          <Box
-            component="button"
-            sx={{
-              flexShrink: 0,
-              mt: 0.5,
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 1,
-              px: 0.5,
-              py: 0.5,
-              border: `1px solid ${theme.palette.divider}`,
-              borderRadius: '8px',
-              background: 'transparent',
-              cursor: 'pointer',
-              color: theme.palette.text.secondary,
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              fontFamily: 'inherit',
-              transition: 'background .15s, color .15s',
-              '&:hover': { borderColor: theme.palette.text.secondary, color: theme.palette.text.primary },
-            }}
-          >
-            <EditIcon sx={{ fontSize: 18 }} />
-          </Box>
+          {isOwner ? (
+            <EditButton theme={theme} />
+          ) : (
+            <FollowButton theme={theme} isFollowed={isFollowed} isLoading={isFollowLoading} onClick={onToggleFollow ?? (() => {})} />
+          )}
         </Box>
 
         {/* Stats row — full width below avatar row, flush left */}

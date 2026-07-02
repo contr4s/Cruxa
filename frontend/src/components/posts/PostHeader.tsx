@@ -1,12 +1,14 @@
-import { Box, Avatar, Typography, useTheme, IconButton } from '@mui/material';
+import { Box, Typography, useTheme, IconButton } from '@mui/material';
 import { Public, Lock, People, Edit, Delete, LocalFireDepartment } from '@mui/icons-material';
 import { relativeTime } from './relativeTime';
 import { GymChip } from '../ui/GymChip';
+import { UserLink } from '../user/UserLink';
 import type { ReactNode } from 'react';
 
 interface PostHeaderProps {
-  avatar?: string;
+  username: string;
   displayName: string;
+  avatarUrl?: string;
   gymName?: string;
   gymId?: string;
   visibility?: 'Public' | 'Followers' | 'Private';
@@ -18,27 +20,27 @@ interface PostHeaderProps {
   mediaToggle?: ReactNode;
 }
 
-export function PostHeader({ displayName, gymName, gymId, visibility, isOwner, isRecommended, createdAt, onEdit, onDelete, mediaToggle }: PostHeaderProps) {
+export function PostHeader({ username, displayName, avatarUrl, gymName, gymId, visibility, isOwner, isRecommended, createdAt, onEdit, onDelete, mediaToggle }: PostHeaderProps) {
   const theme = useTheme();
-  const initial = displayName.charAt(0).toUpperCase();
 
   const visibilityIcon = visibility === 'Private' ? <Lock sx={{ fontSize: 14 }} /> : visibility === 'Followers' ? <People sx={{ fontSize: 14 }} /> : <Public sx={{ fontSize: 14 }} />;
 
   return (
     <Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, px: 2.5, pt: 2, pb: 1.5 }}>
-        <Avatar sx={{ width: 36, height: 36, fontSize: '0.95rem', bgcolor: theme.palette.primary.main }}>
-          {initial}
-        </Avatar>
-        <Box sx={{ flex: '0 1 auto', minWidth: 0 }}>
-          <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary }}>
-            {displayName}
-          </Typography>
-          <Typography sx={{ fontSize: '0.72rem', color: theme.palette.text.secondary, display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            {relativeTime(createdAt)}
-            {gymName && <GymChip name={gymName} gymId={gymId} />}
-          </Typography>
-        </Box>
+        <UserLink
+          username={username}
+          displayName={displayName}
+          avatarUrl={avatarUrl}
+          size="md"
+          withAvatar
+          subtitle={
+            <>
+              {relativeTime(createdAt)}
+              {gymName && <GymChip name={gymName} gymId={gymId} />}
+            </>
+          }
+        />
         {mediaToggle && (
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', justifyContent: 'center', mx: 'auto' }}>
             {mediaToggle}

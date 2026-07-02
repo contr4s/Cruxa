@@ -1,6 +1,7 @@
-import { Box, Typography, Avatar, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { RatingBadge } from '../ui/RatingBadge';
 import type { RouteReviewSummary } from '../../types/routesetter';
+import { UserLink } from '../user/UserLink';
 
 interface RouteReviewsListProps {
   reviews: RouteReviewSummary[];
@@ -31,12 +32,7 @@ export function RouteReviewsList({ reviews }: RouteReviewsListProps) {
             border: `1px solid ${theme.palette.divider}`,
           }}
         >
-          <Avatar
-            src={review.userAvatarUrl}
-            sx={{ width: 36, height: 36, fontSize: '0.8rem', bgcolor: theme.palette.primary.main, flexShrink: 0 }}
-          >
-            {review.displayName[0]}
-          </Avatar>
+          <UserLink username={review.username} displayName={review.displayName} avatarUrl={review.userAvatarUrl} size="md" withAvatar />
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
               <Typography sx={{ fontSize: '0.85rem', fontWeight: 600, color: theme.palette.text.primary }}>

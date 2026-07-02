@@ -9,6 +9,7 @@ import {
   TableRow,
   Typography,
   Chip,
+  Checkbox,
   useTheme,
   IconButton,
 } from '@mui/material';
@@ -26,6 +27,9 @@ interface RouteTableProps {
   showStatus?: boolean;
   showActions?: boolean;
   showSetter?: boolean;
+  selectable?: boolean;
+  selectedIds?: Set<string>;
+  onSelectionChange?: (selectedIds: Set<string>) => void;
   onEdit?: (route: RouteDto) => void;
   onArchive?: (route: RouteDto) => void;
   onRestore?: (route: RouteDto) => void;
@@ -36,6 +40,9 @@ export function RouteTable({
   showStatus = false,
   showActions = false,
   showSetter = true,
+  selectable = false,
+  selectedIds,
+  onSelectionChange,
   onEdit,
   onArchive,
   onRestore,
@@ -44,11 +51,33 @@ export function RouteTable({
   const navigate = useNavigate();
   const location = useLocation();
 
+  const allSelected = selectable && selectedIds && routes.length > 0 && routes.every((r) => selectedIds.has(r.id));
+  const someSelected = selectable && selectedIds && routes.some((r) => selectedIds.has(r.id)) && !allSelected;
+
+  const handleToggle = (id: string) => {
+    if (!selectedIds || !onSelectionChange) return;
+    const next = new Set(selectedIds);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    onSelectionChange(next);
+  };
+
+  const handleSelectAll = () => {
+    if (!onSelectionChange) return;
+    if (allSelected) {
+      onSelectionChange(new Set());
+    } else {
+      onSelectionChange(new Set(routes.map((r) => r.id)));
+    }
+  };
+
   if (routes.length === 0) {
     return <StateDisplay type="empty" message="Нет трасс" description="Попробуйте изменить фильтры" />;
   }
 
-  const headers = ['', 'Название', 'Грейд', 'Тип', 'Рейтинг', 'Пролазы'];
+  const headers: string[] = [];
+  if (selectable) headers.push('QR');
+  headers.push('', 'Название', 'Грейд', 'Тип', 'Рейтинг', 'Пролазы');
   if (showSetter) headers.push('Рутсеттер');
   if (showStatus) headers.push('Статус');
   if (showActions) headers.push('Действия');
@@ -64,18 +93,31 @@ export function RouteTable({
       <Table size="small" sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow sx={{ background: theme.custom.surface2 }}>
-            {headers.map((h) => (
+            {headers.map((h, idx) => (
               <TableCell
-                key={h}
+                key={idx}
                 sx={{
                   color: theme.palette.text.secondary,
                   fontWeight: 700,
                   fontSize: '0.78rem',
                   borderBottom: `1px solid ${theme.palette.divider}`,
-                  display: h ? { xs: 'none', sm: 'table-cell' } : { xs: 'none', md: 'table-cell' },
+                  display: idx <= 1 ? { xs: 'none', md: 'table-cell' } : { xs: 'none', sm: 'table-cell' },
                 }}
               >
-                {h}
+                {selectable && idx === 0 ? (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <Checkbox
+                      size="small"
+                      checked={allSelected ?? false}
+                      indeterminate={someSelected}
+                      onChange={handleSelectAll}
+                      sx={{ p: 0 }}
+                    />
+                    {h}
+                  </Box>
+                ) : (
+                  h
+                )}
               </TableCell>
             ))}
           </TableRow>
@@ -86,12 +128,24 @@ export function RouteTable({
               key={route.id}
               hover
               onClick={() => navigate(`/route/${route.id}`, { state: { backgroundLocation: location } })}
+              selected={selectable && selectedIds?.has(route.id)}
               sx={{
                 cursor: 'pointer',
                 '& td': { borderBottom: `1px solid ${theme.palette.divider}` },
                 '&:last-child td': { borderBottom: 'none' },
               }}
             >
+              {selectable && (
+                <TableCell sx={{ width: 32, p: '8px', display: { xs: 'none', md: 'table-cell' } }}>
+                  <Checkbox
+                    size="small"
+                    checked={selectedIds?.has(route.id) ?? false}
+                    onChange={() => handleToggle(route.id)}
+                    onClick={(e) => e.stopPropagation()}
+                    sx={{ p: 0 }}
+                  />
+                </TableCell>
+              )}
               <TableCell sx={{ width: 32, p: '8px', display: { xs: 'none', md: 'table-cell' } }}>
                 <Box
                   sx={{

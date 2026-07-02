@@ -1,12 +1,15 @@
-import { useState, useMemo } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
-import { Route, People, EditNote, FilterList } from '@mui/icons-material';
+import { useState, useMemo, useCallback, useRef } from 'react';
+import { Box, Typography, Fab, useTheme } from '@mui/material';
+import { Route, People, EditNote, FilterList, QrCodeScanner } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { Pagination } from '../components/ui/Pagination';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSelectableRows } from '../hooks/useSelectableRows';
+import { QrPdfDialog } from '../components/routes/QrPdfDialog';
+import { generateQrPdfBlob, downloadBlob } from '../utils/generateQrPdf';
 import {
   useGymAdminStats,
   useAdminRoutes,
@@ -47,6 +50,11 @@ export default function GymAdminDashboardPage() {
   useScrollReveal();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<AdminRouteFilterState>(DEFAULT_FILTERS);
+  const [qrDialogOpen, setQrDialogOpen] = useState(false);
+
+  const { selectedIds, setSelected } = useSelectableRows();
+  const selectedRoutesRef = useRef<RouteDto[]>([]);
+  const prevSelectedJson = useRef('');
 
   // GymAdmin управляет своим залом (через отдельный эндпоинт)
   const { data: managedGym, isLoading: managedLoading } = useManagedGym();
@@ -56,6 +64,20 @@ export default function GymAdminDashboardPage() {
   const { data: activity } = useGymActivity(gymId);
   const { data: routesData, isLoading: routesLoading } = useAdminRoutes(gymId, { ...filters, page, pageSize: 10 });
   const { data: setters, isLoading: settersLoading } = useGymSetters(gymId);
+
+  useMemo(() => {
+    const json = JSON.stringify([...selectedIds].sort());
+    if (json === prevSelectedJson.current) return;
+    prevSelectedJson.current = json;
+    const seen = new Map<string, RouteDto>();
+    for (const r of selectedRoutesRef.current) {
+      if (selectedIds.has(r.id)) seen.set(r.id, r);
+    }
+    for (const r of routesData?.items ?? []) {
+      if (selectedIds.has(r.id)) seen.set(r.id, r);
+    }
+    selectedRoutesRef.current = [...seen.values()];
+  }, [selectedIds, routesData]);
 
   const sectors = useMemo(() => {
     const map = new Map<string, string>();
@@ -72,6 +94,18 @@ export default function GymAdminDashboardPage() {
     });
     return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
   }, [routesData]);
+
+  const handleQrConfirm = useCallback(async (qrPerPage: number, baseUrl: string) => {
+    setQrDialogOpen(false);
+    const routes = selectedRoutesRef.current.filter((r) => selectedIds.has(r.id));
+    if (routes.length === 0) return;
+    try {
+      const blob = await generateQrPdfBlob(routes, qrPerPage, baseUrl);
+      downloadBlob(blob, 'qrcodes.pdf');
+    } catch {
+      alert('Ошибка при генерации PDF');
+    }
+  }, [selectedIds]);
 
   if (managedLoading || gymLoading || !gym) {
     return (
@@ -122,7 +156,30 @@ export default function GymAdminDashboardPage() {
             <StateDisplay type="loading" message="Загрузка трасс…" />
           ) : (
             <>
-              <AdminRouteTable routes={routesData?.items ?? []} />
+              {selectedIds.size > 0 && (
+                <Fab
+                  variant="extended"
+                  color="primary"
+                  size="medium"
+                  sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1200 }}
+                  onClick={() => setQrDialogOpen(true)}
+                >
+                  <QrCodeScanner sx={{ mr: 1 }} />
+                  PDF QR ({selectedIds.size})
+                </Fab>
+              )}
+              <AdminRouteTable
+                routes={routesData?.items ?? []}
+                selectable
+                selectedIds={selectedIds}
+                onSelectionChange={setSelected}
+              />
+              <QrPdfDialog
+                open={qrDialogOpen}
+                routes={selectedRoutesRef.current.filter((r) => selectedIds.has(r.id))}
+                onClose={() => setQrDialogOpen(false)}
+                onConfirm={handleQrConfirm}
+              />
               {routesData && routesData.totalPages > 1 && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                   <Pagination page={page} count={routesData.totalPages} onChange={(_, v) => setPage(v)} />

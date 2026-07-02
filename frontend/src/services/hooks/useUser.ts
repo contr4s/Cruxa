@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity } from '../users.service';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity, getUserByUsername, followUser, unfollowUser, isFollowing } from '../users.service';
 import type { UserDto, UserStats, KruskorPoint, RadarSkillsResponse, GradePyramidItem, AscentTypeDistribution, TopRoutesResponse, MonthlyActivity } from '../../types/user';
+import { useAuthStore } from '../../stores/authStore';
 
 export function useUserProfile(userId: string) {
   return useQuery<UserDto>({
@@ -63,5 +64,48 @@ export function useAscentDistribution(userId: string, enabled?: boolean) {
     queryKey: ['user', userId, 'ascent-distribution'],
     queryFn: () => getAscentDistribution(userId),
     enabled: !!userId && enabled !== false,
+  });
+}
+
+// ── Follow / public profile ─────────────────────────────
+
+export function useUserByUsername(username: string | undefined) {
+  return useQuery<UserDto>({
+    queryKey: ['user', 'username', username],
+    queryFn: () => getUserByUsername(username ?? ''),
+    enabled: !!username,
+  });
+}
+
+export function useIsFollowing(userId: string | undefined) {
+  const currentUserId = useAuthStore((s) => s.userId);
+  return useQuery<boolean>({
+    queryKey: ['user', userId, 'is-following'],
+    queryFn: () => isFollowing(userId ?? ''),
+    enabled: !!userId && !!currentUserId && userId !== currentUserId,
+  });
+}
+
+function invalidateUser(queryClient: ReturnType<typeof useQueryClient>, userId: string) {
+  queryClient.invalidateQueries({ queryKey: ['user', userId, 'stats'] });
+  queryClient.invalidateQueries({ queryKey: ['user', userId, 'is-following'] });
+  queryClient.invalidateQueries({ queryKey: ['user', userId, 'profile'] });
+  queryClient.invalidateQueries({ queryKey: ['feedSuggestions'] });
+  queryClient.invalidateQueries({ queryKey: ['feed'] });
+}
+
+export function useFollowUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: string) => followUser(userId),
+    onSuccess: (_, userId) => invalidateUser(queryClient, userId),
+  });
+}
+
+export function useUnfollowUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: string) => unfollowUser(userId),
+    onSuccess: (_, userId) => invalidateUser(queryClient, userId),
   });
 }

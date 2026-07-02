@@ -43,6 +43,7 @@ export interface RouteReviewSummary {
   routeName: string;
   routeGrade: string;
   userId: string;
+  username: string;
   displayName: string;
   userAvatarUrl?: string;
   rating: number;

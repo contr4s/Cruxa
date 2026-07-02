@@ -138,11 +138,12 @@ export default function PostDetailPage() {
       >
         <Box sx={{ px: 2.5, pt: 2, pb: 1 }}>
           <PostDetailAuthor
+            username={post.username}
             displayName={post.displayName}
+            avatarUrl={post.userAvatarUrl}
             gymName={post.gymName}
             gymId={post.gymId}
             createdAt={post.createdAt}
-            isOwner={post.userId === currentUserId}
           />
         </Box>
         <Box sx={{ px: 2.5, pb: 1.5 }}>
@@ -183,11 +184,12 @@ export default function PostDetailPage() {
     >
       <Box sx={{ px: 2.5, pt: 2, pb: 1 }}>
         <PostDetailAuthor
+          username={post.username}
           displayName={post.displayName}
+          avatarUrl={post.userAvatarUrl}
           gymName={post.gymName}
           gymId={post.gymId}
           createdAt={post.createdAt}
-          isOwner={post.userId === currentUserId}
         />
       </Box>
       <Box sx={{ px: 2.5, pb: 1.5 }}>

@@ -65,6 +65,7 @@ export const MOCK_MY_POSTS: PostDto[] = [
   {
     id: 'p1',
     userId: CURRENT_USER_ID,
+    username: 'alexey',
     displayName: 'Алексей Кузнецов',
     userAvatarUrl: undefined,
     gymId: 'g1',
@@ -98,6 +99,7 @@ export const MOCK_MY_POSTS: PostDto[] = [
   {
     id: 'p2',
     userId: CURRENT_USER_ID,
+    username: 'alexey',
     displayName: 'Алексей Кузнецов',
     userAvatarUrl: undefined,
     gymId: 'g3',
@@ -124,6 +126,7 @@ export const MOCK_MY_POSTS: PostDto[] = [
   },
   {
     id: 'p3',
+    username: 'alexey',
     userId: CURRENT_USER_ID,
     displayName: 'Алексей Кузнецов',
     userAvatarUrl: undefined,
@@ -149,6 +152,7 @@ export const MOCK_MY_POSTS: PostDto[] = [
   // дополнительные посты для пагинации
   ...Array.from({ length: 8 }, (_, i) => ({
     id: `my${i + 10}`,
+    username: 'alexey',
     userId: CURRENT_USER_ID,
     displayName: 'Алексей Кузнецов',
     userAvatarUrl: undefined,
@@ -170,6 +174,7 @@ export const MOCK_MY_POSTS: PostDto[] = [
 // ── Посты ленты (чужие, isOwner = false) ──────────────
 export const MOCK_FEED_POSTS: PostDto[] = [
   {
+    username: 'ekaterina-smirnova',
     id: 'f1',
     userId: 'u2',
     displayName: 'Екатерина Смирнова',
@@ -253,33 +258,33 @@ export const MOCK_FEED_POSTS: PostDto[] = [
 // ── Комментарии ────────────────────────────────────
 const MOCK_COMMENTS: Record<string, CommentDto[]> = {
   p1: [
-    { id: 'c1', postId: 'p1', userId: 'u2', displayName: 'Екатерина Смирнова', text: 'Классная тренировка! 🔥', createdAt: '2026-06-25T20:00:00Z' },
-    { id: 'c2', postId: 'p1', userId: 'u3', displayName: 'Михаил Петров', text: '14 трасс — мощно!', createdAt: '2026-06-25T20:30:00Z' },
-    { id: 'c3', postId: 'p1', userId: 'u4', displayName: 'Дмитрий Волков', text: 'Красная стрела — отличная трасса', createdAt: '2026-06-25T21:00:00Z' },
+    { id: 'c1', postId: 'p1', userId: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова', text: 'Классная тренировка! 🔥', createdAt: '2026-06-25T20:00:00Z' },
+    { id: 'c2', postId: 'p1', userId: 'u3', username: 'mikhail-petrov', displayName: 'Михаил Петров', text: '14 трасс — мощно!', createdAt: '2026-06-25T20:30:00Z' },
+    { id: 'c3', postId: 'p1', userId: 'u4', username: 'dmitry-volkov', displayName: 'Дмитрий Волков', text: 'Красная стрела — отличная трасса', createdAt: '2026-06-25T21:00:00Z' },
   ],
   p2: [
-    { id: 'c4', postId: 'p2', userId: 'u2', displayName: 'Екатерина Смирнова', text: 'Зелёный дракон коварный!', createdAt: '2026-05-30T19:00:00Z' },
+    { id: 'c4', postId: 'p2', userId: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова', text: 'Зелёный дракон коварный!', createdAt: '2026-05-30T19:00:00Z' },
   ],
   p3: [
-    { id: 'c5', postId: 'p3', userId: 'u3', displayName: 'Михаил Петров', text: 'BigWall — топ зал!', createdAt: '2026-05-25T15:00:00Z' },
-    { id: 'c6', postId: 'p3', userId: 'u4', displayName: 'Дмитрий Волков', text: 'Чёрная молния — моя любимая', createdAt: '2026-05-25T16:00:00Z' },
+    { id: 'c5', postId: 'p3', userId: 'u3', username: 'mikhail-petrov', displayName: 'Михаил Петров', text: 'BigWall — топ зал!', createdAt: '2026-05-25T15:00:00Z' },
+    { id: 'c6', postId: 'p3', userId: 'u4', username: 'dmitry-volkov', displayName: 'Дмитрий Волков', text: 'Чёрная молния — моя любимая', createdAt: '2026-05-25T16:00:00Z' },
   ],
   f1: [
-    { id: 'c7', postId: 'f1', userId: CURRENT_USER_ID, displayName: 'Алексей Кузнецов', text: 'Круто! 6B редпоинт — огонь! 🔥', createdAt: '2026-06-25T11:00:00Z' },
-    { id: 'c8', postId: 'f1', userId: 'u3', displayName: 'Михаил Петров', text: 'Поздравляю!', createdAt: '2026-06-25T12:00:00Z' },
-    { id: 'c9', postId: 'f1', userId: 'u4', displayName: 'Дмитрий Волков', text: 'В какой сектор ходила?', createdAt: '2026-06-25T12:30:00Z' },
-    { id: 'c10', postId: 'f1', userId: 'u2', displayName: 'Екатерина Смирнова', text: 'Спасибо! В левый, там новый сет', createdAt: '2026-06-25T13:00:00Z' },
-    { id: 'c11', postId: 'f1', userId: 'u5', displayName: 'Ольга Иванова', text: 'Супер! 💪', createdAt: '2026-06-25T14:00:00Z' },
+    { id: 'c7', postId: 'f1', userId: CURRENT_USER_ID, username: 'alexey', displayName: 'Алексей Кузнецов', text: 'Круто! 6B редпоинт — огонь! 🔥', createdAt: '2026-06-25T11:00:00Z' },
+    { id: 'c8', postId: 'f1', userId: 'u3', username: 'mikhail-petrov', displayName: 'Михаил Петров', text: 'Поздравляю!', createdAt: '2026-06-25T12:00:00Z' },
+    { id: 'c9', postId: 'f1', userId: 'u4', username: 'dmitry-volkov', displayName: 'Дмитрий Волков', text: 'В какой сектор ходила?', createdAt: '2026-06-25T12:30:00Z' },
+    { id: 'c10', postId: 'f1', userId: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова', text: 'Спасибо! В левый, там новый сет', createdAt: '2026-06-25T13:00:00Z' },
+    { id: 'c11', postId: 'f1', userId: 'u5', username: 'olga-ivanova', displayName: 'Ольга Иванова', text: 'Супер! 💪', createdAt: '2026-06-25T14:00:00Z' },
   ],
   f2: [
-    { id: 'c12', postId: 'f2', userId: CURRENT_USER_ID, displayName: 'Алексей Кузнецов', text: '7A! Красава!', createdAt: '2026-06-24T16:00:00Z' },
-    { id: 'c13', postId: 'f2', userId: 'u2', displayName: 'Екатерина Смирнова', text: 'Сколько подходов было?', createdAt: '2026-06-24T16:30:00Z' },
-    { id: 'c14', postId: 'f2', userId: 'u3', displayName: 'Михаил Петров', text: 'Где-то 8 подходов за месяц', createdAt: '2026-06-24T17:00:00Z' },
-    { id: 'c15', postId: 'f2', userId: 'u4', displayName: 'Дмитрий Волков', text: 'Мощно!', createdAt: '2026-06-24T18:00:00Z' },
+    { id: 'c12', postId: 'f2', userId: CURRENT_USER_ID, username: 'alexey', displayName: 'Алексей Кузнецов', text: '7A! Красава!', createdAt: '2026-06-24T16:00:00Z' },
+    { id: 'c13', postId: 'f2', userId: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова', text: 'Сколько подходов было?', createdAt: '2026-06-24T16:30:00Z' },
+    { id: 'c14', postId: 'f2', userId: 'u3', username: 'mikhail-petrov', displayName: 'Михаил Петров', text: 'Где-то 8 подходов за месяц', createdAt: '2026-06-24T17:00:00Z' },
+    { id: 'c15', postId: 'f2', userId: 'u4', username: 'dmitry-volkov', displayName: 'Дмитрий Волков', text: 'Мощно!', createdAt: '2026-06-24T18:00:00Z' },
   ],
   f3: [
-    { id: 'c16', postId: 'f3', userId: CURRENT_USER_ID, displayName: 'Алексей Кузнецов', text: 'Согласен, отличный зал!', createdAt: '2026-06-24T10:00:00Z' },
-    { id: 'c17', postId: 'f3', userId: 'u2', displayName: 'Екатерина Смирнова', text: 'О, тоже там был на днях!', createdAt: '2026-06-24T11:00:00Z' },
+    { id: 'c16', postId: 'f3', userId: CURRENT_USER_ID, username: 'alexey', displayName: 'Алексей Кузнецов', text: 'Согласен, отличный зал!', createdAt: '2026-06-24T10:00:00Z' },
+    { id: 'c17', postId: 'f3', userId: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова', text: 'О, тоже там был на днях!', createdAt: '2026-06-24T11:00:00Z' },
   ],
 };
 
@@ -304,11 +309,11 @@ export async function mockGetPostById(postId: string): Promise<PostDetailDto | n
   return {
     ...post,
     likedBy: [
-      { id: 'u2', displayName: 'Екатерина Смирнова' },
-      { id: 'u3', displayName: 'Михаил Петров' },
-      { id: 'u5', displayName: 'Ольга Иванова' },
-      { id: 'u6', displayName: 'Иван Сидоров' },
-      { id: 'u7', displayName: 'Настя Козлова' },
+      { id: 'u2', username: 'ekaterina-smirnova', displayName: 'Екатерина Смирнова' },
+      { id: 'u3', username: 'mikhail-petrov', displayName: 'Михаил Петров' },
+      { id: 'u5', username: 'olga-ivanova', displayName: 'Ольга Иванова' },
+      { id: 'u6', username: 'ivan-sidorov', displayName: 'Иван Сидоров' },
+      { id: 'u7', username: 'nastya-kozlova', displayName: 'Настя Козлова' },
     ].slice(0, post.likesCount > 4 ? 5 : post.likesCount),
   };
 }
@@ -330,6 +335,7 @@ export async function mockAddComment(postId: string, text: string): Promise<Comm
     id: crypto.randomUUID(),
     postId,
     userId: CURRENT_USER_ID,
+    username: 'alexey',
     displayName: 'Алексей',
     text,
     createdAt: new Date().toISOString(),
@@ -350,10 +356,10 @@ export async function mockGetFeedSuggestions(): Promise<FeedSuggestionsDto> {
   await mockDelay(200);
   return {
     users: [
-      { id: 'u4', displayName: 'Дмитрий Волков', commonFollowers: 2, isFollowed: false },
-      { id: 'u5', displayName: 'Ольга Иванова', commonFollowers: 5, isFollowed: false },
-      { id: 'u6', displayName: 'Иван Сидоров', commonFollowers: 1, isFollowed: false },
-      { id: 'u7', displayName: 'Настя Козлова', commonFollowers: 3, isFollowed: true },
+      { id: 'u4', username: 'dmitry-volkov', displayName: 'Дмитрий Волков', commonFollowers: 2, isFollowed: false },
+      { id: 'u5', username: 'olga-ivanova', displayName: 'Ольга Иванова', commonFollowers: 5, isFollowed: false },
+      { id: 'u6', username: 'ivan-sidorov', displayName: 'Иван Сидоров', commonFollowers: 1, isFollowed: false },
+      { id: 'u7', username: 'nastya-kozlova', displayName: 'Настя Козлова', commonFollowers: 3, isFollowed: true },
     ],
     routes: [
       { id: 'r1', name: 'Красная стрела', grade: '6A', holdColor: 'Red', rating: 4.8, gymName: 'RockZone', gymId: 'g1' },
@@ -367,5 +373,12 @@ export async function mockGetFeedSuggestions(): Promise<FeedSuggestionsDto> {
       { id: 'g3', name: 'Лимейт', rating: 4.2, distance: '3.5 км', area: 800, maxHeight: 10, activeRouteCount: 18 },
     ],
   };
+}
+
+export async function mockGetUserPosts(userId: string, page = 1, pageSize = 10): Promise<PaginatedList<PostDto>> {
+  await mockDelay(350);
+  const allPosts = [...MOCK_MY_POSTS, ...MOCK_FEED_POSTS];
+  const userPosts = allPosts.filter((p) => p.userId === userId);
+  return paginate(userPosts, page, pageSize);
 }
 

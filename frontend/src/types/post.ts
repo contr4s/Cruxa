@@ -4,6 +4,7 @@ export type AscentStyle = 'Flash' | 'Onsight' | 'Redpoint' | 'Attempt' | 'Projec
 export interface PostDto {
   id: string;
   userId: string;
+  username: string;
   displayName: string;
   userAvatarUrl?: string;
   gymId?: string;
@@ -44,6 +45,7 @@ export interface CommentDto {
   id: string;
   postId: string;
   userId: string;
+  username: string;
   displayName: string;
   userAvatarUrl?: string;
   text: string;
@@ -55,6 +57,7 @@ export interface PostDetailDto extends PostDto {
 }
 
 export interface LikedUserDto {
+  username: string;
   id: string;
   displayName: string;
   userAvatarUrl?: string;
@@ -79,6 +82,7 @@ export interface CreateAscentRequest {
 export type FeedFilter = 'subs' | 'recommended';
 
 export interface RecommendedUserDto {
+  username: string;
   id: string;
   displayName: string;
   userAvatarUrl?: string;

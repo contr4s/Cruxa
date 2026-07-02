@@ -12,6 +12,7 @@ export interface RouteDto {
   gymId: string;
   gymName: string;
   setterId: string;
+  setterUsername: string;
   setterName: string;
   setterAvatarUrl?: string;
   setterGender?: 'male' | 'female';
@@ -29,6 +30,7 @@ export interface RouteReviewDto {
   id: string;
   routeId: string;
   userId: string;
+  username: string;
   displayName: string;
   userAvatarUrl?: string;
   rating: number;

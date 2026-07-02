@@ -9,8 +9,9 @@ import { useTopRoutes } from '../../services/hooks/useUser';
 import { useAuthStore } from '../../stores/authStore';
 import { LazyCard } from '../ui/LazyCard';
 
-export function TopRoutes() {
-  const userId = useAuthStore((s) => s.userId ?? '');
+export function TopRoutes({ userId: propUserId }: { userId?: string } = {}) {
+  const authUserId = useAuthStore((s) => s.userId ?? '');
+  const userId = propUserId ?? authUserId;
   const { data: routesData, isLoading } = useTopRoutes(userId as string);
   const routes = routesData?.routes ?? [];
   const totalRoutes = routesData?.totalRoutes;

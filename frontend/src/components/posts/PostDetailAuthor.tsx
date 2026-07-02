@@ -1,52 +1,32 @@
-import { Box, Avatar, Typography, useTheme, Button } from '@mui/material';
-import { PersonAdd } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { GymChip } from '../ui/GymChip';
+import { UserLink } from '../user/UserLink';
 
 interface PostDetailAuthorProps {
-  avatar?: string;
+  username: string;
   displayName: string;
+  avatarUrl?: string;
   gymName?: string;
   gymId?: string;
   createdAt: string;
-  isOwner?: boolean;
-  onSubscribe?: () => void;
 }
 
-export function PostDetailAuthor({ avatar, displayName, gymName, gymId, createdAt, isOwner, onSubscribe }: PostDetailAuthorProps) {
-  const theme = useTheme();
-  const initial = displayName.charAt(0).toUpperCase();
-
+export function PostDetailAuthor({ username, displayName, avatarUrl, gymName, gymId, createdAt }: PostDetailAuthorProps) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, px: 2.5, py: 2 }}>
-      <Avatar sx={{ width: 48, height: 48, fontSize: '1.2rem', bgcolor: theme.palette.primary.main }}>
-        {initial}
-      </Avatar>
-      <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography sx={{ fontWeight: 700, fontSize: '1rem', color: theme.palette.text.primary }}>
-            {displayName}
-          </Typography>
-          {!isOwner && (
-            <Button
-              size="small"
-              variant="outlined"
-              startIcon={<PersonAdd />}
-              onClick={onSubscribe}
-              sx={{ borderRadius: '50px', fontSize: '0.78rem', textTransform: 'none' }}
-            >
-              Подписаться
-            </Button>
-          )}
-        </Box>
-        <Typography sx={{ fontSize: '0.78rem', color: theme.palette.text.secondary, mt: 0.5 }}>
-          {new Date(createdAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
-        </Typography>
-        {gymName && (
-          <Box sx={{ mt: 0.5 }}>
-            <GymChip name={gymName} gymId={gymId} />
-          </Box>
-        )}
-      </Box>
+      <UserLink
+        username={username}
+        displayName={displayName}
+        avatarUrl={avatarUrl}
+        size="lg"
+        withAvatar
+        subtitle={
+          <>
+            {new Date(createdAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+            {gymName && <GymChip name={gymName} gymId={gymId} />}
+          </>
+        }
+      />
     </Box>
   );
 }

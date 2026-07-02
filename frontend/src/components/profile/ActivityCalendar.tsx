@@ -28,9 +28,10 @@ const MONTHS = [
 
 const DAYS_OF_WEEK = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
-export const ActivityCalendar = memo(function ActivityCalendar() {
+export const ActivityCalendar = memo(function ActivityCalendar({ userId: propUserId }: { userId?: string } = {}) {
   const theme = useTheme();
-  const userId = useAuthStore((s) => s.userId);
+  const authUserId = useAuthStore((s) => s.userId);
+  const userId = propUserId ?? authUserId;
   const { data: activityData, isLoading } = useMonthlyActivity(userId);
   const data = activityData;
   const [currentMonth, setCurrentMonth] = useState(data?.month ?? 5);

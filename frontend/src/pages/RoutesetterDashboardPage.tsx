@@ -1,12 +1,15 @@
-import { useState, useMemo } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
-import { Construction, Route, Reviews, LocationOn, FilterList } from '@mui/icons-material';
+import { useState, useMemo, useCallback, useRef } from 'react';
+import { Box, Typography, Fab, useTheme } from '@mui/material';
+import { Construction, Route, Reviews, LocationOn, FilterList, QrCodeScanner } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { Pagination } from '../components/ui/Pagination';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSelectableRows } from '../hooks/useSelectableRows';
+import { QrPdfDialog } from '../components/routes/QrPdfDialog';
+import { generateQrPdfBlob, downloadBlob } from '../utils/generateQrPdf';
 import {
   useRoutesetterStats,
   useSetterRoutes,
@@ -46,11 +49,31 @@ export default function RoutesetterDashboardPage() {
   useScrollReveal();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<SetterRouteFilterState>(DEFAULT_FILTERS);
+  const [qrDialogOpen, setQrDialogOpen] = useState(false);
+
+  const { selectedIds, setSelected } = useSelectableRows();
+  const selectedRoutesRef = useRef<RouteDto[]>([]);
+  const prevSelectedJson = useRef('');
 
   const { data: stats, isLoading: statsLoading } = useRoutesetterStats();
   const { data: routesData, isLoading: routesLoading } = useSetterRoutes({ ...filters, page, pageSize: 10 });
   const { data: reviews, isLoading: reviewsLoading } = useSetterReviews();
   const { data: gyms, isLoading: gymsLoading } = useLinkedGyms();
+
+  // keep selected route objects in sync across pages
+  useMemo(() => {
+    const json = JSON.stringify([...selectedIds].sort());
+    if (json === prevSelectedJson.current) return;
+    prevSelectedJson.current = json;
+    const seen = new Map<string, RouteDto>();
+    for (const r of selectedRoutesRef.current) {
+      if (selectedIds.has(r.id)) seen.set(r.id, r);
+    }
+    for (const r of routesData?.items ?? []) {
+      if (selectedIds.has(r.id)) seen.set(r.id, r);
+    }
+    selectedRoutesRef.current = [...seen.values()];
+  }, [selectedIds, routesData]);
 
   const overview = useMemo(() => {
     const allRoutes: RouteDto[] = routesData?.items ?? [];
@@ -85,6 +108,18 @@ export default function RoutesetterDashboardPage() {
   };
 
   const gymOptions = useMemo(() => (gyms ?? []).map((g) => ({ id: g.id, name: g.name })), [gyms]);
+
+  const handleQrConfirm = useCallback(async (qrPerPage: number, baseUrl: string) => {
+    setQrDialogOpen(false);
+    const routes = selectedRoutesRef.current.filter((r) => selectedIds.has(r.id));
+    if (routes.length === 0) return;
+    try {
+      const blob = await generateQrPdfBlob(routes, qrPerPage, baseUrl);
+      downloadBlob(blob, 'qrcodes.pdf');
+    } catch {
+      alert('Ошибка при генерации PDF');
+    }
+  }, [selectedIds]);
 
   return (
     <PageContainer>
@@ -133,11 +168,32 @@ export default function RoutesetterDashboardPage() {
             <StateDisplay type="loading" message="Загрузка трасс…" />
           ) : (
             <>
+              {selectedIds.size > 0 && (
+                <Fab
+                  variant="extended"
+                  color="primary"
+                  size="medium"
+                  sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1200 }}
+                  onClick={() => setQrDialogOpen(true)}
+                >
+                  <QrCodeScanner sx={{ mr: 1 }} />
+                  PDF QR ({selectedIds.size})
+                </Fab>
+              )}
               <SetterRouteTable
                 routes={routesData?.items ?? []}
+                selectable
+                selectedIds={selectedIds}
+                onSelectionChange={setSelected}
                 onEdit={(r) => alert(`Редактировать ${r.name} — скоро`)}
                 onArchive={handleArchive}
                 onRestore={handleRestore}
+              />
+              <QrPdfDialog
+                open={qrDialogOpen}
+                routes={selectedRoutesRef.current.filter((r) => selectedIds.has(r.id))}
+                onClose={() => setQrDialogOpen(false)}
+                onConfirm={handleQrConfirm}
               />
               {routesData && routesData.totalPages > 1 && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>

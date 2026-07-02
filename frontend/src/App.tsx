@@ -22,6 +22,7 @@ const RouteDetailPage = lazy(() => import('./pages/RouteDetailPage'));
 const RoutesetterDashboardPage = lazy(() => import('./pages/RoutesetterDashboardPage'));
 const GymAdminDashboardPage = lazy(() => import('./pages/GymAdminDashboardPage'));
 const SuperAdminDashboardPage = lazy(() => import('./pages/SuperAdminDashboardPage'));
+const UserProfilePage = lazy(() => import('./pages/UserProfilePage'));
 
 function AppRoutes() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function AppRoutes() {
         <Route element={<ProtectedLayout />}>
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/u/:username" element={<UserProfilePage />} />
           <Route path="/workouts" element={<WorkoutsPage />} />
           <Route path="/workouts/new" element={<StateDisplay type="empty" icon={<FitnessCenterIcon />} message="Скоро" description="Форма создания тренировки — скоро" />} />
           <Route path="/post/:id" element={<PostDetailPage />} />

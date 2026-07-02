@@ -1,6 +1,9 @@
 import type { PostDto, CommentDto, PostDetailDto, FeedSuggestionsDto } from '../types/post';
 import type { PaginatedList } from '../types/common';
-import { mockGetWorkoutFeed, mockGetFeedPosts, mockGetComments, mockToggleLike, mockAddComment, mockGetPostById, mockDeletePost, mockCreatePost, mockGetFeedSuggestions } from './mock/posts.mock';
+import {
+  mockGetWorkoutFeed, mockGetFeedPosts, mockGetComments, mockToggleLike, mockAddComment,
+  mockGetPostById, mockDeletePost, mockCreatePost, mockGetFeedSuggestions, mockGetUserPosts,
+} from './mock/posts.mock';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
@@ -59,5 +62,12 @@ export async function getFeedSuggestions(): Promise<FeedSuggestionsDto> {
   if (USE_MOCK) return mockGetFeedSuggestions();
   const { default: api } = await import('./api');
   const response = await api.get<FeedSuggestionsDto>('/feed/suggestions');
+  return response.data;
+}
+
+export async function getUserPosts(userId: string, page = 1, pageSize = 10): Promise<PaginatedList<PostDto>> {
+  if (USE_MOCK) return mockGetUserPosts(userId, page, pageSize);
+  const { default: api } = await import('./api');
+  const response = await api.get<PaginatedList<PostDto>>(`/posts/user/${userId}`, { params: { page, pageSize } });
   return response.data;
 }

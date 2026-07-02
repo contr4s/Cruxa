@@ -63,7 +63,9 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>(
         }}
       >
         <PostHeader
+          username={post.username}
           displayName={post.displayName}
+          avatarUrl={post.userAvatarUrl}
           gymName={post.gymName}
           gymId={post.gymId}
           visibility={post.visibility}

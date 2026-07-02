@@ -16,12 +16,39 @@ export const MOCK_USER: UserDto = {
   avatarUrl: undefined,
 };
 
+export const MOCK_USER_OTHER: UserDto = {
+  id: '550e8400-e29b-41d4-a716-446655440002',
+  username: 'dmitry-volkov',
+  email: 'dmitry@climb.ru',
+  firstName: 'Дмитрий',
+  lastName: 'Волков',
+  city: 'Санкт-Петербург',
+  gender: 'М',
+  height: 182,
+  role: 'Climber',
+  createdAt: '2025-04-12T00:00:00Z',
+  avatarUrl: undefined,
+};
+
+export const MOCK_USERS: UserDto[] = [MOCK_USER, MOCK_USER_OTHER];
+
 export const MOCK_STATS: UserStats = {
   kruscore: 534,
   totalWorkouts: 14,
   followersCount: 24,
   followingCount: 12,
 };
+
+export const MOCK_STATS_OTHER: UserStats = {
+  kruscore: 612,
+  totalWorkouts: 28,
+  followersCount: 47,
+  followingCount: 21,
+};
+
+// ── Follow state — мутабельный внутренний стейт для моков ──
+const followedSet = new Set<string>();
+followedSet.add(MOCK_USER.id); // current user follows nobody by default
 
 export async function mockGetUserProfile(): Promise<UserDto> {
   await mockDelay(350);
@@ -31,6 +58,28 @@ export async function mockGetUserProfile(): Promise<UserDto> {
 export async function mockGetUserStats(): Promise<UserStats> {
   await mockDelay(500);
   return MOCK_STATS;
+}
+
+export async function mockGetUserByUsername(username: string): Promise<UserDto> {
+  await mockDelay(300);
+  const user = MOCK_USERS.find((u) => u.username === username);
+  if (!user) throw Object.assign(new Error('Not found'), { response: { status: 404 } });
+  return user;
+}
+
+export async function mockFollowUser(userId: string): Promise<void> {
+  await mockDelay(150);
+  followedSet.add(userId);
+}
+
+export async function mockUnfollowUser(userId: string): Promise<void> {
+  await mockDelay(150);
+  followedSet.delete(userId);
+}
+
+export async function mockIsFollowing(userId: string): Promise<boolean> {
+  await mockDelay(100);
+  return followedSet.has(userId);
 }
 
 export async function mockGetKruskorHistory(period: string): Promise<KruskorPoint[]> {

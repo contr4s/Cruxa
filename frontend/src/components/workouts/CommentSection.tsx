@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, Typography, InputBase, CircularProgress, Avatar, useTheme } from '@mui/material';
+import { Box, Typography, InputBase, CircularProgress, useTheme } from '@mui/material';
 import { Forum, Send } from '@mui/icons-material';
 import { addComment } from '../../services/posts.service';
 import { useAuthStore } from '../../stores/authStore';
 import type { CommentDto } from '../../types/post';
 import { relativeTime } from '../posts/relativeTime';
+import { UserLink } from '../user/UserLink';
 
 const PAGE_SIZE = 3;
 
@@ -49,6 +50,7 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
       id: `opt-${crypto.randomUUID()}`,
       postId,
       userId: useAuthStore.getState().userId ?? '',
+      username: useAuthStore.getState().displayName ?? '',
       displayName: useAuthStore.getState().displayName ?? 'Алексей',
       text,
       createdAt: new Date().toISOString(),
@@ -96,18 +98,15 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 2 }}>
             {visible.map((comment) => (
               <Box key={comment.id} sx={{ display: 'flex', gap: 1.5 }}>
-                <Avatar sx={{ width: 32, height: 32, fontSize: '0.75rem', bgcolor: theme.palette.primary.main }}>
-                  {comment.displayName.charAt(0)}
-                </Avatar>
+                <UserLink
+                  username={comment.username}
+                  displayName={comment.displayName}
+                  avatarUrl={comment.userAvatarUrl}
+                  size="sm"
+                  withAvatar
+                  subtitle={relativeTime(comment.createdAt)}
+                />
                 <Box sx={{ flex: 1, minWidth: 0 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.25 }}>
-                    <Typography sx={{ fontSize: '0.78rem', fontWeight: 600, color: theme.palette.text.primary }}>
-                      {comment.displayName}
-                    </Typography>
-                    <Typography sx={{ fontSize: '0.65rem', color: theme.palette.text.secondary }}>
-                      {relativeTime(comment.createdAt)}
-                    </Typography>
-                  </Box>
                   <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, lineHeight: 1.4 }}>
                     {comment.text}
                   </Typography>
