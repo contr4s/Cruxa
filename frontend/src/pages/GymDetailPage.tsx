@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, CircularProgress, useTheme } from '@mui/material';
 import { useGym, useToggleFavorite } from '../services/hooks/useGyms';
 import { useInfiniteRoutesByGym } from '../services/hooks/useRoutes';
+import { useCreateDraftPost } from '../services/hooks/useDraftPost';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { SectionHeader } from '../components/ui/SectionHeader';
@@ -14,10 +15,13 @@ import { GymHoursPricesBlock } from '../components/gyms/detail/GymHoursPricesBlo
 import { GymStats } from '../components/gyms/detail/GymStats';
 import { RouteTable } from '../components/routes/RouteTable';
 import { RouteFilters, type RouteFiltersValues } from '../components/ui/RouteFilters';
+import { useDraftStore } from '../stores/draftWorkoutStore';
 
 export default function GymDetailPage() {
   const { id } = useParams<{ id: string }>();
   const theme = useTheme();
+  const store = useDraftStore();
+  const { mutateAsync: createDraft } = useCreateDraftPost();
   const [filters, setFilters] = useState<RouteFiltersValues>({
     searchQuery: '',
     type: 'all',
@@ -147,6 +151,8 @@ export default function GymDetailPage() {
         avgRating={gym.rating}
         gradeRange={gradeRange}
       />
+
+      {/* DraftFab is in ProtectedLayout */}
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <RouteFilters

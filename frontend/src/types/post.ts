@@ -1,3 +1,5 @@
+import type { RouteType } from './route';
+
 export type PostVisibility = 'Public' | 'Followers' | 'Private';
 export type AscentStyle = 'Flash' | 'Onsight' | 'Redpoint' | 'Attempt' | 'Project' | 'Repeat';
 
@@ -34,10 +36,13 @@ export interface PostAscentDto {
   routeId: string;
   routeName: string;
   grade: string;
+  gradeIndex?: number;
   holdColor: string;
   style: AscentStyle;
+  type?: RouteType;
   isFlash?: boolean;
   notes?: string;
+  mediaUrls?: string[];
   tags?: { name: string; category: string }[];
 }
 

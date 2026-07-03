@@ -9,6 +9,7 @@ import { PostDetailAuthor, PostDescription, PostActions, MediaToggle, PostMediaC
 import { ChartsCarousel } from '../components/charts/ChartsCarousel';
 import { PageContainer } from '../components/layout/PageContainer';
 import { ModalOverlay } from '../components/ui/ModalOverlay';
+import { StateDisplay } from '../components/ui/StateDisplay';
 import { computePyramid, computeDistribution, computeCategories } from '../utils/ascentStats';
 
 export default function PostDetailPage() {

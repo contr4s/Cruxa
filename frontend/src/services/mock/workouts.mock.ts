@@ -1,5 +1,6 @@
-import type { PostDto, CommentDto } from '../../types/post';
+import type { PostDto, CommentDto, PostAscentDto, CreateAscentRequest } from '../../types/post';
 import { mockDelay } from './helpers';
+import { MOCK_ROUTES } from './routes.mock';
 
 export const MOCK_POSTS: PostDto[] = [
   {
@@ -99,5 +100,63 @@ export async function mockToggleLike(_postId: string, _isLiked: boolean): Promis
   await mockDelay(150);
   // In mock mode, just return success
   return;
+}
+
+// ── Draft mocks ─────────────────────────────────────────────
+
+let _draftCounter = 10;
+
+export async function mockCreateDraftPost(gymId: string): Promise<PostDto> {
+  await mockDelay(300);
+  _draftCounter++;
+  return {
+    id: `draft-${_draftCounter}`,
+    userId: '550e8400-e29b-41d4-a716-446655440001',
+    username: 'alex',
+    displayName: 'Алексей',
+    gymId,
+    ascents: [],
+    mediaUrls: [],
+    visibility: 'Public',
+    stats: { totalKruskor: 0, avgGrade: '', totalRoutes: 0 },
+    likesCount: 0,
+    commentsCount: 0,
+    isLiked: false,
+    isBookmarked: false,
+    createdAt: new Date().toISOString(),
+  };
+}
+
+export async function mockUpdatePost(id: string, _data: Record<string, unknown>): Promise<PostDto> {
+  await mockDelay(200);
+  const draft = MOCK_POSTS[0];
+  return { ...draft, id, ..._data, ascents: draft.ascents } as PostDto;
+}
+
+export async function mockAddAscent(_postId: string, data: CreateAscentRequest & { mediaUrls?: string[] }): Promise<PostAscentDto> {
+  await mockDelay(250);
+  const idx = _draftCounter++;
+  const route = MOCK_ROUTES.find((r) => r.id === data.routeId);
+  return {
+    id: `ascent-${idx}`,
+    routeId: data.routeId,
+    routeName: route?.name ?? `Трасса ${idx}`,
+    grade: route?.grade ?? '6A',
+    holdColor: route?.holdColor ?? 'Red',
+    style: data.style,
+    notes: data.notes,
+    mediaUrls: data.mediaUrls,
+  };
+}
+
+export async function mockRemoveAscent(_postId: string, _ascentId: string): Promise<void> {
+  void _postId;
+  void _ascentId;
+  await mockDelay(150);
+}
+
+export async function mockDeleteDraftPost(_postId: string): Promise<void> {
+  void _postId;
+  await mockDelay(200);
 }
 

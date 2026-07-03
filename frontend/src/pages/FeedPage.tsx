@@ -1,19 +1,16 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useFeed, useToggleLike, useFeedSuggestions } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { FeedToggle } from '../components/feed/FeedToggle';
 import { FeedUserSuggestions } from '../components/feed/FeedUserSuggestions';
 import { FeedRouteRecommendations } from '../components/feed/FeedRouteRecommendations';
 import { FeedGymRecommendations } from '../components/feed/FeedGymRecommendations';
-import { Fab } from '../components/ui/Fab';
 import { getComments } from '../services/posts.service';
 import { PageContainer } from '../components/layout/PageContainer';
 import { AsidePanel } from '../components/layout/AsidePanel';
 
 export default function FeedPage() {
-  const navigate = useNavigate();
   const [filter, setFilter] = useState<'subs' | 'recommended'>('subs');
   const {
     data: pages,
@@ -65,7 +62,6 @@ export default function FeedPage() {
           )}
           <div ref={sentinelRef} />
         </Box>
-        <Fab onClick={() => navigate('/workouts/new')} />
       </PageContainer>
       <AsidePanel sx={{ width: 320 }}>
         <FeedUserSuggestions users={suggestions?.users ?? []} />

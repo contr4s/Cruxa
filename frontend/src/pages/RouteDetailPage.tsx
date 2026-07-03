@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import { FitnessCenter } from '@mui/icons-material';
 import type { Location } from 'react-router-dom';
+
 import { useRoute, useRouteConsensus, useRouteReviews } from '../services/hooks/useRoutes';
+import { useCreateDraftPost } from '../services/hooks/useDraftPost';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { ModalOverlay } from '../components/ui/ModalOverlay';
@@ -11,6 +14,7 @@ import { RouteInfoBlock } from '../components/routes/detail/RouteInfoBlock';
 import { RouteConsensusChart } from '../components/routes/detail/RouteConsensusChart';
 import { RouteReviews } from '../components/routes/detail/RouteReviews';
 import { PrivateNotes } from '../components/routes/detail/PrivateNotes';
+import { useDraftStore } from '../stores/draftWorkoutStore';
 
 export default function RouteDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +22,11 @@ export default function RouteDetailPage() {
   const location = useLocation();
   const state = location.state as { backgroundLocation?: Location } | undefined;
   const isModal = !!state?.backgroundLocation;
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const draftStatus = useDraftStore((s) => s.status);
+  const draftGymId = useDraftStore((s) => s.gymId);
+  const store = useDraftStore();
+  const { mutateAsync: createDraft } = useCreateDraftPost();
   const {
     data: route,
     isLoading: routeLoading,
@@ -55,6 +64,28 @@ export default function RouteDetailPage() {
     else navigate('/feed');
   };
 
+  const handleSendClimb = async () => {
+    if (!route) return;
+    if (draftStatus === 'idle') {
+      const post = await createDraft(route.gymId);
+      store.startDraft(post.id, route.gymId, route.gymName);
+      store.openAscentModal(route.id);
+    } else if (draftGymId === route.gymId) {
+      store.openAscentModal(route.id);
+    } else {
+      setConfirmOpen(true);
+    }
+  };
+
+  const handleReplaceDraft = async () => {
+    if (!route) return;
+    store.clearDraft();
+    const post = await createDraft(route.gymId);
+    store.startDraft(post.id, route.gymId, route.gymName);
+    setConfirmOpen(false);
+    store.openAscentModal(route.id);
+  };
+
   const content = (
     <>
       {/* Mobile: stacked */} 
@@ -90,7 +121,7 @@ export default function RouteDetailPage() {
       {/* FAB: Пролез! */}
       <Box
         component="button"
-        onClick={() => navigate(`/workouts/new?routeId=${route.id}`)}
+        onClick={handleSendClimb}
         sx={{
           position: 'fixed',
           bottom: { xs: '100px', md: '28px' },
@@ -136,6 +167,21 @@ export default function RouteDetailPage() {
           Пролез!
         </Box>
       </Box>
+
+      {/* Wrong gym confirm dialog */}
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <DialogTitle>Другой зал</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            У вас активна тренировка в «{store.gymName}». Начать новую в «{route?.gymName}»?
+            Текущая тренировка будет отменена.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmOpen(false)}>Остаться</Button>
+          <Button onClick={handleReplaceDraft} color="error">Заменить</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 

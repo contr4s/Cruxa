@@ -1,17 +1,14 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useFeed, useToggleLike } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { WeekStats, AchievementsPanel } from '../components/workouts';
 import { GoalsPanel } from '../components/workouts/goals/GoalsPanel';
-import { Fab } from '../components/ui/Fab';
 import { getComments } from '../services/posts.service';
 import { PageContainer } from '../components/layout/PageContainer';
 import { AsidePanel } from '../components/layout/AsidePanel';
 
 export default function WorkoutsPage() {
-  const navigate = useNavigate();
   const {
     data: pages,
     isLoading,
@@ -52,7 +49,6 @@ export default function WorkoutsPage() {
           </Box>
         )}
         <div ref={sentinelRef} />
-        <Fab onClick={() => navigate('/workouts/new')} />
       </PageContainer>
       <AsidePanel>
         <WeekStats workouts={3} ascents={27} kruscor={94} hours="5ч 25м" />

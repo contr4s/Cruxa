@@ -1,9 +1,12 @@
-import type { PostDto, CommentDto, PostDetailDto, FeedSuggestionsDto } from '../types/post';
+import type { PostDto, CommentDto, PostDetailDto, FeedSuggestionsDto, PostAscentDto, CreateAscentRequest } from '../types/post';
 import type { PaginatedList } from '../types/common';
 import {
   mockGetWorkoutFeed, mockGetFeedPosts, mockGetComments, mockToggleLike, mockAddComment,
   mockGetPostById, mockDeletePost, mockCreatePost, mockGetFeedSuggestions, mockGetUserPosts,
 } from './mock/posts.mock';
+import {
+  mockCreateDraftPost, mockUpdatePost, mockAddAscent, mockRemoveAscent,
+} from './mock/workouts.mock';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
@@ -70,4 +73,33 @@ export async function getUserPosts(userId: string, page = 1, pageSize = 10): Pro
   const { default: api } = await import('./api');
   const response = await api.get<PaginatedList<PostDto>>(`/posts/user/${userId}`, { params: { page, pageSize } });
   return response.data;
+}
+
+// ── Draft workout ──────────────────────────────────────────
+
+export async function createDraftPost(gymId: string): Promise<PostDto> {
+  if (USE_MOCK) return mockCreateDraftPost(gymId);
+  const { default: api } = await import('./api');
+  const response = await api.post<PostDto>('/posts', { gymId, status: 'draft' });
+  return response.data;
+}
+
+export async function updatePost(id: string, data: Partial<PostDto> & { status?: string; duration?: number; visibility?: string; body?: string }): Promise<PostDto> {
+  if (USE_MOCK) return mockUpdatePost(id, data);
+  const { default: api } = await import('./api');
+  const response = await api.put<PostDto>(`/posts/${id}`, data);
+  return response.data;
+}
+
+export async function addAscent(postId: string, data: CreateAscentRequest & { mediaUrls?: string[] }): Promise<PostAscentDto> {
+  if (USE_MOCK) return mockAddAscent(postId, data);
+  const { default: api } = await import('./api');
+  const response = await api.post<PostAscentDto>(`/posts/${postId}/ascents`, data);
+  return response.data;
+}
+
+export async function removeAscentEndpoint(postId: string, ascentId: string): Promise<void> {
+  if (USE_MOCK) return mockRemoveAscent(postId, ascentId);
+  const { default: api } = await import('./api');
+  await api.delete(`/posts/${postId}/ascents/${ascentId}`);
 }

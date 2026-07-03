@@ -1,16 +1,23 @@
 import { Box } from '@mui/material';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { ProtectedRoute } from '../ui/ProtectedRoute';
 import { BackgroundPattern } from '../ui/BackgroundPattern';
 import { Sidebar } from './Sidebar';
 import { MobileHeader } from './MobileHeader';
 import { BottomTabBar } from './BottomTabBar';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
-import { Fab } from '../ui/Fab';
+import { DraftWorkoutBar } from '../workouts/draft/DraftWorkoutBar';
+import { DraftFab } from '../workouts/draft/DraftFab';
+import { StartWorkoutSheet } from '../workouts/draft/StartWorkoutSheet';
+import { AscentFormModal } from '../workouts/draft/AscentFormModal';
+import { useDraftStore } from '../../stores/draftWorkoutStore';
 
 export function ProtectedLayout() {
-  const location = useLocation();
-  const hideFab = /^\/route\/\w+/.test(location.pathname) || location.pathname === '/routesetter' || location.pathname === '/gym-admin' || location.pathname === '/admin';
+  const { startSheetOpen, ascentModalTarget, openStartSheet, closeStartSheet, closeAscentModal } = useDraftStore();
+
+  const handleStart = () => {
+    openStartSheet();
+  };
 
   return (
     <ProtectedRoute>
@@ -25,7 +32,14 @@ export function ProtectedLayout() {
         </Box>
       </Box>
       <BottomTabBar />
-      {!hideFab && <Fab onClick={() => alert('Новая тренировка')} />}
+      <DraftWorkoutBar />
+      <DraftFab onStart={handleStart} onAddAscent={() => useDraftStore.getState().openAscentModal()} />
+      <StartWorkoutSheet open={startSheetOpen} onClose={closeStartSheet} />
+      <AscentFormModal
+        open={ascentModalTarget !== null}
+        onClose={closeAscentModal}
+        prefilledRouteId={ascentModalTarget?.routeId}
+      />
     </ProtectedRoute>
   );
 }

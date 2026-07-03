@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { darkTheme } from './theme/darkTheme';
 import { AuthProvider } from './providers/AuthProvider';
 import { ProtectedLayout } from './components/layout/ProtectedLayout';
@@ -39,7 +40,7 @@ function AppRoutes() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/u/:username" element={<UserProfilePage />} />
           <Route path="/workouts" element={<WorkoutsPage />} />
-          <Route path="/workouts/new" element={<StateDisplay type="empty" icon={<FitnessCenterIcon />} message="Скоро" description="Форма создания тренировки — скоро" />} />
+          <Route path="/workouts/new" element={<Navigate to="/workouts" replace />} />
           <Route path="/post/:id" element={<PostDetailPage />} />
           <Route path="/gyms" element={<GymsPage />} />
           <Route path="/gyms/:id" element={<GymDetailPage />} />
@@ -64,11 +65,13 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <AuthProvider>
-          <Suspense fallback={<StateDisplay type="loading" message="Загрузка…" />}>
-            <AppRoutes />
-          </Suspense>
-        </AuthProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <AuthProvider>
+            <Suspense fallback={<StateDisplay type="loading" message="Загрузка…" />}>
+              <AppRoutes />
+            </Suspense>
+          </AuthProvider>
+        </LocalizationProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
