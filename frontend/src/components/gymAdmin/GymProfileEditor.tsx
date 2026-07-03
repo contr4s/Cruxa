@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
-import {
-  Box, Typography, TextField, Button, IconButton, useTheme,
-} from '@mui/material';
+import { Box, Typography, TextField, Button, IconButton, useTheme } from '@mui/material';
 import { Add, Delete, Save, Close } from '@mui/icons-material';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Card } from '../../theme/cardStyles';
-import type { GymDto, GymPrice, WorkingHoursEntry, UpdateGymPayload } from '../../types/gym';
+import type { GymDto, UpdateGymPayload } from '../../types/gym';
 
 interface GymProfileEditorProps {
   gym: GymDto;
@@ -73,6 +73,37 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 }
 
 /* ---------- Edit Form ---------- */
+
+// ── Zod schema ───────────────────────────────────────────
+
+const hourEntrySchema = z.object({ days: z.string(), from: z.string(), to: z.string() });
+const priceEntrySchema = z.object({ name: z.string(), price: z.coerce.number() });
+
+const gymProfileSchema = z.object({
+  name: z.string().min(1, 'Обязательное поле'),
+  city: z.string().min(1, 'Обязательное поле'),
+  address: z.string().min(1, 'Обязательное поле'),
+  description: z.string().optional().or(z.literal('')),
+  phone: z.string().regex(/^[\d\s+\-()]*$/, 'Некорректный формат').optional().or(z.literal('')),
+  email: z.string().email('Некорректный email').optional().or(z.literal('')),
+  website: z.string().optional().or(z.literal('')),
+  vkUrl: z.string().optional().or(z.literal('')),
+  instagramUrl: z.string().optional().or(z.literal('')),
+  youtubeUrl: z.string().optional().or(z.literal('')),
+  latitude: z.coerce.number().min(-90).max(90).optional().or(z.literal('')),
+  longitude: z.coerce.number().min(-180).max(180).optional().or(z.literal('')),
+  area: z.coerce.number().positive('Положительное число').optional().or(z.literal('')),
+  maxHeight: z.coerce.number().positive('Положительное число').optional().or(z.literal('')),
+  yearOpened: z.coerce.number().int().min(1900, 'От 1900').max(2030, 'До 2030').optional().or(z.literal('')),
+  metroStations: z.string().optional().or(z.literal('')),
+  tags: z.string().optional().or(z.literal('')),
+  hours: z.array(hourEntrySchema),
+  prices: z.array(priceEntrySchema),
+  photoUrls: z.array(z.string()),
+});
+
+type GymFormValues = z.infer<typeof gymProfileSchema>;
+
 function EditForm({ gym, onSave, onCancel, saving }: {
   gym: GymDto;
   onSave?: (data: UpdateGymPayload) => void;
@@ -81,113 +112,70 @@ function EditForm({ gym, onSave, onCancel, saving }: {
 }) {
   const theme = useTheme();
 
-  const [name, setName] = useState(gym.name);
-  const [city, setCity] = useState(gym.city);
-  const [address, setAddress] = useState(gym.address);
-  const [description, setDescription] = useState(gym.description ?? '');
-  const [phone, setPhone] = useState(gym.phone ?? '');
-  const [email, setEmail] = useState(gym.email ?? '');
-  const [website, setWebsite] = useState(gym.website ?? '');
-  const [vkUrl, setVkUrl] = useState(gym.vkUrl ?? '');
-  const [instagramUrl, setInstagramUrl] = useState(gym.instagramUrl ?? '');
-  const [youtubeUrl, setYoutubeUrl] = useState(gym.youtubeUrl ?? '');
-  const [latitude, setLatitude] = useState(gym.lat?.toString() ?? '');
-  const [longitude, setLongitude] = useState(gym.lon?.toString() ?? '');
-  const [area, setArea] = useState(gym.area?.toString() ?? '');
-  const [maxHeight, setMaxHeight] = useState(gym.maxHeight?.toString() ?? '');
-  const [yearOpened, setYearOpened] = useState(gym.yearOpened?.toString() ?? '');
-  const [metroStations, setMetroStations] = useState(gym.metroStations.join(', '));
-  const [tags, setTags] = useState(gym.tags.join(', '));
-  const [photoUrls, setPhotoUrls] = useState<string[]>(gym.photoUrls);
+  const { control, handleSubmit, formState: { errors } } = useForm<GymFormValues>({
+    resolver: zodResolver(gymProfileSchema),
+    defaultValues: {
+      name: gym.name,
+      city: gym.city,
+      address: gym.address,
+      description: gym.description ?? '',
+      phone: gym.phone ?? '',
+      email: gym.email ?? '',
+      website: gym.website ?? '',
+      vkUrl: gym.vkUrl ?? '',
+      instagramUrl: gym.instagramUrl ?? '',
+      youtubeUrl: gym.youtubeUrl ?? '',
+      latitude: gym.lat?.toString() ?? '',
+      longitude: gym.lon?.toString() ?? '',
+      area: gym.area?.toString() ?? '',
+      maxHeight: gym.maxHeight?.toString() ?? '',
+      yearOpened: gym.yearOpened?.toString() ?? '',
+      metroStations: gym.metroStations.join(', '),
+      tags: gym.tags.join(', '),
+      hours: Object.entries(gym.hours).map(([days, fromTo]) => {
+        const [from, to] = fromTo.split(' – ').map(s => s.trim());
+        return { days, from: from || '', to: to || '' };
+      }),
+      prices: gym.prices,
+      photoUrls: gym.photoUrls,
+    },
+  });
 
-  // hours as WorkingHoursEntry[]
-  const [hours, setHours] = useState<WorkingHoursEntry[]>(
-    Object.entries(gym.hours).map(([days, fromTo]) => {
-      const [from, to] = fromTo.split(' – ').map(s => s.trim());
-      return { days, from: from || '', to: to || '' };
-    })
-  );
-  const [prices, setPrices] = useState<GymPrice[]>(gym.prices);
+  const { fields: hourFields, append: appendHour, remove: removeHour } = useFieldArray({ control, name: 'hours' });
+  const { fields: priceFields, append: appendPrice, remove: removePrice } = useFieldArray({ control, name: 'prices' });
+  const { fields: photoFields, append: appendPhoto, remove: removePhoto } = useFieldArray({ control, name: 'photoUrls' });
 
-  const addHour = useCallback(() => setHours(h => [...h, { days: '', from: '', to: '' }]), []);
-  const removeHour = useCallback((i: number) => setHours(h => h.filter((_, idx) => idx !== i)), []);
-  const updateHour = useCallback((i: number, field: keyof WorkingHoursEntry, val: string) => {
-    setHours(h => h.map((e, idx) => idx === i ? { ...e, [field]: val } : e));
-  }, []);
-
-  const addPrice = useCallback(() => setPrices(p => [...p, { name: '', price: 0 }]), []);
-  const removePrice = useCallback((i: number) => setPrices(p => p.filter((_, idx) => idx !== i)), []);
-  const updatePrice = useCallback((i: number, field: keyof GymPrice, val: string | number) => {
-    setPrices(p => p.map((e, idx) => idx === i ? { ...e, [field]: val } : e));
-  }, []);
-
-  const addPhoto = useCallback(() => setPhotoUrls(u => [...u, '']), []);
-  const removePhoto = useCallback((i: number) => setPhotoUrls(u => u.filter((_, idx) => idx !== i)), []);
-  const updatePhoto = useCallback((i: number, val: string) => {
-    setPhotoUrls(u => u.map((e, idx) => idx === i ? val : e));
-  }, []);
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = useCallback((): boolean => {
-    const e: Record<string, string> = {};
-    if (!name.trim()) e.name = 'Обязательное поле';
-    if (!city.trim()) e.city = 'Обязательное поле';
-    if (!address.trim()) e.address = 'Обязательное поле';
-    if (yearOpened && (isNaN(Number(yearOpened)) || Number(yearOpened) < 1900 || Number(yearOpened) > 2030)) {
-      e.yearOpened = 'Год от 1900 до 2030';
-    }
-    if (area && (isNaN(Number(area)) || Number(area) <= 0)) e.area = 'Положительное число';
-    if (maxHeight && (isNaN(Number(maxHeight)) || Number(maxHeight) <= 0)) e.maxHeight = 'Положительное число';
-    if (latitude && (isNaN(Number(latitude)) || Number(latitude) < -90 || Number(latitude) > 90)) e.latitude = 'От -90 до 90';
-    if (longitude && (isNaN(Number(longitude)) || Number(longitude) < -180 || Number(longitude) > 180)) e.longitude = 'От -180 до 180';
-    if (phone && !/^[\d\s+\-()]*$/.test(phone)) e.phone = 'Некорректный формат';
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'Некорректный email';
-    if (website && !/^https?:\/\/.+/.test(website)) e.website = 'Должен начинаться с http:// или https://';
-    if (vkUrl && !/^https?:\/\/(vk\.com|www\.vk\.com)\//.test(vkUrl)) e.vkUrl = 'Введите VK URL';
-    if (instagramUrl && !/^https?:\/\/(instagram\.com|www\.instagram\.com)\//.test(instagramUrl)) e.instagramUrl = 'Введите Instagram URL';
-    hours.forEach((h, i) => {
-      if (h.days && (!h.from || !h.to)) e[`hours_${i}`] = 'Заполните время';
-    });
-    prices.forEach((p, i) => {
-      if (p.name && (!p.price || p.price <= 0)) e[`price_${i}`] = 'Цена должна быть > 0';
-    });
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }, [name, city, address, yearOpened, area, maxHeight, latitude, longitude, phone, email, website, vkUrl, instagramUrl, hours, prices]);
-
-  const handleSubmit = () => {
-    if (!validate()) return;
+  const onSubmit = (values: GymFormValues) => {
     onSave?.({
-      name: name || undefined,
-      city: city || undefined,
-      address: address || undefined,
-      description: description || null,
-      phone: phone || null,
-      email: email || null,
-      website: website || null,
-      vkUrl: vkUrl || null,
-      instagramUrl: instagramUrl || null,
-      youtubeUrl: youtubeUrl || null,
-      latitude: latitude ? Number(latitude) : null,
-      longitude: longitude ? Number(longitude) : null,
-      area: area ? Number(area) : null,
-      maxHeight: maxHeight ? Number(maxHeight) : null,
-      yearOpened: yearOpened ? Number(yearOpened) : null,
-      metroStations: metroStations ? metroStations.split(',').map(s => s.trim()).filter(Boolean) : [],
-      tags: tags ? tags.split(',').map(s => s.trim()).filter(Boolean) : [],
-      photoUrls: photoUrls.filter(Boolean),
-      hours: hours.filter(h => h.days),
-      prices: prices.filter(p => p.name),
+      name: values.name || undefined,
+      city: values.city || undefined,
+      address: values.address || undefined,
+      description: values.description || null,
+      phone: values.phone || null,
+      email: values.email || null,
+      website: values.website || null,
+      vkUrl: values.vkUrl || null,
+      instagramUrl: values.instagramUrl || null,
+      youtubeUrl: values.youtubeUrl || null,
+      latitude: values.latitude ? Number(values.latitude) : null,
+      longitude: values.longitude ? Number(values.longitude) : null,
+      area: values.area ? Number(values.area) : null,
+      maxHeight: values.maxHeight ? Number(values.maxHeight) : null,
+      yearOpened: values.yearOpened ? Number(values.yearOpened) : null,
+      metroStations: values.metroStations ? values.metroStations.split(',').map(s => s.trim()).filter(Boolean) : [],
+      tags: values.tags ? values.tags.split(',').map(s => s.trim()).filter(Boolean) : [],
+      photoUrls: values.photoUrls.filter(Boolean),
+      hours: values.hours.filter(h => h.days),
+      prices: values.prices.filter(p => p.name),
     });
   };
 
   const fieldSx = { '& .MuiInputBase-root': { fontSize: '0.85rem' }, '& .MuiInputLabel-root': { fontSize: '0.82rem' } };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
-        <Button variant="contained" color="primary" size="small" startIcon={<Save />} onClick={handleSubmit} disabled={saving}>
+        <Button type="submit" variant="contained" color="primary" size="small" startIcon={<Save />} disabled={saving}>
           {saving ? 'Сохранение…' : 'Сохранить'}
         </Button>
         <Button variant="outlined" size="small" startIcon={<Close />} onClick={onCancel} disabled={saving}>
@@ -201,23 +189,45 @@ function EditForm({ gym, onSave, onCancel, saving }: {
           <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: theme.palette.text.primary }}>
             Основная информация
           </Typography>
-          <TextField label="Название" size="small" value={name} onChange={e => setName(e.target.value)} sx={fieldSx} required error={!!errors.name} helperText={errors.name} />
-          <TextField label="Город" size="small" value={city} onChange={e => setCity(e.target.value)} sx={fieldSx} required error={!!errors.city} helperText={errors.city} />
-          <TextField label="Адрес" size="small" value={address} onChange={e => setAddress(e.target.value)} sx={fieldSx} required error={!!errors.address} helperText={errors.address} />
-          <TextField label="Описание" size="small" multiline minRows={3} value={description} onChange={e => setDescription(e.target.value)} sx={fieldSx} />
-          <TextField label="Метро (через запятую)" size="small" value={metroStations} onChange={e => setMetroStations(e.target.value)} sx={fieldSx} />
-          <TextField label="Теги (через запятую)" size="small" value={tags} onChange={e => setTags(e.target.value)} sx={fieldSx} />
+          <Controller name="name" control={control} render={({ field }) => (
+            <TextField {...field} label="Название" size="small" sx={fieldSx} required error={!!errors.name} helperText={errors.name?.message} />
+          )} />
+          <Controller name="city" control={control} render={({ field }) => (
+            <TextField {...field} label="Город" size="small" sx={fieldSx} required error={!!errors.city} helperText={errors.city?.message} />
+          )} />
+          <Controller name="address" control={control} render={({ field }) => (
+            <TextField {...field} label="Адрес" size="small" sx={fieldSx} required error={!!errors.address} helperText={errors.address?.message} />
+          )} />
+          <Controller name="description" control={control} render={({ field }) => (
+            <TextField {...field} label="Описание" size="small" multiline minRows={3} sx={fieldSx} />
+          )} />
+          <Controller name="metroStations" control={control} render={({ field }) => (
+            <TextField {...field} label="Метро (через запятую)" size="small" sx={fieldSx} />
+          )} />
+          <Controller name="tags" control={control} render={({ field }) => (
+            <TextField {...field} label="Теги (через запятую)" size="small" sx={fieldSx} />
+          )} />
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-            <TextField label="Площадь (м²)" size="small" type="number" value={area} onChange={e => setArea(e.target.value)} sx={fieldSx} error={!!errors.area} helperText={errors.area} />
-            <TextField label="Макс. высота (м)" size="small" type="number" value={maxHeight} onChange={e => setMaxHeight(e.target.value)} sx={fieldSx} error={!!errors.maxHeight} helperText={errors.maxHeight} />
+            <Controller name="area" control={control} render={({ field }) => (
+              <TextField {...field} label="Площадь (м²)" size="small" type="number" sx={fieldSx} error={!!errors.area} helperText={errors.area?.message} />
+            )} />
+            <Controller name="maxHeight" control={control} render={({ field }) => (
+              <TextField {...field} label="Макс. высота (м)" size="small" type="number" sx={fieldSx} error={!!errors.maxHeight} helperText={errors.maxHeight?.message} />
+            )} />
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-            <TextField label="Год открытия" size="small" type="number" value={yearOpened} onChange={e => setYearOpened(e.target.value)} sx={fieldSx} error={!!errors.yearOpened} helperText={errors.yearOpened} />
+            <Controller name="yearOpened" control={control} render={({ field }) => (
+              <TextField {...field} label="Год открытия" size="small" type="number" sx={fieldSx} error={!!errors.yearOpened} helperText={errors.yearOpened?.message} />
+            )} />
             <Box />
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
-            <TextField label="Широта" size="small" type="number" value={latitude} onChange={e => setLatitude(e.target.value)} sx={fieldSx} inputProps={{ step: 0.0001 }} error={!!errors.latitude} helperText={errors.latitude} />
-            <TextField label="Долгота" size="small" type="number" value={longitude} onChange={e => setLongitude(e.target.value)} sx={fieldSx} inputProps={{ step: 0.0001 }} error={!!errors.longitude} helperText={errors.longitude} />
+            <Controller name="latitude" control={control} render={({ field }) => (
+              <TextField {...field} label="Широта" size="small" type="number" sx={fieldSx} slotProps={{ htmlInput: { step: 0.0001 } }} error={!!errors.latitude} helperText={errors.latitude?.message} />
+            )} />
+            <Controller name="longitude" control={control} render={({ field }) => (
+              <TextField {...field} label="Долгота" size="small" type="number" sx={fieldSx} slotProps={{ htmlInput: { step: 0.0001 } }} error={!!errors.longitude} helperText={errors.longitude?.message} />
+            )} />
           </Box>
         </Box>
 
@@ -226,54 +236,81 @@ function EditForm({ gym, onSave, onCancel, saving }: {
           <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: theme.palette.text.primary }}>
             Контакты
           </Typography>
-          <TextField label="Телефон" size="small" value={phone} onChange={e => setPhone(e.target.value)} sx={fieldSx} error={!!errors.phone} helperText={errors.phone} />
-          <TextField label="Email" size="small" value={email} onChange={e => setEmail(e.target.value)} sx={fieldSx} error={!!errors.email} helperText={errors.email} />
-          <TextField label="Сайт" size="small" value={website} onChange={e => setWebsite(e.target.value)} sx={fieldSx} error={!!errors.website} helperText={errors.website} />
-          <TextField label="VK" size="small" value={vkUrl} onChange={e => setVkUrl(e.target.value)} sx={fieldSx} error={!!errors.vkUrl} helperText={errors.vkUrl} />
-          <TextField label="Instagram" size="small" value={instagramUrl} onChange={e => setInstagramUrl(e.target.value)} sx={fieldSx} error={!!errors.instagramUrl} helperText={errors.instagramUrl} />
-          <TextField label="YouTube" size="small" value={youtubeUrl} onChange={e => setYoutubeUrl(e.target.value)} sx={fieldSx} />
+          <Controller name="phone" control={control} render={({ field }) => (
+            <TextField {...field} label="Телефон" size="small" sx={fieldSx} error={!!errors.phone} helperText={errors.phone?.message} />
+          )} />
+          <Controller name="email" control={control} render={({ field }) => (
+            <TextField {...field} label="Email" size="small" sx={fieldSx} error={!!errors.email} helperText={errors.email?.message} />
+          )} />
+          <Controller name="website" control={control} render={({ field }) => (
+            <TextField {...field} label="Сайт" size="small" sx={fieldSx} error={!!errors.website} helperText={errors.website?.message} />
+          )} />
+          <Controller name="vkUrl" control={control} render={({ field }) => (
+            <TextField {...field} label="VK" size="small" sx={fieldSx} error={!!errors.vkUrl} helperText={errors.vkUrl?.message} />
+          )} />
+          <Controller name="instagramUrl" control={control} render={({ field }) => (
+            <TextField {...field} label="Instagram" size="small" sx={fieldSx} error={!!errors.instagramUrl} helperText={errors.instagramUrl?.message} />
+          )} />
+          <Controller name="youtubeUrl" control={control} render={({ field }) => (
+            <TextField {...field} label="YouTube" size="small" sx={fieldSx} />
+          )} />
 
+          {/* Часы работы (useFieldArray) */}
           <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: theme.palette.text.primary, mt: 1 }}>
             Часы работы
           </Typography>
-          {hours.map((h, i) => (
-            <Box key={i} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
-              <TextField size="small" placeholder="Пн-Пт" value={h.days} onChange={e => updateHour(i, 'days', e.target.value)} sx={{ minWidth: 90, ...fieldSx }} error={!!errors[`hours_${i}`]} helperText={errors[`hours_${i}`]} />
-              <TextField size="small" placeholder="08:00" value={h.from} onChange={e => updateHour(i, 'from', e.target.value)} sx={{ maxWidth: 80, ...fieldSx }} />
+          {hourFields.map((item, i) => (
+            <Box key={item.id} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+              <Controller name={`hours.${i}.days`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="Пн-Пт" sx={{ minWidth: 90, ...fieldSx }} />
+              )} />
+              <Controller name={`hours.${i}.from`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="08:00" sx={{ maxWidth: 80, ...fieldSx }} />
+              )} />
               <Typography sx={{ color: theme.palette.text.secondary }}>–</Typography>
-              <TextField size="small" placeholder="23:00" value={h.to} onChange={e => updateHour(i, 'to', e.target.value)} sx={{ maxWidth: 80, ...fieldSx }} />
+              <Controller name={`hours.${i}.to`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="23:00" sx={{ maxWidth: 80, ...fieldSx }} />
+              )} />
               <IconButton size="small" onClick={() => removeHour(i)} color="error"><Delete fontSize="small" /></IconButton>
             </Box>
           ))}
-          <Button size="small" startIcon={<Add />} onClick={addHour} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
+          <Button size="small" startIcon={<Add />} onClick={() => appendHour({ days: '', from: '', to: '' })} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
             Добавить день
           </Button>
 
+          {/* Цены (useFieldArray) */}
           <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: theme.palette.text.primary, mt: 1 }}>
             Цены
           </Typography>
-          {prices.map((p, i) => (
-            <Box key={i} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
-              <TextField size="small" placeholder="Название" value={p.name} onChange={e => updatePrice(i, 'name', e.target.value)} sx={{ flex: 1, ...fieldSx }} error={!!errors[`price_${i}`]} helperText={errors[`price_${i}`]} />
-              <TextField size="small" placeholder="Цена" type="number" value={p.price || ''} onChange={e => updatePrice(i, 'price', Number(e.target.value))} sx={{ maxWidth: 100, ...fieldSx }} />
+          {priceFields.map((item, i) => (
+            <Box key={item.id} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+              <Controller name={`prices.${i}.name`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="Название" sx={{ flex: 1, ...fieldSx }} />
+              )} />
+              <Controller name={`prices.${i}.price`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="Цена" type="number" sx={{ maxWidth: 100, ...fieldSx }} />
+              )} />
               <Typography sx={{ color: theme.palette.text.secondary }}>₽</Typography>
               <IconButton size="small" onClick={() => removePrice(i)} color="error"><Delete fontSize="small" /></IconButton>
             </Box>
           ))}
-          <Button size="small" startIcon={<Add />} onClick={addPrice} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
+          <Button size="small" startIcon={<Add />} onClick={() => appendPrice({ name: '', price: 0 })} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
             Добавить цену
           </Button>
 
+          {/* Фото (useFieldArray) */}
           <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: theme.palette.text.primary, mt: 1 }}>
             Фото (URL)
           </Typography>
-          {photoUrls.map((url, i) => (
-            <Box key={i} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
-              <TextField size="small" placeholder="https://…" value={url} onChange={e => updatePhoto(i, e.target.value)} sx={{ flex: 1, ...fieldSx }} />
+          {photoFields.map((item, i) => (
+            <Box key={item.id} sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+              <Controller name={`photoUrls.${i}`} control={control} render={({ field }) => (
+                <TextField {...field} size="small" placeholder="https://…" sx={{ flex: 1, ...fieldSx }} />
+              )} />
               <IconButton size="small" onClick={() => removePhoto(i)} color="error"><Delete fontSize="small" /></IconButton>
             </Box>
           ))}
-          <Button size="small" startIcon={<Add />} onClick={addPhoto} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
+          <Button size="small" startIcon={<Add />} onClick={() => appendPhoto('')} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
             Добавить фото
           </Button>
         </Box>

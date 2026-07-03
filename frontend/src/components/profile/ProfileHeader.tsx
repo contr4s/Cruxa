@@ -38,13 +38,14 @@ interface ProfileHeaderProps {
   isFollowed?: boolean;
   isFollowLoading?: boolean;
   onToggleFollow?: () => void;
+  onEdit?: () => void;
 }
 
-// ponytail: EditButton остаётся no-op заглушкой — форма редактирования профиля ещё не реализована (Roadmap 3.22)
-function EditButton({ theme }: { theme: ReturnType<typeof useTheme> }) {
+function EditButton({ theme, onClick }: { theme: ReturnType<typeof useTheme>; onClick?: () => void }) {
   return (
     <Box
       component="button"
+      onClick={onClick}
       sx={{
         flexShrink: 0,
         mt: 0.5,
@@ -129,6 +130,7 @@ export function ProfileHeader({
   isFollowed = false,
   isFollowLoading = false,
   onToggleFollow,
+  onEdit,
 }: ProfileHeaderProps) {
   const theme = useTheme();
   const [showAllAchievements, setShowAllAchievements] = useState(false);
@@ -279,7 +281,7 @@ export function ProfileHeader({
         </Box>
 
         {isOwner ? (
-          <EditButton theme={theme} />
+          <EditButton theme={theme} onClick={onEdit} />
         ) : (
           <FollowButton theme={theme} isFollowed={isFollowed} isLoading={isFollowLoading} onClick={onToggleFollow ?? (() => {})} />
         )}
@@ -362,7 +364,7 @@ export function ProfileHeader({
           </Box>
 
           {isOwner ? (
-            <EditButton theme={theme} />
+            <EditButton theme={theme} onClick={onEdit} />
           ) : (
             <FollowButton theme={theme} isFollowed={isFollowed} isLoading={isFollowLoading} onClick={onToggleFollow ?? (() => {})} />
           )}

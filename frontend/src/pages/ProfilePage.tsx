@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { ActivityCalendar, ProfileHeader, TopRoutes } from '../components/profile';
+import { ActivityCalendar, ProfileHeader, TopRoutes, ProfileEditFormModal } from '../components/profile';
 import { CombinedChart, RadarChart, GradePyramid, AscentDonut } from '../components/profile/analytics';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { PageContainer } from '../components/layout/PageContainer';
@@ -11,6 +12,7 @@ import { useAuthStore } from '../stores/authStore';
 export default function ProfilePage() {
   const theme = useTheme();
   useScrollReveal();
+  const [editOpen, setEditOpen] = useState(false);
 
   const userId = useAuthStore((s) => s.userId) ?? '550e8400-e29b-41d4-a716-446655440001';
   const { data: user, isLoading: userLoading } = useUserProfile(userId);
@@ -47,8 +49,15 @@ export default function ProfilePage() {
           followingCount={stats.followingCount}
           kruskorScore={stats.kruscore}
           totalWorkouts={stats.totalWorkouts}
+          onEdit={() => setEditOpen(true)}
         />
       </Box>
+
+      <ProfileEditFormModal
+        open={editOpen}
+        user={user}
+        onClose={() => setEditOpen(false)}
+      />
 
       {/* Top Routes + Activity Calendar (2 columns) */}
       <Box

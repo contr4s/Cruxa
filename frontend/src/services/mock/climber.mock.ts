@@ -67,6 +67,34 @@ export async function mockGetUserByUsername(username: string): Promise<UserDto> 
   return user;
 }
 
+// ── Profile update mock ──────────────────────────────────
+
+// сохраняем копию последних обновлённых данных для возврата
+let mockUserData: UserDto = { ...MOCK_USER };
+
+export async function mockUpdateUserProfile(data: Partial<UserDto>): Promise<UserDto> {
+  await mockDelay(400);
+  mockUserData = { ...mockUserData, ...data };
+  // также обновляем MOCK_USER для консистентности с getUserProfile
+  Object.assign(MOCK_USER, data);
+  return { ...mockUserData };
+}
+
+// ── Change password mock ─────────────────────────────────
+
+const MOCK_CURRENT_PASSWORD = 'password123'; // пароль по умолчанию для мока
+
+export async function mockChangePassword(currentPassword: string, newPassword: string): Promise<void> {
+  await mockDelay(300);
+  if (currentPassword !== MOCK_CURRENT_PASSWORD) {
+    throw new Error('Неверный текущий пароль');
+  }
+  if (newPassword.length < 6) {
+    throw new Error('Новый пароль должен быть не менее 6 символов');
+  }
+  // В реальном моке просто ничего не делаем — успех
+}
+
 export async function mockFollowUser(userId: string): Promise<void> {
   await mockDelay(150);
   followedSet.add(userId);

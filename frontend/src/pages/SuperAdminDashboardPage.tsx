@@ -38,10 +38,10 @@ export default function SuperAdminDashboardPage() {
   const [filters, setFilters] = useState<AdminGymFilterState>(DEFAULT_FILTERS);
   const [createOpen, setCreateOpen] = useState(false);
 
-  const { data: stats, isLoading: statsLoading } = useAdminStats();
-  const { data: recentActivity, isLoading: activityLoading } = useRecentActivity();
-  const { data: topGyms, isLoading: topGymsLoading } = useTopGyms();
-  const { data: gymsData, isLoading: gymsLoading } = useAdminGyms({ ...filters, page, pageSize: 10 });
+  const { data: stats, isLoading: statsLoading, isError: statsError, refetch: refetchStats } = useAdminStats();
+  const { data: recentActivity, isLoading: activityLoading, isError: activityError, refetch: refetchActivity } = useRecentActivity();
+  const { data: topGyms, isLoading: topGymsLoading, isError: topGymsError, refetch: refetchTopGyms } = useTopGyms();
+  const { data: gymsData, isLoading: gymsLoading, isError: gymsError, refetch: refetchGyms } = useAdminGyms({ ...filters, page, pageSize: 10 });
   const { mutateAsync: createGymMutate, isPending: creatingGym } = useCreateGym();
 
   return (
@@ -103,7 +103,9 @@ export default function SuperAdminDashboardPage() {
         </Box>
 
         {/* Global stats */}
-        {statsLoading || !stats ? (
+        {statsError ? (
+          <StateDisplay type="error" message="Ошибка загрузки статистики" onRetry={() => refetchStats()} />
+        ) : statsLoading || !stats ? (
           <StateDisplay type="loading" message="Загрузка статистики…" />
         ) : (
           <AdminGlobalStats stats={stats} />
@@ -111,14 +113,18 @@ export default function SuperAdminDashboardPage() {
 
         {/* Activity + Top gyms */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 2 }}>
-          {activityLoading ? (
+          {activityError ? (
+            <StateDisplay type="error" message="Ошибка загрузки активности" onRetry={() => refetchActivity()} size="sm" />
+          ) : activityLoading ? (
             <StateDisplay type="loading" message="Загрузка активности…" size="sm" />
           ) : !recentActivity || recentActivity.length === 0 ? (
             <StateDisplay type="empty" message="Нет активности" description="За последнее время нет новых действий" size="sm" />
           ) : (
             <ActivityFeed items={recentActivity} />
           )}
-          {topGymsLoading ? (
+          {topGymsError ? (
+            <StateDisplay type="error" message="Ошибка загрузки топа" onRetry={() => refetchTopGyms()} size="sm" />
+          ) : topGymsLoading ? (
             <StateDisplay type="loading" message="Загрузка топа…" size="sm" />
           ) : !topGyms || topGyms.length === 0 ? (
             <StateDisplay type="empty" message="Нет данных" description="Топ залов пока не сформирован" size="sm" />
@@ -151,7 +157,9 @@ export default function SuperAdminDashboardPage() {
             filters={filters}
             onChange={(f) => { setFilters(f); setPage(1); }}
           />
-          {gymsLoading ? (
+          {gymsError ? (
+            <StateDisplay type="error" message="Ошибка загрузки залов" onRetry={() => refetchGyms()} />
+          ) : gymsLoading ? (
             <StateDisplay type="loading" message="Загрузка залов…" />
           ) : !gymsData || gymsData.items.length === 0 ? (
             <StateDisplay type="empty" message="Нет залов по заданным фильтрам" />

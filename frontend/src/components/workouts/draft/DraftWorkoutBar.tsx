@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {
-  Box, Typography, Button, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions,
+  Box, Typography, Button, IconButton,
 } from '@mui/material';
 import { FitnessCenter, Close } from '@mui/icons-material';
+import { ConfirmDialog } from '../../ui/ConfirmDialog';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useUpdatePost } from '../../../services/hooks/useDraftPost';
 import { PublishWorkoutSheet } from './PublishWorkoutSheet';
@@ -56,18 +57,16 @@ export function DraftWorkoutBar() {
       </Box>
 
       {/* Cancel confirm dialog */}
-      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
-        <DialogTitle>Отменить тренировку?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Все добавленные трассы будут удалены. Это действие нельзя отменить.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setConfirmOpen(false)}>Остаться</Button>
-          <Button color="error" onClick={handleCancel}>Отменить тренировку</Button>
-        </DialogActions>
-      </Dialog>
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Отменить тренировку?"
+        message="Все добавленные трассы будут удалены. Это действие нельзя отменить."
+        confirmLabel="Отменить тренировку"
+        cancelLabel="Остаться"
+        severity="error"
+        onConfirm={handleCancel}
+        onCancel={() => setConfirmOpen(false)}
+      />
 
       {/* Publish sheet */}
       <PublishWorkoutSheet open={publishOpen} onClose={() => setPublishOpen(false)} />

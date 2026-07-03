@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity, getUserByUsername, followUser, unfollowUser, isFollowing } from '../users.service';
+import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity, getUserByUsername, followUser, unfollowUser, isFollowing, updateUserProfile, changePassword } from '../users.service';
 import type { UserDto, UserStats, KruskorPoint, RadarSkillsResponse, GradePyramidItem, AscentTypeDistribution, TopRoutesResponse, MonthlyActivity } from '../../types/user';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -107,5 +107,33 @@ export function useUnfollowUser() {
   return useMutation({
     mutationFn: (userId: string) => unfollowUser(userId),
     onSuccess: (_, userId) => invalidateUser(queryClient, userId),
+  });
+}
+
+// ── Profile update / password ────────────────────────────
+
+export function useUpdateUserProfile() {
+  const queryClient = useQueryClient();
+  const userId = useAuthStore((s) => s.userId);
+  const setDisplayName = useAuthStore((s: any) => s.setDisplayName);
+  return useMutation({
+    mutationFn: (data: Partial<UserDto>) => updateUserProfile(userId ?? '', data),
+    onSuccess: (updatedUser) => {
+      queryClient.invalidateQueries({ queryKey: ['user', userId, 'profile'] });
+      queryClient.invalidateQueries({ queryKey: ['user', userId, 'stats'] });
+      const newDisplayName = updatedUser.firstName
+        ? updatedUser.lastName
+          ? `${updatedUser.firstName} ${updatedUser.lastName}`
+          : updatedUser.firstName
+        : updatedUser.username;
+      if (setDisplayName) setDisplayName(newDisplayName);
+    },
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: ({ currentPassword, newPassword }: { currentPassword: string; newPassword: string }) =>
+      changePassword(currentPassword, newPassword),
   });
 }

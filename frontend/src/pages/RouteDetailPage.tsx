@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Box, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { FitnessCenter } from '@mui/icons-material';
 import type { Location } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { useRoute, useRouteConsensus, useRouteReviews } from '../services/hooks/
 import { useCreateDraftPost } from '../services/hooks/useDraftPost';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
+import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { ModalOverlay } from '../components/ui/ModalOverlay';
 import { RoutePhotoBlock } from '../components/routes/detail/RoutePhotoBlock';
 import { RouteInfoBlock } from '../components/routes/detail/RouteInfoBlock';
@@ -47,7 +48,7 @@ export default function RouteDetailPage() {
     return (
       <PageContainer>
         <StateDisplay
-          type="empty"
+          type="error"
           message="Трасса не найдена"
           description={
             routeError instanceof Error
@@ -169,19 +170,16 @@ export default function RouteDetailPage() {
       </Box>
 
       {/* Wrong gym confirm dialog */}
-      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
-        <DialogTitle>Другой зал</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            У вас активна тренировка в «{store.gymName}». Начать новую в «{route?.gymName}»?
-            Текущая тренировка будет отменена.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setConfirmOpen(false)}>Остаться</Button>
-          <Button onClick={handleReplaceDraft} color="error">Заменить</Button>
-        </DialogActions>
-      </Dialog>
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Другой зал"
+        message={`У вас активна тренировка в «${store.gymName}». Начать новую в «${route?.gymName}»? Текущая тренировка будет отменена.`}
+        confirmLabel="Заменить"
+        cancelLabel="Остаться"
+        severity="warning"
+        onConfirm={handleReplaceDraft}
+        onCancel={() => setConfirmOpen(false)}
+      />
     </>
   );
 

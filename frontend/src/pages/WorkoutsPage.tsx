@@ -4,6 +4,7 @@ import { useFeed, useToggleLike } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { WeekStats, AchievementsPanel } from '../components/workouts';
 import { GoalsPanel } from '../components/workouts/goals/GoalsPanel';
+import { StateDisplay } from '../components/ui/StateDisplay';
 import { getComments } from '../services/posts.service';
 import { PageContainer } from '../components/layout/PageContainer';
 import { AsidePanel } from '../components/layout/AsidePanel';
@@ -12,6 +13,8 @@ export default function WorkoutsPage() {
   const {
     data: pages,
     isLoading,
+    isError,
+    refetch,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -19,6 +22,13 @@ export default function WorkoutsPage() {
   const posts = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
   const toggleLikeMutation = useToggleLike();
 
+  if (isError) {
+    return (
+      <PageContainer>
+        <StateDisplay type="error" message="Ошибка загрузки тренировок" onRetry={() => refetch()} />
+      </PageContainer>
+    );
+  }
   const sentinelRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sentinelRef.current;

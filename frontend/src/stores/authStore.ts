@@ -12,9 +12,10 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, username: string, password: string) => Promise<void>;
+  register: (email: string, username: string, password: string, extra?: { firstName?: string; lastName?: string; gender?: string; height?: number }) => Promise<void>;
   logout: () => void;
   init: () => void;
+  setDisplayName: (name: string) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -69,10 +70,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
 
-  register: async (email: string, username: string, password: string) => {
+  register: async (email: string, username: string, password: string, extra?: { firstName?: string; lastName?: string; gender?: string; height?: number }) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await authService.register({ email, username, password });
+      const response = await authService.register({ email, username, password, ...extra });
       localStorage.setItem('auth_token', response.token);
       localStorage.setItem('auth_user', JSON.stringify(response));
       set({
@@ -87,6 +88,18 @@ export const useAuthStore = create<AuthState>((set) => ({
     } catch (err) {
       set({ isLoading: false, error: err instanceof Error ? err.message : 'Ошибка регистрации' });
       throw err;
+    }
+  },
+
+  setDisplayName: (name: string) => {
+    set({ displayName: name });
+    const userStr = localStorage.getItem('auth_user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        user.displayName = name;
+        localStorage.setItem('auth_user', JSON.stringify(user));
+      } catch { /* ignore */ }
     }
   },
 

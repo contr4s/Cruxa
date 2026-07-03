@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { SnackbarProvider } from 'notistack';
 import { darkTheme } from './theme/darkTheme';
 import { AuthProvider } from './providers/AuthProvider';
 import { ProtectedLayout } from './components/layout/ProtectedLayout';
@@ -13,6 +14,7 @@ import { RoleGuard } from './components/ui/RoleGuard';
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const FeedPage = lazy(() => import('./pages/FeedPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const WorkoutsPage = lazy(() => import('./pages/WorkoutsPage'));
@@ -49,6 +51,7 @@ function AppRoutes() {
           <Route path="/gym-admin" element={<RoleGuard role="GymAdmin"><GymAdminDashboardPage /></RoleGuard>} />
           <Route path="/admin" element={<RoleGuard role="Admin"><SuperAdminDashboardPage /></RoleGuard>} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
@@ -67,9 +70,15 @@ function App() {
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <AuthProvider>
-            <Suspense fallback={<StateDisplay type="loading" message="Загрузка…" />}>
-              <AppRoutes />
-            </Suspense>
+            <SnackbarProvider
+              maxSnack={5}
+              autoHideDuration={4000}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            >
+              <Suspense fallback={<StateDisplay type="loading" message="Загрузка…" />}>
+                <AppRoutes />
+              </Suspense>
+            </SnackbarProvider>
           </AuthProvider>
         </LocalizationProvider>
       </ThemeProvider>

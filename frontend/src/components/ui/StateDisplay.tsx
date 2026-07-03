@@ -1,4 +1,4 @@
-import { Box, Typography, CircularProgress, useTheme } from '@mui/material';
+import { Box, Typography, CircularProgress, Button, useTheme } from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
 import InboxIcon from '@mui/icons-material/Inbox';
 import type { SxProps } from '@mui/system';
@@ -13,6 +13,8 @@ interface StateDisplayProps {
   icon?: ReactNode;
   sx?: SxProps;
   size?: 'sm' | 'md' | 'lg';
+  onRetry?: () => void;
+  action?: ReactNode;
 }
 
 const DEFAULT_PROPS: Record<StateType, { icon: ReactNode; message: string }> = {
@@ -34,6 +36,8 @@ export function StateDisplay({
   icon,
   sx,
   size = 'md',
+  onRetry,
+  action,
 }: StateDisplayProps) {
   const theme = useTheme();
   const defaults = DEFAULT_PROPS[type];
@@ -79,6 +83,14 @@ export function StateDisplay({
         >
           {description}
         </Typography>
+      )}
+      {onRetry && type === 'error' && (
+        <Button onClick={onRetry} variant="outlined" size="small" sx={{ mt: 1 }}>
+          Повторить
+        </Button>
+      )}
+      {action && (
+        <Box sx={{ mt: 1 }}>{action}</Box>
       )}
     </Box>
   );

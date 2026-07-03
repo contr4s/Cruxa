@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, Typography, InputBase, CircularProgress, useTheme } from '@mui/material';
-import { Forum, Send } from '@mui/icons-material';
+import { Box, Typography, InputBase, useTheme } from '@mui/material';
+import { Send } from '@mui/icons-material';
 import { addComment } from '../../services/posts.service';
 import { useAuthStore } from '../../stores/authStore';
+import { StateDisplay } from '../ui/StateDisplay';
 import type { CommentDto } from '../../types/post';
 import { relativeTime } from '../posts/relativeTime';
 import { UserLink } from '../user/UserLink';
@@ -19,10 +20,23 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
   const theme = useTheme();
   const [comments, setComments] = useState<CommentDto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [submitting, setSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const loadComments = () => {
+    setLoading(true);
+    setError(false);
+    getComments(postId).then((data) => {
+      setComments(data);
+      setLoading(false);
+    }).catch(() => {
+      setError(true);
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -32,7 +46,10 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
         setLoading(false);
       }
     }).catch(() => {
-      if (!cancelled) setLoading(false);
+      if (!cancelled) {
+        setError(true);
+        setLoading(false);
+      }
     });
     return () => { cancelled = true; };
   }, [postId, getComments]);
@@ -74,22 +91,17 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
   const hasMore = visibleCount < totalCount;
 
   if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 3 }}>
-        <CircularProgress size={20} sx={{ color: theme.palette.text.secondary }} />
-      </Box>
-    );
+    return <StateDisplay type="loading" size="sm" />;
+  }
+
+  if (error) {
+    return <StateDisplay type="error" size="sm" message="Не удалось загрузить комментарии" onRetry={loadComments} />;
   }
 
   return (
     <Box sx={{ px: 2.5, py: 2 }}>
       {totalCount === 0 ? (
-        <Box sx={{ textAlign: 'center', py: 3 }}>
-          <Forum sx={{ fontSize: 24, color: theme.palette.text.secondary, mb: 1 }} />
-          <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary }}>
-            💬 Комментариев пока нет. Будьте первым!
-          </Typography>
-        </Box>
+        <StateDisplay type="empty" size="sm" message="Комментариев пока нет" description="Будьте первым!" />
       ) : (
         <>
           <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: theme.palette.text.primary, mb: 1.5 }}>

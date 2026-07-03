@@ -1,38 +1,34 @@
-import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { TextField } from '@mui/material';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { useAuthStore } from '../stores/authStore';
 import { AuthFormLayout } from '../components/ui/AuthFormLayout';
+
+const loginSchema = z.object({
+  email: z.string().email('Введите корректный email'),
+  password: z.string().min(6, 'Пароль не менее 6 символов'),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { login, isLoading, error } = useAuthStore();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [validationError, setValidationError] = useState<string | null>(null);
+  const { control, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: '', password: '' },
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setValidationError(null);
-
-    if (!email.trim()) {
-      setValidationError('Введите email');
-      return;
-    }
-    if (!password) {
-      setValidationError('Введите пароль');
-      return;
-    }
-
+  const onSubmit = async (values: LoginFormValues) => {
     try {
-      await login(email, password);
+      await login(values.email, values.password);
       const redirect = searchParams.get('redirect') || '/feed';
       navigate(decodeURIComponent(redirect), { replace: true });
-    } catch {
-      // error is set in store
-    }
+    } catch { /* error is set in store */ }
   };
 
   return (
@@ -41,30 +37,44 @@ export default function LoginPage() {
       submitLabel="Войти"
       isLoading={isLoading}
       error={error}
-      validationError={validationError}
-      onSubmit={handleSubmit}
+      validationError={errors.email?.message || errors.password?.message || null}
+      onSubmit={handleSubmit(onSubmit)}
       footerText="Нет аккаунта?"
       footerLinkLabel="Зарегистрироваться"
       footerLinkTo="/register"
     >
-      <TextField
-        label="Email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        fullWidth
-        required
-        autoFocus
-        size="small"
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label="Email"
+            type="email"
+            fullWidth
+            required
+            autoFocus
+            size="small"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
+        )}
       />
-      <TextField
-        label="Пароль"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        fullWidth
-        required
-        size="small"
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label="Пароль"
+            type="password"
+            fullWidth
+            required
+            size="small"
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+        )}
       />
     </AuthFormLayout>
   );

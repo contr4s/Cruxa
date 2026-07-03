@@ -1,10 +1,12 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { Route, People, EditNote, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
+import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { Pagination } from '../components/ui/Pagination';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useSelectableRows } from '../hooks/useSelectableRows';
@@ -61,6 +63,8 @@ export default function GymAdminDashboardPage() {
   const selectedRoutesRef = useRef<RouteDto[]>([]);
   const prevSelectedJson = useRef('');
 
+  const { enqueueSnackbar } = useSnackbar();
+
   // GymAdmin управляет своим залом (через отдельный эндпоинт)
   const { data: managedGym, isLoading: managedLoading } = useManagedGym();
   const gymId = managedGym?.gymId ?? '';
@@ -69,6 +73,7 @@ export default function GymAdminDashboardPage() {
   const { data: activity } = useGymActivity(gymId);
   const { data: routesData, isLoading: routesLoading } = useAdminRoutes(gymId, { ...filters, page, pageSize: 10 });
   const { data: setters, isLoading: settersLoading } = useGymSetters(gymId);
+  const [unlinkTarget, setUnlinkTarget] = useState<string | null>(null);
 
   useMemo(() => {
     const json = JSON.stringify([...selectedIds].sort());
@@ -128,6 +133,20 @@ export default function GymAdminDashboardPage() {
     setRouteFormOpen(false);
     setEditingRoute(undefined);
   }, []);
+
+  const handleUnlink = (id: string) => setUnlinkTarget(id);
+
+  const handleUnlinkConfirm = async () => {
+    if (!unlinkTarget) return;
+    try {
+      // TODO: implement actual unlink API call
+      enqueueSnackbar('Рутсеттер отвязан', { variant: 'success' });
+    } catch {
+      enqueueSnackbar('Ошибка при отвязывании', { variant: 'error' });
+    } finally {
+      setUnlinkTarget(null);
+    }
+  };
 
   if (managedLoading || gymLoading) {
     return (
@@ -245,7 +264,7 @@ export default function GymAdminDashboardPage() {
           ) : (
             <SettersManagement
               setters={setters ?? []}
-              onUnlink={(id) => alert(`Отвязать ${id} — скоро`)}
+              onUnlink={handleUnlink}
               onLink={() => alert('Привязать рутсеттера — скоро')}
             />
           )}
@@ -261,6 +280,15 @@ export default function GymAdminDashboardPage() {
           onClose={handleCloseRouteForm}
         />
       )}
+      <ConfirmDialog
+        open={unlinkTarget !== null}
+        title="Отвязать рутсеттера?"
+        message="Рутсеттер потеряет доступ к управлению трассами этого зала."
+        confirmLabel="Отвязать"
+        severity="warning"
+        onConfirm={handleUnlinkConfirm}
+        onCancel={() => setUnlinkTarget(null)}
+      />
     </PageContainer>
   );
 }

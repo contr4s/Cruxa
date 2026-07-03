@@ -3,6 +3,10 @@ export interface RegisterRequest {
   username: string;
   password: string;
   confirmPassword?: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  height?: number;
 }
 
 export interface LoginRequest {

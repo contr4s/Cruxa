@@ -1,10 +1,12 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { Construction, Route, Reviews, LocationOn, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
+import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { Pagination } from '../components/ui/Pagination';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useSelectableRows } from '../hooks/useSelectableRows';
@@ -54,14 +56,17 @@ export default function RoutesetterDashboardPage() {
   const [routeFormOpen, setRouteFormOpen] = useState(false);
   const [editingRoute, setEditingRoute] = useState<RouteDto | undefined>();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { selectedIds, setSelected } = useSelectableRows();
   const selectedRoutesRef = useRef<RouteDto[]>([]);
   const prevSelectedJson = useRef('');
 
-  const { data: stats, isLoading: statsLoading } = useRoutesetterStats();
-  const { data: routesData, isLoading: routesLoading } = useSetterRoutes({ ...filters, page, pageSize: 10 });
-  const { data: reviews, isLoading: reviewsLoading } = useSetterReviews();
-  const { data: gyms, isLoading: gymsLoading } = useLinkedGyms();
+  const { data: stats, isLoading: statsLoading, isError: statsError, refetch: refetchStats } = useRoutesetterStats();
+  const { data: routesData, isLoading: routesLoading, isError: routesError, refetch: refetchRoutes } = useSetterRoutes({ ...filters, page, pageSize: 10 });
+  const { data: reviews, isLoading: reviewsLoading, isError: reviewsError, refetch: refetchReviews } = useSetterReviews();
+  const { data: gyms, isLoading: gymsLoading, isError: gymsError, refetch: refetchGyms } = useLinkedGyms();
+  const [archiveTarget, setArchiveTarget] = useState<RouteDto | null>(null);
 
   // keep selected route objects in sync across pages
   useMemo(() => {
@@ -100,9 +105,19 @@ export default function RoutesetterDashboardPage() {
     };
   }, [routesData]);
 
-  const handleArchive = async (route: RouteDto) => {
-    await archiveRoute(route.id);
-    window.location.reload();
+  const handleArchive = (route: RouteDto) => setArchiveTarget(route);
+
+  const handleArchiveConfirm = async () => {
+    if (!archiveTarget) return;
+    try {
+      await archiveRoute(archiveTarget.id);
+      enqueueSnackbar('Трасса архивирована', { variant: 'success' });
+      refetchRoutes();
+    } catch {
+      enqueueSnackbar('Ошибка при архивации', { variant: 'error' });
+    } finally {
+      setArchiveTarget(null);
+    }
   };
 
   const handleRestore = async (route: RouteDto) => {
@@ -146,7 +161,9 @@ export default function RoutesetterDashboardPage() {
           </Button>
         </Box>
 
-        {statsLoading || !stats ? (
+        {statsError ? (
+          <StateDisplay type="error" message="Ошибка загрузки статистики" onRetry={() => refetchStats()} />
+        ) : statsLoading || !stats ? (
           <StateDisplay type="loading" message="Загрузка статистики…" />
         ) : (
           <RoutesetterStats stats={stats} />
@@ -224,7 +241,9 @@ export default function RoutesetterDashboardPage() {
 
         <Box>
           <SectionHeader icon={<Reviews sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Отзывы на мои трассы" />
-          {reviewsLoading ? (
+          {reviewsError ? (
+            <StateDisplay type="error" message="Ошибка загрузки отзывов" onRetry={() => refetchReviews()} />
+          ) : reviewsLoading ? (
             <StateDisplay type="loading" message="Загрузка отзывов…" />
           ) : (
             <>
@@ -238,7 +257,9 @@ export default function RoutesetterDashboardPage() {
 
         <Box>
           <SectionHeader icon={<LocationOn sx={{ fontSize: 20, color: theme.palette.primary.main }} />} title="Привязанные залы" />
-          {gymsLoading ? (
+          {gymsError ? (
+            <StateDisplay type="error" message="Ошибка загрузки залов" onRetry={() => refetchGyms()} />
+          ) : gymsLoading ? (
             <StateDisplay type="loading" message="Загрузка залов…" />
           ) : (
             <LinkedGyms gyms={gyms ?? []} />
@@ -255,6 +276,15 @@ export default function RoutesetterDashboardPage() {
           onClose={handleCloseRouteForm}
         />
       )}
+      <ConfirmDialog
+        open={archiveTarget !== null}
+        title="Архивировать трассу?"
+        message="Трасса будет скрыта из общего каталога. Её можно восстановить позже."
+        confirmLabel="Архивировать"
+        severity="warning"
+        onConfirm={handleArchiveConfirm}
+        onCancel={() => setArchiveTarget(null)}
+      />
     </PageContainer>
   );
 }

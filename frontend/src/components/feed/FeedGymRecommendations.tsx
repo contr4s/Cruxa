@@ -5,6 +5,7 @@ import type { RecommendedGymDto } from '../../types/post';
 import { getRatingColor } from '../../constants/rating';
 import { GymBadge } from '../ui/GymBadge';
 import { pluralize } from '../../utils/pluralize';
+import { StateDisplay } from '../ui/StateDisplay';
 
 interface FeedGymRecommendationsProps {
   gyms: RecommendedGymDto[];
@@ -29,42 +30,48 @@ export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
       <Typography sx={{ fontWeight: 700, fontSize: '0.82rem', mb: 1.5, color: theme.palette.text.primary, display: 'flex', alignItems: 'center', gap: 0.75 }}>
         <FitnessCenter sx={{ fontSize: 16, color: theme.palette.primary.main }} /> Рекомендуемые залы
       </Typography>
-      {gyms.map((gym) => (
-        <Box
-          key={gym.id}
-          onClick={() => navigate(`/gyms/${gym.id}`)}
-          sx={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 0.5, px: 0.5, mx: -0.5, borderRadius: 1,
-            transition: 'background .2s ease',
-            cursor: 'pointer',
-            '&:hover': { bgcolor: theme.custom.surface2 },
-          }}
-        >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flex: 1, minWidth: 0, p: 0.25 }}>
-            <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary, pr: 0.25 }}>
-              {gym.name}
-            </Typography>
-            {gym.activeRouteCount != null && (
-              <GymBadge icon={<ShowChart sx={{ fontSize: 12 }} />} label={`${gym.activeRouteCount} ${pluralize(gym.activeRouteCount, ['трасса', 'трассы', 'трасс'])}`} />
-            )}
-            {gym.maxHeight !== undefined && (
-              <GymBadge icon={<Height sx={{ fontSize: 12 }} />} label={`${gym.maxHeight}м`} />
-            )}
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
-            <Typography sx={{ fontSize: '0.72rem', fontWeight: 600, color: getRatingColor(gym.rating), display: 'flex', alignItems: 'center', gap: 0.25 }}>
-              <Star sx={{ fontSize: 14 }} /> {gym.rating.toFixed(1)}
-            </Typography>
-            {gym.distance && (
-              <GymBadge
-                icon={<NearMe sx={{ fontSize: 12 }} />}
-                label={gym.distance}
-                sx={{ bgcolor: 'transparent', border: `1px solid ${theme.palette.divider}`, color: theme.palette.text.primary }}
-              />
-            )}
-          </Box>
-        </Box>
-      ))}
+      {gyms.length === 0 ? (
+        <StateDisplay type="empty" size="sm" message="Нет рекомендаций" />
+      ) : (
+        <>
+          {gyms.map((gym) => (
+            <Box
+              key={gym.id}
+              onClick={() => navigate(`/gyms/${gym.id}`)}
+              sx={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 0.5, px: 0.5, mx: -0.5, borderRadius: 1,
+                transition: 'background .2s ease',
+                cursor: 'pointer',
+                '&:hover': { bgcolor: theme.custom.surface2 },
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flex: 1, minWidth: 0, p: 0.25 }}>
+                <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.primary, pr: 0.25 }}>
+                  {gym.name}
+                </Typography>
+                {gym.activeRouteCount != null && (
+                  <GymBadge icon={<ShowChart sx={{ fontSize: 12 }} />} label={`${gym.activeRouteCount} ${pluralize(gym.activeRouteCount, ['трасса', 'трассы', 'трасс'])}`} />
+                )}
+                {gym.maxHeight !== undefined && (
+                  <GymBadge icon={<Height sx={{ fontSize: 12 }} />} label={`${gym.maxHeight}м`} />
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
+                <Typography sx={{ fontSize: '0.72rem', fontWeight: 600, color: getRatingColor(gym.rating), display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                  <Star sx={{ fontSize: 14 }} /> {gym.rating.toFixed(1)}
+                </Typography>
+                {gym.distance && (
+                  <GymBadge
+                    icon={<NearMe sx={{ fontSize: 12 }} />}
+                    label={gym.distance}
+                    sx={{ bgcolor: 'transparent', border: `1px solid ${theme.palette.divider}`, color: theme.palette.text.primary }}
+                  />
+                )}
+              </Box>
+            </Box>
+          ))}
+        </>
+      )}
     </Box>
   );
 }

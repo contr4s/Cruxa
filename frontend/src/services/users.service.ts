@@ -4,6 +4,7 @@ import {
   mockGetRadarSkills, mockGetGradePyramid, mockGetAscentDistribution,
   mockGetTopRoutes, mockGetMonthlyActivity, mockGetUserByUsername,
   mockFollowUser, mockUnfollowUser, mockIsFollowing,
+  mockUpdateUserProfile, mockChangePassword,
 } from './mock/climber.mock';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
@@ -23,10 +24,16 @@ export async function getUserStats(userId: string): Promise<UserStats> {
 }
 
 export async function updateUserProfile(userId: string, data: Partial<UserDto>): Promise<UserDto> {
-  if (USE_MOCK) return mockGetUserProfile();
+  if (USE_MOCK) return mockUpdateUserProfile(data);
   const { default: api } = await import('./api');
   const response = await api.put<UserDto>(`/users/${userId}`, data);
   return response.data;
+}
+
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  if (USE_MOCK) return mockChangePassword(currentPassword, newPassword);
+  const { default: api } = await import('./api');
+  await api.put('/auth/password', { currentPassword, newPassword });
 }
 
 export async function getKruskorHistory(userId: string, period: string): Promise<KruskorPoint[]> {

@@ -72,7 +72,7 @@ export default function UserProfilePage() {
   if (userNotFound || !user || !stats) {
     return (
       <PageContainer>
-        <StateDisplay type="empty" message="Пользователь не найден" />
+        <StateDisplay type="error" message="Пользователь не найден" />
       </PageContainer>
     );
   }

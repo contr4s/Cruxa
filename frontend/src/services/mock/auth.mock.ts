@@ -49,7 +49,7 @@ export async function mockRegister(data: RegisterRequest): Promise<AuthResponse>
     'admin@cruxa.ru': { role: 'Admin', userId: 'a1', displayName: 'Супер Админ' },
   };
 
-  const user = roleMap[data.email.toLowerCase()] ?? { role: 'Climber', userId: '550e8400-e29b-41d4-a716-446655440001', displayName: 'Алексей Кузнецов' };
+  const user = roleMap[data.email.toLowerCase()] ?? { role: 'Climber' as const, userId: '550e8400-e29b-41d4-a716-446655440001', displayName: data.firstName ? `${data.firstName} ${data.lastName ?? ''}`.trim() : 'Алексей Кузнецов' };
 
   return {
     token: MOCK_TOKEN,
