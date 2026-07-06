@@ -1,20 +1,22 @@
 import { useState } from 'react';
-import { TextField, Collapse, useTheme } from '@mui/material';
-import { EditNote } from '@mui/icons-material';
+import { TextField, Collapse, Button, Box, CircularProgress, useTheme } from '@mui/material';
+import { EditNote, Save } from '@mui/icons-material';
 
 interface PrivateNotesProps {
   initialValue?: string;
-  onChange?: (value: string) => void;
+  onSave?: (value: string) => Promise<void>;
 }
 
-export function PrivateNotes({ initialValue = '', onChange }: PrivateNotesProps) {
+export function PrivateNotes({ initialValue = '', onSave }: PrivateNotesProps) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(initialValue);
+  const [saving, setSaving] = useState(false);
 
-  const handleChange = (v: string) => {
-    setValue(v);
-    onChange?.(v);
+  const handleSave = async () => {
+    if (!onSave) return;
+    setSaving(true);
+    try { await onSave(value); } finally { setSaving(false); }
   };
 
   return (
@@ -52,7 +54,7 @@ export function PrivateNotes({ initialValue = '', onChange }: PrivateNotesProps)
           maxRows={4}
           placeholder="Ваши заметки об этой трассе..."
           value={value}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           onClick={(e) => e.stopPropagation()}
           sx={{
             mt: 0.5,
@@ -73,6 +75,18 @@ export function PrivateNotes({ initialValue = '', onChange }: PrivateNotesProps)
             },
           }}
         />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+          <Button
+            size="small"
+            variant="contained"
+            startIcon={saving ? <CircularProgress size={14} /> : <Save sx={{ fontSize: 14 }} />}
+            disabled={saving}
+            onClick={(e) => { e.stopPropagation(); handleSave(); }}
+            sx={{ fontSize: '0.75rem' }}
+          >
+            {saving ? 'Сохранение...' : 'Сохранить'}
+          </Button>
+        </Box>
       </Collapse>
     </details>
   );

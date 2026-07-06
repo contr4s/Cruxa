@@ -1,105 +1,71 @@
+import api from './api';
 import type { UserDto, UserStats, KruskorPoint, RadarSkillsResponse, GradePyramidItem, AscentTypeDistribution, TopRoutesResponse, MonthlyActivity } from '../types/user';
-import {
-  mockGetUserProfile, mockGetUserStats, mockGetKruskorHistory,
-  mockGetRadarSkills, mockGetGradePyramid, mockGetAscentDistribution,
-  mockGetTopRoutes, mockGetMonthlyActivity, mockGetUserByUsername,
-  mockFollowUser, mockUnfollowUser, mockIsFollowing,
-  mockUpdateUserProfile, mockChangePassword,
-} from './mock/climber.mock';
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
-
+// ponytail: these functions delegate to real API. When MSW is off, ensure backend
+// implements all endpoints. Add `username` to PostDto if missing.
 export async function getUserProfile(userId: string): Promise<UserDto> {
-  if (USE_MOCK) return mockGetUserProfile();
-  const { default: api } = await import('./api');
   const response = await api.get<UserDto>(`/users/${userId}`);
   return response.data;
 }
 
 export async function getUserStats(userId: string): Promise<UserStats> {
-  if (USE_MOCK) return mockGetUserStats();
-  const { default: api } = await import('./api');
   const response = await api.get<UserStats>(`/users/${userId}/stats`);
   return response.data;
 }
 
 export async function updateUserProfile(userId: string, data: Partial<UserDto>): Promise<UserDto> {
-  if (USE_MOCK) return mockUpdateUserProfile(data);
-  const { default: api } = await import('./api');
   const response = await api.put<UserDto>(`/users/${userId}`, data);
   return response.data;
 }
 
 export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
-  if (USE_MOCK) return mockChangePassword(currentPassword, newPassword);
-  const { default: api } = await import('./api');
   await api.put('/auth/password', { currentPassword, newPassword });
 }
 
 export async function getKruskorHistory(userId: string, period: string): Promise<KruskorPoint[]> {
-  if (USE_MOCK) return mockGetKruskorHistory(period);
-  const { default: api } = await import('./api');
   const response = await api.get<KruskorPoint[]>(`/users/${userId}/kruskor-history`, { params: { period } });
   return response.data;
 }
 
 export async function getRadarSkills(userId: string): Promise<RadarSkillsResponse> {
-  if (USE_MOCK) return mockGetRadarSkills();
-  const { default: api } = await import('./api');
   const response = await api.get<RadarSkillsResponse>(`/users/${userId}/radar-skills`);
   return response.data;
 }
 
 export async function getGradePyramid(userId: string): Promise<GradePyramidItem[]> {
-  if (USE_MOCK) return mockGetGradePyramid();
-  const { default: api } = await import('./api');
   const response = await api.get<GradePyramidItem[]>(`/users/${userId}/grade-pyramid`);
   return response.data;
 }
 
 export async function getAscentDistribution(userId: string): Promise<AscentTypeDistribution[]> {
-  if (USE_MOCK) return mockGetAscentDistribution();
-  const { default: api } = await import('./api');
   const response = await api.get<AscentTypeDistribution[]>(`/users/${userId}/ascent-distribution`);
   return response.data;
 }
 
 export async function getTopRoutes(userId: string): Promise<TopRoutesResponse> {
-  if (USE_MOCK) return mockGetTopRoutes();
-  const { default: api } = await import('./api');
   const response = await api.get<TopRoutesResponse>(`/users/${userId}/top-routes`);
   return response.data;
 }
 
 export async function getMonthlyActivity(userId: string): Promise<MonthlyActivity> {
-  if (USE_MOCK) return mockGetMonthlyActivity();
-  const { default: api } = await import('./api');
   const response = await api.get<MonthlyActivity>(`/users/${userId}/monthly-activity`);
   return response.data;
 }
 
 export async function getUserByUsername(username: string): Promise<UserDto> {
-  if (USE_MOCK) return mockGetUserByUsername(username);
-  const { default: api } = await import('./api');
   const response = await api.get<UserDto>(`/users/username/${username}`);
   return response.data;
 }
 
 export async function followUser(userId: string): Promise<void> {
-  if (USE_MOCK) return mockFollowUser(userId);
-  const { default: api } = await import('./api');
   await api.post(`/users/${userId}/follow`);
 }
 
 export async function unfollowUser(userId: string): Promise<void> {
-  if (USE_MOCK) return mockUnfollowUser(userId);
-  const { default: api } = await import('./api');
   await api.delete(`/users/${userId}/follow`);
 }
 
 export async function isFollowing(userId: string): Promise<boolean> {
-  if (USE_MOCK) return mockIsFollowing(userId);
-  const { default: api } = await import('./api');
   const response = await api.get<boolean>(`/users/${userId}/is-following`);
   return response.data;
 }

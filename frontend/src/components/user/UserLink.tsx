@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, useTheme } from '@mui/material';
-import type { SxProps, Theme, ReactNode } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 
 export interface UserLinkProps {
   username: string;
@@ -48,7 +48,7 @@ export function UserLink({
       onClick={handleClick}
       sx={{
         display: 'inline-flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         gap: 0.75,
         cursor: 'pointer',
         textDecoration: 'none',

@@ -26,7 +26,7 @@ export function dividerBorderTop(theme: Theme): SxProps {
  * Ховер-эффект поверхностью surface2
  */
 export function hoverSurface2(sx?: SxProps): SxProps {
-  return { '&:hover': { background: (theme: Theme) => theme.custom.surface2, ...sx } };
+  return { '&:hover': { background: (theme: Theme) => (theme as Theme).custom.surface2, ...sx } } as SxProps;
 }
 
 /**
@@ -73,14 +73,14 @@ export function ascentBadgeStyle(bgColor: string): SxProps {
  */
 export function smallIconButton(theme: Theme): SxProps {
   return {
-    background: theme.custom.surface2,
+    background: (theme as Theme).custom.surface2,
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: 1,
     color: theme.palette.text.secondary,
     width: 26,
     height: 26,
     '&:hover': {
-      background: theme.custom.surface3,
+      background: (theme as Theme).custom.surface3,
       color: theme.palette.text.primary,
     },
   };
@@ -96,7 +96,7 @@ export function statsBar(theme: Theme): SxProps {
     px: 2,
     py: 1,
     borderTop: `1px solid ${theme.palette.divider}`,
-    background: theme.custom.surface2,
+    background: (theme as Theme).custom.surface2,
   };
 }
 
@@ -123,7 +123,7 @@ export function avatarInitial(size: number = 28): SxProps {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: (theme: Theme) => theme.palette.primary.main,
+    background: (theme) => (theme as Theme).palette.primary.main,
     color: '#fff',
     fontWeight: 700,
     fontSize: `${size * 0.35}px`,

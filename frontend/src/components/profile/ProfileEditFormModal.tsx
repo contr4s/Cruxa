@@ -1,7 +1,7 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
   Box, Typography, TextField, Button, Radio, RadioGroup,
-  FormControlLabel, FormControl, FormLabel, FormHelperText,
+  FormControlLabel, FormHelperText,
   Avatar, IconButton, Divider, useTheme,
 } from '@mui/material';
 import { PhotoCamera, Save } from '@mui/icons-material';
@@ -100,12 +100,12 @@ function ProfileEditFormContent({ user, onClose, saving, onSave }: ContentProps)
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { control, handleSubmit, formState: { errors } } = useForm<ProfileEditFormValues>({
-    resolver: zodResolver(profileEditSchema),
+    resolver: zodResolver(profileEditSchema) as any,
     defaultValues: {
       firstName: user.firstName ?? '',
       lastName: user.lastName ?? '',
       city: user.city ?? '',
-      gender: (user.gender as 'M' | 'F') ?? undefined,
+      gender: user.gender === 'М' ? 'M' : user.gender === 'Ж' ? 'F' : (user.gender as 'M' | 'F') ?? undefined,
       height: user.height ?? '',
       currentPassword: '',
       newPassword: '',

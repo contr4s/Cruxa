@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { GradientButton } from '../ui/GradientButton';
+import { Reveal } from '../ui/Reveal';
 
 export function CallToAction() {
   const navigate = useNavigate();
 
   return (
-    <section className="cta-section scroll-reveal">
+    <Reveal>
+    <section className="cta-section">
       <div className="cta-card">
         <h2 className="cta-title">Готовы начать?</h2>
         <p className="cta-text">
@@ -30,5 +32,6 @@ export function CallToAction() {
         </GradientButton>
       </div>
     </section>
+    </Reveal>
   );
 }

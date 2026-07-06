@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { GradientButton } from '../ui/GradientButton';
+import { Button } from '@mui/material';
 
 export function Navbar() {
   return (
@@ -7,9 +7,9 @@ export function Navbar() {
       <Link to="/" className="nav-logo">▲ Крукса</Link>
       <div className="nav-links">
         <Link to="/login" className="nav-link nav-login">Войти</Link>
-        <GradientButton component={Link} to="/register" size="sm">
+        <Button component={Link} to="/register" variant="contained" color="primary" size="small">
           Присоединиться
-        </GradientButton>
+        </Button>
       </div>
     </nav>
   );

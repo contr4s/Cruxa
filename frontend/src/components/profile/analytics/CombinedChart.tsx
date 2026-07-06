@@ -5,6 +5,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import TerrainIcon from '@mui/icons-material/Terrain';
 import { Line } from 'react-chartjs-2';
 import { SectionHeader } from '../../ui/SectionHeader';
+import type { ChartOptions, ChartData } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -71,11 +72,11 @@ const gradientFillPlugin = {
 export const CombinedChart = memo(function CombinedChart() {
   const theme = useTheme();
   const [period, setPeriod] = useState('all');
-  const chartRef = useRef<ChartJS>(null);
+  const chartRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   useChartResize(chartRef, containerRef, [period]);
   const userId = useAuthStore((s) => s.userId);
-  const { data: kruskorPoints, isLoading } = useKruskorHistory(userId, period);
+  const { data: kruskorPoints, isLoading } = useKruskorHistory(userId ?? '', period);
 
   const data = kruskorPoints ?? [];
   const labels = data.map((d) => d.date);
@@ -84,7 +85,7 @@ export const CombinedChart = memo(function CombinedChart() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const maxGrades = data.map((d) => gradeMap[d.maxGrade] ?? 0);
 
-  const chartData = {
+  const chartData: ChartData<'line'> = {
     labels,
     datasets: [
       {
@@ -94,7 +95,7 @@ export const CombinedChart = memo(function CombinedChart() {
         backgroundColor: 'rgba(38, 166, 154, 0.12)',
         fill: true,
         tension: 0.4,
-        pointRadius: (ctx: { chart: ChartJS }) => ctx.chart.width < 600 ? 0 : 4,
+        pointRadius: (ctx: { chart: { width: number } }) => ctx.chart.width < 600 ? 0 : 4,
         pointBackgroundColor: '#26A69A',
         yAxisID: 'y',
       },
@@ -106,14 +107,14 @@ export const CombinedChart = memo(function CombinedChart() {
         borderDash: [5, 5],
         fill: false,
         tension: 0.4,
-        pointRadius: (ctx: { chart: ChartJS }) => ctx.chart.width < 600 ? 0 : 3,
+        pointRadius: (ctx: { chart: { width: number } }) => ctx.chart.width < 600 ? 0 : 3,
         pointBackgroundColor: '#FFB300',
         yAxisID: 'y1',
       },
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: false,
     maintainAspectRatio: false,
     interaction: {
@@ -134,12 +135,12 @@ export const CombinedChart = memo(function CombinedChart() {
       tooltip: {
         ...CHART_TOOLTIP,
         callbacks: {
-          label(context: { datasetIndex: number; parsed: { y: number } }) {
+          label(context: { datasetIndex: number; parsed: { y: number | null } }) {
             if (context.datasetIndex === 1) {
-              const idx = Math.round(context.parsed.y);
+              const idx = Math.round(context.parsed.y ?? 0);
               return idx >= 0 && idx < gradeList.length ? `Сложность: ${gradeList[idx]}` : '';
             }
-            return `Крускор: ${context.parsed.y}`;
+            return `Крускор: ${context.parsed.y ?? 0}`;
           },
         },
       },
@@ -169,8 +170,8 @@ export const CombinedChart = memo(function CombinedChart() {
         grid: { display: false },
         ticks: {
           color: '#9E9E9E',
-          callback(value: number) {
-            const idx = Math.round(value);
+          callback(value: string | number) {
+            const idx = Math.round(value as number);
             return idx >= 0 && idx < gradeList.length ? gradeList[idx] : '';
           },
         },
@@ -217,8 +218,7 @@ export const CombinedChart = memo(function CombinedChart() {
 
       {/* Chart */}
       <Box ref={containerRef} sx={{ width: '100%', height: { xs: 340, md: 400 } }}>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <Line ref={chartRef} data={chartData} options={options as any} plugins={[gradientFillPlugin]} />
+        <Line ref={chartRef} data={chartData as any} options={options} plugins={[gradientFillPlugin]} />
       </Box>
 
       {/* Bottom stats */}

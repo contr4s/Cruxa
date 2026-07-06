@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { PostCard } from '../posts/PostCard';
 import { StateDisplay } from '../ui/StateDisplay';
 import { useAuthStore } from '../../stores/authStore';
@@ -9,14 +9,13 @@ interface WorkoutFeedProps {
   isLoading?: boolean;
   emptyStateMessage?: string;
   defaultTab?: number;
-  getComments: (postId: string) => Promise<CommentDto[]>;
+  getComments: (postId: string) => Promise<CommentDto[] | { items: CommentDto[] }>;
   onLikeToggle: (postId: string, wasLiked: boolean) => void;
   onCommentAdded: () => void;
   onDelete?: (postId: string) => void;
 }
 
 export function WorkoutFeed({ posts, isLoading, emptyStateMessage, defaultTab = 1, getComments, onLikeToggle, onCommentAdded, onDelete }: WorkoutFeedProps) {
-  const theme = useTheme();
   const currentUserId = useAuthStore((s) => s.userId);
 
   if (isLoading) {

@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions } from '../posts.service';
-import type { PostDto, CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
+import type { CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
 
 export function useFeed(filter?: FeedFilter) {
   return useInfiniteQuery({
@@ -22,7 +22,10 @@ export function usePost(postId: string) {
 export function useComments(postId: string) {
   return useQuery<CommentDto[]>({
     queryKey: ['comments', postId],
-    queryFn: () => getComments(postId),
+    queryFn: async () => {
+      const result = await getComments(postId);
+      return Array.isArray(result) ? result : result.items;
+    },
     enabled: !!postId,
   });
 }

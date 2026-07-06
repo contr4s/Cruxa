@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Schedule, AttachMoney } from '@mui/icons-material';
-import type { GymDto } from '../../types/gym';
+import type { GymDto } from '../../../types/gym';
 
 interface GymHoursPricesBlockProps {
   prices: GymDto['prices'];
@@ -24,7 +24,7 @@ export function GymHoursPricesBlock({ prices, hours }: GymHoursPricesBlockProps)
         </Box>
         {Object.entries(hours).map(([days, time]) => (
           <Typography key={days} sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, pl: 2.5 }}>
-            {days}: {time}
+            {days}: {time as ReactNode}
           </Typography>
         ))}
       </Box>
@@ -34,7 +34,7 @@ export function GymHoursPricesBlock({ prices, hours }: GymHoursPricesBlockProps)
           <AttachMoney sx={{ fontSize: 16 }} />
           <Typography sx={{ fontSize: '0.82rem', fontWeight: 600 }}>Цены</Typography>
         </Box>
-        {visiblePrices.map((p) => (
+        {visiblePrices.map((p: { name: string; price: number }) => (
           <Typography key={p.name} sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, pl: 2.5 }}>
             {p.name} — {p.price.toLocaleString()} ₽
           </Typography>

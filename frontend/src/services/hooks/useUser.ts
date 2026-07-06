@@ -115,7 +115,7 @@ export function useUnfollowUser() {
 export function useUpdateUserProfile() {
   const queryClient = useQueryClient();
   const userId = useAuthStore((s) => s.userId);
-  const setDisplayName = useAuthStore((s: any) => s.setDisplayName);
+  const setDisplayName = useAuthStore((s) => s.setDisplayName);
   return useMutation({
     mutationFn: (data: Partial<UserDto>) => updateUserProfile(userId ?? '', data),
     onSuccess: (updatedUser) => {

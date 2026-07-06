@@ -10,8 +10,10 @@ interface FavoriteButtonProps {
 
 export function FavoriteButton({ isFavorite, onToggle, size = 20 }: FavoriteButtonProps) {
   const [animating, setAnimating] = useState(false);
+  const [fav, setFav] = useState(isFavorite);
 
   const handleClick = useCallback(() => {
+    setFav((prev) => !prev);
     setAnimating(true);
     setTimeout(() => setAnimating(false), 300);
     onToggle();
@@ -22,9 +24,9 @@ export function FavoriteButton({ isFavorite, onToggle, size = 20 }: FavoriteButt
       onClick={handleClick}
       size="small"
       sx={{ p: 0.5 }}
-      aria-label={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+      aria-label={fav ? 'Удалить из избранного' : 'Добавить в избранное'}
     >
-      {isFavorite ? (
+      {fav ? (
         <Favorite
           sx={{
             fontSize: size,

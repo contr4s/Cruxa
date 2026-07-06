@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ProfileHeader, TopRoutes, ActivityCalendar } from '../components/profile';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { PageContainer } from '../components/layout/PageContainer';
+import { Reveal } from '../components/ui/Reveal';
 import { responsiveGrid } from '../theme/commonStyles';
 import { useAuthStore } from '../stores/authStore';
 import { useUserByUsername, useUserStats, useIsFollowing, useFollowUser, useUnfollowUser } from '../services/hooks/useUser';
@@ -15,7 +15,6 @@ import { getComments } from '../services/posts.service';
 
 export default function UserProfilePage() {
   const theme = useTheme();
-  useScrollReveal(0);
 
   const { username } = useParams<{ username: string }>();
   const currentUserId = useAuthStore((s) => s.userId);
@@ -81,52 +80,54 @@ export default function UserProfilePage() {
 
   return (
     <PageContainer sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Box className="scroll-reveal" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <ProfileHeader
-          user={user}
-          isOwner={false}
-          isFollowed={isFollowed ?? false}
-          isFollowLoading={followPending || unfollowPending || isFollowingLoading}
-          onToggleFollow={handleToggleFollow}
-          followersCount={stats.followersCount}
-          followingCount={stats.followingCount}
-          kruskorScore={stats.kruscore}
-          totalWorkouts={stats.totalWorkouts}
-        />
-      </Box>
+      <Reveal>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <ProfileHeader
+            user={user}
+            isOwner={false}
+            isFollowed={isFollowed ?? false}
+            isFollowLoading={followPending || unfollowPending || isFollowingLoading}
+            onToggleFollow={handleToggleFollow}
+            followersCount={stats.followersCount}
+            followingCount={stats.followingCount}
+            kruskorScore={stats.kruscore}
+            totalWorkouts={stats.totalWorkouts}
+          />
+        </Box>
+      </Reveal>
 
       {/* Top Routes + Activity Calendar (2 columns) */}
-      <Box
-        className="scroll-reveal scroll-reveal-delay-1"
-        sx={responsiveGrid()}
-      >
-        <TopRoutes userId={userId} />
-        <ActivityCalendar userId={userId} />
-      </Box>
+      <Reveal delay={0.1}>
+        <Box sx={responsiveGrid()}>
+          <TopRoutes userId={userId} />
+          <ActivityCalendar userId={userId} />
+        </Box>
+      </Reveal>
 
       {/* Divider */}
-      <Box
-        className="scroll-reveal scroll-reveal-delay-1"
-        sx={{
+      <Reveal delay={0.1}>
+        <Box sx={{
           height: 2,
           background: `linear-gradient(90deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 50%, transparent 100%)`,
           borderRadius: '2px',
           width: '100%',
-        }}
-      />
+        }} />
+      </Reveal>
 
       {/* Posts */}
-      <Box className="scroll-reveal scroll-reveal-delay-2">
-        <WorkoutFeed
-          posts={posts}
-          isLoading={postsLoading}
-          emptyStateMessage="Пользователь пока ничего не опубликовал"
-          defaultTab={1}
-          getComments={(postId) => getComments(postId)}
-          onLikeToggle={(postId, wasLiked) => doToggleLike({ postId, isLiked: wasLiked })}
-          onCommentAdded={() => {}}
-        />
-      </Box>
+      <Reveal delay={0.2}>
+        <Box>
+          <WorkoutFeed
+            posts={posts}
+            isLoading={postsLoading}
+            emptyStateMessage="Пользователь пока ничего не опубликовал"
+            defaultTab={1}
+            getComments={(postId) => getComments(postId)}
+            onLikeToggle={(postId, wasLiked) => doToggleLike({ postId, isLiked: wasLiked })}
+            onCommentAdded={() => {}}
+          />
+        </Box>
+      </Reveal>
 
       {/* Infinite scroll sentinel */}
       {hasNextPage && (

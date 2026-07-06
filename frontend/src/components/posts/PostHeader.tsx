@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, IconButton } from '@mui/material';
+import { Box, useTheme, IconButton } from '@mui/material';
 import { Public, Lock, People, Edit, Delete, LocalFireDepartment } from '@mui/icons-material';
 import { relativeTime } from './relativeTime';
 import { GymChip } from '../ui/GymChip';

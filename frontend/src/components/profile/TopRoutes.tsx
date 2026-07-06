@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Card } from '../../theme/cardStyles';
 import { SectionHeader } from '../ui/SectionHeader';
@@ -17,7 +16,6 @@ export function TopRoutes({ userId: propUserId }: { userId?: string } = {}) {
   const totalRoutes = routesData?.totalRoutes;
   const avgGrade = routesData?.avgGrade;
   const maxGrade = routesData?.maxGrade;
-  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <LazyCard loading={isLoading} minHeight={360}>

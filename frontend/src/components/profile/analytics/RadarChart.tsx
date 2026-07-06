@@ -13,7 +13,7 @@ export const RadarChart = memo(function RadarChart() {
   const theme = useTheme();
   const userId = useAuthStore((s) => s.userId);
   const { ref, inView } = useInView();
-  const { data: radarData, isLoading } = useRadarSkills(userId, inView);
+  const { data: radarData, isLoading } = useRadarSkills(userId ?? '', inView);
 
   const categories = radarData?.categories ?? {};
   const categoryKeys = Object.keys(categories);

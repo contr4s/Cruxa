@@ -90,11 +90,11 @@ const gymProfileSchema = z.object({
   vkUrl: z.string().optional().or(z.literal('')),
   instagramUrl: z.string().optional().or(z.literal('')),
   youtubeUrl: z.string().optional().or(z.literal('')),
-  latitude: z.coerce.number().min(-90).max(90).optional().or(z.literal('')),
-  longitude: z.coerce.number().min(-180).max(180).optional().or(z.literal('')),
-  area: z.coerce.number().positive('Положительное число').optional().or(z.literal('')),
-  maxHeight: z.coerce.number().positive('Положительное число').optional().or(z.literal('')),
-  yearOpened: z.coerce.number().int().min(1900, 'От 1900').max(2030, 'До 2030').optional().or(z.literal('')),
+  latitude: z.union([z.coerce.number().min(-90).max(90), z.literal('')]).optional(),
+  longitude: z.union([z.coerce.number().min(-180).max(180), z.literal('')]).optional(),
+  area: z.union([z.coerce.number().positive('Положительное число'), z.literal('')]).optional(),
+  maxHeight: z.union([z.coerce.number().positive('Положительное число'), z.literal('')]).optional(),
+  yearOpened: z.union([z.coerce.number().int().min(1900, 'От 1900').max(2030, 'До 2030'), z.literal('')]).optional(),
   metroStations: z.string().optional().or(z.literal('')),
   tags: z.string().optional().or(z.literal('')),
   hours: z.array(hourEntrySchema),
@@ -113,7 +113,7 @@ function EditForm({ gym, onSave, onCancel, saving }: {
   const theme = useTheme();
 
   const { control, handleSubmit, formState: { errors } } = useForm<GymFormValues>({
-    resolver: zodResolver(gymProfileSchema),
+    resolver: zodResolver(gymProfileSchema) as any,
     defaultValues: {
       name: gym.name,
       city: gym.city,
@@ -138,12 +138,12 @@ function EditForm({ gym, onSave, onCancel, saving }: {
       }),
       prices: gym.prices,
       photoUrls: gym.photoUrls,
-    },
+    } as any,
   });
 
   const { fields: hourFields, append: appendHour, remove: removeHour } = useFieldArray({ control, name: 'hours' });
   const { fields: priceFields, append: appendPrice, remove: removePrice } = useFieldArray({ control, name: 'prices' });
-  const { fields: photoFields, append: appendPhoto, remove: removePhoto } = useFieldArray({ control, name: 'photoUrls' });
+  const { fields: photoFields, append: appendPhoto, remove: removePhoto } = useFieldArray({ control, name: 'photoUrls' as 'hours' });
 
   const onSubmit = (values: GymFormValues) => {
     onSave?.({
@@ -173,7 +173,7 @@ function EditForm({ gym, onSave, onCancel, saving }: {
   const fieldSx = { '& .MuiInputBase-root': { fontSize: '0.85rem' }, '& .MuiInputLabel-root': { fontSize: '0.82rem' } };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box component="form" onSubmit={handleSubmit(onSubmit as any)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
         <Button type="submit" variant="contained" color="primary" size="small" startIcon={<Save />} disabled={saving}>
           {saving ? 'Сохранение…' : 'Сохранить'}
@@ -310,7 +310,7 @@ function EditForm({ gym, onSave, onCancel, saving }: {
               <IconButton size="small" onClick={() => removePhoto(i)} color="error"><Delete fontSize="small" /></IconButton>
             </Box>
           ))}
-          <Button size="small" startIcon={<Add />} onClick={() => appendPhoto('')} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
+          <Button size="small" startIcon={<Add />} onClick={() => appendPhoto('' as any as any)} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
             Добавить фото
           </Button>
         </Box>

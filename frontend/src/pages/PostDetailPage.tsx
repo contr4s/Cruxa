@@ -1,9 +1,9 @@
-import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { usePost } from '../services/hooks/useFeed';
 import { getComments } from '../services/posts.service';
-import { useAuthStore } from '../stores/authStore';
+
 import { CommentSection } from '../components/workouts/CommentSection';
 import { PostDetailAuthor, PostDescription, PostActions, MediaToggle, PostMediaCarousel, PostAscentList } from '../components/posts';
 import { ChartsCarousel } from '../components/charts/ChartsCarousel';
@@ -19,13 +19,9 @@ export default function PostDetailPage() {
   const location = useLocation();
   const { data: post, isLoading } = usePost(id || '');
   const [tab, setTab] = useState(0);
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const state = location.state as { backgroundLocation?: Location } | undefined;
   const isModal = !!state?.backgroundLocation;
-
-  const hasMedia = post ? post.mediaUrls.length > 0 : false;
-  const currentUserId = useAuthStore((s) => s.userId);
 
   const pyramid = useMemo(() => (post ? computePyramid(post.ascents) : []), [post]);
   const distribution = useMemo(() => (post ? computeDistribution(post.ascents) : []), [post]);

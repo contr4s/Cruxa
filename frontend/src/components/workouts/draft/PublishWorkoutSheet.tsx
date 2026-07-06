@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Box, Typography, TextField, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, CircularProgress, Checkbox, FormGroup,
 } from '@mui/material';
@@ -7,6 +7,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { ModalOverlay } from '../../ui/ModalOverlay';
 import { PostAscentList } from '../../posts/PostAscentList';
 import { MediaUploader } from './MediaUploader';
+import { uploadMedia } from '../../../services/mediaUpload.service';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useUpdatePost } from '../../../services/hooks/useDraftPost';
 import type { PostVisibility } from '../../../types/post';
@@ -33,7 +34,7 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
   const [extraFiles, setExtraFiles] = useState<File[]>([]);
 
   // On mount, select all ascent media by default
-  useMemo(() => {
+  useEffect(() => {
     if (open) {
       const allUrls = ascents.flatMap((a) => a.mediaUrls ?? []);
       setSelectedMedia(allUrls);
@@ -51,7 +52,9 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
     const durationMinutes = duration.hour() * 60 + duration.minute();
 
     // ponytail: upload extraFiles to server when backend endpoint is ready
-    const extraUrls = extraFiles.map((_, i) => `/mock/uploads/extra-${Date.now()}-${i}.jpg`);
+    const extraUrls = extraFiles.length > 0
+      ? await Promise.all(extraFiles.map((f) => uploadMedia(f).then((r) => r.url)))
+      : [];
 
     await publishPost({
       body: body || undefined,

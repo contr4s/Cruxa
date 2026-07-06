@@ -57,21 +57,32 @@
 .phone-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .phone-header-title { font-weight: 700; font-size: .9rem; color: var(--primary); }
 .phone-header-icon { color: var(--text3); font-size: 1.1rem; letter-spacing: 2px; }
-.phone-welcome { font-size: .8rem; color: var(--text2); margin-bottom: 12px; }
-.phone-dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
-.phone-stat-item { background: var(--surface2); border-radius: 10px; padding: 10px 6px; text-align: center; }
-.phone-stat-value { display: block; font-size: 1.1rem; font-weight: 800; color: var(--primary); }
-.phone-stat-label { display: block; font-size: .68rem; color: var(--text3); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
-.phone-activity-label { font-size: .72rem; font-weight: 600; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
-.phone-route-list { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-.phone-route-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--surface2); border-radius: 10px; }
-.phone-route-info { flex: 1; display: flex; flex-direction: column; }
-.phone-route-name { font-size: .75rem; font-weight: 600; }
-.phone-route-gym { font-size: .68rem; color: var(--text3); }
-.phone-route-check { color: var(--primary); font-size: .8rem; font-weight: 700; }
+
+/* Post card inside phone */
+.phone-post-card { flex: 1; background: var(--surface2); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.phone-post-header { display: flex; align-items: center; gap: 8px; }
+.phone-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--surface3); flex-shrink: 0; }
+.phone-post-user { flex: 1; display: flex; flex-direction: column; line-height: 1.2; }
+.phone-post-name { font-size: .75rem; font-weight: 600; }
+.phone-post-gym { font-size: .65rem; color: var(--text3); }
+.phone-post-body { font-size: .72rem; color: var(--text2); line-height: 1.4; }
+.phone-post-stats { display: flex; gap: 6px; flex-wrap: wrap; }
+.phone-stat-chip { font-size: .62rem; color: var(--text3); background: var(--surface3); padding: 2px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px; }
+.phone-chip-icon { flex-shrink: 0; }
+.phone-ascent-list { display: flex; flex-direction: column; gap: 4px; }
+.phone-ascent-row { display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: var(--surface); border-radius: 8px; }
+.phone-route-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.phone-ascent-name { font-size: .7rem; flex: 1; }
+.phone-ascent-grade { font-size: .68rem; font-weight: 700; color: var(--primary); }
+.phone-ascent-style { font-size: .6rem; color: var(--text3); background: var(--surface3); padding: 1px 6px; border-radius: 4px; }
+.phone-post-actions { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.phone-action-row { display: flex; align-items: center; gap: 3px; }
+.phone-action-svg { color: var(--text3); }
+.phone-action-count { font-size: .68rem; color: var(--text3); }
+
 .phone-tab-bar { display: flex; justify-content: space-around; padding: 8px 0 0; border-top: 1px solid var(--border); margin-top: auto; }
-.phone-tab { font-size: 1.1rem; opacity: .4; }
-.phone-tab.active { opacity: 1; }
+.phone-tab { color: var(--text3); opacity: .4; transition: opacity .2s, color .2s; }
+.phone-tab.active { opacity: 1; color: var(--primary); }
 .phone-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; height: 120%; background: radial-gradient(circle, rgba(38,166,154,.1) 0%, transparent 70%); z-index: -1; }
 
 /* ===== Features ===== */
@@ -100,6 +111,7 @@
 .stat-label { display: block; font-size: .85rem; color: var(--text2); }
 .stat-bar { width: 40px; height: 3px; background: rgba(38,166,154,.15); border-radius: 2px; margin: 12px auto 0; position: relative; overflow: hidden; }
 .stat-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--primary); border-radius: 2px; transition: width .8s ease; }
+
 .scroll-reveal.visible .stat-bar::after { width: 60%; }
 
 /* ===== CTA ===== */

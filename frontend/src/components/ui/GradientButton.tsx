@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Button, useTheme } from '@mui/material';
 import type { ButtonProps } from '@mui/material';
 
-interface GradientButtonProps extends Omit<ButtonProps, 'children'> {
+interface GradientButtonProps extends Omit<ButtonProps, 'children' | 'size'> {
   children: ReactNode;
   size?: 'sm' | 'lg';
 }

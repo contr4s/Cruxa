@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { FitnessCenter } from '@mui/icons-material';
 import type { Location } from 'react-router-dom';
 

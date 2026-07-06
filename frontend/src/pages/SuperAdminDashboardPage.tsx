@@ -4,11 +4,12 @@ import {
   TextField, DialogActions, useTheme,
 } from '@mui/material';
 import { BadgeOutlined, Add } from '@mui/icons-material';
+import { useSnackbar } from 'notistack';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { Pagination } from '../components/ui/Pagination';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+
 import { useCreateGym } from '../services/hooks/useGyms';
 import {
   useAdminStats,
@@ -33,7 +34,7 @@ const DEFAULT_FILTERS: AdminGymFilterState = {
 export default function SuperAdminDashboardPage() {
   const theme = useTheme();
   const navigate = useNavigate();
-  useScrollReveal();
+  const { enqueueSnackbar } = useSnackbar();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<AdminGymFilterState>(DEFAULT_FILTERS);
   const [createOpen, setCreateOpen] = useState(false);
@@ -78,27 +79,14 @@ export default function SuperAdminDashboardPage() {
             <Typography sx={{ fontSize: '0.88rem', color: theme.palette.text.secondary }}>
               Москва, СПб
             </Typography>
-            <Box
-              component="button"
-              onClick={() => alert('Экспорт данных — скоро')}
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 0.75,
-                px: 1.5,
-                py: 0.6,
-                borderRadius: 1,
-                border: `1px solid ${theme.palette.divider}`,
-                background: 'transparent',
-                color: theme.palette.text.secondary,
-                fontSize: '0.78rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                '&:hover': { borderColor: theme.palette.text.primary, color: theme.palette.text.primary },
-              }}
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => enqueueSnackbar('Экспорт данных появится в ближайшее время', { variant: 'info' })}
+              sx={{ fontSize: '0.78rem' }}
             >
               Экспорт данных
-            </Box>
+            </Button>
           </Box>
         </Box>
 
@@ -143,10 +131,10 @@ export default function SuperAdminDashboardPage() {
                 {gymsData && (
                   <>
                     <Box sx={{ display: 'inline-flex', px: 1, py: 0.25, borderRadius: '12px', background: '#2E7D32', color: '#fff', fontSize: '0.72rem', fontWeight: 600 }}>
-                      {gymsData.items.filter((g) => g.status === 'Active').length} активных
+                      {gymsData.items.filter((g: { status: string }) => g.status === 'Active').length} активных
                     </Box>
                     <Box sx={{ display: 'inline-flex', px: 1, py: 0.25, borderRadius: '12px', background: '#424242', color: '#BDBDBD', fontSize: '0.72rem', fontWeight: 600 }}>
-                      {gymsData.items.filter((g) => g.status !== 'Active').length} на модерации
+                      {gymsData.items.filter((g: { status: string }) => g.status !== 'Active').length} на модерации
                     </Box>
                   </>
                 )}
@@ -167,7 +155,7 @@ export default function SuperAdminDashboardPage() {
             <>
               <AdminGymTable
                 gyms={gymsData.items}
-                onManage={(id) => navigate(`/gym-admin`)}
+                onManage={(_id) => navigate(`/gym-admin`)}
                 onSort={(field) => {
                   setFilters((prev) => ({ ...prev, sort: prev.sort === field ? `-${field}` : field }));
                   setPage(1);

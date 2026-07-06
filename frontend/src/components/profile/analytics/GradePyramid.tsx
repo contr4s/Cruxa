@@ -13,7 +13,7 @@ export const GradePyramid = memo(function GradePyramid() {
   const theme = useTheme();
   const userId = useAuthStore((s) => s.userId);
   const { ref, inView } = useInView();
-  const { data: pyramidData, isLoading } = useGradePyramid(userId, inView);
+  const { data: pyramidData, isLoading } = useGradePyramid(userId ?? '', inView);
   const data = pyramidData ?? [];
 
   return (

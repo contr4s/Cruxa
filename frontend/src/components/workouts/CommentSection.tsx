@@ -5,6 +5,7 @@ import { addComment } from '../../services/posts.service';
 import { useAuthStore } from '../../stores/authStore';
 import { StateDisplay } from '../ui/StateDisplay';
 import type { CommentDto } from '../../types/post';
+import type { PaginatedList } from '../../types/common';
 import { relativeTime } from '../posts/relativeTime';
 import { UserLink } from '../user/UserLink';
 
@@ -12,8 +13,12 @@ const PAGE_SIZE = 3;
 
 interface CommentSectionProps {
   postId: string;
-  getComments: (postId: string) => Promise<CommentDto[]>;
+  getComments: (postId: string) => Promise<PaginatedList<CommentDto>>;
   onCommentAdded: () => void;
+}
+
+function flattenComments(data: CommentDto[] | { items: CommentDto[] }): CommentDto[] {
+  return Array.isArray(data) ? data : data.items;
 }
 
 export function CommentSection({ postId, getComments, onCommentAdded }: CommentSectionProps) {
@@ -30,7 +35,7 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
     setLoading(true);
     setError(false);
     getComments(postId).then((data) => {
-      setComments(data);
+      setComments(flattenComments(data));
       setLoading(false);
     }).catch(() => {
       setError(true);
@@ -42,7 +47,7 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
     let cancelled = false;
     getComments(postId).then((data) => {
       if (!cancelled) {
-        setComments(data);
+        setComments(flattenComments(data));
         setLoading(false);
       }
     }).catch(() => {

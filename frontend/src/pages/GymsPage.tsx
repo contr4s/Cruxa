@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { useGyms, useInfiniteGyms, useToggleFavorite } from '../services/hooks/useGyms';
+import { useInfiniteGyms, useToggleFavorite } from '../services/hooks/useGyms';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { SkeletonCard } from '../components/ui/SkeletonCard';
@@ -18,6 +18,7 @@ const CITIES = [
 export default function GymsPage() {
   const [city, setCity] = useState('all');
   const [sort, setSort] = useState('rating');
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
 
   const params = { city, sort } as const;
   const {
@@ -28,7 +29,8 @@ export default function GymsPage() {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteGyms(params);
-  const gyms = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
+  const allGyms = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
+  const gyms = useMemo(() => favoritesOnly ? allGyms.filter((g) => g.isFavorite) : allGyms, [allGyms, favoritesOnly]);
 
   const toggleFavorite = useToggleFavorite();
 
@@ -52,6 +54,7 @@ export default function GymsPage() {
 
   const filterConfig: FilterConfig[] = [
     { key: 'city', label: 'Город', type: 'select', options: CITIES, value: city, onChange: setCity },
+    { key: 'favorites', label: 'Избранное', type: 'chips', options: [{ value: 'all', label: 'Все' }, { value: 'fav', label: 'Избранные' }], value: favoritesOnly ? 'fav' : 'all', onChange: (v) => setFavoritesOnly(v === 'fav') },
   ];
 
   return (

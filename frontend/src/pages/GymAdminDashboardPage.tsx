@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { Route, People, EditNote, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
@@ -8,7 +8,7 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { Pagination } from '../components/ui/Pagination';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+
 import { useSelectableRows } from '../hooks/useSelectableRows';
 import { QrPdfDialog } from '../components/routes/QrPdfDialog';
 import { generateQrPdfBlob, downloadBlob } from '../utils/generateQrPdf';
@@ -20,6 +20,7 @@ import {
 } from '../services/hooks/useGymAdmin';
 import { useGym, useUpdateGym } from '../services/hooks/useGyms';
 import { useManagedGym } from '../services/hooks/useManagedGym';
+import { unlinkSetter } from '../services/gymAdmin.service';
 import type { AdminRouteFilterState } from '../types/gymAdmin';
 import type { RouteDto } from '../types/route';
 import type { UpdateGymPayload } from '../types/gym';
@@ -51,7 +52,6 @@ const DEFAULT_FILTERS: AdminRouteFilterState = {
 
 export default function GymAdminDashboardPage() {
   const theme = useTheme();
-  useScrollReveal();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<AdminRouteFilterState>(DEFAULT_FILTERS);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
@@ -75,7 +75,7 @@ export default function GymAdminDashboardPage() {
   const { data: setters, isLoading: settersLoading } = useGymSetters(gymId);
   const [unlinkTarget, setUnlinkTarget] = useState<string | null>(null);
 
-  useMemo(() => {
+  useEffect(() => {
     const json = JSON.stringify([...selectedIds].sort());
     if (json === prevSelectedJson.current) return;
     prevSelectedJson.current = json;
@@ -137,9 +137,9 @@ export default function GymAdminDashboardPage() {
   const handleUnlink = (id: string) => setUnlinkTarget(id);
 
   const handleUnlinkConfirm = async () => {
-    if (!unlinkTarget) return;
+    if (!unlinkTarget || !gymId) return;
     try {
-      // TODO: implement actual unlink API call
+      await unlinkSetter(gymId, unlinkTarget);
       enqueueSnackbar('Рутсеттер отвязан', { variant: 'success' });
     } catch {
       enqueueSnackbar('Ошибка при отвязывании', { variant: 'error' });

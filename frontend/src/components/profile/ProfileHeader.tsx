@@ -41,35 +41,17 @@ interface ProfileHeaderProps {
   onEdit?: () => void;
 }
 
-function EditButton({ theme, onClick }: { theme: ReturnType<typeof useTheme>; onClick?: () => void }) {
+function EditButton({ theme: _theme, onClick }: { theme: ReturnType<typeof useTheme>; onClick?: () => void }) {
   return (
-    <Box
-      component="button"
+    <Button
       onClick={onClick}
-      sx={{
-        flexShrink: 0,
-        mt: 0.5,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 1,
-        px: 2,
-        py: 0.5,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: '8px',
-        background: 'transparent',
-        cursor: 'pointer',
-        color: theme.palette.text.secondary,
-        fontSize: '0.85rem',
-        fontWeight: 600,
-        fontFamily: 'inherit',
-        transition: 'background .15s, color .15s',
-        '&:hover': { borderColor: theme.palette.text.secondary, color: theme.palette.text.primary },
-      }}
+      size="small"
+      variant="outlined"
+      startIcon={<EditIcon />}
+      sx={{ mt: 0.5, flexShrink: 0 }}
     >
-      <EditIcon sx={{ fontSize: 18 }} />
-      <Box component="span">Редактировать</Box>
-    </Box>
+      Редактировать
+    </Button>
   );
 }
 
@@ -103,14 +85,14 @@ function FollowButton({
         px: 2,
         py: 0.5,
         minWidth: 130,
-        borderColor: theme.palette.primary.main,
-        color: isFollowed ? '#fff' : theme.palette.primary.main,
-        bgcolor: isFollowed ? theme.palette.primary.main : 'transparent',
+        borderColor: (theme as any)?.palette?.primary?.main,
+        color: isFollowed ? '#fff' : (theme as any)?.palette?.primary?.main,
+        bgcolor: isFollowed ? (theme as any)?.palette?.primary?.main : 'transparent',
         '&:hover': {
-          borderColor: theme.palette.primary.main,
+          borderColor: (theme as any)?.palette?.primary?.main,
           bgcolor: isFollowed
-            ? theme.palette.primary.dark ?? '#1F8A80'
-            : `${theme.palette.primary.main}15`,
+            ? ((theme as any)?.palette?.primary?.dark ?? '#1F8A80')
+            : `${(theme as any)?.palette?.primary?.main}15`,
         },
         '&.Mui-disabled': { opacity: 0.6 },
       }}

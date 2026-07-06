@@ -1,3 +1,4 @@
+import { Reveal } from '../ui/Reveal';
 
 const stats = [
   { num: '10+', label: 'Скалодромов' },
@@ -8,7 +9,8 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="stats-section scroll-reveal">
+    <Reveal>
+    <section className="stats-section">
       <div className="stats-grid">
         {stats.map((s) => (
           <div className="stat-card" key={s.label}>
@@ -19,5 +21,6 @@ export function Stats() {
         ))}
       </div>
     </section>
+    </Reveal>
   );
 }

@@ -2,13 +2,14 @@ import { useState, useMemo, useCallback, useRef } from 'react';
 import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { Construction, Route, Reviews, LocationOn, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
+import { useAuthStore } from '../stores/authStore';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { Pagination } from '../components/ui/Pagination';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+
 import { useSelectableRows } from '../hooks/useSelectableRows';
 import { QrPdfDialog } from '../components/routes/QrPdfDialog';
 import { generateQrPdfBlob, downloadBlob } from '../utils/generateQrPdf';
@@ -49,7 +50,6 @@ const DEFAULT_FILTERS: SetterRouteFilterState = {
 
 export default function RoutesetterDashboardPage() {
   const theme = useTheme();
-  useScrollReveal();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<SetterRouteFilterState>(DEFAULT_FILTERS);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function RoutesetterDashboardPage() {
   const prevSelectedJson = useRef('');
 
   const { data: stats, isLoading: statsLoading, isError: statsError, refetch: refetchStats } = useRoutesetterStats();
-  const { data: routesData, isLoading: routesLoading, isError: routesError, refetch: refetchRoutes } = useSetterRoutes({ ...filters, page, pageSize: 10 });
+  const { data: routesData, isLoading: routesLoading, isError: _routesError, refetch: refetchRoutes } = useSetterRoutes({ ...filters, page, pageSize: 10 });
   const { data: reviews, isLoading: reviewsLoading, isError: reviewsError, refetch: refetchReviews } = useSetterReviews();
   const { data: gyms, isLoading: gymsLoading, isError: gymsError, refetch: refetchGyms } = useLinkedGyms();
   const [archiveTarget, setArchiveTarget] = useState<RouteDto | null>(null);
@@ -125,6 +125,14 @@ export default function RoutesetterDashboardPage() {
     window.location.reload();
   };
 
+  const currentUserId = useAuthStore((s) => s.userId);
+  const currentDisplayName = useAuthStore((s) => s.displayName);
+  const setterOptionsForForm = useMemo(() => 
+    currentUserId && currentDisplayName 
+      ? [{ id: currentUserId, name: currentDisplayName }] 
+      : undefined, 
+    [currentUserId, currentDisplayName]
+  );
   const gymOptions = useMemo(() => (gyms ?? []).map((g) => ({ id: g.id, name: g.name })), [gyms]);
 
   const handleQrConfirm = useCallback(async (qrPerPage: number, baseUrl: string) => {
@@ -273,6 +281,7 @@ export default function RoutesetterDashboardPage() {
           route={editingRoute}
           gymId={editingRoute?.gymId}
           gymOptions={editingRoute ? undefined : gymOptions}
+          setterOptions={setterOptionsForForm}
           onClose={handleCloseRouteForm}
         />
       )}

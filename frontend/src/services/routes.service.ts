@@ -1,7 +1,6 @@
-import type { RouteDto, GradeConsensus, RouteReviewDto } from '../types/route';
+import api from './api';
+import type { RouteDto, GradeConsensus, RouteReviewDto, CreateRoutePayload, UpdateRoutePayload } from '../types/route';
 import type { PaginatedList } from '../types/common';
-
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
 export interface GetRoutesParams {
   page?: number;
@@ -23,63 +22,35 @@ export interface GetRoutesParams {
 }
 
 export async function getRoutesByGym(gymId: string, params?: GetRoutesParams): Promise<PaginatedList<RouteDto>> {
-  if (USE_MOCK) {
-    const { mockGetRoutesByGym } = await import('./mock/routes.mock');
-    return mockGetRoutesByGym(gymId, params);
-  }
-  const { default: api } = await import('./api');
   const response = await api.get<PaginatedList<RouteDto>>(`/gyms/${gymId}/routes`, { params });
   return response.data;
 }
 
 export async function getRouteById(id: string): Promise<RouteDto | null> {
-  if (USE_MOCK) {
-    const { mockGetRouteById } = await import('./mock/routes.mock');
-    return mockGetRouteById(id);
-  }
-  const { default: api } = await import('./api');
   const response = await api.get<RouteDto | null>(`/routes/${id}`);
   return response.data;
 }
 
 export async function getRouteConsensus(routeId: string): Promise<GradeConsensus | null> {
-  if (USE_MOCK) {
-    const { mockGetRouteConsensus } = await import('./mock/routes.mock');
-    return mockGetRouteConsensus(routeId);
-  }
-  const { default: api } = await import('./api');
   const response = await api.get<GradeConsensus | null>(`/routes/${routeId}/consensus`);
   return response.data;
 }
 
-export async function getRouteReviews(routeId: string): Promise<RouteReviewDto[]> {
-  if (USE_MOCK) {
-    const { mockGetRouteReviews } = await import('./mock/routes.mock');
-    return mockGetRouteReviews(routeId);
-  }
-  const { default: api } = await import('./api');
-  const response = await api.get<RouteReviewDto[]>(`/routes/${routeId}/reviews`);
+export async function getRouteReviews(routeId: string): Promise<PaginatedList<RouteReviewDto>> {
+  const response = await api.get<PaginatedList<RouteReviewDto>>(`/routes/${routeId}/reviews`);
   return response.data;
 }
 
-import type { CreateRoutePayload, UpdateRoutePayload } from '../types/route';
+export async function saveRouteNote(routeId: string, note: string): Promise<void> {
+  await api.put(`/routes/${routeId}/notes`, { note });
+}
 
 export async function createRoute(data: CreateRoutePayload): Promise<RouteDto> {
-  if (USE_MOCK) {
-    const { mockCreateRoute } = await import('./mock/routes.mock');
-    return mockCreateRoute(data as unknown as Record<string, unknown>);
-  }
-  const { default: api } = await import('./api');
   const response = await api.post<RouteDto>('/routes', data);
   return response.data;
 }
 
 export async function updateRoute(id: string, data: UpdateRoutePayload): Promise<RouteDto | null> {
-  if (USE_MOCK) {
-    const { mockUpdateRoute } = await import('./mock/routes.mock');
-    return mockUpdateRoute(id, data as unknown as Record<string, unknown>);
-  }
-  const { default: api } = await import('./api');
   const response = await api.put<RouteDto>(`/routes/${id}`, data);
   return response.data;
 }

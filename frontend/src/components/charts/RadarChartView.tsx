@@ -55,7 +55,7 @@ export function RadarChartView({ labels, values, unit = '%', centerValue, height
       tooltip: {
         ...CHART_TOOLTIP,
         callbacks: {
-          label: (ctx: any) => `${ctx.parsed.r}${unit}`,
+          label: (ctx: { parsed: { r: number } }) => `${ctx.parsed.r}${unit}`,
         },
       },
       centerText: showCenter ? { avg } : undefined,

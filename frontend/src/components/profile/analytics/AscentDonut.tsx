@@ -13,7 +13,7 @@ export const AscentDonut = memo(function AscentDonut() {
   const theme = useTheme();
   const userId = useAuthStore((s) => s.userId);
   const { ref, inView } = useInView();
-  const { data: distData, isLoading } = useAscentDistribution(userId, inView);
+  const { data: distData, isLoading } = useAscentDistribution(userId ?? '', inView);
   const data = distData ?? [];
 
   return (

@@ -32,7 +32,7 @@ export const ActivityCalendar = memo(function ActivityCalendar({ userId: propUse
   const theme = useTheme();
   const authUserId = useAuthStore((s) => s.userId);
   const userId = propUserId ?? authUserId;
-  const { data: activityData, isLoading } = useMonthlyActivity(userId);
+  const { data: activityData, isLoading } = useMonthlyActivity(userId ?? '');
   const data = activityData;
   const [currentMonth, setCurrentMonth] = useState(data?.month ?? 5);
   const [currentYear, setCurrentYear] = useState(data?.year ?? 2026);

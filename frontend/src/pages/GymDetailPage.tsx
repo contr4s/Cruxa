@@ -20,8 +20,8 @@ import { useDraftStore } from '../stores/draftWorkoutStore';
 export default function GymDetailPage() {
   const { id } = useParams<{ id: string }>();
   const theme = useTheme();
-  const store = useDraftStore();
-  const { mutateAsync: createDraft } = useCreateDraftPost();
+  useDraftStore();
+  useCreateDraftPost();
   const [filters, setFilters] = useState<RouteFiltersValues>({
     searchQuery: '',
     type: 'all',

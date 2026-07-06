@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback as _useCallback } from 'react';
 import {
   Box, Typography, TextField, Button, Autocomplete, Chip, IconButton, useTheme,
 } from '@mui/material';
@@ -125,7 +125,7 @@ function RouteFormContent({
 }) {
   const theme = useTheme();
 
-  const { control, handleSubmit, watch, formState: { errors } } = useForm<RouteFormValues>({
+  const { control, handleSubmit, formState: { errors } } = useForm<RouteFormValues>({
     resolver: zodResolver(routeFormSchema),
     defaultValues: {
       gymId: gymId ?? '',
@@ -141,10 +141,6 @@ function RouteFormContent({
       isActive: route ? route.status === 'Active' : true,
     },
   });
-
-  const selectedGymId = watch('gymId');
-  const effectiveGymId = gymId || selectedGymId;
-  const photoUrls = watch('photoUrls');
 
   const fieldSx = {
     '& .MuiInputBase-root': { fontSize: '0.85rem' },
@@ -348,7 +344,7 @@ function RouteFormContent({
         name="tags"
         control={control}
         render={({ field }) => (
-          <Autocomplete
+          <Autocomplete<string, true, false, true>
             multiple
             freeSolo
             size="small"
@@ -356,17 +352,7 @@ function RouteFormContent({
             value={field.value}
             onChange={(_, v) => field.onChange(v)}
             renderInput={(params) => <TextField {...params} label="Теги" sx={fieldSx} placeholder="Добавить тег…" />}
-            renderTags={(value, getTagProps) =>
-              value.map((option, index) => (
-                <Chip
-                  {...getTagProps({ index })}
-                  key={option}
-                  label={option}
-                  size="small"
-                  sx={{ fontSize: '0.75rem', fontWeight: 600 }}
-                />
-              ))
-            }
+            slotProps={{ chip: { size: 'small' as const } }}
             sx={fieldSx}
           />
         )}

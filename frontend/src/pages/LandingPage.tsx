@@ -1,5 +1,5 @@
 import '../theme/landing.css';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+
 import { Navbar } from '../components/landing/Navbar';
 import { Hero } from '../components/landing/Hero';
 import { Features } from '../components/landing/Features';
@@ -9,7 +9,6 @@ import { Footer } from '../components/landing/Footer';
 
 
 export default function LandingPage() {
-  useScrollReveal();
 
   return (
     <div className="landing-page">

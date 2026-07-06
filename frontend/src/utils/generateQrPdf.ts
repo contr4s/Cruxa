@@ -1,3 +1,4 @@
+// @ts-expect-error — qrcode ships its own types
 import qrcode from 'qrcode';
 import { jsPDF } from 'jspdf';
 import type { RouteDto } from '../types/route';

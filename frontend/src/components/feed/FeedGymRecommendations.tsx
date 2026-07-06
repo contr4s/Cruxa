@@ -5,6 +5,8 @@ import type { RecommendedGymDto } from '../../types/post';
 import { getRatingColor } from '../../constants/rating';
 import { GymBadge } from '../ui/GymBadge';
 import { pluralize } from '../../utils/pluralize';
+import { gymDistance } from '../../utils/geo';
+import { useUserLocation } from '../../hooks/useUserLocation';
 import { StateDisplay } from '../ui/StateDisplay';
 
 interface FeedGymRecommendationsProps {
@@ -14,6 +16,7 @@ interface FeedGymRecommendationsProps {
 export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
   const theme = useTheme();
   const navigate = useNavigate();
+  const userLoc = useUserLocation();
 
   return (
     <Box sx={{
@@ -60,10 +63,10 @@ export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
                 <Typography sx={{ fontSize: '0.72rem', fontWeight: 600, color: getRatingColor(gym.rating), display: 'flex', alignItems: 'center', gap: 0.25 }}>
                   <Star sx={{ fontSize: 14 }} /> {gym.rating.toFixed(1)}
                 </Typography>
-                {gym.distance && (
+                {gym.lat && gym.lon && (
                   <GymBadge
                     icon={<NearMe sx={{ fontSize: 12 }} />}
-                    label={gym.distance}
+                    label={gymDistance(gym.lat, gym.lon, userLoc?.lat, userLoc?.lon) ?? ''}
                     sx={{ bgcolor: 'transparent', border: `1px solid ${theme.palette.divider}`, color: theme.palette.text.primary }}
                   />
                 )}

@@ -14,7 +14,7 @@ const registerSchema = z.object({
   firstName: z.string().min(1, 'Имя обязательно'),
   lastName: z.string().min(1, 'Фамилия обязательна'),
   gender: z.enum(['M', 'F']).optional(),
-  height: z.coerce.number().min(100, 'Минимум 100 см').max(250, 'Максимум 250 см').optional().or(z.literal('')),
+  height: z.coerce.number().min(100, 'Минимум 100 см').max(250, 'Максимум 250 см').optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Пароли не совпадают',
   path: ['confirmPassword'],
@@ -27,7 +27,7 @@ export default function RegisterPage() {
   const { register, isLoading, error } = useAuthStore();
 
   const { control, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(registerSchema) as any,
     defaultValues: {
       email: '',
       username: '',
@@ -36,7 +36,7 @@ export default function RegisterPage() {
       firstName: '',
       lastName: '',
       gender: undefined,
-      height: '',
+      height: undefined,
     },
   });
 

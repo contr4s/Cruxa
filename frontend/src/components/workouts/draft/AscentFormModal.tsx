@@ -10,6 +10,7 @@ import { MediaUploader } from './MediaUploader';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useAddAscent } from '../../../services/hooks/useDraftPost';
 import { useRoutesByGym } from '../../../services/hooks/useRoutes';
+import { uploadMedia } from '../../../services/mediaUpload.service';
 import { ASCENT_COLORS } from '../../../constants/ascent';
 import type { RouteDto } from '../../../types/route';
 import type { AscentStyle } from '../../../types/post';
@@ -81,7 +82,10 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
   const onSubmit = async (values: AscentFormValues) => {
     if (!postId) return;
 
-    const mediaUrls = files.map((_, i) => `/mock/uploads/${Date.now()}-${i}.jpg`);
+    // ponytail: upload files in parallel, replace with queued upload when backend ready
+    const mediaUrls = files.length > 0
+      ? await Promise.all(files.map((f) => uploadMedia(f).then((r) => r.url)))
+      : [];
 
     const result = await addAscentApi({
       routeId: values.routeId,

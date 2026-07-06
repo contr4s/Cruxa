@@ -18,6 +18,7 @@ import type { UserRole } from './user';
 
 export interface AuthResponse {
   token: string;
+  refreshToken?: string;
   userId: string;
   username: string;
   displayName: string;

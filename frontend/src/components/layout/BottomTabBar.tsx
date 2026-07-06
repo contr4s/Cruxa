@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import { TAB_ITEMS } from './navigation';
 import { avatarInitial } from '../../theme/commonStyles';
+import type { UserRole } from '../../types/user';
 
 export function BottomTabBar() {
   const theme = useTheme();
@@ -19,7 +20,7 @@ export function BottomTabBar() {
 
   const visibleItems = TAB_ITEMS.filter((item) => {
     if (!item.roles) return true;
-    return role ? item.roles.includes(role) : false;
+    return role ? item.roles.includes(role as UserRole) : false;
   });
 
   return (

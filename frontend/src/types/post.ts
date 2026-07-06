@@ -109,7 +109,8 @@ export interface RecommendedGymDto {
   id: string;
   name: string;
   rating: number;
-  distance: string;
+  lat?: number;
+  lon?: number;
   area?: number;
   maxHeight?: number;
   activeRouteCount?: number;

@@ -49,9 +49,11 @@ const features = [
   },
 ];
 
+import { Reveal } from '../ui/Reveal';
+
 export function Features() {
   return (
-    <section className="features-section scroll-reveal">
+    <section className="features-section">
       <div className="section-header">
         <span className="section-tag">Возможности</span>
         <h2 className="section-title">
@@ -64,10 +66,9 @@ export function Features() {
 
       <div className="feature-grid">
         {features.map((f) => (
+          <Reveal key={f.title}>
           <Card
-            key={f.title}
-            className="scroll-reveal feature-card"
-            sx={{ animationDelay: f.delay }}
+            className="feature-card"
           >
             <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
               <div className="feature-icon-box">{f.icon}</div>
@@ -85,6 +86,7 @@ export function Features() {
               </Typography>
             </CardContent>
           </Card>
+          </Reveal>
         ))}
       </div>
     </section>

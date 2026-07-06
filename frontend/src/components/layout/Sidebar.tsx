@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { useAuthStore } from '../../stores/authStore';
 import { NAV_ITEMS } from './navigation';
 import { avatarInitial } from '../../theme/commonStyles';
+import type { UserRole } from '../../types/user';
 
 export function Sidebar() {
   const theme = useTheme();
@@ -22,7 +23,7 @@ export function Sidebar() {
 
   const visibleItems = NAV_ITEMS.filter((item) => {
     if (!item.roles) return true;
-    return role ? item.roles.includes(role) : false;
+    return role ? item.roles.includes(role as UserRole) : false;
   });
 
   return (

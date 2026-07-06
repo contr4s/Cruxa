@@ -1,6 +1,6 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Box, Typography, Button } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -10,6 +10,37 @@ import { AuthProvider } from './providers/AuthProvider';
 import { ProtectedLayout } from './components/layout/ProtectedLayout';
 import { StateDisplay } from './components/ui/StateDisplay';
 import { RoleGuard } from './components/ui/RoleGuard';
+
+class GlobalErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', p: 4, textAlign: 'center' }}>
+          <Typography variant="h5" sx={{ mb: 1 }}>Что-то пошло не так</Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2, maxWidth: 400 }}>
+            {this.state.error?.message ?? 'Неизвестная ошибка'}
+          </Typography>
+          <Button variant="outlined" onClick={() => { this.setState({ hasError: false, error: null }); window.location.href = '/'; }}>
+            На главную
+          </Button>
+        </Box>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -76,7 +107,9 @@ function App() {
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
               <Suspense fallback={<StateDisplay type="loading" message="Загрузка…" />}>
-                <AppRoutes />
+                <GlobalErrorBoundary>
+                  <AppRoutes />
+                </GlobalErrorBoundary>
               </Suspense>
             </SnackbarProvider>
           </AuthProvider>

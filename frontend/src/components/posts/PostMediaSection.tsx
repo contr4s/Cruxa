@@ -13,7 +13,7 @@ interface PostMediaSectionProps {
   onPhotoClick?: () => void;
 }
 
-export function PostMediaSection({ ascents, mediaUrls, tab, onTabChange, onPhotoClick }: PostMediaSectionProps) {
+export function PostMediaSection({ ascents, mediaUrls, tab, onTabChange: _onTabChange, onPhotoClick }: PostMediaSectionProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const pyramid = computePyramid(ascents);

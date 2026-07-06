@@ -1,6 +1,4 @@
 import { Box, Typography, useTheme } from '@mui/material';
-import { Card } from '../../theme/cardStyles';
-import { GymChip } from '../ui/GymChip';
 import { RatingBadge } from '../ui/RatingBadge';
 import { GymBadge } from '../ui/GymBadge';
 import type { AdminGymItem } from '../../types/admin';
@@ -30,7 +28,7 @@ export function AdminGymTable({ gyms, onManage, onSort }: AdminGymTableProps) {
     borderBottom: `1px solid ${theme.palette.divider}`,
   };
 
-  const sortableThSx = (field: string) => ({
+  const sortableThSx = (_field: string) => ({
     ...thSx,
     cursor: 'pointer',
     '&:hover': { color: theme.palette.text.primary },

@@ -1,6 +1,8 @@
 import { forwardRef, useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";import { PostHeader } from "./PostHeader";
+import { useNavigate, useLocation } from "react-router-dom";
+import type { CommentDto } from "../../types/post";
+import { PostHeader } from "./PostHeader";
 import { PostMediaSection } from "./PostMediaSection";
 import { PostDescription } from "./PostDescription";
 import { MediaToggle } from "./MediaToggle";
@@ -12,7 +14,7 @@ interface PostCardProps {
   isOwner?: boolean;
   isRecommended?: boolean;
   defaultTab?: number;
-  getComments: (postId: string) => any;
+  getComments: (postId: string) => Promise<CommentDto[] | { items: CommentDto[] }>;
   onLikeToggle: (postId: string, wasLiked: boolean) => void;
   onCommentAdded: () => void;
   onEdit?: () => void;

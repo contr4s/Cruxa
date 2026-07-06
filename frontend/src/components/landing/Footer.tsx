@@ -7,9 +7,12 @@ const footerLinks = [
   { label: 'Telegram', to: '#' },
 ];
 
+import { Reveal } from '../ui/Reveal';
+
 export function Footer() {
   return (
-    <footer className="landing-footer scroll-reveal">
+    <Reveal>
+    <footer className="landing-footer">
       <span className="footer-brand">▲ Крукса — 2026</span>
       <div className="footer-links">
         {footerLinks.map((link) => (
@@ -19,5 +22,6 @@ export function Footer() {
         ))}
       </div>
     </footer>
+    </Reveal>
   );
 }

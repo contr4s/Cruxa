@@ -1,5 +1,4 @@
 import { Select, MenuItem, FormControl, useTheme } from '@mui/material';
-import type { SelectChangeEvent } from '@mui/material';
 
 const CATEGORY_LABELS: Record<string, string> = {
   style: 'Стиль',

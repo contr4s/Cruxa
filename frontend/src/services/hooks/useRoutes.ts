@@ -30,7 +30,10 @@ export function useRouteConsensus(routeId: string) {
 export function useRouteReviews(routeId: string) {
   return useQuery({
     queryKey: ['route', routeId, 'reviews'],
-    queryFn: () => getRouteReviews(routeId),
+    queryFn: async () => {
+      const result = await getRouteReviews(routeId);
+      return Array.isArray(result) ? result : result.items;
+    },
     enabled: !!routeId,
   });
 }
