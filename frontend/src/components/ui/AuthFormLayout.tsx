@@ -66,7 +66,8 @@ export function AuthFormLayout({
             variant="h2"
             sx={{ fontSize: '2rem', fontWeight: 800, color: theme.palette.primary.main, mb: 0.5 }}
           >
-            ▲ Крукса
+            <img src="/logo.png" alt="" style={{ height: 34, verticalAlign: 'middle', marginRight: 8 }} />
+            Крукса
           </Typography>
           <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
             {subtitle}

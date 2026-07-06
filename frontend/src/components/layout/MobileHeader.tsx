@@ -20,15 +20,19 @@ export function MobileHeader() {
     >
       {/* Logo */}
       <Typography
+        component="div"
         sx={{
           fontSize: '1.15rem',
           fontWeight: 800,
           color: theme.palette.primary.main,
           letterSpacing: '-.3px',
           whiteSpace: 'nowrap',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
-        ▲ Крукса
+        <img src="/logo.png" alt="" style={{ height: 32, marginRight: 8 }} />
+        Крукса
       </Typography>
 
       {/* Search pill */}

@@ -1,12 +1,12 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Cruxa.Api/Cruxa.Api.csproj" />
-    <Project Path="src/Cruxa.Application/Cruxa.Application.csproj" />
-    <Project Path="src/Cruxa.Domain/Cruxa.Domain.csproj" />
-    <Project Path="src/Cruxa.Infrastructure/Cruxa.Infrastructure.csproj" />
-    <Project Path="src/Cruxa.Parser/Cruxa.Parser.csproj" />
+    <Project Path="backend/src/Cruxa.Api/Cruxa.Api.csproj" />
+    <Project Path="backend/src/Cruxa.Application/Cruxa.Application.csproj" />
+    <Project Path="backend/src/Cruxa.Domain/Cruxa.Domain.csproj" />
+    <Project Path="backend/src/Cruxa.Infrastructure/Cruxa.Infrastructure.csproj" />
+    <Project Path="backend/src/Cruxa.Parser/Cruxa.Parser.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Cruxa.Tests/Cruxa.Tests.csproj" />
+    <Project Path="backend/tests/Cruxa.Tests/Cruxa.Tests.csproj" />
   </Folder>
 </Solution>

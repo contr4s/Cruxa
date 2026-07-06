@@ -59,8 +59,8 @@ export function Sidebar() {
           minHeight: 44,
         }}
       >
-        <Box className="si-icon" sx={{ flexShrink: 0, width: 28, textAlign: 'center', fontSize: '1.6rem', color: theme.palette.primary.main }}>
-          ▲
+        <Box className="si-icon" sx={{ flexShrink: 0, width: 28, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: .5 }}>
+          <img src="/logo.png" alt="" style={{ height: 32, display: 'block' }} />
         </Box>
         <Typography
           className="si-label"

@@ -23,7 +23,6 @@ export interface RouteDto {
   ascentsCount: number;
   status: RouteStatus;
   createdAt: string;
-  isFavorite?: boolean;
 }
 
 export interface RouteReviewDto {

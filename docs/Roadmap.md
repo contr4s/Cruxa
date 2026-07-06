@@ -112,37 +112,105 @@
 | 3.30 | **i18n, PWA, Performance**: подготовка к мобильной версии (PWA-воркер, lazy loading, code splitting) | ⬜ |
 | 3.31 | **Страница публичного профиля пользователя** (`/u/:username`): общая шапка (аватар, имя, крускор, тренировки, подписчики, бейджи, кнопка «Подписаться/Отписаться»), бесконечная лента постов пользователя через `GET /api/posts/user/{userId}`. Редирект `/u/{ownUsername}` → `/profile` | ✅ |
 
-## 📍 Фаза 3.5: Backend-доработки под мокап (после фронта)
+## 📍 Фаза 3.5: Backend-доработки под интеграцию с фронтом
 
 ### 🎯 Цель
-Доработать API и БД для полного покрытия функциональности, отрисованной в мокапе, но ещё не реализованной. Фронтенд на Фазе 3 может стартовать с мокап-данными (JSON fixtures), а бекенд догоняет на этом этапе.
+Фронт полностью готов. Задача — максимально быстро заставить его работать с реальным беком для ручного тестирования MVP, затем добавить недостающие фичи.
 
-### 🔧 План реализации
+### 🔧 Стратегия
 
-| № | Задача | Зависит от |
-|---|--------|-----------|
-| 3.5.1 | **Крускор (Kruskor) — алгоритм расчёта**: единый композитный скоринг (GradeIndex × Ascents × коэффициент стиля). Сущность `UserScore` / вычисляемое поле. История изменения крускора по месяцам | — |
-| 3.5.2 | **Stats endpoint — пользователь**: `GET /api/users/{id}/stats` — календарь активностей (heatmap), streak, прогресс по месяцам, пирамида грейдов, распределение по стилям, общая статистика (всего трасс, макс грейд, ср. грейд, крускор) | 3.5.1 |
-| 3.5.3 | **Stats endpoint — зал**: `GET /api/gyms/{id}/stats` — кол-во трасс (активных/архив), средний рейтинг, диапазон грейдов, активность за неделю (новые трассы, пролазы, отзывы, посетители) | — |
-| 3.5.4 | **Stats endpoint — трасса**: `GET /api/routes/{id}/stats` — кол-во пролазов, средний рейтинг, распределение грейдов (консенсус), кол-во отзывов | — |
-| 3.5.5 | **Stats endpoint — пост**: `GET /api/posts/{id}/stats` — суммарный Крускор, ср. грейд, длительность тренировки | 3.5.1 |
-| 3.5.6 | **Избранное (Gym Favorites)**: новая сущность `UserFavoriteGym`, CRUD endpoints (`POST/DELETE /api/gyms/{id}/favorite`, `GET /api/users/me/favorites`) | — |
-| 3.5.7 | **Голосование за грейд (Grade Consensus)**: новая сущность `RouteGradeVote` (`RouteId`, `UserId`, `GradeIndex`), unique constraint, endpoint `POST /api/routes/{id}/grade-vote`, расчёт консенсуса (медиана голосов) | — |
-| 3.5.8 | **Цели (Goals)**: новая сущность `UserGoal` (тип цели: target grade, total ascents, total gyms; целевое значение; текущий прогресс), CRUD endpoints | 3.5.2 (нужны stats для прогресса) |
-| 3.5.9 | **Достижения/Badges**: система проверки условий + выдача. Сущность `UserAchievement`. Набор бейджей: "15 дней подряд", "50 трасс", "10 отзывов", "5 залов", "8 фото". Endpoint `GET /api/users/me/achievements` | 3.5.2 |
-| 3.5.10 | **Длительность тренировки**: добавить поле `Duration` (int, minutes) в сущность `Post`, команды `CreatePostCommand`/`UpdatePostCommand`, отображение в `PostDto` | — |
-| 3.5.11 | **Секторы зала CRUD**: новая сущность `GymSector`, endpoints: `GET /api/gyms/{id}/sectors`, `POST`, `PUT`, `DELETE`. Привязка сектора к Route через look-up | — |
-| 3.5.12 | **Лента по подпискам**: доработка `GET /api/posts/feed` — добавить query-параметр `filter=subscriptions` (только посты пользователей, на кого подписан) | — |
-| 3.5.13 | **Рекомендации**: `GET /api/users/recommended` (по пересечению подписок), `GET /api/routes/recommended` (по грейду/истории пользователя), `GET /api/gyms/recommended` (по городу/посещениям) | 3.5.2 |
-| 3.5.14 | **Пагинация комментариев и отзывов**: миграция с `IEnumerable<>` на `OffsetPaginatedList<>` для `GET /api/posts/{id}/comments` и `GET /api/routes/{id}/reviews` | — |
-| 3.5.15 | **Экспорт данных (Admin)**: `GET /api/admin/export/{entity}` — CSV-экспорт залов, трасс, пользователей | — |
-| 3.5.16 | **Geolocation / дистанция**: query-параметры `lat`, `lon` для `GET /api/gyms` — сортировка по дистанции от указанной точки | — |
-| 3.5.17 | **Visibility постов**: корректная фильтрация постов по `Visibility` (Public / Followers / Private) во всех list-эндпоинтах | — |
-| 3.5.18 | **Media Selection при публикации**: доработка `PublishPost` — возможность указать, какие `MediaUrls` из пролазов войдут в итоговую галерею поста | — |
-| 3.5.19 | **Управление паролем**: endpoint `PUT /api/auth/password` — смена пароля (старый + новый). Endpoint `POST /api/auth/reset-password` — сброс пароля (email/token) | — |
-| 3.5.20 | **Настройки приватности пользователя**: сущность `UserSettings` (theme, language, emailNotifications, pushEnabled, profileVisibility). CRUD endpoint | — |
-| 3.5.21 | **Подтверждение удаления/деактивации на бекенде**: idempotent delete с verify-токеном или confirm-параметром для необратимых действий | — |
-| 3.5.22 | **Upload media endpoint**: `POST /api/media/upload` — загрузка изображений (multipart), возврат `MediaUrl`, интеграция с медиа-галереей трасс, постов, профилей | — |
+Фаза разбита на **5 треков**, выполняются последовательно:
+1. **Track A (Стабилизация)** — чиним то, что уже есть на беке, но не сходится с фронтом
+2. **Track B (Статистика и аналитика)** — эндпоинты для дашборда Climber (ключевой экран MVP)
+3. **Track C (Социальные и engagement-фичи)** — избранное, консенсус, рекомендации, медиа
+4. **Track D (Ролевые дашборды)** — Routesetter, GymAdmin, Admin
+5. **Track E (Полировка и edge cases)** — видимость, гео, экспорт, настройки
+
+> **Принцип**: каждый трек делает независимый набор экранов работающим. После Track A можно показывать базовые экраны (залы, трассы, профиль, посты). После Track B — полностью работающий профиль Climber с графиками.
+
+---
+
+### 🔧 Track A: Стабилизация (MVP Core)
+
+**Цель**: устранить все блокеры, чтобы фронт соединился с беком и базовые экраны открывались.
+
+| № | Задача | Описание |
+|---|--------|----------|
+| **A1** | **Инвентаризация DTO** | Сверить все поля `AuthResponse`, `UserDto`, `GymDto`, `RouteDto`, `PostDto`, `CommentDto`, `AscentDto` между C# и TypeScript. Добавить недостающие поля (`displayName`, `avatarUrl`, `stats`, `ascents`, `isLiked`, `isFavorite`, `sector`, `setterUsername` и т.д.) |
+| **A2** | **Фикс путей эндпоинтов** | `GET /gyms/{gymId}/routes` → добавить алиас на беке (сейчас `/Routes/gym/{gymId}`). `GET /tags` → добавить алиас (сейчас `/routes/Tags`) |
+| **A3** | **Refresh token** | Добавить `POST /auth/refresh` — фронт уже делает запрос в `api.ts` interceptor |
+| **A4** | **Смена пароля** | `PUT /auth/password` — `changePassword()` в `users.service.ts` |
+| **A5** | **Пагинация комментариев** | `GET /api/posts/{postId}/comments` — переделать с `IEnumerable<>` на `OffsetPaginatedList<>` (фронт ждёт `PaginatedList<CommentDto>`) |
+| **A6** | **Пагинация постов пользователя** | `GET /api/posts/user/{userId}` — переделать с `IEnumerable<>` на `OffsetPaginatedList<>` (фронт ждёт `PaginatedList<PostDto>`) |
+| **A7** | **Пагинация отзывов на трассу** | `GET /api/routes/{routeId}/reviews` — переделать с `IEnumerable<>` на `OffsetPaginatedList<>` |
+| **A8** | **Поле Duration в Post** | Добавить `Duration` (int, minutes) в сущность `Post`, команды, DTO |
+| **A9** | **Поле Visibility в Post** | Убедиться, что `visibility` корректно сохраняется и фильтруется. Фронт шлёт `Public`/`Followers`/`Private` |
+| **A10** | **Поле filter на /posts/feed** | Добавить query-параметр `filter=subs\|recommended` на `GET /api/posts/feed` |
+| **A11** | **Поле gymName, setterUsername и setterAvatarUrl в RouteDto** | Добавить недостающие поля для отображения на фронте |
+
+---
+
+### 🔧 Track B: Статистика и аналитика (Climber Dashboard)
+
+**Цель**: сделать полностью работающим профиль Climber с графиками и аналитикой — ключевой экран для демо MVP.
+
+| № | Задача | Описание |
+|---|--------|----------|
+| **B1** | **Крускор (Kruskor) — алгоритм и сущность** | Композитный скоринг `GradeIndex × Ascents × коэффициент стиля`. Сущность `UserScore` / вычисляемое поле. История по дням |
+| **B2** | **`GET /api/users/{id}/stats`** | Базовые метрики: `kruscore`, `totalWorkouts`, `followersCount`, `followingCount` |
+| **B3** | **`GET /api/users/{id}/kruskor-history`** | Массив точек `{ date, score, maxGrade }` для графика крускора. Параметр `period` (week/month/year) |
+| **B4** | **`GET /api/users/{id}/grade-pyramid`** | Пирамида грейдов: `[{ grade, count }]` |
+| **B5** | **`GET /api/users/{id}/ascent-distribution`** | Распределение по стилям пролазов: `[{ type, count }]` |
+| **B6** | **`GET /api/users/{id}/top-routes`** | Топ трасс пользователя: `{ routes: [...], totalRoutes, avgGrade, maxGrade }` |
+| **B7** | **`GET /api/users/{id}/monthly-activity`** | Календарь активностей (heatmap): `{ year, month, days: [{ day, intensity, hasWorkout, routeCount }], totalWorkouts, totalRoutes, streak }` |
+| **B8** | **`GET /api/users/{id}/radar-skills`** | Радар навыков: `{ categories: { [category]: [{ name, value }] } }` |
+| **B9** | **`GET /api/gyms/{id}/stats`** | Статистика зала: кол-во трасс, средний рейтинг, диапазон грейдов, активность за неделю |
+| **B10** | **`GET /api/routes/{id}/stats`** | Статистика трассы: кол-во пролазов, ср. рейтинг, распределение грейдов |
+
+---
+
+### 🔧 Track C: Социальные фичи и engagement
+
+**Цель**: добавить фичи, которые фронт уже умеет показывать, но на беке нет эндпоинтов.
+
+| № | Задача | Описание |
+|---|--------|----------|
+| **C1** | **Избранное (Gym Favorites)** | Сущность `UserFavoriteGym`. `POST/DELETE /api/gyms/{id}/favorite`. Фронт вызывает `toggleGymFavorite()` |
+| **C2** | **Grade Consensus** | Сущность `RouteGradeVote`. `GET /api/routes/{id}/consensus` — распределение голосов, медиана. Фронт ждёт `GradeConsensus` |
+| **C3** | **Заметки к трассе** | `PUT /api/routes/{id}/notes` — приватные заметки пользователя о трассе |
+| **C4** | **Upload Media** | `POST /api/media/upload` — multipart-загрузка, возврат `{ url }`. Интеграция с медиа трасс, постов, профилей |
+| **C5** | **Feed Suggestions** | `GET /api/feed/suggestions` — рекомендованные пользователи, трассы, залы. Фронт ждёт `FeedSuggestionsDto` |
+| **C6** | **Media Selection при публикации** | Доработка `PublishPost` — возможность указать, какие `MediaUrls` из пролазов войдут в галерею поста |
+
+---
+
+### 🔧 Track D: Ролевые дашборды
+
+**Цель**: включить экраны Routesetter, GymAdmin и SuperAdmin.
+
+| № | Задача | Описание |
+|---|--------|----------|
+| **D1** | **Routesetter stats** | `GET /api/routesetters/me/stats`, `GET /api/routesetters/me/routes`, `GET /api/routesetters/me/reviews`, `GET /api/routesetters/me/gyms` |
+| **D2** | **GymAdmin дашборд** | `GET /api/gyms/{id}/admin-stats`, `GET /api/gyms/{id}/admin-routes`, `GET /api/gyms/{id}/activity`, `GET /api/gyms/{id}/setters`, `POST/DELETE /api/gyms/{id}/setters` |
+| **D3** | **Managed Gym** | `GET /api/users/me/managed-gym` — какой зал привязан к пользователю (GymAdmin) |
+| **D4** | **Admin (SuperAdmin) дашборд** | `GET /api/admin/stats`, `GET /api/admin/recent-activity`, `GET /api/admin/top-gyms`, `GET /api/admin/gyms` |
+| **D5** | **Цели (Goals)** | Сущность `UserGoal`. `GET /api/users/me/goals`, CRUD. Прогресс цели из stats |
+| **D6** | **Экспорт данных** | `GET /api/admin/export/{entity}` — CSV-экспорт залов, трасс, пользователей |
+| **D7** | **Секторы зала CRUD** | Сущность `GymSector`. `GET/POST/PUT/DELETE /api/gyms/{id}/sectors`. Привязка сектора к Route |
+
+---
+
+### 🔧 Track E: Полировка и edge cases
+
+**Цель**: закрыть оставшиеся зазоры между фронтом и беком, включая настройки, приватность и GEO.
+
+| № | Задача | Описание |
+|---|--------|----------|
+| **E1** | **Geolocation / дистанция** | Query-параметры `lat`, `lon` для `GET /api/gyms` — сортировка по дистанции |
+| **E2** | **Visibility фильтрация постов** | Корректная фильтрация по `Visibility` (Public / Followers / Private) во всех list-эндпоинтах |
+| **E3** | **Настройки приватности** | Сущность `UserSettings` (theme, language, emailNotifications, pushEnabled, profileVisibility). CRUD endpoint |
+| **E4** | **Достижения/Badges** | Система проверки условий + выдача. Сущность `UserAchievement`. Endpoint `GET /api/users/me/achievements` |
+| **E5** | **Подтверждение удаления** | Idempotent delete с verify-токеном или confirm-параметром для необратимых действий |
 
 ## 📍 Фаза 4: Mobile MVP (Flutter)
 
@@ -212,15 +280,11 @@
 
 ## 📍 Заключение
 
-Текущий статус проекта: **Фазы 1-2 завершены** ✅ — Core API + Парсер работают в production-ready состоянии.
+Текущий статус проекта: **Фазы 1-3 завершены** ✅ — Core API + Парсер + Web-фронтенд готовы.
 
 Ближайшие шаги:
-1. **Фаза 3** — реализация Web-фронтенда по готовому мокапу (9 страниц, 4 роли). Мокап готов на ~90%, что позволяет стартовать без ожидания бекенда.
-   - 🆕 **Важно**: 12 задач добавлены на формы и UI-состояния, которых нет в мокапе (auth-экраны, CRUD-формы, toast, confirm-диалоги, skeleton, 404, onboarding, настройки)
-2. **Фаза 3.5** — доработка API под полную функциональность мокапа (22 задачи: крускор, статистика, избранное, цели, достижения, рекомендации, upload media, смена пароля и др.)
-3. **Фазы 4-5** — Mobile MVP и Social Features (уведомления, чаты, поиск, деплой)
-4. **Фаза 6** — продвинутые фичи для вовлечения (клубы, челленджи, рейтинги, планы тренировок) — будут уточняться по мере развития платформы
+1. **Фаза 3.5** — интеграция бека с готовым фронтом. **Track A** (стабилизация DTO, пагинация, рефреш-токен) — критический блокер, без него ничего не работает. **Track B** (статистика и аналитика) — ключевой для демо MVP.
+2. **Фазы 4-5** — Mobile MVP и Social Features (уведомления, чаты, поиск, деплой)
+3. **Фаза 6** — продвинутые фичи для вовлечения (клубы, челленджи, рейтинги, планы тренировок)
 
-> **Примечание**: Порядок Фаз 3 и 3.5 выбран осознанно — фронтенд может (и должен) стартовать с мокап-данными (JSON fixtures) параллельно с бекенд-доработками. Фаза 3 не блокирует Фазу 3.5, и наоборот.
-
-> **Важно**: Мокап покрывает ~65% UI — основные экраны с данными (профиль, аналитика, залы, трассы). Оставшиеся ~35% (auth-формы, CRUD-формы, toast, диалоги, skeleton, 404, onboarding, настройки) должны быть спроектированы и реализованы в рамках Фазы 3 до или параллельно с основными экранами.
+> **Приоритет**: Track A → Track B → Track C → Track D → Track E. Каждый трек делает набор экранов работающим. После Track A можно показывать базовые экраны (залы, трассы, профиль, посты). После Track B — полностью работающий профиль Climber.
