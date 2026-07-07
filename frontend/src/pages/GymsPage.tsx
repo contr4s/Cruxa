@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { useInfiniteGyms, useToggleFavorite } from '../services/hooks/useGyms';
+import { useInfiniteGyms, useToggleFavorite, useCities } from '../services/hooks/useGyms';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { SkeletonCard } from '../components/ui/SkeletonCard';
@@ -9,18 +9,18 @@ import { GymFilters } from '../components/gyms/GymFilters';
 import { GymSort } from '../components/gyms/GymSort';
 import type { FilterConfig } from '../components/gyms/GymFilters';
 
-const CITIES = [
-  { value: 'all', label: 'Все города' },
-  { value: 'Москва', label: 'Москва' },
-  { value: 'Санкт-Петербург', label: 'Санкт-Петербург' },
-];
-
 export default function GymsPage() {
   const [city, setCity] = useState('all');
   const [sort, setSort] = useState('rating');
   const [favoritesOnly, setFavoritesOnly] = useState(false);
 
-  const params = { city, sort } as const;
+  const { data: citiesData } = useCities();
+  const cityOptions = useMemo(() => [
+    { value: 'all', label: 'Все города' },
+    ...(citiesData ?? []).map((c: string) => ({ value: c, label: c })),
+  ], [citiesData]);
+
+  const params = useMemo(() => ({ city, sort } as const), [city, sort]);
   const {
     data: pages,
     isLoading,
@@ -53,7 +53,7 @@ export default function GymsPage() {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, pages]);
 
   const filterConfig: FilterConfig[] = [
-    { key: 'city', label: 'Город', type: 'select', options: CITIES, value: city, onChange: setCity },
+    { key: 'city', label: 'Город', type: 'select', options: cityOptions, value: city, onChange: setCity },
     { key: 'favorites', label: 'Избранное', type: 'chips', options: [{ value: 'all', label: 'Все' }, { value: 'fav', label: 'Избранные' }], value: favoritesOnly ? 'fav' : 'all', onChange: (v) => setFavoritesOnly(v === 'fav') },
   ];
 

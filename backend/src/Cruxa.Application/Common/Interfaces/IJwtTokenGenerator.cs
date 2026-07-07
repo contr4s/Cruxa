@@ -4,5 +4,6 @@ using Domain.Entities;
 
 public interface IJwtTokenGenerator
 {
-    Task<string> GenerateTokenAsync(User user);
+    Task<string> GenerateAccessTokenAsync(User user);
+    Task<string> GenerateRefreshTokenAsync();
 }

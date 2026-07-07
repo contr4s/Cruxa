@@ -129,15 +129,17 @@ public class RouteReviewHandlerTests
         var review1 = RouteReview.Create(_routeId, Guid.NewGuid(), rating: rating1).Value!;
         var review2 = RouteReview.Create(_routeId, Guid.NewGuid(), rating: rating2).Value!;
         var handler = new GetRouteReviewsByRouteHandler(_reviewRepo.Object);
-        _reviewRepo.Setup(r => r.GetByRouteIdAsync(_routeId)).ReturnsAsync(new[] { review1, review2 });
+        _reviewRepo.Setup(r => r.GetPagedByRouteIdAsync(_routeId, 1, 20))
+            .ReturnsAsync((new List<RouteReview> { review1, review2 }, 2));
 
         var result = await handler.Handle(
-            new GetRouteReviewsByRouteQuery(RouteId: _routeId), CancellationToken.None);
+            new GetRouteReviewsByRouteQuery(RouteId: _routeId, Page: 1, PageSize: 20), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().HaveCount(2);
-        result.Value.Should().Contain(r => r.Rating == rating1);
-        result.Value.Should().Contain(r => r.Rating == rating2);
+        result.Value.Items.Should().HaveCount(2);
+        result.Value.Items.Should().Contain(r => r.Rating == rating1);
+        result.Value.Items.Should().Contain(r => r.Rating == rating2);
+        result.Value.TotalCount.Should().Be(2);
     }
 
     [Fact]

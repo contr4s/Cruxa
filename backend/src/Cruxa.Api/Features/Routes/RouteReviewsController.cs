@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Application.Features.Routes.DTOs;
@@ -16,9 +17,9 @@ public class RouteReviewsController(IMediator mediator, ICurrentUserService curr
     /// <summary>Get all reviews for a route (public)</summary>
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<RouteReviewDto>>> GetByRoute(Guid routeId)
+    public async Task<ActionResult<OffsetPaginatedList<RouteReviewDto>>> GetByRoute(Guid routeId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var result = await mediator.Send(new GetRouteReviewsByRouteQuery(routeId));
+        var result = await mediator.Send(new GetRouteReviewsByRouteQuery(routeId, page, pageSize));
         return Ok(result.Value);
     }
 

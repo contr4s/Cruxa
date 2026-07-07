@@ -11,10 +11,10 @@ public record GetGymsByCityQuery : IRequest<Result<OffsetPaginatedList<GymDto>>>
     public int Page { get; }
     public int PageSize { get; }
 
-    public GetGymsByCityQuery(string city, int page = 1, int pageSize = 20)
+    public GetGymsByCityQuery(string city, int page = 1, int pageSize = 10)
     {
         City = city;
         Page = Math.Max(1, page);
-        PageSize = Math.Clamp(pageSize, 1, 100);
+        PageSize = Math.Clamp(pageSize, 1, 10);
     }
 }

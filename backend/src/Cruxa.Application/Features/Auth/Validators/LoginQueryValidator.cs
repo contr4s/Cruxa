@@ -1,9 +1,9 @@
+using Cruxa.Application.Features.Auth.Commands;
 using FluentValidation;
-using Cruxa.Application.Features.Auth.Queries;
 
 namespace Cruxa.Application.Features.Auth.Validators;
 
-public class LoginQueryValidator : AbstractValidator<LoginQuery>
+public class LoginQueryValidator : AbstractValidator<LoginCommand>
 {
     public LoginQueryValidator()
     {

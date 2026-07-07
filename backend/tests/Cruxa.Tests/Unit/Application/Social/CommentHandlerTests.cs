@@ -64,14 +64,16 @@ public class CommentHandlerTests
             Comment.Create(postId, Guid.NewGuid(), _fixture.Faker.Lorem.Sentence()).Value!
         };
         var handler = new GetCommentsByPostHandler(_commentRepo.Object);
-        _commentRepo.Setup(r => r.GetByPostIdAsync(postId)).ReturnsAsync(comments);
+        _commentRepo.Setup(r => r.GetPagedByPostIdAsync(postId, 1, 20))
+            .ReturnsAsync((comments.ToList(), 2));
 
         var result = await handler.Handle(
-            new GetCommentsByPostQuery(postId), CancellationToken.None);
+            new GetCommentsByPostQuery(postId, 1, 20), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().HaveCount(2);
-        result.Value.Should().Contain(c => c.Content == comments[0].Content);
-        result.Value.Should().Contain(c => c.Content == comments[1].Content);
+        result.Value.Items.Should().HaveCount(2);
+        result.Value.Items.Should().Contain(c => c.Content == comments[0].Content);
+        result.Value.Items.Should().Contain(c => c.Content == comments[1].Content);
+        result.Value.TotalCount.Should().Be(2);
     }
 }

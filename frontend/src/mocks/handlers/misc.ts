@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import { mockDelay } from '../helpers';
 
 export const tagsHandlers = [
-  http.get('/api/tags', async () => {
+  http.get('/api/routes/tags', async () => {
     await mockDelay(200);
     return HttpResponse.json([
       { name: 'overhang', category: 'style' },

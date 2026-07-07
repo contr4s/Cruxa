@@ -4,8 +4,8 @@ using Cruxa.Application.Features.Posts.Interfaces;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Features.Social.Interfaces;
 using Cruxa.Domain.Enums;
+using Cruxa.Application.Features.Social.Interfaces;
 
 namespace Cruxa.Application.Features.Posts.Handlers;
 
@@ -22,16 +22,38 @@ public sealed class GetFeedHandler : IRequestHandler<GetFeedQuery, Result<Offset
 
     public async Task<Result<OffsetPaginatedList<PostDto>>> Handle(GetFeedQuery request, CancellationToken ct)
     {
-        var following = await _followerRepository.GetFollowingAsync(request.UserId);
-        var userIds = new List<Guid>(following) { request.UserId };
+        var currentUserId = request.UserId;
+        var following = await _followerRepository.GetFollowingAsync(currentUserId);
+        var followingSet = new HashSet<Guid>(following);
 
-        var allPosts = await _postRepository.GetByUserIdsAsync(userIds);
-        var publishedPosts = allPosts.Where(p => p.Status == PostStatus.Published).ToList();
+        List<Domain.Entities.Post> allPosts;
 
-        var totalCount = publishedPosts.Count;
+        if (request.Filter == FeedFilter.Subs)
+        {
+            // Только посты от подписок (без собственных)
+            var posts = await _postRepository.GetByUserIdsAsync(following.ToList());
+            allPosts = posts.ToList();
+        }
+        else
+        {
+            // Recommended / default — все опубликованные публичные посты
+            allPosts = (await _postRepository.GetAllAsync())
+                .Where(p => p.Status == PostStatus.Published)
+                .ToList();
+        }
 
-        var feed = publishedPosts
+        var visiblePosts = allPosts
+            .Where(p => p.Status == PostStatus.Published)
+            .Where(p =>
+                p.Visibility == PostVisibility.Public
+                || p.UserId == currentUserId
+                || (p.Visibility == PostVisibility.Followers && followingSet.Contains(p.UserId)))
             .OrderByDescending(p => p.CreatedAt)
+            .ToList();
+
+        var totalCount = visiblePosts.Count;
+
+        var feed = visiblePosts
             .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(GetPostByIdHandler.MapToDto)

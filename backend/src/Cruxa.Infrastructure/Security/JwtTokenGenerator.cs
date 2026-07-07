@@ -2,6 +2,7 @@ namespace Cruxa.Infrastructure.Security;
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         _configuration = configuration;
     }
 
-    public Task<string> GenerateTokenAsync(User user)
+    public Task<string> GenerateAccessTokenAsync(User user)
     {
         var secret = _configuration["Jwt:Secret"]
             ?? throw new InvalidOperationException("JWT Secret is not configured");
@@ -33,7 +34,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new(JwtRegisteredClaimNames.Email, user.Email),
+            new(JwtRegisteredClaimNames.Email, user.Email.Value),
             new(JwtRegisteredClaimNames.Name, user.Username),
             new(ClaimTypes.Role, user.Role.ToString())
         };
@@ -49,5 +50,12 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             signingCredentials: credentials);
 
         return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
+    }
+
+    public Task<string> GenerateRefreshTokenAsync()
+    {
+        var bytes = RandomNumberGenerator.GetBytes(64);
+        return Task.FromResult(Convert.ToBase64String(bytes)
+            .Replace('+', '-').Replace('/', '_').TrimEnd('='));
     }
 }

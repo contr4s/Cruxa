@@ -19,7 +19,6 @@ export interface PostDto {
   likesCount: number;
   commentsCount: number;
   isLiked: boolean;
-  isBookmarked: boolean;
   createdAt: string;
 }
 

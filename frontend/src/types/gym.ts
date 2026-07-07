@@ -9,16 +9,14 @@ export interface GymDto {
   phone?: string;
   email?: string;
   website?: string;
-  vkUrl?: string;
-  instagramUrl?: string;
-  youtubeUrl?: string;
+  socialLinks?: string[];
   photoUrls: string[];
-  area?: number;
+  wallArea?: number;
   maxHeight?: number;
-  yearOpened?: number;
+  yearFounded?: number;
   metroStations: string[];
   tags: string[];
-  hours: GymHours;
+  hours: WorkingHoursEntry[];
   prices: GymPrice[];
   rating: number;
   routeCount: number;
@@ -26,13 +24,9 @@ export interface GymDto {
   isFavorite: boolean;
 }
 
-export interface GymHours {
-  [day: string]: string;
-}
-
 export interface GymPrice {
   name: string;
-  price: number;
+  price: string;
 }
 
 export interface GymSector {
@@ -57,9 +51,7 @@ export interface UpdateGymPayload {
   phone?: string | null;
   email?: string | null;
   website?: string | null;
-  vkUrl?: string | null;
-  instagramUrl?: string | null;
-  youtubeUrl?: string | null;
+  socialLinks?: string[];
   photoUrls?: string[];
   area?: number | null;
   maxHeight?: number | null;

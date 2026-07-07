@@ -5,7 +5,7 @@ using Cruxa.Application.Features.Routes.Queries;
 namespace Cruxa.Api.Features.Routes;
 
 [ApiController]
-[Route("api/routes/[controller]")]
+[Route("api/routes/tags")]
 public class TagsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]

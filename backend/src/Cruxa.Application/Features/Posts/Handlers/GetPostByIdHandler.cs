@@ -28,6 +28,8 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
         Id = post.Id,
         UserId = post.UserId,
         Username = post.User?.Username ?? "",
+        UserAvatarUrl = post.User?.AvatarUrl,
+        DisplayName = post.User is not null ? $"{post.User.FirstName} {post.User.LastName}".Trim() : "",
         GymId = post.GymId,
         GymName = post.Gym?.Name ?? "",
         Description = post.Description,
@@ -37,11 +39,16 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
         CreatedAt = post.CreatedAt,
         LikesCount = post.Likes.Count,
         CommentsCount = post.Comments.Count,
+        Duration = post.Duration,
+        IsLiked = false,
         Ascents = post.Ascents.Select(a => new AscentDto
         {
             Id = a.Id,
             RouteId = a.RouteId,
-            GradeRaw = a.Route?.Grade?.Raw ?? "",
+            RouteName = a.Route?.Name ?? "",
+            Grade = a.Route?.Grade?.Raw ?? "",
+            GradeIndex = a.Route?.Grade?.Index ?? 0,
+            HoldColor = a.Route?.HoldColor ?? default,
             Style = a.Style,
             MediaUrls = a.MediaUrls.ToList(),
             CreatedAt = a.CreatedAt

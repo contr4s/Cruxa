@@ -49,9 +49,26 @@ export function MediaCarousel({ images, aspectRatio = '16 / 10' }: MediaCarousel
         slidesPerView={1}
         style={{ width: '100%', height: '100%' }}
       >
-        {images.map((_src, i) => (
+        {images.map((src, i) => (
           <SwiperSlide key={i}>
             <Box
+              component="img"
+              src={src}
+              alt={`Фото ${i + 1}`}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+              }}
+              onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                const target = e.currentTarget;
+                target.style.display = 'none';
+                target.nextElementSibling?.classList.remove('hidden');
+              }}
+            />
+            <Box
+              className="hidden"
               sx={{
                 width: '100%',
                 height: '100%',
@@ -60,6 +77,7 @@ export function MediaCarousel({ images, aspectRatio = '16 / 10' }: MediaCarousel
                 color: theme.custom.text3,
                 fontSize: '0.85rem',
                 fontWeight: 500,
+                display: 'none',
               }}
             >
               📷 Фото {i + 1}

@@ -1,6 +1,6 @@
 namespace Cruxa.Application.Features.Gyms.DTOs;
 
-using Cruxa.Domain.ValueObjects;
+using Domain.ValueObjects;
 
 /// <summary>
 /// DTO for importing a gym from an external source (parser).

@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Social.Queries;
 using FluentAssertions;
 
@@ -53,10 +54,10 @@ public class CommentIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/posts/{postId}/comments");
         response.EnsureSuccessStatusCode();
-        var comments = await DeserializeAsync<List<CommentDto>>(response);
+        var comments = await DeserializeAsync<OffsetPaginatedList<CommentDto>>(response);
 
-        comments.Should().NotBeEmpty();
-        comments.Count.Should().BeGreaterThanOrEqualTo(2);
+        comments.Items.Should().NotBeEmpty();
+        comments.Items.Count.Should().BeGreaterThanOrEqualTo(2);
     }
 
     [Fact]
@@ -67,9 +68,9 @@ public class CommentIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/posts/{postId}/comments");
         response.EnsureSuccessStatusCode();
-        var comments = await DeserializeAsync<List<CommentDto>>(response);
+        var comments = await DeserializeAsync<OffsetPaginatedList<CommentDto>>(response);
 
-        comments.Should().BeEmpty();
+        comments.Items.Should().BeEmpty();
     }
 
     [Fact]

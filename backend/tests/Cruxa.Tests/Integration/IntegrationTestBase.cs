@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Cruxa.Application.Features.Auth.DTOs;
-using Cruxa.Application.Features.Auth.Queries;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Domain.Enums;
@@ -100,7 +99,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     /// </summary>
     private async Task<AuthResponse> LoginAsync(string email, string password)
     {
-        var query = new LoginQuery(email, password);
+        var query = new LoginCommand(email, password);
         var response = await Client.PostAsJsonAsync("/api/auth/login", query, JsonOptions);
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<AuthResponse>(JsonOptions))!;
@@ -167,7 +166,8 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     /// </summary>
     protected async Task<RouteDto> CreateRouteAsync(Guid gymId)
     {
-        var response = await Client.PostAsJsonAsync("/api/routes", Fixture.Create<CreateRouteCommand>() with { GymId = gymId }, JsonOptions);
+        var cmd = Fixture.Create<CreateRouteCommand>() with { GymId = gymId, Tags = null };
+        var response = await Client.PostAsJsonAsync("/api/routes", cmd, JsonOptions);
         response.EnsureSuccessStatusCode();
         return (await DeserializeAsync<RouteDto>(response))!;
     }
@@ -179,6 +179,7 @@ public abstract class IntegrationTestBase(CruxaApiFactory factory) : IClassFixtu
     {
         var req = Fixture.Create<CreatePostRequest>();
         req.GymId = gymId;
+        req.Visibility = PostVisibility.Public;
         return req;
     }
 

@@ -12,9 +12,12 @@ public class User : AggregateRoot<Guid>
 {
     public string Username { get; private set; }
     public Email Email { get; private set; }
-    public string PasswordHash { get; private set; }
+    public string? FirstName { get; private set; }
+    public string? LastName { get; private set; }
     public string? AvatarUrl { get; private set; }
     public string? City { get; private set; }
+    public string? Gender { get; private set; }
+    public int? Height { get; private set; }
     public Role Role { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
@@ -39,10 +42,19 @@ public class User : AggregateRoot<Guid>
     private readonly List<RouteReview> _reviews = [];
     public IReadOnlyCollection<RouteReview> Reviews => _reviews.AsReadOnly();
 
+    // Credentials
+    public PasswordCredential? PasswordCredential { get; private set; }
+
+    private readonly List<ExternalCredential> _externalCredentials = [];
+    public IReadOnlyCollection<ExternalCredential> ExternalCredentials => _externalCredentials.AsReadOnly();
+
+    private readonly List<RefreshToken> _refreshTokens = [];
+    public IReadOnlyCollection<RefreshToken> RefreshTokens => _refreshTokens.AsReadOnly();
+
     // For EF Core
     private User() { }
 
-    public static Result<User> Create(Email email, string username, string passwordHash)
+    public static Result<User> Create(Email email, string username, string? firstName = null, string? lastName = null, string? gender = null, int? height = null, string? city = null)
     {
         Guard.AgainstNullOrWhiteSpace(username, nameof(username));
 
@@ -51,7 +63,11 @@ public class User : AggregateRoot<Guid>
             Id = Guid.NewGuid(),
             Email = email,
             Username = username.Trim(),
-            PasswordHash = passwordHash,
+            FirstName = firstName?.Trim(),
+            LastName = lastName?.Trim(),
+            Gender = gender,
+            Height = height,
+            City = city,
             Role = Role.Climber,
             CreatedAt = DateTime.UtcNow
         };
@@ -59,22 +75,14 @@ public class User : AggregateRoot<Guid>
         return Result.Success(user);
     }
 
-    public Result ChangePassword(string currentPasswordHash, string newPasswordHash)
-    {
-        Guard.AgainstNullOrWhiteSpace(currentPasswordHash, nameof(currentPasswordHash));
-        Guard.AgainstNullOrWhiteSpace(newPasswordHash, nameof(newPasswordHash));
-
-        if (currentPasswordHash != PasswordHash)
-            return Result.Failure(Error.Validation("Current password is incorrect"));
-
-        PasswordHash = newPasswordHash;
-        return Result.Success();
-    }
-
-    public void UpdateProfile(string? avatarUrl, string? city)
+    public void UpdateProfile(string? avatarUrl, string? city, string? firstName = null, string? lastName = null, string? gender = null, int? height = null)
     {
         if (avatarUrl is not null) AvatarUrl = avatarUrl;
         if (city is not null) City = city;
+        if (firstName is not null) FirstName = firstName;
+        if (lastName is not null) LastName = lastName;
+        if (gender is not null) Gender = gender;
+        if (height.HasValue) Height = height;
     }
 
     public void ChangeRole(Role newRole)

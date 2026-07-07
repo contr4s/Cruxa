@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Common.Models;
+using Cruxa.Domain.Enums;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
@@ -26,17 +27,18 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
     /// <summary>Get posts by user ID</summary>
     [AllowAnonymous]
     [HttpGet("user/{userId:guid}")]
-    public async Task<ActionResult<IEnumerable<PostDto>>> GetByUser(Guid userId)
+    public async Task<ActionResult<OffsetPaginatedList<PostDto>>> GetByUser(Guid userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await mediator.Send(new GetPostsByUserQuery(userId));
+        var currentUserId = currentUser.GetUserId();
+        var result = await mediator.Send(new GetPostsByUserQuery(userId, currentUserId, page, pageSize));
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
     /// <summary>Get feed (posts from followed users + own)</summary>
     [HttpGet("feed")]
-    public async Task<ActionResult<OffsetPaginatedList<PostDto>>> GetFeed([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<ActionResult<OffsetPaginatedList<PostDto>>> GetFeed([FromQuery] int page = 1, [FromQuery] int pageSize = 20, [FromQuery] FeedFilter? filter = null)
     {
-        var result = await mediator.Send(new GetFeedQuery(currentUser.GetRequiredUserId(), page, pageSize));
+        var result = await mediator.Send(new GetFeedQuery(currentUser.GetRequiredUserId(), page, pageSize, filter));
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 

@@ -5,4 +5,4 @@ using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Auth.Commands;
 
-public record RegisterCommand(string Username, string Email, string Password, string? City) : IRequest<Result<AuthResponse>>, ICommand;
+public record RegisterCommand(string Username, string Email, string Password, string? City, string? FirstName = null, string? LastName = null, string? Gender = null, int? Height = null) : IRequest<Result<AuthResponse>>, ICommand;

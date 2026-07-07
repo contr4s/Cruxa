@@ -26,8 +26,8 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
                 email => email.Value,
                 value => Email.Create(value).Value));
 
-        builder.Property(u => u.PasswordHash)
-            .IsRequired();
+        builder.Property(u => u.FirstName).HasMaxLength(100);
+        builder.Property(u => u.LastName).HasMaxLength(100);
 
         builder.Property(u => u.Role)
             .HasConversion<string>()

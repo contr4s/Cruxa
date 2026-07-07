@@ -14,14 +14,9 @@ export interface LoginRequest {
   password: string;
 }
 
-import type { UserRole } from './user';
+import type { UserDto } from './user';
 
 export interface AuthResponse {
   token: string;
-  refreshToken?: string;
-  userId: string;
-  username: string;
-  displayName: string;
-  email: string;
-  role: UserRole;
+  user: UserDto;
 }

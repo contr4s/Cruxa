@@ -22,7 +22,7 @@ export interface GetRoutesParams {
 }
 
 export async function getRoutesByGym(gymId: string, params?: GetRoutesParams): Promise<PaginatedList<RouteDto>> {
-  const response = await api.get<PaginatedList<RouteDto>>(`/gyms/${gymId}/routes`, { params });
+  const response = await api.get<PaginatedList<RouteDto>>(`/routes/gym/${gymId}`, { params });
   return response.data;
 }
 

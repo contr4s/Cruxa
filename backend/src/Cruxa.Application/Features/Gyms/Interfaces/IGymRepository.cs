@@ -6,8 +6,9 @@ public interface IGymRepository
 {
     Task<Gym?> GetByIdAsync(Guid id);
     Task<(List<Gym> Items, int TotalCount)> GetByCityPagedAsync(string city, int page, int pageSize);
-    Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize);
+    Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize, string? city = null, Domain.Enums.GymSort? sort = null);
     Task<IEnumerable<Gym>> GetAllAsync();
+    Task<List<string>> GetCitiesAsync();
     Task AddAsync(Gym gym);
     Task UpdateAsync(Gym gym);
     Task DeleteAsync(Guid id);

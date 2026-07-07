@@ -12,6 +12,8 @@ public class PostDto
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public string Username { get; set; } = string.Empty;
+    public string? UserAvatarUrl { get; set; }
+    public string DisplayName { get; set; } = string.Empty;
     public Guid GymId { get; set; }
     public string GymName { get; set; } = string.Empty;
     public string? Description { get; set; }
@@ -21,5 +23,7 @@ public class PostDto
     public DateTime CreatedAt { get; set; }
     public int LikesCount { get; set; }
     public int CommentsCount { get; set; }
+    public int? Duration { get; set; }
+    public bool IsLiked { get; set; }
     public List<AscentDto> Ascents { get; set; } = [];
 }

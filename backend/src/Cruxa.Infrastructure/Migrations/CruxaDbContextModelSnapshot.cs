@@ -19,7 +19,7 @@ namespace Cruxa.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.8")
+                .HasAnnotation("ProductVersion", "10.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -91,6 +91,30 @@ namespace Cruxa.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("comments", (string)null);
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.ExternalCredential", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ExternalCredentials");
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.Follower", b =>
@@ -249,6 +273,30 @@ namespace Cruxa.Infrastructure.Migrations
                     b.ToTable("likes", (string)null);
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.PasswordCredential", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("PasswordCredentials");
+                });
+
             modelBuilder.Entity("Cruxa.Domain.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -261,6 +309,9 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)");
+
+                    b.Property<int?>("Duration")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("GymId")
                         .HasColumnType("uuid");
@@ -297,6 +348,32 @@ namespace Cruxa.Infrastructure.Migrations
                     b.ToTable("posts", (string)null);
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("Cruxa.Domain.Entities.Route", b =>
                 {
                     b.Property<Guid>("Id")
@@ -318,6 +395,10 @@ namespace Cruxa.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(true);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.PrimitiveCollection<List<string>>("PhotoUrls")
                         .IsRequired()
@@ -570,9 +651,19 @@ namespace Cruxa.Infrastructure.Migrations
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Gender")
                         .HasColumnType("text");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -658,6 +749,15 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.ExternalCredential", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.User", null)
+                        .WithMany("ExternalCredentials")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Cruxa.Domain.Entities.Follower", b =>
                 {
                     b.HasOne("Cruxa.Domain.Entities.User", "FolloweeUser")
@@ -729,6 +829,15 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.PasswordCredential", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.User", null)
+                        .WithOne("PasswordCredential")
+                        .HasForeignKey("Cruxa.Domain.Entities.PasswordCredential", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Cruxa.Domain.Entities.Post", b =>
                 {
                     b.HasOne("Cruxa.Domain.Entities.Gym", "Gym")
@@ -744,6 +853,17 @@ namespace Cruxa.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Gym");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -862,13 +982,19 @@ namespace Cruxa.Infrastructure.Migrations
 
                     b.Navigation("Comments");
 
+                    b.Navigation("ExternalCredentials");
+
                     b.Navigation("Followers");
 
                     b.Navigation("Following");
 
                     b.Navigation("Likes");
 
+                    b.Navigation("PasswordCredential");
+
                     b.Navigation("Posts");
+
+                    b.Navigation("RefreshTokens");
 
                     b.Navigation("Reviews");
                 });

@@ -35,7 +35,7 @@ public class CreateRouteHandler(
         }
 
         var routeResult = Route.Create(cmd.GymId, gradeResult.Value, cmd.Type, cmd.HoldColor,
-            cmd.AuthorId, cmd.PhotoUrls, tagEntities, cmd.Sector);
+            cmd.Name ?? "", cmd.AuthorId, cmd.PhotoUrls, tagEntities, cmd.Sector);
         if (routeResult.IsFailure) return Result.Failure<RouteDto>(routeResult.Error);
 
         await routes.AddAsync(routeResult.Value);

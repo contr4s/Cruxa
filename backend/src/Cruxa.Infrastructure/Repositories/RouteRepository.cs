@@ -20,6 +20,8 @@ public class RouteRepository : IRouteRepository
             .Include(r => r.Gym)
             .Include(r => r.Author)
             .Include(r => r.Tags)
+            .Include(r => r.Reviews)
+            .Include(r => r.Ascents)
             .FirstOrDefaultAsync(r => r.Id == id);
     }
 
@@ -35,7 +37,10 @@ public class RouteRepository : IRouteRepository
     {
         var query = _context.Routes
             .Include(r => r.Gym)
-            .Include(r => r.Tags);
+            .Include(r => r.Author)
+            .Include(r => r.Tags)
+            .Include(r => r.Reviews)
+            .Include(r => r.Ascents);
         var totalCount = await query.CountAsync();
         var items = await query
             .OrderBy(r => r.Grade.Index)
@@ -48,7 +53,11 @@ public class RouteRepository : IRouteRepository
     public async Task<(List<Route> Items, int TotalCount)> GetByGymPagedAsync(Guid gymId, int page, int pageSize)
     {
         var query = _context.Routes
+            .Include(r => r.Gym)
+            .Include(r => r.Author)
             .Include(r => r.Tags)
+            .Include(r => r.Reviews)
+            .Include(r => r.Ascents)
             .Where(r => r.GymId == gymId);
         var totalCount = await query.CountAsync();
         var items = await query
@@ -63,7 +72,10 @@ public class RouteRepository : IRouteRepository
     {
         return await _context.Routes
             .Include(r => r.Gym)
+            .Include(r => r.Author)
             .Include(r => r.Tags)
+            .Include(r => r.Reviews)
+            .Include(r => r.Ascents)
             .ToListAsync();
     }
 

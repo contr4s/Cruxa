@@ -46,9 +46,9 @@ function ReadOnlyView({ gym }: { gym: GymDto }) {
           Часы и цены
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.25 }}>
-          {Object.entries(gym.hours).map(([day, hours]) => (
-            <InfoRow key={day} label={day} value={hours} />
-          ))}
+          {Array.isArray(gym.hours) ? gym.hours.map((entry) => (
+            <InfoRow key={entry.days} label={entry.days} value={`${entry.from} – ${entry.to}`} />
+          )) : null}
           {gym.prices.map((price) => (
             <InfoRow key={price.name} label={price.name} value={`${price.price} ₽`} />
           ))}
@@ -77,7 +77,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 // ── Zod schema ───────────────────────────────────────────
 
 const hourEntrySchema = z.object({ days: z.string(), from: z.string(), to: z.string() });
-const priceEntrySchema = z.object({ name: z.string(), price: z.coerce.number() });
+const priceEntrySchema = z.object({ name: z.string(), price: z.string() });
 
 const gymProfileSchema = z.object({
   name: z.string().min(1, 'Обязательное поле'),
@@ -87,9 +87,7 @@ const gymProfileSchema = z.object({
   phone: z.string().regex(/^[\d\s+\-()]*$/, 'Некорректный формат').optional().or(z.literal('')),
   email: z.string().email('Некорректный email').optional().or(z.literal('')),
   website: z.string().optional().or(z.literal('')),
-  vkUrl: z.string().optional().or(z.literal('')),
-  instagramUrl: z.string().optional().or(z.literal('')),
-  youtubeUrl: z.string().optional().or(z.literal('')),
+  socialLinks: z.string().optional().or(z.literal('')),
   latitude: z.union([z.coerce.number().min(-90).max(90), z.literal('')]).optional(),
   longitude: z.union([z.coerce.number().min(-180).max(180), z.literal('')]).optional(),
   area: z.union([z.coerce.number().positive('Положительное число'), z.literal('')]).optional(),
@@ -122,20 +120,19 @@ function EditForm({ gym, onSave, onCancel, saving }: {
       phone: gym.phone ?? '',
       email: gym.email ?? '',
       website: gym.website ?? '',
-      vkUrl: gym.vkUrl ?? '',
-      instagramUrl: gym.instagramUrl ?? '',
-      youtubeUrl: gym.youtubeUrl ?? '',
+      socialLinks: (gym.socialLinks ?? []).join('\n'),
       latitude: gym.lat?.toString() ?? '',
       longitude: gym.lon?.toString() ?? '',
-      area: gym.area?.toString() ?? '',
+      area: gym.wallArea?.toString() ?? '',
       maxHeight: gym.maxHeight?.toString() ?? '',
-      yearOpened: gym.yearOpened?.toString() ?? '',
+      yearOpened: gym.yearFounded?.toString() ?? '',
       metroStations: gym.metroStations.join(', '),
       tags: gym.tags.join(', '),
-      hours: Object.entries(gym.hours).map(([days, fromTo]) => {
-        const [from, to] = fromTo.split(' – ').map(s => s.trim());
-        return { days, from: from || '', to: to || '' };
-      }),
+      hours: (gym.hours ?? []).map((entry) => ({
+        days: entry.days,
+        from: entry.from,
+        to: entry.to,
+      })),
       prices: gym.prices,
       photoUrls: gym.photoUrls,
     } as any,
@@ -154,9 +151,7 @@ function EditForm({ gym, onSave, onCancel, saving }: {
       phone: values.phone || null,
       email: values.email || null,
       website: values.website || null,
-      vkUrl: values.vkUrl || null,
-      instagramUrl: values.instagramUrl || null,
-      youtubeUrl: values.youtubeUrl || null,
+      socialLinks: values.socialLinks ? values.socialLinks.split('\n').map(s => s.trim()).filter(Boolean) : undefined,
       latitude: values.latitude ? Number(values.latitude) : null,
       longitude: values.longitude ? Number(values.longitude) : null,
       area: values.area ? Number(values.area) : null,
@@ -245,14 +240,8 @@ function EditForm({ gym, onSave, onCancel, saving }: {
           <Controller name="website" control={control} render={({ field }) => (
             <TextField {...field} label="Сайт" size="small" sx={fieldSx} error={!!errors.website} helperText={errors.website?.message} />
           )} />
-          <Controller name="vkUrl" control={control} render={({ field }) => (
-            <TextField {...field} label="VK" size="small" sx={fieldSx} error={!!errors.vkUrl} helperText={errors.vkUrl?.message} />
-          )} />
-          <Controller name="instagramUrl" control={control} render={({ field }) => (
-            <TextField {...field} label="Instagram" size="small" sx={fieldSx} error={!!errors.instagramUrl} helperText={errors.instagramUrl?.message} />
-          )} />
-          <Controller name="youtubeUrl" control={control} render={({ field }) => (
-            <TextField {...field} label="YouTube" size="small" sx={fieldSx} />
+          <Controller name="socialLinks" control={control} render={({ field }) => (
+            <TextField {...field} label="Соцсети (по одной на строку)" size="small" multiline rows={3} sx={fieldSx} />
           )} />
 
           {/* Часы работы (useFieldArray) */}
@@ -294,7 +283,7 @@ function EditForm({ gym, onSave, onCancel, saving }: {
               <IconButton size="small" onClick={() => removePrice(i)} color="error"><Delete fontSize="small" /></IconButton>
             </Box>
           ))}
-          <Button size="small" startIcon={<Add />} onClick={() => appendPrice({ name: '', price: 0 })} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
+          <Button size="small" startIcon={<Add />} onClick={() => appendPrice({ name: '', price: '' })} sx={{ alignSelf: 'flex-start', fontSize: '0.82rem' }}>
             Добавить цену
           </Button>
 

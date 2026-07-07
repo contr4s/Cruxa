@@ -23,7 +23,7 @@ public sealed class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Resul
         if (post.UserId != request.UserId)
             return Result.Failure<PostDto>(Error.Unauthorized("You can only update your own posts"));
 
-        post.Update(request.Description, request.MediaUrls, request.Visibility);
+        post.Update(request.Description, request.MediaUrls, request.Visibility, request.Duration);
         await _repository.UpdateAsync(post);
 
         return Result.Success(new PostDto
@@ -31,6 +31,8 @@ public sealed class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Resul
             Id = post.Id,
             UserId = post.UserId,
             Username = post.User?.Username ?? "",
+            UserAvatarUrl = post.User?.AvatarUrl,
+            DisplayName = post.User is not null ? $"{post.User.FirstName} {post.User.LastName}".Trim() : "",
             GymId = post.GymId,
             GymName = post.Gym?.Name ?? "",
             Description = post.Description,
@@ -39,7 +41,9 @@ public sealed class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Resul
             Status = post.Status,
             CreatedAt = post.CreatedAt,
             LikesCount = post.Likes.Count,
-            CommentsCount = post.Comments.Count
+            CommentsCount = post.Comments.Count,
+            Duration = post.Duration,
+            IsLiked = false
         });
     }
 }

@@ -6,6 +6,6 @@ export interface TagInfo {
 }
 
 export async function getTags(): Promise<TagInfo[]> {
-  const response = await api.get<TagInfo[]>('/tags');
+  const response = await api.get<TagInfo[]>('/routes/tags');
   return response.data;
 }

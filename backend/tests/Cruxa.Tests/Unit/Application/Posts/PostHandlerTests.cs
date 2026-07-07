@@ -114,7 +114,7 @@ public class PostHandlerTests
         post.Publish();
         var handler = new GetFeedHandler(_postRepo.Object, _followerRepo.Object);
         _followerRepo.Setup(r => r.GetFollowingAsync(_userId)).ReturnsAsync([]);
-        _postRepo.Setup(r => r.GetByUserIdsAsync(It.Is<List<Guid>>(ids => ids.Contains(_userId)))).ReturnsAsync([post]);
+        _postRepo.Setup(r => r.GetAllAsync()).ReturnsAsync([post]);
 
         var result = await handler.Handle(
             new GetFeedQuery(_userId, 1, 10), CancellationToken.None);

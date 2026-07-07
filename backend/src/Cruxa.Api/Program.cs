@@ -7,6 +7,7 @@ using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Serilog;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 // ──────────────────────────────────────────────
@@ -50,7 +51,7 @@ try
     builder.Services.AddControllers()
     .AddJsonOptions(opts =>
     {
-        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
         opts.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
     });
 
@@ -134,6 +135,19 @@ try
     {
         var db = scope.ServiceProvider.GetRequiredService<CruxaDbContext>();
         await db.Database.MigrateAsync();
+
+        // Seed admin password credential from local config
+        var adminPasswordHash = app.Configuration["AdminPasswordHash"];
+        if (!string.IsNullOrEmpty(adminPasswordHash))
+        {
+            var adminId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            if (!await db.PasswordCredentials.AnyAsync(pc => pc.UserId == adminId))
+            {
+                db.PasswordCredentials.Add(new Cruxa.Domain.Entities.PasswordCredential(
+                    adminId, adminPasswordHash));
+                await db.SaveChangesAsync();
+            }
+        }
     }
 
     // ──────────────────────────────────────────

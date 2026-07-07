@@ -64,7 +64,7 @@ export function GymCard({ gym, onFavoriteToggle }: GymCardProps) {
         <Box sx={{ display: 'flex', gap: 0.75, flexWrap: 'wrap', alignItems: 'center' }}>
           <GymBadge icon={<ShowChart sx={{ fontSize: 12 }} />} label={`${gym.activeRouteCount} ${pluralize(gym.activeRouteCount, ['трасса', 'трассы', 'трасс'])}`} />
           {gym.maxHeight && <GymBadge icon={<Height sx={{ fontSize: 12 }} />} label={`${gym.maxHeight} м`} />}
-          {gym.area && <GymBadge icon={<SpaceDashboard sx={{ fontSize: 12 }} />} label={`${gym.area} м²`} />}
+          {gym.wallArea && <GymBadge icon={<SpaceDashboard sx={{ fontSize: 12 }} />} label={`${gym.wallArea} м²`} />}
         </Box>
         {gym.lat && gym.lon && (
           <GymBadge

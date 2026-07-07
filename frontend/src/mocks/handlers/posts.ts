@@ -83,7 +83,7 @@ const MOCK_MY_POSTS: PostDto[] = [
       { id: 'a13', routeId: 'r13', routeName: 'Глубина', grade: '6C', holdColor: 'Blue', style: 'Project' },
       { id: 'a14', routeId: 'r14', routeName: 'Солнцеворот', grade: '5A', holdColor: 'Yellow', style: 'Flash', isFlash: true },
     ],
-    likesCount: 12, commentsCount: 3, isLiked: false, isBookmarked: false,
+    likesCount: 12, commentsCount: 3, isLiked: false,
     createdAt: '2026-06-25T19:30:00Z',
   },
   ...Array.from({ length: 8 }, (_, i) => ({
@@ -98,7 +98,6 @@ const MOCK_MY_POSTS: PostDto[] = [
     likesCount: Math.floor(Math.random() * 12),
     commentsCount: Math.floor(Math.random() * 4),
     isLiked: i % 3 === 0,
-    isBookmarked: false,
     createdAt: new Date(2026, 5, 20 - i).toISOString(),
   })),
 ];
@@ -116,7 +115,7 @@ const MOCK_FEED_POSTS: PostDto[] = [
       { id: 'f1b', routeId: 'r2', routeName: 'Синий мув', grade: '6B', holdColor: 'Blue', style: 'Redpoint' },
       { id: 'f1c', routeId: 'r3', routeName: 'Золотая середина', grade: '5C', holdColor: 'Yellow', style: 'Flash', isFlash: true },
     ],
-    likesCount: 8, commentsCount: 2, isLiked: false, isBookmarked: false,
+    likesCount: 8, commentsCount: 2, isLiked: false,
     createdAt: '2026-06-24T15:00:00Z',
   },
 ];
@@ -194,7 +193,7 @@ export const postHandlers = [
       gymId: body?.gymId, gymName: body?.gymId ? MOCK_ROUTES.find(r => r.gymId === body.gymId)?.gymName : undefined,
       ascents: [], mediaUrls: [], visibility: 'Public',
       stats: { totalKruskor: 0, avgGrade: '', totalRoutes: 0 },
-      likesCount: 0, commentsCount: 0, isLiked: false, isBookmarked: false,
+      likesCount: 0, commentsCount: 0, isLiked: false,
       createdAt: new Date().toISOString(),
     }, { status: 201 });
   }),
@@ -207,7 +206,7 @@ export const postHandlers = [
       gymId: 'g1', gymName: 'RockZone',
       ascents: [], mediaUrls: [], visibility: 'Public',
       stats: { totalKruskor: 0, avgGrade: '', totalRoutes: 0 },
-      likesCount: 0, commentsCount: 0, isLiked: false, isBookmarked: false,
+      likesCount: 0, commentsCount: 0, isLiked: false,
       createdAt: new Date().toISOString(),
       ...data,
     });

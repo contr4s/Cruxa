@@ -11,4 +11,5 @@ public record CreatePostCommand(
     Guid GymId,
     string? Description,
     List<string>? MediaUrls,
-    PostVisibility Visibility) : IRequest<Result<PostDto>>, ICommand;
+    PostVisibility Visibility,
+    int? Duration = null) : IRequest<Result<PostDto>>, ICommand;

@@ -15,6 +15,7 @@ public class Post : AggregateRoot<Guid>
     public List<string> MediaUrls { get; private set; } = [];
     public PostVisibility Visibility { get; private set; } = PostVisibility.Public;
     public PostStatus Status { get; private set; } = PostStatus.Draft;
+    public int? Duration { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
     private readonly List<Ascent> _ascents = [];
@@ -34,7 +35,7 @@ public class Post : AggregateRoot<Guid>
 
     private Post() { }
 
-    public static Result<Post> Create(Guid userId, Guid gymId, string? description, List<string>? mediaUrls)
+    public static Result<Post> Create(Guid userId, Guid gymId, string? description, List<string>? mediaUrls, int? duration = null)
     {
         Guard.AgainstDefault(userId, nameof(userId));
         Guard.AgainstDefault(gymId, nameof(gymId));
@@ -46,6 +47,7 @@ public class Post : AggregateRoot<Guid>
             GymId = gymId,
             Description = description,
             MediaUrls = mediaUrls ?? [],
+            Duration = duration,
             CreatedAt = DateTime.UtcNow,
             Status = PostStatus.Draft,
             Visibility = PostVisibility.Public
@@ -60,11 +62,12 @@ public class Post : AggregateRoot<Guid>
         Status = PostStatus.Published;
     }
 
-    public void Update(string? description, List<string>? mediaUrls, PostVisibility? visibility)
+    public void Update(string? description, List<string>? mediaUrls, PostVisibility? visibility, int? duration = null)
     {
         if (description != null) Description = description;
         if (mediaUrls != null) MediaUrls = mediaUrls;
         if (visibility.HasValue) Visibility = visibility.Value;
+        if (duration.HasValue) Duration = duration;
     }
 
     public void AddAscent(Ascent ascent)

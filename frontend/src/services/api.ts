@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL ?? '/api',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -34,55 +35,60 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then((token) => {
-          originalRequest.headers.Authorization = `Bearer ${token}`;
-          return api(originalRequest);
-        });
-      }
+    // Network error or no response — just reject
+    if (!error.response) return Promise.reject(error);
 
-      originalRequest._retry = true;
-      isRefreshing = true;
+    const url = originalRequest.url ?? '';
 
-      const refreshToken = localStorage.getItem('auth_refresh_token');
-      if (!refreshToken) {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_refresh_token');
-        localStorage.removeItem('auth_user');
-        window.location.pathname = '/login';
-        isRefreshing = false;
-        return Promise.reject(error);
-      }
-
-      try {
-        const response = await axios.post(
-          `${api.defaults.baseURL}/auth/refresh`,
-          { refreshToken },
-        );
-        const { token, refreshToken: newRefresh } = response.data;
-        localStorage.setItem('auth_token', token);
-        if (newRefresh) localStorage.setItem('auth_refresh_token', newRefresh);
-
-        processQueue(null, token);
-
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return api(originalRequest);
-      } catch (refreshError) {
-        processQueue(refreshError, null);
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_refresh_token');
-        localStorage.removeItem('auth_user');
-        window.location.pathname = '/login';
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
-      }
+    // Login/register 401 is expected — don't intercept
+    if (url.includes('/auth/login') || url.includes('/auth/register')) {
+      return Promise.reject(error);
     }
 
-    return Promise.reject(error);
+    // Only handle 401 for other endpoints
+    if (error.response.status !== 401 || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    // If this IS the refresh endpoint and it 401d — redirect now
+    if (url.includes('/auth/refresh')) {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+      window.location.href = '/login';
+      return Promise.reject(error);
+    }
+
+    if (isRefreshing) {
+      return new Promise((resolve, reject) => {
+        failedQueue.push({ resolve, reject });
+      }).then((token) => {
+        originalRequest.headers.Authorization = `Bearer ${token}`;
+        return api(originalRequest);
+      });
+    }
+
+    originalRequest._retry = true;
+    isRefreshing = true;
+
+    try {
+      const response = await api.post('/auth/refresh');
+      const { token } = response.data;
+      localStorage.setItem('auth_token', token);
+
+      processQueue(null, token);
+
+      originalRequest.headers.Authorization = `Bearer ${token}`;
+      return api(originalRequest);
+    } catch (refreshError) {
+      processQueue(refreshError, null);
+      // Refresh failed — redirect to login
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+      window.location.href = '/login';
+      return Promise.reject(refreshError);
+    } finally {
+      isRefreshing = false;
+    }
   },
 );
 

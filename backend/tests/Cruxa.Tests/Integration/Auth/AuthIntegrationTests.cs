@@ -20,7 +20,7 @@ public class AuthIntegrationTests : IntegrationTestBase
         auth.Token.Should().NotBeNullOrEmpty();
         auth.User.Username.Should().Be(cmd.Username);
         auth.User.Email.Should().Be(cmd.Email.ToLowerInvariant());
-        auth.User.City.Should().Be(cmd.City);
+        auth.User.DisplayName.Should().NotBeNullOrEmpty();
         auth.User.Role.Should().Be("Climber");
     }
 

@@ -8,6 +8,7 @@ namespace Cruxa.Application.Features.Routes.Commands;
 
 public record UpdateRouteCommand(
     Guid Id,
+    string? Name = null,
     RouteType? Type = null,
     HoldColor? HoldColor = null,
     string? GradeRaw = null,

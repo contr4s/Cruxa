@@ -41,7 +41,7 @@ public class AscentIntegrationTests(CruxaApiFactory factory) : IntegrationTestBa
         var response = await Client.PostAsJsonAsync($"/api/posts/{Fixture.Create<Guid>()}/ascents", new
         {
             routeId = Fixture.Create<Guid>(),
-            style = "Onsight"
+            Style = AscentStyle.Onsight
         }, JsonOptions);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
@@ -118,7 +118,7 @@ public class AscentIntegrationTests(CruxaApiFactory factory) : IntegrationTestBa
         var ascents = await DeserializeAsync<OffsetPaginatedList<AscentDto>>(getResponse);
 
         // Update ascent style
-        var updateCmd = new { Style = "Flash", MediaUrls = new List<string> { "https://example.com/photo.jpg" } };
+        var updateCmd = new { Style = AscentStyle.Flash, MediaUrls = new List<string> { "https://example.com/photo.jpg" } };
         var updateResponse = await Client.PutAsJsonAsync($"/api/posts/{postId}/ascents/{ascents!.Items[0].Id}", updateCmd, JsonOptions);
         updateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
@@ -142,7 +142,7 @@ public class AscentIntegrationTests(CruxaApiFactory factory) : IntegrationTestBa
         var ascents = await DeserializeAsync<OffsetPaginatedList<AscentDto>>(getResponse);
 
         var updateResponse = await Client.PutAsJsonAsync($"/api/posts/{postId}/ascents/{ascents!.Items[0].Id}",
-            new { Style = "Flash" }, JsonOptions);
+            new { Style = AscentStyle.Flash }, JsonOptions);
         updateResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
     }
 

@@ -1,6 +1,6 @@
 namespace Cruxa.Parser.Models;
 
-using Cruxa.Domain.ValueObjects;
+using Domain.ValueObjects;
 
 /// <summary>
 /// Normalized DTO representing a gym parsed from climbingpro.ru.

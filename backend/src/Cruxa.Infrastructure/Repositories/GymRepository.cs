@@ -18,32 +18,58 @@ public class GymRepository : IGymRepository
     {
         return await _context.Gyms
             .Include(g => g.GradingSystem)
+            .Include(g => g.Routes)
             .FirstOrDefaultAsync(g => g.Id == id);
     }
 
     public async Task<IEnumerable<Gym>> GetByCityAsync(string city)
     {
         return await _context.Gyms
+            .Include(g => g.Routes)
             .Where(g => g.City == city)
             .ToListAsync();
     }
 
-    public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize)
+    public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize, string? city = null, Domain.Enums.GymSort? sort = null)
     {
-        var query = _context.Gyms
-            .Include(g => g.GradingSystem);
+        IQueryable<Gym> query = _context.Gyms
+            .Include(g => g.GradingSystem)
+            .Include(g => g.Routes);
+
+        if (!string.IsNullOrEmpty(city) && city != "all")
+            query = query.Where(g => g.City == city);
+
         var totalCount = await query.CountAsync();
-        var items = await query
-            .OrderBy(g => g.Name)
+
+        IOrderedQueryable<Gym> ordered = sort switch
+        {
+            Domain.Enums.GymSort.Name => query.OrderBy(g => g.Name),
+            Domain.Enums.GymSort.Rating => query.OrderByDescending(g => g.Routes.Average(r => r.Reviews.Average(rv => (double?)rv.Rating) ?? 0)),
+            Domain.Enums.GymSort.Routes => query.OrderByDescending(g => g.Routes.Count),
+            _ => query.OrderBy(g => g.Name)
+        };
+
+        var items = await ordered
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
         return (items, totalCount);
     }
 
+    public async Task<List<string>> GetCitiesAsync()
+    {
+        return await _context.Gyms
+            .Select(g => g.City)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToListAsync();
+    }
+
     public async Task<(List<Gym> Items, int TotalCount)> GetByCityPagedAsync(string city, int page, int pageSize)
     {
-        var query = _context.Gyms.Where(g => g.City == city);
+        var query = _context.Gyms
+            .Include(g => g.Routes)
+            .Where(g => g.City == city);
         var totalCount = await query.CountAsync();
         var items = await query
             .OrderBy(g => g.Name)
@@ -57,6 +83,7 @@ public class GymRepository : IGymRepository
     {
         return await _context.Gyms
             .Include(g => g.GradingSystem)
+            .Include(g => g.Routes)
             .ToListAsync();
     }
 
@@ -73,7 +100,7 @@ public class GymRepository : IGymRepository
     public async Task DeleteAsync(Guid id)
     {
         var gym = await GetByIdAsync(id);
-        if (gym != null)
+        if (gym is not null)
         {
             _context.Gyms.Remove(gym);
         }

@@ -46,11 +46,11 @@ public class UpdateRouteHandler(
                 tagEntities = tagResult.Value;
             }
 
-            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.PhotoUrls, tagEntities, cmd.Sector, cmd.IsActive);
+            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.Name, cmd.PhotoUrls, tagEntities, cmd.Sector, cmd.IsActive);
         }
         else
         {
-            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.PhotoUrls, null, cmd.Sector, cmd.IsActive);
+            route.Update(cmd.Type, cmd.HoldColor, newGrade, cmd.Name, cmd.PhotoUrls, null, cmd.Sector, cmd.IsActive);
         }
 
         await routes.UpdateAsync(route);

@@ -5,7 +5,7 @@ using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Gyms.Commands;
 
-using Cruxa.Domain.ValueObjects;
+using Domain.ValueObjects;
 
 public record CreateGymCommand(string Name, string City, string Address, double? Latitude = null, double? Longitude = null,
     string? Description = null, string? ContactInfo = null, string? Website = null,

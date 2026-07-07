@@ -6,13 +6,25 @@ interface GymContactsBlockProps {
   gym: GymDto;
 }
 
-const SOCIALS = [['vkUrl', 'VK'], ['instagramUrl', 'Instagram'], ['youtubeUrl', 'YouTube'], ['website', 'Сайт']] as const;
+function extractSocials(gym: GymDto): { key: string; label: string; url: string }[] {
+  if (!gym.socialLinks) return [];
+  return gym.socialLinks
+    .map(url => {
+      const label = url.includes('vk.') || url.includes('vkontakte') ? 'VK'
+        : url.includes('instagram') ? 'Instagram'
+        : url.includes('youtube') || url.includes('youtu.be') ? 'YouTube'
+        : 'Сайт';
+      return { key: url, label, url };
+    });
+}
 
 export function GymContactsBlock({ gym }: GymContactsBlockProps) {
   const theme = useTheme();
-  const hasSocials = SOCIALS.some(([k]) => gym[k]);
+  const socials = extractSocials(gym);
+  const hasSocials = socials.length > 0;
+  const hasWebsite = !!gym.website;
 
-  if (!gym.phone && !gym.email && !hasSocials) return null;
+  if (!gym.phone && !gym.email && !hasSocials && !hasWebsite) return null;
 
   return (
     <>
@@ -36,17 +48,18 @@ export function GymContactsBlock({ gym }: GymContactsBlockProps) {
           )}
         </Box>
       )}
-      {hasSocials && (
+      {(hasSocials || hasWebsite) && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {SOCIALS.map(([key, label]) => {
-            const url = gym[key];
-            if (!url) return null;
-            return (
-              <Link key={key} href={url} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ fontSize: '0.78rem', color: theme.palette.primary.light, display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <Language sx={{ fontSize: 14 }} />{label}
-              </Link>
-            );
-          })}
+          {hasWebsite && (
+            <Link href={gym.website!} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ fontSize: '0.78rem', color: theme.palette.primary.light, display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Language sx={{ fontSize: 14 }} />Сайт
+            </Link>
+          )}
+          {socials.map(({ key, label, url }) => (
+            <Link key={key} href={url} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ fontSize: '0.78rem', color: theme.palette.primary.light, display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Language sx={{ fontSize: 14 }} />{label}
+            </Link>
+          ))}
         </Box>
       )}
     </>

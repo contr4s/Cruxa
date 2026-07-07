@@ -1,4 +1,4 @@
-﻿using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Interfaces;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Features.Users.Interfaces;
 using Cruxa.Domain.Entities;
@@ -11,14 +11,18 @@ public class RegisterHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IUserRepository> _userRepo = new();
+    private readonly Mock<IPasswordCredentialRepository> _credRepo = new();
     private readonly Mock<IJwtTokenGenerator> _jwt = new();
     private readonly Mock<IPasswordHasher> _passwordHasher = new();
+    private readonly Mock<IRefreshTokenRepository> _refreshTokenRepo = new();
     private readonly RegisterHandler _handler;
 
     public RegisterHandlerTests()
     {
-        _jwt.Setup(j => j.GenerateTokenAsync(It.IsAny<User>())).ReturnsAsync("token");
-        _handler = new RegisterHandler(_userRepo.Object, _jwt.Object, _passwordHasher.Object);
+        _jwt.Setup(j => j.GenerateAccessTokenAsync(It.IsAny<User>())).ReturnsAsync("token");
+        _jwt.Setup(j => j.GenerateRefreshTokenAsync()).ReturnsAsync("refresh");
+        _passwordHasher.Setup(p => p.Hash(It.IsAny<string>())).Returns("hash");
+        _handler = new RegisterHandler(_userRepo.Object, _credRepo.Object, _refreshTokenRepo.Object, _jwt.Object, _passwordHasher.Object);
     }
 
     [Fact]

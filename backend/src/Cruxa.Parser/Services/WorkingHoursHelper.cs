@@ -1,6 +1,6 @@
 namespace Cruxa.Parser.Services;
 
-using Cruxa.Domain.ValueObjects;
+using Domain.ValueObjects;
 
 /// <summary>
 /// Helper for compact representation of working hours.

@@ -2,7 +2,6 @@ using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Auth.DTOs;
 using Cruxa.Application.Features.Auth.Commands;
-using Cruxa.Application.Features.Users.DTOs;
 using Cruxa.Application.Features.Users.Interfaces;
 using Cruxa.Application.Common.Interfaces;
 using Cruxa.Domain.Common;
@@ -11,7 +10,12 @@ using Cruxa.Domain.ValueObjects;
 
 namespace Cruxa.Application.Features.Auth.Handlers;
 
-public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPasswordHasher passwordHasher)
+public class RegisterHandler(
+    IUserRepository users,
+    IPasswordCredentialRepository passwordCredentials,
+    IRefreshTokenRepository refreshTokenRepo,
+    IJwtTokenGenerator jwt,
+    IPasswordHasher passwordHasher)
     : IRequestHandler<RegisterCommand, Result<AuthResponse>>
 {
     public async Task<Result<AuthResponse>> Handle(RegisterCommand cmd, CancellationToken ct)
@@ -26,22 +30,27 @@ public class RegisterHandler(IUserRepository users, IJwtTokenGenerator jwt, IPas
         if (emailResult.IsFailure)
             return Result.Failure<AuthResponse>(emailResult.Error);
 
-        var passwordHash = passwordHasher.Hash(cmd.Password);
-
-        var userResult = User.Create(emailResult.Value, cmd.Username, passwordHash);
+        var userResult = User.Create(emailResult.Value, cmd.Username, cmd.FirstName, cmd.LastName, cmd.Gender, cmd.Height, cmd.City);
         if (userResult.IsFailure)
             return Result.Failure<AuthResponse>(userResult.Error);
 
         var user = userResult.Value;
-        if (cmd.City is not null)
-            user.UpdateProfile(null, cmd.City);
-
         await users.AddAsync(user);
 
-        var token = await jwt.GenerateTokenAsync(user);
-        var userDto = user.Adapt<UserDto>();
+        var passwordHash = passwordHasher.Hash(cmd.Password);
+        var credential = new PasswordCredential(user.Id, passwordHash);
+        await passwordCredentials.AddAsync(credential);
 
-        return new AuthResponse { Token = token, User = userDto };
+        var token = await jwt.GenerateAccessTokenAsync(user);
+        var refreshToken = await jwt.GenerateRefreshTokenAsync();
+        var rt = new RefreshToken(user.Id, refreshToken, DateTime.UtcNow.AddDays(7));
+        await refreshTokenRepo.AddAsync(rt);
+
+        return new AuthResponse
+        {
+            Token = token,
+            User = user.Adapt<Users.DTOs.UserDto>()
+        };
     }
 
 }

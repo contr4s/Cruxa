@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Configuration;
 using Testcontainers.PostgreSql;
 
 namespace Cruxa.Tests.Integration;
@@ -37,6 +38,7 @@ public class CruxaApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
         // Override environment settings
         builder.UseEnvironment("Testing");
+        builder.UseSetting("Jwt:Secret", "test-secret-key-32-chars-long-at-least!!");
     }
 
     public async Task InitializeAsync()

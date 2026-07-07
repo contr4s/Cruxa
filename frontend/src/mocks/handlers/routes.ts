@@ -46,7 +46,7 @@ function paginate<T>(items: T[], page: number, pageSize: number): PaginatedList<
 }
 
 export const routeHandlers = [
-  http.get('/api/gyms/:gymId/routes', async ({ request, params }) => {
+  http.get('/api/routes/gym/:gymId', async ({ request, params }) => {
     await mockDelay(400);
     const url = new URL(request.url);
     const page = Number(url.searchParams.get('page')) || 1;

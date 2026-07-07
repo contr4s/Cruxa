@@ -84,10 +84,10 @@ public class PostIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/posts/user/{created.UserId}");
         response.EnsureSuccessStatusCode();
-        var posts = await DeserializeAsync<List<PostDto>>(response);
+        var posts = await DeserializeAsync<OffsetPaginatedList<PostDto>>(response);
 
-        posts.Should().NotBeEmpty();
-        posts.Should().Contain(p => p.Id == created.Id);
+        posts.Items.Should().NotBeEmpty();
+        posts.Items.Should().Contain(p => p.Id == created.Id);
     }
 
     [Fact]

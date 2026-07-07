@@ -5,7 +5,6 @@ import api from '../services/api';
 
 interface AuthState {
   token: string | null;
-  refreshToken: string | null;
   userId: string | null;
   username: string | null;
   displayName: string | null;
@@ -21,36 +20,57 @@ interface AuthState {
   setDisplayName: (name: string) => void;
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
-  token: null,
-  refreshToken: null,
-  userId: null,
-  username: null,
-  displayName: null,
-  role: null,
-  isAuthenticated: false,
+export const useAuthStore = create<AuthState>((set, get) => {
+  // Restore auth state from localStorage synchronously on store creation
+  const storedToken = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+  const storedUser = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_user') : null;
+  let initial: Partial<AuthState> = {};
+
+  if (storedToken && storedUser) {
+    try {
+      const data = JSON.parse(storedUser);
+      const user = data.user ?? data;
+      initial = {
+        token: storedToken,
+        userId: user.id ?? user.userId,
+        username: user.username,
+        displayName: user.displayName ?? user.username,
+        role: user.role,
+        isAuthenticated: true,
+      };
+    } catch {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+    }
+  }
+
+  return {
+    token: initial.token ?? null,
+    userId: initial.userId ?? null,
+    username: initial.username ?? null,
+    displayName: initial.displayName ?? null,
+    role: initial.role ?? null,
+    isAuthenticated: initial.isAuthenticated ?? false,
   isLoading: false,
   error: null,
 
   init: () => {
     const token = localStorage.getItem('auth_token');
-    const refreshToken = localStorage.getItem('auth_refresh_token');
     const userStr = localStorage.getItem('auth_user');
     if (token && userStr) {
       try {
-        const user = JSON.parse(userStr) as AuthResponse;
+        const data = JSON.parse(userStr);
+        const user = data.user ?? data;
         set({
           token,
-          refreshToken,
-          userId: user.userId,
+          userId: user.id ?? user.userId,
           username: user.username,
-          displayName: user.displayName,
+          displayName: user.displayName ?? user.username,
           role: user.role,
           isAuthenticated: true,
         });
       } catch {
         localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_refresh_token');
         localStorage.removeItem('auth_user');
       }
     }
@@ -61,21 +81,18 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     try {
       const response = await authService.login({ email, password });
       localStorage.setItem('auth_token', response.token);
-      if (response.refreshToken) localStorage.setItem('auth_refresh_token', response.refreshToken);
       localStorage.setItem('auth_user', JSON.stringify(response));
       set({
         token: response.token,
-        refreshToken: response.refreshToken ?? null,
-        userId: response.userId,
-        username: response.username,
-        displayName: response.displayName,
-        role: response.role,
+        userId: response.user.id,
+        username: response.user.username,
+        displayName: response.user.displayName ?? response.user.username,
+        role: response.user.role,
         isAuthenticated: true,
         isLoading: false,
       });
     } catch (err) {
       set({ isLoading: false, error: err instanceof Error ? err.message : 'Ошибка входа' });
-      throw err;
     }
   },
 
@@ -84,39 +101,34 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     try {
       const response = await authService.register({ email, username, password, ...extra });
       localStorage.setItem('auth_token', response.token);
-      if (response.refreshToken) localStorage.setItem('auth_refresh_token', response.refreshToken);
       localStorage.setItem('auth_user', JSON.stringify(response));
       set({
         token: response.token,
-        refreshToken: response.refreshToken ?? null,
-        userId: response.userId,
-        username: response.username,
-        displayName: response.displayName,
-        role: response.role,
+        userId: response.user.id,
+        username: response.user.username,
+        displayName: response.user.displayName ?? response.user.username,
+        role: response.user.role,
         isAuthenticated: true,
         isLoading: false,
       });
     } catch (err) {
       set({ isLoading: false, error: err instanceof Error ? err.message : 'Ошибка регистрации' });
-      throw err;
     }
   },
 
   refreshAuth: async () => {
-    const refreshToken = get().refreshToken;
-    if (!refreshToken) {
-      get().logout();
-      return;
-    }
+    // Refresh token is stored in httpOnly cookie — just call the endpoint
     try {
-      const response = await api.post<AuthResponse & { refreshToken?: string }>('/auth/refresh', { refreshToken });
+      const response = await api.post<AuthResponse>('/auth/refresh');
       localStorage.setItem('auth_token', response.data.token);
-      if (response.data.refreshToken) localStorage.setItem('auth_refresh_token', response.data.refreshToken);
       localStorage.setItem('auth_user', JSON.stringify(response.data));
+      const user = response.data.user;
       set({
         token: response.data.token,
-        refreshToken: response.data.refreshToken ?? null,
-        role: response.data.role,
+        userId: user.id,
+        username: user.username,
+        displayName: user.displayName ?? user.username,
+        role: user.role,
         isAuthenticated: true,
       });
     } catch {
@@ -139,11 +151,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   logout: () => {
     localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_refresh_token');
     localStorage.removeItem('auth_user');
     set({
       token: null,
-      refreshToken: null,
       userId: null,
       username: null,
       displayName: null,
@@ -151,4 +161,5 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       isAuthenticated: false,
     });
   },
-}));
+};
+});

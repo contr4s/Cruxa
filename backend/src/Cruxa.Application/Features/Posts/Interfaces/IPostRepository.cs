@@ -5,7 +5,7 @@ namespace Cruxa.Application.Features.Posts.Interfaces;
 public interface IPostRepository
 {
     Task<Post?> GetByIdAsync(Guid id);
-    Task<IEnumerable<Post>> GetByUserIdAsync(Guid userId);
+    Task<(List<Post> Items, int TotalCount)> GetPagedByUserIdAsync(Guid userId, int page, int pageSize);
     Task<IEnumerable<Post>> GetByUserIdsAsync(List<Guid> userIds);
     Task<IEnumerable<Post>> GetByGymIdAsync(Guid gymId);
     Task<IEnumerable<Post>> GetAllAsync();

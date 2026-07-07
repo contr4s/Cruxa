@@ -242,8 +242,8 @@ public class SeedCommand
         public string? ContactEmail { get; set; }
         public List<string>? SocialLinks { get; set; }
         public string? Website { get; set; }
-        public List<Cruxa.Domain.ValueObjects.PriceItem>? Prices { get; set; }
-        public List<Cruxa.Domain.ValueObjects.WorkingHoursEntry>? WorkingHours { get; set; }
+        public List<Domain.ValueObjects.PriceItem>? Prices { get; set; }
+        public List<Domain.ValueObjects.WorkingHoursEntry>? WorkingHours { get; set; }
         public List<string> PhotoUrls { get; set; } = [];
         public double? WallArea { get; set; }
         public double? MaxHeight { get; set; }

@@ -20,6 +20,9 @@ public class CruxaDbContext : DbContext
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<RouteReview> RouteReviews => Set<RouteReview>();
     public DbSet<Tag> Tags => Set<Tag>();
+    public DbSet<PasswordCredential> PasswordCredentials => Set<PasswordCredential>();
+    public DbSet<ExternalCredential> ExternalCredentials => Set<ExternalCredential>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getGyms, getGymById, toggleGymFavorite, updateGym } from '../gyms.service';
+import { getGyms, getGymById, getCities, toggleGymFavorite, updateGym } from '../gyms.service';
 import type { GetGymsParams } from '../gyms.service';
 import type { GymDto } from '../../types/gym';
 import type { UpdateGymPayload } from '../../types/gym';
@@ -17,6 +17,14 @@ export function useInfiniteGyms(params?: Omit<GetGymsParams, 'page'>) {
     queryFn: ({ pageParam = 1 }) => getGyms({ ...params, page: pageParam, pageSize: params?.pageSize ?? 10 }),
     getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.page + 1 : undefined),
     initialPageParam: 1,
+  });
+}
+
+export function useCities() {
+  return useQuery({
+    queryKey: ['gyms', 'cities'],
+    queryFn: getCities,
+    staleTime: 5 * 60 * 1000,
   });
 }
 

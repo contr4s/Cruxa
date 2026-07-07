@@ -31,6 +31,21 @@ public class CommentRepository : ICommentRepository
             .ToListAsync();
     }
 
+    public async Task<(List<Comment> Items, int TotalCount)> GetPagedByPostIdAsync(Guid postId, int page, int pageSize)
+    {
+        var query = _context.Comments
+            .Include(c => c.User)
+            .Where(c => c.PostId == postId);
+
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderBy(c => c.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
     public async Task<IEnumerable<Comment>> GetRecentByPostIdAsync(Guid postId, int limit)
     {
         return await _context.Comments

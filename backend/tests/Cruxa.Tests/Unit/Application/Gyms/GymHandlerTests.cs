@@ -138,9 +138,9 @@ public class GymHandlerTests
             typeof(Gym).GetProperty("City")?.SetValue(g, city);
         }
         var handler = new GetGymsByCityHandler(_gymRepo.Object);
-        _gymRepo.Setup(r => r.GetByCityPagedAsync(city, 1, 20)).ReturnsAsync((gyms, 2));
+        _gymRepo.Setup(r => r.GetByCityPagedAsync(city, 1, 10)).ReturnsAsync((gyms, 2));
 
-        var result = await handler.Handle(new GetGymsByCityQuery(city, 1, 20), CancellationToken.None);
+        var result = await handler.Handle(new GetGymsByCityQuery(city, 1, 10), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Items.Should().HaveCount(2);

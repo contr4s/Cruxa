@@ -31,7 +31,10 @@ public sealed class UpdateAscentHandler : IRequestHandler<UpdateAscentCommand, R
         {
             Id = ascent.Id,
             RouteId = ascent.RouteId,
-            GradeRaw = ascent.Route?.Grade?.Raw ?? "",
+            RouteName = ascent.Route?.Name ?? "",
+            Grade = ascent.Route?.Grade?.Raw ?? "",
+            GradeIndex = ascent.Route?.Grade?.Index ?? 0,
+            HoldColor = ascent.Route?.HoldColor ?? default,
             Style = ascent.Style,
             MediaUrls = ascent.MediaUrls.ToList(),
             CreatedAt = ascent.CreatedAt

@@ -10,6 +10,7 @@ using ValueObjects;
 /// </summary>
 public class Route : Entity<Guid>
 {
+    public string Name { get; private set; } = string.Empty;
     public Grade Grade { get; private set; }
     public RouteType Type { get; private set; }
     public HoldColor HoldColor { get; private set; }
@@ -41,6 +42,7 @@ public class Route : Entity<Guid>
         Grade grade,
         RouteType type,
         HoldColor holdColor,
+        string name = "",
         Guid? authorId = null,
         List<string>? photoUrls = null,
         List<Tag>? tags = null,
@@ -54,6 +56,7 @@ public class Route : Entity<Guid>
             Id = Guid.NewGuid(),
             GymId = gymId,
             AuthorId = authorId,
+            Name = name.Trim(),
             Grade = grade,
             Type = type,
             HoldColor = holdColor,
@@ -74,6 +77,7 @@ public class Route : Entity<Guid>
         RouteType? type,
         HoldColor? holdColor,
         Grade? grade,
+        string? name,
         List<string>? photoUrls,
         List<Tag>? tags,
         string? sector,
@@ -82,6 +86,7 @@ public class Route : Entity<Guid>
         if (type.HasValue) Type = type.Value;
         if (holdColor.HasValue) HoldColor = holdColor.Value;
         if (grade is not null) Grade = grade;
+        if (name is not null) Name = name.Trim();
         if (photoUrls != null) PhotoUrls = photoUrls;
         if (tags != null) Tags = tags;
         if (sector != null) Sector = sector;

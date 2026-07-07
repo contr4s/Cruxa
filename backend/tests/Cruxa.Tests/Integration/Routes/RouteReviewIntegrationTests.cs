@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.DTOs;
 using FluentAssertions;
 
@@ -89,10 +90,10 @@ public class RouteReviewIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/routes/{routeId}/reviews");
         response.EnsureSuccessStatusCode();
-        var reviews = await DeserializeAsync<List<RouteReviewDto>>(response);
+        var reviews = await DeserializeAsync<OffsetPaginatedList<RouteReviewDto>>(response);
 
-        reviews.Should().NotBeEmpty();
-        reviews.Count.Should().BeGreaterThanOrEqualTo(2);
+        reviews.Items.Should().NotBeEmpty();
+        reviews.Items.Count.Should().BeGreaterThanOrEqualTo(2);
     }
 
     [Fact]

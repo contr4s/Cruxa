@@ -4,13 +4,27 @@ import { mockDelay } from '../helpers';
 
 const MOCK_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mock-token-for-development';
 
-const roleMap: Record<string, { role: AuthResponse['role']; userId: string; username: string; displayName: string }> = {
+const roleMap: Record<string, { role: string; userId: string; username: string; displayName: string }> = {
   'routesetter@cruxa.ru': { role: 'Routesetter', userId: 's1', username: 'setter', displayName: 'Сеттер Петров' },
   'gymadmin@cruxa.ru': { role: 'GymAdmin', userId: 'g1', username: 'gymadmin', displayName: 'Админ Залова' },
   'admin@cruxa.ru': { role: 'Admin', userId: 'a1', username: 'superadmin', displayName: 'Супер Админ' },
 };
 
-const defaultUser = { role: 'Climber' as const, userId: '550e8400-e29b-41d4-a716-446655440001', username: 'alexey', displayName: 'Алексей Кузнецов' };
+const defaultUser = { role: 'Climber', userId: '550e8400-e29b-41d4-a716-446655440001', username: 'alexey', displayName: 'Алексей Кузнецов' };
+
+function makeAuthResponse(email: string, uname: string, u: typeof defaultUser): AuthResponse {
+  return {
+    token: MOCK_TOKEN,
+    user: {
+      id: u.userId,
+      username: uname,
+      email,
+      displayName: u.displayName,
+      role: u.role as AuthResponse['user']['role'],
+      createdAt: new Date().toISOString(),
+    },
+  };
+}
 
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
@@ -22,15 +36,8 @@ export const authHandlers = [
     if (data.password.length < 6) {
       return HttpResponse.json({ title: 'Неверный email или пароль' }, { status: 401 });
     }
-    const user = roleMap[data.email.toLowerCase()] ?? defaultUser;
-    return HttpResponse.json<AuthResponse>({
-      token: MOCK_TOKEN,
-      userId: user.userId,
-      username: user.username,
-      displayName: user.displayName,
-      email: data.email,
-      role: user.role,
-    });
+    const u = roleMap[data.email.toLowerCase()] ?? defaultUser;
+    return HttpResponse.json<AuthResponse>(makeAuthResponse(data.email, u.username, u));
   }),
 
   http.post('/api/auth/register', async ({ request }) => {
@@ -42,14 +49,7 @@ export const authHandlers = [
     if (data.password.length < 6) {
       return HttpResponse.json({ title: 'Пароль должен быть не менее 6 символов' }, { status: 400 });
     }
-    const user = roleMap[data.email.toLowerCase()] ?? defaultUser;
-    return HttpResponse.json<AuthResponse>({
-      token: MOCK_TOKEN,
-      userId: user.userId,
-      username: data.username,
-      displayName: user.displayName,
-      email: data.email,
-      role: user.role,
-    });
+    const u = roleMap[data.email.toLowerCase()] ?? defaultUser;
+    return HttpResponse.json<AuthResponse>(makeAuthResponse(data.email, data.username, u));
   }),
 ];

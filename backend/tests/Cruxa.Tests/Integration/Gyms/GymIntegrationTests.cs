@@ -92,7 +92,7 @@ public class GymIntegrationTests : IntegrationTestBase
         var gym = await CreateGymAsync();
 
         ClearToken();
-        var response = await Client.GetAsync($"/api/gyms/city/{gym.City}");
+        var response = await Client.GetAsync($"/api/gyms?city={Uri.EscapeDataString(gym.City)}");
         response.EnsureSuccessStatusCode();
         var gyms = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
 
@@ -172,7 +172,7 @@ public class GymIntegrationTests : IntegrationTestBase
         var gym = await CreateGymAsync();
 
         ClearToken();
-        var response = await Client.GetAsync($"/api/gyms/city/{gym.City}?page=1&pageSize=10");
+        var response = await Client.GetAsync($"/api/gyms?city={Uri.EscapeDataString(gym.City)}&page=1&pageSize=10");
         response.EnsureSuccessStatusCode();
         var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
 
@@ -180,5 +180,85 @@ public class GymIntegrationTests : IntegrationTestBase
         result.Items.Should().NotBeEmpty();
         result.Page.Should().Be(1);
         result.PageSize.Should().Be(10);
+    }
+
+    [Fact]
+    public async Task GetCities_ReturnsDistinctCities()
+    {
+        await SetupAdminAsync();
+        await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync("/api/gyms/cities");
+        response.EnsureSuccessStatusCode();
+        var cities = await DeserializeAsync<List<string>>(response);
+
+        cities.Should().NotBeNull();
+        cities.Should().NotBeEmpty();
+        cities.Should().OnlyHaveUniqueItems();
+    }
+
+    [Fact]
+    public async Task GetAll_WithCityFilter_ReturnsOnlyMatchingGyms()
+    {
+        await SetupAdminAsync();
+        var gym = await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync($"/api/gyms?city={Uri.EscapeDataString(gym.City)}");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().NotBeEmpty();
+        result.Items.Should().OnlyContain(g => g.City == gym.City);
+    }
+
+    [Fact]
+    public async Task GetAll_WithNonExistentCity_ReturnsEmpty()
+    {
+        ClearToken();
+        var response = await Client.GetAsync("/api/gyms?city=NonexistentCity123");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().BeEmpty();
+        result.TotalCount.Should().Be(0);
+    }
+
+    [Fact]
+    public async Task GetAll_WithSortByName_ReturnsOrderedGyms()
+    {
+        await SetupAdminAsync();
+        await CreateGymAsync();
+        await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync("/api/gyms?sort=name&pageSize=10");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().NotBeEmpty();
+        var names = result.Items.Select(g => g.Name).ToList();
+        names.Should().BeInAscendingOrder();
+    }
+
+    [Fact]
+    public async Task GetAll_WithInvalidSort_DefaultsToName()
+    {
+        await SetupAdminAsync();
+        await CreateGymAsync();
+
+        ClearToken();
+        var response = await Client.GetAsync("/api/gyms?sort=invalid_sort_value&pageSize=10");
+        response.EnsureSuccessStatusCode();
+        var result = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
+
+        result.Should().NotBeNull();
+        result.Items.Should().NotBeEmpty();
+        var names = result.Items.Select(g => g.Name).ToList();
+        names.Should().BeInAscendingOrder();
     }
 }

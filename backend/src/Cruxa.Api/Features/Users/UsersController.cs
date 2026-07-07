@@ -49,4 +49,12 @@ public class UsersController(IMediator mediator, ICurrentUserService currentUser
         await mediator.Send(new DeleteUserCommand(id));
         return NoContent();
     }
+
+    [AllowAnonymous]
+    [HttpGet("{id:guid}/stats")]
+    public async Task<ActionResult<UserStatsDto>> GetStats(Guid id)
+    {
+        var result = await mediator.Send(new GetUserStatsQuery(id));
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
+    }
 }

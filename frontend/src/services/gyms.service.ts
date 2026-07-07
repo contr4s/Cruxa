@@ -33,3 +33,8 @@ export async function updateGym(id: string, data: UpdateGymPayload): Promise<Gym
   const response = await api.put<GymDto>(`/gyms/${id}`, data);
   return response.data;
 }
+
+export async function getCities(): Promise<string[]> {
+  const response = await api.get<string[]>('/gyms/cities');
+  return response.data;
+}

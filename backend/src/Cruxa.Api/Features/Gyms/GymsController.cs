@@ -5,6 +5,7 @@ using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Application.Common.Models;
+using Cruxa.Domain.Enums;
 
 namespace Cruxa.Api.Features.Gyms;
 
@@ -13,9 +14,17 @@ namespace Cruxa.Api.Features.Gyms;
 public class GymsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? city = null, [FromQuery] string? sort = null)
     {
-        var result = await mediator.Send(new GetAllGymsQuery(page, pageSize));
+        var sortEnum = Enum.TryParse<GymSort>(sort, ignoreCase: true, out var parsed) ? parsed : (GymSort?)null;
+        var result = await mediator.Send(new GetAllGymsQuery(page, pageSize, city, sortEnum));
+        return Ok(result.Value);
+    }
+
+    [HttpGet("cities")]
+    public async Task<ActionResult<List<string>>> GetCities()
+    {
+        var result = await mediator.Send(new GetCitiesQuery());
         return Ok(result.Value);
     }
 
@@ -24,13 +33,6 @@ public class GymsController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new GetGymByIdQuery(id));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
-    }
-
-    [HttpGet("city/{city}")]
-    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetByCity(string city, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
-    {
-        var result = await mediator.Send(new GetGymsByCityQuery(city, page, pageSize));
-        return Ok(result.Value);
     }
 
     [HttpPost]

@@ -12,7 +12,7 @@ public class UserTests
     private User CreateUser()
     {
         var email = Email.Create(_fixture.Faker.Internet.Email()).Value!;
-        var result = User.Create(email, _fixture.Faker.Internet.UserName(), _fixture.Faker.Lorem.Word());
+        var result = User.Create(email, _fixture.Faker.Internet.UserName());
         return result.Value!;
     }
 
@@ -21,7 +21,7 @@ public class UserTests
     {
         var email = Email.Create(_fixture.Faker.Internet.Email()).Value!;
         var username = _fixture.Faker.Internet.UserName();
-        var result = User.Create(email, username, _fixture.Faker.Lorem.Word());
+        var result = User.Create(email, username);
 
         result.IsSuccess.Should().BeTrue();
         result.Value!.Username.Should().Be(username);
@@ -34,7 +34,7 @@ public class UserTests
     public void Create_WithEmptyUsername_Throws()
     {
         var email = Email.Create(_fixture.Faker.Internet.Email()).Value!;
-        var act = () => User.Create(email, "  ", _fixture.Faker.Lorem.Word());
+        var act = () => User.Create(email, "  ");
         act.Should().Throw<ArgumentException>();
     }
 
@@ -63,28 +63,6 @@ public class UserTests
 
         user.AvatarUrl.Should().Be(avatarUrl);
         user.City.Should().Be(city);
-    }
-
-    [Fact]
-    public void ChangePassword_WithWrongCurrentHash_ReturnsValidationError()
-    {
-        var user = CreateUser();
-        var currentHash = user.PasswordHash;
-
-        var result = user.ChangePassword(_fixture.Faker.Lorem.Word(), _fixture.Faker.Lorem.Word());
-
-        result.IsSuccess.Should().BeFalse();
-        result.Error.Code.Should().Be("Validation");
-    }
-
-    [Fact]
-    public void ChangePassword_WithCorrectCurrentHash_ReturnsSuccess()
-    {
-        var user = CreateUser();
-
-        var result = user.ChangePassword(user.PasswordHash, _fixture.Faker.Lorem.Word());
-
-        result.IsSuccess.Should().BeTrue();
     }
 
     [Fact]

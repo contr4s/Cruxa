@@ -41,15 +41,16 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (values: RegisterFormValues) => {
-    try {
-      await register(values.email, values.username, values.password, {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        gender: values.gender,
-        height: values.height ? Number(values.height) : undefined,
-      });
+    await register(values.email, values.username, values.password, {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      gender: values.gender,
+      height: values.height ? Number(values.height) : undefined,
+    });
+    const state = useAuthStore.getState();
+    if (!state.error) {
       navigate('/feed', { replace: true });
-    } catch { /* error is set in store */ }
+    }
   };
 
   return (

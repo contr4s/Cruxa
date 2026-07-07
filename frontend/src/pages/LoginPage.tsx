@@ -24,11 +24,12 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (values: LoginFormValues) => {
-    try {
-      await login(values.email, values.password);
+    await login(values.email, values.password);
+    const state = useAuthStore.getState();
+    if (!state.error) {
       const redirect = searchParams.get('redirect') || '/feed';
       navigate(decodeURIComponent(redirect), { replace: true });
-    } catch { /* error is set in store */ }
+    }
   };
 
   return (

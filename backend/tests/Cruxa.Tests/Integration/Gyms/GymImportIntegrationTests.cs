@@ -123,7 +123,7 @@ public class GymImportIntegrationTests : IntegrationTestBase
         importResponse.EnsureSuccessStatusCode();
 
         // Fetch the gym by name via city endpoint
-        var getResponse = await Client.GetAsync($"/api/gyms/city/{dto.City}");
+        var getResponse = await Client.GetAsync($"/api/gyms?city={Uri.EscapeDataString(dto.City)}");
         getResponse.EnsureSuccessStatusCode();
         var gyms = await DeserializeAsync<OffsetPaginatedList<GymDto>>(getResponse);
 

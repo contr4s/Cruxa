@@ -12,7 +12,7 @@ public class GetAllGymsHandler(IGymRepository gyms) : IRequestHandler<GetAllGyms
 {
     public async Task<Result<OffsetPaginatedList<GymDto>>> Handle(GetAllGymsQuery q, CancellationToken ct)
     {
-        var (items, totalCount) = await gyms.GetAllPagedAsync(q.Page, q.PageSize);
+        var (items, totalCount) = await gyms.GetAllPagedAsync(q.Page, q.PageSize, q.City, q.Sort);
         var dtos = items.Select(g => g.Adapt<GymDto>()).ToList();
         return Result.Success(new OffsetPaginatedList<GymDto>(dtos, totalCount, q.Page, q.PageSize));
     }

@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Social.Commands;
 using Cruxa.Application.Features.Social.Queries;
 
@@ -15,9 +16,9 @@ public class CommentsController(IMediator mediator, ICurrentUserService currentU
     /// <summary>Get comments for a post</summary>
     [AllowAnonymous]
     [HttpGet("{postId:guid}/comments")]
-    public async Task<ActionResult<IEnumerable<CommentDto>>> GetComments(Guid postId)
+    public async Task<ActionResult<OffsetPaginatedList<CommentDto>>> GetComments(Guid postId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
-        var result = await mediator.Send(new GetCommentsByPostQuery(postId));
+        var result = await mediator.Send(new GetCommentsByPostQuery(postId, page, pageSize));
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 

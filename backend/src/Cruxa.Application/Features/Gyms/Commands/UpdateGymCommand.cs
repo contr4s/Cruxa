@@ -5,7 +5,7 @@ using Cruxa.Application.Common.Interfaces;
 
 namespace Cruxa.Application.Features.Gyms.Commands;
 
-using Cruxa.Domain.ValueObjects;
+using Domain.ValueObjects;
 
 public record UpdateGymCommand(Guid Id, string? Name = null, string? City = null, string? Address = null,
     double? Latitude = null, double? Longitude = null, string? Description = null,

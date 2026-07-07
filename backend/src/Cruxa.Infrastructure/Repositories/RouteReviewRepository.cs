@@ -28,6 +28,21 @@ internal class RouteReviewRepository : IRouteReviewRepository
             .OrderByDescending(r => r.CreatedAt)
             .ToListAsync();
 
+    public async Task<(List<RouteReview> Items, int TotalCount)> GetPagedByRouteIdAsync(Guid routeId, int page, int pageSize)
+    {
+        var query = _db.RouteReviews
+            .Include(r => r.User)
+            .Where(r => r.RouteId == routeId);
+
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderByDescending(r => r.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
+    }
+
     public async Task<IEnumerable<RouteReview>> GetByUserIdAsync(Guid userId)
         => await _db.RouteReviews
             .Include(r => r.Route)

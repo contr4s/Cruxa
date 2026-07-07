@@ -28,11 +28,33 @@ public class PostRepository : IPostRepository
     public async Task<IEnumerable<Post>> GetByUserIdAsync(Guid userId)
     {
         return await _context.Posts
+            .Include(p => p.User)
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
+            .Include(p => p.Likes)
+            .Include(p => p.Comments)
             .Where(p => p.UserId == userId)
             .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<(List<Post> Items, int TotalCount)> GetPagedByUserIdAsync(Guid userId, int page, int pageSize)
+    {
+        var query = _context.Posts
+            .Include(p => p.User)
+            .Include(p => p.Gym)
+            .Include(p => p.Ascents)
+            .Include(p => p.Likes)
+            .Include(p => p.Comments)
+            .Where(p => p.UserId == userId);
+
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (items, totalCount);
     }
 
     public async Task<IEnumerable<Post>> GetByUserIdsAsync(List<Guid> userIds)
