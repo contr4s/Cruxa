@@ -14,6 +14,8 @@ interface AuthFormLayoutProps {
   footerText: string;
   footerLinkLabel: string;
   footerLinkTo: string;
+  /** Доп. элемент рядом со ссылкой в футере */
+  footerExtra?: ReactNode;
 }
 
 /**
@@ -31,6 +33,7 @@ export function AuthFormLayout({
   footerText,
   footerLinkLabel,
   footerLinkTo,
+  footerExtra,
 }: AuthFormLayoutProps) {
   const theme = useTheme();
 
@@ -92,12 +95,19 @@ export function AuthFormLayout({
           {isLoading ? <CircularProgress size={22} sx={{ color: '#fff' }} /> : submitLabel}
         </Button>
 
-        <Typography variant="body2" sx={{ textAlign: 'center', color: theme.custom.text3 }}>
-          {footerText}{' '}
-          <Link component={RouterLink} to={footerLinkTo} sx={{ color: theme.palette.primary.main, cursor: 'pointer' }}>
+        <Box sx={{ mt: 2.5, textAlign: 'center' }}>
+          <Typography variant="body2" sx={{ color: theme.custom.text3, display: 'inline' }}>
+            {footerText}{' '}
+          </Typography>
+          <Link component={RouterLink} to={footerLinkTo} sx={{ color: theme.palette.primary.main, cursor: 'pointer', fontSize: '0.85rem' }}>
             {footerLinkLabel}
           </Link>
-        </Typography>
+          {footerExtra && (
+            <Typography variant="caption" sx={{ display: 'block', mt: 0.75, color: theme.custom.text3 }}>
+              {footerExtra}
+            </Typography>
+          )}
+        </Box>
       </Paper>
     </Box>
   );

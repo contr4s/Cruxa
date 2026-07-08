@@ -5,6 +5,7 @@
     <Project Path="backend/src/Cruxa.Domain/Cruxa.Domain.csproj" />
     <Project Path="backend/src/Cruxa.Infrastructure/Cruxa.Infrastructure.csproj" />
     <Project Path="backend/src/Cruxa.Parser/Cruxa.Parser.csproj" />
+    <Project Path="backend/src/Cruxa.Seeder/Cruxa.Seeder.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="backend/tests/Cruxa.Tests/Cruxa.Tests.csproj" />

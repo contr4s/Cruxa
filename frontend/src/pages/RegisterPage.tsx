@@ -3,8 +3,10 @@ import { Box, TextField, Radio, RadioGroup, FormControlLabel, FormHelperText, Ty
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { AuthFormLayout } from '../components/ui/AuthFormLayout';
+import DevLoginDialog from '../components/features/DevLoginDialog';
 
 const registerSchema = z.object({
   email: z.string().email('Введите корректный email'),
@@ -53,7 +55,10 @@ export default function RegisterPage() {
     }
   };
 
+  const [devOpen, setDevOpen] = useState(false);
+
   return (
+    <>
     <AuthFormLayout
       subtitle="Присоединяйтесь к сообществу"
       submitLabel="Создать аккаунт"
@@ -64,6 +69,25 @@ export default function RegisterPage() {
       footerText="Уже есть аккаунт?"
       footerLinkLabel="Войти"
       footerLinkTo="/login"
+      footerExtra={import.meta.env.VITE_DEV_ACCOUNTS_ENABLED === 'true' ? (
+        <button
+          onClick={() => setDevOpen(true)}
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#26A69A',
+            fontSize: '0.78rem',
+            fontFamily: 'inherit',
+            padding: 0,
+            transition: 'opacity .15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '.7')}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+        >
+          Войти в тестовый аккаунт →
+        </button>
+      ) : undefined}
     >
       <Controller
         name="firstName"
@@ -194,5 +218,7 @@ export default function RegisterPage() {
         )}
       />
     </AuthFormLayout>
+    <DevLoginDialog open={devOpen} onClose={() => setDevOpen(false)} />
+    </>
   );
 }

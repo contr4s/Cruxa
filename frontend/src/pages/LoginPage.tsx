@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAuthStore } from '../stores/authStore';
 import { AuthFormLayout } from '../components/ui/AuthFormLayout';
+import DevLoginDialog from '../components/features/DevLoginDialog';
+import { useState } from 'react';
 
 const loginSchema = z.object({
   email: z.string().email('Введите корректный email'),
@@ -17,6 +19,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { login, isLoading, error } = useAuthStore();
+  const [devOpen, setDevOpen] = useState(false);
 
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -33,6 +36,7 @@ export default function LoginPage() {
   };
 
   return (
+    <>
     <AuthFormLayout
       subtitle="Войдите в своё пространство"
       submitLabel="Войти"
@@ -43,6 +47,25 @@ export default function LoginPage() {
       footerText="Нет аккаунта?"
       footerLinkLabel="Зарегистрироваться"
       footerLinkTo="/register"
+      footerExtra={import.meta.env.VITE_DEV_ACCOUNTS_ENABLED === 'true' ? (
+        <button
+          onClick={() => setDevOpen(true)}
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#26A69A',
+            fontSize: '0.78rem',
+            fontFamily: 'inherit',
+            padding: 0,
+            transition: 'opacity .15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '.7')}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+        >
+          Войти в тестовый аккаунт →
+        </button>
+      ) : undefined}
     >
       <Controller
         name="email"
@@ -78,5 +101,7 @@ export default function LoginPage() {
         )}
       />
     </AuthFormLayout>
+    <DevLoginDialog open={devOpen} onClose={() => setDevOpen(false)} />
+    </>
   );
 }

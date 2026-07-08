@@ -9,6 +9,8 @@ public class RouteReviewDto
     public Guid RouteId { get; set; }
     public Guid UserId { get; set; }
     public string? Username { get; set; }
+    public string? DisplayName { get; set; }
+    public string? UserAvatarUrl { get; set; }
     public int? Rating { get; set; }
     public string? PrivateNotes { get; set; }
     public string? PublicReview { get; set; }

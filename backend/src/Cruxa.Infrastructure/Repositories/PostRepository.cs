@@ -60,8 +60,10 @@ public class PostRepository : IPostRepository
     public async Task<IEnumerable<Post>> GetByUserIdsAsync(List<Guid> userIds)
     {
         return await _context.Posts
+            .Include(p => p.User)
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
+                .ThenInclude(a => a.Route)
             .Where(p => userIds.Contains(p.UserId))
             .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
@@ -82,6 +84,8 @@ public class PostRepository : IPostRepository
         return await _context.Posts
             .Include(p => p.User)
             .Include(p => p.Gym)
+            .Include(p => p.Ascents)
+                .ThenInclude(a => a.Route)
             .ToListAsync();
     }
 

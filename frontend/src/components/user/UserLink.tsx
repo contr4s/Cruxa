@@ -32,7 +32,7 @@ export function UserLink({
   const theme = useTheme();
   const navigate = useNavigate();
   const s = SIZE_MAP[size];
-  const initial = displayName.charAt(0).toUpperCase();
+  const initial = (displayName ?? username ?? '?').charAt(0).toUpperCase();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();

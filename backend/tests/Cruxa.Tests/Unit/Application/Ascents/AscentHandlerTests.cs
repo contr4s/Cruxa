@@ -1,3 +1,4 @@
+using Bogus;
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Ascents.Handlers;
 using Cruxa.Application.Features.Ascents.Contracts;

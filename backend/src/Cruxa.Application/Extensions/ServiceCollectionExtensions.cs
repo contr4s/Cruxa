@@ -66,9 +66,16 @@ public static class ServiceCollectionExtensions
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.GymName, src => src.Gym != null ? src.Gym.Name : "")
             .Map(dest => dest.SetterUsername, src => src.Author != null ? src.Author.Username : null)
+            .Map(dest => dest.SetterName, src => src.Author != null ? $"{src.Author.FirstName} {src.Author.LastName}".Trim() : null)
             .Map(dest => dest.SetterAvatarUrl, src => src.Author != null ? src.Author.AvatarUrl : null)
             .Map(dest => dest.Rating, src => src.Reviews.Count > 0 ? src.Reviews.Average(r => r.Rating ?? 0) : 0)
             .Map(dest => dest.AscentsCount, src => src.Ascents.Count);
+
+        // RouteReview → RouteReviewDto: map User navigation
+        TypeAdapterConfig<RouteReview, RouteReviewDto>.NewConfig()
+            .Map(dest => dest.Username, src => src.User != null ? src.User.Username : null)
+            .Map(dest => dest.DisplayName, src => src.User != null ? $"{src.User.FirstName} {src.User.LastName}".Trim() : null)
+            .Map(dest => dest.UserAvatarUrl, src => src.User != null ? src.User.AvatarUrl : null);
 
         // Services
         services.AddScoped<KruscoreService>();

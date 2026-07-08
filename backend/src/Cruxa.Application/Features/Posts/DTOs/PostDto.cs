@@ -17,6 +17,7 @@ public class PostDto
     public Guid GymId { get; set; }
     public string GymName { get; set; } = string.Empty;
     public string? Description { get; set; }
+    public string? Body => Description;
     public List<string> MediaUrls { get; set; } = [];
     public PostVisibility Visibility { get; set; }
     public PostStatus Status { get; set; }
@@ -25,5 +26,6 @@ public class PostDto
     public int CommentsCount { get; set; }
     public int? Duration { get; set; }
     public bool IsLiked { get; set; }
+    public PostStatsDto? Stats { get; set; }
     public List<AscentDto> Ascents { get; set; } = [];
 }

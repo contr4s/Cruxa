@@ -24,6 +24,7 @@ public class CruxaDbContext : DbContext
     public DbSet<ExternalCredential> ExternalCredentials => Set<ExternalCredential>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<UserScoreSnapshot> UserScoreSnapshots => Set<UserScoreSnapshot>();
+    public DbSet<GymAssignment> GymAssignments => Set<GymAssignment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

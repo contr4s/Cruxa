@@ -1,6 +1,8 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import { useFeed, useToggleLike } from '../services/hooks/useFeed';
+import { useToggleLike } from '../services/hooks/useFeed';
+import { useUserPosts } from '../services/hooks/useUserPosts';
+import { useAuthStore } from '../stores/authStore';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { WeekStats, AchievementsPanel } from '../components/workouts';
 import { GoalsPanel } from '../components/workouts/goals/GoalsPanel';
@@ -10,6 +12,7 @@ import { PageContainer } from '../components/layout/PageContainer';
 import { AsidePanel } from '../components/layout/AsidePanel';
 
 export default function WorkoutsPage() {
+  const userId = useAuthStore((s) => s.userId);
   const {
     data: pages,
     isLoading,
@@ -18,7 +21,7 @@ export default function WorkoutsPage() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useFeed();
+  } = useUserPosts(userId ?? undefined);
   const posts = useMemo(() => pages?.pages.flatMap((p) => p.items) ?? [], [pages]);
   const toggleLikeMutation = useToggleLike();
 

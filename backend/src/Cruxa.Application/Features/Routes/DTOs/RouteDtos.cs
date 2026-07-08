@@ -13,6 +13,7 @@ public class RouteDto
     public string GymName { get; set; } = string.Empty;
     public Guid? AuthorId { get; set; }
     public string? SetterUsername { get; set; }
+    public string? SetterName { get; set; }
     public string? SetterAvatarUrl { get; set; }
     public string GradeRaw { get; set; } = string.Empty;
     public int GradeIndex { get; set; }

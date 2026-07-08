@@ -23,35 +23,56 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
         return Result.Success(MapToDto(post));
     }
 
-    internal static PostDto MapToDto(Domain.Entities.Post post) => new()
+    internal static PostDto MapToDto(Domain.Entities.Post post)
     {
-        Id = post.Id,
-        UserId = post.UserId,
-        Username = post.User?.Username ?? "",
-        UserAvatarUrl = post.User?.AvatarUrl,
-        DisplayName = post.User is not null ? $"{post.User.FirstName} {post.User.LastName}".Trim() : "",
-        GymId = post.GymId,
-        GymName = post.Gym?.Name ?? "",
-        Description = post.Description,
-        MediaUrls = post.MediaUrls.ToList(),
-        Visibility = post.Visibility,
-        Status = post.Status,
-        CreatedAt = post.CreatedAt,
-        LikesCount = post.Likes.Count,
-        CommentsCount = post.Comments.Count,
-        Duration = post.Duration,
-        IsLiked = false,
-        Ascents = post.Ascents.Select(a => new AscentDto
+        var ascents = post.Ascents.ToList();
+        var totalRoutes = ascents.Count;
+        var grades = ascents.Select(a => a.Route?.Grade).Where(g => g is not null).ToList();
+        var maxGrade = grades.Count > 0 ? grades.MaxBy(g => g!.Index) : null;
+        var avgIndex = grades.Count > 0 ? (int)Math.Round(grades.Average(g => g!.Index)) : 0;
+        var avgGrade = grades.Count > 0 ? grades.FirstOrDefault(g => g!.Index >= avgIndex)?.Raw ?? "" : "";
+        var totalKruskor = ascents.Sum(a => a.Route is not null
+            ? (int)(Domain.Services.KruscoreCalculator.GetS(a.Style, a.Route.Type) * Domain.Services.KruscoreCalculator.GetScale(a.Style, a.Route.Type))
+            : 0);
+
+        return new PostDto
         {
-            Id = a.Id,
-            RouteId = a.RouteId,
-            RouteName = a.Route?.Name ?? "",
-            Grade = a.Route?.Grade?.Raw ?? "",
-            GradeIndex = a.Route?.Grade?.Index ?? 0,
-            HoldColor = a.Route?.HoldColor ?? default,
-            Style = a.Style,
-            MediaUrls = a.MediaUrls.ToList(),
-            CreatedAt = a.CreatedAt
-        }).ToList()
-    };
+            Id = post.Id,
+            UserId = post.UserId,
+            Username = post.User?.Username ?? "",
+            UserAvatarUrl = post.User?.AvatarUrl,
+            DisplayName = post.User is not null ? $"{post.User.FirstName} {post.User.LastName}".Trim() : "",
+            GymId = post.GymId,
+            GymName = post.Gym?.Name ?? "",
+            Description = post.Description,
+            MediaUrls = post.MediaUrls.ToList(),
+            Visibility = post.Visibility,
+            Status = post.Status,
+            CreatedAt = post.CreatedAt,
+            LikesCount = post.Likes.Count,
+            CommentsCount = post.Comments.Count,
+            Duration = post.Duration,
+            IsLiked = false,
+            Stats = new PostStatsDto
+            {
+                TotalKruskor = totalKruskor,
+                AvgGrade = avgGrade,
+                Duration = post.Duration,
+                TotalRoutes = totalRoutes,
+                MaxGrade = maxGrade?.Raw,
+            },
+            Ascents = ascents.Select(a => new AscentDto
+            {
+                Id = a.Id,
+                RouteId = a.RouteId,
+                RouteName = a.Route?.Name ?? "",
+                Grade = a.Route?.Grade?.Raw ?? "",
+                GradeIndex = a.Route?.Grade?.Index ?? 0,
+                HoldColor = a.Route?.HoldColor ?? default,
+                Style = a.Style,
+                MediaUrls = a.MediaUrls.ToList(),
+                CreatedAt = a.CreatedAt
+            }).ToList()
+        };
+    }
 }

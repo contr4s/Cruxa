@@ -49,6 +49,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPasswordCredentialRepository, PasswordCredentialRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<IStatsRepository, StatsRepository>();
+        services.AddScoped<IGymAssignmentRepository, GymAssignmentRepository>();
 
         // Transaction manager
         services.AddScoped<ITransactionManager, TransactionManager>();
