@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Domain.Common;
 
 namespace Cruxa.Application.Common.Behaviors;

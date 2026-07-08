@@ -1,4 +1,5 @@
 using Cruxa.Infrastructure.Repositories;
+using Cruxa.Application.Features.Statistics.Contracts;
 
 namespace Cruxa.Infrastructure.Extensions;
 
@@ -8,14 +9,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using Persistence;
 using Security;
-using Application.Features.Users.Interfaces;
-using Application.Features.Gyms.Interfaces;
-using Application.Features.Routes.Interfaces;
-using Application.Features.GradingSystems.Interfaces;
-using Application.Features.Posts.Interfaces;
-using Application.Features.Ascents.Interfaces;
-using Application.Features.Social.Interfaces;
-using Application.Common.Interfaces;
+using Application.Features.Users.Contracts;
+using Application.Features.Gyms.Contracts;
+using Application.Features.Routes.Contracts;
+using Application.Features.GradingSystems.Contracts;
+using Application.Features.Posts.Contracts;
+using Application.Features.Ascents.Contracts;
+using Application.Features.Social.Contracts;
+using Application.Common.Contracts;
 
 public static class ServiceCollectionExtensions
 {
@@ -47,6 +48,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRouteReviewRepository, RouteReviewRepository>();
         services.AddScoped<IPasswordCredentialRepository, PasswordCredentialRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+        services.AddScoped<IStatsRepository, StatsRepository>();
 
         // Transaction manager
         services.AddScoped<ITransactionManager, TransactionManager>();

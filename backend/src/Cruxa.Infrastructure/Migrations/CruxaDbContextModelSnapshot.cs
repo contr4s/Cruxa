@@ -688,6 +688,40 @@ namespace Cruxa.Infrastructure.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("Cruxa.Domain.Entities.UserScoreSnapshot", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Confidence")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int>("MaxGradeIndex")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Score")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "Date")
+                        .IsUnique();
+
+                    b.ToTable("user_score_snapshots", (string)null);
+                });
+
             modelBuilder.Entity("RouteTag", b =>
                 {
                     b.Property<Guid>("RouteId")

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Application.Features.Routes.Queries;

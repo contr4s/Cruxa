@@ -1,9 +1,9 @@
 using MediatR;
-using Cruxa.Application.Features.Ascents.Interfaces;
+using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Commands;
 using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Application.Features.Ascents.Queries;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Common.Models;
 using Cruxa.Domain.Common;
 using DomainAscent = Cruxa.Domain.Entities.Ascent;

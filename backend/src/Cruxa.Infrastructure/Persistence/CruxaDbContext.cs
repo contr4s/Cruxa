@@ -23,6 +23,7 @@ public class CruxaDbContext : DbContext
     public DbSet<PasswordCredential> PasswordCredentials => Set<PasswordCredential>();
     public DbSet<ExternalCredential> ExternalCredentials => Set<ExternalCredential>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<UserScoreSnapshot> UserScoreSnapshots => Set<UserScoreSnapshot>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

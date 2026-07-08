@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.Ascents.Interfaces;
+using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Commands;
 using Cruxa.Domain.Common;
 namespace Cruxa.Application.Features.Ascents.Handlers;

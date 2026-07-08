@@ -1,6 +1,6 @@
 using Mapster;
 using MediatR;
-using Cruxa.Application.Features.Users.Interfaces;
+using Cruxa.Application.Features.Users.Contracts;
 using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Users.DTOs;
 using Cruxa.Application.Features.Users.Commands;

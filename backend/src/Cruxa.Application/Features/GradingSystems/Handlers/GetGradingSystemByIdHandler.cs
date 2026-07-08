@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Application.Features.GradingSystems.Queries;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Domain.Common;

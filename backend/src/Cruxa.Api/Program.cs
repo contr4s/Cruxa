@@ -1,4 +1,4 @@
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Application.Extensions;
 using Cruxa.Api.Common;
 using Cruxa.Domain.Common;

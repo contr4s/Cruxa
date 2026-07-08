@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 
 namespace Cruxa.Api.Common;
 

@@ -1,7 +1,7 @@
 using MediatR;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Domain.Common;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 
 namespace Cruxa.Application.Features.Gyms.Commands;
 

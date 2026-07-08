@@ -1,7 +1,7 @@
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Application.Features.Gyms.Handlers;
-using Cruxa.Application.Features.Gyms.Interfaces;
+using Cruxa.Application.Features.Gyms.Contracts;
 using Cruxa.Domain.Common;
 using Cruxa.Domain.Entities;
 using FluentAssertions;

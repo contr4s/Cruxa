@@ -14,6 +14,7 @@
 | [006](006-cqrs-mediatr.md) | CQRS with MediatR | Active | 2026-06-01 | Commands/Queries separation |
 | [007](007-feature-slices.md) | Feature Slices | Active | 2026-06-01 | Группировка по бизнес-фичам |
 | [008](008-parser-architecture.md) | Parser Architecture | Active | 2026-06-04 | CLI-парсер + API import endpoint |
+| [009](009-kruskor-scoring.md) | Kruscor Scoring Algorithm | Active | 2026-07-08 | Elo-подобный скоринг с S-таблицами по типам трасс, scale (Lead=75/Bould=100/Radar=25), Repeat dynamic, Attempt, warm-start, экспоненциальный decay halflife 90d, K-factor, Grade Reliability Weight, per-tag radar skills |
 
 ## ADR Lifecycle
 

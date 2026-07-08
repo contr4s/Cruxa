@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Domain.Common;
 namespace Cruxa.Application.Features.Posts.Handlers;

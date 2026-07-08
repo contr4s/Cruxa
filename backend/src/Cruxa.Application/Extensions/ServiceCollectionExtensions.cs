@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Mapster;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Common.Behaviors;
+using Cruxa.Application.Features.Statistics.Services;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.ValueObjects;
 using Cruxa.Application.Features.Gyms.DTOs;
@@ -68,6 +69,9 @@ public static class ServiceCollectionExtensions
             .Map(dest => dest.SetterAvatarUrl, src => src.Author != null ? src.Author.AvatarUrl : null)
             .Map(dest => dest.Rating, src => src.Reviews.Count > 0 ? src.Reviews.Average(r => r.Rating ?? 0) : 0)
             .Map(dest => dest.AscentsCount, src => src.Ascents.Count);
+
+        // Services
+        services.AddScoped<KruscoreService>();
 
         return services;
     }

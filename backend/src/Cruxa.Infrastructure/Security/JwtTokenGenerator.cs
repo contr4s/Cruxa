@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Entities;
-using Application.Common.Interfaces;
+using Application.Common.Contracts;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {

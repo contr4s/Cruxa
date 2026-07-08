@@ -2,7 +2,7 @@ using MediatR;
 using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Domain.Common;
 using Cruxa.Domain.Enums;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 
 namespace Cruxa.Application.Features.Ascents.Commands;
 

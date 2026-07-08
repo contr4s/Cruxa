@@ -28,5 +28,10 @@ public enum AscentStyle
     /// <summary>
     /// Попытка (не оконченный пролаз)
     /// </summary>
-    Attempt = 4
+    Attempt = 4,
+
+    /// <summary>
+    /// Повторное прохождение
+    /// </summary>
+    Repeat = 5
 }

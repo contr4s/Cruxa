@@ -1,4 +1,4 @@
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Cruxa.Infrastructure.Persistence;

@@ -1,11 +1,13 @@
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Application.Features.Posts.Handlers;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Queries;
-using Cruxa.Application.Features.Social.Interfaces;
+using Cruxa.Application.Features.Social.Contracts;
+using Cruxa.Application.Features.Statistics.Services;
+using Cruxa.Application.Features.Statistics.Contracts;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Posts;
@@ -15,8 +17,19 @@ public class PostHandlerTests
     private readonly TestFixture _fixture = new();
     private readonly Mock<IPostRepository> _postRepo = new();
     private readonly Mock<IFollowerRepository> _followerRepo = new();
+    private readonly Mock<IStatsRepository> _statsRepo = new();
+    private readonly KruscoreService _kruscore;
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _gymId = Guid.NewGuid();
+
+    public PostHandlerTests()
+    {
+        _kruscore = new KruscoreService(_statsRepo.Object);
+        _statsRepo.Setup(r => r.GetLastSnapshotBeforeAsync(It.IsAny<Guid>(), It.IsAny<DateOnly>()))
+            .ReturnsAsync((UserScoreSnapshot?)null);
+        _statsRepo.Setup(r => r.GetAllAscentsOrderedAsync(It.IsAny<Guid>()))
+            .ReturnsAsync([]);
+    }
 
     private Post CreatePost()
     {
@@ -69,7 +82,7 @@ public class PostHandlerTests
     public async Task PublishPost_WhenOwn_ReturnsSuccess()
     {
         var post = CreatePost();
-        var handler = new PublishPostHandler(_postRepo.Object);
+        var handler = new PublishPostHandler(_postRepo.Object, _kruscore);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(

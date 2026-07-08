@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.Gyms.Interfaces;
+using Cruxa.Application.Features.Gyms.Contracts;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Domain.Common;
 

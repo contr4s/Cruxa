@@ -1,6 +1,6 @@
 using Cruxa.Application.Features.GradingSystems.Commands;
 using Cruxa.Application.Features.GradingSystems.Handlers;
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Application.Features.GradingSystems.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;

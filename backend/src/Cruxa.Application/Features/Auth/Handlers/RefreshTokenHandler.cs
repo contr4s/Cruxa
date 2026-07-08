@@ -2,8 +2,8 @@ using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Auth.DTOs;
 using Cruxa.Application.Features.Auth.Commands;
-using Cruxa.Application.Features.Users.Interfaces;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Features.Users.Contracts;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Domain.Common;
 using Cruxa.Domain.Entities;
 

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Cruxa.Application.Features.Auth.DTOs;
 using Cruxa.Application.Features.Auth.Commands;
 using Microsoft.AspNetCore.Authorization;
-using Cruxa.Application.Common.Interfaces;
-using Cruxa.Application.Features.Users.Interfaces;
+using Cruxa.Application.Common.Contracts;
+using Cruxa.Application.Features.Users.Contracts;
 using Cruxa.Domain.Entities;
 
 namespace Cruxa.Api.Features.Auth;

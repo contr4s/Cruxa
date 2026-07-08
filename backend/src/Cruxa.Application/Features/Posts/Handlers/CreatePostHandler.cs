@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Commands;
 using Cruxa.Application.Features.Posts.DTOs;
 using Cruxa.Application.Features.Ascents.DTOs;

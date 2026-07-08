@@ -1,5 +1,5 @@
 using MediatR;
-using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Application.Features.Routes.Commands;
 using Cruxa.Domain.Common;
 namespace Cruxa.Application.Features.Routes.Handlers;

@@ -1,5 +1,5 @@
 using Cruxa.Application.Features.Routes.Handlers;
-using Cruxa.Application.Features.Routes.Interfaces;
+using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;

@@ -1,4 +1,4 @@
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Domain.Entities;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

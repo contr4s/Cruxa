@@ -1,12 +1,12 @@
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Ascents.Handlers;
-using Cruxa.Application.Features.Ascents.Interfaces;
+using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Queries;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using FluentAssertions;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Ascents;

@@ -1,6 +1,6 @@
 using MediatR;
 using Cruxa.Application.Features.GradingSystems.Commands;
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Domain.Common;
 
 namespace Cruxa.Application.Features.GradingSystems.Handlers;

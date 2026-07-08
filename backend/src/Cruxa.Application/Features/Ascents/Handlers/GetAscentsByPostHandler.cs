@@ -1,6 +1,6 @@
 using Mapster;
 using MediatR;
-using Cruxa.Application.Features.Ascents.Interfaces;
+using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Queries;
 using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Application.Common.Models;

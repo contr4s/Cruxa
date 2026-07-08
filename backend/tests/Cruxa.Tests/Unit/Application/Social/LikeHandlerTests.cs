@@ -1,6 +1,6 @@
 using Cruxa.Application.Features.Social.Handlers;
-using Cruxa.Application.Features.Social.Interfaces;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Features.Social.Contracts;
+using Cruxa.Application.Common.Contracts;
 using FluentAssertions;
 using Moq;
 

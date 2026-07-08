@@ -1,10 +1,10 @@
 using Cruxa.Application.Features.Users.Handlers;
-using Cruxa.Application.Features.Users.Interfaces;
+using Cruxa.Application.Features.Users.Contracts;
 using Cruxa.Application.Features.Users.Queries;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.ValueObjects;
 using FluentAssertions;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Users;

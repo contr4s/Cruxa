@@ -1,12 +1,12 @@
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Routes.Handlers;
-using Cruxa.Application.Features.Routes.Interfaces;
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.Routes.Contracts;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Application.Features.Routes.Queries;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using Cruxa.Domain.ValueObjects;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using FluentAssertions;
 using Moq;
 

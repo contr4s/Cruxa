@@ -1,11 +1,11 @@
 using Mapster;
 using MediatR;
-using Cruxa.Application.Features.Routes.Interfaces;
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.Routes.Contracts;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Domain.Common;
 using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Application.Features.Routes.Commands;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Domain.Entities;
 
 namespace Cruxa.Application.Features.Routes.Handlers;

@@ -1,10 +1,10 @@
 using Cruxa.Application.Common.Models;
 using Cruxa.Application.Features.Gyms.Handlers;
-using Cruxa.Application.Features.Gyms.Interfaces;
+using Cruxa.Application.Features.Gyms.Contracts;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Gyms;

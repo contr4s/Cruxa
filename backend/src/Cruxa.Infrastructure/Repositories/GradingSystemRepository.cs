@@ -1,4 +1,4 @@
-using Cruxa.Application.Features.GradingSystems.Interfaces;
+using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Domain.Entities;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
 using MediatR;
 using Cruxa.Application.Common.Models;
-using Cruxa.Application.Features.Posts.Interfaces;
+using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
 using Cruxa.Domain.Common;

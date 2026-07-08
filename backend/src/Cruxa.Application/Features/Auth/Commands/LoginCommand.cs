@@ -1,4 +1,4 @@
-using Cruxa.Application.Common.Interfaces;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Application.Features.Auth.DTOs;
 using Cruxa.Domain.Common;
 using MediatR;
