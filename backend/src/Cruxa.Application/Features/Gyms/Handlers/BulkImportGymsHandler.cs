@@ -1,5 +1,6 @@
 using Mapster;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Contracts;
@@ -18,14 +19,16 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
 {
     private readonly IGymRepository _gymRepository;
     private readonly ITransactionManager _transactionManager;
+    private readonly ILogger<BulkImportGymsHandler> _logger;
 
     // Default grading system ID (Фонтенбло Боулдеринг, seeded in CruxaDbContext)
     private static readonly Guid DefaultGradingSystemId = new("00000000-0000-0000-0000-000000000001");
 
-    public BulkImportGymsHandler(IGymRepository gymRepository, ITransactionManager transactionManager)
+    public BulkImportGymsHandler(IGymRepository gymRepository, ITransactionManager transactionManager, ILogger<BulkImportGymsHandler> logger)
     {
         _gymRepository = gymRepository;
         _transactionManager = transactionManager;
+        _logger = logger;
     }
 
     public async Task<Result<BulkImportResult>> Handle(BulkImportGymsCommand command, CancellationToken ct)
@@ -54,6 +57,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
                 // Validate required fields
                 if (string.IsNullOrWhiteSpace(dto.Name))
                 {
+                    _logger.LogWarning("Bulk import: skipped gym — missing Name");
                     result.Errors.Add("Gym missing required field: Name");
                     result.Skipped++;
                     continue;
@@ -61,6 +65,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
 
                 if (string.IsNullOrWhiteSpace(dto.City))
                 {
+                    _logger.LogWarning("Bulk import: skipped gym '{Name}' — missing City", dto.Name);
                     result.Errors.Add($"Gym '{dto.Name}' missing required field: City");
                     result.Skipped++;
                     continue;
@@ -68,6 +73,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
 
                 if (string.IsNullOrWhiteSpace(dto.Address))
                 {
+                    _logger.LogWarning("Bulk import: skipped gym '{Name}' — missing Address", dto.Name);
                     result.Errors.Add($"Gym '{dto.Name}' missing required field: Address");
                     result.Skipped++;
                     continue;
@@ -77,6 +83,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
                 var exists = await _gymRepository.ExistsByNameAndCityAsync(dto.Name.Trim(), dto.City.Trim());
                 if (exists)
                 {
+                    _logger.LogDebug("Bulk import: skipped gym '{Name}' in '{City}' — already exists", dto.Name, dto.City);
                     result.Skipped++;
                     continue;
                 }
@@ -91,6 +98,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
 
                 if (createResult.IsFailure)
                 {
+                    _logger.LogWarning("Bulk import: skipped gym '{Name}' — creation failed: {Reason}", dto.Name, createResult.Error.Message);
                     result.Errors.Add($"Gym '{dto.Name}': {createResult.Error.Message}");
                     result.Skipped++;
                     continue;
@@ -133,6 +141,7 @@ public class BulkImportGymsHandler : IRequestHandler<BulkImportGymsCommand, Resu
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Bulk import failed after {Count} successes", result.Imported);
             await transaction.RollbackAsync(ct);
             return Result.Failure<BulkImportResult>(
                 Error.Validation($"Import failed: {ex.Message}"));

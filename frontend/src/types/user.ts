@@ -25,7 +25,7 @@ export interface UserStats {
 export interface KruskorPoint {
   date: string;
   score: number;
-  maxGrade: string;
+  maxGrade?: string;
 }
 
 export interface GradePyramidItem {
@@ -61,9 +61,7 @@ export interface MonthlyActivity {
   year: number;
   month: number;
   days: ActivityDay[];
-  totalWorkouts: number;
-  totalRoutes: number;
-  streak: number;
+  weekActivity: number;
 }
 
 export interface ActivityDay {

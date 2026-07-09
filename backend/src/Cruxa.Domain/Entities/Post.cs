@@ -35,7 +35,7 @@ public class Post : AggregateRoot<Guid>
 
     private Post() { }
 
-    public static Result<Post> Create(Guid userId, Guid gymId, string? description, List<string>? mediaUrls, int? duration = null)
+    public static Result<Post> Create(Guid userId, Guid gymId, string? description, List<string>? mediaUrls, int? duration = null, DateTime? createdAt = null)
     {
         Guard.AgainstDefault(userId, nameof(userId));
         Guard.AgainstDefault(gymId, nameof(gymId));
@@ -48,7 +48,7 @@ public class Post : AggregateRoot<Guid>
             Description = description,
             MediaUrls = mediaUrls ?? [],
             Duration = duration,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = createdAt ?? DateTime.UtcNow,
             Status = PostStatus.Draft,
             Visibility = PostVisibility.Public
         };

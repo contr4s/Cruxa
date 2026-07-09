@@ -31,24 +31,22 @@ public class StatsRepository : IStatsRepository
             .ToListAsync();
     }
 
-    public async Task UpsertSnapshotBatchAsync(List<UserScoreSnapshot> snapshots)
+    public async Task UpsertSnapshotAsync(UserScoreSnapshot snapshot)
     {
-        foreach (var snapshot in snapshots)
-        {
-            var existing = await _context.UserScoreSnapshots
-                .FirstOrDefaultAsync(s => s.UserId == snapshot.UserId && s.Date == snapshot.Date);
+        var existing = await _context.UserScoreSnapshots.FirstOrDefaultAsync(s =>
+                s.UserId == snapshot.UserId && s.Date == snapshot.Date);
 
-            if (existing is not null)
-            {
-                existing.Score = snapshot.Score;
-                existing.Confidence = snapshot.Confidence;
-                existing.MaxGradeIndex = snapshot.MaxGradeIndex;
-                existing.CreatedAt = snapshot.CreatedAt;
-            }
-            else
-            {
-                _context.UserScoreSnapshots.Add(snapshot);
-            }
+        if (existing is not null)
+        {
+            existing.Score         = snapshot.Score;
+            existing.Confidence    = snapshot.Confidence;
+            existing.MaxGradeIndex = snapshot.MaxGradeIndex;
+            existing.MaxGradeRaw   = snapshot.MaxGradeRaw;
+            existing.CreatedAt     = snapshot.CreatedAt;
+        }
+        else
+        {
+            _context.UserScoreSnapshots.Add(snapshot);
         }
 
         await _context.SaveChangesAsync();
@@ -77,6 +75,7 @@ public class StatsRepository : IStatsRepository
         return await _context.Posts
             .Where(p => p.UserId == userId && p.CreatedAt >= from && p.CreatedAt < to)
             .Include(p => p.Ascents)
+            .ThenInclude(a => a.Route)
             .ToListAsync();
     }
 
@@ -134,14 +133,18 @@ public class StatsRepository : IStatsRepository
 
     public async Task<List<AscentWithRouteTags>> GetAscentsWithTagsAsync(Guid userId)
     {
-        return await _context.Ascents
+        var ascents = await _context.Ascents
             .Where(a => a.UserId == userId)
             .Include(a => a.Route).ThenInclude(r => r.Tags)
-            .Select(a => new AscentWithRouteTags(
-                a.Id, a.RouteId, a.PostId, a.Route.Grade.Index,
-                a.Style.ToString(), (int)a.Route.Type, a.CreatedAt,
-                a.Route.Tags.Select(t => t.Value).ToList()))
             .ToListAsync();
+
+        return ascents.Select(a => new AscentWithRouteTags(
+            a.Id, a.RouteId, a.PostId, a.Route.Grade.Index,
+            a.Style,
+            a.Route.Type,
+            a.CreatedAt,
+            a.Route.Tags.Select(t => (t.Value, t.Category)).ToList()))
+            .ToList();
     }
 }
 

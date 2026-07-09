@@ -32,10 +32,11 @@ export const ActivityCalendar = memo(function ActivityCalendar({ userId: propUse
   const theme = useTheme();
   const authUserId = useAuthStore((s) => s.userId);
   const userId = propUserId ?? authUserId;
-  const { data: activityData, isLoading } = useMonthlyActivity(userId ?? '');
+  const now = new Date();
+  const [currentMonth, setCurrentMonth] = useState(now.getMonth());
+  const [currentYear, setCurrentYear] = useState(now.getFullYear());
+  const { data: activityData, isLoading } = useMonthlyActivity(userId ?? '', currentYear, currentMonth);
   const data = activityData;
-  const [currentMonth, setCurrentMonth] = useState(data?.month ?? 5);
-  const [currentYear, setCurrentYear] = useState(data?.year ?? 2026);
 
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const startOffset = firstDay === 0 ? 6 : firstDay - 1;
@@ -115,7 +116,7 @@ export const ActivityCalendar = memo(function ActivityCalendar({ userId: propUse
               <Box key={i} sx={{ width: 8, height: 8, borderRadius: '50%', background: active ? theme.palette.primary.main : theme.custom.surface2 }} />
             ))}
           </Box>
-          <Typography sx={{ color: theme.custom.text3, fontSize: '0.78rem' }}>3 из 4 нед</Typography>
+          <Typography sx={{ color: theme.custom.text3, fontSize: '0.78rem' }}>{activityData?.weekActivity ?? 0} из 4 нед</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
           <Box sx={{ width: 10, height: 10, borderRadius: '3px', background: 'rgba(38, 166, 154, 0.05)' }} />

@@ -117,6 +117,7 @@ export default function GymDetailPage() {
   }
 
   if (gymError || !gym) {
+    console.error('[GymDetail] Failed to load gym:', id, gymError);
     return (
       <PageContainer>
         <StateDisplay

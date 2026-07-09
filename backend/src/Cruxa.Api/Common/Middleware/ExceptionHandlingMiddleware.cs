@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace Cruxa.Api.Common.Middleware;
 
-public class ExceptionHandlingMiddleware(RequestDelegate next)
+public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
     {
@@ -12,18 +12,22 @@ public class ExceptionHandlingMiddleware(RequestDelegate next)
         }
         catch (ArgumentNullException ex)
         {
+            logger.LogWarning(ex, "Bad request: {Message} for {RequestPath}", ex.Message, context.Request.Path);
             await WriteProblem(context, StatusCodes.Status400BadRequest, ex.Message);
         }
         catch (ArgumentException ex)
         {
+            logger.LogWarning(ex, "Bad request: {Message} for {RequestPath}", ex.Message, context.Request.Path);
             await WriteProblem(context, StatusCodes.Status400BadRequest, ex.Message);
         }
         catch (KeyNotFoundException ex)
         {
+            logger.LogWarning(ex, "Not found: {Message} for {RequestPath}", ex.Message, context.Request.Path);
             await WriteProblem(context, StatusCodes.Status404NotFound, ex.Message);
         }
         catch (Exception ex)
         {
+            logger.LogError(ex, "Unhandled exception processing {RequestPath}", context.Request.Path);
             await WriteProblem(context, StatusCodes.Status500InternalServerError, "Internal server error");
         }
     }

@@ -2,6 +2,9 @@ using Cruxa.Application.Common.Contracts;
 using Cruxa.Application.Extensions;
 using Cruxa.Api.Common;
 using Cruxa.Domain.Common;
+using Cruxa.Domain.Entities;
+using Cruxa.Domain.Enums;
+using Cruxa.Domain.ValueObjects;
 using Cruxa.Infrastructure.Extensions;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +54,7 @@ try
     builder.Services.AddControllers()
     .AddJsonOptions(opts =>
     {
-        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         opts.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
     });
 
@@ -141,9 +144,18 @@ try
         if (!string.IsNullOrEmpty(adminPasswordHash))
         {
             var adminId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            if (!await db.Users.AnyAsync(u => u.Id == adminId))
+            {
+                var adminEmail = Email.Create("admin@cruxa.app").Value;
+                var admin = User.Create(adminEmail, "admin", "Admin", "Cruxa", "M", 180, "Москва").Value!;
+                admin.Id = adminId;
+                admin.ChangeRole(Role.Admin);
+                db.Users.Add(admin);
+            }
+
             if (!await db.PasswordCredentials.AnyAsync(pc => pc.UserId == adminId))
             {
-                db.PasswordCredentials.Add(new Cruxa.Domain.Entities.PasswordCredential(
+                db.PasswordCredentials.Add(new PasswordCredential(
                     adminId, adminPasswordHash));
                 await db.SaveChangesAsync();
             }
@@ -153,7 +165,10 @@ try
     // ──────────────────────────────────────────
     // Middleware pipeline
     // ──────────────────────────────────────────
+    app.UseMiddleware<Cruxa.Api.Common.Middleware.CorrelationIdMiddleware>();
+    app.UseMiddleware<Cruxa.Api.Common.Middleware.ResponseLoggingMiddleware>();
     app.UseMiddleware<Cruxa.Api.Common.Middleware.ExceptionHandlingMiddleware>();
+    app.UseSerilogRequestLogging();
 
     // Swagger / Scalar (only in Development)
     if (app.Environment.IsDevelopment())

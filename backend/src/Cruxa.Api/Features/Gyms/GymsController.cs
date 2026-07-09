@@ -18,14 +18,14 @@ public class GymsController(IMediator mediator) : ControllerBase
     {
         var sortEnum = Enum.TryParse<GymSort>(sort, ignoreCase: true, out var parsed) ? parsed : (GymSort?)null;
         var result = await mediator.Send(new GetAllGymsQuery(page, pageSize, city, sortEnum));
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 
     [HttpGet("cities")]
     public async Task<ActionResult<List<string>>> GetCities()
     {
         var result = await mediator.Send(new GetCitiesQuery());
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 
     [HttpGet("{id:guid}")]

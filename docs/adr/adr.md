@@ -10,7 +10,7 @@
 | [002](002-grade-normalization.md) | Grade Normalization | Active | 2026-05-29 | Нормализация грейдов через GradeIndex |
 | [003](003-workout-aggregation.md) | Workout Aggregation | Active | 2026-05-29 | Агрегация Post + Ascent |
 | [004](004-project-structure-clean-architecture.md) | Clean Architecture | Active | 2026-05-29 | Domain/Application/Infrastructure/Api |
-| [005](005-ddd-patterns.md) | DDD Patterns | Active | 2026-06-01 | Value Objects, Aggregates, Domain Events |
+| [005](005-ddd-patterns.md) | DDD Patterns | Active | 2026-06-01 | Value Objects, Aggregates (частично реализовано, Domain Events отложены) |
 | [006](006-cqrs-mediatr.md) | CQRS with MediatR | Active | 2026-06-01 | Commands/Queries separation |
 | [007](007-feature-slices.md) | Feature Slices | Active | 2026-06-01 | Группировка по бизнес-фичам |
 | [008](008-parser-architecture.md) | Parser Architecture | Active | 2026-06-04 | CLI-парсер + API import endpoint |

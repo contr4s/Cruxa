@@ -4,6 +4,17 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import './theme/variables.css';
 import App from './App.tsx';
 
+// ── Global error handlers ──────────────────────
+window.addEventListener('error', (event) => {
+  console.error('[Global] Uncaught error:', event.error ?? event.message);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('[Global] Unhandled rejection:', event.reason);
+});
+
+const shouldLog = () => import.meta.env.VITE_DEBUG === 'true' || import.meta.env.DEV;
+
 async function startApp() {
   if (import.meta.env.VITE_USE_MOCK === 'true') {
     // Unregister stale service workers from previous scope registrations
@@ -14,7 +25,7 @@ async function startApp() {
       }
     }
     const { worker } = await import('./mocks/browser');
-    await worker.start({ onUnhandledRequest: 'bypass' });
+    await worker.start({ onUnhandledRequest: 'warn' });
   }
 
   const queryClient = new QueryClient({
@@ -25,6 +36,18 @@ async function startApp() {
         refetchOnWindowFocus: false,
       },
     },
+  });
+
+  queryClient.getQueryCache().subscribe((event) => {
+    if (event?.query?.state?.error && shouldLog()) {
+      console.error('[RQ] Query error:', event.query.state.error);
+    }
+  });
+
+  queryClient.getMutationCache().subscribe((event) => {
+    if (event?.mutation?.state?.error && shouldLog()) {
+      console.error('[RQ] Mutation error:', event.mutation.state.error);
+    }
   });
 
   createRoot(document.getElementById('root')!).render(

@@ -37,7 +37,7 @@ export default function DevAccountPicker() {
         }
         setAccounts(grouped);
       })
-      .catch(() => { /* ignore — backend not running */ });
+      .catch((err) => console.warn('[Dev] Backend not available, account picker disabled:', err));
   }, []);
 
   const handleLogin = useCallback(async (email: string, password: string) => {

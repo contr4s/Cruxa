@@ -2,6 +2,7 @@ namespace Cruxa.Application.Features.Statistics.DTOs;
 
 public class TopRouteItemDto
 {
+    public Guid Id => RouteId;
     public Guid AscentId { get; set; }
     public Guid RouteId { get; set; }
     public string Name { get; set; } = string.Empty;

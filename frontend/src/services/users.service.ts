@@ -23,7 +23,17 @@ export async function changePassword(currentPassword: string, newPassword: strin
 }
 
 export async function getKruskorHistory(userId: string, period: string): Promise<KruskorPoint[]> {
-  const response = await api.get<KruskorPoint[]>(`/users/${userId}/kruskor-history`, { params: { period } });
+  const now = new Date();
+  let from: Date | undefined;
+  switch (period) {
+    case '1m': from = new Date(now.getFullYear(), now.getMonth() - 1, 1); break;
+    case '3m': from = new Date(now.getFullYear(), now.getMonth() - 3, 1); break;
+    case '6m': from = new Date(now.getFullYear(), now.getMonth() - 6, 1); break;
+    case '1y': from = new Date(now.getFullYear() - 1, now.getMonth(), 1); break;
+  }
+  const params: Record<string, string> = {};
+  if (from) params.from = from.toISOString();
+  const response = await api.get<KruskorPoint[]>(`/users/${userId}/kruscore-history`, { params });
   return response.data;
 }
 
@@ -47,8 +57,11 @@ export async function getTopRoutes(userId: string): Promise<TopRoutesResponse> {
   return response.data;
 }
 
-export async function getMonthlyActivity(userId: string): Promise<MonthlyActivity> {
-  const response = await api.get<MonthlyActivity>(`/users/${userId}/monthly-activity`);
+export async function getMonthlyActivity(userId: string, year?: number, month?: number): Promise<MonthlyActivity> {
+  const params: Record<string, number> = {};
+  if (year !== undefined) params.year = year;
+  if (month !== undefined) params.month = month + 1; // JS month is 0-based
+  const response = await api.get<MonthlyActivity>(`/users/${userId}/monthly-activity`, { params });
   return response.data;
 }
 

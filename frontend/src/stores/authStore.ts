@@ -39,6 +39,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
         isAuthenticated: true,
       };
     } catch {
+      console.warn('[Auth] Invalid stored auth data on init, clearing');
       localStorage.removeItem('auth_token');
       localStorage.removeItem('auth_user');
     }
@@ -70,6 +71,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
           isAuthenticated: true,
         });
       } catch {
+        console.warn('[Auth] Invalid stored auth data in init(), clearing');
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_user');
       }

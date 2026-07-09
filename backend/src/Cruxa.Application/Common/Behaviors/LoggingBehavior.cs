@@ -35,9 +35,9 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
             if (response is Result { IsSuccess: false } failure)
             {
                 _logger.LogWarning(
-                    "Completed {RequestName} [RequestId={RequestId}] in {ElapsedMs}ms — Failure: [{ErrorCode}] {ErrorMessage}",
+                    "Completed {RequestName} [RequestId={RequestId}] in {ElapsedMs}ms — Failure: [{ErrorCode}] {ErrorMessage} {@Request}",
                     requestName, requestId, stopwatch.ElapsedMilliseconds,
-                    failure.Error?.Code, failure.Error?.Message);
+                    failure.Error?.Code, failure.Error?.Message, request);
             }
             else
             {

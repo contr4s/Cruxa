@@ -22,45 +22,42 @@ public static class UserGenerator
 
         for (var i = 0; i < 10; i++)
         {
-            var person = new Bogus.Person(locale: "ru");
-            var gender = person.Gender == Bogus.DataSets.Name.Gender.Male ? "M" : "F";
-            var first = person.FirstName;
-            var last = person.LastName;
+            CreateUser();
+        }
+
+        for (var i = 0; i < 5; i++)
+        {
+            var admin = CreateUser();
+            admin.ChangeRole(Role.GymAdmin);
+            staffMap.Add((admin.Id, i, true, false));
+        }
+
+        for (var i = 0; i < 5; i++)
+        {
+            var setter = CreateUser();
+            setter.ChangeRole(Role.Routesetter);
+            staffMap.Add((setter.Id, i, false, true));
+        }
+
+        return (users, creds, staffMap);
+
+        User CreateUser()
+        {
+            var person   = new Bogus.Person(locale: "ru");
+            var gender   = person.Gender == Bogus.DataSets.Name.Gender.Male ? "M" : "F";
+            var first    = person.FirstName;
+            var last     = person.LastName;
             var username = person.UserName;
-            var email = Email.Create($"{username}@cruxa.seed").Value;
-            var city = faker.PickRandom(cities);
-            var height = faker.Random.Int(155, 195);
+            var email    = Email.Create($"{username}@cruxa.seed").Value;
+            var city     = faker.PickRandom(cities);
+            var height   = faker.Random.Int(155, 195);
 
             var user = User.Create(email, username, first, last, gender, height, city).Value!;
             users.Add(user);
             creds.Add(new PasswordCredential(user.Id, HashPassword(username.ToLower())));
-        }
 
-        // 5 GymAdmin accounts (gyms 1-5)
-        for (var i = 1; i <= 5; i++)
-        {
-            var username = $"gym{i}admin";
-            var email = Email.Create($"{username}@cruxa.seed").Value;
-            var user = User.Create(email, username, $"Staff{i}", $"Admin").Value!;
-            user.ChangeRole(Role.GymAdmin);
-            users.Add(user);
-            creds.Add(new PasswordCredential(user.Id, HashPassword(faker.Internet.Password())));
-            staffMap.Add((user.Id, i - 1, true, false));
+            return user;
         }
-
-        // 5 Routesetter accounts (gyms 1-5)
-        for (var i = 1; i <= 5; i++)
-        {
-            var username = $"gym{i}setter";
-            var email = Email.Create($"{username}@cruxa.seed").Value;
-            var user = User.Create(email, username, $"Staff{i}", $"Setter").Value!;
-            user.ChangeRole(Role.Routesetter);
-            users.Add(user);
-            creds.Add(new PasswordCredential(user.Id, HashPassword(faker.Internet.Password())));
-            staffMap.Add((user.Id, i - 1, false, true));
-        }
-
-        return (users, creds, staffMap);
     }
 
     internal static string HashPassword(string password)

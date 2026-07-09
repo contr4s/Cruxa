@@ -142,7 +142,7 @@ export const userHandlers = [
         hasWorkout: Math.random() > 0.5,
         routeCount: Math.floor(Math.random() * 10),
       })),
-      totalWorkouts: 14, totalRoutes: 47, streak: 5,
+      weekActivity: 5,
     });
   }),
 

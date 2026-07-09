@@ -17,6 +17,7 @@ public class Route : Entity<Guid>
     public List<string> PhotoUrls { get; private set; } = [];
     public List<Tag> Tags { get; private set; } = [];
     public string? Sector { get; private set; }
+    public DateTime CreatedAt { get; private set; }
     public bool IsActive { get; private set; } = true;
 
     public Guid GymId { get; private set; }
@@ -54,6 +55,7 @@ public class Route : Entity<Guid>
         var route = new Route
         {
             Id = Guid.NewGuid(),
+            CreatedAt = DateTime.UtcNow,
             GymId = gymId,
             AuthorId = authorId,
             Name = name.Trim(),

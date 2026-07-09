@@ -18,6 +18,7 @@ public class AscentRepository : IAscentRepository
     {
         return await _context.Ascents
             .Include(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .FirstOrDefaultAsync(a => a.Id == id);
     }
 

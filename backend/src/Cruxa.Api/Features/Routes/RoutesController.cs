@@ -17,7 +17,7 @@ public class RoutesController(IMediator mediator, ICurrentUserService currentUse
     public async Task<ActionResult<OffsetPaginatedList<RouteDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
         var result = await mediator.Send(new GetAllRoutesQuery(page, pageSize));
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 
     [HttpGet("{id:guid}")]
@@ -31,7 +31,7 @@ public class RoutesController(IMediator mediator, ICurrentUserService currentUse
     public async Task<ActionResult<OffsetPaginatedList<RouteDto>>> GetByGym(Guid gymId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
         var result = await mediator.Send(new GetRoutesByGymQuery(gymId, page, pageSize));
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 
     [HttpPost]

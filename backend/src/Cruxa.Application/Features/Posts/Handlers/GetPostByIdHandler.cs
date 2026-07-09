@@ -71,6 +71,7 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
                 HoldColor = a.Route?.HoldColor ?? default,
                 Style = a.Style,
                 MediaUrls = a.MediaUrls.ToList(),
+                Tags = a.Route?.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList() ?? [],
                 CreatedAt = a.CreatedAt
             }).ToList()
         };

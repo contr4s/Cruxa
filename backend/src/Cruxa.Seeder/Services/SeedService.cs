@@ -2,6 +2,7 @@ using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using Cruxa.Infrastructure.Persistence;
 using Cruxa.Seeder.Generators;
+using Cruxa.Application.Features.Statistics.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cruxa.Seeder.Services;
@@ -9,10 +10,12 @@ namespace Cruxa.Seeder.Services;
 public class SeedService
 {
     private readonly CruxaDbContext _db;
+    private readonly KruscoreService _kruscore;
 
-    public SeedService(CruxaDbContext db)
+    public SeedService(CruxaDbContext db, KruscoreService kruscore)
     {
         _db = db;
+        _kruscore = kruscore;
     }
 
     public async Task SeedAsync()
@@ -52,10 +55,7 @@ public class SeedService
         // ── Step 4: Routes + Tags ──
         Console.Write("🧗 Routes... ");
         var existingTags = await _db.Tags.ToListAsync();
-        var staffByGym = staffMap
-            .GroupBy(s => s.gymIndex)
-            .ToDictionary(g => g.Key, g => g.First());
-        var routes = RouteGenerator.Generate(gyms, staffByGym, existingTags);
+        var routes = RouteGenerator.Generate(gyms, staffMap, existingTags);
 
         // Add route-tag relationships
         foreach (var route in routes)
@@ -71,23 +71,36 @@ public class SeedService
         await _db.SaveChangesAsync();
         Console.WriteLine($"{routes.Count} created");
 
-        // ── Step 5: Posts ──
-        Console.Write("📝 Posts... ");
-        var posts = PostGenerator.Generate(climbers, gyms);
-        _db.Posts.AddRange(posts);
-        await _db.SaveChangesAsync();
-        Console.WriteLine($"{posts.Count} created");
+        // ── Step 5-8: For each user, generate+save+publish posts sequentially ──
+        Console.Write("📝 Generating and publishing posts... ");
+        var postBatches = PostGenerator.Generate(climbers, gyms, routes);
+        var allPosts = new List<Post>();
+        var allAscents = new List<Ascent>();
 
-        // ── Step 6: Ascents ──
-        Console.Write("⛰️ Ascents... ");
-        var ascents = AscentGenerator.Generate(posts, routes, climbers);
-        _db.Ascents.AddRange(ascents);
-        await _db.SaveChangesAsync();
-        Console.WriteLine($"{ascents.Count} created");
+        foreach (var (user, batches) in postBatches)
+        {
+            foreach (var (post, ascents) in batches)
+            {
+                allPosts.Add(post);
+                allAscents.AddRange(ascents);
 
-        // ── Step 7: Social (followers, likes, comments, reviews) ──
+                // Draft first
+                _db.Posts.Add(post);
+                foreach (var ascent in ascents)
+                    _db.Ascents.Add(ascent);
+                await _db.SaveChangesAsync();
+
+                // Publish — triggers KruscoreService.RecalculateAsync
+                post.Publish();
+                var date = DateOnly.FromDateTime(post.CreatedAt);
+                await _kruscore.RecalculateAsync(user.Id, date);
+            }
+        }
+        Console.WriteLine($"{allPosts.Count} posts, {allAscents.Count} ascents");
+
+        // ── Step 9: Social (followers, likes, comments, reviews) ──
         Console.Write("❤️ Social... ");
-        var (followers, likes, comments, reviews) = SocialGenerator.Generate(climbers, posts, routes);
+        var (followers, likes, comments, reviews) = SocialGenerator.Generate(climbers, allPosts, routes);
         _db.Followers.AddRange(followers);
         _db.Likes.AddRange(likes);
         _db.Comments.AddRange(comments);
@@ -95,46 +108,7 @@ public class SeedService
         await _db.SaveChangesAsync();
         Console.WriteLine($"followers:{followers.Count} likes:{likes.Count} comments:{comments.Count} reviews:{reviews.Count}");
 
-        // ── Step 8: Kruscore recalculation ──
-        Console.Write("📊 Kruscore... ");
-        var activeUsers = climbers
-            .Where(u => posts.Any(p => p.UserId == u.Id && p.Status == PostStatus.Published))
-            .ToList();
-
-        var lastDates = posts
-            .Where(p => p.Status == PostStatus.Published)
-            .GroupBy(p => p.UserId)
-            .ToDictionary(g => g.Key, g => g.Max(p => DateOnly.FromDateTime(p.CreatedAt)));
-
-        var recalculated = 0;
-        foreach (var user in activeUsers)
-        {
-            if (!lastDates.TryGetValue(user.Id, out var lastDate)) continue;
-
-            // Load all ascents with routes for Kruscore
-            var allAscents = await _db.Ascents
-                .Include(a => a.Route)
-                .Where(a => a.UserId == user.Id)
-                .OrderBy(a => a.CreatedAt)
-                .ToListAsync();
-
-            if (allAscents.Count == 0) continue;
-
-            var totalW = allAscents.Sum(a => Domain.Services.KruscoreCalculator.RouteTypeWeight(a.Route.Type));
-            if (totalW < 15) continue;
-
-            var theta = Domain.Services.KruscoreCalculator.PerformanceRating(allAscents);
-            var confidence = allAscents.Count;
-            var maxGrade = allAscents.Max(a => a.Route.Grade.Index);
-
-            var snapshot = new UserScoreSnapshot(user.Id, lastDate, theta, confidence, maxGrade);
-            _db.UserScoreSnapshots.Add(snapshot);
-            recalculated++;
-        }
-        await _db.SaveChangesAsync();
-        Console.WriteLine($"{recalculated} users scored");
-
-        Console.WriteLine($"\n✅ Seed complete! Gyms:{gyms.Count} Users:{users.Count} Routes:{routes.Count} Posts:{posts.Count} Ascents:{ascents.Count}");
+        Console.WriteLine($"\n✅ Seed complete! Gyms:{gyms.Count} Users:{users.Count} Routes:{routes.Count} Posts:{allPosts.Count} Ascents:{allAscents.Count}");
     }
 
     public async Task ClearAsync()

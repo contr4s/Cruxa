@@ -7,7 +7,7 @@ public interface IStatsRepository
 {
     Task<UserScoreSnapshot?> GetLastSnapshotBeforeAsync(Guid userId, DateOnly date);
     Task<List<UserScoreSnapshot>> GetSnapshotsAsync(Guid userId, DateOnly from, DateOnly to);
-    Task UpsertSnapshotBatchAsync(List<UserScoreSnapshot> snapshots);
+    Task UpsertSnapshotAsync(UserScoreSnapshot snapshots);
     Task<List<Ascent>> GetAscentsWithRoutesAsync(Guid userId);
     Task<List<Ascent>> GetTopAscentsAsync(Guid userId, int count = 5);
     Task<List<Post>> GetPostsInRangeAsync(Guid userId, DateTimeOffset from, DateTimeOffset to);

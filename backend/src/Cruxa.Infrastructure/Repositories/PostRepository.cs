@@ -20,6 +20,8 @@ public class PostRepository : IPostRepository
             .Include(p => p.User)
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
+            .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .Include(p => p.Likes)
             .Include(p => p.Comments)
             .FirstOrDefaultAsync(p => p.Id == id);
@@ -31,6 +33,8 @@ public class PostRepository : IPostRepository
             .Include(p => p.User)
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
+                .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .Include(p => p.Likes)
             .Include(p => p.Comments)
             .Where(p => p.UserId == userId)
@@ -44,6 +48,8 @@ public class PostRepository : IPostRepository
             .Include(p => p.User)
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
+                .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .Include(p => p.Likes)
             .Include(p => p.Comments)
             .Where(p => p.UserId == userId);
@@ -64,6 +70,7 @@ public class PostRepository : IPostRepository
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
                 .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .Where(p => userIds.Contains(p.UserId))
             .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
@@ -74,6 +81,8 @@ public class PostRepository : IPostRepository
         return await _context.Posts
             .Include(p => p.User)
             .Include(p => p.Ascents)
+                .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .Where(p => p.GymId == gymId)
             .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
@@ -86,6 +95,7 @@ public class PostRepository : IPostRepository
             .Include(p => p.Gym)
             .Include(p => p.Ascents)
                 .ThenInclude(a => a.Route)
+            .ThenInclude(r => r.Tags)
             .ToListAsync();
     }
 

@@ -40,7 +40,6 @@ Active
 1. **DDD Primitives** (Common/):
    - `Result<T>` monad для типобезопасных ошибок
    - `Entity<TId>` / `AggregateRoot<TId>` базовые классы
-   - `ValueObject` базовый класс
    - `Guard` для защитных клауз
 
 2. **Value Objects** (ValueObjects/):
@@ -55,7 +54,9 @@ Active
    - `Gym.AddRoute()` — проверка наличия GradingSystem
 
 4. **Domain Services** (Domain/Services/):
-   - `GradeResolver` — разрешение грейда через GradingSystem
+   - `KruscoreCalculator` — Elo-подобный алгоритм Крускора
+
+> **Примечание:** Реализовано частично. Domain Events отложены до Фазы 5.
 
 ## Обоснование
 - **Single Source of Truth**: бизнес-правила живут в домене, а не в сервисах
@@ -66,8 +67,6 @@ Active
 ## Последствия
 - Существующие Application Services нужно переписать для работы с Result<T>
 - Контроллеры должны разворачивать Result<T> в HTTP response
-- Value Objects в EF Core требуют Owned Types или Value Converters
-- `Grade` VO меняет таблицу routes (GradeRaw + GradeIndex становятся внутренними)
 - Репозитории остаются, но возвращают доменные объекты с поведением
 
 ## Ссылки

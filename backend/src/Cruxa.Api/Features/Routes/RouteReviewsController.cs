@@ -20,7 +20,7 @@ public class RouteReviewsController(IMediator mediator, ICurrentUserService curr
     public async Task<ActionResult<OffsetPaginatedList<RouteReviewDto>>> GetByRoute(Guid routeId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
     {
         var result = await mediator.Send(new GetRouteReviewsByRouteQuery(routeId, page, pageSize));
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
     /// <summary>Get current user's review for a route</summary>
@@ -28,7 +28,9 @@ public class RouteReviewsController(IMediator mediator, ICurrentUserService curr
     public async Task<ActionResult<RouteReviewDto?>> GetMyReview(Guid routeId)
     {
         var result = await mediator.Send(new GetRouteReviewByUserRouteQuery(routeId, currentUser.GetRequiredUserId()));
-        return Ok(result.Value);
+        if (result.IsFailure)
+            return NotFound(result.Error);
+        return result.Value is null ? Ok(null) : Ok(result.Value);
     }
 
     /// <summary>Add or update your review for a route</summary>

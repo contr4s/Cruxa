@@ -51,6 +51,7 @@ export default function PostDetailPage() {
   }
 
   if (!post) {
+    console.error('[PostDetail] Post not found or error loading post:', id);
     const fallback = <StateDisplay type="error" message="Пост не найден" />;
     if (isModal) {
       return (

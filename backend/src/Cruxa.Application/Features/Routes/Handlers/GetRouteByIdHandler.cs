@@ -12,6 +12,9 @@ public class GetRouteByIdHandler(IRouteRepository routes) : IRequestHandler<GetR
     public async Task<Result<RouteDto>> Handle(GetRouteByIdQuery q, CancellationToken ct)
     {
         var route = await routes.GetByIdAsync(q.Id);
-        return route is null ? Result.Failure<RouteDto>(Error.NotFound("Route")) : Result.Success(route.Adapt<RouteDto>());
+        if (route is null)
+            return Result.Failure<RouteDto>(Error.NotFound("Route"));
+
+        return Result.Success(RouteDto.FromEntity(route));
     }
 }

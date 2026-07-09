@@ -8,6 +8,8 @@ const api = axios.create({
   },
 });
 
+const shouldLog = () => import.meta.env.VITE_DEBUG === 'true' || import.meta.env.DEV;
+
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (value: unknown) => void;
@@ -27,13 +29,34 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  if (shouldLog()) {
+    console.log('[API] ➡ %s %s', config.method?.toUpperCase(), config.url);
+  }
   return config;
 });
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (shouldLog()) {
+      const duration = response.config?.headers?.['X-Start-Time']
+        ? Date.now() - Number(response.config.headers['X-Start-Time'])
+        : 0;
+      console.log('[API] ⬅ %d %s (%dms)', response.status, response.config.url, duration);
+    }
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
+
+    if (shouldLog()) {
+      const method = originalRequest?.method?.toUpperCase() ?? '?';
+      const url = originalRequest?.url ?? '?';
+      if (error.response) {
+        console.error('[API] ✗ %d %s %s — %s', error.response.status, method, url, error.response.data?.detail ?? error.message);
+      } else {
+        console.error('[API] ✗ %s %s — %s', method, url, error.message);
+      }
+    }
 
     // Network error or no response — just reject
     if (!error.response) return Promise.reject(error);
@@ -81,6 +104,7 @@ api.interceptors.response.use(
       return api(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError, null);
+      console.error('[Auth] Refresh failed — redirecting to /login:', refreshError);
       // Refresh failed — redirect to login
       localStorage.removeItem('auth_token');
       localStorage.removeItem('auth_user');

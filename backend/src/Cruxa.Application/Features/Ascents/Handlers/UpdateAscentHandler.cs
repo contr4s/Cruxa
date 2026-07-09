@@ -37,6 +37,7 @@ public sealed class UpdateAscentHandler : IRequestHandler<UpdateAscentCommand, R
             HoldColor = ascent.Route?.HoldColor ?? default,
             Style = ascent.Style,
             MediaUrls = ascent.MediaUrls.ToList(),
+            Tags = ascent.Route?.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList() ?? [],
             CreatedAt = ascent.CreatedAt
         };
         return Result.Success(dto);

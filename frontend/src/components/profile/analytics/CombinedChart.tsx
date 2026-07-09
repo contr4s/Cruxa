@@ -27,8 +27,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 // gradientFillPlugin is passed via plugins prop to <Line>
 
 /* Шкала сложности строится динамически на основе данных */
-function buildGradeScale(data: { maxGrade: string }[]): { list: string[]; map: Record<string, number>; maxIndex: number } {
-  const unique = [...new Set(data.map((d) => d.maxGrade))];
+function buildGradeScale(data: { maxGrade?: string }[]): { list: string[]; map: Record<string, number>; maxIndex: number } {
+  const unique = [...new Set(data.map((d) => d.maxGrade ?? '').filter(Boolean))];
   const sorted = unique.sort((a, b) => {
     const aNum = parseFloat(a) || 0;
     const bNum = parseFloat(b) || 0;
@@ -80,10 +80,10 @@ export const CombinedChart = memo(function CombinedChart() {
 
   const data = kruskorPoints ?? [];
   const labels = data.map((d) => d.date);
-  const scores = data.map((d) => d.score);
+  const scores = data.map((d) => Math.round(d.score));
   const { list: gradeList, map: gradeMap, maxIndex } = data.length > 0 ? buildGradeScale(data) : { list: [] as string[], map: {} as Record<string, number>, maxIndex: 0 };
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const maxGrades = data.map((d) => gradeMap[d.maxGrade] ?? 0);
+  const maxGrades = data.map((d) => d.maxGrade ? (gradeMap[d.maxGrade] ?? 0) : 0);
 
   const chartData: ChartData<'line'> = {
     labels,
@@ -140,7 +140,7 @@ export const CombinedChart = memo(function CombinedChart() {
               const idx = Math.round(context.parsed.y ?? 0);
               return idx >= 0 && idx < gradeList.length ? `Сложность: ${gradeList[idx]}` : '';
             }
-            return `Крускор: ${context.parsed.y ?? 0}`;
+            return `Крускор: ${Math.round(context.parsed.y ?? 0)}`;
           },
         },
       },
@@ -233,7 +233,7 @@ export const CombinedChart = memo(function CombinedChart() {
           }}
         >
           <Typography sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <AutoGraphIcon sx={{ fontSize: 18, color: theme.palette.primary.main }} /> Крускор: <strong style={{ color: theme.palette.primary.main }}>+{data[data.length - 1].score - data[0].score}</strong>
+            <AutoGraphIcon sx={{ fontSize: 18, color: theme.palette.primary.main }} /> Крускор: <strong style={{ color: theme.palette.primary.main }}>{Math.round(data[data.length - 1].score - data[0].score) >= 0 ? '+' : ''}{Math.round(data[data.length - 1].score - data[0].score)}</strong>
           </Typography>
           <Typography sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <TerrainIcon sx={{ fontSize: 18, color: theme.palette.secondary.main }} /> Сложность: <span style={{ color: theme.palette.text.primary }}>{data[0].maxGrade}</span> → <strong style={{ color: theme.palette.secondary.main }}>{data[data.length - 1].maxGrade}</strong>

@@ -8,10 +8,31 @@
 - `Id` (UUID)
 - `Username` (string)
 - `Email` (string)
-- `PasswordHash` (string)
 - `AvatarUrl` (string)
 - `City` (string) *Город проживания для локализированной ленты и фильтров*
-- `Role` (enum: Climber, Routesetter, GymAdmin, Admin) *GymAdmin настраивает профиль скалодрома и трассы в админке*
+- `Role` (enum: Climber, Routesetter, GymAdmin, Admin)
+- `CreatedAt` (timestamp)
+- *Пароль хранится в отдельной сущности `PasswordCredential` (1:1)*
+
+### 1a. `PasswordCredential` (Учётные данные)
+- `Id` (UUID)
+- `UserId` (FK -> User, unique)
+- `PasswordHash` (string)
+- `CreatedAt` (timestamp)
+
+### 1b. `RefreshToken` (Токен обновления JWT)
+- `Id` (UUID)
+- `UserId` (FK -> User)
+- `Token` (string, unique)
+- `ExpiresAt` (timestamp)
+- `CreatedAt` (timestamp)
+- `RevokedAt` (timestamp, nullable)
+
+### 1c. `ExternalCredential` (Внешняя аутентификация — для будущего OAuth)
+- `Id` (UUID)
+- `UserId` (FK -> User)
+- `Provider` (string) *Например: "Google", "VK"*
+- `ProviderId` (string) *ID пользователя у провайдера*
 - `CreatedAt` (timestamp)
 
 ### 2. `Gym` (Скалодром)
@@ -38,13 +59,13 @@
 ### 4. `Route` (Трасса на скалодроме)
 - `Id` (UUID)
 - `GymId` (FK -> Gym)
-- `AuthorId` (FK -> User) *Опционально (рутсеттер)*
+- `AuthorId` (FK -> User, nullable) *Рутсеттер*
 - `GradeRaw` (string) *Оригинальная сложность от админа (выбирается из справочника GradingSystem)*
-- `GradeIndex` (int) *Нормализованная средняя сложность (0 - 1000) для статистики*
-- `Type` (enum: Bouldering, Lead) *Speed-трассы пока не рассматриваются*
-- `HoldColor` (enum: Red, Blue, Green, Yellow, Purple, Orange, etc.) *Цвет зацепок*
-- `PhotoUrls` (string[]) *Опционально.Фотографии трассы*
-- `Tags` (string[]) *Теги стиля трассы: "динамика", "пассивы", "мизера", "нависание" и т.д.*
+- `GradeIndex` (int) *Нормализованная средняя сложность (0–1000) для статистики*
+- `Type` (enum: Bouldering, Lead, Speed)
+- `HoldColor` (enum: 11 цветов + мультиколор) *Цвет зацепок*
+- `PhotoUrls` (string[]) *Опционально. Фотографии трассы*
+- `Tags` (string[]) *Теги стиля трассы через связь с сущностью `Tag`*
 - `Sector` (string) *Опционально. Название зоны на скалодроме или расположение*
 - `IsActive` (boolean) *Скручена трасса или нет*
 
@@ -63,8 +84,8 @@
 - `PostId` (FK -> Post) *Привязка к конкретному посту-тренировке*
 - `UserId` (FK -> User)
 - `RouteId` (FK -> Route)
-- `Style` (enum: Onsight, Flash, Redpoint, TopRope, Attempt)
-- `MediaUrls` (string[]) *Опционально. Фото/видео конкретного пролаза (например, видео попытки)*
+- `Style` (enum: Onsight, Flash, Redpoint, TopRope, Attempt, Project, Repeat)
+- `MediaUrls` (string[]) *Опционально. Фото/видео конкретного пролаза*
 - `CreatedAt` (timestamp)
 
 ### 7. `RouteReview` (Отзыв о трассе)
@@ -83,8 +104,41 @@
 - `FolloweeId` (FK -> User)
 - `CreatedAt` (timestamp)
 
-### 9. `Like` & `Comment` (Социальная активность)
-- Обеспечивают взаимодействие с `Post`. В ленте отображаются именно посты, выступающие как агрегаторы пролазов (Ascent) за одну тренировку на скалодроме.
+### 9. `Like` (Лайк поста)
+- `Id` (UUID)
+- `PostId` (FK -> Post)
+- `UserId` (FK -> User)
+- `CreatedAt` (timestamp)
+- *Уникальное ограничение: один пользователь — один лайк на пост (PostId + UserId)*
+
+### 10. `Comment` (Комментарий к посту)
+- `Id` (UUID)
+- `PostId` (FK -> Post)
+- `UserId` (FK -> User)
+- `Text` (text)
+- `CreatedAt` (timestamp)
+
+### 11. `Tag` (Тег трассы)
+- `Id` (UUID)
+- `Name` (string) *"динамика", "пассивы", "техничный" и т.д.*
+- `Slug` (string) *Уникальный идентификатор*
+- *Связь с Route через таблицу RouteTags*
+
+### 12. `UserScoreSnapshot` (Снимок Крускора)
+- `Id` (UUID)
+- `UserId` (FK -> User)
+- `Score` (double) *Значение Крускора на момент расчёта*
+- `ExpirationCount` (double) *Счётчик затухания (C в формуле)*
+- `CalculatedAt` (timestamp) *Дата расчёта*
+- `CreatedAt` (timestamp)
+- *Хранит историю изменения Крускора для построения графика*
+
+### 13. `GymAssignment` (Привязка персонала к залу)
+- `Id` (UUID)
+- `UserId` (FK -> User)
+- `GymId` (FK -> Gym)
+- `RoleInGym` (enum: Routesetter, GymAdmin)
+- `CreatedAt` (timestamp)
 
 ## 💡 Особенности системы оценок (Grades)
 Так как скалодромы используют разные системы (Французская шкала, V-Scale, диапазоны цветов), то в базе предусмотрена система нормализации сложности через отдельную сущность `GradingSystem`:

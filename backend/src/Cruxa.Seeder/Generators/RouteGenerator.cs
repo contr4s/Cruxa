@@ -19,11 +19,11 @@ public static class RouteGenerator
     };
 
     /// <summary>
-    /// Генерирует ~50 трасс, распределённых по залам (по 5 на зал).
+    /// Генерирует 20 трасс на зал.
     /// </summary>
     public static List<Route> Generate(
         List<Gym> gyms,
-        Dictionary<int, (Guid userId, int gymIndex, bool isAdmin, bool isSetter)> staffByGymIndex,
+        List<(Guid userId, int gymIndex, bool isAdmin, bool isSetter)> staffMap,
         List<Tag> existingTags)
     {
         var routes = new List<Route>();
@@ -41,20 +41,24 @@ public static class RouteGenerator
 
         var holdColors = Enum.GetValues<HoldColor>();
 
+        // Collect all setter IDs for fallback
+        var allSetters = staffMap.Where(s => s.isSetter).Select(s => s.userId).ToList();
+
         foreach (var gym in gyms)
         {
             var gymIdx = gyms.IndexOf(gym);
-            var setterId = staffByGymIndex.TryGetValue(gymIdx, out var staff) && staff.isSetter
-                ? staff.userId
-                : (Guid?)null;
+            Guid? setterId;
+            var gymStaff = staffMap.FirstOrDefault(s => s.gymIndex == gymIdx && s.isSetter);
+            if (gymStaff.userId != default)
+                setterId = gymStaff.userId;
+            else if (allSetters.Count > 0)
+                setterId = allSetters[faker.Random.Int(0, allSetters.Count - 1)];
+            else
+                setterId = null;
 
             var usedNames = new HashSet<string>();
 
-            var count = gymIdx switch
-            {
-                // More routes for first gyms
-                0 or 1 => 6, 2 or 3 => 5, _ => 4
-            };
+            var count = 20;
 
             for (var r = 0; r < count; r++)
             {

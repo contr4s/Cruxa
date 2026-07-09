@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Mapster;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Common.Behaviors;
@@ -8,6 +9,7 @@ using Cruxa.Domain.Entities;
 using Cruxa.Domain.ValueObjects;
 using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Routes.DTOs;
+using Cruxa.Application.Features.Statistics.Options;
 using Cruxa.Application.Features.Users.DTOs;
 using FluentValidation;
 
@@ -21,13 +23,17 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblyContaining<RegisterHandler>();
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
             cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         // FluentValidation
         services.AddValidatorsFromAssemblyContaining<RegisterHandler>();
+
+        // Options
+        services.Configure<TrainingIntensityOptions>(o =>
+            configuration.GetSection(TrainingIntensityOptions.SectionName).Bind(o));
 
         // Mapster
         TypeAdapterConfig.GlobalSettings.Default.MapToConstructor(true);

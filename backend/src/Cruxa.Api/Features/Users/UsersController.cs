@@ -51,8 +51,8 @@ public class UsersController(
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await mediator.Send(new DeleteUserCommand(id));
-        return NoContent();
+        var result = await mediator.Send(new DeleteUserCommand(id));
+        return result.IsSuccess ? NoContent() : NotFound();
     }
 
     /// <summary>

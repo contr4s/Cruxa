@@ -12,6 +12,8 @@ Base URL: `http://localhost:5000` (default)
 |--------|-----|------|--------|-------|------|----------|
 | POST | `/api/auth/register` | ❌ Anon | — | — | `RegisterCommand` | `AuthResponse` |
 | POST | `/api/auth/login` | ❌ Anon | — | — | `LoginQuery` | `AuthResponse` |
+| POST | `/api/auth/refresh` | ❌ Anon | — | — | `RefreshTokenCommand` | `AuthResponse` |
+| PUT | `/api/auth/password` | ✅ Auth | — | — | `ChangePasswordCommand` | 204 No Content |
 
 ## Пользователи
 
@@ -29,11 +31,14 @@ Base URL: `http://localhost:5000` (default)
 |--------|-----|------|--------|-------|------|----------|
 | GET | `/api/gyms` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<GymDto>` |
 | GET | `/api/gyms/{id}` | ❌ Anon | — | — | — | `GymDto` |
+| GET | `/api/gyms/cities` | ❌ Anon | — | — | — | `IEnumerable<string>` |
 | GET | `/api/gyms/city/{city}` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<GymDto>` |
 | POST | `/api/gyms` | ✅ Auth | `RequireGymAdmin` | — | `CreateGymCommand` | `GymDto` |
 | PUT | `/api/gyms/{id}` | ✅ Auth | `RequireGymAdmin` | — | `UpdateGymCommand` | `GymDto` |
 | DELETE | `/api/gyms/{id}` | ✅ Auth | `RequireAdmin` | — | — | 204 No Content |
 | POST | `/api/gyms/import` | ✅ Auth | `RequireAdmin` | — | `BulkImportGymsCommand` | `BulkImportResult` |
+| POST | `/api/gyms/{id}/favorite` | ✅ Auth | — | — | — | 204 No Content |
+| DELETE | `/api/gyms/{id}/favorite` | ✅ Auth | — | — | — | 204 No Content |
 
 ## Системы грейдов (GradingSystems)
 
@@ -57,6 +62,8 @@ Base URL: `http://localhost:5000` (default)
 | PUT | `/api/routes/{id}` | ✅ Auth | `RequireRoutesetter` | — | `UpdateRouteCommand` | 204 No Content |
 | PATCH | `/api/routes/{id}/deactivate` | ✅ Auth | `RequireRoutesetter` | — | — | 204 No Content |
 | PATCH | `/api/routes/{id}/reactivate` | ✅ Auth | `RequireRoutesetter` | — | — | 204 No Content |
+| GET | `/api/routes/{id}/consensus` | ❌ Anon | — | — | — | `GradeConsensusDto` |
+| PUT | `/api/routes/{id}/notes` | ✅ Auth | — | — | `UpdateRouteNotesCommand` | 204 No Content |
 | DELETE | `/api/routes/{id}` | ✅ Auth | `RequireAdmin` | — | — | 204 No Content |
 
 ## Посты (Posts)
@@ -64,9 +71,9 @@ Base URL: `http://localhost:5000` (default)
 | Method | URL | Auth | Policy | Query | Body | Response |
 |--------|-----|------|--------|-------|------|----------|
 | GET | `/api/posts/{id}` | ❌ Anon | — | — | — | `PostDto` |
-| GET | `/api/posts/user/{userId}` | ❌ Anon | — | — | — | `IEnumerable<PostDto>` |
+| GET | `/api/posts/user/{userId}` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<PostDto>` |
 | GET | `/api/posts/feed` | ✅ Auth | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<PostDto>` |
-| GET | `/api/posts/gym/{gymId}` | ❌ Anon | — | — | — | `IEnumerable<PostDto>` |
+| GET | `/api/posts/gym/{gymId}` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<PostDto>` |
 | POST | `/api/posts` | ✅ Auth | — | — | `CreatePostRequest` | `PostDto` |
 | PUT | `/api/posts/{id}` | ✅ Auth | — | — | `CreatePostRequest` | `PostDto` |
 | PUT | `/api/posts/{id}/publish` | ✅ Auth | — | — | — | 204 No Content |
@@ -86,7 +93,7 @@ Base URL: `http://localhost:5000` (default)
 
 | Method | URL | Auth | Policy | Query | Body | Response |
 |--------|-----|------|--------|-------|------|----------|
-| GET | `/api/routes/{routeId}/reviews` | ❌ Anon | — | — | — | `IEnumerable<RouteReviewDto>` |
+| GET | `/api/routes/{routeId}/reviews` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<RouteReviewDto>` |
 | GET | `/api/routes/{routeId}/reviews/my` | ✅ Auth | — | — | — | `RouteReviewDto` |
 | POST | `/api/routes/{routeId}/reviews` | ✅ Auth | — | — | `AddRouteReviewCommand` | 201 Created |
 | PUT | `/api/routes/{routeId}/reviews/{id}` | ✅ Auth | — | — | `UpdateRouteReviewCommand` | `RouteReviewDto` |
@@ -102,7 +109,7 @@ Base URL: `http://localhost:5000` (default)
 
 | Method | URL | Auth | Policy | Query | Body | Response |
 |--------|-----|------|--------|-------|------|----------|
-| GET | `/api/posts/{postId}/comments` | ❌ Anon | — | — | — | `IEnumerable<CommentDto>` |
+| GET | `/api/posts/{postId}/comments` | ❌ Anon | — | `page` (1), `pageSize` (20) | — | `OffsetPaginatedList<CommentDto>` |
 | POST | `/api/posts/{postId}/comments` | ✅ Auth | — | — | `AddCommentCommand` | `CommentDto` |
 | DELETE | `/api/comments/{commentId}` | ✅ Auth | — | — | — | 204 No Content |
 
@@ -125,23 +132,54 @@ Base URL: `http://localhost:5000` (default)
 
 ---
 
+## Статистика (Statistics)
+
+| Method | URL | Auth | Policy | Query | Body | Response |
+|--------|-----|------|--------|-------|------|----------|
+| GET | `/api/users/{id}/stats` | ✅ Auth | — | — | — | `UserStatsDto` |
+| GET | `/api/users/{id}/kruskor-history` | ✅ Auth | — | `period` (year) | — | `List<KruskorPointDto>` |
+| GET | `/api/users/{id}/grade-pyramid` | ✅ Auth | — | — | — | `GradePyramidDto` |
+| GET | `/api/users/{id}/ascent-distribution` | ✅ Auth | — | — | — | `AscentDistributionDto` |
+| GET | `/api/users/{id}/top-routes` | ✅ Auth | — | — | — | `TopRoutesDto` |
+| GET | `/api/users/{id}/monthly-activity` | ✅ Auth | — | `year`, `month` | — | `MonthlyActivityDto` |
+| GET | `/api/users/{id}/radar-skills` | ✅ Auth | — | — | — | `RadarSkillsDto` |
+| GET | `/api/gyms/{id}/stats` | ✅ Auth | — | — | — | `GymStatsDto` |
+| GET | `/api/routes/{id}/stats` | ✅ Auth | — | — | — | `RouteStatsDto` |
+
+## Медиа (Media)
+
+| Method | URL | Auth | Policy | Query | Body | Response |
+|--------|-----|------|--------|-------|------|----------|
+| POST | `/api/media/upload` | ✅ Auth | — | — | Multipart file | `{ url: string }` |
+
+## Рекомендации (Feed Suggestions)
+
+| Method | URL | Auth | Policy | Query | Body | Response |
+|--------|-----|------|--------|-------|------|----------|
+| GET | `/api/feed/suggestions` | ✅ Auth | — | — | — | `FeedSuggestionsDto` |
+
+---
+
 ## Сводка
 
 | Категория | Endpoints | Authenticated | Admin-only |
 |-----------|-----------|---------------|------------|
-| Auth | 2 | 0 | 0 |
+| Auth | 4 | 1 | 0 |
 | Users | 5 | 4 | 2 |
-| Gyms | 7 | 4 | 2 |
+| Gyms | 10 | 6 | 2 |
 | GradingSystems | 6 | 3 | 3 |
-| Routes | 8 | 4 | 1 |
+| Routes | 10 | 5 | 1 |
 | Route Reviews | 5 | 4 | 0 |
 | Tags | 1 | 0 | 0 |
 | Posts | 8 | 5 | 0 |
 | Ascents | 5 | 3 | 0 |
+| Statistics | 9 | 9 | 0 |
+| Media | 1 | 1 | 0 |
+| Feed Suggestions | 1 | 1 | 0 |
 | Comments | 3 | 2 | 0 |
 | Likes | 2 | 2 | 0 |
 | Followers | 5 | 3 | 0 |
-| **Итого** | **58** | **33** | **8** |
+| **Итого** | **74** | **40** | **8** |
 
 ## Политики авторизации
 

@@ -45,6 +45,7 @@ export default function RouteDetailPage() {
   }
 
   if (routeError || !route) {
+    console.error('[RouteDetail] Failed to load route:', routeError);
     return (
       <PageContainer>
         <StateDisplay

@@ -10,6 +10,12 @@ interface RouteSetterInfoProps {
 export function RouteSetterInfo({ route, size = 'md' }: RouteSetterInfoProps) {
   const theme = useTheme();
 
+  if (!route.setterUsername) return null;
+
+  const date = route.createdAt && route.createdAt !== '0001-01-01T00:00:00'
+    ? new Date(route.createdAt).toLocaleDateString('ru-RU')
+    : null;
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
       <UserLink
@@ -19,10 +25,11 @@ export function RouteSetterInfo({ route, size = 'md' }: RouteSetterInfoProps) {
         size={size === 'sm' ? 'sm' : 'md'}
         withAvatar
       />
-      <Typography sx={{ fontSize: '0.82rem', color: theme.custom.text3 }}>
-        {route.setterGender === 'female' ? 'накрутила' : 'накрутил'}{' '}
-        {new Date(route.createdAt).toLocaleDateString('ru-RU')}
-      </Typography>
+      {date && (
+        <Typography sx={{ fontSize: '0.82rem', color: theme.custom.text3 }}>
+          {route.setterGender === 'female' ? 'накрутила' : 'накрутил'} {date}
+        </Typography>
+      )}
     </Box>
   );
 }

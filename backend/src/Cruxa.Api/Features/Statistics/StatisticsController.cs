@@ -20,8 +20,10 @@ public class StatisticsController(IMediator mediator) : ControllerBase
 
     [HttpGet("users/{id:guid}/kruscore-history")]
     public async Task<ActionResult<List<KruscorePointDto>>> GetKruscoreHistory(
-        Guid id, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+        Guid id, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null)
     {
+        from ??= DateTime.MinValue;
+        to ??= DateTime.MaxValue;
         var result = await mediator.Send(new GetKruscoreHistoryQuery(id, from, to));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
@@ -41,7 +43,7 @@ public class StatisticsController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("users/{id:guid}/top-routes")]
-    public async Task<ActionResult<List<TopRouteItemDto>>> GetTopRoutes(Guid id)
+    public async Task<ActionResult<TopRoutesResponseDto>> GetTopRoutes(Guid id)
     {
         var result = await mediator.Send(new GetTopRoutesQuery(id));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
@@ -49,9 +51,12 @@ public class StatisticsController(IMediator mediator) : ControllerBase
 
     [HttpGet("users/{id:guid}/monthly-activity")]
     public async Task<ActionResult<MonthlyActivityDto>> GetMonthlyActivity(
-        Guid id, [FromQuery] int year, [FromQuery] int month)
+        Guid id, [FromQuery] int? year = null, [FromQuery] int? month = null)
     {
-        var result = await mediator.Send(new GetMonthlyActivityQuery(id, year, month));
+        var now = DateTime.UtcNow;
+        year ??= now.Year;
+        month ??= now.Month;
+        var result = await mediator.Send(new GetMonthlyActivityQuery(id, year.Value, month.Value));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 

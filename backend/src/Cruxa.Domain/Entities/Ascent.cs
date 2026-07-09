@@ -34,7 +34,8 @@ public class Ascent : Entity<Guid>
         Guid userId,
         Guid routeId,
         AscentStyle style,
-        List<string>? mediaUrls = null)
+        List<string>? mediaUrls = null,
+        DateTime? createdAt = null)
     {
         Guard.AgainstDefault(postId, nameof(postId));
         Guard.AgainstDefault(userId, nameof(userId));
@@ -48,7 +49,7 @@ public class Ascent : Entity<Guid>
             RouteId = routeId,
             Style = style,
             MediaUrls = mediaUrls ?? [],
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = createdAt ?? DateTime.UtcNow
         });
     }
 

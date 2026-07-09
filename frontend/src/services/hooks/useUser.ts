@@ -51,10 +51,10 @@ export function useTopRoutes(userId: string, enabled?: boolean) {
   });
 }
 
-export function useMonthlyActivity(userId: string) {
+export function useMonthlyActivity(userId: string, year?: number, month?: number) {
   return useQuery<MonthlyActivity>({
-    queryKey: ['user', userId, 'monthly-activity'],
-    queryFn: () => getMonthlyActivity(userId),
+    queryKey: ['user', userId, 'monthly-activity', year, month],
+    queryFn: () => getMonthlyActivity(userId, year, month),
     enabled: !!userId,
   });
 }

@@ -9,6 +9,8 @@ import { routesetterHandlers } from './handlers/routesetter';
 import { gymAdminHandlers } from './handlers/gymAdmin';
 import { tagsHandlers, managedGymHandlers, mediaHandlers } from './handlers/misc';
 
+const shouldLog = () => import.meta.env.VITE_DEBUG === 'true' || import.meta.env.DEV;
+
 export const worker = setupWorker(
   ...authHandlers,
   ...gymHandlers,
@@ -22,3 +24,17 @@ export const worker = setupWorker(
   ...managedGymHandlers,
   ...mediaHandlers,
 );
+
+if (shouldLog()) {
+  worker.events.on('request:start', ({ request }) => {
+    console.log('[MSW] ➡ %s %s', request.method, request.url);
+  });
+
+  worker.events.on('request:match', ({ request }) => {
+    console.log('[MSW] ✓ %s %s', request.method, request.url);
+  });
+
+  worker.events.on('request:unhandled', ({ request }) => {
+    console.warn('[MSW] ? %s %s — no handler', request.method, request.url);
+  });
+}

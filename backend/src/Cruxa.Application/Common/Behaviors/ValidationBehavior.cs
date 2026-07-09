@@ -1,6 +1,7 @@
 using FluentValidation;
 using MediatR;
 using Cruxa.Domain.Common;
+using Microsoft.Extensions.Logging;
 
 namespace Cruxa.Application.Common.Behaviors;
 
@@ -9,9 +10,10 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
     where TResponse : class
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
+    private readonly ILogger<ValidationBehavior<TRequest, TResponse>> _logger;
 
-    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
-        => _validators = validators;
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<ValidationBehavior<TRequest, TResponse>> logger)
+        => (_validators, _logger) = (validators, logger);
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken ct)
     {
@@ -28,6 +30,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         if (failures.Count != 0)
         {
             var message = string.Join("; ", failures.Select(f => f.ErrorMessage));
+            _logger.LogWarning("Validation failed for {RequestName}: {Errors}", typeof(TRequest).Name, message);
 
             if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
             {

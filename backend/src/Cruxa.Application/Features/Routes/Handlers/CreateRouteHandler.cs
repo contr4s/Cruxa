@@ -39,6 +39,6 @@ public class CreateRouteHandler(
         if (routeResult.IsFailure) return Result.Failure<RouteDto>(routeResult.Error);
 
         await routes.AddAsync(routeResult.Value);
-        return Result.Success(routeResult.Value.Adapt<RouteDto>());
+        return Result.Success(RouteDto.FromEntity(routeResult.Value));
     }
 }

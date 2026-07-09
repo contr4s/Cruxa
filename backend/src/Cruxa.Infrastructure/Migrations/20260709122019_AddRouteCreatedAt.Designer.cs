@@ -5,6 +5,7 @@ using Cruxa.Domain.ValueObjects;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,9 +14,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cruxa.Infrastructure.Migrations
 {
     [DbContext(typeof(CruxaDbContext))]
-    partial class CruxaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260709122019_AddRouteCreatedAt")]
+    partial class AddRouteCreatedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -736,9 +739,6 @@ namespace Cruxa.Infrastructure.Migrations
 
                     b.Property<int>("MaxGradeIndex")
                         .HasColumnType("integer");
-
-                    b.Property<string>("MaxGradeRaw")
-                        .HasColumnType("text");
 
                     b.Property<double>("Score")
                         .HasPrecision(10, 2)

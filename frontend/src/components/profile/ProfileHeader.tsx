@@ -209,7 +209,7 @@ export function ProfileHeader({
           </Box>
 
           <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mb: 1.5 }}>
-            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore}</strong> крускор</Box>
+            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{Math.round(kruskorScore)}</strong> крускор</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
@@ -354,7 +354,7 @@ export function ProfileHeader({
 
         {/* Stats row — full width below avatar row, flush left */}
         <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mt: 2, mb: 1.5 }}>
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore}</strong> крускор</Box>
+          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{Math.round(kruskorScore)}</strong> крускор</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>

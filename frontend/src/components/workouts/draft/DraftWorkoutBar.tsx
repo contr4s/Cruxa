@@ -17,7 +17,7 @@ export function DraftWorkoutBar() {
   if (status !== 'active') return null;
 
   const handleCancel = async () => {
-    await removeDraft({ status: 'deleted' }).catch(() => {});
+    await removeDraft({ status: 'deleted' }).catch((err) => console.error('[Draft] Cancel failed:', err));
     clearDraft();
     setConfirmOpen(false);
   };

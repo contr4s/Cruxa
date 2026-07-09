@@ -1,3 +1,6 @@
+using Cruxa.Application.Features.Statistics.Services;
+using Cruxa.Application.Features.Statistics.Contracts;
+using Cruxa.Application.Extensions;
 using Cruxa.Infrastructure.Extensions;
 using Cruxa.Infrastructure.Persistence;
 using Cruxa.Seeder.Services;
@@ -17,16 +20,10 @@ var host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) =>
     {
-        var connectionString = context.Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
-        dataSourceBuilder.EnableDynamicJson();
-        var dataSource = dataSourceBuilder.Build();
-
-        services.AddDbContext<CruxaDbContext>(options =>
-            options.UseNpgsql(dataSource));
-
+        // Register full infrastructure + application (repos, MediatR, KruscoreService, DbContext, etc.)
+        services.AddInfrastructure(context.Configuration);
+        services.AddApplication(context.Configuration);
+        services.AddScoped<Cruxa.Application.Features.Posts.Handlers.PublishPostHandler>();
         services.AddScoped<SeedService>();
     })
     .Build();

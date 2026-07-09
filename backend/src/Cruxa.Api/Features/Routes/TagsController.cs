@@ -12,6 +12,6 @@ public class TagsController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<List<string>>> GetAll()
     {
         var result = await mediator.Send(new GetAllTagsQuery());
-        return Ok(result.Value);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 }

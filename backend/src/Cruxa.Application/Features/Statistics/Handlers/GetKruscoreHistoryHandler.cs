@@ -31,7 +31,7 @@ public sealed class GetKruscoreHistoryHandler(
         {
             Date = s.Date,
             Score = s.Score,
-            MaxGrade = s.MaxGradeIndex
+            MaxGrade = s.MaxGradeRaw ?? s.MaxGradeIndex.ToString()
         }).ToList();
 
         return result;

@@ -4,88 +4,117 @@ using Cruxa.Domain.Enums;
 
 namespace Cruxa.Seeder.Generators;
 
+/// <summary>
+/// Generates posts with coupled ascents (realistic session counts) per user.
+/// Returns (Post, List&lt;Ascent&gt;) tuples — caller saves &amp; publishes sequentially.
+/// </summary>
 public static class PostGenerator
 {
+    private static readonly AscentStyle[] Styles = [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.TopRope, AscentStyle.Attempt];
+    private static readonly double[] StyleWeights = [0.05, 0.20, 0.35, 0.25, 0.15];
+    private static readonly string[] PostTags = ["climbing,person", "climbing,action", "climbing,wall", "climbing,bouldering", "climbing,training", "climbing,competition", "rock,climbing,outdoor", "climbing,gym,inside"];
+
     /// <summary>
-    /// Генерирует ~250 постов: активные климберы ~6, казуальные ~3, новые ~1–2.
+    /// For each climber generates post+ascent batches. Posts are OLDEST-first
+    /// so sequential kruskor calibration works correctly.
     /// </summary>
-    public static List<Post> Generate(List<User> climbers, List<Gym> gyms)
+    public static List<(User User, List<(Post Post, List<Ascent> Ascents)> Batches)> Generate(
+        List<User> climbers, List<Gym> gyms, List<Route> routes)
     {
-        var posts = new List<Post>();
         var faker = new Faker("ru");
+        var result = new List<(User, List<(Post, List<Ascent>)>)>();
 
         foreach (var user in climbers)
         {
-            // Determine how many posts for this user based on activity distribution
-            var activityLevel = faker.Random.Int(1, 100);
-            int postCount = activityLevel switch
-            {
-                <= 15 => faker.Random.Int(6, 10),   // top 15% — very active
-                <= 40 => faker.Random.Int(3, 6),    // next 25% — active
-                <= 70 => faker.Random.Int(1, 3),    // next 30% — casual
-                _ => faker.Random.Int(0, 2)          // bottom 30% — occasional
-            };
-
-            // Filter gyms by user's city, or use all if city not set
             var cityGyms = string.IsNullOrEmpty(user.City)
                 ? gyms
                 : gyms.Where(g => g.City == user.City).ToList();
             if (cityGyms.Count == 0) cityGyms = gyms;
 
+            var postCount = faker.Random.Int(4, 10);
+            var dayOffsets = new HashSet<int>();
+            while (dayOffsets.Count < postCount)
+                dayOffsets.Add(faker.Random.Int(1, 90));
+
+            // OLDEST first so calibration snapshot anchors earliest date
+            var sortedDays = dayOffsets.OrderByDescending(d => d).ToList();
+
+            var batches = new List<(Post, List<Ascent>)>();
             for (var p = 0; p < postCount; p++)
             {
                 var gym = faker.PickRandom(cityGyms);
-                var daysAgo = faker.Random.Int(1, 90);
-                var createdAt = DateTime.UtcNow.AddDays(-daysAgo)
+                var createdAt = DateTime.UtcNow.AddDays(-sortedDays[p])
                     .AddHours(faker.Random.Int(8, 23))
                     .AddMinutes(faker.Random.Int(0, 59));
 
-                var postTags = faker.PickRandom(new[]
-                {
-                    "climbing,person", "climbing,action", "climbing,wall",
-                    "climbing,bouldering", "climbing,training", "climbing,competition",
-                    "rock,climbing,outdoor", "climbing,gym,inside"
-                });
                 var post = Post.Create(
-                    user.Id,
-                    gym.Id,
+                    user.Id, gym.Id,
                     description: ClimbingPhrases.RandomPostDescription(),
                     mediaUrls: faker.Random.Bool(0.7f)
                         ? Enumerable.Range(0, faker.Random.Int(1, 3))
-                            .Select(i => $"https://loremflickr.com/800/600/{postTags}?random={user.Username}_{p}_{i}")
-                            .ToList()
+                            .Select(i => $"https://loremflickr.com/800/600/{faker.PickRandom(PostTags)}?random={user.Username}_{p}_{i}").ToList()
                         : [],
-                    duration: faker.Random.Int(30, 180)).Value!;
+                    duration: faker.Random.Int(30, 180),
+                    createdAt: createdAt).Value!;
 
-                // Set visibility
-                var visibilityRoll = faker.Random.Int(1, 100);
-                PostVisibility visibility = visibilityRoll switch
-                {
-                    <= 75 => PostVisibility.Public,
-                    <= 90 => PostVisibility.Followers,
-                    _ => PostVisibility.Private
-                };
-                SetPrivateField(post, "_visibility", visibility);
+                var gymRoutes = routes.Where(r => r.GymId == gym.Id).ToList();
+                var ascents = GenerateAscents(faker, post.Id, user.Id, gymRoutes, createdAt);
 
-                // Most posts are published
-                var statusRoll = faker.Random.Int(1, 100);
-                if (statusRoll <= 93)
-                {
-                    post.Publish();
-                }
-
-                SetPrivateField(post, "_createdAt", createdAt);
-
-                posts.Add(post);
+                batches.Add((post, ascents));
             }
+
+            result.Add((user, batches));
         }
 
-        return posts;
+        return result;
     }
 
-    private static void SetPrivateField<T>(object obj, string name, T value)
+    private static List<Ascent> GenerateAscents(Faker faker, Guid postId, Guid userId, List<Route> gymRoutes, DateTime createdAt)
     {
-        var f = obj.GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-        if (f is not null) f.SetValue(obj, value);
+        if (gymRoutes.Count == 0) return [];
+
+        var boulderRoutes = gymRoutes.Where(r => r.Type == RouteType.Bouldering).ToList();
+        var leadRoutes = gymRoutes.Where(r => r.Type == RouteType.Lead).ToList();
+
+        var sessionType = faker.Random.Int(1, 100);
+        int ascentCount;
+        List<Route> pool;
+
+        if (sessionType <= 55) // bouldering session
+        {
+            pool = boulderRoutes.Count >= 3 ? boulderRoutes : gymRoutes;
+            ascentCount = faker.Random.Int(15, 25);
+        }
+        else if (sessionType <= 80) // lead session
+        {
+            pool = leadRoutes.Count >= 3 ? leadRoutes : gymRoutes;
+            ascentCount = faker.Random.Int(5, 9);
+        }
+        else // mixed
+        {
+            pool = gymRoutes;
+            ascentCount = faker.Random.Int(8, 14);
+        }
+
+        ascentCount = Math.Min(ascentCount, pool.Count);
+        if (ascentCount < 1) return [];
+
+        return faker.PickRandom(pool, ascentCount).Select(route =>
+        {
+            var style = PickWeighted(faker, Styles, StyleWeights);
+            return Ascent.Create(postId, userId, route.Id, style, createdAt: createdAt).Value!;
+        }).ToList();
+    }
+
+    private static T PickWeighted<T>(Faker f, T[] items, double[] weights)
+    {
+        var r = f.Random.Double();
+        var cumulative = 0.0;
+        for (var i = 0; i < items.Length; i++)
+        {
+            cumulative += weights[i];
+            if (r < cumulative) return items[i];
+        }
+        return items[^1];
     }
 }

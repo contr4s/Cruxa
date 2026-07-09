@@ -1,3 +1,5 @@
+using Cruxa.Domain.Enums;
+
 namespace Cruxa.Application.Features.Statistics.Contracts;
 
 public record AscentWithRouteTags(
@@ -5,7 +7,7 @@ public record AscentWithRouteTags(
     Guid RouteId,
     Guid PostId,
     int GradeIndex,
-    string Style,
-    int RouteType,
+    AscentStyle Style,
+    RouteType RouteTypeCode,
     DateTime Date,
-    List<string> Tags);
+    List<(string Value, string? Category)> Tags);
