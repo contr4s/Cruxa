@@ -1,6 +1,7 @@
 import api from './api';
 import type { AdminDashboardStats, RecentActivityItem, TopGymItem, AdminGymItem, AdminGymFilterState } from '../types/admin';
 import type { PaginatedList } from '../types/common';
+import type { BulkImportResult } from '../types/gym';
 
 export async function getAdminStats(): Promise<AdminDashboardStats> {
   const response = await api.get<AdminDashboardStats>('/admin/stats');
@@ -21,5 +22,10 @@ export async function getAdminGyms(
   params?: Partial<AdminGymFilterState> & { page?: number; pageSize?: number },
 ): Promise<PaginatedList<AdminGymItem>> {
   const response = await api.get<PaginatedList<AdminGymItem>>('/admin/gyms', { params });
+  return response.data;
+}
+
+export async function importGyms(gyms: Record<string, unknown>[]): Promise<BulkImportResult> {
+  const response = await api.post<BulkImportResult>('/gyms/import', { gyms });
   return response.data;
 }

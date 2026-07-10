@@ -10,7 +10,7 @@ namespace Cruxa.Tests.Unit.Application.Routes;
 public class RouteReviewHandlerTests
 {
     private readonly TestFixture _fixture = new();
-    private readonly Mock<IRouteReviewRepository> _reviewRepo = new();
+    private readonly Mock<IRouteFeedbackRepository> _reviewRepo = new();
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _routeId = Guid.NewGuid();
 
@@ -19,7 +19,7 @@ public class RouteReviewHandlerTests
     {
         var handler = new AddRouteReviewHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId))
-            .ReturnsAsync((RouteReview?)null);
+            .ReturnsAsync((RouteFeedback?)null);
 
         var rating = _fixture.Faker.Random.Int(1, 5);
         var result = await handler.Handle(
@@ -34,7 +34,7 @@ public class RouteReviewHandlerTests
     public async Task AddReview_WhenReviewExists_ReturnsConflict()
     {
         var handler = new AddRouteReviewHandler(_reviewRepo.Object);
-        var existing = RouteReview.Create(_routeId, _userId).Value!;
+        var existing = RouteFeedback.Create(_routeId, _userId).Value!;
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId))
             .ReturnsAsync(existing);
 
@@ -53,7 +53,7 @@ public class RouteReviewHandlerTests
         var newRating = _fixture.Faker.Random.Int(1, 5);
         var newPrivateNotes = _fixture.Faker.Lorem.Sentence();
         var newPublicReview = _fixture.Faker.Lorem.Sentence();
-        var review = RouteReview.Create(_routeId, _userId, rating: initialRating).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId, rating: initialRating).Value!;
         var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
@@ -70,7 +70,7 @@ public class RouteReviewHandlerTests
     public async Task UpdateReview_WhenNotExists_ReturnsNotFound()
     {
         var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
-        _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteReview?)null);
+        _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteFeedback?)null);
 
         var result = await handler.Handle(
             _fixture.Create<UpdateRouteReviewCommand>() with { UserId = _userId }, CancellationToken.None);
@@ -82,7 +82,7 @@ public class RouteReviewHandlerTests
     [Fact]
     public async Task UpdateReview_WhenNotOwnReview_ReturnsUnauthorized()
     {
-        var review = RouteReview.Create(_routeId, _userId).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId).Value!;
         var handler = new UpdateRouteReviewHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
@@ -96,7 +96,7 @@ public class RouteReviewHandlerTests
     [Fact]
     public async Task DeleteReview_WhenExistsAndOwn_ReturnsSuccess()
     {
-        var review = RouteReview.Create(_routeId, _userId).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId).Value!;
         var handler = new DeleteRouteReviewHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByIdAsync(review.Id)).ReturnsAsync(review);
 
@@ -112,7 +112,7 @@ public class RouteReviewHandlerTests
     public async Task DeleteReview_WhenNotExists_ReturnsNotFound()
     {
         var handler = new DeleteRouteReviewHandler(_reviewRepo.Object);
-        _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteReview?)null);
+        _reviewRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((RouteFeedback?)null);
 
         var result = await handler.Handle(
             _fixture.Create<DeleteRouteReviewCommand>(), CancellationToken.None);
@@ -126,11 +126,11 @@ public class RouteReviewHandlerTests
     {
         var rating1 = _fixture.Faker.Random.Int(1, 5);
         var rating2 = _fixture.Faker.Random.Int(1, 5);
-        var review1 = RouteReview.Create(_routeId, Guid.NewGuid(), rating: rating1).Value!;
-        var review2 = RouteReview.Create(_routeId, Guid.NewGuid(), rating: rating2).Value!;
+        var review1 = RouteFeedback.Create(_routeId, Guid.NewGuid(), rating: rating1).Value!;
+        var review2 = RouteFeedback.Create(_routeId, Guid.NewGuid(), rating: rating2).Value!;
         var handler = new GetRouteReviewsByRouteHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetPagedByRouteIdAsync(_routeId, 1, 20))
-            .ReturnsAsync((new List<RouteReview> { review1, review2 }, 2));
+            .ReturnsAsync((new List<RouteFeedback> { review1, review2 }, 2));
 
         var result = await handler.Handle(
             new GetRouteReviewsByRouteQuery(RouteId: _routeId, Page: 1, PageSize: 20), CancellationToken.None);
@@ -146,7 +146,7 @@ public class RouteReviewHandlerTests
     public async Task GetReviewByUserRoute_WhenExists_ReturnsReview()
     {
         var rating = _fixture.Faker.Random.Int(1, 5);
-        var review = RouteReview.Create(_routeId, _userId, rating: rating).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId, rating: rating).Value!;
         var handler = new GetRouteReviewByUserRouteHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId)).ReturnsAsync(review);
 
@@ -164,7 +164,7 @@ public class RouteReviewHandlerTests
     {
         var handler = new GetRouteReviewByUserRouteHandler(_reviewRepo.Object);
         _reviewRepo.Setup(r => r.GetByRouteAndUserAsync(_routeId, _userId))
-            .ReturnsAsync((RouteReview?)null);
+            .ReturnsAsync((RouteFeedback?)null);
 
         var result = await handler.Handle(
             new GetRouteReviewByUserRouteQuery(RouteId: _routeId, UserId: _userId),

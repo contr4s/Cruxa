@@ -158,7 +158,7 @@ export default function RoutesetterDashboardPage() {
   }, []);
 
   return (
-    <PageContainer>
+    <PageContainer sx = {{ maxWidth: 1000 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: theme.palette.text.primary }}>

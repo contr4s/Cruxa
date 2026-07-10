@@ -15,7 +15,7 @@ public class RouteReviewTests
         var rating = _fixture.Faker.Random.Int(1, 5);
         var privateNotes = _fixture.Faker.Lorem.Sentence();
         var publicReview = _fixture.Faker.Lorem.Sentence();
-        var result = RouteReview.Create(_routeId, _userId, rating: rating, privateNotes: privateNotes, publicReview: publicReview);
+        var result = RouteFeedback.Create(_routeId, _userId, rating: rating, privateNotes: privateNotes, publicReview: publicReview);
 
         result.IsSuccess.Should().BeTrue();
         result.Value!.RouteId.Should().Be(_routeId);
@@ -28,35 +28,35 @@ public class RouteReviewTests
     [Fact]
     public void Create_WithDefaultRouteId_Throws()
     {
-        var act = () => RouteReview.Create(Guid.Empty, _userId);
+        var act = () => RouteFeedback.Create(Guid.Empty, _userId);
         act.Should().Throw<ArgumentException>();
     }
 
     [Fact]
     public void Create_WithDefaultUserId_Throws()
     {
-        var act = () => RouteReview.Create(_routeId, Guid.Empty);
+        var act = () => RouteFeedback.Create(_routeId, Guid.Empty);
         act.Should().Throw<ArgumentException>();
     }
 
     [Fact]
     public void Create_WithRatingOutOfRange_Throws()
     {
-        var act = () => RouteReview.Create(_routeId, _userId, rating: 6);
+        var act = () => RouteFeedback.Create(_routeId, _userId, rating: 6);
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
 
     [Fact]
     public void Create_WithRatingBelowRange_Throws()
     {
-        var act = () => RouteReview.Create(_routeId, _userId, rating: 0);
+        var act = () => RouteFeedback.Create(_routeId, _userId, rating: 0);
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
 
     [Fact]
     public void Create_WithNoOptionalFields_ReturnsSuccess()
     {
-        var result = RouteReview.Create(_routeId, _userId);
+var result = RouteFeedback.Create(_routeId, _userId);
 
         result.IsSuccess.Should().BeTrue();
         result.Value!.Rating.Should().BeNull();
@@ -67,12 +67,12 @@ public class RouteReviewTests
     [Fact]
     public void UpdateReview_ChangesValues()
     {
-        var review = RouteReview.Create(_routeId, _userId, rating: _fixture.Faker.Random.Int(1, 5)).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId, rating: _fixture.Faker.Random.Int(1, 5)).Value!;
 
         var rating = _fixture.Faker.Random.Int(1, 5);
         var privateNotes = _fixture.Faker.Lorem.Sentence();
         var publicReview = _fixture.Faker.Lorem.Sentence();
-        review.UpdateReview(rating, privateNotes, publicReview);
+        review.UpdateFeedback(rating, privateNotes, publicReview, null);
 
         review.Rating.Should().Be(rating);
         review.PrivateNotes.Should().Be(privateNotes);
@@ -84,11 +84,11 @@ public class RouteReviewTests
     public void UpdateReview_WithNulls_SetsNulls()
     {
         var initialRating = _fixture.Faker.Random.Int(1, 5);
-        var review = RouteReview.Create(_routeId, _userId, rating: initialRating,
+        var review = RouteFeedback.Create(_routeId, _userId, rating: initialRating,
             privateNotes: _fixture.Faker.Lorem.Sentence(),
             publicReview: _fixture.Faker.Lorem.Sentence()).Value!;
 
-        review.UpdateReview(null, null, null);
+        review.UpdateFeedback(null, null, null, null);
 
         review.Rating.Should().BeNull();
         review.PrivateNotes.Should().BeNull();
@@ -98,9 +98,9 @@ public class RouteReviewTests
     [Fact]
     public void UpdateReview_WithOutOfRangeRating_Throws()
     {
-        var review = RouteReview.Create(_routeId, _userId).Value!;
+        var review = RouteFeedback.Create(_routeId, _userId).Value!;
 
-        var act = () => review.UpdateReview(6, null, null);
+        var act = () => review.UpdateFeedback(6, null, null, null);
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }

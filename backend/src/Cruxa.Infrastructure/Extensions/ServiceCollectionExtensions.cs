@@ -1,4 +1,6 @@
 using Cruxa.Infrastructure.Repositories;
+using Cruxa.Application.Features.Admin.Contracts;
+using Cruxa.Application.Features.GymAdmin.Contracts;
 using Cruxa.Application.Features.Statistics.Contracts;
 
 namespace Cruxa.Infrastructure.Extensions;
@@ -51,6 +53,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IStatsRepository, StatsRepository>();
         services.AddScoped<IGymAssignmentRepository, GymAssignmentRepository>();
         services.AddScoped<IGymFavoriteRepository, GymFavoriteRepository>();
+        services.AddScoped<IAdminRepository, AdminRepository>();
+        services.AddScoped<IGymAdminRepository, GymAdminRepository>();
 
         // Transaction manager
         services.AddScoped<ITransactionManager, TransactionManager>();

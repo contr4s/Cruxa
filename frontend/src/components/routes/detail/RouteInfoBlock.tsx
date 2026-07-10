@@ -32,7 +32,7 @@ export function RouteInfoBlock({ route }: RouteInfoBlockProps) {
             borderRadius: '12px', background: theme.palette.primary.main, color: '#fff',
           }}
         >
-          {route.type === 'Boulder' ? 'Bouldering' : route.type}
+          {route.type === 'Bouldering' ? 'Bouldering' : route.type}
         </Typography>
         <RatingBadge rating={route.rating} />
       </Box>

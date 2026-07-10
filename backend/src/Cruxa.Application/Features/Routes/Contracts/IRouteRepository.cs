@@ -1,3 +1,4 @@
+using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Domain.Entities;
 
 namespace Cruxa.Application.Features.Routes.Contracts;
@@ -9,6 +10,7 @@ public interface IRouteRepository
     Task<(List<Route> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize);
     Task<IEnumerable<Route>> GetByGymIdAsync(Guid gymId);
     Task<IEnumerable<Route>> GetAllAsync();
+    Task<(List<Route> Items, int TotalCount)> GetFilteredRoutesAsync(RouteFilter filter);
     Task AddAsync(Route route);
     Task UpdateAsync(Route route);
     Task DeleteAsync(Guid id);

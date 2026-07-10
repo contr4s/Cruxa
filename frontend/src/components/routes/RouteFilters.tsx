@@ -24,7 +24,7 @@ interface RouteFiltersProps {
 
 const TYPES = [
   { value: 'all', label: 'Все' },
-  { value: 'Boulder', label: 'Боулдер' },
+  { value: 'Bouldering', label: 'Боулдер' },
   { value: 'Lead', label: 'Lead' },
   { value: 'TopRope', label: 'Top-rope' },
   { value: 'Speed', label: 'Скорость' },

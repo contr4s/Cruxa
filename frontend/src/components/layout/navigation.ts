@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
   { path: '/workouts', icon: FitnessCenterIcon, label: 'Тренировки' },
   { path: '/gyms', icon: MapIcon, label: 'Скалодромы' },
   { path: '/feed', icon: NewspaperIcon, label: 'Лента' },
-  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter', 'Admin'] },
+  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter'] },
   { path: '/gym-admin', icon: AdminPanelSettingsIcon, label: 'Управление', roles: ['GymAdmin'] },
   { path: '/admin', icon: AdminPanelSettingsIcon, label: 'Администрирование', roles: ['Admin'] },
 ];
@@ -38,7 +38,7 @@ export const TAB_ITEMS: NavItem[] = [
   { path: '/workouts', icon: FitnessCenterIcon, label: 'Тренировки' },
   { path: '/gyms', icon: MapIcon, label: 'Скалодромы' },
   { path: '/profile', label: 'Профиль' },
-  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter', 'Admin'] },
-  { path: '/gym-admin', icon: AdminPanelSettingsIcon, label: 'Управление', roles: ['GymAdmin', 'Admin'] },
+  { path: '/routesetter', icon: ConstructionIcon, label: 'Рутсеттер', roles: ['Routesetter'] },
+  { path: '/gym-admin', icon: AdminPanelSettingsIcon, label: 'Управление', roles: ['GymAdmin'] },
   { path: '/admin', icon: AdminPanelSettingsIcon, label: 'Администрирование', roles: ['Admin'] },
 ];

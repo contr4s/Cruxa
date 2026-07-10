@@ -113,7 +113,7 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
       grade: result.grade,
       gradeIndex: route?.gradeIndex ?? 0,
       holdColor: result.holdColor,
-      type: route?.type ?? 'Boulder',
+      type: route?.type ?? 'Bouldering',
       style: result.style,
       notes: result.notes,
       mediaUrls: result.mediaUrls ?? [],

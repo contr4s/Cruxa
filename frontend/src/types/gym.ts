@@ -61,3 +61,9 @@ export interface UpdateGymPayload {
   hours?: WorkingHoursEntry[];
   prices?: GymPrice[];
 }
+
+export interface BulkImportResult {
+  imported: number;
+  skipped: number;
+  errors: string[];
+}

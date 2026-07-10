@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Box, Typography, Fab, Button, useTheme } from '@mui/material';
 import { useSnackbar } from 'notistack';
+import { useSearchParams } from 'react-router-dom';
+import { useAuthStore } from '../stores/authStore';
 import { Route, People, EditNote, FilterList, QrCodeScanner, Add } from '@mui/icons-material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { PageContainer } from '../components/layout/PageContainer';
@@ -64,10 +66,14 @@ export default function GymAdminDashboardPage() {
   const prevSelectedJson = useRef('');
 
   const { enqueueSnackbar } = useSnackbar();
+  const [searchParams] = useSearchParams();
+  const userRole = useAuthStore((s) => s.role);
+  const queryGymId = searchParams.get('gymId');
 
-  // GymAdmin управляет своим залом (через отдельный эндпоинт)
+  // GymAdmin управляет своим залом (через отдельный эндпоинт).
+  // Admin (SuperAdmin) может передать gymId в query-параметре.
   const { data: managedGym, isLoading: managedLoading } = useManagedGym();
-  const gymId = managedGym?.gymId ?? '';
+  const gymId = (userRole === 'Admin' && queryGymId) ? queryGymId : (managedGym?.gymId ?? '');
   const { data: gym, isLoading: gymLoading } = useGym(gymId);
   const { data: stats, isLoading: statsLoading } = useGymAdminStats(gymId);
   const { data: activity } = useGymActivity(gymId);

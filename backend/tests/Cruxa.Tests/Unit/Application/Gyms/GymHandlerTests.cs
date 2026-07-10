@@ -13,6 +13,8 @@ public class GymHandlerTests
 {
     private readonly TestFixture _fixture = new();
     private readonly Mock<IGymRepository> _gymRepo = new();
+    private readonly Mock<IGymFavoriteRepository> _favRepo = new();
+    private readonly Mock<ICurrentUserService> _currentUser = new();
 
     private Gym CreateGym()
     {
@@ -30,7 +32,7 @@ public class GymHandlerTests
     {
         var gym = CreateGym();
         var id = Guid.NewGuid();
-        var handler = new GetGymByIdHandler(_gymRepo.Object);
+        var handler = new GetGymByIdHandler(_gymRepo.Object, _favRepo.Object, _currentUser.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(gym);
 
         var result = await handler.Handle(
@@ -44,7 +46,7 @@ public class GymHandlerTests
     public async Task GetGymById_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
-        var handler = new GetGymByIdHandler(_gymRepo.Object);
+        var handler = new GetGymByIdHandler(_gymRepo.Object, _favRepo.Object, _currentUser.Object);
         _gymRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((Gym?)null);
 
         var result = await handler.Handle(
@@ -115,7 +117,7 @@ public class GymHandlerTests
     public async Task GetAllGyms_ReturnsPaginatedList()
     {
         var gyms = new[] { CreateGym(), CreateGym(), CreateGym() };
-        var handler = new GetAllGymsHandler(_gymRepo.Object);
+        var handler = new GetAllGymsHandler(_gymRepo.Object, _favRepo.Object, _currentUser.Object);
         _gymRepo.Setup(r => r.GetAllPagedAsync(1, 2)).ReturnsAsync((gyms.Take(2).ToList(), 3));
 
         var result = await handler.Handle(new GetAllGymsQuery(1, 2), CancellationToken.None);

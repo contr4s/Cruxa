@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
   Box, Typography, Button, Dialog, DialogTitle, DialogContent,
   TextField, DialogActions, useTheme,
@@ -11,6 +11,7 @@ import { StateDisplay } from '../components/ui/StateDisplay';
 import { Pagination } from '../components/ui/Pagination';
 
 import { useCreateGym } from '../services/hooks/useGyms';
+import { importGyms } from '../services/admin.service';
 import {
   useAdminStats,
   useRecentActivity,
@@ -44,6 +45,36 @@ export default function SuperAdminDashboardPage() {
   const { data: topGyms, isLoading: topGymsLoading, isError: topGymsError, refetch: refetchTopGyms } = useTopGyms();
   const { data: gymsData, isLoading: gymsLoading, isError: gymsError, refetch: refetchGyms } = useAdminGyms({ ...filters, page, pageSize: 10 });
   const { mutateAsync: createGymMutate, isPending: creatingGym } = useCreateGym();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importing, setImporting] = useState(false);
+
+  const handleImportClick = () => fileInputRef.current?.click();
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImporting(true);
+    try {
+      const text = await file.text();
+      const gyms = JSON.parse(text);
+      const data = Array.isArray(gyms) ? gyms : [gyms];
+      const result = await importGyms(data);
+      enqueueSnackbar(`Импорт завершён: ${result.imported} добавлено, ${result.skipped} пропущено`, {
+        variant: result.errors.length > 0 ? 'warning' : 'success',
+      });
+      if (result.errors.length > 0) {
+        result.errors.forEach((err: string) => enqueueSnackbar(err, { variant: 'error' }));
+      }
+      refetchGyms();
+      refetchStats();
+    } catch (err) {
+      enqueueSnackbar('Ошибка при импорте: ' + (err instanceof Error ? err.message : 'неизвестная ошибка'), { variant: 'error' });
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   return (
     <PageContainer>
@@ -82,11 +113,20 @@ export default function SuperAdminDashboardPage() {
             <Button
               size="small"
               variant="outlined"
-              onClick={() => enqueueSnackbar('Экспорт данных появится в ближайшее время', { variant: 'info' })}
+              startIcon={<Add />}
+              disabled={importing}
+              onClick={handleImportClick}
               sx={{ fontSize: '0.78rem' }}
             >
-              Экспорт данных
+              {importing ? 'Импорт…' : 'Импорт залов'}
             </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
           </Box>
         </Box>
 
@@ -155,7 +195,7 @@ export default function SuperAdminDashboardPage() {
             <>
               <AdminGymTable
                 gyms={gymsData.items}
-                onManage={(_id) => navigate(`/gym-admin`)}
+                onManage={(id) => navigate(`/gym-admin?gymId=${id}`)}
                 onSort={(field) => {
                   setFilters((prev) => ({ ...prev, sort: prev.sort === field ? `-${field}` : field }));
                   setPage(1);
