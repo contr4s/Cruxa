@@ -32,9 +32,7 @@ public class GymRepository : IGymRepository
 
     public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize, string? city = null, Domain.Enums.GymSort? sort = null)
     {
-        IQueryable<Gym> query = _context.Gyms
-            .Include(g => g.GradingSystem)
-            .Include(g => g.Routes);
+        IQueryable<Gym> query = _context.Gyms.Include(g => g.Routes);
 
         if (!string.IsNullOrEmpty(city) && city != "all")
             query = query.Where(g => g.City == city);

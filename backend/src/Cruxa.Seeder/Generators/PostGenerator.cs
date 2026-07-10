@@ -11,7 +11,7 @@ namespace Cruxa.Seeder.Generators;
 /// </summary>
 public static class PostGenerator
 {
-    private static readonly string[] PostTags = ["climbing,person", "climbing,action", "climbing,wall", "climbing,bouldering", "climbing,training", "climbing,competition", "rock,climbing,outdoor", "climbing,gym,inside"];
+    private static readonly string[] PostTags = ["climbing,bouldering", "climbing,lead", "climbing,route", "climbing,wall", "climbing,hold", "climbing,gym", "mountain,rock", "mountain,climbing"];
 
     /// <summary>
     /// For each climber generates post+ascent batches. Posts are OLDEST-first.

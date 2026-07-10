@@ -1,0 +1,472 @@
+[
+  {
+    "name": "Фитнес-арена 3000",
+    "city": "Уфа",
+    "address": "Уфа, Менделеева, 134/7",
+    "latitude": 54.71631,
+    "longitude": 56.008054,
+    "description": "Скалодром «Фитнес-арена», несомненно, порадует не только профессионалов, но и любителей скалолазного спорта. Посетителям предлагаются тренажеры для альпинистов любой сложности: для детей от 6 лет, аматоров, а также профессиональных спортсменов. У нас постоянно проводятся различные соревнования, позволяя скалолазам в полной мере проявить свои возможности и мастерство. Клиенты могут приобрести абонемент на несколько занятий или выбрать разовое посещение, если еще не определились с отношением к скалолазанию. Также вы можете организовать любой спортивный праздник или мероприятие.",
+    "contactInfo": "+7 (347) 216-30-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/fitnessarena3000",
+      "https://www.facebook.com/arena3000/",
+      "https://www.instagram.com/fitnessarena3000/"
+    ],
+    "website": "http://fitness3000.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/alt_fitnes_arena_3000_skalodrom-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/alt_krytyi_skalodrom_fitnes_arena_3000_-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/alt_skalodrom_-min.jpg"
+    ],
+    "wallArea": 100,
+    "maxHeight": 10,
+    "yearFounded": 2006,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Клуб им. Нассонова",
+    "city": "Уфа",
+    "address": "Уфа, Ленина, 43",
+    "latitude": 54.733764,
+    "longitude": 55.950355,
+    "description": "Скалодром Спелеоклуб им.Нассонова - \"камерное\" место, где регулярно собираются спелеологи для тренировок, развития своих навыков и профессионального общения. Скалодром оборудован стенами высотой 4 метра и площадью 60 кв.м. Зал небольшой, но уютный и адаптированный под \"реальные\" условия - на стенах есть отвесы, разный угол наклона. Это позволяет потренироваться и улучшить свои навыки для лазания по пещерам и скалам. А также подготовиться к прохождению спелеодистанций на соревнованиях и чемпионатах по спортивному туризму.",
+    "contactInfo": "8 (937) 154-29-82",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/nassonova"
+    ],
+    "website": "http://www.speleo-ufa.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/dYw2s8XFyqA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iZZtUI9XsBA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mceXROWC2NU-min.jpg"
+    ],
+    "wallArea": 60,
+    "maxHeight": 4,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Гимназия №158",
+    "city": "Уфа",
+    "address": "Уфа, ул. З.Исмагилова, 1",
+    "latitude": 54.693972,
+    "longitude": 55.987347,
+    "description": "Скалодром располагается в просторном спортзале гимназии №158 им. Мустая Карима. Высота стен составляет 13 метров, общая площадь – 100 кв.м. Архитектура и состояние скалодрома отвечают техническому регламенту и требованиям к проведению соревнований всероссийского уровня. Предназначен для тренировок учащихся, а также спортсменов из башкирских детско-юношеских спортивных школ. Коммерческих групп на данный момент нет. Занятия проводятся по будням с 16-30 до 19-30 и по субботам с 14-00 до 19-30. В воскресенье зал не работает.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://gimn158ufa.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:30",
+        "to": "19:30"
+      },
+      {
+        "days": "Сб",
+        "from": "14:00",
+        "to": "19:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/IMG_6462-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IMG_9762-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IMG_9715-min.jpg"
+    ],
+    "wallArea": 100,
+    "maxHeight": 13,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Play Day",
+    "city": "Уфа",
+    "address": "Уфа, Проспект Октября, 34",
+    "latitude": 54.749725,
+    "longitude": 55.999978,
+    "description": "Хоть этот скалодром и находится в местном ТРК, площадь у него приличная – около 60-ти кв.метров. Приходили сюда всей семьей, и каждому понравились разные активности. Мне в Плэй Дэй больше всего по душе пришелся именно скалодром, тем более в день нашего посещения была акция, немного сэкономить получилось даже. Все вокруг было чисто, обстановка комфортная и веселая. Еще удобно то, что работают они допоздна, так что можно развлекаться, никуда не торопясь.",
+    "contactInfo": "+7 (347) 293-69-58",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/playdaygroup"
+    ],
+    "website": "http://play-day.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "12:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/148486-396x527-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/def4840e4c9633769c3952f0569ac4f9-min.JPG"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Маршал Артс",
+    "city": "Уфа",
+    "address": "Уфа, ул. Новоженова 9/2",
+    "latitude": 54.783746,
+    "longitude": 56.067396,
+    "description": "Скалодром «Маршал Артс» - это часть спорткомплекса Центр Спорта Маршал Артс (общей площадью 2700 кв.м.) в Уфе. Помимо секций скалолазания и боулдеринга, в спорткомплексе действуют еще 35 разных секций для детей и взрослых. Также в центре для удобства и комфорта посетителей есть детская игровая комната, огороженная парковка на 300 мест, гардероб и раздевалки, сауна и душ. Физических и возрастных ограничений на посещение скалодрома нет, поэтому можно всей семьей попробовать свои силы в лазании, развить координацию движений и просто приятно провести время. Можно записаться на занятия, которые проводят два профессиональных тренера, мастера спорта и чемпионы по скалолазанию. Первое посещение скалодрома «Маршал Артс» для детей - бесплатное, а для взрослых - с 30% скидкой",
+    "contactInfo": "+7 (347) 246-27-22",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/ufamartialarts"
+    ],
+    "website": "http://martial-arts.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/9hRLmRy8JnU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dScGISYKg20-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DXf8ql94Z_8-min.jpg"
+    ],
+    "wallArea": 230,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "КУЛ ТАУ",
+    "city": "Уфа",
+    "address": "Уфа, ул. Рихарда Зорге, 63к3",
+    "latitude": 54.768303,
+    "longitude": 56.00808,
+    "description": "Спортивный центр «Кул-Тау» располагается неподалеку от столицы солнечного Башкортостана — Уфы. Здесь установлено современное искусственное сооружение для скалолазания высотой 17 метров. В стене имеется множество препятствий разного уровня сложности. Тренировочная площадка находится открытом воздухе, но сверху от прямого попадания осадков ее защищает мощный купол. База работает в среду, понедельник и пятницу с 18:00 до 22:00, а в субботу и воскресенье — с 14:00 до 18:00. Центром управляет Игорь Чинарев. Он ответственно подходит к делу, поэтому объект соответствует международным стандартам безопасности и качества обслуживания.",
+    "contactInfo": "+7 (906) 108-35-25",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/drom2"
+    ],
+    "website": "https://vk.com/drom2",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "14:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Абонемент на 5 занятий",
+        "price": "1000 руб"
+      },
+      {
+        "name": "Занятие с инструктором",
+        "price": "750 руб"
+      },
+      {
+        "name": "1 самостоятельное занятие",
+        "price": "250 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/3OKzNAuOMLI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NwyGuA8yyHY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/QHlwELEMP1Q-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/toOCjTYeKf4-min.jpg"
+    ],
+    "wallArea": 900,
+    "maxHeight": 17,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "FLYPARK",
+    "city": "Уфа",
+    "address": "Уфа, Луганская ул, 1",
+    "latitude": 54.751788,
+    "longitude": 56.017046,
+    "description": "FLYPARK - первый в Уфе полноценный центр батута и акробатики, на территории которого построен первоклассный скалодром. Здесь есть всё необходимое\u00A0для занятий спортом и активного отдыха. Учреждение работает для детей и взрослых. Центр можно рассматривать как тренировочную площадку и в качестве места для проведения оригинальных мероприятий (в том числе праздничных), таких, как дни рождения, памятные даты, корпоративы. Для занятий необходимо иметь спортивную форму, переобувку и документ, удостоверяющий личность. Доступна предварительная запись по телефону.",
+    "contactInfo": "+7 (347) 286-28-26",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/flypark"
+    ],
+    "website": "https://vk.com/flypark",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/cLCl_GiWYxE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/h_jxvtf3TjI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/L4163CPGQyQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WZFfPhfu4RU-min.jpg"
+    ],
+    "wallArea": 160,
+    "maxHeight": 4.6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Парк им. М. Гафури",
+    "city": "Уфа",
+    "address": "Уфа, просп. Октября, 79/1Б",
+    "latitude": 54.771611,
+    "longitude": 56.022867,
+    "description": "ЦПКиО имени М. Гафури города Уфа, располагающийся на территории площадью в 29 гектаров, оборудован открытым скалодромом. Максимально достижимая его высота составляет более 10-ти метров, а совокупная площадь всей лазательной поверхности – 40 кв. метров.\r\nПод руководством квалифицированных инструкторов здесь новички могут попробовать свои силы в скалолазании, а более опытные любители данного вида спорта имеют возможность регулярно посещать скалодром для совершенствования навыков лазания. Помимо этого на постоянной основе в парке проходят массовые праздники и спортивные соревнования, участие в которых может принять любой желающий.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/verticalufa1"
+    ],
+    "website": "https://vk.com/verticalufa1",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/QrAWuShhEa4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/4QyXgWAw3jM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/I4DpjYN5OnM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/llMPIkGpWgY-min.jpg"
+    ],
+    "wallArea": 40,
+    "maxHeight": 10,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Приволжский ПСО",
+    "city": "Уфа",
+    "address": "Уфа, ул. Менделеева, 162 корпус 2",
+    "latitude": 54.750203,
+    "longitude": 56.038426,
+    "description": "Ведомственный скалодром Уфимского поисково-спасательного отряда предназначен для проведения тренировок, учений и состязаний сотрудников отделения, так как умение взбираться по стенам и безопасно спускаться с них можно выработать исключительно на данном тренажере. Совокупная площадь лазательной поверхности данного сооружения составляет около 60-ти кв. метров, а максимальная высота достигает 4-х метров.\r\nДанный тренировочный скалодром оборудован разнообразными зацепами, современными спусковыми платформами, а также всеми возможными видами страховок и карнизами для применения многошаговой страховки.",
+    "contactInfo": "+7 (347) 232-33-75",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club3352457"
+    ],
+    "website": "https://vk.com/club3352457",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/image-21-min.jpg"
+    ],
+    "wallArea": 60,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ШВСМ РБ",
+    "city": "Уфа",
+    "address": "Уфа, ул. Султанова, 24/1",
+    "latitude": 54.730994,
+    "longitude": 55.928696,
+    "description": "Скалодром ШВСМ РБ города Уфа оборудован на территории одного из 9-ти спортивных залов данного учреждения. Суммарная площадь всей лазательной поверхности сооружения составляет около 440 кв.метров. Максимальная высота скалодрома достигает отметки в 9,5 метров. Многообразие дорожек, отличающихся друг от друга рельефом и внушительный карниз, переходящий в потолок порадует как новичков, так и профессионалов.\r\nЗанятия проходят под руководством квалифицированных тренеров и инструкторов, имеется возможность посещения индивидуальных тренировок. Для удобства посетителей все необходимое скалолазное снаряжение можно взять в аренду на время лазания.",
+    "contactInfo": "+7 (347) 272-05-81",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/bashclimbers"
+    ],
+    "website": "https://vk.com/bashclimbers",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ШВСМ_фото___display-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/wkg6CCSeo0E-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xmNL6rrq5bg-min.jpg"
+    ],
+    "wallArea": 440,
+    "maxHeight": 9.5,
+    "yearFounded": 1996,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Учебно-тренировочная база спасателей Шушпа",
+    "city": "Уфа",
+    "address": "Белорецкий район, село Шушпа",
+    "latitude": 54.082387,
+    "longitude": 58.478672,
+    "description": "Скалодром, расположенный на учебно-тренировочной базе спасателей Шушпа, был сконструирован и разработан по индивидуальному авторскому проекту. Сооружение высотой в 10 метров оснащено одновременно 3-мя модулями: «Ледолазание», «Скалолазание» и «Промышленный альпинизм».\r\nПомимо тренировок, учений и состязаний среди сотрудников спасательных служб, на территории скалодрома проводятся занятия для взрослых и детей под руководством профессиональных инструкторов. Предоставляется возможность взять на прокат все необходимое скалолазное снаряжение, а также воспользоваться прочими услугами базы.",
+    "contactInfo": "+7 (917)047-82-85",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/publicshyshpa",
+      "https://vk.com/club41181553"
+    ],
+    "website": "https://vk.com/publicshyshpa",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4seGW8z7j6o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JbtpjBuIl48-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-l9mYey_-Ls-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/t4RKTrF3zqc-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "RockLands",
+    "city": "Уфа",
+    "address": "Уфа, ул. Ростовская 18Б (ост. Ростовская)",
+    "latitude": 54.752848,
+    "longitude": 56.015806,
+    "description": "На современном скалодроме Rocklands занимаются дети (с 4-х лет) и взрослые. Скалолазный стенд имеет высоту 12 м, а также огромную боулдер-стенку. Зал располагает всеми необходимыми условиями для комфортного занятия скалолазанием: есть раздевалки и душевая, зона для разминки, современные крэшпады и системы страховки и многое другое. Занятия проводят квалифицированные инструкторы. Сэкономить на занятиях можно при помощи гибкой системы абонементов. Скалодром располагается практически в самом центре Уфы, поэтому добраться до него легко из любой точки города.",
+    "contactInfo": "+7 (3472) 66-18-62",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rocklands_ufa"
+    ],
+    "website": "https://vk.com/rocklands_ufa",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб",
+        "from": "14:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "11:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "250 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Персональные занятия с тренером",
+        "price": "700 руб"
+      },
+      {
+        "name": "Курс для продвинутых (7 недель)",
+        "price": "9000 руб"
+      },
+      {
+        "name": "Базовый курс для новичков",
+        "price": "9500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ew648c38vV4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ww1Z_7zmx8s-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XOYbm2QEuOI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/P7sEqRq8EBk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LsaSj10XdvA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Vh5JbupUFSU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wLBGzt5GF94-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZGNMjz-6Zgw-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ГОиЧС",
+    "city": "Уфа",
+    "address": "Уфа, Максима Горького, 35а",
+    "latitude": 54.825545,
+    "longitude": 56.065842,
+    "description": "Скалодром «Гражданской обороны и чрезвычайных ситуаций» относится к категории ведомственных, создан на базе подготовительного центра более 10-ти лет назад. Характеризуется минимализмом в оснащении, однако здесь есть все необходимое для полноценных и безопасных тренировок. Площадь стен скалодрома составляет 50 кв. м., высота – 7 метров. В обычные дни он открыт только для тренировок личного состава МЧС и студентов факультета защиты в чрезвычайных ситуациях УГАТУ. Однако часто скалодром открывает двери для всех желающих – нередко здесь проходят экскурсии и мастер-классы, на которых все желающие могут попробовать себя в роли альпиниста или спасателя.",
+    "contactInfo": "+7 (347) 240‒48‒10",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://mchs-ufa.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4pjdkLsaZgc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/123-min.jpg"
+    ],
+    "wallArea": 50,
+    "maxHeight": 7,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Приход Крестовоздвиженского храма",
+    "city": "Уфа",
+    "address": "Уфа, Лесопильная ул., 4",
+    "latitude": 54.732621,
+    "longitude": 55.920297,
+    "description": "Монастырь при Крестовоздвиженском храме города Уфа оборудован спортивным залом, посещать который могут все желающие. Общая площадь его лазательной поверхности составляет около 30-ти кв. метров, а максимальная высота достигает 4-х метров.\r\nНа территории скалодрома по всем вопросам можно обращаться к настоятелю (о. Роман) данного монастыря. Под его руководством здесь проходят занятия по скалолазанию и спелеологии (исследование природных подземных пространств) как для прихожан, так и для воспитанников социального приюта.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club43499203"
+    ],
+    "website": "http://vkhram.ru/katehizaciya-detei/turizm-speleologiya/",
+    "workingHours": [
+      {
+        "days": "Ср",
+        "from": "18:30",
+        "to": "20:30"
+      },
+      {
+        "days": "Сб",
+        "from": "15:00",
+        "to": "17:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/TKrGFgtqHN4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BaAK-onmav0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/P9cKUdoOSjo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/N_AnLSUVQK4-min.jpg"
+    ],
+    "wallArea": 30,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

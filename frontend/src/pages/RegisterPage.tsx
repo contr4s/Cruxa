@@ -51,7 +51,12 @@ export default function RegisterPage() {
     });
     const state = useAuthStore.getState();
     if (!state.error) {
-      navigate('/feed', { replace: true });
+      const roleRoutes: Record<string, string> = {
+        Routesetter: '/routesetter',
+        GymAdmin: '/gym-admin',
+        Admin: '/admin',
+      };
+      navigate(roleRoutes[state.role ?? ''] || '/feed', { replace: true });
     }
   };
 

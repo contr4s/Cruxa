@@ -1,0 +1,39 @@
+[
+  {
+    "name": "Станция юных туристов",
+    "city": "Анжеро-Судженск",
+    "address": "Анжеро-Судженск пр. Октябрьский, 7",
+    "latitude": 56.074991,
+    "longitude": 86.015,
+    "description": "МБУ ДО «Станция юных туристов» города Анжеро-Судженск, основавшееся еще в 1993-м году, по сей день занимается реализацией образовательных программ всестороннего развития детей и взрослых, имеющих туристско-краеведческую направленность. Скалодром учреждения порадует любителей скалолазания общей площадью лазательной поверхности около 200 кв. метров и внушительной высотой – 20 метров.\r\nПомимо занятий скалолазанием, ледолазанием и альпинизмом, здесь регулярно проводятся традиционные слёты и соревнования среди обучающихся, а также организовываются походы, экспедиции и сплавы по регионам России.",
+    "contactInfo": "+7 (384) 536-13-87",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/asturizm"
+    ],
+    "website": "http://as-turizm.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "8:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/LZGmYqcRqRE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ht6it4IfPlw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9csEzJM2t9I-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VG8U92M2Hxg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LHzwSWIZfJM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Vu45z21FZB0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vdFarTbst2U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iRiDMNtY_Ew-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 20,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

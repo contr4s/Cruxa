@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Белорецк",
+    "city": "Белорецк",
+    "address": "Белорецк, ул. Красных партизан, 11",
+    "latitude": 53.969967,
+    "longitude": 58.400752,
+    "description": "Этот скалодром находится в центре туризма. Туда ходит заниматься скалолазанием в секцию мой сын. Также у них тренировки проводятся в гимнастическом зале 21-й школы, но основным зданием все же считается центр туризма, а площадкой - их спортзал. Скалодром там небольшой, но для детских тренировок полностью подходит.\rИз преимуществ посещения центра туризма я могу назвать близость к дому (живем в центральном районе), а также хороших педагогов. Они не просто спортсмены, а именно педагоги, потому что хорошо работают с детьми и умеют вызвать у них интерес к спорту.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/belclimber"
+    ],
+    "website": "https://vk.com/belclimber",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СШ №21",
+    "city": "Белорецк",
+    "address": "Белорецк, ул.50 лет Октября, 48",
+    "latitude": 53.961408,
+    "longitude": 58.407552,
+    "description": "Важно! Скалодром доступен только воспитанников секции скалолазания и не доступен для свободного посещения. Возможна запись в секцию.\r\nОборудованный в спортзале средней школы №21 в городе Белорецке (Башкортостан) скалодром насчитывает максимальную высоту 8 м, а его общая скалолазная площадь составляет 60 кв.м. Здесь занимаются воспитанники школы, обучающиеся скалолазанию с нуля. Опытные преподаватели пристально следят за выполнением подъема, обеспечивают безопасность своих подопечных. Наиболее талантливые спортсмены имеют спортивные разряды и участвуют в первенствах не только местного уровня, но и масштаба всей Республики Башкортостан - в Салавате и Уфе.",
+    "contactInfo": "+7 (927) 637-26-22",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/belclimber"
+    ],
+    "website": "https://vk.com/belclimber",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-18_15-30-19.733-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-18_15-30-31.624-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/l5vjbgRn-MU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/liVTunhHK8w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jI4HcsfwVYY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Y4Ey23Jk9Wg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bDK3uoekezU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NhJjJqeOdO4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/K4fLKsjG7Is-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/MjP5dqcJ8_w-min.jpg"
+    ],
+    "wallArea": 60,
+    "maxHeight": 8,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  }
+]

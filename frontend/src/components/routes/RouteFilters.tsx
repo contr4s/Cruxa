@@ -27,7 +27,7 @@ const TYPES = [
   { value: 'Bouldering', label: 'Боулдер' },
   { value: 'Lead', label: 'Lead' },
   { value: 'TopRope', label: 'Top-rope' },
-  { value: 'Speed', label: 'Скорость' },
+  // ponytail: add Lead+Speed categories if climbing gym expands
 ];
 
 const SORTS = [

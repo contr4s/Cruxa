@@ -15,7 +15,13 @@ public class GetAllGymsHandler(IGymRepository gyms, IGymFavoriteRepository favor
     public async Task<Result<OffsetPaginatedList<GymDto>>> Handle(GetAllGymsQuery q, CancellationToken ct)
     {
         var (items, totalCount) = await gyms.GetAllPagedAsync(q.Page, q.PageSize, q.City, q.Sort);
-        var dtos = items.Select(g => g.Adapt<GymDto>()).ToList();
+        var dtos = items.Select(g =>
+        {
+            var dto = g.Adapt<GymDto>();
+            dto.RouteCount = g.Routes?.Count ?? 0;
+            dto.ActiveRouteCount = g.Routes?.Count(r => r.IsActive) ?? 0;
+            return dto;
+        }).ToList();
 
         var userId = currentUser.GetUserId();
         if (userId.HasValue)

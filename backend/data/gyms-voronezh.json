@@ -1,0 +1,237 @@
+[
+  {
+    "name": "Работница",
+    "city": "Воронеж",
+    "address": "г. Воронеж, ул. Ленина, 73",
+    "latitude": 51.683926,
+    "longitude": 39.216313,
+    "description": "Скалодром «Работница», основанный в 2016-ом году, предлагает всем посетителям возможность испытать свои силы сразу в 3-х направлениях: скалолазание, альпинизм и ледолазание. Для занятий не требуется иметь специальную спортивную подготовку, так как здесь Вы можете предварительно посетить пробную тренировку под руководством опытного инструктора.\r\nОбучение и взрослых, и детей проходит в нескольких категориях, которые формируются в соответствии с возрастом и уровнем лазающих. Помимо этого на скалодроме проводятся различные познавательные мероприятия, на которых каждый желающий имеет возможность узнать больше полезной информации об альпинистском снаряжении и особенностях драй-тулинг.",
+    "contactInfo": "+7 (473) 239-84-45",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/skalodrom.rabotniza/",
+      "https://vk.com/rabotniza",
+      "https://www.youtube.com/channel/UCkWR31Qt337iZVGU8DxS3ew"
+    ],
+    "website": "https://www.club-alpin.ru",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Персональные тренировки",
+        "price": "800 руб"
+      },
+      {
+        "name": "Базовый Курс (4 занятия)",
+        "price": "2200 руб"
+      },
+      {
+        "name": "Разовое посещение (утро будни)",
+        "price": "300 руб"
+      },
+      {
+        "name": "Годовой абонемент",
+        "price": "11700 руб"
+      },
+      {
+        "name": "12 занятий",
+        "price": "2300 руб"
+      },
+      {
+        "name": "Полугодовой абонемент",
+        "price": "6750 руб"
+      },
+      {
+        "name": "Абонемент 3 месяца",
+        "price": "4050 руб"
+      },
+      {
+        "name": "Абонемент 1 месяц",
+        "price": "1800 руб"
+      },
+      {
+        "name": "16 занятий",
+        "price": "3000 руб"
+      },
+      {
+        "name": "8 занятий",
+        "price": "1700 руб"
+      },
+      {
+        "name": "4 занятия",
+        "price": "1150 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7PeEx80KWSQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9Hzie28iSeI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7ntpnSreGJc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/MwMByuDYxDc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/MM0vC2N6nYo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/n-6rDp7kSUI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/i7W-g0Kwad8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GZFXqc1mbCU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nFndCrAn-E8-min.jpg"
+    ],
+    "wallArea": 320,
+    "maxHeight": null,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Маяк",
+    "city": "Воронеж",
+    "address": "г. Воронеж, Арзамасская ул., 4А, Парк Алые паруса",
+    "latitude": 51.657099,
+    "longitude": 39.241232,
+    "description": "Скалодром «Маяк», основанный в 2014-ом году, заслуженно является любимым местом активного времяпрепровождения жителей Воронежа и местной достопримечательностью для гостей города. Имея общую высоту в 13 метров и высоту стен – 10 метров, скалодром является еще и мобильным, то есть его можно разобрать и перенести в необходимое место. Посетителей порадует наличие 5-ти стен разнообразных маршрутов, которые рассчитаны на людей, входящих в возрастную категорию от 4-х до 60-ти лет.\r\nС наивысшей точки скалодрома открывается замечательный вид на столицу Черноземья и его водохранилище, это своеобразная смотровая площадка для горожан и туристов.",
+    "contactInfo": "+7 (960) 119-00-17",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodrom_mayak"
+    ],
+    "website": "https://vk.com/skalodrom_mayak",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4CfQ0PipZ3Q-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/foylV5Cu2Uc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WmydaQi5Y38-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eZefUHzS6vI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XKb8SuZQFFY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gQa9hpBbJxk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5bz62Ov-j48-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 13,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Энергия",
+    "city": "Воронеж",
+    "address": "Воронеж, Ворошилова, 1 А",
+    "latitude": 51.653696,
+    "longitude": 39.178548,
+    "description": "«Энергия» принадлежит и находится под управлением федерации скалолазания России, и состоит из 3-х секторов. Основной скалодром включает в себя стену для эталонной скорости и лазательную поверхность на трудность, площадь которой более 450 кв. метров. Максимальная высота потолка – 18 метров. Помимо этого здесь имеется специально оборудованное пространство для начинающих и боулдеринговый зал площадью 145 кв. метров. Любой желающий может посетить современную зону разминки и силовых упражнений.\r\nТерритория скалодрома регулярно становится местом проведения крупномасштабных соревнований и фестивалей по альпинизму и скалолазанию.",
+    "contactInfo": "+7(930)425-06-20",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbvrn",
+      "https://www.facebook.com/climbvrn",
+      "https://www.instagram.com/climbvrn/"
+    ],
+    "website": "https://vk.com/climbvrn",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "19:30",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Занятие для малышей 4-6 лет",
+        "price": "500 руб"
+      },
+      {
+        "name": "Занятие по альпинизму",
+        "price": "500 руб"
+      },
+      {
+        "name": "Занятие в зале для боулдеринга",
+        "price": "200 руб"
+      },
+      {
+        "name": "Одно занятие с тренером",
+        "price": "950 руб"
+      },
+      {
+        "name": "4 занятия с тренером",
+        "price": "3000 руб"
+      },
+      {
+        "name": "Одно групповое занятие",
+        "price": "500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/энергия-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/энергия-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/энергия-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/энергия-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/энергия-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/энергия-06-min.jpg"
+    ],
+    "wallArea": 650,
+    "maxHeight": 18,
+    "yearFounded": 1996,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Призывной пункт",
+    "city": "Воронеж",
+    "address": "Воронеж, ул. Беговая, 174",
+    "latitude": 51.698705,
+    "longitude": 39.137055,
+    "description": "Стандартный скалодром, был тут на первенстве города по скорости несколько лет назад. В призеры не вошел. Стенд понравился, довольно высокий и большой. Для тренировок скорости подходит идеально.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 11,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Клуб горных видов спорта &quot;Крокус&quot;",
+    "city": "Воронеж",
+    "address": "Воронеж, ул. Ленинградская, 136 Б",
+    "latitude": 51.637114,
+    "longitude": 39.236444,
+    "description": "Скалодром клуба горных видов спорта («Крокус») города Воронеж располагается на цокольном этаже, имеет общую площадь стен для лазания около 150 кв. метров. Максимальная высота данного сооружения составляет 3,5 метра. Здесь всем желающим предоставляется возможность отрабатывать технические навыки, посещать регулярные боулдеринговые занятия, а также тренироваться лазать траверсом и по потолку.\r\nПомимо самого скалодрома имеется небольшой спортзал с многочисленными тренажерами-рукоходами, гимнастическими стенками и турниками. На территории клуба постоянно проходят лекции квалифицированных педагогов, инструкторов и спортсменов об основах, видах скалолазания и альпинизма.",
+    "contactInfo": "+7 (920)-447-11-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/krokus_vrn"
+    ],
+    "website": "https://vk.com/krokus_vrn",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/mRP38Udx04M-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pQ5AlWDh28A-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/evyw0ypBQDc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/qIVINIEgl04-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 3.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

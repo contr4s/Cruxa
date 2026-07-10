@@ -9,6 +9,8 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CheckIcon from '@mui/icons-material/Check';
 import { Card } from '../../theme/cardStyles';
 import type { UserDto } from '../../types/user';
+import { useState } from 'react';
+import { FollowersList } from './FollowersList';
 
 interface ProfileHeaderProps {
   user: UserDto;
@@ -97,6 +99,7 @@ export function ProfileHeader({
   onEdit,
 }: ProfileHeaderProps) {
   const theme = useTheme();
+  const [listModal, setListModal] = useState<{ open: boolean; mode: 'followers' | 'following' }>({ open: false, mode: 'followers' });
 
   const initial = (user.firstName || user.username)[0].toUpperCase();
   const displayName = user.firstName
@@ -162,7 +165,7 @@ export function ProfileHeader({
                   lineHeight: 1,
                 }}
               >
-                {user.gender}
+                {user.gender === 'M' ? 'М' : user.gender === 'F' ? 'Ж' : user.gender}
               </Box>
             )}
             {user.height && (
@@ -190,8 +193,16 @@ export function ProfileHeader({
           <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mb: 1.5 }}>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore.toFixed(1)}</strong> крускор</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
-            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
-            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
+            <Box
+              component="span"
+              onClick={() => setListModal({ open: true, mode: 'followers' })}
+              sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35, cursor: 'pointer', '&:hover': { opacity: 0.7 } }}
+            ><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
+            <Box
+              component="span"
+              onClick={() => setListModal({ open: true, mode: 'following' })}
+              sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35, cursor: 'pointer', '&:hover': { opacity: 0.7 } }}
+            ><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
           </Box>
 
         </Box>
@@ -252,7 +263,7 @@ export function ProfileHeader({
                     lineHeight: 1,
                   }}
                 >
-                  {user.gender}
+                  {user.gender === 'M' ? 'М' : user.gender === 'F' ? 'Ж' : user.gender}
                 </Box>
               )}
               {user.height && (
@@ -290,11 +301,26 @@ export function ProfileHeader({
         <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mt: 2, mb: 1.5 }}>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore.toFixed(1)}</strong> крускор</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
+          <Box
+            component="span"
+            onClick={() => setListModal({ open: true, mode: 'followers' })}
+            sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35, cursor: 'pointer', '&:hover': { opacity: 0.7 } }}
+          ><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
+          <Box
+            component="span"
+            onClick={() => setListModal({ open: true, mode: 'following' })}
+            sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35, cursor: 'pointer', '&:hover': { opacity: 0.7 } }}
+          ><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
         </Box>
 
       </Box>
+
+      <FollowersList
+        open={listModal.open}
+        onClose={() => setListModal({ open: false, mode: 'followers' })}
+        userId={user.id}
+        mode={listModal.mode}
+      />
     </Box>
   );
 }

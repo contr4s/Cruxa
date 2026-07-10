@@ -26,7 +26,7 @@ const routeFormSchema = z.object({
   setterId: z.string().optional(),
   name: z.string().min(1, 'Обязательное поле'),
   gradeRaw: z.string().min(1, 'Обязательное поле'),
-  type: z.enum(['Bouldering', 'Lead', 'Speed']),
+  type: z.enum(['Bouldering', 'Lead']),
   holdColor: z.string().min(1, 'Обязательное поле'),
   sector: z.string().optional().or(z.literal('')),
   tags: z.array(z.string()),

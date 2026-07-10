@@ -2,7 +2,6 @@ export const ROUTE_TYPE_OPTIONS = [
   { value: 'all', label: 'Все' },
   { value: 'Bouldering', label: 'Боулдер' },
   { value: 'Lead', label: 'Трудность' },
-  { value: 'Speed', label: 'Скорость' },
 ];
 
 export const SORT_OPTIONS = [

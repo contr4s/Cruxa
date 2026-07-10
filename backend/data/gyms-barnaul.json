@@ -1,0 +1,104 @@
+[
+  {
+    "name": "ROCK DROM",
+    "city": "Барнаул",
+    "address": "г. Барнаул, Социалистический просп., 23",
+    "latitude": 53.333032,
+    "longitude": 83.787259,
+    "description": "«ROCK DROM» является единственным в Барнауле скалодромом со свободным графиком посещения. Лазать здесь можно в любом удобном формате – тренируясь индивидуально или в группах, также имеется возможность проведения детских праздников и тимбилдинга. Для любителей боулдеринга были оборудованы 5-ти метровые плоскости и трассы с верхней страховкой.\r\nЗа безопасность во время занятий на скалодроме отвечают профессиональные тренеры по скалолазанию с огромным опытом лазания. Сертифицированное оборудование обеспечивает сохранность посетителей. В «ROCK DROM» Вас ждет исключительно дружелюбная атмосфера в компании единомышленников, заряд бодрости и отличное настроение.",
+    "contactInfo": "+7 (3852) 69-70-80",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rock_drom",
+      "https://www.instagram.com/rock_drom/"
+    ],
+    "website": "https://www.rockdrom.ru",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "300 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка",
+        "price": "800 руб"
+      },
+      {
+        "name": "Детская школа",
+        "price": "1800 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/edf329_f6c46c9ce6bf4c7ba1f49d91f769cd3bmv2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/edf329_1dbc013c7f0943fea3de953b3c544ec9mv2_d_4000_2830_s_4_2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/edf329_2aba22feb927405fbb5d83f3d6215188mv2_d_4000_2667_s_4_2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/edf329_c1e9bd0689ff47969c4cd39c7b3a36a3mv2_d_2667_4000_s_4_2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/edf329_8c5278defc204579b5caa42e59fab8c9mv2_d_4000_2667_s_4_2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/G5UiWmidmp0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8JFWybx_vv8-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №127",
+    "city": "Барнаул",
+    "address": "Барнаул, Северный Власихинский проезд, 64",
+    "latitude": 53.33315,
+    "longitude": 83.671915,
+    "description": "В Барнауле имеется всего несколько мест, где можно полазать на искусственном скалодроме. Одно из них разместилось в средней школе №127. Раньше скалодром был доступен только для учащихся школы, но теперь здесь может тренироваться любой желающий в определенные дни. На скалодроме можно заниматься по двум дисциплинам: трудность и скорость. Первое требует сложный вид двигательной активности и высокую организованность, а также выносливость, гибкость, пластику и интеллект, для второго нужно грамотно рассчитывать время подъема. На скалодроме доступно страховочное оборудование, обувь лучше брать свою. Занятия круглогодичные, но график работы в летнее время следует уточнять по телефону.",
+    "contactInfo": "+7 (913)228-80-92",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://shkola127.ucoz.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Школа_127_display-min.jpg"
+    ],
+    "wallArea": 80,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Манеж АлтГТУ",
+    "city": "Барнаул",
+    "address": "Барнаул, Комсомольский проспект, 69а",
+    "latitude": 53.346199,
+    "longitude": 83.785543,
+    "description": "Несмотря на то, что Барнаул расположен на доступном расстоянии от Алтайских гор, жителям города не всегда удается выбираться лазать по настоящим скалам. Для этого в городе открыли самый большой скалодром в манеже АлтГТУ. На его территории можно тренироваться как в теплое время года, так и в холодное, независимо от погоды. Манеж принимает в своих стенах профессиональных скалолазов, которые проводят тренировки по дисциплинам «скорость» и «трудность». Здесь регулярно проводятся соревнования, участие в которых принимает до 200 спортсменов. На скалодроме проводятся групповые и индивидуальные занятия с тренером, снаряжение можно брать напрокат.",
+    "contactInfo": "+7 (385) 245-55-98",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/groups/altstu/",
+      "https://vk.com/altstu_official"
+    ],
+    "website": "https://www.altstu.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/49096-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-18_12-21-30.204-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DSC_9069_JPG_600x460_q85-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DSC_9071_JPG_600x460_q85-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DSC_9076_JPG_600x460_q85-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DSC_9083_JPG_600x460_q85-min.jpg"
+    ],
+    "wallArea": 600,
+    "maxHeight": 11,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

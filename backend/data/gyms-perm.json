@@ -1,0 +1,502 @@
+[
+  {
+    "name": "Клуб скалолазания Скала",
+    "city": "Пермь",
+    "address": "г. Пермь, ш. Космонавтов, 158А, корп. 3, Универсальный манеж",
+    "latitude": 57.976123,
+    "longitude": 56.157524,
+    "description": "Клуб скалолазания «Скала» (СК им. Сухарева), начавший свою работу в 2011-ом году, для удобства посетителей разделен на 4 секции. Основная (для лазания на трудность) порадует высотой скалодрома в 19,5 метров, максимально возможным нависанием - 7 метров и тем, что сложность трасс варьируется от 5с до 8b. Обилие трасс с нижней (16-25) и верхней (5) страховкой позволит каждому найти себе подходящую. Секция для боулдеринга имеет высоту 4,5 метра, ширину – 13 метров, оснащена матами, гарантирующими безопасность во время лазания.\r\n«Скала» занимается организацией детского и взрослого дня рождения на территории скалодрома, любых корпоративных мероприятий и уроков физкультуры для школьников и студентов.",
+    "contactInfo": "+7 (342) 254-03-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "http://instagram.com/skala_perm",
+      "http://vk.com/skalaperm"
+    ],
+    "website": "http://skalaclub.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "14:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение (взрослые)",
+        "price": "350 руб"
+      },
+      {
+        "name": "Абонемент детский",
+        "price": "3000 руб"
+      },
+      {
+        "name": "Абонемент взрослый",
+        "price": "4000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/0BHZIeMmmQQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/lWuw7e6Yatk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vPf9VGIO9Yc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/btPGdimYfV4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kz0a6oZLiFk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1G1K8OPCYLk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/n9xLG3PWD-c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/RVfdw-wEAmk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7UdGQ5GJ87Q-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/66hvOFiJlx0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kUXYkmlUjaA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3CysKhzeurw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tC-W4OAGrnM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/K2EaT29Ux0I-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/QPaTv16kYpw-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Массаракш",
+    "city": "Пермь",
+    "address": "Пермь, ул. Ивановская, 32а",
+    "latitude": 58.02956,
+    "longitude": 56.311001,
+    "description": "Стены скалодрома «Массаракш»  имеют и сложный рельеф (нависания, карнизы, изогнутый барабан), и вертикальные некрутые поверхности. Это позволяет создавать трассы разнообразного уровня сложности, и заинтересовать таким образом посетителей всех категорий. Трассы обновляются на регулярной основе, в среднем в месяц образуется около 30-ти новых трасс.\r\nЗона разминки оборудована всем необходимым снаряжением для подготовки к тренировке (турник, фингер-, кампус-борд, гантели, шары, наклонная шведская лестница).\r\nВ распоряжении посетителей зала находятся комфортабельные раздевалки, душевые. Помимо этого скалодром оборудован мощной системой вентиляции с современными кондиционерами.",
+    "contactInfo": "+7 (342) 204-74-58",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodrom.perm",
+      "https://www.instagram.com/massaraksh.club/",
+      "https://www.youtube.com/channel/UCEYend-cTmI7zQFgI5qodDQ"
+    ],
+    "website": "http://massaraksh.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "16:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Абонемент на 6 посещений (студенческий)",
+        "price": "1400 руб"
+      },
+      {
+        "name": "Абонемент в детскую секцию",
+        "price": "2000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/массаракш-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/массаракш-07-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Геккон",
+    "city": "Пермь",
+    "address": "Пермь, ул. Автозаводская, 21",
+    "latitude": 58.002134,
+    "longitude": 55.940437,
+    "description": "«Геккон» был образован в 2009-ом году, на данный момент является одним из лучших клубов скалолазания в Пермском крае. Квалифицированные тренеры ведут набор в группы среди всех желающих обучиться мастерству в данном виде спорта.\r\nСреди возможностей семейного клуба имеются большой скалодром высотой 6 метров и площадью 50 кв.м.; боулдеринг-зал, высота которого 3,5 метра, а площадь – 40 кв.м. Также есть вертикальный скалодром. Для удобства посетителей здесь функционируют мужская и женская раздевалки, общий душ, отдельная душевая кабина, напитки в ассортименте. Для детей постоянно организовываются развлекательные мероприятия с активными играми на стенках, эстафетами.",
+    "contactInfo": "+7 (919) 701-50-77",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/gekonclub.perm",
+      "https://www.instagram.com/gekonclub.perm/"
+    ],
+    "website": "https://vk.com/gekonclub.perm",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Вт",
+        "from": "11:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Чт",
+        "from": "11:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Пт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "11:00",
+        "to": "19:00"
+      },
+      {
+        "days": "Вс",
+        "from": "11:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Первое занятие (для детей)",
+        "price": "0 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/IIlRLcHDqOs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/V7CSNZybACw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hK6IUIG1QnA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Thrm4xsYCyk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LtPfoOeAFDA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-e5vSBzs-rM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mBzg7aPo2gA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5xrjjsspVXk-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": 2009,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №16",
+    "city": "Пермь",
+    "address": "Пермь, Академика Веденеева, 71",
+    "latitude": 58.106433,
+    "longitude": 56.383316,
+    "description": "Скалодром в пермской школе №16 позволяет лазать на трудность и скорость. На его территории тренируются обучающиеся единственного на Урале специализированного центра подготовки верхолазов, альпинистов, скалолазов, инструкторов по скалолазанию и промышленных альпинистов «Верхолазы Урала». Занятия также доступны для учеников школы, а для остальных возможности тренироваться на данном скалодроме нет. Высота стены 6,5 метров, а общая площадь стен 80 кв.метров. В школе №16 регулярно проводятся соревнования по скалолазанию, в которых принимают участие дети разных возрастных групп.",
+    "contactInfo": "+7 (912) 489-89-00",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://www.moo-sch16.narod.ru/news.htm",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 80,
+    "maxHeight": 6.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №13",
+    "city": "Пермь",
+    "address": "Пермь, Парковый проспект, 16",
+    "latitude": 57.997136,
+    "longitude": 56.146583,
+    "description": "Классное место, обожаем с мужем бывать здесь иногда в выходные. Скалодром работает только по вечерам, но это скорее его преимущество. Точный график работы узнаем заранее по телефону, чтобы уж наверняка. Атмосфера здесь располагает, тренеры внимательные, есть снаряжение, которое берем в аренду каждый раз. Нам нравится, будем продолжать посещение.",
+    "contactInfo": "+7 (908) 270-97-01",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Клуб Ирбис",
+    "city": "Пермь",
+    "address": "Пермь, ул. Сибирская, 29",
+    "latitude": 58.010131,
+    "longitude": 56.24891,
+    "description": "Клуб «Ирбис» открылся в апреле 1986 года при Дворце Детского (юношеского) творчества г. Перми. Он имеет свою символику, устав, флаг и форму. Его участников тренируют опытные выпускники «Ирбис». В клубе действуют 3 зала для тренировок по скалолазанию, общая площадь которых составляет 450 кв. метров. В первом расположен самый популярный в Перми боулдеринговый зал, во втором зале установлен высокий скалодром с возможностью лазать с верхней и нижней страховками, а в третьем зале высокий боковой скалодром, где можно тренироваться только с верхней страховкой, но особенностью является диагональный траверс протяженностью около 40 метров.",
+    "contactInfo": "+7 (912) 212-43-35",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club362322"
+    ],
+    "website": "http://perm-climbing.ru/irbis/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/3b60adb7caa2ef28ef522827073d17e3-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3d23f8a7828cfde16907d4ee44c02e3d-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/aad79cb30963a0035fc21fdb0da2fb64-min.jpg"
+    ],
+    "wallArea": 450,
+    "maxHeight": 9,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Зодиак",
+    "city": "Пермь",
+    "address": "Пермь, ул. Газеты Звезда, 54",
+    "latitude": 58.000288,
+    "longitude": 56.25509,
+    "description": "Занималась я на другом скалодорме Перьми, а в Зодиаке была на местных соревнованиях по боулдерингу. Была приятно удивлена тем, как все качественно сделано, везде порядок и чистота. Теперь иногда прихожу полазать сюда, так как работаю неподалеку. Ставлю 5 звезд, потому что этого заслуживают организаторы Зодиака.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Атмосфера",
+    "city": "Пермь",
+    "address": "Пермь, Тимирязева 26а",
+    "latitude": 58.003712,
+    "longitude": 56.265807,
+    "description": "Клуб «Атмосфера» открылся в 2014 году благодаря «Пермской школе скалолазания» и «Российскому Союзу ветеранов Афганистана». На протяжении нескольких лет на большом 11-метровом скалодроме, построенном на территории клуба, проводятся тренировки по скалолазанию для всех желающих. Также, на базе клуба действуют секции для детей от 3 лет, где опытные инструкторы учат правильным навыкам лазания по скалам, проводят занятия по технике безопасности, а также развивают все группы мышц ребенка, чтобы тело лучше адаптировалось под данный вид спорта. Кроме того, в развлекательном клубе проводят праздники на батутах, дни рождения, корпоративы, Новый год и множество других мероприятий.",
+    "contactInfo": "+7 (843) 277-33-36",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/atmosfera_perm",
+      "https://www.instagram.com/atmosferaperm/"
+    ],
+    "website": "http://club-atmosfera.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/AfK0-9pBo1Q-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Tpjk3Ec6-oc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VDZ7zwXuq-c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YVCw6hXXen8-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 11,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Клуб скалолазания «Вертикаль»",
+    "city": "Пермь",
+    "address": "Пермь, ул. Старцева, 1а",
+    "latitude": 58.010898,
+    "longitude": 56.310983,
+    "description": "В \"Вертикаль\" ходит сын, клуб работает на базе гимназии №2. Скалодром находится в спортзале, он очень высокий, на некоторых участках воспитанники ползают даже по почти горизонтальным поверхностям. Обязательно при тренировке на всех страховка, тренеры держат веревку и контролируют подъем. Все же для большей безопасности снизу расстелены обычные маты.\rТренеры меня приятно удивили, несмотря на свою молодость, они действительно компетентные скалолазы, а что еще более важно - ответственные педагоги, которые умеют ладить с детьми.",
+    "contactInfo": "+7 (919) 707-13-07",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/perm_vertical"
+    ],
+    "website": "https://vk.com/perm_vertical",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "11:00",
+        "to": "13:00"
+      },
+      {
+        "days": "Вт",
+        "from": "13:30",
+        "to": "15:00"
+      },
+      {
+        "days": "Ср",
+        "from": "11:00",
+        "to": "13:00"
+      },
+      {
+        "days": "Чт",
+        "from": "13:30",
+        "to": "15:00"
+      },
+      {
+        "days": "Сб",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "9:00",
+        "to": "15:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Hx6WUqHG1oo-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/KuUSrPC7ZPM-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/pWWl2-8wT1I-min_1.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "УДС Молот",
+    "city": "Пермь",
+    "address": "Пермь, Лебедева, 13",
+    "latitude": 58.024446,
+    "longitude": 56.295586,
+    "description": "Подскажите как связаться с тренерами, что бы ребенка отдать на скалолазание?",
+    "contactInfo": "+7 (909) 101-41-52",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "8:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ППКФКиС",
+    "city": "Пермь",
+    "address": "Пермь, Сибирская, 55",
+    "latitude": 58.003359,
+    "longitude": 56.254991,
+    "description": "Единственным минусом скалодрома для меня является то, что он уличный, хоть и расположен под крышей. Холодных дней у нас намного больше, поэтому комфортного времени для лазания остается очень мало. Это расстраивает.\r\rОрганизовано здесь все хорошо, и ребята-инструкторы опытные, вежливые и внимательные. Высота самого скалодрома тоже радует – больше 12-ти метров, редко где такое встретишь. Приходите, не пожалеете!",
+    "contactInfo": "+7 (909)101-41-52",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 12.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Дворец Творчества Юных",
+    "city": "Пермь",
+    "address": "Пермь, Сибирская, 29",
+    "latitude": 58.010131,
+    "longitude": 56.24891,
+    "description": "В ДДЮТ обучался скалолазанию еще во время учебы в школе, но потом забил на время и ушел заниматься боулдерингом в Массаракш. Тот скалодром мне не очень нравился, слишком простой, детский, старый. Хорошие воспоминания остались только о тренерах, они действительному многому научили: как грамотно использовать страховку, какими упражнениями укреплять хват, как улучшать технику и пр. Возможно, сегодня там те же самые тренеры. Но сам скалодром - в Перми есть намного лучше. Как выше, так и больше, и с более разнообразным рельефом.",
+    "contactInfo": "+7 (902) 834-31-69",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Рокстар",
+    "city": "Пермь",
+    "address": "Пермь ш. Космонавтов 111к2",
+    "latitude": 57.990806,
+    "longitude": 56.207003,
+    "description": null,
+    "contactInfo": "+7 (342) 203-33-44",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rockstar_perm",
+      "https://www.instagram.com/rockstar_perm/"
+    ],
+    "website": "http://rockstarperm.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "8:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5qS5JK7s_FQ.jpg",
+      "https://maps.climbingpro.ru/media/photo/nw-JSX7K7GU.jpg",
+      "https://maps.climbingpro.ru/media/photo/9ir5qFGoDyY.jpg",
+      "https://maps.climbingpro.ru/media/photo/ue7OPi5QOGA.jpg",
+      "https://maps.climbingpro.ru/media/photo/w4dI2NM7JCw.jpg",
+      "https://maps.climbingpro.ru/media/photo/M6podB5RZOs.jpg",
+      "https://maps.climbingpro.ru/media/photo/9PWMzhkTbEU.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 11,
+    "yearFounded": 2021,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №37",
+    "city": "Пермь",
+    "address": "Пермь, ул. Кабельщиков, 21а",
+    "latitude": 58.101473,
+    "longitude": 56.290304,
+    "description": "В пермской средней школе №37 построили большой скалодром высотой 5,5 метров и общей площадью 50 кв.метров. На его территории занимаются ученики школы, а также периодически проводятся городские и региональные соревнования по скалолазанию. В них принимают участие около 200 человек из несколькоих десятков школ Перми и школ края. Специально для этого здесь установили третий в России электронный таймер. Скалодром позволяет тренироваться на скорость и трудность.",
+    "contactInfo": "+7 (902) 474-23-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club51687376"
+    ],
+    "website": "https://vk.com/club51687376",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 50,
+    "maxHeight": 5.5,
+    "yearFounded": 2000,
+    "metroStations": [],
+    "tags": []
+  }
+]

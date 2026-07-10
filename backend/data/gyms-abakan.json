@@ -1,0 +1,114 @@
+[
+  {
+    "name": "СОШ №5",
+    "city": "Абакан",
+    "address": "Абакан, пер. Весенний, 6",
+    "latitude": 53.67114,
+    "longitude": 91.531904,
+    "description": "У нас скалодром появился после 19-й школы. Там он был 1-й, но простой и невысокий. Наш более сложен и имеет отрицательный рельеф, поэтому соревнования стали проводить у нас в школе. Внешне скалодром оставляет желать лучшего, но лазать интересно. Особенно на дорожке с карнизами. Когда я учился, скалолазание стало моим любимым видом спорта. Нас учили всему, от того как правильно ставить ногу на зацеп до того, как без ошибок вязать узлы и страховать напарника. Не говоря уже о технике безопасности.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/PA140710_display-min.JPG"
+    ],
+    "wallArea": null,
+    "maxHeight": 7.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СК «Абакан»",
+    "city": "Абакан",
+    "address": "Абакан, ул.Хакасская, 2",
+    "latitude": 53.722329,
+    "longitude": 91.470648,
+    "description": "Лично пока не лазал, но за скалодромом слежу с начала строительства. Мне очень нравится его рельеф, плюс у нас это самый высокий скалодром на данный момент. При 13,5 метров высоты можно лазать эталонку скорости, а вся остальная часть неплохо подойдет для трудности. Было бы неплохо, если бы сделали хотя бы часть стенда в формате природной скалы, когда поверхность шершавая. Стенд сделан из обычной толстой фанеры, скрепленной под разными углами, а на нее в свою очередь накручиваются зацепы. Но выглядит все равно круто и внушительно, жду, когда наконец-то смогу полазать.",
+    "contactInfo": "+7 (390) 235-87-37",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://sk-abakan.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7343ad83699169ca963ab85cf29fb10a_XL-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/img_9293-min.JPG"
+    ],
+    "wallArea": null,
+    "maxHeight": 13.5,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Батут Экстрим",
+    "city": "Абакан",
+    "address": "Абакан, ул. Советская, 73в",
+    "latitude": 53.718589,
+    "longitude": 91.428248,
+    "description": "Батутный зал прикольный, а скалодром детский. Трассы то есть более-менее сложные, но разнообразие рельефа, высота - это не профессиональный уровень. Если это был бы классический болдеринговый зал, где часть трасс накручена буквально на потолке. Но здесь такой участок есть только в самом низу, и то используется лишь для фиксации при подъеме.\rНаклоны ни о чем. Зацепы преимущественно простые. В общем, мое мнение такое - прийти развлекаться, отдать сюда ребенка для занятий скалолазанием - все это можно. Если хочется что-то реально профессиональное - идите в спортклуб \"Абакан\", там стенд так стенд!",
+    "contactInfo": "+7 (908) 326-89-10",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/batutextrem"
+    ],
+    "website": "https://vk.com/batutextrem",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5Pxs1jiDzro-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/9U_WqEXFoDk-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/-OsMo3wyJh4-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/WOUFda_O7xU-min_1.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СОШ №19",
+    "city": "Абакан",
+    "address": "Абакан, ул. Ярыгина, 15",
+    "latitude": 53.725435,
+    "longitude": 91.43141,
+    "description": null,
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-4-1_12-45-54.686-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

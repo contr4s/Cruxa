@@ -1,0 +1,165 @@
+[
+  {
+    "name": "Курская стена",
+    "city": "Курск",
+    "address": "г.Курск, Элеваторный пер., 14Д",
+    "latitude": 51.676963,
+    "longitude": 36.155591,
+    "description": "Скалодром «Курская стена», начавший свою работу в 2015-ом году, порадует посетителей любого возраста и уровня подготовки общей площадью скальной поверхности более 850 кв. метров. Максимальная высота стен и рельефов достигает 16-ти метров. Также здесь в распоряжении всех желающих находятся более 30-ти трасс, категория сложности которых варьируется в пределах от 5с до 8b, а время преодоления – от 6-ти секунд до 15-ти минут.\r\nДля юных любителей скалолазания оборудована увлекательная детская площадка, где с ними активно проводят время внимательные и опытные инструкторы. Имеется возможность подбора индивидуальной программы занятий в зависимости от возраста, имеющихся навыков и желаемого результата.",
+    "contactInfo": "+7 (915) 516-58-30",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/kurskwallru",
+      "http://facebook.com/kurskwall",
+      "http://instagram.com/kurskwall",
+      "https://www.youtube.com/channel/UCJWSkQc8VXMrQmun52zuZMg"
+    ],
+    "website": "http://kurskwall.ru",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "11:00",
+        "to": "17:00"
+      },
+      {
+        "days": "Вт-Пт",
+        "from": "11:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "15:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "11:00",
+        "to": "17:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "250 руб"
+      },
+      {
+        "name": "Разовое посещение &quot;для двоих&quot;",
+        "price": "450 руб"
+      },
+      {
+        "name": "12 посещений (на 2 месяца)",
+        "price": "1900 руб"
+      },
+      {
+        "name": "12 посещений. Абонемент &quot;для двоих&quot;",
+        "price": "3420 руб"
+      },
+      {
+        "name": "25 посещений (4 месяца)",
+        "price": "3800 руб"
+      },
+      {
+        "name": "25 посещений. Общий абонемент &quot;для двоих&quot;",
+        "price": "6840 руб"
+      },
+      {
+        "name": "Абонемент на 1 месяц безлимитный",
+        "price": "3000 руб"
+      },
+      {
+        "name": "Абонемент на 1 месяц &quot;для двоих&quot; безлимитный",
+        "price": "5400 руб"
+      },
+      {
+        "name": "Абонемент на 3 месяца безлимитный",
+        "price": "8000 руб"
+      },
+      {
+        "name": "Абонемент на 3 месяца &quot;для двоих&quot; безлимитный",
+        "price": "14400 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев безлимитный",
+        "price": "14000 руб"
+      },
+      {
+        "name": "Абонемент на 6 месяцев &quot;для двоих&quot; безлимитный",
+        "price": "25200 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/lAdwKCSm9sw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/yGjhuWQfxgQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OLTsDSMaSQw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5DP207yl-Js-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Yiuan3PmZEc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/668n_xs3_dU-min.jpg"
+    ],
+    "wallArea": 850,
+    "maxHeight": 16,
+    "yearFounded": 2015,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Курская башня",
+    "city": "Курск",
+    "address": "Курск, ул. Станционная, 17",
+    "latitude": 51.749535,
+    "longitude": 36.234724,
+    "description": "Скалодром \"Курская башня\" представляет собой кирпичную стену, на которой местные скалолазы и альпинисты разместили скалолазные зацепы и шлямбурные крюки. Таким образом, в городе и появился этот скалодром под открытым небом, имеющий достаточно внушительные размеры. Площадь скалолазной поверхности здесь - 210 кв. м., высота - 14 м. Заниматься на этом скалодроме можно совершенно бесплатно и абсолютно в любое время. Разумеется, особенной популярностью \"Башня\" пользуется в теплое время года, когда погода располагает к тренировкам на свежем воздухе.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club32089981"
+    ],
+    "website": "https://vk.com/club32089981",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_14-51-23.204-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_14-51-31.890-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-25_14-51-44.562-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2oxTgQJFwE0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/SyAEuAU1vv4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sfArTzPANZ8-min.jpg"
+    ],
+    "wallArea": 210,
+    "maxHeight": 14,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "CLIMB.46",
+    "city": "Курск",
+    "address": "Курск, ул. Луначарского, 8",
+    "latitude": 51.72746,
+    "longitude": 36.190697,
+    "description": "Скалодром CLIMB.46 это центр любителей скалолазания Курска. \r\nЭто 200 кв.м лазательной поверхности. Высота стен 6 метров.\r\nЗдесь тренируются: детская группы (5-8 лет), группа юношеской спортивной подготовки (8-17 лет), взрослые любители, семьи, проходят индивидуальные тренировки и корпоративные занятия. \r\nПосетители могут прийти в CLIMB.46 с собственным снаряжением, или получить снаряжение на месте. Тренеры и инструкторы скалодрома Climb.46 имеют спортивную (скалолазную и альпинистскую), психологическую и педагогическую подготовку, сертифицированы в области высотной безопасности.",
+    "contactInfo": "+7 (903)639-01-49",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climb_46"
+    ],
+    "website": "https://vk.com/climb_46",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7-6NiJqqUEM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ggnxa-lbXp0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/po1JoD7GgzM-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

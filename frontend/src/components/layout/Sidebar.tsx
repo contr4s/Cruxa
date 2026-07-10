@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Typography, Avatar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useSnackbar } from 'notistack';
 import { useAuthStore } from '../../stores/authStore';
 import { NAV_ITEMS } from './navigation';
 import { avatarInitial } from '../../theme/commonStyles';
@@ -10,6 +11,7 @@ export function Sidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const { enqueueSnackbar } = useSnackbar();
   const { displayName, logout, role } = useAuthStore();
 
   const currentPath = location.pathname;
@@ -91,14 +93,20 @@ export function Sidebar() {
         {visibleItems.map((item) => (
           <Box
             key={item.path}
-            onClick={() => item.path && navigate(item.path)}
+            onClick={() => {
+              if (item.isDivider) {
+                enqueueSnackbar('Поиск — скоро', { variant: 'info' });
+              } else if (item.path) {
+                navigate(item.path);
+              }
+            }}
             sx={{
               display: 'flex',
               alignItems: 'center',
               gap: '14px',
               p: '10px',
               borderRadius: `${(theme.shape.borderRadius as number) - 4}px`,
-              cursor: item.path ? 'pointer' : 'default',
+              cursor: item.path || item.isDivider ? 'pointer' : 'default',
               color: currentPath === item.path ? theme.palette.primary.main : theme.palette.text.secondary,
               whiteSpace: 'nowrap',
               transition: 'background .15s, color .15s',

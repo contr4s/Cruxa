@@ -1,6 +1,7 @@
 
 using Cruxa.Application.Features.Statistics.Contracts;
 using Cruxa.Domain.Entities;
+using Cruxa.Domain.Enums;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,12 +63,29 @@ public class StatsRepository : IStatsRepository
 
     public async Task<List<Ascent>> GetTopAscentsAsync(Guid userId, int count = 5)
     {
-        return await _context.Ascents
-            .Where(a => a.UserId == userId)
-            .Include(a => a.Route).ThenInclude(r => r.Gym)
-            .OrderByDescending(a => a.Route.Grade.Index)
-            .Take(count)
+        // RouteId, grade и id лучшего пролаза (по grade затем по стилю) для каждой уникальной трассы
+        var best = await _context.Ascents
+            .Where(a => a.UserId == userId && a.Style != AscentStyle.Attempt)
+            .Select(a => new { a.Id, a.RouteId, GradeIndex = a.Route.Grade.Index, a.Style })
             .ToListAsync();
+
+        var topIds = best
+            .GroupBy(x => x.RouteId)
+            .Select(g => g.OrderByDescending(x => x.GradeIndex).ThenBy(x => (int)x.Style).First())
+            .OrderByDescending(x => x.GradeIndex)
+            .ThenBy(x => x.Style)
+            .Take(count)
+            .Select(x => x.Id)
+            .ToList();
+
+        if (topIds.Count == 0) return [];
+
+        var ascents = await _context.Ascents
+            .Where(a => topIds.Contains(a.Id))
+            .Include(a => a.Route).ThenInclude(r => r.Gym)
+            .ToListAsync();
+
+        return topIds.Select(id => ascents.First(a => a.Id == id)).ToList();
     }
 
     public async Task<List<Post>> GetPostsInRangeAsync(Guid userId, DateTimeOffset from, DateTimeOffset to)

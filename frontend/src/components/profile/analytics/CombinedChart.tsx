@@ -73,11 +73,11 @@ export const CombinedChart = memo(function CombinedChart() {
   const [period, setPeriod] = useState('all');
   const chartRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  useChartResize(chartRef, containerRef, [period]);
   const userId = useAuthStore((s) => s.userId);
   const { data: kruskorPoints, isLoading } = useKruskorHistory(userId ?? '', period);
 
   const data = kruskorPoints ?? [];
+  useChartResize(chartRef, containerRef, [period, data.length]);
   const labels = data.map((d) => d.date);
   const scores = data.map((d) => Math.round(d.score));
   const { list: gradeList, map: gradeMap, maxIndex } = data.length > 0 ? buildGradeScale(data) : { list: [] as string[], map: {} as Record<string, number>, maxIndex: 0 };
@@ -216,11 +216,11 @@ export const CombinedChart = memo(function CombinedChart() {
       />
 
       {/* Chart */}
-      <Box ref={containerRef} sx={{ width: '100%', height: { xs: 340, md: 400 } }}>
+      <Box ref={containerRef} sx={{ width: '100%', height: { xs: 340, md: 400 }, minHeight: { xs: 340, md: 400 } }}>
         {data.length > 0 ? (
           <Line ref={chartRef} data={chartData as any} options={options} plugins={[gradientFillPlugin]} />
         ) : (
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: 340 }}>
             <Typography sx={{ color: theme.palette.text.secondary, fontSize: '0.85rem' }}>Нет данных</Typography>
           </Box>
         )}

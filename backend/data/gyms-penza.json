@@ -1,0 +1,145 @@
+[
+  {
+    "name": "ФОК &quot;Олимп&quot;",
+    "city": "Пенза",
+    "address": "Пенза, Кижеватова, 13Б",
+    "latitude": 53.163665,
+    "longitude": 44.980551,
+    "description": "В физкультурно-оздоровительном комплексе «Олимп» больше 10-ти лет проводят тренировки для детей по разным видам спорта. Среди них мини-футбол, бадминтон, фитнес-аэробика и скалолазание. В зале расположен 7-метровый скалодром, предназначенный для лазания на скорость и трудность. В стенах комплекса регулярно проводятся городские и региональные соревнования среди детей от 9 до 17 лет, в результате которых лучшим спортсменам вручают грамоты и памятные награды. Кроме того, посетители «Олимпа» вместе с инструкторами выезжают на настоящие скальные массивы под открытым небом, где применяют все полученные знания и навыки на практике.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/deti_skalolazi_58"
+    ],
+    "website": "https://vk.com/deti_skalolazi_58",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/олимп_скалодром-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/b7kFrYnREWk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/RVDOJGgrPWw-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": 2005,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Город развлечений",
+    "city": "Пенза",
+    "address": "Пенза, ул. Радужная, 1",
+    "latitude": 53.216346,
+    "longitude": 44.913599,
+    "description": "Тут пара залов, один на 6,5 метров в высоту с маленькими нависаниями, он весьма простой поэтому оптимален для новичков. Второй уже на 10 метров, и тут нависания больше, есть участки с потолком и можно лазать с нижней страховкой. Подходит уже для любителей и опытных. Всего накручено где-то трасс 50-60, если добавить к этому периодические замены и обновления, то получаются разнообразные тренировки.\rТрассы сделаны для любого уровня подготовки, некоторые мне до сих пор не по зубам. Скалодром работает с нормальным современным оборудованием, взять ту же гри-гри. На прокат можно взять скальники, кто в 1-й раз, да и магнезия не помешает.",
+    "contactInfo": "+7 (841) 299-99-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/gorod_razvlecheniy",
+      "https://www.instagram.com/gorod.razvlecheniy/"
+    ],
+    "website": "https://otdoxni.com/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "8:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/8a52d22375f65f00940ac6de62a867ee-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/b4da0c36dbeb97a5fb0b73bb39e1e59d-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/e49bb072e35b34c84444308de8d9462e-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Альптур",
+    "city": "Пенза",
+    "address": "г. Пенза, Чаадаева ул. 119",
+    "latitude": 53.210727,
+    "longitude": 45.061201,
+    "description": "Скалолазный центр «АльпТур» состоит из 3-х отделений, включающих в себя зону разминки, боулдеринга и основную часть. Зона разминки порадует посетителей разнообразием скалолазных тренажеров. Зал для боулдеринга это 7 модулей различной ширины и высоты, общая площадь которых 120 кв. метров. «Большой скалодром» располагается на 220 кв. метрах с делением на секторы, его максимальная высота достигает 7-ми метров.\r\nПрофессиональные тренеры и инструкторы центра ежедневно проводят занятия с взрослыми и детьми, состоящие из обязательного вводного инструктажа по технике безопасности, обучения основным техническим приемам и подготовке к лазанию на естественном рельефе.",
+    "contactInfo": "(8412) 25-90-01",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/skalodrom_alptur/",
+      "https://vk.com/alptour"
+    ],
+    "website": "https://alptur-club.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "15:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "14:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Вс",
+        "from": "11:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение взрослые",
+        "price": "400 руб"
+      },
+      {
+        "name": "Страховка инструктором до 10 подъемов",
+        "price": "500 руб"
+      },
+      {
+        "name": "Разовое посещение детское",
+        "price": "300 руб"
+      },
+      {
+        "name": "Безлимитный",
+        "price": "2500 руб"
+      },
+      {
+        "name": "8 посещений",
+        "price": "2000 руб"
+      },
+      {
+        "name": "5 посещений",
+        "price": "1200 руб"
+      },
+      {
+        "name": "Индивидуальное занятие взрослое",
+        "price": "750 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ljv-AMcanBw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2QeumhjKISg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iHYHTTM4ncI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/CJlwzFctK8I-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wkXKGX5Sg94-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fmBve3M-z_o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ltDi7Alnjes-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sgEOOGsPBpk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Sr3p_LHwg2Y-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/D6t0Rp8A5sY-min.jpg"
+    ],
+    "wallArea": 430,
+    "maxHeight": 7.2,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  }
+]

@@ -27,6 +27,10 @@ import { getDevAccounts, devLogin, type DevAccountDto } from '../../services/dev
 import { useAuthStore } from '../../stores/authStore';
 import { useNavigate } from 'react-router-dom';
 
+function roleRoute(role?: string | null): string | undefined {
+  return { Routesetter: '/routesetter', GymAdmin: '/gym-admin', Admin: '/admin' }[role ?? ''];
+}
+
 interface GroupedAccounts {
   Climber: DevAccountDto[];
   Routesetter: DevAccountDto[];
@@ -111,7 +115,7 @@ export default function DevLoginDialog({ open, onClose }: DevLoginDialogProps) {
         error: null,
       });
       onClose();
-      navigate('/feed', { replace: true });
+      navigate(roleRoute(res.user.role) || '/feed', { replace: true });
     } catch {
       // fallback: form login
       await login(account.email, account.username);
@@ -120,7 +124,7 @@ export default function DevLoginDialog({ open, onClose }: DevLoginDialogProps) {
         setError(state.error);
       } else {
         onClose();
-        navigate('/feed', { replace: true });
+        navigate(roleRoute(state.role) || '/feed', { replace: true });
       }
     }
     setLoadingId(null);

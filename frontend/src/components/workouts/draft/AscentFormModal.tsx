@@ -5,6 +5,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useSnackbar } from 'notistack';
 import { ModalOverlay } from '../../ui/ModalOverlay';
 import { MediaUploader } from './MediaUploader';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
@@ -48,7 +49,8 @@ interface AscentFormModalProps {
 
 export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormModalProps) {
   const theme = useTheme();
-  const { postId, gymId, addAscent: addToStore } = useDraftStore();
+  const { postId, gymId, ascents, addAscent: addToStore } = useDraftStore();
+  const { enqueueSnackbar } = useSnackbar();
   const { mutateAsync: addAscentApi, isPending } = useAddAscent(postId);
   const { mutateAsync: saveFeedback } = useSaveRouteFeedback();
   const { data: gradingSystems } = useGradingSystems();
@@ -106,6 +108,12 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
 
   const onSubmit = async (values: AscentFormValues) => {
     if (!postId) return;
+
+    // Validate no duplicate route
+    if (ascents.some((a) => a.routeId === values.routeId)) {
+      enqueueSnackbar('Эта трасса уже добавлена в тренировку', { variant: 'warning' });
+      return;
+    }
 
     // ponytail: upload files in parallel, replace with queued upload when backend ready
     const mediaUrlsFromFiles = files.length > 0

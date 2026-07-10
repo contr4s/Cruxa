@@ -1,4 +1,4 @@
-export type RouteType = 'Bouldering' | 'Lead' | 'Speed';
+export type RouteType = 'Bouldering' | 'Lead';
 export type RouteStatus = 'Active' | 'Archived';
 
 export interface RouteDto {

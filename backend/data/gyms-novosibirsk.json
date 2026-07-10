@@ -1,0 +1,220 @@
+[
+  {
+    "name": "Зона гравитации",
+    "city": "Новосибирск",
+    "address": "Новосибирск, ул. Бориса Богаткова, 253/3",
+    "latitude": 55.043231,
+    "longitude": 82.985072,
+    "description": "Скалодром спортивно-развлекательного центра «Зона гравитации» это имитация скального рельефа, которая была создана специально для занятий скалолазанием. Посетители любого возраста и уровня общей физической подготовки с огромной радостью преодолевают маршруты различного уровня сложности, участвуют в соревнованиях на ловкость, постигают секрет победы и успеха под чутким руководством опытных тренеров и инструкторов. Безопасность во время лазания гарантирована благодаря использованию профессионального снаряжения и страховочного оборудования. Имеется специально оборудованная игровая зона для детей, где безопасно, весело и комфортно.",
+    "contactInfo": "+7 (983) 312 16 16",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/areagravitynsk",
+      "https://www.instagram.com/zona_gravity_nsk/",
+      "https://www.youtube.com/channel/UCrwShdoFiJ7MzWEj9oM6JbA"
+    ],
+    "website": "http://гравитация-нск.рф",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Тариф Семейный &quot;Мини&quot;",
+        "price": "1100 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/K1LUl31gld4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jc2wPcwHkrg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/CXzPekFpqDA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5h3f-7Wr2ec-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gwAk_lkgOdQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/_yBOmbFbw7Q-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Panorama",
+    "city": "Новосибирск",
+    "address": "Новосибирск, ул. Кирова, 82, 3 этаж",
+    "latitude": 55.015129,
+    "longitude": 82.947137,
+    "description": "«Panorama» - крупнейший и самый современный скалодром Новосибирска, открывший свои двери для посетителей в 2014-ом году. Помимо детской и взрослой школ скалолазания, здесь имеется возможность свободного посещения скалолазного центра, организации проведения массового мероприятия (день рождения, выпускной, корпоратив) и аренды высококлассного снаряжения для скалолазания Petzl и Singing Rock.\r\nСкалолазный центр занимает более 900 кв. метров всей площади, около 450-ти кв. метров из которых – скалодром. Высота потолков достигает 8-ми метров. В составе тренеров «Panorama» состоят только профессиональные тренеры-инструкторы (мастера спорта и кандидаты в мастера спорта), всегда готовые помочь посетителям и гарантирующие безопасность во время лазания.",
+    "contactInfo": "+7 (383) 303-41-41",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/panoramaclimbing/",
+      "https://www.instagram.com/panoramaclimbing/",
+      "https://vk.com/panoramasport",
+      "https://twitter.com/climbpanorama",
+      "https://www.youtube.com/channel/UCw6ORas6doF3Kl91dlbWxIg"
+    ],
+    "website": "https://panorama-sport.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:30",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение, самостоятельные тренировки",
+        "price": "350 руб"
+      },
+      {
+        "name": "Разовое посещение с тренером",
+        "price": "700 руб"
+      },
+      {
+        "name": "Абонемент &quot;Килиманджаро&quot;",
+        "price": "2700 руб"
+      },
+      {
+        "name": "Абонемент &quot;Эльбрус&quot;",
+        "price": "1500 руб"
+      },
+      {
+        "name": "Абонемент &quot;Эверест&quot;",
+        "price": "1400 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/panorama-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/panorama-07-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ReФОРМА",
+    "city": "Новосибирск",
+    "address": "Новосибирск, ул. Терешковой, 12а",
+    "latitude": 54.84175,
+    "longitude": 83.103677,
+    "description": "«ReФОРМА», открывший свои двери для всех желающих еще в 2010-ом году, может похвастаться внушительной общей площадью в 80 кв. метров. Высота скалодрома варьируется в пределах от 5-ти до 7,5 метров. В распоряжении посетителей ежедневно находятся 5 полос разной категории сложности (от 5а до 6с), что в целом составляет более 40 увлекательных трасс.\r\nК занятиям на скалодроме допускаются дети в возрасте от 4-х лет вне зависимости от уровня общей физической подготовки и имеющихся навыков. Тренировки проводятся под руководством квалифицированных тренеров с огромным опытом работы. Безопасность гарантирована благодаря использованию надежного специального скалолазного оборудования и снаряжения.",
+    "contactInfo": "+7 (383) 330-74-75",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/fitnessreforma",
+      "https://www.instagram.com/fitnessreforma/",
+      "https://www.youtube.com/channel/UCqjyS0K2RDiVOgxyhjVMTWg"
+    ],
+    "website": "http://www.fitnessreforma.ru/uslugi/skalodrom/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "7:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/reforma-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/reforma-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/reforma-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/reforma-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/reforma-05-min.jpg"
+    ],
+    "wallArea": 80,
+    "maxHeight": 7.5,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Каскад",
+    "city": "Новосибирск",
+    "address": "Новосибирск, ул. Академическая, 9/1",
+    "latitude": 54.83642,
+    "longitude": 83.110082,
+    "description": "Скалодром «Каскад» был построен в 90-е годы в Академгородке. Уже больше 20-ти лет он считается самым высоким и крупным в Новосибирске. Высота стен составляет 12 метров, они имеют шероховатое покрытие, которое позволяет посетителям испытывать ощущение настоящего скального рельефа. Нависание возможно до 5 метров. На скалодроме базируется скалолазный клуб с одноименным названием, участников которого тренируют мастера спорта по скалолазанию. На скалодроме регулярно обновляют зацепки и веревки, поэтому посетители могут не переживать за безопасность во время подъема. Имеется небольшая зона боулдеринга.",
+    "contactInfo": "+7 (953) 803-32-74",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/kask_ru"
+    ],
+    "website": "http://www.kask.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/-1x6CmzUuNI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6UQCTUYpeO0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KyEUq3BG3MQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/owVhS0gmgQg-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 12,
+    "yearFounded": 2009,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Витязь",
+    "city": "Новосибирск",
+    "address": "Новосибирск, ул. Фрунзе, 57а",
+    "latitude": 55.039718,
+    "longitude": 82.94463,
+    "description": "На базе центра гражданского и военно-патриотического воспитания «Витязь» работает клуб скалолазания «Альпинист», участником которого может стать любой желающий в возрасте от 14 до 35 лет. Максимальная высота стен скалодрома составляет 6 метров, а площадь стен 40 кв. метров. На скалодроме расположены 6 дорожек, можно заниматься по дисциплинам «трудность» и «боулдеринг». Кроме того, на стенах висят большое количество зацепов разного уровня сложности, которые регулярно меняются и обновляются, а на щитах построен искусственный рельеф, позволяющий посетителям ощутить себя словно на настоящих скальных массивах.",
+    "contactInfo": "+7 (923) 152-25-09",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skvityaz"
+    ],
+    "website": "https://vk.com/skvityaz",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "18:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/e3F8BF45xP0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/g9SF72gGQLk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HwyEBaDQgQI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/q5O5X-0ZTM0-min.jpg"
+    ],
+    "wallArea": 40,
+    "maxHeight": 6,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  }
+]

@@ -1,0 +1,190 @@
+[
+  {
+    "name": "Доберман",
+    "city": "Ульяновск",
+    "address": "Ульяновск, ул. Брестская, д. 78, стр. 13",
+    "latitude": 54.266615,
+    "longitude": 48.272229,
+    "description": "«Доберман» предлагает посетителям преодолеть трассы разной сложности новейшего боулдерингового скалодрома самостоятельно или с тренером-инструктором. Трассы обновляются, в связи с чем и меняется их сложность. Имеется детская секция, набор в которую осуществляется с 7-ми до 16-ти лет. На постоянной основе организовываются соревнования среди взрослых и детей по скалолазанию, совместные поездки на скалы.\r\nЦентр предоставляет в аренду снаряжение для скалолазания, что делает занятия еще более доступными. Здесь можно записаться на разовое посещение скалодрома, персональное занятие с инструктором, а также приобрести различные типы абонементов.",
+    "contactInfo": "+7 (8422) 76-28-21",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/goclimbing73",
+      "http://facebook.com/doberzal",
+      "http://instagram.com/doberzal"
+    ],
+    "website": "http://doberzal.ru/",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "250 руб"
+      },
+      {
+        "name": "Безлимитный абонемент",
+        "price": "1500 руб"
+      },
+      {
+        "name": "Групповые тренировки для взрослых",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Индивидуальные и групповые занятия",
+        "price": "200 руб"
+      },
+      {
+        "name": "Подготовительная группа",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Детская секция",
+        "price": "2400 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/nL9CFJRJIsM-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/ceEfcigbcgw-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/NeBe2yqoS1o-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/LSw2r0kgp6U-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/Vt7o4kXF7D8-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/bn419JTEmBo-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/bZryYPN6_dw-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/4cvpy9WjlJA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/UlCEDE4nS4E-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mR278IyJV3U-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 5,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Серебряные крылья",
+    "city": "Ульяновск",
+    "address": "Ульяновск, Новосондецкий б-р, 1a",
+    "latitude": 54.374732,
+    "longitude": 48.589119,
+    "description": "На скалодром «Серебряные крылья» собираются разные люди. В одном месте сходятся школьники, студенты и многие другие жители города. Их объединяет скалолазание, альпинизм, боулдеринг, ледолазание, спелеология и множество других активных видов лазания по стенам. Это третий по счету скалодром в Ульяновске, на территории которого можно заняться спортивным туризмом. В зале одновременно могут тренироваться как новички, так и профессионалы, вместимость скалодрома до 30-ти человек. Высота стен достигает 7.5 метров, а общая площадь составляет 50 кв.метров. Благодаря отапливанию помещения зимой и хорошей вентиляции летом, на территории «Серебряных крыльев» можно заниматься круглый год.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club50903555"
+    ],
+    "website": "https://vk.com/club50903555",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/серебряные_крылья-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ska-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oLbb6wrMPqM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2zjf3ITZcWs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kUCs8nFZp_M-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7.5,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Лагерь Деева",
+    "city": "Ульяновск",
+    "address": "Ульяновск, ул. Оренбургская, 41б",
+    "latitude": 54.367053,
+    "longitude": 48.530145,
+    "description": "Отправляла в этот лагерь свою дочку 9-ти лет в прошлом летнем сезоне. Вернулась она оттуда довольная, и изъявила желание серьезно заниматься скалолазанием уже у нас в городе. Как оказалось, в лагере имени Деева есть свой скалодром, занятия на котором проводили для детишек инструкторы. Моя дочь там научилась основам лазания и страховки, все это в короткий срок. Могу всем родителям теперь рекомендовать это место.",
+    "contactInfo": "+7 (904)190-01-39",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "МОУ СШ № 2",
+    "city": "Ульяновск",
+    "address": "Ульяновсакая область, р. п. Новоспасское, ул. Мира, 37",
+    "latitude": 53.143793,
+    "longitude": 47.766945,
+    "description": "По поселковым меркам скалодром неплохой. Конечно, в нашем региональном центре есть места намного круче, но из-за неимения лучшего и школьный сойдет. Дети занимаются скалолазанием прямо в спортзале. Скалодром стоит у стены. Технически, это и есть часть стены, просто к ней прикрепили щиты, куда вставили зацепы, а сверху закрепили веревки.\rВысота там немногим больше баскетбольного щита, что находится рядом. Также на другой стороне в углу сделано продолжение скалодрома, вот там есть небольшой участок под отрицательным углом на высоте около 3-х метров. Все остальные поверхности ровные. Скалодром яркий, как раз чтобы нравиться детям.",
+    "contactInfo": "+7 (927) 826-11-55",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "МОУ Цемзаводская СШ",
+    "city": "Ульяновск",
+    "address": "Ульяновская область, Сенгилеевский район, п.Цемзавод, ул.Лесная, 12в",
+    "latitude": 54.002463,
+    "longitude": 48.727316,
+    "description": "Для поселка такой скалодром это просто сказка. В основное время занимаются дети, но в вечернее время можно приходить полазать и взрослым. Я сам был пока всего пару раз, но мне очень понравилось. Хоть я впервые был не стене, и скорее всего что-то делал не по правилам, было супер. Доволен скалодромом, обязательно пойду еще.",
+    "contactInfo": "+7 (842) 332-91-81",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "МОУ СОШ № 42",
+    "city": "Ульяновск",
+    "address": "Ульяновск, ул. Тельмана, 7",
+    "latitude": 54.348501,
+    "longitude": 48.538571,
+    "description": null,
+    "contactInfo": "+7 (927) 804-57-38",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "МОУ СОШ № 31",
+    "city": "Ульяновск",
+    "address": "Ульяновск, ул. Героев Свири, 12",
+    "latitude": 54.260894,
+    "longitude": 48.328545,
+    "description": null,
+    "contactInfo": "+7 (905) 035-55-02",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

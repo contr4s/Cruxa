@@ -18,8 +18,9 @@ public sealed class GetPostsByUserHandler : IRequestHandler<GetPostsByUserQuery,
     {
         var (items, totalCount) = await _repository.GetPagedByUserIdAsync(request.UserId, request.Page, request.PageSize);
 
-        // Filter visibility: only Public and own Private/Followers posts
+        // Filter visibility: only Public and own Private/Followers posts, and only published
         var filtered = items
+            .Where(p => p.Status == PostStatus.Published)
             .Where(p => p.Visibility == PostVisibility.Public || p.UserId == request.CurrentUserId)
             .ToList();
 

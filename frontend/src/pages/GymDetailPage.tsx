@@ -58,7 +58,7 @@ export default function GymDetailPage() {
     maxAscents: filters.maxAscents < 10000 ? filters.maxAscents : undefined,
     createdWithin: filters.createdWithin > 0 ? filters.createdWithin : undefined,
     tags: filters.tags || undefined,
-  } as const), [filters.searchQuery, filters.type, filters.holdColor, filters.minGradeIndex, filters.maxGradeIndex, filters.setterId, filters.sort, filters.status, filters.minRating, filters.maxRating, filters.minAscents, filters.maxAscents, filters.createdWithin, filters.tags]);
+  } as const), [filters]);
 
   const { data: gym, isLoading: gymLoading, error: gymError } = useGym(id ?? '');
   const {
@@ -74,14 +74,19 @@ export default function GymDetailPage() {
   const toggleFavorite = useToggleFavorite();
 
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const observerCallback = useRef(() => {});
+  observerCallback.current = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
+
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
+        if (entry.isIntersecting) observerCallback.current();
       },
       { rootMargin: '200px' },
     );

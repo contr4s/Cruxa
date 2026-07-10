@@ -1,0 +1,204 @@
+[
+  {
+    "name": "Панорама",
+    "city": "Иркутск",
+    "address": "Иркутск, ул. Декабрьских событий, 102",
+    "latitude": 52.279908,
+    "longitude": 104.313557,
+    "description": "Скалодром «Панорама» сочетает в себе 3 зоны скалолазания: боулдеринг, на скорость, на трудность. Обучающие курсы и программы были созданы опытнейшими тренерами-скалолазами таким образом, чтобы человек с любым уровнем физической подготовки смог начать заниматься данным видом спорта с пользой и удовольствием.\r\nНабор в детскую школу скалолазания ведется для детей от 4-х лет. Имеется возможность записаться на платное пробное занятие, чтобы узнать больше о скалолазании, ознакомиться с особенностями скалодрома, попробовать себя в роли скалолаза под чутким руководством инструктора и получить новые впечатления, эмоционально разгрузиться.",
+    "contactInfo": "+7 3952 43-43-48",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/panorama_skalodrom",
+      "https://www.facebook.com/panorama.skalodrom/",
+      "https://www.instagram.com/panorama_skalodrom/"
+    ],
+    "website": "http://skalodromirk.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "7:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Пробное занятие с тренером",
+        "price": "450 руб"
+      },
+      {
+        "name": "Базовый курс &quot;Персональный&quot;",
+        "price": "6300 руб"
+      },
+      {
+        "name": "Базовый курс &quot;В группе&quot;",
+        "price": "4900 руб"
+      },
+      {
+        "name": "Продвинутый курс (до 8 чел)",
+        "price": "9400 руб"
+      },
+      {
+        "name": "Безлимитный абонемент",
+        "price": "3400 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 3 мес",
+        "price": "7400 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 12 мес",
+        "price": "18900 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 6 мес",
+        "price": "12490 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-07-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/панорама-иркутск-08-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1zpLUANoeqg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8OjN0Go3fqU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Uj6D4xacjY0-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 15,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ИРНИТУ (ИрГТУ)",
+    "city": "Иркутск",
+    "address": "Иркутск, ул. Лермонтова, 83",
+    "latitude": 52.262615,
+    "longitude": 104.26149,
+    "description": "Скалодром ИРНИТУ, располагающийся на территории спортивного зала образовательного учреждения, является уникальным для Иркутской области, поскольку обладает рекордными размерами и разнообразием рельефа. Совокупная площадь лазательной поверхности сооружения составляет около 300 кв. метров, максимальная высота достигает отметки в 11 метров, а наибольший вынос от вертикали – 6 метров.\r\nЗанятия проходят с использованием как нижней, так и верхней страховки – скалодром обеспечен стационарными креплениями для лазания. Помимо ежедневных тренировок здесь проходят крупные областные и городские состязания по скалолазному спорту в дисциплинах «Скорость» и «Трудность».",
+    "contactInfo": "+7 (902) 577-59-88",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/irgtuirk"
+    ],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "18:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/skalo2-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/skalo4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mwvLVIgiNuw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wwmBcjw9ciw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Ft8B5ze0pYA-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 11,
+    "yearFounded": 2000,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ФАСИО",
+    "city": "Иркутск",
+    "address": "Иркутск, ул.Баррикад, 33",
+    "latitude": 52.297112,
+    "longitude": 104.303442,
+    "description": "Боулдеринговый скалодром ФАСИО, образованный в 2016-ом году в качестве замены тренировочного зала на ул. Рабочего Штаба, оборудован с целью объединения любителей скалолазания разного уровня подготовки. Общая площадь лазательной поверхности составляет более 300 кв. метров. Максимальная высота данного сооружения достигает отметки в 4,5 метра.\r\nПрофессиональные инструкторы ежедневно проводят занятия по скалолазанию для взрослых и детей. Имеется возможность приобретения абонементов на различное количество тренировок, а также льготные условия посещения для мастеров спорта и кандидатов в мастера спорта, тренеров по альпинизму и скалолазанию.",
+    "contactInfo": "8 (914) 919-78-74",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/irkskalodrom"
+    ],
+    "website": "http://facio.ru/skalodrom-girkutska",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Fasio_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Fasio3_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Fasio5_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/skalodrom-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 4.5,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "База иркутского МЧС",
+    "city": "Иркутск",
+    "address": "Иркутская область, Байкальский тракт 61 км Байкальского тракта",
+    "latitude": 51.907799,
+    "longitude": 104.810433,
+    "description": "Учебно-тренировочный скалодром на базе Байкальского поисково-спасательного отряда МЧС (поселок Никола), спроектированный и построенный в 2006-ом году, предназначен для постоянного совершенствования спасателями навыков работы на высоте. Суммарная площадь лазательной поверхности сооружения составляет около 300 кв. метров, а максимальная высота достигает 11-ти метров.\r\nСкалодром оборудован большим количеством разнообразных зацепов, современных высокотехнологичных спусковых платформ и всех возможных видов страховок, а также многообразием карнизов с различным отрицательным углом наклона.",
+    "contactInfo": "+7 (950) 062-59-51",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club68039023"
+    ],
+    "website": "http://38.mchs.gov.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/w4o0YwC5dq-800x600-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IHRu03I9kD-800x600-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1f66aa47d9aedcbeadd46b42fa095d8f-800x600-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/4476cf4ccafc3c547c47140859e0f349-800x600-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/f9c1235127406ec3c5cad3f715bb403c-800x600-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 11,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Боулдеринговый зал ИрГТУ",
+    "city": "Иркутск",
+    "address": "Иркутск, ул. Курчатова, 2",
+    "latitude": 52.258067,
+    "longitude": 104.269728,
+    "description": "Важно! Занятия проводятся только для членов ФССИО \r\nБоулдеринговый зал ИРНИТУ, который находится на территории спортзала данного образовательного учреждения, используется студентами для индивидуальных занятий, отработки необходимых технических навыков лазания, а также проведения соревнований и фестивалей по скалолазному спорту. Совокупная площадь лазательной поверхности данного скалодрома составляет около 105-ти кв. метров, максимальная высота достигает отметки в 2,5 метра. Пол в помещении полностью застелен специальными матами, которые смягчают удар при падении или срыве с высоты. Занятия проходят под предводительством квалифицированных педагогов-инструкторов с большим опытом работы и восхождения по естественному и искусственному рельефам.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/irgtuirk"
+    ],
+    "website": "https://vk.com/irgtuirk",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 105,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

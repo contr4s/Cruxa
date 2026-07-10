@@ -15,7 +15,7 @@ interface DraftState {
 }
 
 interface DraftActions {
-  startDraft: (postId: string, gymId: string, gymName?: string) => void;
+  startDraft: (postId: string, gymId: string, gymName?: string, ascents?: PostAscentDto[]) => void;
   addAscent: (ascent: PostAscentDto) => void;
   removeAscent: (id: string) => void;
   clearDraft: () => void;
@@ -37,13 +37,13 @@ export const useDraftStore = create<DraftState & DraftActions>((set, get) => ({
   ascentModalTarget: null,
   startSheetOpen: false,
 
-  startDraft: (postId, gymId, gymName) =>
+  startDraft: (postId, gymId, gymName, ascents) =>
     set({
       status: 'active',
       postId,
       gymId,
       gymName: gymName ?? null,
-      ascents: [],
+      ascents: ascents ?? [],
       createdAt: new Date().toISOString(),
     }),
 

@@ -29,7 +29,7 @@ export function ProtectedLayout() {
   // Restore draft on mount
   useEffect(() => {
     if (draft && draft.status === 'Draft') {
-      startDraft(draft.id, draft.gymId ?? '', draft.gymName);
+      startDraft(draft.id, draft.gymId ?? '', draft.gymName, draft.ascents);
     }
   }, [draft, startDraft]);
 

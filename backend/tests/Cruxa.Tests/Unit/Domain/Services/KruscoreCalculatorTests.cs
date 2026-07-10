@@ -50,7 +50,7 @@ public class KruscoreCalculatorTests
     [InlineData(AscentStyle.Attempt, RouteType.Bouldering, 50.0)]
     [InlineData(AscentStyle.Flash, RouteType.Lead, 75.0)]
     [InlineData(AscentStyle.Attempt, RouteType.Lead, 37.5)]
-    [InlineData(AscentStyle.Flash, RouteType.Speed, 100.0)]
+    [InlineData(AscentStyle.Flash, RouteType.Bouldering, 100.0)]
     public void GetScale_ReturnsCorrect(AscentStyle style, RouteType type, double expected)
     {
         var result = KruscoreCalculator.GetScale(style, type);

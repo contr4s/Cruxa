@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Top Drive",
+    "city": "Ярославль",
+    "address": "Ярославль, ул. Свободы, 91",
+    "latitude": 57.62586,
+    "longitude": 39.84958,
+    "description": "«Top Drive» - это территория скалолазов различного уровня подготовки. Центр предлагает увлекательную программу празднования любых детских праздников, организовывает обучение в платной детской школе скалолазания, занимается проведением корпоративных мероприятий на природе с помощью выездного быстромонтируемого скалодрома. Здесь ведут работу исключительно профессиональные инструкторы, имеющие за плечами огромный опыт в спорте, готовые помочь во всем как новичкам, так и более опытным скалолазам. «Top Drive» гарантирует неповторимую атмосферу и индивидуальный подход к каждому посетителю скалодрома.",
+    "contactInfo": "+7 (980) 654-20-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/topdriveclimb76"
+    ],
+    "website": "http://www.topdrive76.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/top-drive-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/top-drive-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/top-drive-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/top-drive-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/top-drive-05-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  }
+]

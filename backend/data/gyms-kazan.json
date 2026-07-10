@@ -1,0 +1,148 @@
+[
+  {
+    "name": "Джим",
+    "city": "Казань",
+    "address": "Казань, улица Мазита Гафури, 46",
+    "latitude": 55.768309,
+    "longitude": 49.102084,
+    "description": "Отличный новый скалодром в Казани! Наконец-то и в Казани появилась эталонка :) Скалодром большой и светлый. Большое количество трасс, которые постоянно меняются. Преобладаются рельефы, чего тоже не хватало в казанских скалодромах. \rМаты шикарные, можно падать и шлепаться от души :D\r14.12.2019 было официальное открытие скалодрома и прошел боулдер фестиваль. Приехали скалолазы из Ижевска, Ульяновска, Самары. \rРекомендую к посещению!",
+    "contactInfo": "+7 (912) 75-15-740",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbingymkzn",
+      "https://www.instagram.com/climbingym/?igshid=t1o5fj9pdxnm"
+    ],
+    "website": "https://vk.com/climbingymkzn",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/tyNU7pi2_vI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/L3Iol3ax3ow-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fCa0CoeFFsE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5suaT9eYXks-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 12,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "УНИКС",
+    "city": "Казань",
+    "address": "Казань, ул. Профессора Нужина, 2",
+    "latitude": 55.791172,
+    "longitude": 49.124084,
+    "description": "«УНИКС» порадует любителей и профессионалов скалолазного спорта стенами скалодрома, общая площадь которых составляет 200 кв. метра. Также для удобства посетителей здесь оборудованы тренажеры, занятия на которых с легкостью можно чередовать с лазанием.\r\nУдобное расположение в центре города Казань, яркое оформление зала, исключительно профессиональные тренеры, детская и взрослая школа скалолазания – это лишь малая часть преимуществ занятий на территории скалодрома «УНИКС».\r\nК тренировкам допускаются дети в возрасте от 6-ти лет только под присмотром одного или обоих родителей. Имеется возможность приобрести подарочный абонемент на посещение скалодрома, а также организовать празднование любого мероприятия.",
+    "contactInfo": "8 (843) 2384579",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbingunics",
+      "http://vk.com/club11579467"
+    ],
+    "website": "https://vk.com/climbingunics",
+    "workingHours": null,
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "300 руб"
+      },
+      {
+        "name": "Безлимитное посещение",
+        "price": "1900 руб"
+      },
+      {
+        "name": "Абонемент на 6 занятий",
+        "price": "1200 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/W7Qa4egZSZs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jLDsJ7l4FnE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ldRpsvfEr9s-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/C03zDsmCaVI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iYRkKUyZagg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hcIr9ZRJYuc-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Самайн",
+    "city": "Казань",
+    "address": "Казань, ул. Четаева, 26, школа № 165",
+    "latitude": 55.822953,
+    "longitude": 49.127515,
+    "description": "В «Самайн» проходят регулярные вечерние тренировки для детей и взрослых. Помимо этого имеется возможность посетить разовое занятие, приобрести абонемент (4, 8, 12 посещений) или заказать по предварительной записи индивидуальное или групповое обучение. В распоряжении посетителей 2 зала: большой и боулдеринговый.\r\nЗдесь регулярно проходят соревнования по скалолазанию как на базе самого скалодрома, так и иных площадок Казани, соседних регионов, а также организовываются коллективные выезды на скалы. Также скалодром является отличным вариантом проведения корпоративного тимбилдинга или праздника.",
+    "contactInfo": "8 (965) 602-49-17",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/samhainkazan",
+      "https://www.instagram.com/samhainclimbingwall/"
+    ],
+    "website": "https://vk.com/samhainkazan",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "18:30",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ur1RD8WraWs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/omp6BqOa1OI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ExeO7vf_0Ck-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xVPZ3_jQnEw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/rIcgMAEeWvo-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Патриот",
+    "city": "Казань",
+    "address": "Казань, ул. Крутовская, 20",
+    "latitude": 55.738176,
+    "longitude": 49.120149,
+    "description": "В ВПЦ стоит старенький скалодром. Занимался на нем давно еще, сейчас хожу на Самайн. У Патриота не очень большая высота (около 6-ти метров максимум) и площадь. Но в то же время он имеет неплохой рельеф. Прямых трасс почти нет, везде задействованы нависания и потолки. Лазать можно как со страховкой, так и без нее - боулдеринг с матами.",
+    "contactInfo": "+7 (917) 266-35-62",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rtpatriot"
+    ],
+    "website": "https://vk.com/rtpatriot",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/x_0daf68c5-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_9c348a77-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_12d46e5a-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_a6bd0467-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_edda401f-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

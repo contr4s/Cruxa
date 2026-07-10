@@ -1,0 +1,87 @@
+[
+  {
+    "name": "«Яр Чаллы»",
+    "city": "Набережные Челны",
+    "address": "Набережные Челны, пр. Г. Тукая, 14",
+    "latitude": 55.741009,
+    "longitude": 52.407031,
+    "description": "Профессиональный 8-ми метровый стенд Валтопии. Подходит для скалолазания на трудность, но на особо крутые изгибы рельефа не рассчитывайте. На стенде больше 10-ти дорожек, что позволяет разом лазить нескольким посетителям. Страховка верхняя и нижняя, причем оттяжки проложены даже на вертикальных дорожках. Зацепок много, какие-то рельефные, какие-то щипковые, много мизеров, карманов, есть пассивы.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/id471891012"
+    ],
+    "website": "https://vk.com/id471891012",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "15:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4081387184788164_3fee-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-28_13-0-57.759-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Эверест",
+    "city": "Набережные Челны",
+    "address": "г. Набережные Челны, 2, 9-й комплекс",
+    "latitude": 55.723399,
+    "longitude": 52.385498,
+    "description": "Скалодром «Эверест» радует любителей скалолазания любого возраста и уровня подготовки обилием трасс разной категории сложности и площадью стен в 88 кв. метров уже с 2010-го года. Максимальная высота одного из 2-х скалодромов достигает 8-ми метров, боулдер-зал имеет высоту 4 метра.\r\nНа территории скалодрома с посетителями занимаются только опытные инструкторы, которые обеспечивают комфортное и полезное времяпрепровождение, а также полную безопасность. Имеется возможность проведения празднования любого мероприятия для детей (день рождения, выпускной) и взрослых (корпоратив, тимбилдинг, вечеринка) в увлекательной атмосфере спорта.",
+    "contactInfo": "+7 (927) 048-73-33",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climb_nch",
+      "https://www.instagram.com/skalodrom16/"
+    ],
+    "website": "https://vk.com/climb_nch",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "10:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Kl7GjCbools-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/_OWR0_nR__U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YTYeY_kfzNE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZwhuPuN17uk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uumO-2GzClI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BWDT-N4D5Do-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NbTxNdUpnAI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LEV-7ZM2Z6U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/RMhfSgU5PPg-min.jpg"
+    ],
+    "wallArea": 88,
+    "maxHeight": 8,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  }
+]

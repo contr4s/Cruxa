@@ -1,0 +1,174 @@
+[
+  {
+    "name": "VladRock",
+    "city": "Владивосток",
+    "address": "г. Владивосток, ул. Каплунова, 7",
+    "latitude": 43.114496,
+    "longitude": 131.945636,
+    "description": "Скалодром «VladRock» отличается большой площадью зала для занятий, предоставляемой всем желающим возможностью посещать взрослую и детскую секции спортивного скалолазания и школу начальной альпинисткой подготовки. Для детей регулярно организовывается спортивно-оздоровительный лагерь, где все воспитанники узнают об основах скалолазного спорта, учатся лазать под руководством тренера и самостоятельно.\r\nДля проведения на территории «VladRock» празднования дня рождения и любого другого детского мероприятия имеются необычные развлекательные программы, которые были разработаны в соответствии с возрастными особенностями участников.",
+    "contactInfo": "8 902 505 4403",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/vlrock",
+      "https://www.instagram.com/vladrock_skalodrom/"
+    ],
+    "website": "http://vlad-rock.ru",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "15:00",
+        "to": "19:00"
+      },
+      {
+        "days": "Ср",
+        "from": "15:00",
+        "to": "19:00"
+      },
+      {
+        "days": "Пт",
+        "from": "15:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Занятие с инструктором",
+        "price": "800 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий",
+        "price": "7000 руб"
+      },
+      {
+        "name": "Абонемент безлимитный",
+        "price": "12000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/w9EcqmEybwA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vIpvAkNujxU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Lm_auJUy9bk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/slP6khvfHoc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/T8S8J-_0vNY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Y0gj-qqDGa4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-AByWBhLWpw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YlztYVsgX20-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/88CtEz1H7Ro-min.jpg"
+    ],
+    "wallArea": 500,
+    "maxHeight": 9,
+    "yearFounded": 2015,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Onsight",
+    "city": "Владивосток",
+    "address": "Владивосток, Тунгусская, 53",
+    "latitude": 43.116358,
+    "longitude": 131.927283,
+    "description": "Скалолазный клуб Onsight - это общество скалолазов, альпинистов, слэклайнеров и просто активных людей, любящих outdoor. Занятия проводятся на скалодроме и скалах. Лазательная поверхность болдерзала порядка 200 кв.м, а его максимальная высота 4,5 м. Здесь могут заниматься не только взрослые, но и дети - минимальный возраст воспитанников - от 5 лет. Тренировки проводятся опытные действующие спортсмены, являющиеся разрядниками и даже КМС. Оплачивать занятия можно любым удобным способом: разово за каждое посещение, приобретая пакет на фиксированное число посещений или безлимит на месяц. Для школьников и студентов действуют скидки.",
+    "contactInfo": "+7 (902) 489-61-57",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/vl.climb",
+      "https://www.instagram.com/onsight_vl/"
+    ],
+    "website": "https://vk.com/vl.climb",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "16:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Ср",
+        "from": "16:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Пт",
+        "from": "16:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/EuKAg0di_AU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/SKSx54U9UCg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uAFUvWqtPnM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/UudeJ4zzLdQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Vx8579Txwvc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xPD2iSbwWAQ-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 4.5,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Спортзал Владивостокского Морского Колледжа",
+    "city": "Владивосток",
+    "address": "Владивосток, ул. Каплунова, 7",
+    "latitude": 43.114496,
+    "longitude": 131.945636,
+    "description": "Прикольный скалодром на 3-м этаже морского колледжа. Туда ходят на скалолазание многие знакомые ребята, сам я был несколько раз в ознакомительных целях. Профессионально не занимаюсь, не зацепило. Но скалодром очень понравился. Весь яркий, красивый, интересный. Я думаю, детям такой понравится очень.\rДля взрослых будет интересно именно полазать, потому что некоторые дорожки сделают вызов даже опытным скалолазам. Там можно лазать хоть по потолку. Я же покорял только ровные стенки, где нет отвисаний. Страхуют инструкторы, пока лезешь, они держат тебя на веревке. Также я видел, что некоторые лазают без страховки, но только снизу, чтобы падать на маты, а это не больно.",
+    "contactInfo": "+7 (423) 290-12-00",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://vladtech.ru/",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "18:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Вт",
+        "from": "16:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Чт",
+        "from": "16:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Пт",
+        "from": "18:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Сб",
+        "from": "14:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_11-14-5.705-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_11-14-52.51-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

@@ -30,8 +30,17 @@ export default function LoginPage() {
     await login(values.email, values.password);
     const state = useAuthStore.getState();
     if (!state.error) {
-      const redirect = searchParams.get('redirect') || '/feed';
-      navigate(decodeURIComponent(redirect), { replace: true });
+      const fromRedirect = searchParams.get('redirect');
+      if (fromRedirect) {
+        navigate(decodeURIComponent(fromRedirect), { replace: true });
+      } else {
+        const roleRoutes: Record<string, string> = {
+          Routesetter: '/routesetter',
+          GymAdmin: '/gym-admin',
+          Admin: '/admin',
+        };
+        navigate(roleRoutes[state.role ?? ''] || '/feed', { replace: true });
+      }
     }
   };
 

@@ -1,0 +1,657 @@
+[
+  {
+    "name": "Энергия",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Бограда, 91",
+    "latitude": 56.005621,
+    "longitude": 92.845753,
+    "description": "Скалодром спортивного комплекса «Энергия» города Красноярск, построенный еще в 1993-м году, имеет общую площадь лазательной поверхности более 300 кв. метров. Максимальная высота достигает отметки 8 метров. Угол наклона варьируется от сильно отрицательного до большого положительного. К занятиям и тренировкам на данном скалодроме допускаются только воспитанники СДЮШОР и сотрудники МЧС.\r\nКвалифицированные тренеры и инструкторы данного спортивного комплекса занимаются активной подготовкой детей и юношей к соревнованиям по скалолазанию и альпинизму не только регионального, но общероссийского масштаба.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-6_15-47-1.927-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-6_15-47-24.296-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 8,
+    "yearFounded": 1993,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СпортЭкс",
+    "city": "Красноярск",
+    "address": "Красноярск, Остров Отдыха, 6/1",
+    "latitude": 55.994859,
+    "longitude": 92.872371,
+    "description": "Скалодром, располагающийся на территории ЦЭС «СпортЭкс» города Красноярск, является довольно старым боулдеринговым скалодромом в городе. Общая площадь лазательной поверхности составляет более 85-ти кв. метров, а максимальная высота достигает отметки в 4,5 метра.\r\nСреди 6-ти интересных дорожек для лазания различной категории сложности, подходящую найдет себе и новичок, и профессиональный спортсмен. Занятия проводятся как в группах, так и в индивидуальном порядке для взрослых и детей в возрасте от 6-ти лет.",
+    "contactInfo": "+7 (903) 986-30-01",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club14701594"
+    ],
+    "website": "https://vk.com/club14701594",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "10:00",
+        "to": "11:00"
+      },
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Сб",
+        "from": "10:00",
+        "to": "12:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/8gTPwjgvhk4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_126adbf6-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_6721abc5-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_fdf00278-min.jpg"
+    ],
+    "wallArea": 85,
+    "maxHeight": 4.5,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СДЮШОР по СС",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Академика Павлова, 5",
+    "latitude": 55.99872,
+    "longitude": 92.967206,
+    "description": "СДЮШОР по спортивному скалолазанию имени В.Г. Путинцева города Красноярск предоставляет всем желающим возможность проводить занятия и тренировки сразу на 2-х боулдеринговых скалодромах. Суммарная площадь лазательной поверхности составляет около 150-ти кв. метров, а максимальная высота достигает 3-х метров.\r\n МБУ СШОР им. В.Г.Путинцева расположена на первом этаже жилого дома. \r\nСкалодромные залы оборудованы специальными страховочными матами. Вместительный тренажерный зал порадует своих посетителей многообразием современных скалолазных тренажеров для развития силы пальцев и рук. Профессиональные тренеры и инструкторы проводят занятия для взрослых и детей в возрасте до 16-ти лет.",
+    "contactInfo": "+7 (391) 235-74-01",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/public152248389"
+    ],
+    "website": "http://skala24.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Вт",
+        "from": "10:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср-Пт",
+        "from": "10:00",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 150,
+    "maxHeight": 3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Патриот",
+    "city": "Красноярск",
+    "address": "Красноярск, Железногорск, ул. Свердлова, 47",
+    "latitude": 56.258308,
+    "longitude": 93.539729,
+    "description": "Скалодром МБУ ДО «Патриот», располагающийся на базе школы № 90 города Железногорск, является не только местом проведения фестивалей и соревнований по скалолазанию, но и центром по обучению данному виду спорта. Совокупная площадь лазательной поверхности составляет около 150-ти кв. метров, максимальная высота достигает 10-ти метровой отметки.\r\nЗанятия по скалолазному спорту проводят квалифицированные инструкторы, также постоянно организовываются экспедиции и выезды на естественный рельеф для всех детей, посещающих секции туристического направления.",
+    "contactInfo": "+7 (913) 516-25-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club40144382"
+    ],
+    "website": "https://vk.com/club40144382",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "15:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Ср",
+        "from": "15:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Пт",
+        "from": "15:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/hSJe7duS7rg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pgltV8dDVrg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vV4yPfs9Ptw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pb9jkQEJawQ-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 10,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Буревестник",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Академика Киренского, 15",
+    "latitude": 55.997185,
+    "longitude": 92.791962,
+    "description": "На скалодроме Буревестник проводятся тренировки для взрослых и для подростков 10-15 лет.  Набираются группы начинающих и группы среднего уровня подготовки. Занятия проводят инструктора, имеющие высшую спортивную квалификацию. На стене скалодрома спортсмены отрабатывают технику прохождения различных видов скального рельефа, тренируются в преодолении маршрутов от простых до высших уровней сложности. Скалодром популярен в холодное время года, а летом тренировки продолжаются на скалах в заповеднике Красноярские Столбы. В клубе Буревестник, кроме скалодрома, имеются тренажеры и хороший бассейн.",
+    "contactInfo": "+7 (902) 929-29-75",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/sport_club_burevestnik"
+    ],
+    "website": "https://vk.com/sport_club_burevestnik",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "19:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт",
+        "from": "19:30",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "19:30",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/-c95w1SeyMQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hpjttKiXGwo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JLD1njfIzH8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/s4uIAnRYXhk-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Арена Север",
+    "city": "Красноярск",
+    "address": "Красноярск, улица 9 Мая, 74",
+    "latitude": 56.050551,
+    "longitude": 92.894586,
+    "description": "Скалодром многофункционального спортивно-зрелищного комплекса «Арена Север» города Красноярск, оборудованный в 4-ом блоке здания, предназначен для тренировок скалолазов, ледолазов и альпинистов, а также всех желающих испытать свои силы. Общая площадь лазательной поверхности на трудность составляет около 225 кв. метров, а максимальная высота сооружения достигает 15-ти метров.\r\nТехнические характеристики и параметры данного скалодрома позволяют ставить различные маршруты и трассы для масштабных соревнований. Занятия в школе скалолазания проводятся в группах и индивидуально, как для взрослых, так и для детей в возрасте от 7-ми лет.",
+    "contactInfo": "+7 (391) 223-34-41",
+    "contactEmail": null,
+    "socialLinks": [
+      "http://www.facebook.com/kgaurcss",
+      "https://vk.com/rcsskrsk",
+      "http://www.youtube.com/kgaurcss",
+      "http://instagram.com/arenaseverkrsk"
+    ],
+    "website": "http://arenasever-krsk.ru/climbing_wall",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "9:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Вт-Вс",
+        "from": "8:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/abal2013lead_004-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DSx0Nx5AewI1-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ice_003-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KC21-min.jpg"
+    ],
+    "wallArea": 225,
+    "maxHeight": null,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Южный",
+    "city": "Красноярск",
+    "address": "Красноярск, Вавилова, 1",
+    "latitude": 55.993298,
+    "longitude": 92.91063,
+    "description": "Центр спортивного лазания «Южный», расположенный на территории торгового центра, открыл свои двери для любителей скалолазного спорта в 2014-ом году. Общая площадь лазательной поверхности скалодрома составляет 110 кв. метров, протяженность – более 17-ти метров, а максимальная высота стен достигает 4,5 метров. Обилие трасс различной категории сложности порадует как начинающих, так и профессиональных скалолазов.\r\nОбучение скалолазанию проходит в индивидуальной и групповой формах. Всем желающим предоставляется возможность самостоятельного посещения скалодрома, а также организации и проведения праздников, открытых уроков и спортивных экскурсий.",
+    "contactInfo": "+7 (391) 272-31-40",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club82325550"
+    ],
+    "website": "https://vk.com/club82325550",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/_jBDa3anRMA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/0bXzZUrFnsU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/a4LT9cLO0l8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Y0hxh2w9ppk-min.jpg"
+    ],
+    "wallArea": 110,
+    "maxHeight": 4.5,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Фанпарк Бобровый лог",
+    "city": "Красноярск",
+    "address": "Красноярск ул. Сибирская, 96",
+    "latitude": 55.960125,
+    "longitude": 92.797289,
+    "description": "Фанпарк \"Бобровый лог\" - это огромная территория на границе со знаменитым заповедником \"Столбы\". Парк работает все 12 месяцев и предлагает своим гостям огромное количество всевозможных развлечений и возможностей для активного отдыха, а также спа-салоны и рестораны для отдыха. Одной из жемчужин парка является 20-ти метровый скалодром, имитирующий скалу. Скалолазная поверхность объекта - 220 кв. м. Благодаря тому, что плиты скалодрома имеют разные конфигурации, здесь могут заниматься как профессиональные спортсмены, так и новички любители. При скалодроме работает пункт проката, где можно арендовать необходимое снаряжение и страховочное оборудование.",
+    "contactInfo": "+7 (913) 040-10-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/bobrovylog",
+      "https://www.instagram.com/bobrolog/#",
+      "https://www.facebook.com/bobrovylog"
+    ],
+    "website": "http://www.bobrovylog.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "12:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/bobrlog1_big-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bobrlog2_big-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bobrlog3_big-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Бобровый_лог1_display-min.jpg"
+    ],
+    "wallArea": 220,
+    "maxHeight": 18,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Спорткорпус ПИСФУ",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Ак. Киренского, 15",
+    "latitude": 55.997185,
+    "longitude": 92.791962,
+    "description": "Скалодром в спорткоопусе ПИ СФУ - это 220 кв. м. скалолазной поверхности разной конфигурации высотой 13 м. При скалодроме работает спортивный клуб СФУ, который трижды в неделю проводит тренировки для студентов, преподавателей и сотрудников университета. Также на скалодроме СФУ ежегодно проводятся соревнования по скалолазнию в дисциплинах \"трудность\" и \"скорость\", открытый фестиваль скалолазания СФУ, соревнования краевой универсиады, открытый чемпионат СФУ.",
+    "contactInfo": "+7 (983) 507-06-38",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/siberianfederal"
+    ],
+    "website": "http://news.sfu-kras.ru/rubric/26",
+    "workingHours": [
+      {
+        "days": "Вт-Ср",
+        "from": "19:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Пт",
+        "from": "19:00",
+        "to": "22:30"
+      },
+      {
+        "days": "Сб",
+        "from": "15:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/img_9792_0-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/img_9875_0-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/img_0306_1-min_1.jpg"
+    ],
+    "wallArea": 220,
+    "maxHeight": 13,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Турклуб «Ермак»",
+    "city": "Красноярск",
+    "address": "Красноярск, Молокова, 28",
+    "latitude": 56.044769,
+    "longitude": 92.908977,
+    "description": "Турклуб \"Ермак\" - это место, которое обязательно понравится каждому ребенку школьного возраста. Здесь можно научиться многим навыкам, которые пригодятся не только во время турпоходов, но и в течение всей жизни. В первую очередь инструкторы стараются максимально развить в детях такие качества, как сила воли, выносливость, умение быстро соображать и быстро действовать. Немалая часть тренировок проходит на четырехметровом скалодроме, т. к. именно этот тренажёр идеально подходит для развития вышеперечисленных качеств и гармоничного развития всех групп мышц.",
+    "contactInfo": "+7 (923) 354 3713",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/tkermak/",
+      "https://vk.com/tkermak"
+    ],
+    "website": "http://tkermak.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "14:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4833279338036887032-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/6966250820239790056-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8304945255978938997-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8613772233819904551-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/erm_climbing_6-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/erm_climbing_8-min.jpg"
+    ],
+    "wallArea": 50,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "М/р Солнечный",
+    "city": "Красноярск",
+    "address": "Красноярск, Солнечный бульвар, 11",
+    "latitude": 56.120337,
+    "longitude": 92.927249,
+    "description": "Скалодром в микрорайоне Солнечный - это небольшой зал для боулдеринга площадью 44 кв. м., максимальная высота стен здесь - 4 м. В данном зале проводятся тренировки скалолазной секции, которую может посещать каждый желающий. Принимают в секцию и детей, которых обучают основам безопасности, техникам лазания и страховки, тренируют гибкость, ловкость и координацию. Также при скалодроме есть раздевалки и душевые для максимального комфорта посетителей.",
+    "contactInfo": "8 (903) 921-87-24",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/patriot24_org?"
+    ],
+    "website": "http://патриот24.рф",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "17:00",
+        "to": "19:30"
+      },
+      {
+        "days": "Пт",
+        "from": "17:00",
+        "to": "19:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BNBYCXnbxpE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vugEoSCGBkU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kNZ8-qMA4Hg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-AG08sivsR4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/cKzbOzRQknQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/zmnCi9hNZ6I-min.jpg"
+    ],
+    "wallArea": 44,
+    "maxHeight": 4,
+    "yearFounded": 2006,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Кадетский корпус",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Малиновского, 20г",
+    "latitude": 56.046569,
+    "longitude": 92.931049,
+    "description": "КГБОУ «Красноярский кадетский корпус имени А.И. Лебедя» занимается как умственным воспитанием кадетов, так и их активным физическим развитием. На базе данного учебного заведения функционирует физкультурно-оздоровительный комплекс с тренажерами и вместительным скалодромом. Общая площадь поверхности для лазания составляет около 64-х кв. метров, а максимальная высота стены достигает 8-ми метров.\r\nЗанятия по скалолазанию проходят в группах под контролем инструкторов. В зависимости от желания воспитанников, в секции проводится подготовка к состязаниям различного масштаба. Помимо этого регулярно организовываются выезды на естественный рельеф с целью отработки навыков.",
+    "contactInfo": "+7 (391) 267-90-03",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://kkk-lebed.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/phoca_thumb_l_img_2550-min.jpg"
+    ],
+    "wallArea": 64,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №3",
+    "city": "Красноярск",
+    "address": "Красноярский край, Дудинка, ул. Ленина, 38",
+    "latitude": 69.402692,
+    "longitude": 86.181952,
+    "description": "Скалодром школы №3 в г. Дудинки является первым на Таймыре скалодромом. Данный объект построили именно в этой школе, т. к. на базе третьей школы функционирует туристический клуб. Скалодром представляет собой две шестиметровые полосы общей площадью 18 кв. м. На скалодроме одновременно могут находиться только два человека - в этом есть как минусы, так и свои плюсы. Здесь регулярно проводятся краевые соревнования в дисциплине \"скорость\". Занятия скалолазанием могут посещать все школьники в возрасте от 7 лет.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club1167355"
+    ],
+    "website": "http://school3dudinka.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/1537772271_22222-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1518491233_dscn0823-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1513933207_dscn1404-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1512357082_dscn1310-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/1509502947_dscn1011-min.jpg"
+    ],
+    "wallArea": 18,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Эталонная трасса",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Остров Отдыха, 15а",
+    "latitude": 55.998418,
+    "longitude": 92.883698,
+    "description": "Эталонная трасса - это 15-ти метровое сооружение, расположенное на Острове отдыха на одной из осветительных опор Центрального стадиона. Площадь трассы небольшая - всего 45 кв. м., однако таких параметров более чем достаточно для эталонной трассы. Данный скалодром находится под открытым небом и используется как для тренировок, так и для проведения соревнований в дисциплинах \"скорость\" и \"трудность\".",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/krasrockclimbing"
+    ],
+    "website": "https://vk.com/krasrockclimbing",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-22_17-33-13.504-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Etalon1-min.jpg"
+    ],
+    "wallArea": 45,
+    "maxHeight": 15,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Центр скалолазания &quot;Солнечный&quot;",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. 40 лет Победы, 2",
+    "latitude": 56.116468,
+    "longitude": 92.938208,
+    "description": null,
+    "contactInfo": "+7 (999) 441-71-90",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbsun",
+      "https://www.instagram.com/climb.sun/"
+    ],
+    "website": "https://vk.com/climbsun",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "9:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "10:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Вс",
+        "from": "10:00",
+        "to": "15:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/KdJmMN1uEKs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/45X7US5gaa4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/4vMyzku2pHY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/24UckEjRfeo-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ROCKY",
+    "city": "Красноярск",
+    "address": "г. Красноярск, ул. Дубровинского, 112, 4 этаж",
+    "latitude": 56.003105,
+    "longitude": 92.847433,
+    "description": null,
+    "contactInfo": "+7 (963) 183-15-26",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rockykrsk",
+      "https://www.instagram.com/climbingrocky/"
+    ],
+    "website": "https://rockyclimbing.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Чт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Пт",
+        "from": "16:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/72301594_696351170772833_8847199116753544949_n.jpg",
+      "https://maps.climbingpro.ru/media/photo/75443169_1081094092282453_8310178985751019161_n.jpg",
+      "https://maps.climbingpro.ru/media/photo/88856876_3362613103754137_5726324071442688083_n.jpg",
+      "https://maps.climbingpro.ru/media/photo/92290319_903476110086707_211433752556161987_n.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Спутник",
+    "city": "Красноярск",
+    "address": "Красноярск, проспект Красноярский рабочий, 62",
+    "latitude": 56.012385,
+    "longitude": 92.970646,
+    "description": "Скалодром «Спутник» города Красноярск оборудован для занятий боулдерингом всех желающих на территории, общая площадь которой составляет около 130-ти кв. метров. Максимальная высота потолка составляет 4,5метра.\r\nЗанятия скалолазанием здесь проводятся только по предварительной договоренности (4 дня в неделю) и под руководством тренера или инструктора. Снаряжение не выдается на прокат или в аренду, поэтому все необходимое для тренировок нужно иметь при себе. Для удобства посетителей имеется возможность пробного занятия.",
+    "contactInfo": "+7 (923) 281-26-95",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club3737832"
+    ],
+    "website": "https://vk.com/club3737832",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Ср",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Пт",
+        "from": "19:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/x_b6fe7550-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_c5be7b38-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_c8a6d043-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_ea346a38-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 4,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Боулдеринг клуб «Скала»",
+    "city": "Красноярск",
+    "address": "Красноярск, ул. Телевизорная, 1",
+    "latitude": 56.023344,
+    "longitude": 92.801889,
+    "description": null,
+    "contactInfo": "+7 (902) 929-27-28",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": 180,
+    "maxHeight": 4.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

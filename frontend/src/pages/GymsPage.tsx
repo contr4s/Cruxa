@@ -1,5 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, ToggleButtonGroup, ToggleButton, useTheme } from '@mui/material';
+import { FormatListBulleted, Map } from '@mui/icons-material';
+import { useSnackbar } from 'notistack';
 import { useInfiniteGyms, useToggleFavorite, useCities } from '../services/hooks/useGyms';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
@@ -10,9 +12,12 @@ import { GymSort } from '../components/gyms/GymSort';
 import type { FilterConfig } from '../components/gyms/GymFilters';
 
 export default function GymsPage() {
+  const theme = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
   const [city, setCity] = useState('all');
   const [sort, setSort] = useState('rating');
   const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
   const { data: citiesData } = useCities();
   const cityOptions = useMemo(() => [
@@ -59,9 +64,37 @@ export default function GymsPage() {
 
   return (
     <PageContainer sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
-        <GymFilters filters={filterConfig} />
-        <GymSort sort={sort} onSortChange={setSort} />
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, alignItems: 'center' }}>
+          <GymFilters filters={filterConfig} />
+          <GymSort sort={sort} onSortChange={setSort} />
+        </Box>
+        <ToggleButtonGroup
+          value={viewMode}
+          exclusive
+          onChange={(_, v) => {
+            if (v === 'map') { enqueueSnackbar('Карта — скоро', { variant: 'info' }); return; }
+            if (v) setViewMode(v);
+          }}
+          size="small"
+          sx={{
+            bgcolor: theme.custom?.surface2 ?? 'transparent',
+            '& .MuiToggleButton-root': {
+              border: `1px solid ${theme.palette.divider}`,
+              px: 1.5, py: 0.5,
+              fontSize: '0.78rem',
+              color: theme.palette.text.secondary,
+              '&.Mui-selected': {
+                bgcolor: theme.palette.primary.main,
+                color: '#fff',
+                '&:hover': { bgcolor: theme.palette.primary.dark },
+              },
+            },
+          }}
+        >
+          <ToggleButton value="list"><FormatListBulleted sx={{ fontSize: 16, mr: 0.5 }} /> Список</ToggleButton>
+          <ToggleButton value="map"><Map sx={{ fontSize: 16, mr: 0.5 }} /> Карта</ToggleButton>
+        </ToggleButtonGroup>
       </Box>
 
       {isLoading && (

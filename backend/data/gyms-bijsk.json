@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Скалолазный центр «Грани»",
+    "city": "Бийск",
+    "address": "Бийск, ул. Ленина, 117",
+    "latitude": 52.547228,
+    "longitude": 85.229414,
+    "description": "Скалолазный центр «Грани» предлагает жителям Бийска глубже окунуться в тему скалолазания. Помимо того, что здесь расположен боулдеринговый зал высотой 3.3 м и общей площадью 41 кв.м, на территории действует школа скалолазания, учащимися которой могут стать дети и подростки в возрасте от 5 до 18 лет. За время обучения в школе профессиональные тренера рассказывают обо всех нюансах лазания по скалам, и спустя время выезжают с учениками лазать по настоящим скалам. Для этого школа бесплатно предоставляет веревки, карабины и системы. Кроме того, тем, кто начал заниматься скалолазанием недавно, центр «Грани» предлагает обзавестись необходимым снаряжением для туризма в собственном оборудованном магазине.",
+    "contactInfo": "+7 (385) 499-99-17",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/grani_climbing_school",
+      "https://www.instagram.com/granibiysk/"
+    ],
+    "website": "http://www.4506.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/9FfWZ2HEqPs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/40c2SzUtIxw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/93ym5XVEDVE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/yZJgrqn2jsY-min.jpg"
+    ],
+    "wallArea": 41,
+    "maxHeight": 3.3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

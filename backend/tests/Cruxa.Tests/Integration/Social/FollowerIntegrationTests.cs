@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Cruxa.Application.Features.Users.DTOs;
 
 namespace Cruxa.Tests.Integration.Social;
 
@@ -76,7 +77,7 @@ public class FollowerIntegrationTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task GetFollowers_ReturnsListOfFollowerIds()
+    public async Task GetFollowers_ReturnsListOfFollowers()
     {
         var target = await ActAsNewUserAsync();
         ClearToken();
@@ -88,14 +89,14 @@ public class FollowerIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync($"/api/users/{target.User.Id}/followers");
         response.EnsureSuccessStatusCode();
-        var followers = await DeserializeAsync<List<Guid>>(response);
+        var followers = await DeserializeAsync<List<UserDto>>(response);
 
         followers.Should().NotBeEmpty();
-        followers.Should().Contain(follower.User.Id);
+        followers.Should().Contain(u => u.Id == follower.User.Id);
     }
 
     [Fact]
-    public async Task GetFollowing_ReturnsListOfFolloweeIds()
+    public async Task GetFollowing_ReturnsListOfFollowees()
     {
         var target1 = await ActAsNewUserAsync();
         ClearToken();
@@ -111,11 +112,11 @@ public class FollowerIntegrationTests : IntegrationTestBase
         ClearToken();
         var followingResponse = await Client.GetAsync($"/api/users/{mainAuth.User.Id}/following");
         followingResponse.EnsureSuccessStatusCode();
-        var following = await DeserializeAsync<List<Guid>>(followingResponse);
+        var following = await DeserializeAsync<List<UserDto>>(followingResponse);
 
         following.Should().NotBeEmpty();
-        following.Should().Contain(target1.User.Id);
-        following.Should().Contain(target2.User.Id);
+        following.Should().Contain(u => u.Id == target1.User.Id);
+        following.Should().Contain(u => u.Id == target2.User.Id);
     }
 
     [Fact]

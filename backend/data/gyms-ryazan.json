@@ -1,0 +1,111 @@
+[
+  {
+    "name": "Геккон",
+    "city": "Рязань",
+    "address": "г. Рязань, ул. Высоковольтная, 54",
+    "latitude": 54.617216,
+    "longitude": 39.691746,
+    "description": "Специализированный центр скалолазания «Геккон» предоставляет всем желающим возможность заниматься самостоятельно, с тренером или в группах на 3-х замечательных скалодромах. Площадь для лазания боулдерингового модуля - более 120 кв. метров, его максимальная высота – 5 метров. Скалодром для лазания с веревкой порадует посетителей общей площадью в 115 кв. метров, а также приличной высотой, которая достигает 8,5 метров.\r\nНовичкам регулярно доступны вертикальные стенки и поверхности с отрицательным углом. Юные любители скалолазания смогут испытать свои силы на специальной детской стенке, где их ждут удобные, яркие зацепы и умеренная высота – 8 метров.",
+    "contactInfo": "+7 (4912) 99-40-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/ksgekkon/",
+      "https://vk.com/ksgekkon",
+      "https://www.facebook.com/klubgekkon",
+      "https://www.youtube.com/channel/UCH-FGJQixnOe3CYFNuLYq3g"
+    ],
+    "website": "http://www.ksgekkon.ru",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое самостоятельное занятие",
+        "price": "350 руб"
+      },
+      {
+        "name": "Разовое занятие с инструктором",
+        "price": "600 руб"
+      },
+      {
+        "name": "Разовое занятие в школе скалолазания",
+        "price": "700 руб"
+      },
+      {
+        "name": "Абонемент на самостоятельные занятия",
+        "price": "2850 руб"
+      },
+      {
+        "name": "Абонемент на 6 занятий с инструктором",
+        "price": "3400 руб"
+      },
+      {
+        "name": "Абонемент в школу скалолазания",
+        "price": "3950 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Q8ta9C44yNI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-w7fCJo0bHo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/l91ytayo0zQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-dlnWcnJTyE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/anrjXvSqXno-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Fs2iNi99Dzs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/rbdWr3q6Wcc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/My_qsPQw-j8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OOYqwYOXlWg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3OR_D_2dAqk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WlHFj-ZTEvY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dXozA57jZK8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/X-Eg59-MQ_U-min.jpg"
+    ],
+    "wallArea": 250,
+    "maxHeight": null,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Fit Elit",
+    "city": "Рязань",
+    "address": "Рязань, ул. Татарская, 21",
+    "latitude": 54.620178,
+    "longitude": 39.727041,
+    "description": "Не особенно большой, но высокий скалодром фитнес-зала. Есть рельеф с имитацией скалы и обычный. По сложности в целом не очень тяжело, скалодром скорее рассчитан на любителей и скалолазов среднего уровня. Сильных нависаний на нем нет, преимущественно вертикальные стены, иногда идут с небольшим отрицательным наклоном. Лазать можно с верхней и нижней страховкой.\rПо меркам фитнес-зала скалодром неплохой. Я сюда одновременно хожу с тренажеркой, поэтому пользуюсь клубной картой. Но и вне клубной программы посещать скалодром не воспрещается, но там идет оплата либо за каждое посещение, либо за блок из нескольких посещений (лимитированный абонемент).",
+    "contactInfo": "+7 (491) 250-35-03",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/fitelit",
+      "https://www.instagram.com/fitelit/",
+      "https://www.facebook.com/pages/Fit-%D0%95lit/235237139996125?rf=494618800614316"
+    ],
+    "website": "http://fit-elit.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "7:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "8:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/XDveb3n9H1w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_14-58-49.935-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-27_15-1-37.574-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9.4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

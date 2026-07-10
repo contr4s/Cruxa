@@ -1,4 +1,3 @@
-using Bogus;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.ValueObjects;
 using Cruxa.Infrastructure.Persistence;
@@ -7,92 +6,75 @@ namespace Cruxa.Seeder.Generators;
 
 public static class GymGenerator
 {
+    public static readonly string[] SelectedGymNames =
+    [
+        "ЦСКА",
+        "ТОКИО",
+        "RedPoint",
+        "Limestone",
+        "МГТУ им. Баумана",
+        "RockZona",
+        "Экстрим",
+        "Соколиная скала",
+        "Луч",
+        "Северная стена",
+        "Трамонтана",
+        "Igels Club",
+        "Неолит",
+    ];
+
     /// <summary>
-    /// 10 залов: первые 5 из реальных данных парсера (Москва), остальные 5 синтетические (СПб).
+    /// Создаёт все залы из данных парсера. Только выбранные (SelectedGymNames) будут наполнены трассами.
     /// </summary>
     public static List<Gym> Generate(string gymsDataDir)
     {
-        var gyms = new List<Gym>();
+        var allParsed = new List<ParsedGym>();
 
-        // Load real Moscow gyms from parser data
-        var moscowFile = Path.Combine(gymsDataDir, "gyms-moskva.json");
-        if (File.Exists(moscowFile))
+        foreach (var file in Directory.GetFiles(gymsDataDir, "gyms-*.json"))
         {
-            var json = File.ReadAllText(moscowFile);
-            var parsed = System.Text.Json.JsonSerializer.Deserialize<List<ParsedGym>>(json);
-            if (parsed is not null)
-            {
-                foreach (var p in parsed.Take(5))
-                {
-                    var name = p.Name ?? $"Москва Gym #{gyms.Count + 1}";
-                    var result = Gym.Create(
-                        name,
-                        p.City ?? "Москва",
-                        p.Address ?? "ул. Центральная, 1",
-                        p.Latitude, p.Longitude);
-                    if (!result.IsSuccess) continue;
-                    var gym = result.Value;
-                    gym.Update(
-                        description: p.Description,
-                        contactInfo: p.ContactInfo,
-                        contactEmail: p.ContactEmail,
-                        socialLinks: p.SocialLinks,
-                        website: p.Website,
-                        prices: p.Prices,
-                        workingHours: p.WorkingHours,
-                        photoUrls: p.PhotoUrls,
-                        gradingSystemId: CruxaDbContext.DefaultGradingSystemId,
-                        wallArea: p.WallArea,
-                        maxHeight: p.MaxHeight,
-                        yearFounded: p.YearFounded,
-                        metroStations: p.MetroStations,
-                        tags: p.Tags);
-                    gym.MarkAsParsed();
-                    gyms.Add(gym);
-                }
-            }
+            var json = File.ReadAllText(file);
+            var parsed = System.Text.Json.JsonSerializer.Deserialize<List<ParsedGym>>(json,
+                new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            if (parsed is not null) allParsed.AddRange(parsed);
         }
 
-        // Generate synthetic SPb gyms
-        var faker = new Faker("ru");
-        var spbPrefixes = new[] { "Скалодром", "Скалы", "Вертикаль", "База", "Стена" };
-        var spbSuffixes = new[] { "на Неве", "Спорт", "Про", "Экстрим", "Клуб" };
-        var spbStreets = new[] { "Невский пр.", "ул. Рубинштейна", "пр. Большевиков", "ул. Садовая", "Лиговский пр." };
+        var gyms = new List<Gym>();
+        var selected = new HashSet<string>(SelectedGymNames);
 
-        while (gyms.Count < 10)
+        foreach (var p in allParsed)
         {
-            var idx = gyms.Count;
-            var name = $"{faker.PickRandom(spbPrefixes)} {faker.PickRandom(spbSuffixes)} #{idx + 1}";
-            var street = faker.PickRandom(spbStreets);
-            var lat = 59.9 + faker.Random.Double() * 0.1;
-            var lng = 30.3 + faker.Random.Double() * 0.1;
+            if (string.IsNullOrWhiteSpace(p.Name)) continue;
 
-            var result = Gym.Create(name, "Санкт-Петербург", $"{street}, {faker.Random.Int(1, 50)}", lat, lng);
+            var result = Gym.Create(
+                p.Name!,
+                p.City ?? "Город не указан",
+                p.Address ?? "Адрес не указан",
+                p.Latitude, p.Longitude);
             if (!result.IsSuccess) continue;
+
             var gym = result.Value;
             gym.Update(
-                description: $"Современный скалодром в Санкт-Петербурге. {faker.Lorem.Sentence(5)}",
-                contactInfo: $"+7 (812) {faker.Random.Int(100, 999)}-{faker.Random.Int(10, 99)}-{faker.Random.Int(10, 99)}",
-                website: $"https://gym{idx + 1}.ru",
-                prices: new List<PriceItem>
-                {
-                    new() { Name = "Разовое", Price = $"{faker.Random.Int(400, 800)} руб" },
-                    new() { Name = "Абонемент на месяц", Price = $"{faker.Random.Int(3000, 6000)} руб" },
-                },
-                workingHours: new List<WorkingHoursEntry>
-                {
-                    new() { Days = "пн-пт", From = new TimeOnly(8, 0), To = new TimeOnly(23, 0) },
-                    new() { Days = "сб-вс", From = new TimeOnly(9, 0), To = new TimeOnly(22, 0) },
-                },
-                photoUrls: new List<string>
-                {
-                    $"https://loremflickr.com/800/600/climbing,gym?random=gym{idx + 1}_a",
-                    $"https://loremflickr.com/800/600/climbing,bouldering?random=gym{idx + 1}_b",
-                    $"https://loremflickr.com/800/600/climbing,wall?random=gym{idx + 1}_c",
-                    $"https://loremflickr.com/800/600/climbing,competition?random=gym{idx + 1}_d",
-                },
-                gradingSystemId: CruxaDbContext.DefaultGradingSystemId);
-            gyms.Add(gym);
+                description: p.Description,
+                contactInfo: p.ContactInfo,
+                contactEmail: p.ContactEmail,
+                socialLinks: p.SocialLinks,
+                website: p.Website,
+                prices: p.Prices,
+                workingHours: p.WorkingHours,
+                photoUrls: p.PhotoUrls,
+                gradingSystemId: CruxaDbContext.DefaultGradingSystemId,
+                wallArea: p.WallArea,
+                maxHeight: p.MaxHeight,
+                yearFounded: p.YearFounded,
+                metroStations: p.MetroStations,
+                tags: p.Tags);
+            gym.MarkAsParsed();
+
+            // Помечаем отобранные залы (для наполнения трассами)
+            if (selected.Contains(p.Name!))
+                gyms.Insert(0, gym); // selected first
+            else
+                gyms.Add(gym);
         }
 
         return gyms;

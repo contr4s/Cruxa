@@ -1,0 +1,168 @@
+[
+  {
+    "name": "WoodRock",
+    "city": "Ставрополь",
+    "address": "г. Ставрополь, Объездная улица, 19А",
+    "latitude": 45.048144,
+    "longitude": 42.016685,
+    "description": "Скалодром «WoodRock» отличается наличием современно оборудованной зоны для занятий боулдерингом, площадь лазательной поверхности которой составляет боле 120 кв. метров, а угол наклона (от 0 до 45-ти градусов) порадует профессиональных скалолазов. Всем желающим предоставляется возможность посещения тренировочной зоны, где помимо традиционных фингер- и пегбордов имеются турники, шары и кольца.\r\nПомимо тренировок для детей и взрослых, на скалодроме можно провести празднование любого детского мероприятия, в активную развлекательную программу которого входит знакомство со скалолазанием, интересные конкурсы и подарки.",
+    "contactInfo": "8 (988) 111 96 26​",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/woodrockgym",
+      "https://www.instagram.com/woodrock_climbing/"
+    ],
+    "website": "https://woodrock-sport.ru",
+    "workingHours": [
+      {
+        "days": "Вт-Ср",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "14:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение для взрослых",
+        "price": "350 руб"
+      },
+      {
+        "name": "Абонемент на 8 посещений",
+        "price": "1500 руб"
+      },
+      {
+        "name": "Безлимитный абонемент",
+        "price": "2000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/D2u3jt8eh90-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/81HzBRfPF9Y-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VBjPlM5VFzw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fz32OoxQm4U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wL-NZn28CmQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eBpx0jW_zlY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wpVsmjSQFsA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GRD1opD8mpY-min.jpg"
+    ],
+    "wallArea": 120,
+    "maxHeight": 7,
+    "yearFounded": 2015,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "База Ставропольского МЧС",
+    "city": "Ставрополь",
+    "address": "Ставрополь, ул. Огородная, 6",
+    "latitude": 45.073477,
+    "longitude": 41.984669,
+    "description": "Базовый стенд без отделки \"под скалу\", сам невысокий, но занимает хорошую площадь. На стенде разнообразный рельеф, созданный за счет разных углов наклона. Если добавить к этому особую постановку зацепов, то получается несколько абсолютно отличающихся друг от друга трасс. Можно подниматься вертикально вверх, можно по плавно нарастающему углу, можно по резким обрывам. Страховка: веревка и маты, тут все стандартно.",
+    "contactInfo": "+7 (928) 636-10-23",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/par4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/МЧС2_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Скалодром_МЧС_display-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СТИС",
+    "city": "Ставрополь",
+    "address": "Ставрополь, проспект Кулакова, 41",
+    "latitude": 45.069397,
+    "longitude": 41.93086,
+    "description": "В тех. институте неплохой скалолазный зал. По крайней мере, он высокий и предполагает почти все варианты рельефа. Это благодаря ангарной конструкции зала. Одна из наиболее запоминающихся дорожек как раз имеет арочный тип, начинаясь на одной стороне зала и заканчиваясь на другой. Просто постепенно переходящие в более нависающие плоскости трассы. Изредка вставлены карнизы, рельефные зацепки. Стандартных зацепок много, тут тоже куча видов, щипки, мизеры, карманы и все остальное.",
+    "contactInfo": "+7 (928) 941-14-44",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/stav_alpinism"
+    ],
+    "website": "https://vk.com/stav_alpinism",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "18:30",
+        "to": "20:30"
+      },
+      {
+        "days": "Ср",
+        "from": "18:30",
+        "to": "20:30"
+      },
+      {
+        "days": "Пт",
+        "from": "18:30",
+        "to": "20:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5To_xMQHonY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9QGBOK5qW18-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/INj0Ql6TLVw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZB9i7Y0dNdk-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Скиф",
+    "city": "Ставрополь",
+    "address": "Ставрополь, Старомарьевское шоссе, 17",
+    "latitude": 45.053742,
+    "longitude": 42.02283,
+    "description": "Тут технически не один скалодром. 1-й находится в зале. У него высота где-то 6 метров, а площадь больше 70-ти квадратов. Он полностью занимает одну стенку и часть других по бокам. По рельефу простой, если бы не установленные карнизы по центру и нависания наверху. Также тут есть тренировочный щит на 10 квадратов. Это чисто тренировочная зона, типа кампусборд, фингерборд. Самое то для укрепления хвата, разминки, заминки и всего остального. Есть невысокий уличный скалодром.\rЕсли на 1-ом лазают со страховкой, так как и высота большая, и учить пользоваться снаряжением, и вязать узлы надо, то тут чистый боулдеринг. Высота вряд ли больше 4,5-5 метров, но зато наклон почти 45 градусов. Тут снизу просто лежат маты, что бы не было травм. Вот и весь скалодром, точнее, целый комплекс нашего альпклуба.",
+    "contactInfo": "+7 (918) 874-86-67",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/stavalp"
+    ],
+    "website": "http://www.skifalp.ru/",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "18:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-28_12-39-44.475-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-28_12-39-49.875-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-28_12-39-56.781-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-28_12-40-4.708-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

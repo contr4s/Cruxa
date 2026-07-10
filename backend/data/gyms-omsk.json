@@ -1,0 +1,298 @@
+[
+  {
+    "name": "Пиратский остров",
+    "city": "Омск",
+    "address": "Омск, ул. Граничная, 1а",
+    "latitude": 54.941058,
+    "longitude": 73.352788,
+    "description": "В Омске несколько лет назад открылся большой парк развлечений «Пиратский остров», который совместил в одном месте пляж, аквапарк, веревочный парк, яхт-клуб «Миллениум», теннисный центр, батуты, площадки с аттракционами, воллейбольную и меннисную площадки и небольшой скалодром под открытым небом. Он работает только в теплое время года, и позволяет всем посетителям парка лазать на скорость. На скалодроме работает инструктор и имеется необходимое страховочное оборудование, однако, при желании, можно лазать самостоятельно без помощи инструктора.",
+    "contactInfo": "+7 (381) 228-66-67",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/pir_ostrov"
+    ],
+    "website": "https://vk.com/pir_ostrov",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/GB1A5341-min-min.JPG",
+      "https://maps.climbingpro.ru/media/photo/jyqt9w6Xt2I-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СибГУФК",
+    "city": "Омск",
+    "address": "Омск, Старозагородная роща, 10",
+    "latitude": 55.00216,
+    "longitude": 73.334929,
+    "description": "Во Дворце Здоровья тренируются студенты СибГУФК, а также многие другие интересующиеся таким видом спорта, как скалолазание. Максимальная высота скалодрома 7 метров, а общая площадь составляет 450 кв. метров. На стенах много трасс разных цветов и сложностей, которые регулярно обновляются. В большей степени, скалодром предназначен для лазания на сложность, а наличие большого боулдериного зала позволяет тренироваться опытным спортсменам. Кроме того, во Дворце Здоровья базируется омская школа скалолазания, а также проводятся экскурсии для школьников, на которых дети узнают полезную информацию о скалолазании и пробуют себя в роли скалолаза.",
+    "contactInfo": "+7 (381) 238-47-38",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/omsk_climbing",
+      "https://www.instagram.com/omsk_climbing/"
+    ],
+    "website": "https://vk.com/omsk_climbing",
+    "workingHours": [
+      {
+        "days": "Пн-Чт",
+        "from": "16:30",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "16:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "13:30",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "12:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/cp8sO8uuCcY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/me6gAZNn2ZQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/SCPUfMj63Gk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vCcBuAMUsWc-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 7,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СК «Энергия»",
+    "city": "Омск",
+    "address": "Омск, ул. Челюскинцев, 98/1",
+    "latitude": 55.009874,
+    "longitude": 73.404459,
+    "description": "СК \"Энергия\" - это скалодром в нашем городе, на базе которого летом работает детский лагерь. Именно туда мы отдали ребенка, чтобы и присмотреть было кому, и какое-то физическое развитие получил. Дети ходят в лагерь с 9-ти до 13-ти часов в будни. На скалодроме они занимаются скалолазанием. Скалодром очень высокий, достает до потолка. Поэтому дети занимаются со страховкой и обязательно под присмотром тренера. Часто они лазают без страховки, но только снизу, где высота небольшая, а весь пол покрыт мягкими толстыми матами. Их учат как работать с веревкой, правильно лазать, тренироваться и многому другому.\rНикаких негативных отзывов от своего сына мы с мужем не слышали, другие родители тоже рады тому, что дети заняты делом. И да, это совершенно безопасно. Пока ни одной травмы, максимум синяк от неудачного лазания по стенке.",
+    "contactInfo": "+7 (908) 314-16-20",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "19:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/6be485_cdaea29e8e9f4b89b9bdd775e80d74c1-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Скалодром_СК_Энергия_display-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Дворец здоровья «Зеленый Остров»",
+    "city": "Омск",
+    "address": "Омск, Старозагородная Роща, 10",
+    "latitude": 55.00216,
+    "longitude": 73.334929,
+    "description": "Как студент СибГУФКа посещаю скалодром Зеленого острова с большой регулярностью. В принципе, может быть условия и инвентарь далеки от того, что я видел в Москве и Питере, но по меркам Омска этот скалодром очень хороший. Единственное, не хватает высокого ровного стенда для эталонной скорости.\rВ остальном все необходимое для занятий скалолазанием в стандартных дисциплинах имеется. С инструкторами знаком лично, они отличные специалисты в своем деле. Причем не только сами компетентные скалолазы, но и достойные педагоги.",
+    "contactInfo": "+7 (381) 225-72-91",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://dz-omsk.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "16:30",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-26_16-31-52.674-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-26_16-32-2.20-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-26_16-32-9.895-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Climbers Garden",
+    "city": "Омск",
+    "address": "г. Омск, ул. 7-я Линия, 132",
+    "latitude": 54.970127,
+    "longitude": 73.407504,
+    "description": "Скалодром «Climbers Garden», основанный в июне 2018-го года, является первым боулдеринговым залом в Омске. Данный вид скалолазания считается одним из самых доступных, так как не требует особой экипировки, а также доступен людям любого возраста и физической формы.\r\nСамостоятельное лазание на скалодроме без тренера является неограниченным по времени. Имеется возможность посещения индивидуальных занятий с инструктором по предварительно разработанной программе. Детские групповые тренировки проводятся для детей в возрасте от 5-ти до 15-ти лет. На территории «Climbers Garden» регулярно проходят соревнования и фестивали по скалолазанию среди взрослых и детей разного возраста и уровня подготовки.",
+    "contactInfo": "+7 (38129) 0-70-04",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbers_garden",
+      "https://www.youtube.com/channel/UCShL6d7TIho35TEf-A0TkvA",
+      "https://www.instagram.com/climbers_garden/",
+      "https://www.facebook.com/climbers.garden.omsk/"
+    ],
+    "website": "https://climbers-garden.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "7:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Первая тренировка",
+        "price": "500 руб"
+      },
+      {
+        "name": "Разовая тренировка в группе (взрослые)",
+        "price": "400 руб"
+      },
+      {
+        "name": "Разовая тренировка в группе (дети)",
+        "price": "300 руб"
+      },
+      {
+        "name": "Разовая самостоятельная тренировка",
+        "price": "250 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Абонемент детский на 5 занятий",
+        "price": "1400 руб"
+      },
+      {
+        "name": "Абонемент детский на 12 занятий",
+        "price": "3000 руб"
+      },
+      {
+        "name": "Абонемент взрослый на 12 занятий",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Абонемент взрослый на 5 занятий",
+        "price": "1800 руб"
+      },
+      {
+        "name": "Абонемент детский на 25 занятий",
+        "price": "5500 руб"
+      },
+      {
+        "name": "Абонемент взрослый на 25 занятий",
+        "price": "7500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/MVzLUJPccik-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/aaEKfnwUACw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/0rZP1gr7Ers-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vAhwCmS2f_c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/14Kz7X3fFz0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/G9D-lHiNkHY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/fkkgl7mIxIQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/s4jWf5HrkQY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5TvJPY-63b8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Fyy3GWuVoQ4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uW5k54_tuao-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HtPNxrzqyc0-min.jpg"
+    ],
+    "wallArea": 500,
+    "maxHeight": null,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Азовская станция туристов",
+    "city": "Омск",
+    "address": "Омская область, Азовский немецкий национальный район село Азово, улица Советская, 58В",
+    "latitude": 54.704935,
+    "longitude": 73.032494,
+    "description": "До Омска лазил в Азово на местном скалодроме. Он не супер, но по сельским меркам достаточно хороший. Как минимум здесь разнообразный рельеф, а не только тупо вертикальная стенка. Участки с наклонами разного угла, небольшое число зацепов, лезешь под верхней страховкой. Достаточно неплохо. Сейчас в Омске занимаюсь в Климберс Гарден, тут больше по боулдерингу, но все равно другой уровень. Но когда жил в Азове, не жаловался и все устраивало. Всем местным однозначно рекомендую, не пожалеете.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://dodtur.azov.obr55.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/image-6--min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IMG-20190213-WA0021-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Станция юных туристов",
+    "city": "Омск",
+    "address": "Омск, ул. Челюскинцев, 81а",
+    "latitude": 55.00674,
+    "longitude": 73.39774,
+    "description": "Сюда ходил сын, пока не отдали его на другой скалодром. Инициатором был он сам, просто стало неинтересно лазать на такой высоте. Его интересовало в больше степени скалолазание, а то, что мы видим здесь - стенка с зацепками в комнате, где до потолка меньше 3-х метров.\rСвои преимущества тоже есть. Во-первых, безопасность. Тут работают профи, всему учат как следует. Во-вторых, научили работать с веревкой. Я слышал, что на невысоких скалодромах учат лазать без страховки. Но тут всему научили. В-третьих, для начинающего спортсмена крутой и высокий скалодром не нужен. Вот когда научится и сам захочет чего-то большего, тогда и можно менять (как было в нашем случае). Так что этот скалодром все равно заслуживает положительно оценки.",
+    "contactInfo": "8 (381) 278-47-70",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/10dd9003b512dc95d62ec7d7dbcfbf73-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/skalolazanie_omsk2-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 3,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Первое президентсткое училище в г. Оренбурге",
+    "city": "Омск",
+    "address": "Оренбург, ул. Пушкинская, 63",
+    "latitude": 51.763567,
+    "longitude": 55.111194,
+    "description": "Небольшой боулдеринговый зал комнатного формата со стандартной высотой потолков. Добрый десяток сантиметров можно убрать сразу из-за раскиданных матов. Рельеф простейший, зацепок мало, но хорошо что хотя бы они разнообразные. Ничего примечательного на скалодроме нет, в нашем городе есть места намного лучше для скалолазания.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-26_16-56-15.552-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-26_16-56-21.118-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 2.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

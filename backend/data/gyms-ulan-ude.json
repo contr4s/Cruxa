@@ -1,0 +1,90 @@
+[
+  {
+    "name": "СОШ №26",
+    "city": "Улан-Удэ",
+    "address": "ул. Революции 1905 года, 100",
+    "latitude": 51.850817,
+    "longitude": 107.571584,
+    "description": "Для любителей такого экстремального развлечения как скалолазание в Улан-Удэ построили несколько скалодромов в разных местах. Один из них расположился в средней образовательной школе №26. Здесь создали все необходимые условия для того, чтобы любой желающий мог испытать на себе трудности скалолазания. Высота скалодрома 6 метров, она позволяет тренироваться по двум дисциплинам: трудность и скорость. Благодаря качественным зацепам, на стенах можно моделировать сложность как для новичка, так и для профессионала. Те, кто посещает скалодром регулярно и давно, могут составлять новые трассы. На базе школы существует секция по скалолазанию, занятия проходят 3 раза в неделю.",
+    "contactInfo": "+7 (924) 45 781 77",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club13801777"
+    ],
+    "website": "http://sport2uu.ru",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Y0S0pG-zaU8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/oKR1t5PCyDs-min.jpg"
+    ],
+    "wallArea": 80,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Байкальский колледж туризма и сервиса",
+    "city": "Улан-Удэ",
+    "address": "Улан-Удэ, ул. Шумяцкого, 4",
+    "latitude": 51.810638,
+    "longitude": 107.669465,
+    "description": "В спортивном зале колледжа расположены две зоны для скалолазания, каждая из которых предназначена для определенных целей и вида лазания. Новичкам доступна стена для высотного скалолазания, где можно побороть страх высоты и проверить свою выдержку, а более опытные ребята могут попробовать себя на более сложном рельефе в зале боулдеринга. Высота всех стен не более 4-х метров, в зале могут заниматься одновременно больше 10-ти человек. На полу лежат смягчающие толстые маты, благодаря которым падать не страшно. Поэтому разрешается передвигаться как со страховкой, так и без нее. Разовое посещение стоит 100 рублей, для постоянных посетителей доступны абонементы.",
+    "contactInfo": "+7 (924) 457-82-77",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club13801777"
+    ],
+    "website": "https://vk.com/club13801777",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/F6ifwFu7gz0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KHNmU0UoYh0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WO_bPWHxJVU-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "УОР (Училище олимпийского резерва)",
+    "city": "Улан-Удэ",
+    "address": "Улан-Удэ, ул. Гвардейская, 1",
+    "latitude": 51.850283,
+    "longitude": 107.615782,
+    "description": null,
+    "contactInfo": "+7 (3012) 442410",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rmc_rb"
+    ],
+    "website": "http://rmcrb.ru",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "17:00",
+        "to": "19:00"
+      },
+      {
+        "days": "Чт",
+        "from": "17:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/m8Dr_hdL5T0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xNxh6C55Lh0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/N42I7PvGbq4-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

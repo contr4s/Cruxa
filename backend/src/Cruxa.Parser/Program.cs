@@ -55,12 +55,24 @@ switch (command)
     {
         var scrape = host.Services.GetRequiredService<ScrapeCommand>();
         var config = host.Services.GetRequiredService<IConfiguration>();
-        var cities = config.GetSection("Scrape:Cities").Get<Dictionary<string, string>>()
+        var client = host.Services.GetRequiredService<IClimbingProClient>();
+
+        Dictionary<string, string> cities;
+        if (argsList.Contains("--all"))
+        {
+            cities = await client.GetAllCitiesAsync();
+            Console.WriteLine($"Found {cities.Count} cities, starting scrape...");
+        }
+        else
+        {
+            cities = config.GetSection("Scrape:Cities").Get<Dictionary<string, string>>()
                      ?? new Dictionary<string, string>
                      {
                          ["Москва"] = "moskva",
                          ["Санкт-Петербург"] = "spb"
                      };
+        }
+
         var outputDir = config["Scrape:OutputDir"] ?? "data";
         if (!Path.IsPathRooted(outputDir))
         {

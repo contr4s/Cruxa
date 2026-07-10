@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Свобода",
+    "city": "Астрахань",
+    "address": "Астрахань, ул. Николая Островского, дом 148 Б",
+    "latitude": 46.33448,
+    "longitude": 48.063425,
+    "description": "«Свобода» предлагает посетителям скалодрома обучиться азам скалолазани на общей площади поверхности в более 200 кв. метров. Каждый, независимо от уровня физической подготовки, найдет подходящую для него трассу, так как здесь они представлены различной сложности. Высота стен скалолазного центра составляет 6 метров.\r\nИмеется возможность записаться на пробное (разовое) занятие с инструктором и самостоятельно, есть безлимитный абонемент сроком на 1 месяц, а также представлена возможность посещать групповые занятия. Обучение ведется для детей от 5-ти до 18-ти лет и для взрослых без возрастных ограничений.",
+    "contactInfo": "+7 (927) 577-66-60",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/svoboda30",
+      "https://www.instagram.com/astra_climbing/",
+      "https://www.youtube.com/channel/UC7oIlzq17yWbyGTUvWenRMQ"
+    ],
+    "website": "https://vk.com/svoboda30",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "12:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/свобода-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/свобода-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/свобода-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/свобода-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/свобода-07-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5jgBBS624yw-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  }
+]

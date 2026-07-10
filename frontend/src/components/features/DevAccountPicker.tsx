@@ -3,6 +3,10 @@ import { getDevAccounts, devLogin, type DevAccountDto } from '../../services/dev
 import { useAuthStore } from '../../stores/authStore';
 import { useNavigate } from 'react-router-dom';
 
+function roleRoute(role?: string | null): string | undefined {
+  return { Routesetter: '/routesetter', GymAdmin: '/gym-admin', Admin: '/admin' }[role ?? ''];
+}
+
 interface GroupedAccounts {
   Climber: DevAccountDto[];
   Routesetter: DevAccountDto[];
@@ -47,7 +51,7 @@ export default function DevAccountPicker() {
     const state = useAuthStore.getState();
     setLoading(false);
     if (!state.error) {
-      navigate('/feed', { replace: true });
+      navigate(roleRoute(state.role) || '/feed', { replace: true });
     } else {
       setError(state.error);
     }
@@ -71,7 +75,7 @@ export default function DevAccountPicker() {
         isLoading: false,
         error: null,
       });
-      navigate('/feed', { replace: true });
+      navigate(roleRoute(res.user.role) || '/feed', { replace: true });
     } catch {
       // Fallback: form-fill with password=username
       await handleLogin(account.email, account.username);

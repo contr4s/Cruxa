@@ -1,0 +1,141 @@
+[
+  {
+    "name": "ОнСайт",
+    "city": "Сочи",
+    "address": "г. Сочи, ул. Гагарина 76/4",
+    "latitude": 43.6097,
+    "longitude": 39.732458,
+    "description": "Скалодром «Онсайт», начавший свою работу для всех желающих в 2017-ом году, предоставляет возможность посещения самостоятельных, групповых и индивидуальных тренировок под чутким руководством инструктора. Для детей функционирует детская школа скалолазания, к занятиям в которой допускаются дети в возрасте от 6-ти лет.\r\nЗдесь каждый посетитель имеет возможность стать участником соревнований и фестивалей по скалолазанию, которые проводятся на территории скалодрома на регулярной основе. В теплое время года организовываются коллективные выезды на скалы при участии профессиональных тренеров «Онсайт».",
+    "contactInfo": "+7 (862) 291-09-14",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodrom_onsight_sochi"
+    ],
+    "website": "https://vk.com/skalodrom_onsight_sochi",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вт",
+        "from": "16:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Чт",
+        "from": "16:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение",
+        "price": "400 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/txI8lb-gUtU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/90zqVutx_bA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tMDtdwV4fLE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/cZbGU9E68Dg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hQpc6pvreN4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/RKXlHqYKM1c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ei4KOAyknnc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GKhnpmW53VA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OW2P-5cH7ZM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HXZK0Noj8ek-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vJCXm1uy_BA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BaRUQroPWeU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/_qosK3cw3_s-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Парк приключений Скайпарк",
+    "city": "Сочи",
+    "address": "Сочи, ул. Краснофлотская, 54А",
+    "latitude": 43.524942,
+    "longitude": 39.997254,
+    "description": "Скалодром в парке приключений \"Скайпарк\" - это 90 кв. м. скалолазной поверхности, предназначенной для соревнований на скорость в рекордном формате. 15-ти метровый спортивный объект был возведен французской компанией Энтре-Прис, мировым лидером по установке эталонных стенок. За электронику скалодрома отвечает фирма Depron, которая укомплектовала комплекс своим таймингом. При скалодроме круглый год работает тренировочная база, на которой опытные инструкторы занимаются как с профессионалами, так и с новичками любителями.",
+    "contactInfo": "8 (800) 100 4 207",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skyparkajhackettsochi",
+      "https://www.instagram.com/skyparkajhackettsochi/",
+      "https://www.facebook.com/skyparkajhackettsochi/",
+      "https://twitter.com/AJHackettINT",
+      "https://www.youtube.com/user/AJHackettINT"
+    ],
+    "website": "https://www.ajhackett.com/sochi/",
+    "workingHours": [
+      {
+        "days": "Чт",
+        "from": "15:00",
+        "to": "18:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "15:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/0-rPeJStU_k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5E-uC5wGYD8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KDINQ3yKQdk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZCu8b4ylsvk-min.jpg"
+    ],
+    "wallArea": 90,
+    "maxHeight": 15,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Фитнес-центр «Valentin»",
+    "city": "Сочи",
+    "address": "Сочи, ул. Учительская, 3",
+    "latitude": 43.572868,
+    "longitude": 39.735045,
+    "description": "Скалодром фитнес-центра \"Valentin\" - это 100 кв. м. панелей, приближенно напоминающих естественный скальный рельеф. На данном скалодроме установлено большое количество маршрутов разного уровня сложности, благодаря этому здесь понравится заниматься и профессионалам и новичкам. Максимальная высота стены здесь 6,5 м. и она имеет разные углы наклона: наклонные для новичков и детей, вертикальные и нависающие для профессионалов. В фитнес-центре имеется прокат, где можно арендовать все необходимое снаряжение и страховочное оборудование.",
+    "contactInfo": "+7 (862) 290-60-90",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/public62216923",
+      "https://www.facebook.com/groups/fit.valentin/",
+      "https://www.instagram.com/valentinsport/"
+    ],
+    "website": "http://www.sochi-fitness.com/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "8:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4mrjORZyOWA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/azGX6j5wjjM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iukUyeUaWhg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tQQgu-8utkA-min.jpg"
+    ],
+    "wallArea": 100,
+    "maxHeight": 6.5,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  }
+]

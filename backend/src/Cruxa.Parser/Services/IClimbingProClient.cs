@@ -10,9 +10,10 @@ public interface IClimbingProClient
     /// <summary>
     /// Scrapes all gyms for a given city from climbingpro.ru.
     /// </summary>
-    /// <param name="city">City display name (e.g. "Москва").</param>
-    /// <param name="citySlug">City slug in URL (e.g. "moskva").</param>
-    /// <param name="ct">Cancellation token.</param>
-    /// <returns>List of parsed gyms.</returns>
     Task<List<ParsedGym>> ScrapeCityAsync(string city, string citySlug, CancellationToken ct = default);
+
+    /// <summary>
+    /// Returns all available city names and slugs from climbingpro.ru.
+    /// </summary>
+    Task<Dictionary<string, string>> GetAllCitiesAsync(CancellationToken ct = default);
 }

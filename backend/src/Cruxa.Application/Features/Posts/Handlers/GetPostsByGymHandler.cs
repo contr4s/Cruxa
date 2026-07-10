@@ -3,6 +3,7 @@ using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Posts.DTOs;
 using Cruxa.Domain.Common;
+using Cruxa.Domain.Enums;
 
 namespace Cruxa.Application.Features.Posts.Handlers;
 
@@ -15,7 +16,9 @@ public sealed class GetPostsByGymHandler : IRequestHandler<GetPostsByGymQuery, R
     public async Task<Result<IEnumerable<PostDto>>> Handle(GetPostsByGymQuery request, CancellationToken ct)
     {
         var posts = await _repository.GetByGymIdAsync(request.GymId);
-        var dtos = posts.Select(GetPostByIdHandler.MapToDto);
+        var dtos = posts
+            .Where(p => p.Status == PostStatus.Published)
+            .Select(GetPostByIdHandler.MapToDto);
         return Result.Success(dtos);
     }
 }

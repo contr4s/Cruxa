@@ -1,0 +1,348 @@
+[
+  {
+    "name": "Вверх",
+    "city": "Краснодар",
+    "address": "г. Краснодар, Новороссийская ул., 174, 3 этаж",
+    "latitude": 45.032095,
+    "longitude": 39.024711,
+    "description": "«Вверх» это современный общедоступный скалодром, разработкой и строительством которого занимались члены популярного клуба альпинистов «Стремление» и другие профессиональные спортсмены. Максимальная высота конструкции достигает 8-ми метров, а общая площадь зала составляет более 250 кв. метров.\r\nДля удобства посетителей здесь в свободном доступе имеются разнообразные тренажеры для скалолазания, веревочный парк и многофункциональный спортзал площадью около 30-ти кв. метров. Новичкам всегда доступна услуга вводного занятия под руководством квалифицированного тренера, скалолазам с опытом предоставляется возможность самостоятельного посещения скалодрома.",
+    "contactInfo": "+7 (988) 520-80-20",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/vverhskal",
+      "https://www.instagram.com/vverhclimb/"
+    ],
+    "website": "https://vk.com/vverhskal",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "11:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Самостоятельные посещения",
+        "price": "200 руб"
+      },
+      {
+        "name": "Занятия с тренером",
+        "price": "400 руб"
+      },
+      {
+        "name": "Абонемент на 10 посещений до 18",
+        "price": "001800 руб"
+      },
+      {
+        "name": "Абонемент на 10 посещений с 18",
+        "price": "003000 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 1 мес",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 3 мес",
+        "price": "7000 руб"
+      },
+      {
+        "name": "Безлимитный абонемент 6 мес",
+        "price": "12000 руб"
+      },
+      {
+        "name": "Вводный курс из 4-х занятий для взрослых",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Абонемент на 10 тренировок в группе",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка для взрослых",
+        "price": "1000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/CozbLA9ZYyk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Zpoxz466hlc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/NbHvUoJ5fSU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/91l4IYlwFrU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/G1mSUM5zjj0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JJkHGn6mhLE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ocuDECGTrOw-min.jpg"
+    ],
+    "wallArea": 250,
+    "maxHeight": 8,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Краснодарский клуб альпинистов «Стремление»",
+    "city": "Краснодар",
+    "address": "Краснодар, ул. Новороссийская, 174",
+    "latitude": null,
+    "longitude": null,
+    "description": "Краснодарский клуб альпинистов \"Стремление\", образовавшийся в 1992-ом году, не имеет собственного скалодрома, но активно занимается объединением всех любителей скалолазного спорта. Члены клуба организуют тренировочные процессы по скалолазанию и альпинизму для всех желающих, проводят спортивные состязания и открывают детские лагеря, а также устраивают восхождения на скалы и горы России, зарубежья. Помимо всего вышеперечисленного, участники «Стремления» известны еще и тем, что с давних времен практикуют строительство большого количества спортивных скалодромов на заказ.",
+    "contactInfo": "+7 (861) 945-54-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/stremleniekrd/?v=wall",
+      "https://www.youtube.com/channel/UC5sRJptGyA16-UpDt-I9Cuw/videos",
+      "https://www.instagram.com/stremlenieclub/",
+      "https://vk.com/club_stremlenie"
+    ],
+    "website": "https://www.stremlenie.name/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/hYXn-gkVrjY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/QUpp9UeWmpg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7L_GNNtlvPg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HDoFEIXVogI-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": 1992,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Fly Zone",
+    "city": "Краснодар",
+    "address": "Краснодар, ул. Стасова, 182/1",
+    "latitude": 45.026546,
+    "longitude": 39.046253,
+    "description": "Скалодром клуба \"Fly zone\" - это 200 кв. м. скалолазной поверхности, украшенной граффити в стиле стрит-арт. Плиты данного скалодрома имеют разные конфигурации, поэтому будут интересны как новичкам, так и профессионалам. Интересная деталь - арка с необычной геометрией и сложной конструкцией, которая поддастся далеко не каждому скалолазу. Здесь также имеется зона боулдеринга с маршрутами разного уровня сложности. Максимальная высота стены - 5 м. \r\nЗаниматься здесь может каждый желающий и проводятся тренировки для детей в возрасте от 7 лет.",
+    "contactInfo": "+7 (900) 252-00-05",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/flyzoneclimb"
+    ],
+    "website": "https://vk.com/flyzoneclimb",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "10:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/aYAIYe2XATk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/E2U1zLKBY6U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GgreTOnPSVk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-Z96VUsWc7g-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 5,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Gekko",
+    "city": "Краснодар",
+    "address": "Краснодар ул. Дзержинского, 100",
+    "latitude": 45.102209,
+    "longitude": 38.983856,
+    "description": "Скалолазный клуб \"Gekko\" - это, в первую очередь, сообщество энтузиастов, которые прилагают все свои силы на обучение скалолазанию детей и взрослых, а также трудятся над развитием и популяризацией скалолазания в регионе. Клуб располагает скалодромом площадью 150 кв. м. и максимальной высотой 12 м. Данный скалодром был построен болгарской компанией Walltopia, мировым производителем скалодромов и аттракционов для активных развлечений. Плиты данного скалодрома имеют разную конфигурацию, некоторые из них имитируют природный скальный рельеф, некоторые имеют отрицательный угол наклона, некоторые вертикальные. Клуб принимает к занятиям всех желающих в возрасте от 10 лет и предоставляет прокат всего необходимого снаряжения.",
+    "contactInfo": "+7 (918)958-61-81",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/gekkoclimbing",
+      "https://www.instagram.com/gekkokrasnodar/"
+    ],
+    "website": "https://vk.com/gekkoclimbing",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/ChB4iMMckLg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9ZbcDttldak-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gYpHZ_kxvhU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-5Gw0uZf7eA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pHQnLct-4w4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ynvwhqL7aXY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/EEklUMgIRHo-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 12,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Эль Капитан",
+    "city": "Краснодар",
+    "address": "Краснодар, ул. 1-го Мая, 304",
+    "latitude": 45.069276,
+    "longitude": 39.022007,
+    "description": "Краснодарский клуб \"Эль Капитан\" - это два скалодрома, рассчитанных на всех, желающих постигнуть азы скалолазного искусства. Один из скалодромов создан специально для детей, высота стены всего 2,5 м. Тренироваться здесь могут дети от 4 лет до 10 лет. На занятиях с детьми инструкторы в первую очередь делают акцент на развитие таких качеств как гибкость, пластичность и ловкость. \r\nВторой скалодром рассчитан на практически любой возраст - здесь занимаются как дети от 7 лет, так и ветераны скалолазного спорта, разменявшие не один десяток лет. Данный скалодром создан для занятий боулдерингом, его высота 4,5 м. Трассы скалодрома регулярно обновляются и имеют разные уровни сложности.",
+    "contactInfo": "+7 (918) 942-11-38",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/elcapitan_climb",
+      "https://www.facebook.com/climbingkrasnodar",
+      "https://www.instagram.com/elcapitan_climb/"
+    ],
+    "website": "http://www.el-capitan.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "14:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Однократное посещение с инструктором",
+        "price": "450 руб"
+      },
+      {
+        "name": "Курс из 10 занятий с инструктором",
+        "price": "5000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/6_SYVE2C4So-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dHei_y7y0N4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/e7sXXC27VmI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/n7MG_mpJBUg-min.jpg"
+    ],
+    "wallArea": 140,
+    "maxHeight": 5.2,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "База активного отдыха «Серфприют»",
+    "city": "Краснодар",
+    "address": "Краснодарский край, Должанская Коса, Азовское море",
+    "latitude": 46.22366,
+    "longitude": 38.109463,
+    "description": "Скалодром базы отдыха \"Серфприют\" - это стена на открытом воздухе высотой 10 м. Площадь скалолазного пространства здесь - 30 кв. м. Все тренировки проходят под наблюдением опытных инструкторов, которые помогут постигнуть азы скалолазного искусства. К тренировкам допускаются все желающие в возрасте от 16 лет. После освоения необходимых навыков есть возможность испытать свои силы на местных соревнованиях.\r\nТакже данный скалодром используется для тренировок спортивных команд, приезжающих на сборы на базу отдыха.",
+    "contactInfo": "+7 (861) 205-02-14",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/surf_shelter",
+      "https://www.facebook.com/surfshelter",
+      "https://www.instagram.com/surfshelters/"
+    ],
+    "website": "http://surf-shelter.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5892-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5894-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5895-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5898-min.jpg"
+    ],
+    "wallArea": 30,
+    "maxHeight": 10,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Спелеоклуб «Вершина»",
+    "city": "Краснодар",
+    "address": "Краснодар, ул. Рашпилевская, 134",
+    "latitude": 45.04561,
+    "longitude": 38.976139,
+    "description": "Спелеоклуб \"Вершина\" был создан на базе краснодарской школы №25 и ориентирован в первую очередь на детей. Организаторы школы дают своим воспитанникам не только теоретические знания о спелеологии, но и организовывают для них туристические походы с целью изучения пещер. Огромный пласт занятий в спелеоклубе занимает спортивная подготовка и основная часть тренировок проходит на скалодроме. Клуб организовал скалодром на воздухе - к кирпичной стене здания школы были прикреплены зацепы. Таким образом был создан 15-ти метровый скалодром, на котором может заниматься совершенно бесплатно каждый желающий. Также внутри школы имеется небольшой скалодром для занятий в плохую погоду.",
+    "contactInfo": "+7 (918) 443-19-47",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/southclimb"
+    ],
+    "website": "https://vk.com/southclimb",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/1_6.jpg",
+      "https://maps.climbingpro.ru/media/photo/2_6.jpg",
+      "https://maps.climbingpro.ru/media/photo/3_2.jpg"
+    ],
+    "wallArea": 34,
+    "maxHeight": 15,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Кадет",
+    "city": "Краснодар",
+    "address": "Краснодар, улица Северная",
+    "latitude": 45.040502,
+    "longitude": 38.974253,
+    "description": "Важно! Скалодром только для кадетов училища. \r\nСкалодром, под кодовым названием \"Кадет\", был построен в Краснодаре в 2012 г. местным клубом альпинистов \"Стремление\". Данный скалодром является частью спортивного комплекса нового кадетского корпуса. Однако, тренироваться здесь могут все желающие, а не только воспитанники кадетского училища. Площадь скалолазной поверхности - 50 кв. м., максимальная высота стены - 8 м. \"Кадет\" - это современный скалолазный комплекс, в котором есть зона боулдеринга, зона спортивного скалолазания.",
+    "contactInfo": "+7 (861) 945-54-54",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club_stremlenie",
+      "https://www.instagram.com/stremlenieclub/",
+      "https://www.youtube.com/channel/UC5sRJptGyA16-UpDt-I9Cuw",
+      "https://www.facebook.com/stremleniekrd/"
+    ],
+    "website": "https://www.stremlenie.name",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-22_14-12-59.177-min.jpg"
+    ],
+    "wallArea": 50,
+    "maxHeight": 8,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Спорткомплекс КИНГ",
+    "city": "Краснодар",
+    "address": "Краснодар, пос. Яблоновский, ул. Гагарина, 41/1",
+    "latitude": 44.980354,
+    "longitude": 38.936721,
+    "description": "Скалодром на территории спортивного комплекса «Кинг» в Яблоновском работает достаточно давно. В 2003 году его обновили, и закрутили на нем последний болт. С тех пор жители города имеют возможность заниматься таким экстремальным видом спорта, как скалолазание. Несмотря на то, что от Краснодара до поселка необходимо добираться на личном или общественном транспорте, и дорога занимает определенное время, на его территории уже больше 15 лет продолжают тренироваться сильнейшие спортсмены Краснодарского края. Высота стен достигает 6-ти метров, а общая площадь скалодрома 50 кв.метров.",
+    "contactInfo": "+7 (928) 206-13-00",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/krajsutur"
+    ],
+    "website": "https://vk.com/krajsutur",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/HbsJstzdXfY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/APvI6ES8osc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/A2YwKWgEXyg-min.jpg"
+    ],
+    "wallArea": 50,
+    "maxHeight": 6,
+    "yearFounded": 2003,
+    "metroStations": [],
+    "tags": []
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+    "name": "Манеж",
+    "city": "Тюмень",
+    "address": "Тюмень, Луначарского, 12",
+    "latitude": 57.165905,
+    "longitude": 65.509822,
+    "description": "Скалодром легкоатлетического манежа в Тюмени - это крупная скалолазная площадка. Его общая площадь превышает 1,3 тыс.кв.м, а максимальная высота достигает 15 м. Пространство позволяет вместить одновременно до 100 спортсменов. Благодаря уникальному искусственному рельефу RockTopia обеспечивается имитация настоящих скал - для лазания на некоторых участках не нужны зацепы, достаточно силы трения. Сами зацепы созданы мировым лидером скалолазного оборудования - болгарским производителем Walltopia. На скалодроме имеются 4 эталонные трассы длиной 15 м для лазания на скорость, также здесь можно заниматься боулдерингом и лазать на трудность. Кроме полноценной верхней страховки вся поверхность скалодрома застелена мягкими современными крэшпадами.",
+    "contactInfo": "+7 (922) 262-13-40",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodromlam"
+    ],
+    "website": "https://vk.com/skalodromlam",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "17:30",
+        "to": "20:30"
+      },
+      {
+        "days": "Чт",
+        "from": "17:30",
+        "to": "20:30"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Абонемент (12 занятий)",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Абонемент (8 занятий)",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Абонемент (4 занятия)",
+        "price": "1600 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/GhzXP6lMDrk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VePMaMfjs2U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9516Obs_nAY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eoIGYYWgaQw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/O8J1RsMR9Js-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-UAgbA1LZzg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/iN4eOVKCJcI-min.jpg"
+    ],
+    "wallArea": 1000,
+    "maxHeight": null,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СК Колос",
+    "city": "Тюмень",
+    "address": "Тюмень, Рощинское шоссе, 4/1",
+    "latitude": 57.164139,
+    "longitude": 65.432279,
+    "description": "Скалодром СК \"Колос\" находится на территории Сельхозакадемии Тюмени. Скалолазный стенд создан при помощи руководителей и спортсменов ТРФА на втором этаже балкона спортзала. Благодаря разным плоскостям и расстоянию между зацепами (и их типу) формируются трассы различной сложности. Здесь могут тренироваться и те, кто впервые пришел на скалодром, и те, кто неоднократно участвовал в соревнованиях по скалолазанию. На стенде выделен отдельный детский сектор, где проводятся тренировки для юных воспитанников. Также здесь занимаются профессионалы, лазая без страховки и имея лишь гимнастические маты под собой. Общая площадь скалолазной поверхности составляет 200 кв.м, а максимальная высота достигает 8 м.",
+    "contactInfo": "+7 (909) 737-53-76",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/trfatyumenregion"
+    ],
+    "website": "https://www.trfa.ru/about/trenirovki.html",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Вс",
+        "from": "18:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/2Cy8tuOhrFE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2Qk3odOTucM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/yGPrx4sU0xk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/DV6EuPoacYM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/27IoEFGjY6E-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5hlXRIEcJPI-min.jpg"
+    ],
+    "wallArea": 200,
+    "maxHeight": 7,
+    "yearFounded": 2008,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №13 (Тюмень)",
+    "city": "Тюмень",
+    "address": "Тюмень, ул. Игримская, 30",
+    "latitude": 57.181588,
+    "longitude": 65.616578,
+    "description": "Скалодром в 13-й школе сделали при поддержке ТРФА. Задумывали еще давно, обращались в федерацию, искали финансирование, закупали оборудование. Конечный результат, правда, на любителя. Причем в буквальном смысле. 2 стенки по 6 метров высотой и 3 метра шириной, чистая вертикаль для скорости. Стоит в спортзале, между стенками как раз баскетбольное кольцо.\rИз-за высоты дети должны использовать верхнюю страховку, но наметили промежуточных точек для нижней. Практической необходимости в них нет, т.к. рельеф не имеет нависаний, а значит, эффекта маятника не будет. Но для тренировки лазания с нижней страховкой не помешает. Лично я не считаю этот скалодром чем-то выдающимся, тем более когда есть скалодром на манеже. Но для школьников сойдет, лучше чем ничего.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/big_8b36baf4dd177e03e108a9b3962b43ba_0162-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/big_44f25c41bae030699dcd8be4335f7467_0163-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/big_db6f8fc0a493185db13b8a152e025111_0158-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

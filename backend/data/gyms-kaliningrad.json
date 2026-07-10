@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Дача",
+    "city": "Калининград",
+    "address": "Калининград (Кенигсберг), Садовое общество &quot;ЦБЗ-1&quot;, Баженова, 1",
+    "latitude": 54.705283,
+    "longitude": 20.561988,
+    "description": "Постоянно зависаю на \"Даче\", поэтому хожу по абонементу. Так намного выгоднее, ведь без него я за каждое посещение платил бы по 300 рублей, а с ним - почти вдвое дешевле. Зал крутой, просторный и огромный, а рельеф просто супер. Есть высокие вертикальные участки для скорости, есть очень много зон на трудность.\rНе знаю ни одного посетителя, кто бы оказался недоволен. Тут может быть только одна жалоба - на популярность, ведь посетителей много. Конечно, не всегда, но бывает так, что кому-то приходится сидеть и ждать. Еще часто бывают дети, но в основном ходят взрослые. Я сюда прихожу обычно в понедельник, среду или пятницу. Занимаюсь почти до закрытия.",
+    "contactInfo": "+7 (911) 468-70-13",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climb_da4a"
+    ],
+    "website": "https://vk.com/climb_da4a",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "21:30"
+      },
+      {
+        "days": "Вс",
+        "from": "11:15",
+        "to": "14:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5yrUFlXO4bw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/AndX3FOSVWo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/dWKtvYAGVBs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OBU2jSEgDYY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YHpQbMES258-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 12,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Baltrock",
+    "city": "Калининград",
+    "address": "Калининград, ул. Сергеева, 10",
+    "latitude": 54.717605,
+    "longitude": 20.518186,
+    "description": "Скалодром международного уровня и боулдеринговый центр «Baltrock», располагающийся на территории Дворца творчества детей и молодежи, порадует новичков и любителей скалолазного спорта обширной площадью лазательной поверхности в 600 кв. метров. Максимально возможная достижимая высота достигает отметки в 12 метров. Разнообразие рельефов и яркое художественное оформление скалодрома придется по душе не только юным, но и взрослым посетителям. Занятия в секции скалолазания во всех дисциплинах ежедневно проходят под руководством квалифицированных инструкторов и тренеров.",
+    "contactInfo": "+7 911 07 339 75",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/baltrock"
+    ],
+    "website": "https://vk.com/baltrock",
+    "workingHours": [
+      {
+        "days": "Пн-Вт",
+        "from": "19:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Чт-Пт",
+        "from": "19:30",
+        "to": "21:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Ey21KVu--X4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jI1HrPx1Uio-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/jKVJTtfYPho-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/VzSDySvnQwg-min.jpg"
+    ],
+    "wallArea": 600,
+    "maxHeight": 12,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "СШ №13",
+    "city": "Калининград",
+    "address": "Калининград ул. Свердлова, 27",
+    "latitude": 54.711234,
+    "longitude": 20.566695,
+    "description": "Скалодром МАОУ СШ №13 города Калининград порадует всех любителей скалолазания обширной площадью лазательной поверхности, которая составляет около 550 кв. метров. Максимальная высота достигает отметки в 12 метров. Скалодром занимает 2 стены спортивного зала школы, одна из которых была пристроена в 2009-ом году известной компанией «Walltopia».\r\nЗанятия для взрослых и детей в возрасте от 7-ми лет проходят под чутким руководством квалифицированных тренеров и инструкторов, имеющих огромный опыт в скалолазании. Здесь регулярно проходят как областные, так и всероссийские соревнования среди новичков и профессионалов.",
+    "contactInfo": "+7 (401) 233-09-32",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/westclimb"
+    ],
+    "website": "https://vk.com/westclimb",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4f0aec4046c16de63556c4a47ca1a5c0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9afdfea1fd645d962067ef4011be5749-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/a5269dee04f1cb727fbae353fb637395-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/d8532ed3fd0f88ed6bab32f23ef59174-min.jpg"
+    ],
+    "wallArea": 550,
+    "maxHeight": 12,
+    "yearFounded": 2009,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа будущего",
+    "city": "Калининград",
+    "address": "Калининградская область, пос. Большое Исаково, ул. Анны Бариновой 1",
+    "latitude": 54.721968,
+    "longitude": 20.607963,
+    "description": "Скалодром МБОУ СОШ «Школа будущего» поселка Большое Исаково, построенный при поддержке известного болгарского производителя «Walltopia» в 2010-ом году, располагается на территории одного из спортивных залов учебного заведения. Совокупная площадь лазательной поверхности составляет около 100 кв. метров, а максимальная высота стен достигает 10-ти метров.\r\nСамо сооружение оборудовано огромным количеством разнообразных зацепов, современных высокотехнологичных страховочных приспособлений и всех возможных видов страховок, а также карнизами с различным отрицательным углом наклона.",
+    "contactInfo": "+7 (401) 251-30-57",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.instagram.com/isakovo_shkola/",
+      "https://www.youtube.com/user/isakovoshkola",
+      "https://vk.com/club76930506"
+    ],
+    "website": "http://www.isakovo-shkola.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-21_10-43-40.579-min.jpg"
+    ],
+    "wallArea": 100,
+    "maxHeight": 10,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Амплитуда",
+    "city": "Калининград",
+    "address": "г. Калининград, ул. Генерал-лейтенанта Озерова 24А",
+    "latitude": 54.72451,
+    "longitude": 20.508134,
+    "description": "Скалодром «Амплитуда», располагаясь на территории спортивно-развлекательного центра, имеет высоту более 7-ми метров. Общая площадь лазательной поверхности составляет около 300 кв. метров. Занятия здесь проходят под чутким руководством квалифицированных тренеров, действующих спортсменов с огромным опытом в лазании на различных поверхностях.\r\nПроводить тренировки разрешается как в группах, так и самостоятельно. Также имеется возможность заниматься по индивидуальной программе с личным инструктором. Любое праздничное мероприятие с участием и детей, и взрослых можно весело провести на территории скалодрома.",
+    "contactInfo": "8 (4012) 90-18-50",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/batut_39",
+      "https://www.facebook.com/amplituda39",
+      "https://www.instagram.com/batut39/"
+    ],
+    "website": "https://vk.com/batut_39",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "10:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вход для взрослых",
+        "price": "400 руб"
+      },
+      {
+        "name": "Вход для детей",
+        "price": "300 руб"
+      },
+      {
+        "name": "Безлимитный скалодром",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Безлимитный скалодром",
+        "price": "4500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/NQU_8kFlmMU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ggu_6cOGxOQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ty8Usw4zSuA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/w8tMXi5gv1Y-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/00U3LvtFRMo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/J4jSXFkMtk4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XkxvHQX4Cdk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8mNsw3TDBqM-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 7,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  }
+]

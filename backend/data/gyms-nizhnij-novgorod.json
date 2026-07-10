@@ -1,0 +1,395 @@
+[
+  {
+    "name": "RockTrail",
+    "city": "Нижний Новгород",
+    "address": "г. Нижний Новгород, Московское шоссе 83Б",
+    "latitude": 56.31918,
+    "longitude": 43.91894,
+    "description": "Скалодром «RockTrail», построенный в 2018-ом году, предоставляет всем желающим возможность совершить восхождение по искусственному рельефы скалы. Здесь в Вашем распоряжении огромное количество разнообразных трасс, отличающихся друг от друга категорией сложности, замысловатый рельеф поверхности стен для боулдеринга и высота стен, достигающих 8,6 метров.\r\nЮным любителям скалолазания возрастом от 4-х лет предлагается посещение детской секции в сопровождении профессиональных тренеров и инструкторов. Регулярно в стенах скалодрома проводятся соревнования, а в летнее время года организовываются спортивные сборы и выезды на скалы.",
+    "contactInfo": "+79302883214",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/rocktrail",
+      "https://www.facebook.com/Скалодром-RockTrail-1431740673599137/"
+    ],
+    "website": "https://vk.com/rocktrail",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение, самостоятельные тренировки",
+        "price": "350 руб"
+      },
+      {
+        "name": "Занятия с инструктором",
+        "price": "900 руб"
+      },
+      {
+        "name": "Абонемент на 4 посещений (1 месяц)",
+        "price": "1300 руб"
+      },
+      {
+        "name": "Абонемент на 8 посещений (1 мес.)",
+        "price": "2000 руб"
+      },
+      {
+        "name": "Абонемент на 1 месяц безлимитный",
+        "price": "2950 руб"
+      },
+      {
+        "name": "Абонемент 3 месяца безлимитный (возможна заморозка на 2 недели)",
+        "price": "6300 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/EflxMzWFyk4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mScR40IYjms-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ucyhA4Mz1Yw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9EP1j-y_w4w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9_SOxdRd5fk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/FeWYMBYeWEY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tmlmZLrRD_c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/k8ToYgDfKLk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/2XzRBgDalrY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sNw0JrYPRt0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/7r6zNoEkevQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/v80wNQ9_M4s-min.jpg"
+    ],
+    "wallArea": 250,
+    "maxHeight": null,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Ладъ",
+    "city": "Нижний Новгород",
+    "address": "г. Нижний Новгород, просп. Гагарина, 25Г",
+    "latitude": 56.29547,
+    "longitude": 43.976001,
+    "description": "Скалодром «ЛадЪ», площадь которого составляет более 350 кв. метров, отлично подойдет и новичкам, и более опытным скалолазам. Профессиональные тренеры и инструкторы помогают всем желающим освоить основные принципы скалолазания и альпинизма или усовершенствовать уже имеющиеся навыки. Имеется возможность посещения групповых, индивидуальных (с тренером) или самостоятельных занятий.\r\nДля детей тренировки проходят в 4-х возрастных группах в соответствии с особенностями развития и уровнем физической подготовки. Есть услуга аренды снаряжения и проведения на территории скалодрома празднования детских, корпоративных и семейных мероприятий.",
+    "contactInfo": "8 (831) 216-40-20",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/centre_lad",
+      "https://facebook.com/climbinglad/",
+      "https://www.instagram.com/lad_climbing/",
+      "https://www.youtube.com/channel/UCqsNwTGVlxYPyKCfgOTeHmQ"
+    ],
+    "website": "http://www.centrlad.ru",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вводное занятие",
+        "price": "600 руб"
+      },
+      {
+        "name": "Персональная тренировка - 12 занятий",
+        "price": "9600 руб"
+      },
+      {
+        "name": "Персональная тренировка - 8 занятий",
+        "price": "6800 руб"
+      },
+      {
+        "name": "Персональная тренировка - 4 занятия",
+        "price": "3500 руб"
+      },
+      {
+        "name": "Начальный курс (4 занятия)",
+        "price": "3200 руб"
+      },
+      {
+        "name": "Детская школа (11-16) (8 занятий)",
+        "price": "3500 руб"
+      },
+      {
+        "name": "Детская школа (8-10 лет) (8 занятий)",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Персональное занятие с инструктором",
+        "price": "1000 руб"
+      },
+      {
+        "name": "Разовое самостоятельное занятие для взрослых",
+        "price": "400 руб"
+      },
+      {
+        "name": "Взрослая школа (8 занятий)",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Разовое посещение (утро будни)",
+        "price": "200 руб"
+      },
+      {
+        "name": "Разовое детское занятие",
+        "price": "300 руб"
+      },
+      {
+        "name": "Подготовительная группа (5-7 лет) (8 занятий)",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Абонемент на 20 занятий",
+        "price": "4000 руб"
+      },
+      {
+        "name": "Абонемент на 12 занятий",
+        "price": "3000 руб"
+      },
+      {
+        "name": "Абонемент на 8 занятий",
+        "price": "2400 руб"
+      },
+      {
+        "name": "Абонемент на 4 занятия",
+        "price": "1400 руб"
+      },
+      {
+        "name": "Утренний безлимит",
+        "price": "2000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/HFZVj5BI5kI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/EWPkWTouQcI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/FXEpSRrXjCQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZtGyJtdyOhM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IRAmPLpNyLU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/qKhey2dFFJM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/afO1FmHV6XI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/vQLPptWDAXE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/U0AXmejw0_M-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/4LnbIUgNedM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/mz0HDzrbFFM-min.jpg"
+    ],
+    "wallArea": 350,
+    "maxHeight": null,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Горнолыжный комплекс Хабарское",
+    "city": "Нижний Новгород",
+    "address": "Нижегородская обл., Богородский р-н, дер. Хабарское, ул.Нагорная, 1",
+    "latitude": 56.181424,
+    "longitude": 43.433337,
+    "description": "Высокий, но не особо большой скалодром. Учитывая, что располагается на территории горнолыжного спорткомплекса, то расценивать как настоящий профессиональный скалодром тяжело. Но в то же время и не аттракцион. Из минусов - под открытым небом, малая площадь и всего лишь 2 дорожки. Из плюсов - 18 метров высота, это реально круто. Последний раз там был, за час платил 350 рублей. Учитывая, что 18 метров - это выше обычной 5-ти этажки, то адреналина куча. Все под верхней страховкой, так что беспокоиться о безопасности не стоит. Рекомендую попробовать хотя бы из-за высоты, ведь сумма небольшая за час, а эмоций полно.",
+    "contactInfo": "+7 (831) 262-12-61",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/habarskoe",
+      "https://www.instagram.com/s.c.habarskoe/"
+    ],
+    "website": "http://habarskoe.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "10:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб",
+        "from": "9:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Вс",
+        "from": "9:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/2FrbLfPBkLQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gWoVXtD1sVE-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/lv7kVEJIwjQ-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 18,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №91",
+    "city": "Нижний Новгород",
+    "address": "Нижний Новгород, ул. Голубева, 4а",
+    "latitude": 56.287337,
+    "longitude": 43.949437,
+    "description": "Ходил на скалодром в Молитовке, где-то 2009-10 годы. Там взнос платил в 500 рублей в месяц и лазал спокойно по будням и в выходной. Из своего носил только скальники, все остальное там было. Скалодром больше ориентирован на альпинистов, чем скалолазов. Тут огромные зацепки, есть трассы с положительным уклоном, каскады, траверс на стенке. Помню, была даже трасса, где зацепы накрутили прямо в крашенную стенку зала. Там и ногой никак не упрешься.\rВысота около 6-ти метров, может чуть-чуть поменьше. На основной части скалодром широкий, метров 9 там точно было. И по площади 5-6 дорожек. Скалодром был классный, перестал ходить лишь из-за состояния здоровья. Рекомендую всем.",
+    "contactInfo": "+7 (910)879-07-58",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "18:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Чт",
+        "from": "18:30",
+        "to": "21:30"
+      },
+      {
+        "days": "Сб",
+        "from": "18:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 5.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Экстримлэнд",
+    "city": "Нижний Новгород",
+    "address": "Нижегородская обл., Кстовский район, деревня Толстобино",
+    "latitude": 56.102694,
+    "longitude": 44.238569,
+    "description": "Это обычный аттракцион на базе отдыха. Гулял там пару лет назад, не отказал себе в подъеме. Возможно, для тех, кто никогда не был на настоящем скалодроме это и покажется крутым, но я как-то не впечатлился. Да, высоко, там метров 10 будет. Но вот рельеф - совсем беда. Просто вертикальная стенка, есть минимальный наклон, но от него толку ноль. Зацепов много, накрученная \"трасса\" ни о чем. Нет, может просто так совпало, что именно к нашему приезду ее перекрутили на такую простую, но скорее всего она такая с 1-го дня. Лезешь под верхней страховкой, так что все безопасно.\rПо качеству стенда претензий нет, зацепы сидят прочно, материал хороший, ничего не крошится и не обваливается. По типу развлекательных аттракционов, что обычно стоят во всяких парках, сойдет. Но как полноценный скалодром, даже нет смысла рассматривать. Достаточно того, что он стоит под открытым небом.",
+    "contactInfo": "8 (800) 222-19-19",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/extremeland"
+    ],
+    "website": "http://extremeland.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/OrPbqLdfAg0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Tpq9uerZhTs-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 10,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Браво",
+    "city": "Нижний Новгород",
+    "address": "Нижний Новгород, ул. Нартова, 2",
+    "latitude": 56.289345,
+    "longitude": 43.995952,
+    "description": "Занимался скалолазанием в \"Браво\" до его закрытия (2014-й год). Это был не самый дешевый скалодром, абонемент обходился мне в 3к на безлимите. Когда редко ходил и платил разово, то 250 рублей. Я сейчас, много лет спустя занимаюсь на почти таких же условиях. Зал был небольшой, самое то для боулдеринга. Начинал свой путь в скалолазании там, там же получил первые ценные советы от инструкторов. Воспоминания только приятные, жаль что закрылся.",
+    "contactInfo": "+7 (920) 257-27-38",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/bravoclub"
+    ],
+    "website": "https://vk.com/bravoclub",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "15:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/x_4af72b82-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_45e123aa-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_78a58264-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_fb4c3480-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №186",
+    "city": "Нижний Новгород",
+    "address": "Нижний Новгород, ул. Генкиной, 84",
+    "latitude": 56.316659,
+    "longitude": 44.029055,
+    "description": "Узкая вертикальная стенка для скалолазания размерами 5х7 метров. По ширине (5 метров) навели 3 дорожки с отрицательным уклоном, центральная еще и с карнизом. На этом разнообразие рельефа заканчивается. Для лазания используют верхнюю страховку, так как высота большая (7 метров) и это не боулдеринг. Все, кто ходят заниматься через секцию, вполне довольны.\rМне же скалодром не особо понравился. Если бы мой сын учился в этой школе, то скорее всего я его отдал бы на скалолазание в Лад или РокТрейл. Пусть это было бы платно и недешево, но зато лазал бы на профессиональном скалодроме, а не этом варианте для младших школьников. Вывод: только для местной секции.",
+    "contactInfo": "+7 (920)294-57-52",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skala186"
+    ],
+    "website": "https://vk.com/skala186",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:40",
+        "to": "19:10"
+      },
+      {
+        "days": "Ср",
+        "from": "20:30",
+        "to": "21:45"
+      },
+      {
+        "days": "Пт",
+        "from": "20:30",
+        "to": "21:45"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/a5-ztCWbDSc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/IHTB_iGKFxw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kfSOf-wPqXU-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 7,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Школа №58",
+    "city": "Нижний Новгород",
+    "address": "Нижний Новгород, ул. Аркадия Гайдара, 20А",
+    "latitude": 56.220944,
+    "longitude": 43.837678,
+    "description": "Сам зал со скалодромом не очень большой, и стена невысокая – чуть больше 5-ти метров. Но я рад и такому, поскольку в городе у нас не так много мест, где можно спокойно и с комфортом периодически заниматься скалолазанием. Поначалу я консультировался с тренером, потом начал уже самостоятельно лазать. Вроде получается, прекращать не собираюсь. Хотелось бы, чтобы в дальнейшем этот скалодром претерпевал только положительные изменения.",
+    "contactInfo": "+7 (905)192-88-89",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [],
+    "wallArea": null,
+    "maxHeight": 5.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

@@ -44,8 +44,8 @@ public static class RouteGenerator
 
         var gradeMapping = GradeMapping.Create(GradeTable.ToDictionary(g => g.Name, g => g.Index)).Value;
 
-        var routeTypes = new[] { RouteType.Bouldering, RouteType.Lead, RouteType.Speed };
-        var typeWeights = new[] { 0.60, 0.25, 0.15 };
+        var routeTypes = new[] { RouteType.Bouldering, RouteType.Lead };
+        var typeWeights = new[] { 0.60, 0.40 };
 
         var holdColors = Enum.GetValues<HoldColor>();
 
@@ -84,11 +84,11 @@ public static class RouteGenerator
 
                 var photoPool = new[]
                 {
-                    $"https://loremflickr.com/400/300/climbing,hold?random=r{routes.Count + r}_a",
-                    $"https://loremflickr.com/400/300/climbing,hand?random=r{routes.Count + r}_b",
-                    $"https://loremflickr.com/400/300/climbing,detail?random=r{routes.Count + r}_c",
-                    $"https://loremflickr.com/400/300/climbing,color?random=r{routes.Count + r}_d",
-                    $"https://loremflickr.com/400/300/rock,wall?random=r{routes.Count + r}_e",
+                    $"https://loremflickr.com/400/300/climbing,bouldering?random=r{routes.Count + r}_a",
+                    $"https://loremflickr.com/400/300/climbing,route?random=r{routes.Count + r}_b",
+                    $"https://loremflickr.com/400/300/climbing,hold?random=r{routes.Count + r}_c",
+                    $"https://loremflickr.com/400/300/climbing,wall?random=r{routes.Count + r}_d",
+                    $"https://loremflickr.com/400/300/climbing,gym?random=r{routes.Count + r}_e",
                 };
                 var route = Route.Create(
                     gym.Id,

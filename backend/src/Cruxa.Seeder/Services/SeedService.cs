@@ -40,13 +40,15 @@ public class SeedService
         Console.WriteLine($"{users.Count} created, {creds.Count} credentials");
 
         Console.Write("🔗 GymAssignments... ");
+        var selectedGyms = gyms.Take(GymGenerator.SelectedGymNames.Length).ToList();
         var assignments = new List<GymAssignment>();
         foreach (var (userId, gymIdx, isAdmin, isSetter) in staffMap)
         {
+            if (gymIdx >= selectedGyms.Count) continue;
             if (isAdmin)
-                assignments.Add(GymAssignment.Create(gyms[gymIdx].Id, userId, GymRoleInGym.GymAdmin).Value!);
+                assignments.Add(GymAssignment.Create(selectedGyms[gymIdx].Id, userId, GymRoleInGym.GymAdmin).Value!);
             if (isSetter)
-                assignments.Add(GymAssignment.Create(gyms[gymIdx].Id, userId, GymRoleInGym.Routesetter).Value!);
+                assignments.Add(GymAssignment.Create(selectedGyms[gymIdx].Id, userId, GymRoleInGym.Routesetter).Value!);
         }
         _db.GymAssignments.AddRange(assignments);
         await _db.SaveChangesAsync();
@@ -55,7 +57,8 @@ public class SeedService
         // ── Step 4: Routes + Tags ──
         Console.Write("🧗 Routes... ");
         var existingTags = await _db.Tags.ToListAsync();
-        var routes = RouteGenerator.Generate(gyms, staffMap, existingTags);
+        // Генерируем трассы только для выбранных залов (первые SelectedGymNames.Length штук)
+        var routes = RouteGenerator.Generate(selectedGyms, staffMap, existingTags);
 
         // Add route-tag relationships
         foreach (var route in routes)
@@ -73,7 +76,7 @@ public class SeedService
 
         // ── Step 5-8: For each user, generate+save+publish posts sequentially ──
         Console.Write("📝 Generating and publishing posts... ");
-        var postBatches = PostGenerator.Generate(climbers, gyms, routes);
+        var postBatches = PostGenerator.Generate(climbers, selectedGyms, routes);
         var allPosts = new List<Post>();
         var allAscents = new List<Ascent>();
 

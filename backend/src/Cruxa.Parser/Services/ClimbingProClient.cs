@@ -120,6 +120,37 @@ public partial class ClimbingProClient : IClimbingProClient
         return links;
     }
 
+    public async Task<Dictionary<string, string>> GetAllCitiesAsync(CancellationToken ct = default)
+    {
+        var html = await LoadPageAsync($"{BaseUrl}/city/skalodromy-rossii/", ct);
+        var cities = new Dictionary<string, string>();
+        if (string.IsNullOrEmpty(html)) return cities;
+
+        var doc = new HtmlDocument();
+        doc.LoadHtml(html);
+
+        var links = doc.DocumentNode.SelectNodes("//a[contains(@href,'/city/')]");
+        if (links is null) return cities;
+
+        foreach (var a in links)
+        {
+            var href = a.GetAttributeValue("href", "");
+            var name = a.InnerText.Trim();
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(href)) continue;
+
+            // /city/moskva/ → moskva
+            var match = Regex.Match(href, @"/city/([^/]+)/");
+            if (!match.Success) continue;
+            var slug = match.Groups[1].Value;
+
+            if (slug == "skalodromy-rossii") continue;
+            cities.TryAdd(name, slug);
+        }
+
+        _logger.LogInformation("Found {Count} cities on ClimbingPro", cities.Count);
+        return cities;
+    }
+
     /// <summary>
     /// Parses an individual gym page and extracts all available data.
     /// </summary>

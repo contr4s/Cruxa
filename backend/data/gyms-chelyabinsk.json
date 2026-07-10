@@ -1,0 +1,389 @@
+[
+  {
+    "name": "Каньон",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Аношкина, 6",
+    "latitude": 55.195632,
+    "longitude": 61.283419,
+    "description": "«Каньон» предлагает отличную возможность заменить однотипные занятия в тренажерном зале на скалодром. Центр предоставляет шанс пройти обучение во взрослой школе скалолазания, где профессиональные инструкторы прописывают программу занятий в индивидуальном порядке. К тренировкам по боулдерингу в детской школе скалолазания могут быть допущены дети в возрасте от 4-х до 18-ти лет. Центр является прекрасным местом проведения разнообразных праздников для детей и взрослых. Опытные и внимательные тренеры гарантируют веселые конкурсы и полную безопасность. Скалодром «Каньон» - больше, чем фитнес!",
+    "contactInfo": "+7 (351) 778-64-77",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/canyon74",
+      "https://www.youtube.com/channel/UCsUHGPJ2QzOaEo2fevSN9FQ"
+    ],
+    "website": "http://kanyon74.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "13:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "11:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "11:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Взрослая секция",
+        "price": "2600 руб"
+      },
+      {
+        "name": "Индивидуальная тренировка",
+        "price": "800 руб"
+      },
+      {
+        "name": "Детская секция",
+        "price": "2600 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/каньон-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/каньон-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/каньон-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/каньон-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/каньон-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/WZf2hidKQuo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BDok1jVqstk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/hWJBsG6asvw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TzSdMeYN9_U-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Искра",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Худякова, 12 к.1",
+    "latitude": 55.148472,
+    "longitude": 61.368948,
+    "description": "Скалодром «Искра» удобен во всех отношениях. Стены его достигают в высоту 4.5 метров и оборудованы трассами для боулдеринга различной степени сложности. Детям и новичкам выделен участок для подъёма с верёвочной страховкой. Кроме современного спортивного оборудования, для «Искры» характерны разнообразные удобства и комфортная обстановка. Наличие большой парковки позволяет оставлять автомобили и велосипеды. Помимо удобных раздевалок с душевыми предусмотрена возможность выпить чай или кофе. Легко добраться до скалоднрома, расположенного по адресу улица Худякова, 12 к.1, можно из любого района Челябинска.",
+    "contactInfo": "+7 (351) 776-77-20",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/iskraclimb",
+      "https://www.instagram.com/iskraclimb/",
+      "https://www.facebook.com/IskraClimb"
+    ],
+    "website": "https://www.iskraclimb.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "16:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "16:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/04Te02Y0_ps-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/FN-nl6xCz0o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/zKill9SXM9A-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZzaVxsp7d_8-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6,
+    "yearFounded": 2013,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Грот",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Артиллерийская, 126",
+    "latitude": 55.166799,
+    "longitude": 61.43439,
+    "description": "Сегодня этот скалодром закрыт, и уже давно. Когда я ходил заниматься сюда, посещение стоило час 150 рублей. С собой дополнительно ничего таскать не нужно было, главное взять запасную одежду и удобную обувь. Одежда - чтобы не испачкать, а то все будет в тальке/магнезии. Страховкой тут не пользовались, ведь это обычный боулдеринговый зал. Тут высота чуть больше, чем в обычной квартире, а весь пол устлан матами.\rСкалодром по структуре был интересный, в нем практически не было ровных поверхностей, всегда какие-то наклоны, нависания, все переходит в потолок, на котором также трассы. Тут лазать под силу было только профессионалам. Жаль, что закрыли такой замечательный зал.",
+    "contactInfo": "+7 (351) 235-47-22",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club16137890"
+    ],
+    "website": "https://vk.com/club16137890",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "15:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "12:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/x_855a876b-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_cd47fc03-min_1.jpg",
+      "https://maps.climbingpro.ru/media/photo/x_d4c12eec-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 2.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Дк Восток",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Сталеваров, 5А",
+    "latitude": 55.264132,
+    "longitude": 61.403739,
+    "description": "На скалодроме на Сталеваров хорошо поставлено обучение скалолазанию. Я проходил тут в том числе индивидуальные занятия с инструкторами, когда только начинал заниматься. Занятие, кстати, недорогое, буквально 400 рублей. При этом инструктор всегда рядом, объясняет все нюансы от и до. То есть не только проведет ТБ и покажет, куда лезть. За это отдельный плюс.\rСам скалодром вполне ничего. Мне сравнивать не с чем, но не думаю, что в каждом городе есть такие высокие и объемные скалодромы. Он включает в себя как прямые участки, так и различные наклоны, участки на потолке. Все со страховкой, так что безопасно.",
+    "contactInfo": "+7 (351)724-09-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club26275281"
+    ],
+    "website": "https://vk.com/club26275281",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "20:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/kN33TScv6Jk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_9e6aad9c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_7838300b-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "МАОУ СОШ № 5",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Калинина, 28",
+    "latitude": 55.180033,
+    "longitude": 61.390911,
+    "description": "В 5-й школе не самый плохой скалодром, если смотреть по школьным меркам. Находится также в спортзале, но у него хотя бы хороший рельеф с карнизами и потолком. То есть почти как на крупном скалодроме. Разумеется, сравнивать с другими скалодромами Челябинска этот школьный не стоит, но тем не менее, он неплох.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://chel-school5.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-4-1_16-46-5.362-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Алмаз",
+    "city": "Челябинск",
+    "address": "г. Челябинск, ул.Эстонская 17",
+    "latitude": 55.122395,
+    "longitude": 61.453201,
+    "description": "Скалодром «Алмаз» предоставляет возможность посещения боулдерингового зала детям и взрослым вне зависимости от возраста и уровня физической подготовки. Полный комплект всего необходимого снаряжения предоставляется всем посетителям в аренду.\r\nОбучение в детской секции скалолазания доступно для детей в возрасте от 7-ми лет. Занятия могут проходить на бесплатной основе, если ребенок в дальнейшем нацелен принимать активное участие в различных соревнованиях и фестивалях по скалолазанию и альпинизму.",
+    "contactInfo": "+7 (922) 234-11-03",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club23395765"
+    ],
+    "website": "https://vk.com/club23395765",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "16:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Ср",
+        "from": "16:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Пт",
+        "from": "16:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/y_f314f6f3-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_cbbee2c5-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_88d7b068-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_31e8ef1e-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_5481c9e9-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_78e51d15-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_c0797460-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_2a3c05ff-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y_7247d0d3-min.jpg"
+    ],
+    "wallArea": 60,
+    "maxHeight": 6,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Пятый Элемент",
+    "city": "Челябинск",
+    "address": "Челябинск, 1й Шахтостроевский переулок, 7",
+    "latitude": 55.120825,
+    "longitude": 61.329799,
+    "description": "«Пятый Элемент» предлагает посетителям для прохождения 4 уникальных этапа: «Земля» это боулдеринговый зал «Капова пещера» площадью 180 кв.м.; «Вода» - боулдеринговый зал «Водопад» с аналогичной площадью; «Огонь» это зал трудности площадью более 500 кв.м.; «Воздух» - 2 эталонные трассы протяженностью 15 метров и скалолазание на скорость.\r\nЗдесь на постоянной основе проводятся соревнования по различным дисциплинам скалолазания для людей всех возрастов, имеется возможность проведения корпоративных мероприятий для взрослых и детей, действуют специальные скидочные акции на посещение центра (для семей, студентов) и удобные типы абонементов.",
+    "contactInfo": "+7 (351) 247-37-19",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club117666112",
+      "https://vk.com/5element74",
+      "https://www.instagram.com/5_element_chelyabinsk/"
+    ],
+    "website": "https://vk.com/club117666112",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "15:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5-элемент-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5-элемент-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5-элемент-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5-элемент-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/5-элемент-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/_r7wsYkVFnc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YHR5f15NVxI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eak5yTJsI1c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/tIaFMdjZ6xg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/S0sXZ77sCiQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/O4qmPTFSZPI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/A_GFhRMwlOQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/EeoGUcB0F9I-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XUYoHvj3c3w-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 15,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "ХочуЛазать",
+    "city": "Челябинск",
+    "address": "Челябинск, ул. Витебская, 4",
+    "latitude": 55.154774,
+    "longitude": 61.371041,
+    "description": "\"Хочу Лазать\" - это преимущественно детский скалодром. Конечно, взрослому тут тоже можно полазать, более того - даже полноценные тренировки с инструкторами проходят, но все же тут намного больше для детей. Даже сам рельеф выглядит типичным \"детским\".\rВ остальном это что-то типа боулдерингового зала, хотя везде развешаны страховочные веревки. Я сюда ходил несколько раз, в основном в формате семейной тренировки, как отдых для всей семьи, но для профессионального уровня считаю скалодром не подходящим. Для ребенка может быть и подойдет, но взрослому стоит поискать более высокие и сложные стенды.",
+    "contactInfo": "+7 (952) 520-15-15",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalolazanie_dlya_detej",
+      "https://www.instagram.com/hochulazat/",
+      "https://www.youtube.com/channel/UClWHV_su2t2Bnxrg_nIMvrA"
+    ],
+    "website": "https://hochulazat.ru/",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/FUrdkipEYTM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/GDczMg26_HY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/KU4Zn9jwtjA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/opznarFY1NU-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4.5,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Академия шпионов",
+    "city": "Челябинск",
+    "address": "Челябинск, Молодогвардейцев 7",
+    "latitude": 55.204747,
+    "longitude": 61.327392,
+    "description": "Скалодром «Академия шпионов» находится в северо-западной части Челябинска. Он создан специально для развития детского скалолазания, а его воспитанниками могут стать даже самые маленькие спортсмены. Скалолазный стенд отличается разнообразным рельефом, используются зацепы разных видов, предусмотрены нависания под отрицательным углом. Инструкторы помогут с освоением техники лазания, научат правильно использовать снаряжение, а также окажут поддержку в прохождении трасс. Для безопасности детей применяется верхняя страховка, а также мягкое покрытие полов.",
+    "contactInfo": "+79000676688",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/academy_spy_74",
+      "https://www.instagram.com/academy_spy_74"
+    ],
+    "website": "академияшпионов.рф",
+    "workingHours": [
+      {
+        "days": "Пн-Сб",
+        "from": "10:00",
+        "to": "20:30"
+      },
+      {
+        "days": "Вс",
+        "from": "10:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Вводное занятие",
+        "price": "300 руб"
+      },
+      {
+        "name": "Разовое занятие без тренера",
+        "price": "300 руб"
+      },
+      {
+        "name": "Индивидуальное занятие",
+        "price": "700 руб"
+      },
+      {
+        "name": "Абонемент 1 мес. 4 занятия",
+        "price": "1500 руб"
+      },
+      {
+        "name": "Абонемент 1 мес. 8 занятий",
+        "price": "2500 руб"
+      },
+      {
+        "name": "Взрослый + ребенок",
+        "price": "700 руб"
+      },
+      {
+        "name": "Абонемент 1 мес. 4 занятия без тренера",
+        "price": "1000 руб"
+      },
+      {
+        "name": "Абонемент 1 мес. 8 занятия без тренера",
+        "price": "2000 руб"
+      }
+    ],
+    "photoUrls": [],
+    "wallArea": 120,
+    "maxHeight": 5.4,
+    "yearFounded": 2019,
+    "metroStations": [],
+    "tags": []
+  }
+]

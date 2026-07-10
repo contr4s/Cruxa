@@ -1,0 +1,595 @@
+[
+  {
+    "name": "Край света",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Толмачева, дом 22",
+    "latitude": 56.840552,
+    "longitude": 60.609458,
+    "description": "«Край света» предлагает всем посетителям лазание по трассам различной сложности на высоте 3-6 метров (боулдеринг). Абсолютная безопасность во время занятий обеспечивается чутким контролем со стороны профессиональных тренеров-инструкторов и толстым слоем специальных матов.\r\nВ боулдеринг-зале могут заниматься скалолазы разного уровня подготовки, благодаря тому, что его стены оборудованы согласно современным мировым тенденциям. Здесь имеется 80 уникальных маршрутов, отдельная зона для детских занятий скалолазанием. В теплое время года стабильно организовываются коллективные выезды на многочисленные скалы Урала.",
+    "contactInfo": "+7 (343) 328-50-76",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/ks_ekb",
+      "https://www.instagram.com/kraisveta_ekb/"
+    ],
+    "website": "http://kraisveta.com/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "10 посещений",
+        "price": "2800 руб"
+      },
+      {
+        "name": "5 посещений",
+        "price": "1400 руб"
+      },
+      {
+        "name": "Безлимит 1 мес.",
+        "price": "2200 руб"
+      },
+      {
+        "name": "Безлимит 3 мес.",
+        "price": "5400 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/край-света-01-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-02-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-03-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-04-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-05-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-06-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/край-света-07-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 5,
+    "yearFounded": 2016,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Радиотехникум",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул.Крауля, 168",
+    "latitude": 56.832989,
+    "longitude": 60.524262,
+    "description": "На скалодроме \"Радиотехникум\" спортсмены занимаются на стенде высотой 9 м. Совокупная площадь скалолазных стен составляет 130 кв.м, на стенде присутствуют отвесы в 15 и 30 градусов. Трассы накручены таким образом, чтобы удобно было заниматься и новичкам, и опытным скалолазам. Скалодром открыт на базе Уральского радиотехнического колледжа, но заниматься здесь могут не только воспитанники учебного заведения. Скалодром открыт для всех желающих, стоимость посещения для детей - 100 р., для взрослых - 150 р. Тренировки проводятся в соответствии с расписанием по будням и выходным, как правило, в вечернее время.",
+    "contactInfo": "+7 (950) 639-63-36",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club43154431"
+    ],
+    "website": "https://vk.com/club43154431",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "17:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/FNuIl3QhVCU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pCy-ZpFeDJ4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pmy_vn9jStw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Xqvp4cHvBRw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ZIUJjBRTSGA-min.jpg"
+    ],
+    "wallArea": 130,
+    "maxHeight": 9,
+    "yearFounded": 2017,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Лицей №180",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Крестинского, 43",
+    "latitude": 56.788628,
+    "longitude": 60.624792,
+    "description": "Важно! Скалодром предназначен только для учащихся лицея.\r\nСкалодром на базе лицея №180 создан в специально оборудованном спортзале. Скалолазный стенд размещен вдоль одной из стен зала, имеет высоту 4 м и общую площадь скалолазных поверхностей 30 кв.м. Накручены трассы для начинающих спортсменов и более-менее опытных скалолазов - это создано благодаря разным типам зацепов и расстоянию между ними, а также углам наклона стенда. Используется верхняя страховка. Занятия проводятся под контролем преподавателей - опытных спортсменов и педагогов. Обучаться скалолазанию на лицейском скалодроме могут только воспитанники учебного заведения.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": "http://полифорум.екатеринбург.рф",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/NRc0973119f198b8a790fbbbda0b221470-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/view.pic-min.jpeg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 6,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Манеж УПИ",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Мира, 29",
+    "latitude": 56.838794,
+    "longitude": 60.653035,
+    "description": "На скалодроме «Манеж УПИ», расположенном на территории легкоатлетического манежа УГТУ-УПИ, начинающие и опытные скалолазы оттачивают свои навыки и готовятся к соревнованиям различного уровня. Скалодром имеет все необходимое для проведения первенств всероссийского масштаба. Его совокупная площадь скалолазных поверхностей достигает 300 кв.м, а максимальная высота стенда составляет 11 м. Трассы разного уровня сложности, опытные инструкторы и профессиональное снаряжение – все это ждет воспитанников скалодрома.",
+    "contactInfo": "+7 (343) 375-14-20",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/em6BOlAvKSw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/A8AxrFyfSPU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/uH_kzg6uxkc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/viBAPv57rn0-min.jpg"
+    ],
+    "wallArea": 300,
+    "maxHeight": 11,
+    "yearFounded": 2014,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Ракета",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, Декабристов, 16/18з",
+    "latitude": 56.825518,
+    "longitude": 60.625098,
+    "description": "Молодежный горный клуб \"Восхождение\" на скалодроме \"Ракета\" в Екатеринбурге организует занятия скалолазанием для всех возрастов. Тренировки в разных возрастных группах, курсовые и разовые посещения проводятся в будни и по выходным, как правило, в вечернее время. Искусственный стенд имеет высоту 4 м, а общая площадь скалолазных поверхностей составляет 170 кв.м. Здесь накручены трассы для разного уровня подготовки. Кроме классического скалолазания в зале осваивают боулдеринг. Также зал оснащен тренажерами для скалолазов - фингербордом, кампусбордом и пр. Занятия организованы под пристальным вниманием компетентных тренеров с огромным стажем.",
+    "contactInfo": "+7 (912) 246-64-60",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/mgkvo"
+    ],
+    "website": "https://vk.com/mgkvo",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вт",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "18:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Чт",
+        "from": "16:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб",
+        "from": "16:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/4v63UoqT944-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BkY9wd568l4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kG1ZqMKRyb0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nyXzKEaeJ9s-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 4,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Башня",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, Московская 28Б, корп.1",
+    "latitude": 56.830182,
+    "longitude": 60.583101,
+    "description": "Скалодром \"Башня\" принадлежит детско-юношеской спортивной школе горных видов спорта (МБУ СШОР), но заниматься здесь могут не только дети, но и взрослые. В секцию скалолазания принимают с любым уровнем подготовки с 4 лет. Общая площадь скалолазной поверхности составляет 350 кв.м., а максимальная высота стен - 10,5 м. Кроме стандартного стенда имеется отдельный боулдеринговый зал, площадь которого составляет 75 кв.м. и зал для зал СФП площадью 20 кв.м. Занятия проводятся практически ежедневно (в основном вечером). Отдельно формируются группы подростков и взрослых. Стоимость занятий - от 300 рублей.",
+    "contactInfo": "+7(343)212-20-28",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/climbgo"
+    ],
+    "website": "https://vk.com/climbgo",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "19:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Вт",
+        "from": "19:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Ср",
+        "from": "21:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Чт",
+        "from": "19:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Пт",
+        "from": "21:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб",
+        "from": "11:00",
+        "to": "13:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Детские тренировки",
+        "price": "350 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/9CWTvG_KyQQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/kWrmeWjJO5I-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/xE2wGV3A2Xs-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/yplkHRJp7GA-min.jpg"
+    ],
+    "wallArea": 350,
+    "maxHeight": 10.5,
+    "yearFounded": 1990,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "УрГЭУ / Синх",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, Ул. 8 марта, 64",
+    "latitude": 56.82441,
+    "longitude": 60.603781,
+    "description": "На самом большом и современном скалодроме Екатеринбурга, расположенном в УрГЭУ (СИНХ), занимаются как дети, так и взрослые. Общая площадь скалолазной поверхности насчитывает порядка 400 кв.м, а максимальная высота стенда - 12 м. Здесь занимаются скалолазанием на трудность, на скорость, а также боулдерингом в специально отведенной зоне. Имеется и зона для разминки. Возможны групповые или индивидуальные занятия с инструктором. Тренерами являются опытные спортсмены, мастера спорта. На скалодроме готовится к соревнованиям сборная университета. \r\nАбонементы или разовые занятия можно приобрести у Администратора при входе в фитнес-клуб \"Евразия\".",
+    "contactInfo": "+7 (922) 203-81-94",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club12761843",
+      "https://vk.com/ekb_klimb"
+    ],
+    "website": "https://vk.com/club12761843",
+    "workingHours": [
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "20:00"
+      },
+      {
+        "days": "Пт",
+        "from": "20:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "16:00",
+        "to": "18:00"
+      },
+      {
+        "days": "Вс",
+        "from": "19:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/5eOfdB5ohmc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/b_EJwDvI1Ow-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/LHAq2RW1p7c-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/YkvR8zin8dk-min.jpg"
+    ],
+    "wallArea": 400,
+    "maxHeight": 12,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "CityFitness",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Первомайская д.77",
+    "latitude": 56.845549,
+    "longitude": 60.641878,
+    "description": "Типичный скалодром фитнес-центра, не специализированного на скалолазании. То есть я его оцениваю как обычный тренажер для любителей, даром что высота хорошая и не классический уличный аттракцион, называемый \"скалодромом\". Максимум по высоте - 8 метров. Это стена с отделкой под рельеф скалы. Рядом находятся модули пониже, там уже более классический стенд с ровной стеной и небольшими навесами. Разными зацепами сделано несколько трасс, так что можно подобрать под себя более сложный маршрут, если хочется. Рекомендую ходить по клубной карте, так занятия будут дешевле.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/cityfit_ekb",
+      "https://www.instagram.com/cityfit_ekb/",
+      "https://www.youtube.com/channel/UC_0eOQzLyD6zT3ENLtjS-pg"
+    ],
+    "website": "https://cityfit.ru/pervomayskaya/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "7:00",
+        "to": "23:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "9:00",
+        "to": "23:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/city_1den-61-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/20180821-IMG_9599-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/20180821-IMG_9614-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Восьмерка",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Гурзуфская 48, 4 этаж, зал Reebok CrossFit EKB",
+    "latitude": 56.825602,
+    "longitude": 60.565351,
+    "description": "«Восьмерка» это детская и взрослая школа скалолазания, а также возможность свободного лазания без тренера. Занятия с детьми проходят в увлекательной игровой форме, где все учатся социальному взаимодействию и приобщению к спорту. К регулярным тренировкам допускаются дети в возрасте от 3-х до 12-ти лет.\r\nЗдесь скалолазным спортом могут начать заниматься люди любого уровня общей физической подготовки. Подобные занятия улучшают растяжку, увеличивают силу, развивают координацию, чувство равновесия и ответственности. Команда сертифицированных инструкторов-тренеров с огромным опытом поможет овладеть всеми необходимыми навыками скалолазания.",
+    "contactInfo": "+7(343)201-63-29",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://www.facebook.com/skalodrom8ka",
+      "https://www.instagram.com/skalodrom8ka/",
+      "https://vk.com/skalodrom8ka",
+      "https://www.youtube.com/channel/UCD27ziH0xRIYbHCDOtALekw",
+      "https://twitter.com/skalodrom8ka"
+    ],
+    "website": "https://skalodrom8.ru/",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "19:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "14:00",
+        "to": "20:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Разовое посещение 350/",
+        "price": "400 руб"
+      },
+      {
+        "name": "Абонемент на 5 занятий",
+        "price": "1900 руб"
+      },
+      {
+        "name": "Абонемент на 10 занятий",
+        "price": "3700 руб"
+      },
+      {
+        "name": "Абонемент на 30 занятий",
+        "price": "10500 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/nPc3v7AytF0-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/CuXG_veO-lo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/wSKydGKXyQI-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/53TujY-dfus-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/OBFjurRDHyc-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 6.5,
+    "yearFounded": 2010,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Виктория",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Панельная, 17/1",
+    "latitude": 56.830817,
+    "longitude": 60.690441,
+    "description": "Детско-юношеская спортивная школа \"Виктория\" наряду с легкой атлетикой, плаванием, дзюдо и другими видами спорта подготавливает спортсменов к соревнованиям по скалолазанию. Собственный скалодром имеет высоту 8 м. Он подходит для скалолазания на скорость, занятий боулдерингом, трассы накручены под верхнюю и нижнюю страховку. Кроме скалолазного стенда спортзал включает в себя тренажеры для скалолазов - фингерборд, каспусборд и др., а также душевые. Занятия проводятся трижды в неделю в вечернее время. Стоимость занятий - 250 рублей. Для студентов и спортсменов с удостоверениями МС действуют скидки. Возможны тренировки с инструкторами.",
+    "contactInfo": "+7 (922) 209-99-72",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skalodrom_viktoriya"
+    ],
+    "website": "https://vk.com/skalodrom_viktoriya",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Сб",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7I4Vqn23FIY-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/9J0h9s7WB2o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/A1Q0_h5FvZU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eLngc2DkQ7k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/qJw0cO1voWQ-min.jpg"
+    ],
+    "wallArea": 150,
+    "maxHeight": 8,
+    "yearFounded": 2011,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Завод трансформаторов тока",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул.Черкасская, 25",
+    "latitude": 56.819878,
+    "longitude": 60.556718,
+    "description": "Важно! Тренировки только для членов РОО «Федерация альпинистов Свердловской области». \r\nНа заводе трансформаторов тока в Екатеринбурге скалодром открыт только для членов ФАСО. Лишь вступив в Федерацию Альпинизма Свердловской области, Вы сможете заниматься и готовиться к соревнованиям на этом скалодроме. Высота искусственного стенда составляет около 12 м. Вход на территорию скалодрома осуществляется по пропускам. Воспитанники должны быть в сменной обуви без черной подошвы. Занятия проводятся по будням (Вт, Чт) в вечернее время - обычно с 18.00 до 20.30. Спортсмены занимаются под надзором более опытных коллег и инструкторов. Наиболее талантливые воспитанники отправляются покорять настоящие горные вершины.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club35067623"
+    ],
+    "website": "https://vk.com/club35067623",
+    "workingHours": [
+      {
+        "days": "Вт",
+        "from": "18:00",
+        "to": "20:30"
+      },
+      {
+        "days": "Чт",
+        "from": "18:00",
+        "to": "20:30"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-4_16-0-36.910-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-4_16-0-46.709-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Сохраненное_изображение_2019-3-4_16-0-57.380-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 12,
+    "yearFounded": 2012,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Лестех",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул.Сибирский тракт, 37",
+    "latitude": 56.821927,
+    "longitude": 60.662944,
+    "description": "Скалодром «Лестех», созданный на базе спорткомплекса Уральского Государственного Лесотехнического Университета, принимает в свои ряды всех желающих обучиться скалолазанию. Тренировками руководит инструктор-методист сборной УГЛТУ. Занятия проводятся на искусственном скалолазном стенде высотой 9,5 м, совокупная площадь которого составляет 100 кв.м. Накручены трассы для начинающих и опытных скалолазов. Тренировки проводятся по будням в вечернее время. Организуются первенства местного уровня.",
+    "contactInfo": null,
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club8028732"
+    ],
+    "website": "https://vk.com/club8028732",
+    "workingHours": [
+      {
+        "days": "Пн-Вт",
+        "from": "18:00",
+        "to": "22:00"
+      },
+      {
+        "days": "Чт-Пт",
+        "from": "18:00",
+        "to": "22:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/DdIfAMhtwuk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ndTmbAhTY4U-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/R_VeYQ4G7Rs-min.jpg"
+    ],
+    "wallArea": 100,
+    "maxHeight": null,
+    "yearFounded": 2000,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Вверх",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Ткачей, 25",
+    "latitude": 56.816843,
+    "longitude": 60.631422,
+    "description": "На скалодроме \"Вверх\" занимаются дети от 2-х лет, подростки и взрослые - все воспитанники разбиты на возрастные группы, к каждой прикреплен компетентный тренер, индивидуальный подход ко всем обучающимся. При обучении используется современное оборудование, скалодром соответствует всем требованиям к безопасности. Возможно посещение скалодрома вне групповых занятий - в свободном формате. Площадь скалолазного стенда - 170 кв.м, а максимальная высота стен - 4,5 м. На стенде накручены трассы разной степени сложности. Кроме классических занятий скалолазанием действует летний лагерь - дети тренируются на скалодроме и природных скалах.",
+    "contactInfo": "+7 (919) 395-86-76",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/vverh_ekb",
+      "https://www.instagram.com/skalodrom.up/"
+    ],
+    "website": "http://vverh-ekb.ru/",
+    "workingHours": [
+      {
+        "days": "Ежедневно",
+        "from": "10:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/EsZLmoIyrMg-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/-rqXvSSEHU4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/SWciVGs5DAc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/TlZb6y8_MVY-min.jpg"
+    ],
+    "wallArea": 170,
+    "maxHeight": 4.5,
+    "yearFounded": 2018,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "На Старых Большевиков",
+    "city": "Екатеринбург",
+    "address": "Екатеринбург, ул. Старых Большевиков, 82/1",
+    "latitude": 56.901218,
+    "longitude": 60.619887,
+    "description": "На скалодроме \"На Старых Большевиков\" могут заниматься скалолазанием дети и взрослые. Секция открыта в рамках детско-юношеского клуба \"Ритм\", где дети и подростки занимаются танцами и различными видами спорта. Профессиональный скалолазный стенд, трассы разного уровня сложности, верхняя и нижняя страховка, удобное местоположение (буквально 5 минут от метро) - это и многое другое ждет Вас на скалодроме Орджоникидзевского района Екатеринбурга. Занятия проводятся профессиональными педагогами Федерации Альпинизма Свердловской области.",
+    "contactInfo": "+7 (922) 616-83-90",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club69338895"
+    ],
+    "website": "https://vk.com/club69338895",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/7Qz1qHzu38k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/m00CJdJwfQ4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/sgDZkozmhF4-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": null,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  }
+]

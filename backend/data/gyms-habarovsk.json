@@ -1,0 +1,214 @@
+[
+  {
+    "name": "Ср.школа 32",
+    "city": "Хабаровск",
+    "address": "Хабаровск, ул. Мухина, 6",
+    "latitude": 48.478007,
+    "longitude": 135.08169,
+    "description": "Стены скалодрома «Школа № 32» имеют общую площадь 130 кв. метров. Поверхность стен оснащена всем необходимым для развития навыков скалолазания. Имеются несколько маршрутов различной степени сложности. В распоряжение посетителей скалодрома, помимо скалолазного оборудования, имеются различные спортивные снаряды, позволяющие чередовать виды физической нагрузки и осуществлять тренировку различных групп мышц. Высокой посещаемости скалодрома способствует его удобное расположение по адресу ул. Мухина 6.",
+    "contactInfo": "+7 (914) 543-16-42",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/32shcool"
+    ],
+    "website": "http://school32.obr27.ru/p20aa1.html",
+    "workingHours": null,
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/xRffbIM_x9M-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/BQzqPA0AlbA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/bwtidGnCyIw-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ewam9XQvJYM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/3Cs-_5AikFk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/U8XCuGHvjL4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/pNfbRd2tzFo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/JGgBS42suRM-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/8P5_TGlW87w-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Z_aeoC1JNYs-min.jpg"
+    ],
+    "wallArea": 130,
+    "maxHeight": 6.7,
+    "yearFounded": 2003,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Ferrum",
+    "city": "Хабаровск",
+    "address": "Хабаровск, ул. Герасимова, 32",
+    "latitude": 48.493307,
+    "longitude": 135.061218,
+    "description": "По этому адресу находится манеж ДВГУПС, где находится университетский скалодром, на котором проводят тренировки Феррум. Мнения и о Ферруме, и о скалодроме у меня хорошее. В первую очередь - это адекватные и грамотные специалисты, которые научили меня всему, что я сегодня умею. Тренируют жестко, но зато быстро добиваешься успехов и учишься на своих ошибках.\rСкалодром высокий, много сложных участков. Я предпочитаю лазать с верхней страховкой по высоким трассам. Рельеф непростой, но тут уже зависит от конкретного места на скалодроме. Есть и более прямые участки, и сильные нависания.",
+    "contactInfo": "+7 (924) 211-06-55",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/ferrumfamily"
+    ],
+    "website": "https://vk.com/ferrumfamily",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "19:00",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/COpL-MEbh68_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/HWsqC3BQEgs_display-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Nj52qmn7ZwA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/y5SBzl2ErWU-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9.5,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "CAVER",
+    "city": "Хабаровск",
+    "address": "Хабаровск, Амурский бульвар, 1",
+    "latitude": 48.476269,
+    "longitude": 135.051983,
+    "description": "Кэйверский (то есть академии физкультуры) скалодром только с виду неказистый, а на деле сложный. Высота хорошая, площадь огромная, здесь много трасс от обычной скоростной до трудности, где приходится лазать по потолку как в боулдеринге, только не на высоте 3 метра.\rЗанятия для взрослых проводят вечером, есть варианты на будни и на пятницу и выходные. Примерно разбито через день. Людей ходит немало, но места хватит всем. Находится в центральном, буквально метров 200-300 от Амура. Добираться удобно.",
+    "contactInfo": "+7 (914) 400-97-46",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/club30417105"
+    ],
+    "website": "https://vk.com/club30417105",
+    "workingHours": [
+      {
+        "days": "Пн",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Ср",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Пт",
+        "from": "17:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Вс",
+        "from": "16:00",
+        "to": "18:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/hczeglpXQ9Y-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/K7tOXy1yiCQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/leocz9NUvR4-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/XUF19UHuyZU-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 8,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "TrialDrom",
+    "city": "Хабаровск",
+    "address": "Хабаровск, ул. Герасимова, 32",
+    "latitude": 48.493307,
+    "longitude": 135.061218,
+    "description": "Здесь почти 10 метров высоты, практиковал все от скалолазания до драйтулинга, связок, ИТО. Был даже прокат. Стенд поначалу не вызывал особого доверия, выглядело все откровенно самопально, это вам не Валтопиевские стенды. Тут одни фанерки, щиты с накрученными зацепками. Но в действительности сделали ребята на славу, все держалось отлично, и трассы получились крутыми. Там даже нависания разные были, горизонтали, 45 градусов и куча всего другого. Лазать можно было с разной страховкой. Жаль, особо долго не смог прозаниматься, уехал после окончания.",
+    "contactInfo": "+7 (984) 175-86-63",
+    "contactEmail": null,
+    "socialLinks": [],
+    "website": null,
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "18:30",
+        "to": "21:00"
+      }
+    ],
+    "prices": [],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/114441-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/114457-670-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/117883-min.jpg"
+    ],
+    "wallArea": null,
+    "maxHeight": 9,
+    "yearFounded": null,
+    "metroStations": [],
+    "tags": []
+  },
+  {
+    "name": "Скала",
+    "city": "Хабаровск",
+    "address": "г. Хабаровск, Прогрессивная ул., 2В, корп. 1",
+    "latitude": 48.392197,
+    "longitude": 135.088787,
+    "description": "Скалодром экстрим-центра «Скала» это замкнутый с 4-х сторон купол, максимальная высота которого составляет 12,5 метров. Протяженность лазательной поверхности - 58 метров, а общая площадь – 750 кв. метров. Угол наклона стен варьируется в пределах от 2-7 до 25-30 градусов, что порадует начинающих, так и профессиональных скалолазов.\r\nДля занятий и мероприятий используется только надежное оборудование от известных зарубежных производителей. Возможно применение как нижней, так и верхней страховки. Трассы регулярно обновляются и модифицируются, позволяя, таким образом, всем посетителям обучаться новым необходимым техническим приемам лазания.",
+    "contactInfo": "+7 (4212) 54-68-23",
+    "contactEmail": null,
+    "socialLinks": [
+      "https://vk.com/skala_dv"
+    ],
+    "website": "http://www.skala-dv.ru",
+    "workingHours": [
+      {
+        "days": "Пн-Пт",
+        "from": "12:00",
+        "to": "21:00"
+      },
+      {
+        "days": "Сб-Вс",
+        "from": "10:00",
+        "to": "19:00"
+      }
+    ],
+    "prices": [
+      {
+        "name": "Пробное лазание &quot;два подъема&quot;",
+        "price": "400 руб"
+      },
+      {
+        "name": "Пробное лазание &quot;один час&quot;",
+        "price": "600 руб"
+      },
+      {
+        "name": "Пробное лазание &quot;два часа&quot;",
+        "price": "700 руб"
+      },
+      {
+        "name": "Детская спортивная секция",
+        "price": "2300 руб"
+      },
+      {
+        "name": "&quot;Вечерняя школа&quot; 8 занятий",
+        "price": "3000 руб"
+      }
+    ],
+    "photoUrls": [
+      "https://maps.climbingpro.ru/media/photo/8Sx_jIs4z-8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/gByqySV1HlU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/eaiLkHwsr2k-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/krJGOBSWsPQ-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nNdY717UlYA-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/FNAkugjNjQc-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/FVXkI6AXZXk-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/0MlfEAORP8A-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/AIO1iAxWB3o-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/Q6hlWWELTCo-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/ed_647-L3RU-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/nms4QwNd3U8-min.jpg",
+      "https://maps.climbingpro.ru/media/photo/W0XCMSHkDMQ-min.jpg"
+    ],
+    "wallArea": 750,
+    "maxHeight": null,
+    "yearFounded": 2007,
+    "metroStations": [],
+    "tags": []
+  }
+]

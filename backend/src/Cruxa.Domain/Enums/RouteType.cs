@@ -9,8 +9,5 @@ public enum RouteType
     Bouldering = 0,
 
     /// <summary>Трасса на трудность (со страховкой)</summary>
-    Lead = 1,
-
-    /// <summary>Скоростная трасса</summary>
-    Speed = 2
+    Lead = 1
 }

@@ -82,3 +82,13 @@ export async function isFollowing(userId: string): Promise<boolean> {
   const response = await api.get<boolean>(`/users/${userId}/is-following`);
   return response.data;
 }
+
+export async function getFollowers(userId: string): Promise<UserDto[]> {
+  const response = await api.get<UserDto[]>(`/users/${userId}/followers`);
+  return response.data;
+}
+
+export async function getFollowing(userId: string): Promise<UserDto[]> {
+  const response = await api.get<UserDto[]>(`/users/${userId}/following`);
+  return response.data;
+}
