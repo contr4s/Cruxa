@@ -4,6 +4,7 @@ using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Application.Features.GradingSystems.Queries;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.GradingSystems;
@@ -144,7 +145,8 @@ public class GradingSystemHandlerTests
         var system = CreateSystem("French");
         var id = Guid.NewGuid();
         _repo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(system);
-        var handler = new UpdateGradingSystemHandler(_repo.Object);
+        var handler = new UpdateGradingSystemHandler(_repo.Object,
+            Mock.Of<ILogger<UpdateGradingSystemHandler>>());
 
         var newMapping = new Dictionary<string, int> { ["7a"] = 3, ["7a+"] = 4 };
         var result = await handler.Handle(
@@ -160,7 +162,8 @@ public class GradingSystemHandlerTests
     {
         var id = Guid.NewGuid();
         _repo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((GradingSystem?)null);
-        var handler = new UpdateGradingSystemHandler(_repo.Object);
+        var handler = new UpdateGradingSystemHandler(_repo.Object,
+            Mock.Of<ILogger<UpdateGradingSystemHandler>>());
 
         var result = await handler.Handle(
             new UpdateGradingSystemCommand(Id: id, Name: "Test", GradeMapping: new Dictionary<string, int> { ["6a"] = 1 }),

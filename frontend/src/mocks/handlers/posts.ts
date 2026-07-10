@@ -66,7 +66,7 @@ const MOCK_MY_POSTS: PostDto[] = [
     body: 'Отличная тренировка перед выходными! Пролез 14 трасс, из них 2 в проекте — прогресс идёт 💪🔥',
     mediaUrls: ['/mock/post1-1.jpg', '/mock/post1-2.jpg', '/mock/post1-3.jpg'],
     visibility: 'Public',
-    stats: { totalKruskor: 42, avgGrade: '5C', duration: 105, totalRoutes: 14, maxGrade: '6C' },
+    stats: { deltaKruskor: 42, avgGrade: '5C', duration: 105, totalRoutes: 14, maxGrade: '6C' },
     ascents: [
       { id: 'a1', routeId: 'r1', routeName: 'Красная стрела', grade: '6A', holdColor: 'Red', style: 'Flash', isFlash: true },
       { id: 'a2', routeId: 'r2', routeName: 'Синий мув', grade: '6B+', holdColor: 'Blue', style: 'Attempt' },
@@ -93,7 +93,7 @@ const MOCK_MY_POSTS: PostDto[] = [
     body: `Тренировка #${i + 4}. ${['Работа над техникой.','Силовой день.','Лёгкая разминка.','Проекты.','Боулдеринг.','Скорость и динамика.','Выносливость.','Флагманские трассы.'][i]}`,
     mediaUrls: i % 2 === 0 ? ['/mock/route1-1.jpg'] : [],
     visibility: 'Public' as const,
-    stats: { totalKruskor: 15 + i * 3, avgGrade: ['6A','5C+','5B','7A','6A','5C','6B','6B+'][i], duration: 60 + i * 10, totalRoutes: FILLER_ASCENTS[i].length, maxGrade: ['6C','6C','6B+','7A','6B+','6B','6C','6B+'][i] },
+    stats: { deltaKruskor: 15 + i * 3, avgGrade: ['6A','5C+','5B','7A','6A','5C','6B','6B+'][i], duration: 60 + i * 10, totalRoutes: FILLER_ASCENTS[i].length, maxGrade: ['6C','6C','6B+','7A','6B+','6B','6C','6B+'][i] },
     ascents: FILLER_ASCENTS[i],
     likesCount: Math.floor(Math.random() * 12),
     commentsCount: Math.floor(Math.random() * 4),
@@ -109,7 +109,7 @@ const MOCK_FEED_POSTS: PostDto[] = [
     body: 'Отличная тренировка! Пролезла свою первую 6B на редпоинт 💪',
     mediaUrls: ['/mock/feed1-1.jpg', '/mock/feed1-2.jpg', '/mock/feed1-3.jpg'],
     visibility: 'Public',
-    stats: { totalKruskor: 42, avgGrade: '5C', duration: 105, totalRoutes: 12, maxGrade: '6C' },
+    stats: { deltaKruskor: 42, avgGrade: '5C', duration: 105, totalRoutes: 12, maxGrade: '6C' },
     ascents: [
       { id: 'f1a', routeId: 'r1', routeName: 'Красная стрела', grade: '6A', holdColor: 'Red', style: 'Flash', isFlash: true },
       { id: 'f1b', routeId: 'r2', routeName: 'Синий мув', grade: '6B', holdColor: 'Blue', style: 'Redpoint' },
@@ -129,6 +129,8 @@ const MOCK_COMMENTS: Record<string, CommentDto[]> = {
 };
 
 let _draftCounter = 10;
+// Shared mutable store for user-created drafts/posts
+const _userPosts: Map<string, PostDto> = new Map();
 
 export const postHandlers = [
   http.get('/api/posts/feed', async ({ request }) => {
@@ -137,13 +139,14 @@ export const postHandlers = [
     const page = Number(url.searchParams.get('page')) || 1;
     const pageSize = Number(url.searchParams.get('pageSize')) || 10;
     const filter = url.searchParams.get('filter');
-    const items = filter === 'subs' ? MOCK_FEED_POSTS : [...MOCK_MY_POSTS, ...MOCK_FEED_POSTS];
+    const userPostsArr = Array.from(_userPosts.values()).filter(p => p.mediaUrls.length > 0 || (p.body && p.body.length > 0));
+    const items = filter === 'subs' ? MOCK_FEED_POSTS : [...userPostsArr, ...MOCK_MY_POSTS, ...MOCK_FEED_POSTS];
     return HttpResponse.json<PaginatedList<PostDto>>(paginate(items, page, pageSize));
   }),
 
   http.get('/api/posts/:postId', async ({ params }) => {
     await mockDelay(300);
-    const post = [...MOCK_MY_POSTS, ...MOCK_FEED_POSTS].find((p) => p.id === params.postId);
+    const post = [..._userPosts.values(), ...MOCK_MY_POSTS, ...MOCK_FEED_POSTS].find((p) => p.id === params.postId);
     if (!post) return HttpResponse.json(null, { status: 404 });
     const detail: PostDetailDto = {
       ...post,
@@ -188,42 +191,57 @@ export const postHandlers = [
     await mockDelay(300);
     _draftCounter++;
     const body = (await request.json()) as { gymId?: string; status?: string } | null;
-    return HttpResponse.json<PostDto>({
+    const newPost: PostDto = {
       id: `draft-${_draftCounter}`, username: 'alexey', userId: CURRENT_USER_ID, displayName: 'Алексей',
       gymId: body?.gymId, gymName: body?.gymId ? MOCK_ROUTES.find(r => r.gymId === body.gymId)?.gymName : undefined,
       ascents: [], mediaUrls: [], visibility: 'Public',
-      stats: { totalKruskor: 0, avgGrade: '', totalRoutes: 0 },
+      stats: { deltaKruskor: 0, avgGrade: '', totalRoutes: 0 },
       likesCount: 0, commentsCount: 0, isLiked: false,
       createdAt: new Date().toISOString(),
-    }, { status: 201 });
+    };
+    _userPosts.set(newPost.id, newPost);
+    return HttpResponse.json<PostDto>(newPost, { status: 201 });
   }),
 
   http.put('/api/posts/:id', async ({ params, request }) => {
     await mockDelay(200);
     const data = (await request.json()) as Partial<PostDto> & { status?: string };
-    return HttpResponse.json<PostDto>({
+    const existing = _userPosts.get(params.id as string);
+    const updated: PostDto = {
       id: params.id as string, username: 'alexey', userId: CURRENT_USER_ID, displayName: 'Алексей',
       gymId: 'g1', gymName: 'RockZone',
-      ascents: [], mediaUrls: [], visibility: 'Public',
-      stats: { totalKruskor: 0, avgGrade: '', totalRoutes: 0 },
+      ascents: existing?.ascents ?? [], mediaUrls: existing?.mediaUrls ?? [], visibility: 'Public',
+      stats: { deltaKruskor: 0, avgGrade: '', totalRoutes: (existing?.ascents ?? []).length },
       likesCount: 0, commentsCount: 0, isLiked: false,
-      createdAt: new Date().toISOString(),
+      createdAt: existing?.createdAt ?? new Date().toISOString(),
       ...data,
-    });
+    };
+    delete (updated as unknown as Record<string, unknown>).status;
+    _userPosts.set(updated.id, updated);
+    return HttpResponse.json<PostDto>(updated);
   }),
 
-  http.post('/api/posts/:postId/ascents', async ({ request, params: _p }) => {
+  http.post('/api/posts/:postId/ascents', async ({ request, params }) => {
     await mockDelay(250);
     _draftCounter++;
     const data = (await request.json()) as { routeId: string; style: string; mediaUrls?: string[] };
     const route = MOCK_ROUTES.find((r) => r.id === data.routeId);
-    return HttpResponse.json<PostAscentDto>({
+    const ascent: PostAscentDto = {
       id: `ascent-${_draftCounter}`,
       routeId: data.routeId, routeName: route?.name ?? 'Трасса',
       grade: route?.grade ?? '6A', holdColor: route?.holdColor ?? 'Red',
       style: data.style as PostAscentDto['style'],
       mediaUrls: data.mediaUrls,
-    }, { status: 201 });
+    };
+    // Store ascent in the user post
+    const post = _userPosts.get(params.postId as string);
+    if (post) {
+      post.ascents = [...post.ascents, ascent];
+      if (data.mediaUrls && data.mediaUrls.length > 0) {
+        post.mediaUrls = [...post.mediaUrls, ...data.mediaUrls];
+      }
+    }
+    return HttpResponse.json<PostAscentDto>(ascent, { status: 201 });
   }),
 
   http.delete('/api/posts/:postId/ascents/:ascentId', async () => {

@@ -15,7 +15,7 @@ public interface IStatsRepository
     Task<int> GetTotalAscentsCountAsync(Guid userId);
     Task<List<Ascent>> GetAscentsByDateAsync(Guid userId, DateOnly date);
     Task<List<Ascent>> GetAllAscentsOrderedAsync(Guid userId);
-    Task<List<RouteReview>> GetRouteReviewsAsync(Guid routeId);
+    Task<List<RouteFeedback>> GetRouteFeedbackAsync(Guid routeId);
     Task<Gym?> GetGymWithRoutesAsync(Guid gymId);
     Task<Route?> GetRouteWithAscentsAndReviewsAsync(Guid routeId);
     Task<List<AscentWithRouteTags>> GetAscentsWithTagsAsync(Guid userId);

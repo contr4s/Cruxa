@@ -41,6 +41,22 @@ public sealed class GradeMapping : IEquatable<GradeMapping>
         return Grade.Create(raw, indexResult.Value);
     }
 
+    /// <summary>
+    /// Reverse lookup — finds the grade string closest to the given index.
+    /// </summary>
+    public Result<Grade> ResolveGrade(int index)
+    {
+        if (_map.Count == 0)
+            return Result.Failure<Grade>(Error.Validation("Grade mapping is empty"));
+
+        var closest = _map
+            .OrderBy(kv => Math.Abs(kv.Value - index))
+            .ThenBy(kv => kv.Value < index ? 0 : 1) // prefer lower grade on tie
+            .First();
+
+        return Grade.Create(closest.Key, closest.Value);
+    }
+
     public IReadOnlyDictionary<string, int> Mapping => _map;
 
     public override string ToString() => $"{{ {string.Join(", ", _map.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"))} }}";

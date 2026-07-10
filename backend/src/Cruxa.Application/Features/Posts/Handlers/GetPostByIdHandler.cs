@@ -1,3 +1,4 @@
+using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Queries;
@@ -31,10 +32,6 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
         var maxGrade = grades.Count > 0 ? grades.MaxBy(g => g!.Index) : null;
         var avgIndex = grades.Count > 0 ? (int)Math.Round(grades.Average(g => g!.Index)) : 0;
         var avgGrade = grades.Count > 0 ? grades.FirstOrDefault(g => g!.Index >= avgIndex)?.Raw ?? "" : "";
-        var totalKruskor = ascents.Sum(a => a.Route is not null
-            ? (int)(Domain.Services.KruscoreCalculator.GetS(a.Style, a.Route.Type) * Domain.Services.KruscoreCalculator.GetScale(a.Style, a.Route.Type))
-            : 0);
-
         return new PostDto
         {
             Id = post.Id,
@@ -55,25 +52,13 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
             IsLiked = false,
             Stats = new PostStatsDto
             {
-                TotalKruskor = totalKruskor,
+                DeltaKruskor = post.DeltaKruskor ?? 0,
                 AvgGrade = avgGrade,
                 Duration = post.Duration,
                 TotalRoutes = totalRoutes,
                 MaxGrade = maxGrade?.Raw,
             },
-            Ascents = ascents.Select(a => new AscentDto
-            {
-                Id = a.Id,
-                RouteId = a.RouteId,
-                RouteName = a.Route?.Name ?? "",
-                Grade = a.Route?.Grade?.Raw ?? "",
-                GradeIndex = a.Route?.Grade?.Index ?? 0,
-                HoldColor = a.Route?.HoldColor ?? default,
-                Style = a.Style,
-                MediaUrls = a.MediaUrls.ToList(),
-                Tags = a.Route?.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList() ?? [],
-                CreatedAt = a.CreatedAt
-            }).ToList()
+            Ascents = ascents.Adapt<List<AscentDto>>()
         };
     }
 }

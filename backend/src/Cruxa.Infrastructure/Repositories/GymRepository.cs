@@ -44,7 +44,6 @@ public class GymRepository : IGymRepository
         IOrderedQueryable<Gym> ordered = sort switch
         {
             Domain.Enums.GymSort.Name => query.OrderBy(g => g.Name),
-            Domain.Enums.GymSort.Rating => query.OrderByDescending(g => g.Routes.Average(r => r.Reviews.Average(rv => (double?)rv.Rating) ?? 0)),
             Domain.Enums.GymSort.Routes => query.OrderByDescending(g => g.Routes.Count),
             _ => query.OrderBy(g => g.Name)
         };

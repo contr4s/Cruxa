@@ -5,7 +5,7 @@ namespace Cruxa.Application.Features.Posts.DTOs;
 /// </summary>
 public class PostStatsDto
 {
-    public double TotalKruskor { get; set; }
+    public double DeltaKruskor { get; set; }
     public string AvgGrade { get; set; } = string.Empty;
     public int? Duration { get; set; }
     public int TotalRoutes { get; set; }

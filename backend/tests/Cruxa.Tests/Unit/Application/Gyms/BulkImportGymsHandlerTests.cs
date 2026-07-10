@@ -5,6 +5,7 @@ using Cruxa.Application.Features.Gyms.Contracts;
 using Cruxa.Domain.Common;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Gyms;
@@ -22,7 +23,8 @@ public class BulkImportGymsHandlerTests
         _txManager.Setup(x => x.BeginTransactionAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(mockTx.Object);
 
-        _handler = new BulkImportGymsHandler(_gymRepo.Object, _txManager.Object);
+        _handler = new BulkImportGymsHandler(_gymRepo.Object, _txManager.Object,
+            Mock.Of<ILogger<BulkImportGymsHandler>>());
     }
 
     [Fact]

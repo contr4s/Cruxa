@@ -12,4 +12,5 @@ public record UpdatePostCommand(
     string? Description,
     List<string>? MediaUrls,
     PostVisibility? Visibility,
-    int? Duration = null) : IRequest<Result<PostDto>>, ICommand;
+    int? Duration = null,
+    PostStatus? Status = null) : IRequest<Result<PostDto>>, ICommand;

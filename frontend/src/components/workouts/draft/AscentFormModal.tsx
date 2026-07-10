@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  Box, Typography, TextField, Button, Autocomplete, Chip, CircularProgress, Rating,
+  Box, Typography, TextField, Button, Autocomplete, Chip, CircularProgress, Rating, useTheme, Select, MenuItem, FormControl, InputLabel,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +14,8 @@ import { uploadMedia } from '../../../services/mediaUpload.service';
 import { ASCENT_COLORS } from '../../../constants/ascent';
 import type { RouteDto } from '../../../types/route';
 import type { AscentStyle } from '../../../types/post';
+import { useGradingSystems } from '../../../services/hooks/useGradingSystems';
+import { useSaveRouteFeedback } from '../../../services/hooks/useRoutes';
 
 const STYLE_OPTIONS: AscentStyle[] = ['Flash', 'Onsight', 'Redpoint', 'Attempt', 'Project', 'Repeat'];
 
@@ -23,6 +25,7 @@ const ascentFormSchema = z.object({
   notes: z.string().optional().or(z.literal('')),
   rating: z.number().min(1).max(5).nullable().optional(),
   review: z.string().optional().or(z.literal('')),
+  gradeIndex: z.number().nullable().optional(),
 });
 
 type AscentFormValues = z.infer<typeof ascentFormSchema>;
@@ -34,12 +37,16 @@ interface AscentFormModalProps {
 }
 
 export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormModalProps) {
+  const theme = useTheme();
   const { postId, gymId, addAscent: addToStore } = useDraftStore();
   const { mutateAsync: addAscentApi, isPending } = useAddAscent(postId);
+  const { mutateAsync: saveFeedback } = useSaveRouteFeedback();
+  const { data: gradingSystems } = useGradingSystems();
 
   const [searchInput, setSearchInput] = useState('');
   const [selectedRoute, setSelectedRoute] = useState<RouteDto | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [mediaUrls, setMediaUrls] = useState<string[]>([]);
 
   const { data: routesData, isLoading: routesLoading } = useRoutesByGym(gymId ?? '', {
     searchQuery: searchInput || undefined,
@@ -55,6 +62,7 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
       notes: '',
       rating: null,
       review: '',
+      gradeIndex: null,
     },
   });
 
@@ -65,6 +73,7 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
       setSearchInput('');
       setSelectedRoute(null);
       setFiles([]);
+      setMediaUrls([]);
     }
   }, [open, reset]);
 
@@ -83,15 +92,17 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
     if (!postId) return;
 
     // ponytail: upload files in parallel, replace with queued upload when backend ready
-    const mediaUrls = files.length > 0
+    const mediaUrlsFromFiles = files.length > 0
       ? await Promise.all(files.map((f) => uploadMedia(f).then((r) => r.url)))
       : [];
+
+    const allMediaUrls = [...mediaUrls, ...mediaUrlsFromFiles];
 
     const result = await addAscentApi({
       routeId: values.routeId,
       style: values.style,
       notes: values.notes || undefined,
-      mediaUrls: mediaUrls.length > 0 ? mediaUrls : undefined,
+      mediaUrls: allMediaUrls.length > 0 ? allMediaUrls : undefined,
     });
 
     const route = selectedRoute;
@@ -107,6 +118,20 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
       notes: result.notes,
       mediaUrls: result.mediaUrls ?? [],
     });
+
+    // Save route feedback (rating, grade opinion, review) if any filled
+    const hasFeedback = values.rating || values.gradeIndex != null || values.review || values.notes;
+    if (hasFeedback && route) {
+      await saveFeedback({
+        routeId: route.id,
+        body: {
+          rating: values.rating ?? undefined,
+          gradeIndex: values.gradeIndex ?? undefined,
+          publicReview: values.review || undefined,
+          privateNote: values.notes || undefined,
+        },
+      });
+    }
 
     onClose();
   };
@@ -148,75 +173,106 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
           )}
         />
 
-        {/* Style chips */}
-        <Controller
-          name="style"
-          control={control}
-          render={({ field }) => (
-            <Box>
-              <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
-                Стиль
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {STYLE_OPTIONS.map((s) => (
-                  <Chip
-                    key={s}
-                    label={s}
-                    size="small"
-                    onClick={() => field.onChange(s)}
-                    variant={field.value === s ? 'filled' : 'outlined'}
-                    sx={{
-                      bgcolor: field.value === s ? ASCENT_COLORS[s] : undefined,
-                      color: field.value === s ? '#fff' : undefined,
-                    }}
-                  />
-                ))}
+        {/* Everything after route selection — hidden until a route is chosen */}
+        {selectedRoute && (<>
+          {/* Style chips */}
+          <Controller
+            name="style"
+            control={control}
+            render={({ field }) => (
+              <Box>
+                <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
+                  Стиль
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {STYLE_OPTIONS.map((s) => (
+                    <Chip
+                      key={s}
+                      label={s}
+                      size="small"
+                      onClick={() => field.onChange(s)}
+                      variant={field.value === s ? 'filled' : 'outlined'}
+                      sx={{
+                        bgcolor: field.value === s ? ASCENT_COLORS[s] : undefined,
+                        color: field.value === s ? '#fff' : undefined,
+                      }}
+                    />
+                  ))}
+                </Box>
               </Box>
-            </Box>
-          )}
-        />
+            )}
+          />
 
-        {/* Private notes */}
-        <Controller
-          name="notes"
-          control={control}
-          render={({ field }) => (
-            <TextField {...field} label="Заметки (только для вас)" multiline minRows={2} />
-          )}
-        />
+          {/* Private notes */}
+          <Controller
+            name="notes"
+            control={control}
+            render={({ field }) => (
+              <TextField {...field} label="Заметки (только для вас)" multiline minRows={2} />
+            )}
+          />
 
-        {/* Review */}
-        {selectedRoute && (
-          <Box>
-            <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
-              Отзыв о трассе
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <Controller
-                name="rating"
-                control={control}
-                render={({ field }) => (
-                  <Rating
-                    value={field.value}
-                    onChange={(_, v) => field.onChange(v)}
-                    size="small"
+          {/* Grade opinion — collapsed under "Добавить отзыв о трассе" */}
+          {(() => {
+            const defaultSystem = gradingSystems?.[0];
+            const gradeOptions = defaultSystem
+              ? Object.entries(defaultSystem.gradeMapping).sort((a, b) => a[1] - b[1])
+              : [];
+
+            return (
+              <details style={{ cursor: 'pointer', border: `1px solid ${theme.palette.divider}`, borderRadius: '8px', padding: '8px 12px' }}>
+                <summary style={{ fontSize: '0.82rem', fontWeight: 600, color: theme.palette.text.secondary, cursor: 'pointer' }}>
+                  Добавить отзыв о трассе
+                </summary>
+                <Box sx={{ mt: 1, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                  {/* Rating */}
+                  <Controller
+                    name="rating"
+                    control={control}
+                    render={({ field }) => (
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Typography variant="caption">Оценка:</Typography>
+                        <Rating value={field.value} onChange={(_, v) => field.onChange(v)} size="small" />
+                      </Box>
+                    )}
                   />
-                )}
-              />
-              {/** rating label is handled by UI, not critical */}
-            </Box>
-            <Controller
-              name="review"
-              control={control}
-              render={({ field }) => (
-                <TextField {...field} placeholder="Ваш комментарий (публичный)" multiline minRows={2} fullWidth />
-              )}
-            />
-          </Box>
-        )}
+                  {/* Grade opinion */}
+                  <Controller
+                    name="gradeIndex"
+                    control={control}
+                    render={({ field }) => (
+                      <FormControl size="small" fullWidth>
+                        <InputLabel>Моё мнение о сложности</InputLabel>
+                        <Select
+                          value={field.value?.toString() ?? ''}
+                          label="Моё мнение о сложности"
+                          displayEmpty
+                          onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : null)}
+                        >
+                          <MenuItem value="">—</MenuItem>
+                          {gradeOptions.map(([grade, idx]) => (
+                            <MenuItem key={grade} value={String(idx)}>{grade}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                  {/* Public review */}
+                  <Controller
+                    name="review"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField {...field} placeholder="Публичный отзыв" multiline minRows={2} fullWidth />
+                    )}
+                  />
+                </Box>
+              </details>
+            );
+          })()}
 
-        {/* Media */}
-        <MediaUploader files={files} existingUrls={[]} onFilesChange={setFiles} />
+          {/* Media */}
+          <MediaUploader files={files} existingUrls={[]} onFilesChange={setFiles} urls={mediaUrls} onUrlsChange={setMediaUrls} />
+        </>)}
 
         {/* Actions */}
         <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>

@@ -39,8 +39,8 @@ public class User : AggregateRoot<Guid>
     private readonly List<Comment> _comments = [];
     public IReadOnlyCollection<Comment> Comments => _comments.AsReadOnly();
 
-    private readonly List<RouteReview> _reviews = [];
-    public IReadOnlyCollection<RouteReview> Reviews => _reviews.AsReadOnly();
+    private readonly List<RouteFeedback> _feedbacks = [];
+    public IReadOnlyCollection<RouteFeedback> Feedbacks => _feedbacks.AsReadOnly();
 
     // Credentials
     public PasswordCredential? PasswordCredential { get; private set; }

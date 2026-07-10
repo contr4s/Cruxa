@@ -5,13 +5,14 @@ using Cruxa.Application.Features.Gyms.DTOs;
 using Cruxa.Application.Features.Gyms.Queries;
 using Cruxa.Application.Features.Gyms.Commands;
 using Cruxa.Application.Common.Models;
+using Cruxa.Application.Common.Contracts;
 using Cruxa.Domain.Enums;
 
 namespace Cruxa.Api.Features.Gyms;
 
 [ApiController]
 [Route("api/[controller]")]
-public class GymsController(IMediator mediator) : ControllerBase
+public class GymsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? city = null, [FromQuery] string? sort = null)
@@ -87,5 +88,16 @@ public class GymsController(IMediator mediator) : ControllerBase
             return BadRequest(result.Error.Message);
 
         return Ok(result.Value);
+    }
+
+    /// <summary>
+    /// Toggle favorite status for the current user.
+    /// </summary>
+    [HttpPost("{id:guid}/favorite")]
+    [Authorize]
+    public async Task<IActionResult> ToggleFavorite(Guid id)
+    {
+        var result = await mediator.Send(new ToggleGymFavoriteCommand(id, currentUser.GetRequiredUserId()));
+        return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 }

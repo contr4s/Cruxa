@@ -61,7 +61,7 @@ internal class RouteConfiguration : IEntityTypeConfiguration<Route>
             .HasForeignKey(r => r.AuthorId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasMany(r => r.Reviews)
+        builder.HasMany(r => r.Feedbacks)
             .WithOne(rr => rr.Route)
             .HasForeignKey(rr => rr.RouteId)
             .OnDelete(DeleteBehavior.Cascade);

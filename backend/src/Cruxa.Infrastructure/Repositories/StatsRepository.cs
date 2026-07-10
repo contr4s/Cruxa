@@ -109,9 +109,9 @@ public class StatsRepository : IStatsRepository
             .ToListAsync();
     }
 
-    public async Task<List<RouteReview>> GetRouteReviewsAsync(Guid routeId)
+    public async Task<List<RouteFeedback>> GetRouteFeedbackAsync(Guid routeId)
     {
-        return await _context.RouteReviews
+        return await _context.RouteFeedbacks
             .Where(r => r.RouteId == routeId)
             .ToListAsync();
     }
@@ -127,7 +127,7 @@ public class StatsRepository : IStatsRepository
     {
         return await _context.Routes
             .Include(r => r.Ascents)
-            .Include(r => r.Reviews)
+            .Include(r => r.Feedbacks)
             .FirstOrDefaultAsync(r => r.Id == routeId);
     }
 

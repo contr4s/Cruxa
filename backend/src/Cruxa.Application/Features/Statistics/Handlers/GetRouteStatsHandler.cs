@@ -15,8 +15,8 @@ public sealed class GetRouteStatsHandler(IStatsRepository stats)
         if (route is null)
             return Result.Failure<RouteStatsDto>(Error.NotFound("Route not found"));
 
-        var avgRating = route.Reviews.Count > 0
-            ? route.Reviews.Average(r => r.Rating ?? 0)
+        var avgRating = route.Feedbacks.Count > 0
+            ? route.Feedbacks.Average(f => f.Rating ?? 0)
             : 0;
 
         var styleDist = route.Ascents

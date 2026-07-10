@@ -4,6 +4,7 @@ using Cruxa.Application.Features.Ascents.Handlers;
 using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Queries;
 using Cruxa.Application.Features.Posts.Contracts;
+using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using FluentAssertions;
@@ -17,6 +18,7 @@ public class AscentHandlerTests
     private readonly TestFixture _fixture = new();
     private readonly Mock<IAscentRepository> _ascentRepo = new();
     private readonly Mock<IPostRepository> _postRepo = new();
+    private readonly Mock<IRouteRepository> _routeRepo = new();
     private readonly Guid _userId = Guid.NewGuid();
     private readonly Guid _gymId = Guid.NewGuid();
 
@@ -29,7 +31,7 @@ public class AscentHandlerTests
     [Fact]
     public async Task AddAscent_WhenPostNotFound_ReturnsNotFound()
     {
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _routeRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Post?)null);
 
         var result = await handler.Handle(
@@ -43,7 +45,7 @@ public class AscentHandlerTests
     public async Task AddAscent_WhenNotOwnPost_ReturnsUnauthorized()
     {
         var post = CreatePost();
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _routeRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(
@@ -58,7 +60,7 @@ public class AscentHandlerTests
     {
         var post = CreatePost();
         var cmd = _fixture.Create<AddAscentCommand>() with { PostId = post.Id, UserId = _userId };
-        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object);
+        var handler = new AddAscentHandler(_ascentRepo.Object, _postRepo.Object, _routeRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(cmd, CancellationToken.None);

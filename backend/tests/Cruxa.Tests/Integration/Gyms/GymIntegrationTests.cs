@@ -51,7 +51,7 @@ public class GymIntegrationTests : IntegrationTestBase
         var gym2 = await CreateGymAsync();
 
         ClearToken();
-        var response = await Client.GetAsync("/api/gyms");
+        var response = await Client.GetAsync("/api/gyms?pageSize=50");
         response.EnsureSuccessStatusCode();
         var allGyms = await DeserializeAsync<OffsetPaginatedList<GymDto>>(response);
 

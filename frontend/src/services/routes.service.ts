@@ -36,6 +36,17 @@ export async function getRouteConsensus(routeId: string): Promise<GradeConsensus
   return response.data;
 }
 
+export interface SaveRouteFeedbackBody {
+  rating?: number;
+  publicReview?: string;
+  privateNote?: string;
+  gradeIndex?: number;
+}
+
+export async function saveRouteFeedback(routeId: string, body: SaveRouteFeedbackBody): Promise<void> {
+  await api.put(`/routes/${routeId}/feedback`, body);
+}
+
 export async function getRouteReviews(routeId: string): Promise<PaginatedList<RouteReviewDto>> {
   const response = await api.get<PaginatedList<RouteReviewDto>>(`/routes/${routeId}/reviews`);
   return response.data;

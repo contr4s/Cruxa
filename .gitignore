@@ -118,3 +118,6 @@ logs/
 
 .vite/
 .env.production
+
+# Articles (drafts for publications)
+docs/articles/

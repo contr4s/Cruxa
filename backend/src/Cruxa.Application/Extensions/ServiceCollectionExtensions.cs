@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Mapster;
+using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Application.Features.Auth.Handlers;
 using Cruxa.Application.Common.Behaviors;
 using Cruxa.Application.Features.Statistics.Services;
@@ -34,6 +35,8 @@ public static class ServiceCollectionExtensions
         // Options
         services.Configure<TrainingIntensityOptions>(o =>
             configuration.GetSection(TrainingIntensityOptions.SectionName).Bind(o));
+        services.Configure<KruscoreOptions>(o =>
+            configuration.GetSection(KruscoreOptions.SectionName).Bind(o));
 
         // Mapster
         TypeAdapterConfig.GlobalSettings.Default.MapToConstructor(true);
@@ -74,14 +77,24 @@ public static class ServiceCollectionExtensions
             .Map(dest => dest.SetterUsername, src => src.Author != null ? src.Author.Username : null)
             .Map(dest => dest.SetterName, src => src.Author != null ? $"{src.Author.FirstName} {src.Author.LastName}".Trim() : null)
             .Map(dest => dest.SetterAvatarUrl, src => src.Author != null ? src.Author.AvatarUrl : null)
-            .Map(dest => dest.Rating, src => src.Reviews.Count > 0 ? src.Reviews.Average(r => r.Rating ?? 0) : 0)
+            .Map(dest => dest.Rating, src => src.Feedbacks.Count > 0 ? src.Feedbacks.Average(r => r.Rating ?? 0) : 0)
             .Map(dest => dest.AscentsCount, src => src.Ascents.Count);
 
-        // RouteReview → RouteReviewDto: map User navigation
-        TypeAdapterConfig<RouteReview, RouteReviewDto>.NewConfig()
+        // RouteFeedback → RouteReviewDto: map User navigation
+        TypeAdapterConfig<RouteFeedback, RouteReviewDto>.NewConfig()
             .Map(dest => dest.Username, src => src.User != null ? src.User.Username : null)
             .Map(dest => dest.DisplayName, src => src.User != null ? $"{src.User.FirstName} {src.User.LastName}".Trim() : null)
             .Map(dest => dest.UserAvatarUrl, src => src.User != null ? src.User.AvatarUrl : null);
+
+        // Ascent → AscentDto: flatten Route navigation properties
+        TypeAdapterConfig<Ascent, AscentDto>.NewConfig()
+            .Map(dest => dest.RouteName, src => src.Route != null ? src.Route.Name : "")
+            .Map(dest => dest.Grade, src => src.Route != null ? src.Route.Grade.Raw : "")
+            .Map(dest => dest.GradeIndex, src => src.Route != null ? src.Route.Grade.Index : 0)
+            .Map(dest => dest.HoldColor, src => src.Route != null ? src.Route.HoldColor : default)
+            .Map(dest => dest.Tags, src => src.Route != null
+                ? src.Route.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList()
+                : new List<TagDto>());
 
         // Services
         services.AddScoped<KruscoreService>();

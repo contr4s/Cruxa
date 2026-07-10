@@ -24,7 +24,7 @@ public sealed class GetTopRoutesHandler(IStatsRepository statsRepo)
             AscentType = a.Style.ToString(),
             GymName = a.Route.Gym?.Name ?? "",
             GymId = a.Route.GymId,
-            Rating = a.Route.Reviews.Count > 0 ? a.Route.Reviews.Average(r => (double?)r.Rating) : 0,
+            Rating = a.Route.Feedbacks.Count > 0 ? a.Route.Feedbacks.Average(f => (double?)f.Rating) : 0,
             Date = a.CreatedAt
         }).ToList();
 

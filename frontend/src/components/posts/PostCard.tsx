@@ -88,7 +88,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>(
         >
           <PostDescription
             body={post.body}
-            totalKruskor={post.stats.totalKruskor}
+            deltaKruskor={post.stats.deltaKruskor}
             avgGrade={post.stats.avgGrade}
             duration={post.stats.duration}
             totalRoutes={post.stats.totalRoutes}

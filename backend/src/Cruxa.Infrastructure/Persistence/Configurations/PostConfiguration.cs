@@ -29,6 +29,8 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
             .HasMaxLength(20)
             .HasDefaultValue(PostStatus.Draft);
 
+        builder.Property(p => p.DeltaKruskor);
+
         builder.Property(p => p.CreatedAt)
             .IsRequired();
 

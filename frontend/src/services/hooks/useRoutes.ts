@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews, createRoute, updateRoute } from '../routes.service';
-import type { GetRoutesParams } from '../routes.service';
+import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews, createRoute, updateRoute, saveRouteFeedback } from '../routes.service';
+import type { GetRoutesParams, SaveRouteFeedbackBody } from '../routes.service';
 import type { CreateRoutePayload, UpdateRoutePayload } from '../../types/route';
 
 export function useRoutesByGym(gymId: string, params?: GetRoutesParams) {
@@ -45,6 +45,18 @@ export function useInfiniteRoutesByGym(gymId: string, params?: Omit<GetRoutesPar
     getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.page + 1 : undefined),
     initialPageParam: 1,
     enabled: !!gymId,
+  });
+}
+
+export function useSaveRouteFeedback() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ routeId, body }: { routeId: string; body: SaveRouteFeedbackBody }) =>
+      saveRouteFeedback(routeId, body),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['route', variables.routeId, 'consensus'] });
+      queryClient.invalidateQueries({ queryKey: ['routes'] });
+    },
   });
 }
 

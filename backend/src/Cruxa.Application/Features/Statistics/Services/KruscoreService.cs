@@ -1,5 +1,7 @@
 
+using System.Collections.Concurrent;
 using Cruxa.Application.Features.Statistics.Contracts;
+using Cruxa.Application.Features.Statistics.Options;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Services;
 using Cruxa.Domain.Enums;
@@ -15,18 +17,38 @@ public class KruscoreService
 {
     private readonly IStatsRepository _statsRepo;
     private readonly ILogger<KruscoreService> _logger;
+    private readonly KruscoreConfig _cfg;
+    private readonly KruscoreOptions _opts;
 
-    public KruscoreService(IStatsRepository statsRepo, ILogger<KruscoreService> logger)
+    public KruscoreService(IStatsRepository statsRepo, ILogger<KruscoreService> logger,
+        Microsoft.Extensions.Options.IOptions<KruscoreOptions> opts)
     {
         _statsRepo = statsRepo;
         _logger = logger;
+        _opts = opts.Value;
+        _cfg = new KruscoreConfig
+        {
+            DefaultRating = _opts.DefaultRating,
+            EloScale = _opts.EloScale,
+            EloOffset = _opts.EloOffset,
+            KBase = _opts.KBase,
+            KMin = _opts.KMin,
+            DecayHalfLifeDays = _opts.DecayHalfLifeDays,
+            GradeBaseline = _opts.GradeBaseline,
+            GradeDeviationScale = _opts.GradeDeviationScale,
+            GradeDeviationFactor = _opts.GradeDeviationFactor,
+            GradeConsensusDivisor = _opts.GradeConsensusDivisor,
+            RouteWeightLead = _opts.RouteWeightLead,
+            RouteWeightOther = _opts.RouteWeightOther,
+        };
     }
 
     /// <summary>
     /// Recalculate Kruscore for a specific date (called after publish/update).
+    /// Returns the delta (score change) caused by this day's ascents.
     /// For the first calculation (calibration) loads all ascents once.
     /// </summary>
-    public async Task RecalculateAsync(Guid userId, DateOnly date)
+    public async Task<int> RecalculateAsync(Guid userId, DateOnly date)
     {
         var lastSnapshot = await _statsRepo.GetLastSnapshotBeforeAsync(userId, date);
 
@@ -35,7 +57,7 @@ public class KruscoreService
             // Calibration: load all ascents once, apply PerformanceRating
             _logger.LogDebug("Calibrating Kruscore for user {UserId}: no prior snapshot found", userId);
             var allAscents = await _statsRepo.GetAllAscentsOrderedAsync(userId);
-            await CalculateFullAsync(allAscents, userId, date);
+            return await CalculateFullAsync(allAscents, userId, date);
         }
         else
         {
@@ -44,25 +66,24 @@ public class KruscoreService
             if (dayAscents.Count == 0)
             {
                 _logger.LogDebug("No ascents on {Date} for user {UserId}, skipping Kruscore recalculation", date, userId);
-                return;
+                return 0;
             }
 
-            await ProcessDayAsync(userId, lastSnapshot, dayAscents, date);
+            return await ProcessDayAsync(userId, lastSnapshot, dayAscents, date);
         }
     }
 
-    private const int MinCalibrationWeight = 15;
-
-    private async Task CalculateFullAsync(List<Ascent> ascents, Guid userId, DateOnly date)
+    private async Task<int> CalculateFullAsync(List<Ascent> ascents, Guid userId, DateOnly date)
     {
-        var totalW = ascents.Sum(a => KruscoreCalculator.RouteTypeWeight(a.Route.Type));
-        if (totalW < MinCalibrationWeight)
+        var totalW = ascents.Sum(a => KruscoreCalculator.RouteTypeWeight(a.Route.Type, _cfg));
+        if (totalW < _opts.MinCalibrationWeight)
         {
-            _logger.LogDebug("Skipping Kruscore calibration for user {UserId}: total weight {TotalWeight} < minimum {MinWeight}", userId, totalW, MinCalibrationWeight);
-            return;
+            _logger.LogDebug("Skipping Kruscore calibration for user {UserId}: total weight {TotalWeight} < minimum {MinWeight}", userId, totalW, _opts.MinCalibrationWeight);
+            return 0;
         }
 
-        var theta = KruscoreCalculator.PerformanceRating(ascents);
+        var theta = KruscoreCalculator.PerformanceRating(ascents, _cfg);
+        theta *= _opts.CalibrationDiscount; // leave room for progress
         var confidence = ascents.Count;
         var maxAscent = ascents.MaxBy(a => a.Route.Grade.Index);
         var maxGradeIndex = maxAscent?.Route.Grade.Index ?? 0;
@@ -70,19 +91,21 @@ public class KruscoreService
 
         var snapshot = new UserScoreSnapshot(userId, date, theta, confidence, maxGradeIndex, maxGradeRaw);
         await _statsRepo.UpsertSnapshotAsync(snapshot);
+        return 0; // first calibration — no prior score to compare
     }
 
-    private async Task ProcessDayAsync(
+    private async Task<int> ProcessDayAsync(
         Guid userId, UserScoreSnapshot lastSnapshot, List<Ascent> dayAscents, DateOnly date)
     {
+        var oldScore = lastSnapshot.Score;
         var (theta, confidence, maxGrade) = (lastSnapshot.Score, lastSnapshot.Confidence, lastSnapshot.MaxGradeIndex);
 
         // Apply decay if this is a new day
         if (date > lastSnapshot.Date)
         {
             var daysSinceLast = (date.ToDateTime(TimeOnly.MinValue) - lastSnapshot.Date.ToDateTime(TimeOnly.MinValue)).Days;
-            var decay = KruscoreCalculator.DecayFactor(Math.Max(1, daysSinceLast));
-            theta -= 50 * (1 - decay) * 0.5;
+            var decay = KruscoreCalculator.DecayFactor(Math.Max(1, daysSinceLast), _cfg);
+            theta -= _opts.DecayBaseAmount * (1 - decay) * _opts.DecayMultiplier;
             confidence *= decay;
         }
 
@@ -94,12 +117,13 @@ public class KruscoreService
         var maxGradeRaw = newMaxAscent?.Route.Grade.Raw;
         var totalWeight = await SumWeightsAsync(dayAscents);
         var avgSurprise = BatchSurprise(dayAscents, theta, isRadar: false);
-        var k           = KruscoreCalculator.KFactor(confidence);
+        var k           = KruscoreCalculator.KFactor(confidence, _cfg);
         theta += k * avgSurprise;
         confidence += totalWeight;
 
         var snapshot = new UserScoreSnapshot(userId, date, theta, confidence, maxGrade, maxGradeRaw);
         await _statsRepo.UpsertSnapshotAsync(snapshot);
+        return (int)(theta - oldScore);
     }
 
     /// <summary>
@@ -190,7 +214,7 @@ public class KruscoreService
                 ? KruscoreCalculator.GetRepeatS(e)
                 : KruscoreCalculator.GetS(style, routeType);
 
-            var w = 1.0; // grade weight, TODO: fetch from repo
+            var w = _routeWeightCache.GetValueOrDefault(a.RouteId, 1.0); // grade weight
             var surprise = w * (s - e);
 
             totalSurprise += surprise;
@@ -225,10 +249,25 @@ public class KruscoreService
         return totalWeight > 0 ? totalSurprise / totalWeight : 0;
     }
 
+    private readonly ConcurrentDictionary<Guid, double> _routeWeightCache = new();
+
     private async Task<double> SumWeightsAsync(List<Ascent> ascents)
     {
-        // пока нет user-ratings → все w=1.0
-        // TODO: когда появятся — вызывать KruscoreCalculator.GradeWeight для каждого route
-        return ascents.Count;
+        var totalWeight = 0.0;
+        var byRoute = ascents.GroupBy(a => a.RouteId);
+
+        foreach (var group in byRoute)
+        {
+            var routeId = group.Key;
+            var feedbacks = await _statsRepo.GetRouteFeedbackAsync(routeId);
+            var ratings = feedbacks.Where(f => f.GradeIndex.HasValue).Select(f => (double)f.GradeIndex!.Value).ToList();
+            var avgRating = ratings.Count > 0 ? ratings.Average() : 0;
+            var count = ratings.Count;
+            var weight = KruscoreCalculator.GradeWeight(avgRating, count, _cfg);
+            _routeWeightCache[routeId] = weight;
+            totalWeight += weight * group.Count();
+        }
+
+        return totalWeight;
     }
 }

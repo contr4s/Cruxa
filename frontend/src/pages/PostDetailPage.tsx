@@ -156,7 +156,7 @@ export default function PostDetailPage() {
         <Box sx={{ px: 2.5, pb: 1.5 }}>
           <PostDescription
             body={post.body}
-            totalKruskor={post.stats.totalKruskor}
+            deltaKruskor={post.stats.deltaKruskor}
             avgGrade={post.stats.avgGrade}
             duration={post.stats.duration}
             totalRoutes={post.stats.totalRoutes}
@@ -202,7 +202,7 @@ export default function PostDetailPage() {
       <Box sx={{ px: 2.5, pb: 1.5 }}>
         <PostDescription
           body={post.body}
-          totalKruskor={post.stats.totalKruskor}
+          deltaKruskor={post.stats.deltaKruskor}
           avgGrade={post.stats.avgGrade}
           duration={post.stats.duration}
           totalRoutes={post.stats.totalRoutes}

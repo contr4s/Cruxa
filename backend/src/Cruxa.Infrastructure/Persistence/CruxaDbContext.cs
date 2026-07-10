@@ -18,13 +18,14 @@ public class CruxaDbContext : DbContext
     public DbSet<Follower> Followers => Set<Follower>();
     public DbSet<Like> Likes => Set<Like>();
     public DbSet<Comment> Comments => Set<Comment>();
-    public DbSet<RouteReview> RouteReviews => Set<RouteReview>();
+    public DbSet<RouteFeedback> RouteFeedbacks => Set<RouteFeedback>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<PasswordCredential> PasswordCredentials => Set<PasswordCredential>();
     public DbSet<ExternalCredential> ExternalCredentials => Set<ExternalCredential>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<UserScoreSnapshot> UserScoreSnapshots => Set<UserScoreSnapshot>();
     public DbSet<GymAssignment> GymAssignments => Set<GymAssignment>();
+    public DbSet<UserFavoriteGym> UserFavoriteGyms => Set<UserFavoriteGym>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

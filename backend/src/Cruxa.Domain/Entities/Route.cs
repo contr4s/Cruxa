@@ -32,8 +32,8 @@ public class Route : Entity<Guid>
     private readonly List<Ascent> _ascents = [];
     public IReadOnlyCollection<Ascent> Ascents => _ascents.AsReadOnly();
 
-    private readonly List<RouteReview> _reviews = [];
-    public IReadOnlyCollection<RouteReview> Reviews => _reviews.AsReadOnly();
+    private readonly List<RouteFeedback> _feedbacks = [];
+    public IReadOnlyCollection<RouteFeedback> Feedbacks => _feedbacks.AsReadOnly();
 
     // For EF Core
     private Route() { }

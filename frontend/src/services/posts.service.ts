@@ -70,4 +70,6 @@ export async function removeAscentEndpoint(postId: string, ascentId: string): Pr
   await api.delete(`/posts/${postId}/ascents/${ascentId}`);
 }
 
-
+export async function publishPost(id: string, selectedMediaUrls?: string[]): Promise<void> {
+  await api.put(`/posts/${id}/publish`, selectedMediaUrls ? { selectedMediaUrls } : {});
+}

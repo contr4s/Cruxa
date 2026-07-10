@@ -70,16 +70,16 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
     {
         var command = new UpdatePostCommand(
             id, currentUser.GetRequiredUserId(), request.Description,
-            request.MediaUrls, request.Visibility);
+            request.MediaUrls, request.Visibility, Status: request.Status);
         var result = await mediator.Send(command);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
     /// <summary>Publish a draft post</summary>
     [HttpPut("{id:guid}/publish")]
-    public async Task<ActionResult> Publish(Guid id)
+    public async Task<ActionResult> Publish(Guid id, [FromBody] PublishPostRequest? body)
     {
-        var result = await mediator.Send(new PublishPostCommand(id, currentUser.GetRequiredUserId()));
+        var result = await mediator.Send(new PublishPostCommand(id, currentUser.GetRequiredUserId(), body?.SelectedMediaUrls));
         return result.IsSuccess ? NoContent() : BadRequest(result.Error);
     }
 

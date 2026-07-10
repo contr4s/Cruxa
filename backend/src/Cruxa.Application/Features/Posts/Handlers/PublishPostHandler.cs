@@ -27,10 +27,15 @@ public sealed class PublishPostHandler : IRequestHandler<PublishPostCommand, Res
             return Result.Failure(Error.Unauthorized("You can only publish your own posts"));
 
         post.Publish();
-        await _repository.UpdateAsync(post);
 
-        // Trigger Kruscore recalculation for this workout date
-        await _kruscore.RecalculateAsync(request.UserId, DateOnly.FromDateTime(post.CreatedAt));
+        if (request.SelectedMediaUrls is not null)
+            post.Update(description: null, mediaUrls: request.SelectedMediaUrls, visibility: null);
+
+        // Calculate delta Kruskor from this workout and persist on post
+        var delta = await _kruscore.RecalculateAsync(request.UserId, DateOnly.FromDateTime(post.CreatedAt));
+        post.SetDeltaKruskor(delta);
+
+        await _repository.UpdateAsync(post);
 
         return Result.Success();
     }

@@ -41,9 +41,8 @@ export interface GradeConsensus {
   routeId: string;
   gradeDistribution: GradeVoteCount[];
   consensusGrade: string;
-  consensusGradeIndex: number;
   totalVotes: number;
-  userVote?: number;
+  userVote?: string;
 }
 
 export interface GradeVoteCount {

@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions } from '../posts.service';
+import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions, publishPost } from '../posts.service';
 import type { CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
 
 export function useFeed(filter?: FeedFilter) {
@@ -74,6 +74,18 @@ export function useAddComment() {
     mutationFn: ({ postId, text }: { postId: string; text: string }) =>
       addComment(postId, text),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feed'] });
+    },
+  });
+}
+
+export function usePublishPost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ postId, selectedMediaUrls }: { postId: string; selectedMediaUrls?: string[] }) =>
+      publishPost(postId, selectedMediaUrls),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['post', variables.postId] });
       queryClient.invalidateQueries({ queryKey: ['feed'] });
     },
   });

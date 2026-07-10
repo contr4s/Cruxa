@@ -55,6 +55,11 @@ public class GradingSystem : AggregateRoot<Guid>
         return Mapping.ResolveGrade(raw);
     }
 
+    public Result<Grade> ResolveGrade(int index)
+    {
+        return Mapping.ResolveGrade(index);
+    }
+
     public void Update(string name, Dictionary<string, int> mapping)
     {
         Guard.AgainstNullOrWhiteSpace(name, nameof(name));

@@ -25,11 +25,11 @@ public class AscentsController(IMediator mediator, ICurrentUserService currentUs
 
     /// <summary>Add an ascent to a post</summary>
     [HttpPost]
-    public async Task<ActionResult> Add(Guid postId, [FromBody] AddAscentCommand command)
+    public async Task<ActionResult<AscentDto>> Add(Guid postId, [FromBody] AddAscentCommand command)
     {
         var cmd = command with { PostId = postId, UserId = currentUser.GetRequiredUserId() };
         var result = await mediator.Send(cmd);
-        return result.IsSuccess ? Created() : BadRequest(result.Error);
+        return result.IsSuccess ? Created(string.Empty, result.Value) : BadRequest(result.Error);
     }
 
     /// <summary>Update an ascent (style, media)</summary>

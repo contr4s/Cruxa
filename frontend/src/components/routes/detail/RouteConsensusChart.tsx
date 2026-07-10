@@ -38,9 +38,9 @@ export function RouteConsensusChart({ consensus }: RouteConsensusChartProps) {
         label: 'Голосов',
         data: consensus.gradeDistribution.map((d) => d.count),
         backgroundColor: consensus.gradeDistribution.map((d) =>
-          d.gradeIndex === consensus.userVote
+          d.grade === consensus.userVote
             ? theme.palette.secondary.main
-            : d.gradeIndex === consensus.consensusGradeIndex
+            : d.grade === consensus.consensusGrade
               ? theme.palette.primary.main
               : theme.custom.surface3,
         ),
@@ -107,7 +107,7 @@ export function RouteConsensusChart({ consensus }: RouteConsensusChartProps) {
           <>
             <Typography sx={{ fontSize: '0.68rem', color: theme.custom.text3 }}>/</Typography>
             <Typography sx={{ fontSize: '0.78rem', fontWeight: 700, color: theme.palette.secondary.main }}>
-              Вы: {consensus.gradeDistribution.find((d) => d.gradeIndex === consensus.userVote)?.grade ?? '—'}
+              Вы: {consensus.gradeDistribution.find((d) => d.grade === consensus.userVote)?.grade ?? '—'}
             </Typography>
           </>
         )}

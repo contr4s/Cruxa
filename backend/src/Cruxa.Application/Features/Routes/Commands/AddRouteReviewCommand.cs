@@ -10,4 +10,5 @@ public record AddRouteReviewCommand(
     Guid UserId,
     int? Rating = null,
     string? PrivateNotes = null,
-    string? PublicReview = null) : IRequest<Result<RouteReviewDto>>, ICommand;
+    string? PublicReview = null,
+    int? GradeIndex = null) : IRequest<Result<RouteReviewDto>>, ICommand;

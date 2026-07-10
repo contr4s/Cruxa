@@ -1,13 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import {
-  Box, Typography, TextField, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, CircularProgress, Checkbox, FormGroup,
+  Box, Typography, TextField, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, CircularProgress, Checkbox, IconButton,
 } from '@mui/material';
+import { ArrowUpward, ArrowDownward, Delete } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { ModalOverlay } from '../../ui/ModalOverlay';
 import { PostAscentList } from '../../posts/PostAscentList';
 import { MediaUploader } from './MediaUploader';
-import { uploadMedia } from '../../../services/mediaUpload.service';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useUpdatePost } from '../../../services/hooks/useDraftPost';
 import type { PostVisibility } from '../../../types/post';
@@ -30,37 +30,65 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
   const [body, setBody] = useState('');
   const [duration, setDuration] = useState<dayjs.Dayjs>(defaultDuration);
   const [visibility, setVisibility] = useState<PostVisibility>('Public');
-  const [selectedMedia, setSelectedMedia] = useState<string[]>([]);
-  const [extraFiles, setExtraFiles] = useState<File[]>([]);
+  const [selectedMedia, setSelectedMedia] = useState<Set<string>>(new Set());
+  const [mediaOrder, setMediaOrder] = useState<string[]>([]);
+  const [extraUrls, setExtraUrls] = useState<string[]>([]);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-  // On mount, select all ascent media by default
+  // On mount, init with ascent media
   useEffect(() => {
-    if (open) {
-      const allUrls = ascents.flatMap((a) => a.mediaUrls ?? []);
-      setSelectedMedia(allUrls);
+    if (open && !hasInitialized) {
+      const urls = ascents.flatMap((a) => a.mediaUrls ?? []);
+      setMediaOrder(urls);
+      setSelectedMedia(new Set(urls));
+      setHasInitialized(true);
     }
-  }, [open]);
+    if (!open) setHasInitialized(false);
+  }, [open, ascents, hasInitialized]);
+
+  const moveUp = (idx: number) => {
+    if (idx <= 0) return;
+    setMediaOrder((prev) => {
+      const next = [...prev];
+      [next[idx], next[idx - 1]] = [next[idx - 1], next[idx]];
+      return next;
+    });
+  };
+
+  const moveDown = (idx: number) => {
+    if (idx >= mediaOrder.length - 1) return;
+    setMediaOrder((prev) => {
+      const next = [...prev];
+      [next[idx], next[idx + 1]] = [next[idx + 1], next[idx]];
+      return next;
+    });
+  };
 
   const toggleMedia = (url: string) => {
-    setSelectedMedia((prev) =>
-      prev.includes(url) ? prev.filter((u) => u !== url) : [...prev, url],
-    );
+    setSelectedMedia((prev) => {
+      const next = new Set(prev);
+      if (next.has(url)) next.delete(url); else next.add(url);
+      return next;
+    });
   };
+
+  const removeUrl = (url: string) => {
+    setMediaOrder((prev) => prev.filter((u) => u !== url));
+    setSelectedMedia((prev) => { const n = new Set(prev); n.delete(url); return n; });
+  };
+
+  // Remove declaration of unused addUrls
+
 
   const handlePublish = async () => {
     if (!postId) return;
     const durationMinutes = duration.hour() * 60 + duration.minute();
-
-    // ponytail: upload extraFiles to server when backend endpoint is ready
-    const extraUrls = extraFiles.length > 0
-      ? await Promise.all(extraFiles.map((f) => uploadMedia(f).then((r) => r.url)))
-      : [];
-
+    const orderedSelected = mediaOrder.filter((url) => selectedMedia.has(url));
     await publishPost({
       body: body || undefined,
       duration: durationMinutes,
       visibility,
-      mediaUrls: [...selectedMedia, ...extraUrls],
+      mediaUrls: orderedSelected,
       status: 'published',
     });
     clearDraft();
@@ -68,7 +96,7 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
   };
 
   return (
-    <ModalOverlay open={open} onClose={onClose} maxWidth={480}>
+    <ModalOverlay open={open} onClose={onClose} maxWidth={520}>
       <Box sx={{ p: 2.5, display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Typography variant="h6">Завершить тренировку</Typography>
 
@@ -77,43 +105,60 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
           <PostAscentList ascents={ascents} />
         )}
 
-        {/* Media from ascents */}
-        {ascents.some((a) => (a.mediaUrls ?? []).length > 0) && (
+        {/* Media gallery — ordered, selectable, reorderable */}
+        {mediaOrder.length > 0 && (
           <Box>
             <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
-              Фото из пролазов в галерею поста
+              Фото для галереи поста ({selectedMedia.size} из {mediaOrder.length} выбрано)
             </Typography>
-            <FormGroup sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 1 }}>
-              {ascents.flatMap((a) =>
-                (a.mediaUrls ?? []).map((url) => (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+              {mediaOrder.map((url, idx) => {
+                const checked = selectedMedia.has(url);
+                const ascentUrls = ascents.flatMap((a) => a.mediaUrls ?? []);
+                const isAscent = ascentUrls.includes(url);
+                return (
                   <Box
                     key={url}
-                    sx={{ position: 'relative', width: 64, height: 64, cursor: 'pointer' }}
-                    onClick={() => toggleMedia(url)}
+                    sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 0.5, borderRadius: 1, bgcolor: 'action.hover' }}
                   >
+                    <Checkbox
+                      checked={checked}
+                      onChange={() => toggleMedia(url)}
+                      size="small"
+                    />
                     <Box
                       component="img"
                       src={url}
-                      sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1, opacity: selectedMedia.includes(url) ? 1 : 0.35 }}
+                      sx={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 0.5, flexShrink: 0, opacity: checked ? 1 : 0.35 }}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                     />
-                    <Checkbox
-                      checked={selectedMedia.includes(url)}
-                      size="small"
-                      sx={{ position: 'absolute', top: -4, right: -4, p: 0.25 }}
-                    />
+                    <Typography variant="caption" sx={{ flex: 1, wordBreak: 'break-all', fontSize: '0.7rem', opacity: checked ? 1 : 0.35 }}>
+                      {isAscent ? '📷 из пролаза' : '🔗 по ссылке'}
+                    </Typography>
+                    <IconButton size="small" onClick={() => moveUp(idx)} disabled={idx === 0}><ArrowUpward sx={{ fontSize: 16 }} /></IconButton>
+                    <IconButton size="small" onClick={() => moveDown(idx)} disabled={idx === mediaOrder.length - 1}><ArrowDownward sx={{ fontSize: 16 }} /></IconButton>
+                    {!isAscent && (
+                      <IconButton size="small" onClick={() => removeUrl(url)}><Delete sx={{ fontSize: 16 }} /></IconButton>
+                    )}
                   </Box>
-                )),
-              )}
-            </FormGroup>
+                );
+              })}
+            </Box>
           </Box>
         )}
 
         {/* Extra photos */}
         <Box>
           <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
-            Дополнительные фото
+            Добавить фото по ссылке
           </Typography>
-          <MediaUploader files={extraFiles} existingUrls={[]} onFilesChange={setExtraFiles} />
+          <MediaUploader files={[]} existingUrls={[]} onFilesChange={() => {}} urls={extraUrls} onUrlsChange={(urls) => {
+            setExtraUrls(urls);
+            urls.forEach((url) => {
+              setMediaOrder((prev) => prev.includes(url) ? prev : [...prev, url]);
+              setSelectedMedia((prev) => new Set(prev).add(url));
+            });
+          }} />
         </Box>
 
         {/* Body */}

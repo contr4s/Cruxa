@@ -45,11 +45,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<IFollowerRepository, FollowerRepository>();
-        services.AddScoped<IRouteReviewRepository, RouteReviewRepository>();
+        services.AddScoped<IRouteFeedbackRepository, RouteFeedbackRepository>();
         services.AddScoped<IPasswordCredentialRepository, PasswordCredentialRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<IStatsRepository, StatsRepository>();
         services.AddScoped<IGymAssignmentRepository, GymAssignmentRepository>();
+        services.AddScoped<IGymFavoriteRepository, GymFavoriteRepository>();
 
         // Transaction manager
         services.AddScoped<ITransactionManager, TransactionManager>();

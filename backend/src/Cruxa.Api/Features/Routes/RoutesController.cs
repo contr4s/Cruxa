@@ -77,4 +77,27 @@ public class RoutesController(IMediator mediator, ICurrentUserService currentUse
         return result.IsSuccess ? NoContent() : NotFound();
     }
 
+    /// <summary>
+    /// Save feedback (rating, review, notes, grade opinion) for a route. Upsert per user.
+    /// </summary>
+    [HttpPut("{id:guid}/feedback")]
+    [Authorize]
+    public async Task<IActionResult> SaveFeedback(Guid id, [FromBody] SaveRouteFeedbackCommand body)
+    {
+        var cmd = body with { RouteId = id, UserId = currentUser.GetRequiredUserId() };
+        var result = await mediator.Send(cmd);
+        return result.IsSuccess ? NoContent() : BadRequest(result.Error);
+    }
+
+    /// <summary>
+    /// Get grade consensus distribution for a route.
+    /// </summary>
+    [HttpGet("{id:guid}/consensus")]
+    [Authorize]
+    public async Task<ActionResult<GradeConsensusDto>> GetConsensus(Guid id)
+    {
+        var userId = currentUser.GetUserId();
+        var result = await mediator.Send(new GetGradeConsensusQuery(id, userId));
+        return result.IsSuccess ? Ok(result.Value) : NotFound();
+    }
 }

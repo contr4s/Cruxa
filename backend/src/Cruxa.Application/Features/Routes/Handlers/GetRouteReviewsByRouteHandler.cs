@@ -10,9 +10,9 @@ namespace Cruxa.Application.Features.Routes.Handlers;
 
 public sealed class GetRouteReviewsByRouteHandler : IRequestHandler<GetRouteReviewsByRouteQuery, Result<OffsetPaginatedList<RouteReviewDto>>>
 {
-    private readonly IRouteReviewRepository _repository;
+    private readonly IRouteFeedbackRepository _repository;
 
-    public GetRouteReviewsByRouteHandler(IRouteReviewRepository repository) => _repository = repository;
+    public GetRouteReviewsByRouteHandler(IRouteFeedbackRepository repository) => _repository = repository;
 
     public async Task<Result<OffsetPaginatedList<RouteReviewDto>>> Handle(GetRouteReviewsByRouteQuery request, CancellationToken ct)
     {

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { FitnessCenter } from '@mui/icons-material';
 import type { Location } from 'react-router-dom';
 
-import { useRoute, useRouteConsensus, useRouteReviews } from '../services/hooks/useRoutes';
+import { useRoute, useRouteConsensus, useRouteReviews, useSaveRouteFeedback } from '../services/hooks/useRoutes';
 import { useCreateDraftPost } from '../services/hooks/useDraftPost';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
@@ -35,6 +35,7 @@ export default function RouteDetailPage() {
   } = useRoute(id ?? '');
   const { data: consensus } = useRouteConsensus(id ?? '');
   const { data: reviews } = useRouteReviews(id ?? '');
+  const { mutateAsync: saveFeedback } = useSaveRouteFeedback();
 
   if (routeLoading) {
     return (
@@ -94,7 +95,7 @@ export default function RouteDetailPage() {
       <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 2.5 }}>
         <RouteInfoBlock route={route} />
         <RoutePhotoBlock route={route} />
-        <PrivateNotes />
+        <PrivateNotes onSave={(note) => saveFeedback({ routeId: route.id, body: { privateNote: note } })} />
         <RouteConsensusChart consensus={consensus ?? null} />
         <RouteReviews reviews={reviews ?? []} />
       </Box>
@@ -114,7 +115,7 @@ export default function RouteDetailPage() {
 
         <Box sx={{ minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2.5 }}>
           <RouteInfoBlock route={route} />
-          <PrivateNotes />
+          <PrivateNotes onSave={(note) => saveFeedback({ routeId: route.id, body: { privateNote: note } })} />
           <RouteConsensusChart consensus={consensus ?? null} />
           <RouteReviews reviews={reviews ?? []} />
         </Box>

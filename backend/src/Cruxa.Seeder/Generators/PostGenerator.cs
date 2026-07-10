@@ -1,22 +1,21 @@
 using Bogus;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
+using Cruxa.Seeder.Helpers;
 
 namespace Cruxa.Seeder.Generators;
 
 /// <summary>
-/// Generates posts with coupled ascents (realistic session counts) per user.
-/// Returns (Post, List&lt;Ascent&gt;) tuples — caller saves &amp; publishes sequentially.
+/// Generates posts with coupled ascents. Each climber has an ability level,
+/// ascents are chosen from routes matching their level via normal distribution.
 /// </summary>
 public static class PostGenerator
 {
     private static readonly AscentStyle[] Styles = [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.TopRope, AscentStyle.Attempt];
-    private static readonly double[] StyleWeights = [0.05, 0.20, 0.35, 0.25, 0.15];
     private static readonly string[] PostTags = ["climbing,person", "climbing,action", "climbing,wall", "climbing,bouldering", "climbing,training", "climbing,competition", "rock,climbing,outdoor", "climbing,gym,inside"];
 
     /// <summary>
-    /// For each climber generates post+ascent batches. Posts are OLDEST-first
-    /// so sequential kruskor calibration works correctly.
+    /// For each climber generates post+ascent batches. Posts are OLDEST-first.
     /// </summary>
     public static List<(User User, List<(Post Post, List<Ascent> Ascents)> Batches)> Generate(
         List<User> climbers, List<Gym> gyms, List<Route> routes)
@@ -31,12 +30,14 @@ public static class PostGenerator
                 : gyms.Where(g => g.City == user.City).ToList();
             if (cityGyms.Count == 0) cityGyms = gyms;
 
+            // Assign ability level: most climbers around 6a-6c, some weaker, some stronger
+            var abilityLevel = NormalDistribution.SampleInt(faker.Random, 580, 80, 460, 760);
+
             var postCount = faker.Random.Int(4, 10);
             var dayOffsets = new HashSet<int>();
             while (dayOffsets.Count < postCount)
                 dayOffsets.Add(faker.Random.Int(1, 90));
 
-            // OLDEST first so calibration snapshot anchors earliest date
             var sortedDays = dayOffsets.OrderByDescending(d => d).ToList();
 
             var batches = new List<(Post, List<Ascent>)>();
@@ -58,7 +59,7 @@ public static class PostGenerator
                     createdAt: createdAt).Value!;
 
                 var gymRoutes = routes.Where(r => r.GymId == gym.Id).ToList();
-                var ascents = GenerateAscents(faker, post.Id, user.Id, gymRoutes, createdAt);
+                var ascents = GenerateAscents(faker, post.Id, user.Id, gymRoutes, createdAt, abilityLevel);
 
                 batches.Add((post, ascents));
             }
@@ -69,7 +70,7 @@ public static class PostGenerator
         return result;
     }
 
-    private static List<Ascent> GenerateAscents(Faker faker, Guid postId, Guid userId, List<Route> gymRoutes, DateTime createdAt)
+    private static List<Ascent> GenerateAscents(Faker faker, Guid postId, Guid userId, List<Route> gymRoutes, DateTime createdAt, int abilityLevel)
     {
         if (gymRoutes.Count == 0) return [];
 
@@ -80,17 +81,17 @@ public static class PostGenerator
         int ascentCount;
         List<Route> pool;
 
-        if (sessionType <= 55) // bouldering session
+        if (sessionType <= 55)
         {
             pool = boulderRoutes.Count >= 3 ? boulderRoutes : gymRoutes;
             ascentCount = faker.Random.Int(15, 25);
         }
-        else if (sessionType <= 80) // lead session
+        else if (sessionType <= 80)
         {
             pool = leadRoutes.Count >= 3 ? leadRoutes : gymRoutes;
             ascentCount = faker.Random.Int(5, 9);
         }
-        else // mixed
+        else
         {
             pool = gymRoutes;
             ascentCount = faker.Random.Int(8, 14);
@@ -99,10 +100,31 @@ public static class PostGenerator
         ascentCount = Math.Min(ascentCount, pool.Count);
         if (ascentCount < 1) return [];
 
-        return faker.PickRandom(pool, ascentCount).Select(route =>
+        // Pick routes closest to the user's ability level using normal distribution
+        var scored = pool
+            .Select(r => new
+            {
+                Route = r,
+                Score = -Math.Abs(r.Grade.Index - abilityLevel),
+                Tiebreaker = faker.Random.Double()
+            })
+            .OrderByDescending(x => x.Score)
+            .ThenByDescending(x => x.Tiebreaker)
+            .Take(ascentCount)
+            .ToList();
+
+        return scored.Select(x =>
         {
-            var style = PickWeighted(faker, Styles, StyleWeights);
-            return Ascent.Create(postId, userId, route.Id, style, createdAt: createdAt).Value!;
+            var gradeDiff = x.Route.Grade.Index - abilityLevel;
+            var style = gradeDiff switch
+            {
+                <= -60 => PickWeighted(faker, [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint], [0.4, 0.4, 0.2]),
+                <= -20 => PickWeighted(faker, [AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.Onsight], [0.35, 0.35, 0.3]),
+                >= 60 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.TopRope], [0.5, 0.3, 0.2]),
+                >= 20 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.Flash], [0.3, 0.4, 0.3]),
+                _ => PickWeighted(faker, [AscentStyle.Redpoint, AscentStyle.Flash, AscentStyle.TopRope], [0.35, 0.3, 0.35]),
+            };
+            return Ascent.Create(postId, userId, x.Route.Id, style, createdAt: createdAt).Value!;
         }).ToList();
     }
 

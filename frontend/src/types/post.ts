@@ -23,7 +23,7 @@ export interface PostDto {
 }
 
 export interface PostStats {
-  totalKruskor: number;
+  deltaKruskor: number;
   avgGrade: string;
   duration?: number; // minutes
   totalRoutes: number;

@@ -1,3 +1,4 @@
+using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Commands;
@@ -49,18 +50,6 @@ public sealed class CreatePostHandler : IRequestHandler<CreatePostCommand, Resul
         CommentsCount = post.Comments.Count,
         Duration = post.Duration,
         IsLiked = false,
-        Ascents = post.Ascents.Select(a => new AscentDto
-        {
-            Id = a.Id,
-            RouteId = a.RouteId,
-            RouteName = a.Route?.Name ?? "",
-            Grade = a.Route?.Grade?.Raw ?? "",
-            GradeIndex = a.Route?.Grade?.Index ?? 0,
-            HoldColor = a.Route?.HoldColor ?? default,
-            Style = a.Style,
-            MediaUrls = a.MediaUrls.ToList(),
-            Tags = a.Route?.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList() ?? [],
-            CreatedAt = a.CreatedAt
-        }).ToList()
+        Ascents = post.Ascents.Adapt<List<AscentDto>>()
     };
 }

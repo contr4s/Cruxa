@@ -133,7 +133,9 @@ try
 
     // ──────────────────────────────────────────
     // Auto-apply EF Core migrations on startup
+    // (skipped in Testing — Integration test factory handles it)
     // ──────────────────────────────────────────
+    if (!app.Environment.IsEnvironment("Testing"))
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<CruxaDbContext>();
@@ -168,7 +170,8 @@ try
     app.UseMiddleware<Cruxa.Api.Common.Middleware.CorrelationIdMiddleware>();
     app.UseMiddleware<Cruxa.Api.Common.Middleware.ResponseLoggingMiddleware>();
     app.UseMiddleware<Cruxa.Api.Common.Middleware.ExceptionHandlingMiddleware>();
-    app.UseSerilogRequestLogging();
+    if (!app.Environment.IsEnvironment("Testing"))
+        app.UseSerilogRequestLogging();
 
     // Swagger / Scalar (only in Development)
     if (app.Environment.IsDevelopment())

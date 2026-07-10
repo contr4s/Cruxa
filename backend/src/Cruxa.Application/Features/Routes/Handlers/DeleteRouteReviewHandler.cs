@@ -6,9 +6,9 @@ namespace Cruxa.Application.Features.Routes.Handlers;
 
 public sealed class DeleteRouteReviewHandler : IRequestHandler<DeleteRouteReviewCommand, Result>
 {
-    private readonly IRouteReviewRepository _repository;
+    private readonly IRouteFeedbackRepository _repository;
 
-    public DeleteRouteReviewHandler(IRouteReviewRepository repository)
+    public DeleteRouteReviewHandler(IRouteFeedbackRepository repository)
     {
         _repository = repository;
     }

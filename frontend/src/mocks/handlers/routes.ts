@@ -91,9 +91,8 @@ export const routeHandlers = [
         gradeIndex: g.gradeIndex + Math.max(0, baseIndex - 12),
       })),
       consensusGrade: route.grade,
-      consensusGradeIndex: baseIndex,
       totalVotes: 65,
-      userVote: baseIndex,
+      userVote: route.grade,
     };
     return HttpResponse.json<GradeConsensus>(consensus);
   }),
@@ -142,5 +141,10 @@ export const routeHandlers = [
     if (idx === -1) return HttpResponse.json(null, { status: 404 });
     MOCK_ROUTES[idx] = { ...MOCK_ROUTES[idx], ...body, sector: body.sector ?? undefined, description: body.description ?? undefined };
     return HttpResponse.json<RouteDto>(MOCK_ROUTES[idx]);
+  }),
+
+  http.put('/api/routes/:id/feedback', async () => {
+    await mockDelay(200);
+    return HttpResponse.json(undefined, { status: 204 });
   }),
 ];

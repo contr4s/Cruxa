@@ -1,4 +1,6 @@
-import { Box, useTheme } from '@mui/material';
+import { useState } from 'react';
+import { Box, Skeleton, useTheme } from '@mui/material';
+import { BrokenImage } from '@mui/icons-material';
 import { flexCenter } from '../../theme/commonStyles';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -11,8 +13,14 @@ interface MediaCarouselProps {
   aspectRatio?: string;
 }
 
+type ImgState = 'loading' | 'loaded' | 'error';
+
 export function MediaCarousel({ images, aspectRatio = '16 / 10' }: MediaCarouselProps) {
   const theme = useTheme();
+  const [imgStates, setImgStates] = useState<Record<number, ImgState>>({});
+
+  const setState = (i: number, s: ImgState) =>
+    setImgStates((prev) => ({ ...prev, [i]: s }));
 
   if (images.length === 0) {
     return (
@@ -49,41 +57,62 @@ export function MediaCarousel({ images, aspectRatio = '16 / 10' }: MediaCarousel
         slidesPerView={1}
         style={{ width: '100%', height: '100%' }}
       >
-        {images.map((src, i) => (
-          <SwiperSlide key={i}>
-            <Box
-              component="img"
-              src={src}
-              alt={`Фото ${i + 1}`}
-              sx={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-              }}
-              onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                const target = e.currentTarget;
-                target.style.display = 'none';
-                target.nextElementSibling?.classList.remove('hidden');
-              }}
-            />
-            <Box
-              className="hidden"
-              sx={{
-                width: '100%',
-                height: '100%',
-                background: theme.custom.surface2,
-                ...flexCenter(),
-                color: theme.custom.text3,
-                fontSize: '0.85rem',
-                fontWeight: 500,
-                display: 'none',
-              }}
-            >
-              📷 Фото {i + 1}
-            </Box>
-          </SwiperSlide>
-        ))}
+        {images.map((src, i) => {
+          const state = imgStates[i] ?? 'loading';
+
+          return (
+            <SwiperSlide key={i}>
+              {state === 'error' ? (
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: theme.custom.surface2,
+                    ...flexCenter(),
+                    flexDirection: 'column',
+                    gap: 0.5,
+                    color: theme.custom.text3,
+                    fontSize: '0.82rem',
+                    fontWeight: 500,
+                  }}
+                >
+                  <BrokenImage sx={{ fontSize: 28, opacity: 0.5 }} />
+                  Не удалось загрузить фото
+                </Box>
+              ) : (
+                <>
+                  {state === 'loading' && (
+                    <Skeleton
+                      variant="rectangular"
+                      animation="wave"
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        bgcolor: theme.custom.surface2,
+                      }}
+                    />
+                  )}
+                  <Box
+                    component="img"
+                    src={src}
+                    alt={`Фото ${i + 1}`}
+                    onLoad={() => setState(i, 'loaded')}
+                    onError={() => setState(i, 'error')}
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                </>
+              )}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </Box>
   );

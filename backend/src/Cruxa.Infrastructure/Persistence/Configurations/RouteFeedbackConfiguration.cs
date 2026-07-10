@@ -4,16 +4,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Domain.Entities;
 
-internal class RouteReviewConfiguration : IEntityTypeConfiguration<RouteReview>
+internal class RouteFeedbackConfiguration : IEntityTypeConfiguration<RouteFeedback>
 {
-    public void Configure(EntityTypeBuilder<RouteReview> builder)
+    public void Configure(EntityTypeBuilder<RouteFeedback> builder)
     {
-        builder.ToTable("route_reviews");
+        builder.ToTable("route_feedback");
 
         builder.HasKey(r => r.Id);
 
         builder.Property(r => r.Rating)
             .HasMaxLength(2); // 1-5
+
+        builder.Property(r => r.GradeIndex);
 
         builder.Property(r => r.PrivateNotes)
             .HasMaxLength(1000);
@@ -28,15 +30,15 @@ internal class RouteReviewConfiguration : IEntityTypeConfiguration<RouteReview>
 
         builder.HasIndex(r => r.RouteId);
         builder.HasIndex(r => r.UserId);
-        builder.HasIndex(r => new { r.RouteId, r.UserId }).IsUnique(); // one review per user per route
+        builder.HasIndex(r => new { r.RouteId, r.UserId }).IsUnique(); // one feedback per user per route
 
         builder.HasOne(r => r.Route)
-            .WithMany(rt => rt.Reviews)
+            .WithMany(rt => rt.Feedbacks)
             .HasForeignKey(r => r.RouteId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(r => r.User)
-            .WithMany(u => u.Reviews)
+            .WithMany(u => u.Feedbacks)
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Restrict);
     }

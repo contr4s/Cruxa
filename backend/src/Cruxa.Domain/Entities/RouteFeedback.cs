@@ -4,16 +4,19 @@ using Abstractions;
 using Common;
 
 /// <summary>
-/// Отзыв пользователя о трассе (Rating + PublicReview + PrivateNotes).
-/// Одна трасса может иметь много отзывов (по одному от каждого пользователя).
+/// Обратная связь пользователя о трассе (оценка, отзыв, заметки, мнение о грейде).
+/// Одна трасса может иметь много фидбеков (по одному от каждого пользователя).
 /// </summary>
-public class RouteReview : Entity<Guid>
+public class RouteFeedback : Entity<Guid>
 {
     public Guid RouteId { get; private set; }
     public Guid UserId { get; private set; }
 
     /// <summary>Оценка трассы от 1 до 5 (насколько понравилась)</summary>
     public int? Rating { get; private set; }
+
+    /// <summary>Мнение пользователя о грейде трассы (gradeIndex), null = не голосовал</summary>
+    public int? GradeIndex { get; private set; }
 
     /// <summary>Приватные заметки (расклад трассы, ключевые движения — видно только себе)</summary>
     public string? PrivateNotes { get; private set; }
@@ -31,14 +34,15 @@ public class RouteReview : Entity<Guid>
     private readonly User _user = null!;
     public User User => _user;
 
-    private RouteReview() { }
+    private RouteFeedback() { }
 
-    public static Result<RouteReview> Create(
+    public static Result<RouteFeedback> Create(
         Guid routeId,
         Guid userId,
         int? rating = null,
         string? privateNotes = null,
-        string? publicReview = null)
+        string? publicReview = null,
+        int? gradeIndex = null)
     {
         Guard.AgainstDefault(routeId, nameof(routeId));
         Guard.AgainstDefault(userId, nameof(userId));
@@ -46,7 +50,7 @@ public class RouteReview : Entity<Guid>
         if (rating.HasValue)
             Guard.AgainstOutOfRange(rating.Value, 1, 5, nameof(rating));
 
-        return Result.Success(new RouteReview
+        return Result.Success(new RouteFeedback
         {
             Id = Guid.NewGuid(),
             RouteId = routeId,
@@ -54,11 +58,12 @@ public class RouteReview : Entity<Guid>
             Rating = rating,
             PrivateNotes = privateNotes,
             PublicReview = publicReview,
+            GradeIndex = gradeIndex,
             CreatedAt = DateTime.UtcNow
         });
     }
 
-    public void UpdateReview(int? rating, string? privateNotes, string? publicReview)
+    public void UpdateFeedback(int? rating, string? privateNotes, string? publicReview, int? gradeIndex)
     {
         if (rating.HasValue)
             Guard.AgainstOutOfRange(rating.Value, 1, 5, nameof(rating));
@@ -66,6 +71,7 @@ public class RouteReview : Entity<Guid>
         Rating = rating;
         PrivateNotes = privateNotes;
         PublicReview = publicReview;
+        GradeIndex = gradeIndex;
         UpdatedAt = DateTime.UtcNow;
     }
 }

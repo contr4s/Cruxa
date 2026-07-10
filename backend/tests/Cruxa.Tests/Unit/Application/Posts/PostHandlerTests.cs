@@ -4,10 +4,13 @@ using Cruxa.Application.Features.Posts.Contracts;
 using Cruxa.Application.Features.Posts.Queries;
 using Cruxa.Application.Features.Social.Contracts;
 using Cruxa.Application.Features.Statistics.Services;
+using Cruxa.Application.Features.Statistics.Options;
 using Cruxa.Application.Features.Statistics.Contracts;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
 using Cruxa.Application.Common.Contracts;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace Cruxa.Tests.Unit.Application.Posts;
@@ -24,7 +27,9 @@ public class PostHandlerTests
 
     public PostHandlerTests()
     {
-        _kruscore = new KruscoreService(_statsRepo.Object);
+        _kruscore = new KruscoreService(_statsRepo.Object,
+            Mock.Of<ILogger<KruscoreService>>(),
+            Options.Create(new KruscoreOptions()));
         _statsRepo.Setup(r => r.GetLastSnapshotBeforeAsync(It.IsAny<Guid>(), It.IsAny<DateOnly>()))
             .ReturnsAsync((UserScoreSnapshot?)null);
         _statsRepo.Setup(r => r.GetAllAscentsOrderedAsync(It.IsAny<Guid>()))
@@ -54,7 +59,7 @@ public class PostHandlerTests
     [Fact]
     public async Task UpdatePost_WhenNotFound_ReturnsNotFound()
     {
-        var handler = new UpdatePostHandler(_postRepo.Object);
+        var handler = new UpdatePostHandler(_postRepo.Object, _kruscore);
         _postRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Post?)null);
 
         var result = await handler.Handle(
@@ -68,7 +73,7 @@ public class PostHandlerTests
     public async Task UpdatePost_WhenNotOwn_ReturnsUnauthorized()
     {
         var post = CreatePost();
-        var handler = new UpdatePostHandler(_postRepo.Object);
+        var handler = new UpdatePostHandler(_postRepo.Object, _kruscore);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(

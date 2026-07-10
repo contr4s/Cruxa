@@ -7,7 +7,7 @@ import { userHandlers } from './handlers/users';
 import { adminHandlers } from './handlers/admin';
 import { routesetterHandlers } from './handlers/routesetter';
 import { gymAdminHandlers } from './handlers/gymAdmin';
-import { tagsHandlers, managedGymHandlers, mediaHandlers } from './handlers/misc';
+import { tagsHandlers, managedGymHandlers, mediaHandlers, gradingSystemHandlers } from './handlers/misc';
 
 const shouldLog = () => import.meta.env.VITE_DEBUG === 'true' || import.meta.env.DEV;
 
@@ -23,6 +23,7 @@ export const worker = setupWorker(
   ...tagsHandlers,
   ...managedGymHandlers,
   ...mediaHandlers,
+  ...gradingSystemHandlers,
 );
 
 if (shouldLog()) {

@@ -3,14 +3,14 @@ import { Whatshot, TrendingUp, Timer, EmojiEvents, ListAlt } from '@mui/icons-ma
 
 interface PostDescriptionProps {
   body?: string;
-  totalKruskor: number;
+  deltaKruskor: number;
   avgGrade: string;
   duration?: number;
   totalRoutes?: number;
   maxGrade?: string;
 }
 
-export function PostDescription({ body, totalKruskor, avgGrade, duration, totalRoutes, maxGrade }: PostDescriptionProps) {
+export function PostDescription({ body, deltaKruskor, avgGrade, duration, totalRoutes, maxGrade }: PostDescriptionProps) {
   const theme = useTheme();
   const hours = duration ? Math.floor(duration / 60) : 0;
   const minutes = duration ? duration % 60 : 0;
@@ -32,7 +32,7 @@ export function PostDescription({ body, totalKruskor, avgGrade, duration, totalR
       )}
 
       <Box sx={{ display: 'flex', gap: { xs: 2, sm: 2.5, md: 3 }, flexWrap: 'wrap' }}>
-        <StatItem icon={<Whatshot sx={{ fontSize: 18, color: theme.palette.primary.main }} />} label="Крускор" value={`+${totalKruskor}`} color={theme.palette.primary.main} />
+        <StatItem icon={<Whatshot sx={{ fontSize: 18, color: theme.palette.primary.main }} />} label="Крускор" value={`${deltaKruskor >= 0 ? '+' : ''}${deltaKruskor}`} color={theme.palette.primary.main} />
         {maxGrade && <StatItem icon={<EmojiEvents sx={{ fontSize: 18, color: theme.palette.secondary.main }} />} label="Макс. сложность" value={maxGrade} color={theme.palette.secondary.main} />}
         <StatItem icon={<TrendingUp sx={{ fontSize: 18, color: theme.palette.text.secondary }} />} label="Средняя" value={avgGrade} />
         {totalRoutes !== undefined && <StatItem icon={<ListAlt sx={{ fontSize: 18, color: theme.palette.text.secondary }} />} label="Пройдено трасс" value={`${totalRoutes}`} />}

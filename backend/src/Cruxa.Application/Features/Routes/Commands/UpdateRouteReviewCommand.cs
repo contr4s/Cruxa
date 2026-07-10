@@ -10,4 +10,5 @@ public record UpdateRouteReviewCommand(
     Guid UserId,
     int? Rating,
     string? PrivateNotes,
-    string? PublicReview) : IRequest<Result<RouteReviewDto>>, ICommand;
+    string? PublicReview,
+    int? GradeIndex = null) : IRequest<Result<RouteReviewDto>>, ICommand;

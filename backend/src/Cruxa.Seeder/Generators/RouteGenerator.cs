@@ -2,15 +2,28 @@ using Bogus;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using Cruxa.Domain.ValueObjects;
+using Cruxa.Seeder.Helpers;
 
 namespace Cruxa.Seeder.Generators;
 
 public static class RouteGenerator
 {
-    private static readonly string[] GradeKeys = [
-        "5c","6a","6a+","6b","6b+","6c","6c+",
-        "7a","7a+","7b","7b+","7c","7c+","8a"
+    // 21 Fontainbleau grades with their indices
+    private static readonly (string Name, int Index)[] GradeTable =
+    [
+        ("4a", 400), ("4b", 420), ("4c", 440),
+        ("5a", 460), ("5b", 480), ("5c", 500),
+        ("6a", 520), ("6a+", 540), ("6b", 560),
+        ("6b+", 580), ("6c", 600), ("6c+", 620),
+        ("7a", 640), ("7a+", 660), ("7b", 680),
+        ("7b+", 700), ("7c", 720), ("7c+", 740),
+        ("8a", 760), ("8a+", 780), ("8b", 800),
     ];
+
+    // Mean grade for normal distribution: ~6b (index 560)
+    private const double GradeMean = 560;
+    // StdDev ~1.5 grades (30 index points)
+    private const double GradeStdDev = 30;
 
     private static readonly (string Name, double Weight)[] SectorWeights =
     {
@@ -29,12 +42,7 @@ public static class RouteGenerator
         var routes = new List<Route>();
         var faker = new Faker("ru");
 
-        var gradeMapping = GradeMapping.Create(new Dictionary<string, int>
-        {
-            ["5c"] = 500, ["6a"] = 520, ["6a+"] = 540, ["6b"] = 560, ["6b+"] = 580,
-            ["6c"] = 600, ["6c+"] = 620, ["7a"] = 640, ["7a+"] = 660, ["7b"] = 680,
-            ["7b+"] = 700, ["7c"] = 720, ["7c+"] = 740, ["8a"] = 760,
-        }).Value;
+        var gradeMapping = GradeMapping.Create(GradeTable.ToDictionary(g => g.Name, g => g.Index)).Value;
 
         var routeTypes = new[] { RouteType.Bouldering, RouteType.Lead, RouteType.Speed };
         var typeWeights = new[] { 0.60, 0.25, 0.15 };
@@ -57,13 +65,16 @@ public static class RouteGenerator
                 setterId = null;
 
             var usedNames = new HashSet<string>();
-
-            var count = 20;
+            // 50-80 routes per gym (normal distribution around 60)
+            var count = NormalDistribution.SampleInt(faker.Random, 60, 12, 50, 80);
 
             for (var r = 0; r < count; r++)
             {
-                var gradeRaw = faker.PickRandom(GradeKeys);
-                var grade = gradeMapping.ResolveGrade(gradeRaw).Value;
+                // Grade from normal distribution around 6b, clip to grade table bounds
+                var gradeIndex = NormalDistribution.SampleInt(faker.Random, GradeMean, GradeStdDev, GradeTable[0].Index, GradeTable[^1].Index);
+                // Find closest matching grade
+                var gradeEntry = GradeTable.OrderBy(g => Math.Abs(g.Index - gradeIndex)).First();
+                var grade = gradeMapping.ResolveGrade(gradeEntry.Name).Value;
 
                 var type = PickWeighted(faker, routeTypes, typeWeights);
                 var holdColor = faker.PickRandom(holdColors);

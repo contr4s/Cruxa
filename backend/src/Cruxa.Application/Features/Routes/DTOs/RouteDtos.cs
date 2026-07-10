@@ -49,7 +49,7 @@ public class RouteDto
         PhotoUrls = r.PhotoUrls.ToList(),
         Tags = r.Tags.Select(t => t.Value).ToList(),
         Sector = r.Sector,
-        Rating = r.Reviews.Count > 0 ? r.Reviews.Average(rv => rv.Rating) ?? 0 : 0,
+        Rating = r.Feedbacks.Count > 0 ? r.Feedbacks.Average(f => f.Rating) ?? 0 : 0,
         AscentsCount = r.Ascents.Count,
         CreatedAt = r.CreatedAt,
         IsActive = r.IsActive,

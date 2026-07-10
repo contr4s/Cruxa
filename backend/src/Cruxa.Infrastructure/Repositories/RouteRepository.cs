@@ -20,7 +20,7 @@ public class RouteRepository : IRouteRepository
             .Include(r => r.Gym)
             .Include(r => r.Author)
             .Include(r => r.Tags)
-            .Include(r => r.Reviews)
+            .Include(r => r.Feedbacks)
             .Include(r => r.Ascents)
             .FirstOrDefaultAsync(r => r.Id == id);
     }
@@ -39,7 +39,7 @@ public class RouteRepository : IRouteRepository
             .Include(r => r.Gym)
             .Include(r => r.Author)
             .Include(r => r.Tags)
-            .Include(r => r.Reviews)
+            .Include(r => r.Feedbacks)
             .Include(r => r.Ascents);
         var totalCount = await query.CountAsync();
         var items = await query
@@ -56,7 +56,7 @@ public class RouteRepository : IRouteRepository
             .Include(r => r.Gym)
             .Include(r => r.Author)
             .Include(r => r.Tags)
-            .Include(r => r.Reviews)
+            .Include(r => r.Feedbacks)
             .Include(r => r.Ascents)
             .Where(r => r.GymId == gymId);
         var totalCount = await query.CountAsync();
@@ -74,7 +74,7 @@ public class RouteRepository : IRouteRepository
             .Include(r => r.Gym)
             .Include(r => r.Author)
             .Include(r => r.Tags)
-            .Include(r => r.Reviews)
+            .Include(r => r.Feedbacks)
             .Include(r => r.Ascents)
             .ToListAsync();
     }

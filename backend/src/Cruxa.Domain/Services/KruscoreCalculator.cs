@@ -70,58 +70,69 @@ public static class KruscoreCalculator
     /// <summary>
     /// K-factor — how fast the rating adapts.
     /// </summary>
-    public static double KFactor(double confidence)
-        => Math.Max(5.0, 32.0 / Math.Sqrt(confidence));
+    public static double KFactor(double confidence, KruscoreConfig? cfg = null)
+    {
+        var c = cfg ?? KruscoreConfig.Default;
+        return Math.Max(c.KMin, c.KBase / Math.Sqrt(confidence));
+    }
 
     /// <summary>
-    /// Exponential decay factor (halflife = 90 days).
+    /// Exponential decay factor.
     /// </summary>
-    public static double DecayFactor(int daysSinceLastSnapshot)
+    public static double DecayFactor(int daysSinceLastSnapshot, KruscoreConfig? cfg = null)
     {
-        var t = daysSinceLastSnapshot / 90.0;
+        var c = cfg ?? KruscoreConfig.Default;
+        var t = daysSinceLastSnapshot / c.DecayHalfLifeDays;
         return Math.Pow(2.0, -t);
     }
 
     /// <summary>
     /// Grade reliability weight (w_grade). 1.0 when no ratings available.
     /// </summary>
-    public static double GradeWeight(double avgUserRating, int ratingsCount)
+    public static double GradeWeight(double avgUserRating, int ratingsCount, KruscoreConfig? cfg = null)
     {
+        var c = cfg ?? KruscoreConfig.Default;
         if (ratingsCount <= 0) return 1.0;
-        var deviation = Math.Abs(avgUserRating - 400) / 200.0; // 400 is lowest grade
-        var consensus = Math.Min(1.0, ratingsCount / 10.0);
-        return 1.0 - 0.3 * deviation * consensus;
+        var deviation = Math.Abs(avgUserRating - c.GradeBaseline) / c.GradeDeviationScale;
+        var consensus = Math.Min(1.0, ratingsCount / c.GradeConsensusDivisor);
+        return 1.0 - c.GradeDeviationFactor * deviation * consensus;
     }
+
     /// <summary>
     /// Weight multiplier for route type (calibration only).
-    /// Lead = 3 (more informative), Bouldering = 1.
     /// </summary>
-    public static int RouteTypeWeight(RouteType routeType) => routeType switch
+    public static int RouteTypeWeight(RouteType routeType, KruscoreConfig? cfg = null)
     {
-        RouteType.Lead => 3,
-        _ => 1,
-    };
+        var c = cfg ?? KruscoreConfig.Default;
+        return routeType switch
+        {
+            RouteType.Lead => c.RouteWeightLead,
+            _ => c.RouteWeightOther,
+        };
+    }
 
     /// <summary>
     /// Performance Rating — used for calibration and competition scoring.
     /// Only successful ascents (Onsight/Flash/Redpoint/TopRope).
     /// Attempts and Repeats are excluded.
     /// </summary>
-    public static double PerformanceRating(double[] gradeIndices, double[] sValues, int[] weights, double scale = 50.0, double offset = 0.7)
+    public static double PerformanceRating(double[] gradeIndices, double[] sValues, int[] weights, KruscoreConfig? cfg = null)
     {
+        var c = cfg ?? KruscoreConfig.Default;
         var sum = 0.0;
         var totalW = 0;
         for (var i = 0; i < gradeIndices.Length; i++)
         {
             if (sValues[i] <= 0) continue; // skip Attempt/Repeat
-            sum += weights[i] * (gradeIndices[i] + scale * (sValues[i] - offset));
+            sum += weights[i] * (gradeIndices[i] + c.EloScale * (sValues[i] - c.EloOffset));
             totalW += weights[i];
         }
-        return totalW > 0 ? sum / totalW : 400.0;
+        return totalW > 0 ? sum / totalW : c.DefaultRating;
     }
 
-    public static double PerformanceRating(List<Ascent> ascents)
+    public static double PerformanceRating(List<Ascent> ascents, KruscoreConfig? cfg = null)
     {
+        var c = cfg ?? KruscoreConfig.Default;
         var grades = new double[ascents.Count];
         var sVals = new double[ascents.Count];
         var weights = new int[ascents.Count];
@@ -133,9 +144,9 @@ public static class KruscoreCalculator
             var routeType = (RouteType)a.Route.Type;
             var style = a.Style;
             sVals[i] = style == AscentStyle.Repeat ? 0.0 : GetS(style, routeType);
-            weights[i] = RouteTypeWeight(routeType);
+            weights[i] = RouteTypeWeight(routeType, c);
         }
 
-        return PerformanceRating(grades, sVals, weights);
+        return PerformanceRating(grades, sVals, weights, c);
     }
 }

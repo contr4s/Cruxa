@@ -143,8 +143,9 @@ public class StatsIntegrationTests(CruxaApiFactory factory) : IntegrationTestBas
         var response = await Client.GetAsync($"/api/users/{CurrentUserId}/top-routes");
 
         response.EnsureSuccessStatusCode();
-        var routes = await DeserializeAsync<List<TopRouteItemDto>>(response);
-        routes.Should().NotBeNull();
+        var result = await DeserializeAsync<TopRoutesResponseDto>(response);
+        result.Should().NotBeNull();
+        result.Routes.Should().NotBeNull();
     }
 
     [Fact]
@@ -158,7 +159,7 @@ public class StatsIntegrationTests(CruxaApiFactory factory) : IntegrationTestBas
         response.EnsureSuccessStatusCode();
         var activity = await DeserializeAsync<MonthlyActivityDto>(response);
         activity.Should().NotBeNull();
-        activity.TotalWorkouts.Should().Be(1);
+        activity.WeekActivity.Should().Be(1);
     }
 
     [Fact(Skip = "Radar skills 500 — needs investigation: KruscoreService.GetRadarSkillsAsync throws")]

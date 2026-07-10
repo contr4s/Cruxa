@@ -333,6 +333,9 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("DeltaKruskor")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)");
@@ -454,7 +457,7 @@ namespace Cruxa.Infrastructure.Migrations
                     b.ToTable("routes", (string)null);
                 });
 
-            modelBuilder.Entity("Cruxa.Domain.Entities.RouteReview", b =>
+            modelBuilder.Entity("Cruxa.Domain.Entities.RouteFeedback", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -462,6 +465,9 @@ namespace Cruxa.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("GradeIndex")
+                        .HasColumnType("integer");
 
                     b.Property<string>("PrivateNotes")
                         .HasMaxLength(1000)
@@ -493,7 +499,7 @@ namespace Cruxa.Infrastructure.Migrations
                     b.HasIndex("RouteId", "UserId")
                         .IsUnique();
 
-                    b.ToTable("route_reviews", (string)null);
+                    b.ToTable("route_feedback", (string)null);
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.Tag", b =>
@@ -716,6 +722,24 @@ namespace Cruxa.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.UserFavoriteGym", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GymId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("UserId", "GymId");
+
+                    b.HasIndex("GymId");
+
+                    b.ToTable("user_favorite_gyms", (string)null);
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.UserScoreSnapshot", b =>
@@ -1000,21 +1024,40 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("Gym");
                 });
 
-            modelBuilder.Entity("Cruxa.Domain.Entities.RouteReview", b =>
+            modelBuilder.Entity("Cruxa.Domain.Entities.RouteFeedback", b =>
                 {
                     b.HasOne("Cruxa.Domain.Entities.Route", "Route")
-                        .WithMany("Reviews")
+                        .WithMany("Feedbacks")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Cruxa.Domain.Entities.User", "User")
-                        .WithMany("Reviews")
+                        .WithMany("Feedbacks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Route");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Cruxa.Domain.Entities.UserFavoriteGym", b =>
+                {
+                    b.HasOne("Cruxa.Domain.Entities.Gym", "Gym")
+                        .WithMany()
+                        .HasForeignKey("GymId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cruxa.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gym");
 
                     b.Navigation("User");
                 });
@@ -1059,7 +1102,7 @@ namespace Cruxa.Infrastructure.Migrations
                 {
                     b.Navigation("Ascents");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("Feedbacks");
                 });
 
             modelBuilder.Entity("Cruxa.Domain.Entities.User", b =>
@@ -1069,6 +1112,8 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("ExternalCredentials");
+
+                    b.Navigation("Feedbacks");
 
                     b.Navigation("Followers");
 
@@ -1081,8 +1126,6 @@ namespace Cruxa.Infrastructure.Migrations
                     b.Navigation("Posts");
 
                     b.Navigation("RefreshTokens");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

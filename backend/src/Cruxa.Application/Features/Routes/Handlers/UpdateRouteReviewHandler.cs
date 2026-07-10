@@ -8,9 +8,9 @@ namespace Cruxa.Application.Features.Routes.Handlers;
 
 public sealed class UpdateRouteReviewHandler : IRequestHandler<UpdateRouteReviewCommand, Result<RouteReviewDto>>
 {
-    private readonly IRouteReviewRepository _repository;
+    private readonly IRouteFeedbackRepository _repository;
 
-    public UpdateRouteReviewHandler(IRouteReviewRepository repository)
+    public UpdateRouteReviewHandler(IRouteFeedbackRepository repository)
     {
         _repository = repository;
     }
@@ -24,7 +24,7 @@ public sealed class UpdateRouteReviewHandler : IRequestHandler<UpdateRouteReview
         if (review.UserId != request.UserId)
             return Result.Failure<RouteReviewDto>(Error.Unauthorized("You can only update your own reviews"));
 
-        review.UpdateReview(request.Rating, request.PrivateNotes, request.PublicReview);
+        review.UpdateFeedback(request.Rating, request.PrivateNotes, request.PublicReview, null);
         await _repository.UpdateAsync(review);
         return Result.Success(review.Adapt<RouteReviewDto>());
     }

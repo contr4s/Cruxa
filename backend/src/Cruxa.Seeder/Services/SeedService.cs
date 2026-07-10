@@ -93,20 +93,22 @@ public class SeedService
                 // Publish — triggers KruscoreService.RecalculateAsync
                 post.Publish();
                 var date = DateOnly.FromDateTime(post.CreatedAt);
-                await _kruscore.RecalculateAsync(user.Id, date);
+                var delta = await _kruscore.RecalculateAsync(user.Id, date);
+                post.SetDeltaKruskor(delta);
             }
         }
         Console.WriteLine($"{allPosts.Count} posts, {allAscents.Count} ascents");
 
-        // ── Step 9: Social (followers, likes, comments, reviews) ──
+        // ── Step 9: Social (followers, likes, comments, feedbacks, favorites) ──
         Console.Write("❤️ Social... ");
-        var (followers, likes, comments, reviews) = SocialGenerator.Generate(climbers, allPosts, routes);
+        var (followers, likes, comments, feedbacks, favoriteGyms) = SocialGenerator.Generate(climbers, allPosts, routes, gyms);
         _db.Followers.AddRange(followers);
         _db.Likes.AddRange(likes);
         _db.Comments.AddRange(comments);
-        _db.RouteReviews.AddRange(reviews);
+        _db.Set<RouteFeedback>().AddRange(feedbacks);
+        _db.Set<UserFavoriteGym>().AddRange(favoriteGyms);
         await _db.SaveChangesAsync();
-        Console.WriteLine($"followers:{followers.Count} likes:{likes.Count} comments:{comments.Count} reviews:{reviews.Count}");
+        Console.WriteLine($"followers:{followers.Count} likes:{likes.Count} comments:{comments.Count} feedbacks:{feedbacks.Count} favorites:{favoriteGyms.Count}");
 
         Console.WriteLine($"\n✅ Seed complete! Gyms:{gyms.Count} Users:{users.Count} Routes:{routes.Count} Posts:{allPosts.Count} Ascents:{allAscents.Count}");
     }
@@ -116,7 +118,8 @@ public class SeedService
         Console.Write("🧹 Clearing seed data... ");
 
         _db.UserScoreSnapshots.RemoveRange(await _db.UserScoreSnapshots.ToListAsync());
-        _db.RouteReviews.RemoveRange(await _db.RouteReviews.ToListAsync());
+        _db.Set<RouteFeedback>().RemoveRange(await _db.Set<RouteFeedback>().ToListAsync());
+        _db.Set<UserFavoriteGym>().RemoveRange(await _db.Set<UserFavoriteGym>().ToListAsync());
         _db.Comments.RemoveRange(await _db.Comments.ToListAsync());
         _db.Likes.RemoveRange(await _db.Likes.ToListAsync());
         _db.Followers.RemoveRange(await _db.Followers.ToListAsync());

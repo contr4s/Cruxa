@@ -1,3 +1,4 @@
+using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Ascents.Contracts;
 using Cruxa.Application.Features.Ascents.Commands;
@@ -27,19 +28,7 @@ public sealed class UpdateAscentHandler : IRequestHandler<UpdateAscentCommand, R
         ascent.UpdateStyle(request.Style, request.MediaUrls);
         await _repository.UpdateAsync(ascent);
 
-        var dto = new AscentDto
-        {
-            Id = ascent.Id,
-            RouteId = ascent.RouteId,
-            RouteName = ascent.Route?.Name ?? "",
-            Grade = ascent.Route?.Grade?.Raw ?? "",
-            GradeIndex = ascent.Route?.Grade?.Index ?? 0,
-            HoldColor = ascent.Route?.HoldColor ?? default,
-            Style = ascent.Style,
-            MediaUrls = ascent.MediaUrls.ToList(),
-            Tags = ascent.Route?.Tags.Select(t => new TagDto { Name = t.Value, Category = t.Category }).ToList() ?? [],
-            CreatedAt = ascent.CreatedAt
-        };
+        var dto = ascent.Adapt<AscentDto>();
         return Result.Success(dto);
     }
 }
