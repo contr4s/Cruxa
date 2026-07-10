@@ -12,10 +12,11 @@ interface WorkoutFeedProps {
   getComments: (postId: string) => Promise<CommentDto[] | { items: CommentDto[] }>;
   onLikeToggle: (postId: string, wasLiked: boolean) => void;
   onCommentAdded: () => void;
+  onEdit?: (postId: string) => void;
   onDelete?: (postId: string) => void;
 }
 
-export function WorkoutFeed({ posts, isLoading, emptyStateMessage, defaultTab = 1, getComments, onLikeToggle, onCommentAdded, onDelete }: WorkoutFeedProps) {
+export function WorkoutFeed({ posts, isLoading, emptyStateMessage, defaultTab = 1, getComments, onLikeToggle, onCommentAdded, onEdit, onDelete }: WorkoutFeedProps) {
   const currentUserId = useAuthStore((s) => s.userId);
 
   if (isLoading) {
@@ -41,6 +42,7 @@ export function WorkoutFeed({ posts, isLoading, emptyStateMessage, defaultTab = 
               getComments={getComments}
               onLikeToggle={onLikeToggle}
               onCommentAdded={onCommentAdded}
+              onEdit={onEdit ? () => onEdit(post.id) : undefined}
               onDelete={onDelete ? () => onDelete(post.id) : undefined}
             />
           ))}

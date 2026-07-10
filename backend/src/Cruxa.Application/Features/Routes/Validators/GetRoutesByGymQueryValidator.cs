@@ -7,7 +7,7 @@ public class GetRoutesByGymQueryValidator : AbstractValidator<GetRoutesByGymQuer
 {
     public GetRoutesByGymQueryValidator()
     {
-        RuleFor(x => x.GymId)
+        RuleFor(x => x.Filter.GymId)
             .NotEmpty().WithMessage("Gym ID is required");
     }
 }

@@ -117,8 +117,11 @@ public class RouteRepository : IRouteRepository
             query = query.Where(r => r.Grade.Index <= filter.MaxGradeIndex.Value);
 
         // Active / archived status
-        if (filter.IsActive.HasValue)
-            query = query.Where(r => r.IsActive == filter.IsActive.Value);
+        if (!string.IsNullOrWhiteSpace(filter.Status) && filter.Status != "all")
+        {
+            var isActive = filter.Status == "Active";
+            query = query.Where(r => r.IsActive == isActive);
+        }
 
         // Sector
         if (!string.IsNullOrWhiteSpace(filter.Sector) && filter.Sector != "all")
@@ -128,14 +131,35 @@ public class RouteRepository : IRouteRepository
         if (filter.SetterId.HasValue)
             query = query.Where(r => r.AuthorId == filter.SetterId.Value);
 
-        // Tags
-        if (filter.Tags is { Count: > 0 })
-            query = query.Where(r => r.Tags.Any(t => filter.Tags.Contains(t.Value)));
+        // Tags: format "category:tag1,tag2|otherCat:tag3,tag4"
+        // OR inside group (comma), AND between groups (pipe)
+        if (!string.IsNullOrWhiteSpace(filter.Tags))
+        {
+            var groups = filter.Tags.Split('|', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var group in groups)
+            {
+                var parts = group.Split(':', 2);
+                if (parts.Length < 2 || string.IsNullOrWhiteSpace(parts[1])) continue;
+                var tagList = parts[1].Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                    .Select(t => t.ToLower()).ToList();
+                if (tagList.Count > 0)
+                {
+                    var captured = tagList;
+                    query = query.Where(r => r.Tags.Any(t => captured.Contains(t.Value)));
+                }
+            }
+        }
+
+        // Ascents count (can be done in DB)
+        if (filter.MinAscents.HasValue)
+            query = query.Where(r => r.Ascents.Count >= filter.MinAscents.Value);
+        if (filter.MaxAscents.HasValue)
+            query = query.Where(r => r.Ascents.Count <= filter.MaxAscents.Value);
 
         // Created within days
-        if (filter.CreatedWithinDays.HasValue && filter.CreatedWithinDays.Value > 0)
+        if (filter.CreatedWithin.HasValue && filter.CreatedWithin.Value > 0)
         {
-            var since = DateTime.UtcNow.AddDays(-filter.CreatedWithinDays.Value);
+            var since = DateTime.UtcNow.AddDays(-filter.CreatedWithin.Value);
             query = query.Where(r => r.CreatedAt >= since);
         }
 
@@ -143,11 +167,14 @@ public class RouteRepository : IRouteRepository
         query = filter.Sort switch
         {
             RouteSort.Oldest => query.OrderBy(r => r.CreatedAt),
-            RouteSort.Rating => query.OrderByDescending(r => r.Feedbacks.Average(f => f.Rating ?? 0)),
-            RouteSort.Ascents => query.OrderByDescending(r => r.Ascents.Count),
+            RouteSort.RatingDesc => query.OrderByDescending(r => r.Feedbacks.Count > 0 ? r.Feedbacks.Average(f => f.Rating) ?? 0 : 0),
+            RouteSort.RatingAsc => query.OrderBy(r => r.Feedbacks.Count > 0 ? r.Feedbacks.Average(f => f.Rating) ?? 0 : 0),
+            RouteSort.AscentsDesc => query.OrderByDescending(r => r.Ascents.Count),
+            RouteSort.AscentsAsc => query.OrderBy(r => r.Ascents.Count),
             RouteSort.GradeAsc => query.OrderBy(r => r.Grade.Index),
             RouteSort.GradeDesc => query.OrderByDescending(r => r.Grade.Index),
-            RouteSort.Name => query.OrderBy(r => r.Name),
+            RouteSort.NameAsc => query.OrderBy(r => r.Name),
+            RouteSort.NameDesc => query.OrderByDescending(r => r.Name),
             _ => query.OrderByDescending(r => r.CreatedAt), // Newest
         };
 
@@ -159,19 +186,14 @@ public class RouteRepository : IRouteRepository
             .Take(filter.PageSize)
             .ToListAsync();
 
-        // Post-filter by rating and ascents count (can't be done in DB easily)
-        if (filter.MinRating.HasValue || filter.MaxRating.HasValue || filter.MinAscentsCount.HasValue || filter.MaxAscentsCount.HasValue)
+        // Post-filter by rating (can't be done in DB easily — computed average)
+        if (filter.MinRating.HasValue || filter.MaxRating.HasValue)
         {
             items = items.Where(r =>
             {
                 var rating = r.Feedbacks.Count > 0 ? r.Feedbacks.Average(f => f.Rating) ?? 0 : 0;
-                var ascents = r.Ascents.Count;
-
                 if (filter.MinRating.HasValue && rating < filter.MinRating.Value) return false;
                 if (filter.MaxRating.HasValue && rating > filter.MaxRating.Value) return false;
-                if (filter.MinAscentsCount.HasValue && ascents < filter.MinAscentsCount.Value) return false;
-                if (filter.MaxAscentsCount.HasValue && ascents > filter.MaxAscentsCount.Value) return false;
-
                 return true;
             }).ToList();
         }

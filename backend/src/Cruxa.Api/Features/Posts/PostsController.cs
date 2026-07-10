@@ -24,6 +24,14 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
+    /// <summary>Get current user's draft post (if any)</summary>
+    [HttpGet("my-draft")]
+    public async Task<ActionResult<PostDto?>> GetMyDraft()
+    {
+        var result = await mediator.Send(new GetMyDraftQuery(currentUser.GetRequiredUserId()));
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+    }
+
     /// <summary>Get posts by user ID</summary>
     [AllowAnonymous]
     [HttpGet("user/{userId:guid}")]
@@ -70,7 +78,7 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
     {
         var command = new UpdatePostCommand(
             id, currentUser.GetRequiredUserId(), request.Description,
-            request.MediaUrls, request.Visibility, Status: request.Status);
+            request.MediaUrls, request.Visibility, request.Duration, Status: request.Status);
         var result = await mediator.Send(command);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }

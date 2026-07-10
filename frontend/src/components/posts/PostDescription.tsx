@@ -32,7 +32,7 @@ export function PostDescription({ body, deltaKruskor, avgGrade, duration, totalR
       )}
 
       <Box sx={{ display: 'flex', gap: { xs: 2, sm: 2.5, md: 3 }, flexWrap: 'wrap' }}>
-        <StatItem icon={<Whatshot sx={{ fontSize: 18, color: theme.palette.primary.main }} />} label="Крускор" value={`${deltaKruskor >= 0 ? '+' : ''}${deltaKruskor}`} color={theme.palette.primary.main} />
+        <StatItem icon={<Whatshot sx={{ fontSize: 18, color: theme.palette.primary.main }} />} label="Крускор" value={`${deltaKruskor >= 0 ? '+' : ''}${deltaKruskor.toFixed(1)}`} color={theme.palette.primary.main} />
         {maxGrade && <StatItem icon={<EmojiEvents sx={{ fontSize: 18, color: theme.palette.secondary.main }} />} label="Макс. сложность" value={maxGrade} color={theme.palette.secondary.main} />}
         <StatItem icon={<TrendingUp sx={{ fontSize: 18, color: theme.palette.text.secondary }} />} label="Средняя" value={avgGrade} />
         {totalRoutes !== undefined && <StatItem icon={<ListAlt sx={{ fontSize: 18, color: theme.palette.text.secondary }} />} label="Пройдено трасс" value={`${totalRoutes}`} />}

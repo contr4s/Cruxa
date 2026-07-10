@@ -48,7 +48,7 @@ public class KruscoreService
     /// Returns the delta (score change) caused by this day's ascents.
     /// For the first calculation (calibration) loads all ascents once.
     /// </summary>
-    public async Task<int> RecalculateAsync(Guid userId, DateOnly date)
+    public async Task<double> RecalculateAsync(Guid userId, DateOnly date)
     {
         var lastSnapshot = await _statsRepo.GetLastSnapshotBeforeAsync(userId, date);
 
@@ -66,14 +66,14 @@ public class KruscoreService
             if (dayAscents.Count == 0)
             {
                 _logger.LogDebug("No ascents on {Date} for user {UserId}, skipping Kruscore recalculation", date, userId);
-                return 0;
+                return 0.0;
             }
 
             return await ProcessDayAsync(userId, lastSnapshot, dayAscents, date);
         }
     }
 
-    private async Task<int> CalculateFullAsync(List<Ascent> ascents, Guid userId, DateOnly date)
+    private async Task<double> CalculateFullAsync(List<Ascent> ascents, Guid userId, DateOnly date)
     {
         var totalW = ascents.Sum(a => KruscoreCalculator.RouteTypeWeight(a.Route.Type, _cfg));
         if (totalW < _opts.MinCalibrationWeight)
@@ -91,10 +91,10 @@ public class KruscoreService
 
         var snapshot = new UserScoreSnapshot(userId, date, theta, confidence, maxGradeIndex, maxGradeRaw);
         await _statsRepo.UpsertSnapshotAsync(snapshot);
-        return 0; // first calibration — no prior score to compare
+        return 0.0; // first calibration — no prior score to compare
     }
 
-    private async Task<int> ProcessDayAsync(
+    private async Task<double> ProcessDayAsync(
         Guid userId, UserScoreSnapshot lastSnapshot, List<Ascent> dayAscents, DateOnly date)
     {
         var oldScore = lastSnapshot.Score;
@@ -123,7 +123,7 @@ public class KruscoreService
 
         var snapshot = new UserScoreSnapshot(userId, date, theta, confidence, maxGrade, maxGradeRaw);
         await _statsRepo.UpsertSnapshotAsync(snapshot);
-        return (int)(theta - oldScore);
+        return theta - oldScore;
     }
 
     /// <summary>

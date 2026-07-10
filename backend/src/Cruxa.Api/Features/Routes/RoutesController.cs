@@ -28,9 +28,10 @@ public class RoutesController(IMediator mediator, ICurrentUserService currentUse
     }
 
     [HttpGet("gym/{gymId:guid}")]
-    public async Task<ActionResult<OffsetPaginatedList<RouteDto>>> GetByGym(Guid gymId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<ActionResult<OffsetPaginatedList<RouteDto>>> GetByGym(Guid gymId, [FromQuery] RouteFilter filter)
     {
-        var result = await mediator.Send(new GetRoutesByGymQuery(gymId, page, pageSize));
+        filter.GymId = gymId;
+        var result = await mediator.Send(new GetRoutesByGymQuery(filter));
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box, Typography, Avatar, useTheme, Button } from '@mui/material';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
@@ -10,23 +9,6 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CheckIcon from '@mui/icons-material/Check';
 import { Card } from '../../theme/cardStyles';
 import type { UserDto } from '../../types/user';
-
-const ACHIEVEMENTS = [
-  { name: '15 дней подряд', type: 'secondary' },
-  { name: '50 трасс', type: 'primary' },
-  { name: '10 отзывов', type: 'primary-dark' },
-  { name: '5 залов', type: 'primary-dark' },
-  { name: '8 фото', type: 'primary-dark' },
-  { name: 'Первый пролаз', type: 'secondary' },
-];
-
-const MAX_VISIBLE = 3;
-
-const BADGE_STYLES: Record<string, Record<string, string>> = {
-  secondary: { bg: 'rgba(255, 179, 0, 0.15)', color: '#FFB300' },
-  primary: { bg: 'rgba(38, 166, 154, 0.15)', color: '#26A69A' },
-  'primary-dark': { bg: 'rgba(38, 166, 154, 0.08)', color: '#80CBC4' },
-};
 
 interface ProfileHeaderProps {
   user: UserDto;
@@ -115,7 +97,6 @@ export function ProfileHeader({
   onEdit,
 }: ProfileHeaderProps) {
   const theme = useTheme();
-  const [showAllAchievements, setShowAllAchievements] = useState(false);
 
   const initial = (user.firstName || user.username)[0].toUpperCase();
   const displayName = user.firstName
@@ -123,8 +104,6 @@ export function ProfileHeader({
       ? `${user.firstName} ${user.lastName}`
       : user.firstName
     : user.username;
-  const visibleAchievements = showAllAchievements ? ACHIEVEMENTS : ACHIEVEMENTS.slice(0, MAX_VISIBLE);
-  const hiddenCount = ACHIEVEMENTS.length - MAX_VISIBLE;
 
   return (
     <Box
@@ -209,57 +188,12 @@ export function ProfileHeader({
           </Box>
 
           <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mb: 1.5 }}>
-            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{Math.round(kruskorScore)}</strong> крускор</Box>
+            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore.toFixed(1)}</strong> крускор</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
             <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
           </Box>
 
-          <Box sx={{ display: 'flex', gap: 0.75, flexWrap: 'wrap', alignItems: 'center' }}>
-            {visibleAchievements.map((achievement) => {
-              const style = BADGE_STYLES[achievement.type] || BADGE_STYLES['primary-dark'];
-              return (
-                <Box
-                  key={achievement.name}
-                  sx={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 0.35,
-                    background: style.bg,
-                    borderRadius: '100px',
-                    px: 1.25,
-                    py: 0.2,
-                    fontSize: '0.75rem',
-                    color: style.color,
-                    fontWeight: 500,
-                  }}
-                >
-                  <span>{achievement.name}</span>
-                </Box>
-              );
-            })}
-            {!showAllAchievements && hiddenCount > 0 && (
-              <Box
-                onClick={() => setShowAllAchievements(true)}
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px dashed rgba(255,255,255,0.1)',
-                  borderRadius: '100px',
-                  px: 1.25,
-                  py: 0.2,
-                  fontSize: '0.72rem',
-                  color: theme.custom.text3,
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  '&:hover': { background: 'rgba(255,255,255,0.08)', color: theme.palette.text.secondary },
-                }}
-              >
-                +{hiddenCount}
-              </Box>
-            )}
-          </Box>
         </Box>
 
         {isOwner ? (
@@ -354,58 +288,12 @@ export function ProfileHeader({
 
         {/* Stats row — full width below avatar row, flush left */}
         <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2.5 }, flexWrap: 'wrap', fontSize: '0.85rem', color: theme.palette.text.secondary, mt: 2, mb: 1.5 }}>
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{Math.round(kruskorScore)}</strong> крускор</Box>
+          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><WhatshotIcon sx={{ fontSize: 16, color: theme.palette.secondary.main }} /> <strong style={{ color: theme.palette.secondary.main }}>{kruskorScore.toFixed(1)}</strong> крускор</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><FitnessCenterIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{totalWorkouts}</strong> тренировок</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><PeopleIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followersCount}</strong> подписчика</Box>
           <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.35 }}><BookmarkIcon sx={{ fontSize: 16 }} /> <strong style={{ color: theme.palette.text.primary }}>{followingCount}</strong> подписок</Box>
         </Box>
 
-        {/* Achievements — full width below stats, flush left */}
-        <Box sx={{ display: 'flex', gap: 0.75, flexWrap: 'wrap', alignItems: 'center' }}>
-          {visibleAchievements.map((achievement) => {
-            const style = BADGE_STYLES[achievement.type] || BADGE_STYLES['primary-dark'];
-            return (
-              <Box
-                key={achievement.name}
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 0.35,
-                  background: style.bg,
-                  borderRadius: '100px',
-                  px: 1.25,
-                  py: 0.2,
-                  fontSize: '0.75rem',
-                  color: style.color,
-                  fontWeight: 500,
-                }}
-              >
-                <span>{achievement.name}</span>
-              </Box>
-            );
-          })}
-          {!showAllAchievements && hiddenCount > 0 && (
-            <Box
-              onClick={() => setShowAllAchievements(true)}
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px dashed rgba(255,255,255,0.1)',
-                borderRadius: '100px',
-                px: 1.25,
-                py: 0.2,
-                fontSize: '0.72rem',
-                color: theme.custom.text3,
-                cursor: 'pointer',
-                fontWeight: 600,
-                '&:hover': { background: 'rgba(255,255,255,0.08)', color: theme.palette.text.secondary },
-              }}
-            >
-              +{hiddenCount}
-            </Box>
-          )}
-        </Box>
       </Box>
     </Box>
   );

@@ -18,6 +18,16 @@ export function FeedGymRecommendations({ gyms }: FeedGymRecommendationsProps) {
   const navigate = useNavigate();
   const userLoc = useUserLocation();
 
+  if (gyms.length === 0) {
+    return (
+      <Box sx={{ bgcolor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: 2, p: 2 }}>
+        <Typography sx={{ fontWeight: 700, fontSize: '0.82rem', color: theme.palette.text.secondary, textAlign: 'center', py: 2 }}>
+          Рекомендации — скоро
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{
       bgcolor: theme.palette.background.paper,

@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { LocalFireDepartment } from '@mui/icons-material';
 import { RouteFull } from '../routes/RouteFull';
-import { StateDisplay } from '../ui/StateDisplay';
 import type { RecommendedRouteDto } from '../../types/post';
 
 interface FeedRouteRecommendationsProps {
@@ -27,7 +26,7 @@ export function FeedRouteRecommendations({ routes }: FeedRouteRecommendationsPro
         <LocalFireDepartment sx={{ fontSize: 16, color: theme.palette.primary.main }} /> Рекомендуемые трассы
       </Typography>
       {routes.length === 0 ? (
-        <StateDisplay type="empty" size="sm" message="Нет рекомендаций" />
+        <Typography sx={{ fontSize: '0.78rem', color: theme.palette.text.secondary, textAlign: 'center', py: 2 }}>Рекомендации — скоро</Typography>
       ) : (
         routes.map((route) => {
           return (

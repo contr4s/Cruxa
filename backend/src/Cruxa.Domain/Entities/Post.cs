@@ -16,7 +16,7 @@ public class Post : AggregateRoot<Guid>
     public PostVisibility Visibility { get; private set; } = PostVisibility.Public;
     public PostStatus Status { get; private set; } = PostStatus.Draft;
     public int? Duration { get; private set; }
-    public int? DeltaKruskor { get; private set; }
+    public double? DeltaKruskor { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
     private readonly List<Ascent> _ascents = [];
@@ -63,7 +63,7 @@ public class Post : AggregateRoot<Guid>
         Status = PostStatus.Published;
     }
 
-    public void SetDeltaKruskor(int delta) => DeltaKruskor = delta;
+    public void SetDeltaKruskor(double delta) => DeltaKruskor = delta;
 
     public void Update(string? description, List<string>? mediaUrls, PostVisibility? visibility, int? duration = null)
     {

@@ -36,7 +36,7 @@ public sealed class GetGymSettersHandler(
                 {
                     GymId = request.GymId,
                     AuthorId = user.Id,
-                    IsActive = true,
+                    Status = "Active",
                     PageSize = int.MaxValue,
                 };
                 var (items, _) = await routes.GetFilteredRoutesAsync(filter);

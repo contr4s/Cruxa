@@ -5,16 +5,4 @@ using Cruxa.Application.Common.Models;
 
 namespace Cruxa.Application.Features.Routes.Queries;
 
-public record GetRoutesByGymQuery : IRequest<Result<OffsetPaginatedList<RouteDto>>>
-{
-    public Guid GymId { get; }
-    public int Page { get; }
-    public int PageSize { get; }
-
-    public GetRoutesByGymQuery(Guid gymId, int page = 1, int pageSize = 20)
-    {
-        GymId = gymId;
-        Page = Math.Max(1, page);
-        PageSize = Math.Clamp(pageSize, 1, 100);
-    }
-}
+public record GetRoutesByGymQuery(RouteFilter Filter) : IRequest<Result<OffsetPaginatedList<RouteDto>>>;

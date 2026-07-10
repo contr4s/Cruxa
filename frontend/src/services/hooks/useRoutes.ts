@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews, createRoute, updateRoute, saveRouteFeedback } from '../routes.service';
+import { getRoutesByGym, getRouteById, getRouteConsensus, getRouteReviews, getMyRouteReview, createRoute, updateRoute, saveRouteFeedback } from '../routes.service';
 import type { GetRoutesParams, SaveRouteFeedbackBody } from '../routes.service';
 import type { CreateRoutePayload, UpdateRoutePayload } from '../../types/route';
 
@@ -55,8 +55,17 @@ export function useSaveRouteFeedback() {
       saveRouteFeedback(routeId, body),
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ['route', variables.routeId, 'consensus'] });
+      queryClient.invalidateQueries({ queryKey: ['route', variables.routeId, 'my-feedback'] });
       queryClient.invalidateQueries({ queryKey: ['routes'] });
     },
+  });
+}
+
+export function useMyRouteFeedback(routeId: string) {
+  return useQuery({
+    queryKey: ['route', routeId, 'my-feedback'],
+    queryFn: () => getMyRouteReview(routeId),
+    enabled: !!routeId,
   });
 }
 

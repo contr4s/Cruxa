@@ -46,17 +46,29 @@ interface RouteFiltersProps {
   filterTrigger?: (bag: { open: boolean; toggle: () => void; activeCount: number }) => React.ReactNode;
 }
 
-// Helper: плоский Set выбранных тегов
-function selectedTagsSet(tagFilter: string): Set<string> {
+// Helper: Set of "cat:tag" entries from "cat1:a,b|cat2:c,d" format
+function selectedTagEntries(tagFilter: string): Set<string> {
   if (!tagFilter) return new Set();
-  return new Set(tagFilter.split(',').map((t) => t.trim().toLowerCase()));
+  return new Set(tagFilter.split('|').flatMap((group) => {
+    const [cat, items] = group.split(':', 2);
+    return items ? items.split(',').map((t) => `${cat}:${t.trim().toLowerCase()}`) : [];
+  }));
 }
-// Helper: добавить/убрать тег
-function toggleTagFilter(tagFilter: string, tag: string): string {
-  const set = selectedTagsSet(tagFilter);
-  if (set.has(tag)) set.delete(tag);
-  else set.add(tag);
-  return Array.from(set).join(',');
+// Helper: toggle a tag within its category — OR inside category, AND between categories
+function toggleTagFilter(tagFilter: string, category: string, tag: string): string {
+  const lower = tag.toLowerCase();
+  const groups = new Map<string, Set<string>>();
+  if (tagFilter) {
+    tagFilter.split('|').forEach((g) => {
+      const [cat, items] = g.split(':', 2);
+      if (cat && items) groups.set(cat, new Set(items.split(',').map((t) => t.trim().toLowerCase())));
+    });
+  }
+  if (!groups.has(category)) groups.set(category, new Set());
+  const set = groups.get(category)!;
+  if (set.has(lower)) set.delete(lower); else set.add(lower);
+  if (set.size === 0) groups.delete(category);
+  return Array.from(groups.entries()).map(([cat, tags]) => `${cat}:${Array.from(tags).join(',')}`).join('|');
 }
 
 const HOLD_COLOR_NAMES = ['all', 'Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange', 'Pink', 'White', 'Black', 'Gray', 'Brown'];
@@ -243,7 +255,7 @@ export function RouteFilters({ filters, onChange, slots, defaults = {}, filterTr
       <FilterSlider
         label="Сложность"
         value={[filters.minGradeIndex, filters.maxGradeIndex]}
-        min={GRADE_MIN} max={GRADE_MAX} step={1}
+        min={GRADE_MIN} max={GRADE_MAX} step={20}
         onChange={([a, b]) => update({ minGradeIndex: a, maxGradeIndex: b })}
         displayLabel={`${GRADE_LABELS[filters.minGradeIndex] ?? filters.minGradeIndex} — ${GRADE_LABELS[filters.maxGradeIndex] ?? filters.maxGradeIndex}`}
       />
@@ -275,13 +287,13 @@ export function RouteFilters({ filters, onChange, slots, defaults = {}, filterTr
       {tagGroups.map(({ category, items }) => (
         <FilterRow key={category} label={`${category}:`}>
           {items.map((t) => {
-            const active = selectedTagsSet(filters.tags).has(t.name);
+            const active = selectedTagEntries(filters.tags).has(`${category}:${t.name.toLowerCase()}`);
             return (
               <Chip
                 key={t.name}
                 label={t.name}
                 size="small"
-                onClick={() => update({ tags: toggleTagFilter(filters.tags, t.name) })}
+                onClick={() => update({ tags: toggleTagFilter(filters.tags, category, t.name) })}
                 sx={chipSx(active)}
               />
             );

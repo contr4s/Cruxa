@@ -1,4 +1,3 @@
-using Mapster;
 using MediatR;
 using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Application.Features.Routes.DTOs;
@@ -12,8 +11,8 @@ public class GetRoutesByGymHandler(IRouteRepository routes) : IRequestHandler<Ge
 {
     public async Task<Result<OffsetPaginatedList<RouteDto>>> Handle(GetRoutesByGymQuery q, CancellationToken ct)
     {
-        var (items, totalCount) = await routes.GetByGymPagedAsync(q.GymId, q.Page, q.PageSize);
+        var (items, totalCount) = await routes.GetFilteredRoutesAsync(q.Filter);
         var dtos = items.Select(RouteDto.FromEntity).ToList();
-        return Result.Success(new OffsetPaginatedList<RouteDto>(dtos, totalCount, q.Page, q.PageSize));
+        return Result.Success(new OffsetPaginatedList<RouteDto>(dtos, totalCount, q.Filter.Page, q.Filter.PageSize));
     }
 }

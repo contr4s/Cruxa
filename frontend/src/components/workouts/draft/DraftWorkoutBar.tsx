@@ -5,21 +5,26 @@ import {
 import { FitnessCenter, Close } from '@mui/icons-material';
 import { ConfirmDialog } from '../../ui/ConfirmDialog';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
-import { useUpdatePost } from '../../../services/hooks/useDraftPost';
+import { deletePost } from '../../../services/posts.service';
 import { PublishWorkoutSheet } from './PublishWorkoutSheet';
 
 export function DraftWorkoutBar() {
   const { status, gymName, ascents, postId, clearDraft } = useDraftStore();
-  const { mutateAsync: removeDraft } = useUpdatePost(postId);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [publishOpen, setPublishOpen] = useState(false);
 
   if (status !== 'active') return null;
 
   const handleCancel = async () => {
-    await removeDraft({ status: 'deleted' }).catch((err) => console.error('[Draft] Cancel failed:', err));
-    clearDraft();
-    setConfirmOpen(false);
+    if (!postId) return;
+    try {
+      await deletePost(postId);
+    } catch (err) {
+      console.error('[Draft] Cancel failed:', err);
+    } finally {
+      clearDraft();
+      setConfirmOpen(false);
+    }
   };
 
   return (

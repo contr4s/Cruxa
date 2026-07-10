@@ -26,7 +26,7 @@ export function GoalsPanel({ variant = 'default' }: GoalsPanelProps) {
         }}
       >
         <Typography sx={{ fontSize: '0.9rem', color: theme.custom.text3, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.75 }}>
-          <TrackChangesIcon sx={{ fontSize: 20 }} /> Цели не установлены
+          <TrackChangesIcon sx={{ fontSize: 20 }} /> Цели — скоро
         </Typography>
       </Box>
     );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Box, Typography, TextField, Button, Autocomplete, Chip, CircularProgress, Rating, useTheme, Select, MenuItem, FormControl, InputLabel,
 } from '@mui/material';
@@ -9,7 +9,7 @@ import { ModalOverlay } from '../../ui/ModalOverlay';
 import { MediaUploader } from './MediaUploader';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useAddAscent } from '../../../services/hooks/useDraftPost';
-import { useRoutesByGym } from '../../../services/hooks/useRoutes';
+import { useInfiniteRoutesByGym } from '../../../services/hooks/useRoutes';
 import { uploadMedia } from '../../../services/mediaUpload.service';
 import { ASCENT_COLORS } from '../../../constants/ascent';
 import type { RouteDto } from '../../../types/route';
@@ -17,11 +17,21 @@ import type { AscentStyle } from '../../../types/post';
 import { useGradingSystems } from '../../../services/hooks/useGradingSystems';
 import { useSaveRouteFeedback } from '../../../services/hooks/useRoutes';
 
-const STYLE_OPTIONS: AscentStyle[] = ['Flash', 'Onsight', 'Redpoint', 'Attempt', 'Project', 'Repeat'];
+const BOULDER_STYLES: AscentStyle[] = ['Flash', 'Redpoint', 'Attempt', 'Repeat'];
+const LEAD_STYLES: AscentStyle[] = ['Onsight', 'Flash', 'Redpoint', 'TopRope', 'Attempt', 'Repeat'];
+
+const STYLE_HINTS: Record<string, string> = {
+  Flash: 'Пройдено с первой попытки',
+  Onsight: 'Пройдено с первой попытки без предварительной информации о трассе',
+  Redpoint: 'Пройдено после нескольких попыток',
+  TopRope: 'Пройдено с верхней страховкой',
+  Attempt: 'Попытка, не долез до топа',
+  Repeat: 'Повторно пройденная трасса',
+};
 
 const ascentFormSchema = z.object({
   routeId: z.string().min(1, 'Выберите трассу'),
-  style: z.enum(['Flash', 'Onsight', 'Redpoint', 'Attempt', 'Project', 'Repeat']),
+  style: z.string(),
   notes: z.string().optional().or(z.literal('')),
   rating: z.number().min(1).max(5).nullable().optional(),
   review: z.string().optional().or(z.literal('')),
@@ -48,11 +58,17 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
   const [files, setFiles] = useState<File[]>([]);
   const [mediaUrls, setMediaUrls] = useState<string[]>([]);
 
-  const { data: routesData, isLoading: routesLoading } = useRoutesByGym(gymId ?? '', {
+  const {
+    data: routesPages,
+    isLoading: routesLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteRoutesByGym(gymId ?? '', {
     searchQuery: searchInput || undefined,
     pageSize: 20,
   });
-  const routes = routesData?.items ?? [];
+  const routes = useMemo(() => routesPages?.pages.flatMap((p) => p.items) ?? [], [routesPages]);
 
   const { control, handleSubmit, reset, setValue } = useForm<AscentFormValues>({
     resolver: zodResolver(ascentFormSchema),
@@ -100,7 +116,7 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
 
     const result = await addAscentApi({
       routeId: values.routeId,
-      style: values.style,
+      style: values.style as AscentStyle,
       notes: values.notes || undefined,
       mediaUrls: allMediaUrls.length > 0 ? allMediaUrls : undefined,
     });
@@ -128,7 +144,7 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
           rating: values.rating ?? undefined,
           gradeIndex: values.gradeIndex ?? undefined,
           publicReview: values.review || undefined,
-          privateNote: values.notes || undefined,
+          privateNotes: values.notes || undefined,
         },
       });
     }
@@ -157,6 +173,16 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
               }}
               getOptionLabel={(o) => `${o.name} (${o.grade})`}
               loading={routesLoading}
+              slotProps={{
+                listbox: {
+                  onScroll: (e: React.UIEvent<HTMLUListElement>) => {
+                    const list = e.currentTarget;
+                    if (list.scrollHeight - list.scrollTop - list.clientHeight < 80 && hasNextPage && !isFetchingNextPage) {
+                      fetchNextPage();
+                    }
+                  },
+                },
+              }}
               renderInput={(params) => (
                 <TextField {...params} label="Трасса" placeholder="Поиск по названию…" error={!!errors.routeId} helperText={errors.routeId?.message} />
               )}
@@ -179,17 +205,23 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
           <Controller
             name="style"
             control={control}
-            render={({ field }) => (
+            render={({ field }) => {
+              const typeOptions = selectedRoute.type === 'Bouldering' ? BOULDER_STYLES : LEAD_STYLES;
+              if (!typeOptions.includes(field.value as AscentStyle)) {
+                setTimeout(() => field.onChange(typeOptions[0]));
+              }
+              return (
               <Box>
                 <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
                   Стиль
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {STYLE_OPTIONS.map((s) => (
+                  {typeOptions.map((s) => (
                     <Chip
                       key={s}
                       label={s}
                       size="small"
+                      title={STYLE_HINTS[s]}
                       onClick={() => field.onChange(s)}
                       variant={field.value === s ? 'filled' : 'outlined'}
                       sx={{
@@ -199,8 +231,11 @@ export function AscentFormModal({ open, onClose, prefilledRouteId }: AscentFormM
                     />
                   ))}
                 </Box>
+                <Typography variant="caption" color="text.disabled" sx={{ mt: 0.5, display: 'block', fontSize: '0.7rem' }}>
+                  {STYLE_HINTS[field.value] ?? ''}
+                </Typography>
               </Box>
-            )}
+            );}}
           />
 
           {/* Private notes */}

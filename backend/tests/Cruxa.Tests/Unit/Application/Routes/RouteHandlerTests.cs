@@ -3,6 +3,7 @@ using Cruxa.Application.Features.Routes.Handlers;
 using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Application.Features.GradingSystems.Contracts;
 using Cruxa.Application.Features.Routes.Queries;
+using Cruxa.Application.Features.Routes.DTOs;
 using Cruxa.Domain.Entities;
 using Cruxa.Domain.Enums;
 using Cruxa.Domain.ValueObjects;
@@ -201,9 +202,10 @@ public class RouteHandlerTests
         var gymId = Guid.NewGuid();
         var routes = new[] { CreateRoute(), CreateRoute(), CreateRoute() };
         var handler = new GetRoutesByGymHandler(_routeRepo.Object);
-        _routeRepo.Setup(r => r.GetByGymPagedAsync(gymId, 2, 2)).ReturnsAsync((routes.Skip(2).Take(2).ToList(), 3));
+        _routeRepo.Setup(r => r.GetFilteredRoutesAsync(It.Is<RouteFilter>(f => f.GymId == gymId && f.Page == 2 && f.PageSize == 2)))
+            .ReturnsAsync((routes.Skip(2).Take(2).ToList(), 3));
 
-        var result = await handler.Handle(new GetRoutesByGymQuery(gymId, 2, 2), CancellationToken.None);
+        var result = await handler.Handle(new GetRoutesByGymQuery(new RouteFilter { GymId = gymId, Page = 2, PageSize = 2 }), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Items.Should().HaveCount(1);

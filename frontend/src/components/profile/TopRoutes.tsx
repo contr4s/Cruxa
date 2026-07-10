@@ -4,6 +4,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Card } from '../../theme/cardStyles';
 import { SectionHeader } from '../ui/SectionHeader';
 import { RouteFull } from '../routes/RouteFull';
+import { StateDisplay } from '../ui/StateDisplay';
 import { useTopRoutes } from '../../services/hooks/useUser';
 import { useAuthStore } from '../../stores/authStore';
 import { LazyCard } from '../ui/LazyCard';
@@ -25,6 +26,9 @@ export function TopRoutes({ userId: propUserId }: { userId?: string } = {}) {
         title="Лучшие трассы"
       />
 
+      {routes.length === 0 ? (
+        <StateDisplay type="empty" message="Нет пройденных трасс" />
+      ) : (<>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
         {routes.map((route) => (
           <Box
@@ -84,6 +88,7 @@ export function TopRoutes({ userId: propUserId }: { userId?: string } = {}) {
           )}
         </Box>
       )}
+      </>)}
       </Box>
     </LazyCard>
   );

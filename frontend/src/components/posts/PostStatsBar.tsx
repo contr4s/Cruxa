@@ -17,7 +17,7 @@ export function PostStatsBar({ deltaKruskor, avgGrade, duration }: PostStatsBarP
   return (
     <Box sx={{ ...statsBar(theme), display: 'flex', gap: 2.5, px: 2.5, py: 1.25 }}>
       <Typography sx={{ fontSize: '0.82rem', fontWeight: 700, color: theme.palette.primary.main, display: 'flex', alignItems: 'center', gap: 0.5 }}>
-        <Whatshot sx={{ fontSize: 16 }} /> {deltaKruskor >= 0 ? '+' : ''}{deltaKruskor}
+        <Whatshot sx={{ fontSize: 16 }} /> {deltaKruskor >= 0 ? '+' : ''}{deltaKruskor.toFixed(1)}
       </Typography>
       <Typography sx={{ fontSize: '0.82rem', color: theme.palette.text.secondary, display: 'flex', alignItems: 'center', gap: 0.5 }}>
         <TrendingUp sx={{ fontSize: 16 }} /> Ср. грейд: {avgGrade}

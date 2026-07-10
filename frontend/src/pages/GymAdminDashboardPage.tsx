@@ -38,8 +38,8 @@ const DEFAULT_FILTERS: AdminRouteFilterState = {
   searchQuery: '',
   type: 'all',
   holdColor: 'all',
-  minGradeIndex: 0,
-  maxGradeIndex: 20,
+  minGradeIndex: 400,
+  maxGradeIndex: 800,
   sort: 'newest',
   status: 'all',
   sector: 'all',
@@ -77,7 +77,26 @@ export default function GymAdminDashboardPage() {
   const { data: gym, isLoading: gymLoading } = useGym(gymId);
   const { data: stats, isLoading: statsLoading } = useGymAdminStats(gymId);
   const { data: activity } = useGymActivity(gymId);
-  const { data: routesData, isLoading: routesLoading } = useAdminRoutes(gymId, { ...filters, page, pageSize: 10 });
+  const apiFilters = useMemo(() => ({
+    ...filters,
+    page,
+    pageSize: 10,
+    type: filters.type !== 'all' ? filters.type : undefined,
+    holdColor: filters.holdColor !== 'all' ? filters.holdColor : undefined,
+    status: filters.status !== 'all' ? filters.status : undefined,
+    minGradeIndex: filters.minGradeIndex > 400 ? filters.minGradeIndex : undefined,
+    maxGradeIndex: filters.maxGradeIndex < 800 ? filters.maxGradeIndex : undefined,
+    minRating: filters.minRating > 0 ? filters.minRating : undefined,
+    maxRating: filters.maxRating < 5 ? filters.maxRating : undefined,
+    minAscents: filters.minAscents > 0 ? filters.minAscents : undefined,
+    maxAscents: filters.maxAscents < 10000 ? filters.maxAscents : undefined,
+    createdWithin: filters.createdWithin > 0 ? filters.createdWithin : undefined,
+    tags: filters.tags || undefined,
+    sector: filters.sector !== 'all' ? filters.sector : undefined,
+    setterId: filters.setterId !== 'all' ? filters.setterId : undefined,
+    searchQuery: filters.searchQuery || undefined,
+  }), [filters, page]);
+  const { data: routesData, isLoading: routesLoading } = useAdminRoutes(gymId, apiFilters);
   const { data: setters, isLoading: settersLoading } = useGymSetters(gymId);
   const [unlinkTarget, setUnlinkTarget] = useState<string | null>(null);
 

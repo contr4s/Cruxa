@@ -50,7 +50,6 @@ const PERIODS = [
   { value: 'all', label: 'Всё' },
 ];
 
-// Plugin for gradient fill under the Kruskor line (matching mockup)
 const gradientFillPlugin = {
   id: 'gradientFill',
   beforeDraw(chart: ChartJS) {
@@ -218,7 +217,13 @@ export const CombinedChart = memo(function CombinedChart() {
 
       {/* Chart */}
       <Box ref={containerRef} sx={{ width: '100%', height: { xs: 340, md: 400 } }}>
-        <Line ref={chartRef} data={chartData as any} options={options} plugins={[gradientFillPlugin]} />
+        {data.length > 0 ? (
+          <Line ref={chartRef} data={chartData as any} options={options} plugins={[gradientFillPlugin]} />
+        ) : (
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <Typography sx={{ color: theme.palette.text.secondary, fontSize: '0.85rem' }}>Нет данных</Typography>
+          </Box>
+        )}
       </Box>
 
       {/* Bottom stats */}

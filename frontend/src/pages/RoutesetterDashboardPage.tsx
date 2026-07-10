@@ -35,8 +35,8 @@ const DEFAULT_FILTERS: SetterRouteFilterState = {
   searchQuery: '',
   type: 'all',
   holdColor: 'all',
-  minGradeIndex: 0,
-  maxGradeIndex: 20,
+  minGradeIndex: 400,
+  maxGradeIndex: 800,
   sort: 'newest',
   status: 'all',
   gymId: 'all',
@@ -63,7 +63,25 @@ export default function RoutesetterDashboardPage() {
   const prevSelectedJson = useRef('');
 
   const { data: stats, isLoading: statsLoading, isError: statsError, refetch: refetchStats } = useRoutesetterStats();
-  const { data: routesData, isLoading: routesLoading, isError: _routesError, refetch: refetchRoutes } = useSetterRoutes({ ...filters, page, pageSize: 10 });
+  const apiFilters = useMemo(() => ({
+    ...filters,
+    page,
+    pageSize: 10,
+    type: filters.type !== 'all' ? filters.type : undefined,
+    holdColor: filters.holdColor !== 'all' ? filters.holdColor : undefined,
+    gymId: filters.gymId !== 'all' ? filters.gymId : undefined,
+    status: filters.status !== 'all' ? filters.status : undefined,
+    minGradeIndex: filters.minGradeIndex > 400 ? filters.minGradeIndex : undefined,
+    maxGradeIndex: filters.maxGradeIndex < 800 ? filters.maxGradeIndex : undefined,
+    minRating: filters.minRating > 0 ? filters.minRating : undefined,
+    maxRating: filters.maxRating < 5 ? filters.maxRating : undefined,
+    minAscents: filters.minAscents > 0 ? filters.minAscents : undefined,
+    maxAscents: filters.maxAscents < 10000 ? filters.maxAscents : undefined,
+    createdWithin: filters.createdWithin > 0 ? filters.createdWithin : undefined,
+    tags: filters.tags || undefined,
+    searchQuery: filters.searchQuery || undefined,
+  }), [filters, page]);
+  const { data: routesData, isLoading: routesLoading, isError: _routesError, refetch: refetchRoutes } = useSetterRoutes(apiFilters);
   const { data: reviews, isLoading: reviewsLoading, isError: reviewsError, refetch: refetchReviews } = useSetterReviews();
   const { data: gyms, isLoading: gymsLoading, isError: gymsError, refetch: refetchGyms } = useLinkedGyms();
   const [archiveTarget, setArchiveTarget] = useState<RouteDto | null>(null);

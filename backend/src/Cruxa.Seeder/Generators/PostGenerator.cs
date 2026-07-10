@@ -11,7 +11,6 @@ namespace Cruxa.Seeder.Generators;
 /// </summary>
 public static class PostGenerator
 {
-    private static readonly AscentStyle[] Styles = [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.TopRope, AscentStyle.Attempt];
     private static readonly string[] PostTags = ["climbing,person", "climbing,action", "climbing,wall", "climbing,bouldering", "climbing,training", "climbing,competition", "rock,climbing,outdoor", "climbing,gym,inside"];
 
     /// <summary>
@@ -116,14 +115,31 @@ public static class PostGenerator
         return scored.Select(x =>
         {
             var gradeDiff = x.Route.Grade.Index - abilityLevel;
-            var style = gradeDiff switch
+
+            AscentStyle style;
+            if (x.Route.Type == RouteType.Bouldering)
             {
-                <= -60 => PickWeighted(faker, [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint], [0.4, 0.4, 0.2]),
-                <= -20 => PickWeighted(faker, [AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.Onsight], [0.35, 0.35, 0.3]),
-                >= 60 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.TopRope], [0.5, 0.3, 0.2]),
-                >= 20 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.Flash], [0.3, 0.4, 0.3]),
-                _ => PickWeighted(faker, [AscentStyle.Redpoint, AscentStyle.Flash, AscentStyle.TopRope], [0.35, 0.3, 0.35]),
-            };
+                style = gradeDiff switch
+                {
+                    <= -60 => PickWeighted(faker, [AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.Repeat], [0.45, 0.35, 0.2]),
+                    <= -20 => PickWeighted(faker, [AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.Attempt], [0.35, 0.35, 0.3]),
+                    >= 60 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.Repeat], [0.55, 0.25, 0.2]),
+                    >= 20 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.Flash], [0.35, 0.35, 0.3]),
+                    _ => PickWeighted(faker, [AscentStyle.Redpoint, AscentStyle.Flash, AscentStyle.Repeat], [0.35, 0.35, 0.3]),
+                };
+            }
+            else
+            {
+                style = gradeDiff switch
+                {
+                    <= -60 => PickWeighted(faker, [AscentStyle.Onsight, AscentStyle.Flash, AscentStyle.Redpoint], [0.4, 0.4, 0.2]),
+                    <= -20 => PickWeighted(faker, [AscentStyle.Flash, AscentStyle.Redpoint, AscentStyle.Onsight], [0.35, 0.35, 0.3]),
+                    >= 60 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.TopRope], [0.5, 0.3, 0.2]),
+                    >= 20 => PickWeighted(faker, [AscentStyle.Attempt, AscentStyle.Redpoint, AscentStyle.Flash], [0.3, 0.4, 0.3]),
+                    _ => PickWeighted(faker, [AscentStyle.Redpoint, AscentStyle.Flash, AscentStyle.TopRope], [0.35, 0.3, 0.35]),
+                };
+            }
+
             return Ascent.Create(postId, userId, x.Route.Id, style, createdAt: createdAt).Value!;
         }).ToList();
     }

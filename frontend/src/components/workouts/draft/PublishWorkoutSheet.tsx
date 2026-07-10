@@ -8,6 +8,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { ModalOverlay } from '../../ui/ModalOverlay';
 import { PostAscentList } from '../../posts/PostAscentList';
 import { MediaUploader } from './MediaUploader';
+import { ConfirmDialog } from '../../ui/ConfirmDialog';
 import { useDraftStore } from '../../../stores/draftWorkoutStore';
 import { useUpdatePost } from '../../../services/hooks/useDraftPost';
 import type { PostVisibility } from '../../../types/post';
@@ -20,6 +21,7 @@ interface PublishWorkoutSheetProps {
 export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps) {
   const { postId, createdAt, ascents, clearDraft } = useDraftStore();
   const { mutateAsync: publishPost, isPending } = useUpdatePost(postId);
+  const [confirmEmptyOpen, setConfirmEmptyOpen] = useState(false);
 
   const defaultDuration = useMemo(() => {
     if (!createdAt) return dayjs().startOf('day').add(1, 'hour');
@@ -81,6 +83,15 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
 
 
   const handlePublish = async () => {
+    if (!postId) return;
+    if (ascents.length === 0) {
+      setConfirmEmptyOpen(true);
+      return;
+    }
+    await doPublish();
+  };
+
+  const doPublish = async () => {
     if (!postId) return;
     const durationMinutes = duration.hour() * 60 + duration.minute();
     const orderedSelected = mediaOrder.filter((url) => selectedMedia.has(url));
@@ -197,6 +208,17 @@ export function PublishWorkoutSheet({ open, onClose }: PublishWorkoutSheetProps)
           </Button>
         </Box>
       </Box>
+
+      <ConfirmDialog
+        open={confirmEmptyOpen}
+        title="Завершить тренировку?"
+        message="В тренировке нет ни одной трассы. Вы уверены, что хотите завершить?"
+        confirmLabel="Да, завершить"
+        cancelLabel="Добавить трассы"
+        severity="warning"
+        onConfirm={() => { setConfirmEmptyOpen(false); doPublish(); }}
+        onCancel={() => setConfirmEmptyOpen(false)}
+      />
     </ModalOverlay>
   );
 }

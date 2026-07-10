@@ -1,7 +1,7 @@
 import type { RouteType } from './route';
 
 export type PostVisibility = 'Public' | 'Followers' | 'Private';
-export type AscentStyle = 'Flash' | 'Onsight' | 'Redpoint' | 'Attempt' | 'Project' | 'Repeat';
+export type AscentStyle = 'Flash' | 'Onsight' | 'Redpoint' | 'TopRope' | 'Attempt' | 'Project' | 'Repeat';
 
 export interface PostDto {
   id: string;
@@ -14,6 +14,7 @@ export interface PostDto {
   body?: string;
   mediaUrls: string[];
   visibility: PostVisibility;
+  status?: string;
   stats: PostStats;
   ascents: PostAscentDto[];
   likesCount: number;

@@ -24,7 +24,7 @@ public sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdQuery, Resul
         return Result.Success(MapToDto(post));
     }
 
-    internal static PostDto MapToDto(Domain.Entities.Post post)
+    public static PostDto MapToDto(Domain.Entities.Post post)
     {
         var ascents = post.Ascents.ToList();
         var totalRoutes = ascents.Count;

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Box, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import { SectionHeader } from '../../ui/SectionHeader';
 import { Card } from '../../../theme/cardStyles';
@@ -24,7 +24,13 @@ export const AscentDonut = memo(function AscentDonut() {
             icon={<DonutLargeIcon sx={{ color: theme.palette.primary.main, fontSize: 20 }} />}
             title="Типы пролазов"
           />
-          <AscentDonutView data={data} />
+          {data.length > 0 ? (
+            <AscentDonutView data={data} />
+          ) : (
+            <Typography sx={{ color: theme.palette.text.secondary, fontSize: '0.85rem', textAlign: 'center', py: 4 }}>
+              Нет данных
+            </Typography>
+          )}
         </Box>
       </LazyCard>
     </Box>

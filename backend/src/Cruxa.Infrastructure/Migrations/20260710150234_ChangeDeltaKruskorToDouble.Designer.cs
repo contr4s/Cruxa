@@ -5,6 +5,7 @@ using Cruxa.Domain.ValueObjects;
 using Cruxa.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,9 +14,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cruxa.Infrastructure.Migrations
 {
     [DbContext(typeof(CruxaDbContext))]
-    partial class CruxaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260710150234_ChangeDeltaKruskorToDouble")]
+    partial class ChangeDeltaKruskorToDouble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

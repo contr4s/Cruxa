@@ -14,7 +14,6 @@ public class KruscoreCalculatorTests
     [InlineData(AscentStyle.Redpoint, RouteType.Lead, 0.75)]
     [InlineData(AscentStyle.TopRope, RouteType.Lead, 0.60)]
     [InlineData(AscentStyle.Attempt, RouteType.Lead, 0.0)]
-    [InlineData(AscentStyle.Onsight, RouteType.Bouldering, 1.0)]
     [InlineData(AscentStyle.Flash, RouteType.Bouldering, 1.0)]
     [InlineData(AscentStyle.Redpoint, RouteType.Bouldering, 0.70)]
     [InlineData(AscentStyle.Attempt, RouteType.Bouldering, 0.0)]
@@ -25,11 +24,10 @@ public class KruscoreCalculatorTests
     }
 
     [Fact]
-    public void GetS_OnsightEqualsFlash_ForBouldering()
+    public void GetS_Onsight_ForBouldering_ReturnsZero()
     {
-        var onsight = KruscoreCalculator.GetS(AscentStyle.Onsight, RouteType.Bouldering);
-        var flash = KruscoreCalculator.GetS(AscentStyle.Flash, RouteType.Bouldering);
-        onsight.Should().Be(flash);
+        var result = KruscoreCalculator.GetS(AscentStyle.Onsight, RouteType.Bouldering);
+        result.Should().Be(0.0);
     }
 
     // ── Repeat S ──────────────────────────────────────────────

@@ -11,5 +11,6 @@ public class CreatePostRequest
     public string? Description { get; set; }
     public List<string>? MediaUrls { get; set; }
     public PostVisibility Visibility { get; set; } = PostVisibility.Public;
+    public int? Duration { get; set; }
     public PostStatus? Status { get; set; }
 }

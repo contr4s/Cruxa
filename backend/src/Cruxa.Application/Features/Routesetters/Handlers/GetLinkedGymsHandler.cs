@@ -42,7 +42,7 @@ public sealed class GetLinkedGymsHandler(
                 {
                     GymId = gym.Id,
                     AuthorId = userId,
-                    IsActive = true,
+                    Status = "Active",
                     PageSize = int.MaxValue,
                 };
                 var (items, _) = await routes.GetFilteredRoutesAsync(filter);

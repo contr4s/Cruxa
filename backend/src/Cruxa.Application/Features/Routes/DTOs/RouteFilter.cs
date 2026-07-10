@@ -6,45 +6,48 @@ public enum RouteSort
 {
     Newest,
     Oldest,
-    Rating,
-    Ascents,
+    RatingDesc,
+    RatingAsc,
+    AscentsDesc,
+    AscentsAsc,
     GradeAsc,
     GradeDesc,
-    Name,
+    NameAsc,
+    NameDesc,
 }
 
 public record RouteFilter
 {
     // Owner/author
-    public Guid? AuthorId;
-    public Guid? GymId;
+    public Guid? AuthorId { get; set; }
+    public Guid? GymId { get; set; }
 
     // Pagination
-    public int Page = 1;
-    public int PageSize = 10;
+    public int Page { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 
     // Text search
-    public string? SearchQuery;
+    public string? SearchQuery { get; set; }
 
     // Route filters
-    public RouteType? Type;
-    public HoldColor? HoldColor;
-    public int? MinGradeIndex;
-    public int? MaxGradeIndex;
-    public bool? IsActive;
-    public string? Sector;
-    public Guid? SetterId;
-    public List<string>? Tags;
+    public RouteType? Type { get; set; }
+    public HoldColor? HoldColor { get; set; }
+    public int? MinGradeIndex { get; set; }
+    public int? MaxGradeIndex { get; set; }
+    public string? Sector { get; set; }
+    public Guid? SetterId { get; set; }
+    public string? Tags { get; set; }
+    public string? Status { get; set; } // "Active" | "Archived" | "all"
 
     // Related data filters
-    public int? MinRating;
-    public int? MaxRating;
-    public int? MinAscentsCount;
-    public int? MaxAscentsCount;
+    public double? MinRating { get; set; }
+    public double? MaxRating { get; set; }
+    public int? MinAscents { get; set; }
+    public int? MaxAscents { get; set; }
 
     // Time range
-    public int? CreatedWithinDays;
+    public int? CreatedWithin { get; set; }
 
     // Sorting
-    public RouteSort Sort = RouteSort.Newest;
+    public RouteSort Sort { get; set; } = RouteSort.Newest;
 }

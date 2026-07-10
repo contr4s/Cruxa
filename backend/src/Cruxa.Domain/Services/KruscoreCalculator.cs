@@ -22,7 +22,6 @@ public static class KruscoreCalculator
         (AscentStyle.Attempt, RouteType.Lead) => 0.0,
 
         // ── Bouldering ─────────────────────────────────────────
-        (AscentStyle.Onsight, RouteType.Bouldering) => 1.0,
         (AscentStyle.Flash, RouteType.Bouldering) => 1.0,
         (AscentStyle.Redpoint, RouteType.Bouldering) => 0.70,
         (AscentStyle.Attempt, RouteType.Bouldering) => 0.0,
