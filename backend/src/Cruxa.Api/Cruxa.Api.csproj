@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cruxa.Application\Cruxa.Application.csproj" />
     <ProjectReference Include="..\Cruxa.Infrastructure\Cruxa.Infrastructure.csproj" />
+    <ProjectReference Include="..\Cruxa.Seeder\Cruxa.Seeder.csproj" />
   </ItemGroup>
 
 </Project>

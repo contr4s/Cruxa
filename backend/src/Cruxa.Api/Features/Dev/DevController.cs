@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Cruxa.Infrastructure.Persistence;
 using Cruxa.Domain.Enums;
 using Cruxa.Application.Common.Contracts;
+using Cruxa.Seeder.Services;
 
 namespace Cruxa.Api.Features.Dev;
 
@@ -23,7 +24,11 @@ public class DevController : ControllerBase
         _env = env;
     }
 
-    private bool IsDevAllowed() => _env.IsEnvironment("Development") || _env.IsEnvironment("Testing");
+    // ponytail: allow dev endpoints in production with ENABLE_SEED=true (one-time seeding)
+    private bool IsDevAllowed() =>
+        _env.IsEnvironment("Development") ||
+        _env.IsEnvironment("Testing") ||
+        (_env.IsProduction() && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ENABLE_SEED")));
 
     /// <summary>
     /// Returns all seed accounts grouped by role, with gym name for staff.
@@ -70,6 +75,32 @@ public class DevController : ControllerBase
 
         var token = await _jwt.GenerateAccessTokenAsync(user);
         return Ok(new { token, user = MapUser(user) });
+    }
+
+    /// <summary>
+    /// Seed all test data (admin only, requires ENABLE_SEED=true).
+    /// </summary>
+    [Authorize(Roles = "Admin")]
+    [HttpPost("seed")]
+    public async Task<ActionResult> Seed()
+    {
+        if (!IsDevAllowed()) return NotFound();
+        var seeder = HttpContext.RequestServices.GetRequiredService<SeedService>();
+        await seeder.SeedAsync();
+        return Ok(new { message = "Seed completed" });
+    }
+
+    /// <summary>
+    /// Clear all seed data (admin only, requires ENABLE_SEED=true).
+    /// </summary>
+    [Authorize(Roles = "Admin")]
+    [HttpPost("clear")]
+    public async Task<ActionResult> Clear()
+    {
+        if (!IsDevAllowed()) return NotFound();
+        var seeder = HttpContext.RequestServices.GetRequiredService<SeedService>();
+        await seeder.ClearAsync();
+        return Ok(new { message = "Clear completed" });
     }
 
     private static object MapUser(Domain.Entities.User u) => new

@@ -24,7 +24,9 @@ public class SeedService
 
         // ── Step 1: Gyms ──
         Console.Write("📦 Gyms... ");
-        var gymsDataDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "data");
+        var gymsDataDir = Path.Combine(AppContext.BaseDirectory, "data");
+        if (!Directory.Exists(gymsDataDir))
+            gymsDataDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "data");
         var gyms = GymGenerator.Generate(gymsDataDir);
         _db.Gyms.AddRange(gyms);
         await _db.SaveChangesAsync();

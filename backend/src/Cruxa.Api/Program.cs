@@ -93,6 +93,7 @@ try
     // ──────────────────────────────────────────
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddApplication(builder.Configuration);
+    builder.Services.AddScoped<Cruxa.Seeder.Services.SeedService>();
 
     // ──────────────────────────────────────────
     // JWT Authentication

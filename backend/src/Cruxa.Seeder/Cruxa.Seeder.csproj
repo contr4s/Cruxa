@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="appsettings.local.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Cruxa.Domain\Cruxa.Domain.csproj" />
     <ProjectReference Include="..\Cruxa.Infrastructure\Cruxa.Infrastructure.csproj" />
   </ItemGroup>
