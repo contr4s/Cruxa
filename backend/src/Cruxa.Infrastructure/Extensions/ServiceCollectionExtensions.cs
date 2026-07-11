@@ -19,6 +19,8 @@ using Application.Features.Posts.Contracts;
 using Application.Features.Ascents.Contracts;
 using Application.Features.Social.Contracts;
 using Application.Common.Contracts;
+using System.Net;
+using System.Net.Sockets;
 
 public static class ServiceCollectionExtensions
 {
@@ -29,7 +31,18 @@ public static class ServiceCollectionExtensions
         var connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+        // ponytail: IPv4-only resolution for hosts like Render with no IPv6 support.
+        // Upgrade: remove when hosting supports IPv6 or Supabase adds IPv4-only DNS.
+        var csb = new NpgsqlConnectionStringBuilder(connectionString);
+        if (csb.Host is not null)
+        {
+            var addresses = Dns.GetHostAddresses(csb.Host);
+            var ipv4 = addresses.FirstOrDefault(a => a.AddressFamily == AddressFamily.InterNetwork);
+            if (ipv4 is not null)
+                csb.Host = ipv4.ToString();
+        }
+
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(csb.ConnectionString);
         dataSourceBuilder.EnableDynamicJson();
         var dataSource = dataSourceBuilder.Build();
 
