@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+
+[[services]]
+name = "api"
+root = "backend/src/Cruxa.Api"
+
+[[services]]
+name = "frontend"
+root = "frontend"
