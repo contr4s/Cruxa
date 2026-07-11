@@ -9,6 +9,9 @@ public class DeleteUserHandler(IUserRepository users) : IRequestHandler<DeleteUs
 {
     public async Task<Result> Handle(DeleteUserCommand cmd, CancellationToken ct)
     {
+        if (cmd.Id != cmd.CurrentUserId)
+            return Result.Failure(Error.Unauthorized("You can only delete your own account"));
+
         var user = await users.GetByIdAsync(cmd.Id);
         if (user is null)
             return Result.Failure(Error.NotFound("User"));

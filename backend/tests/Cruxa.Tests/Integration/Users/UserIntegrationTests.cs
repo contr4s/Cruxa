@@ -107,25 +107,21 @@ public class UserIntegrationTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task Delete_ByAdmin_ReturnsNoContent()
-    {
-        // Create a user to delete
-        var toDelete = await ActAsNewUserAsync();
-        ClearToken();
-
-        // Setup admin
-        await SetupAdminAsync();
-
-        var response = await Client.DeleteAsync($"/api/users/{toDelete.User.Id}");
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
-    }
-
-    [Fact]
-    public async Task Delete_ByNonAdmin_ReturnsForbidden()
+    public async Task Delete_Self_ReturnsNoContent()
     {
         var auth = await ActAsNewUserAsync();
 
         var response = await Client.DeleteAsync($"/api/users/{auth.User.Id}");
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+    }
+
+    [Fact]
+    public async Task Delete_OtherUser_ReturnsNotFound()
+    {
+        var auth = await ActAsNewUserAsync();
+        var otherId = Guid.NewGuid();
+
+        var response = await Client.DeleteAsync($"/api/users/{otherId}");
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
 }

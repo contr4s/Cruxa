@@ -8,7 +8,7 @@ import { FavoriteButton } from '../ui/FavoriteButton';
 import { GymBadge } from '../ui/GymBadge';
 import { getRatingColor } from '../../constants/rating';
 import { pluralize } from '../../utils/pluralize';
-import { gymDistance } from '../../utils/geo';
+import { gymDistance, formatDistance } from '../../utils/geo';
 import { useUserLocation } from '../../hooks/useUserLocation';
 
 interface GymCardProps {
@@ -66,10 +66,10 @@ export function GymCard({ gym, onFavoriteToggle }: GymCardProps) {
           {gym.maxHeight && <GymBadge icon={<Height sx={{ fontSize: 12 }} />} label={`${gym.maxHeight} м`} />}
           {gym.wallArea && <GymBadge icon={<SpaceDashboard sx={{ fontSize: 12 }} />} label={`${gym.wallArea} м²`} />}
         </Box>
-        {gym.lat && gym.lon && (
+        {(gym.distance != null || (gym.lat && gym.lon)) && (
           <GymBadge
             icon={<NearMe sx={{ fontSize: 13 }} />}
-            label={gymDistance(gym.lat, gym.lon, userLoc?.lat, userLoc?.lon) ?? ''}
+            label={gym.distance != null ? formatDistance(gym.distance) : (gymDistance(gym.lat, gym.lon, userLoc?.lat, userLoc?.lon) ?? '')}
             sx={{ bgcolor: 'transparent', border: `1px solid ${theme.palette.divider}`, color: theme.palette.text.primary, fontSize: '0.7rem', height: 20 }}
           />
         )}

@@ -7,9 +7,9 @@ interface GymSortProps {
 }
 
 const SORTS = [
-  { value: 'rating', label: 'По рейтингу' },
-  { value: 'distance', label: 'По расстоянию' }, // ponytail: server-side sort by coords
   { value: 'routes', label: 'По трассам' },
+  { value: 'distance', label: 'По расстоянию' }, // ponytail: server-side sort by coords
+  { value: 'rating', label: 'По рейтингу' },
 ];
 
 export function GymSort({ sort, onSortChange }: GymSortProps) {

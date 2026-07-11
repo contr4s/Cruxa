@@ -1,6 +1,6 @@
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, getFeedSuggestions, publishPost } from '../posts.service';
-import type { CommentDto, PostDetailDto, FeedFilter, FeedSuggestionsDto } from '../../types/post';
+import { getFeed, toggleLike, getComments, addComment, getPostById, deletePost, createPost, publishPost } from '../posts.service';
+import type { CommentDto, PostDetailDto, FeedFilter } from '../../types/post';
 
 export function useFeed(filter?: FeedFilter) {
   return useInfiniteQuery({
@@ -58,13 +58,6 @@ export function useCreatePost() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feed'] });
     },
-  });
-}
-
-export function useFeedSuggestions() {
-  return useQuery<FeedSuggestionsDto>({
-    queryKey: ['feedSuggestions'],
-    queryFn: getFeedSuggestions,
   });
 }
 

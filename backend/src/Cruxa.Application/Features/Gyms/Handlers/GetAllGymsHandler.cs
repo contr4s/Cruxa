@@ -14,12 +14,18 @@ public class GetAllGymsHandler(IGymRepository gyms, IGymFavoriteRepository favor
 {
     public async Task<Result<OffsetPaginatedList<GymDto>>> Handle(GetAllGymsQuery q, CancellationToken ct)
     {
-        var (items, totalCount) = await gyms.GetAllPagedAsync(q.Page, q.PageSize, q.City, q.Sort);
+        var (items, totalCount) = await gyms.GetAllPagedAsync(q.Page, q.PageSize, q.City, q.Sort, q.Lat, q.Lon);
         var dtos = items.Select(g =>
         {
             var dto = g.Adapt<GymDto>();
             dto.RouteCount = g.Routes?.Count ?? 0;
             dto.ActiveRouteCount = g.Routes?.Count(r => r.IsActive) ?? 0;
+            if (g.Location != null && q.Lat.HasValue && q.Lon.HasValue)
+            {
+                var userCoord = Domain.ValueObjects.GeoCoordinate.Create(q.Lat.Value, q.Lon.Value);
+                if (userCoord.IsSuccess)
+                    dto.Distance = userCoord.Value.DistanceTo(g.Location);
+            }
             return dto;
         }).ToList();
 

@@ -1,13 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Reveal } from '../ui/Reveal';
 
 const footerLinks = [
-  { label: 'Документация', to: '#' },
-  { label: 'API', to: '#' },
-  { label: 'GitHub', to: '#' },
-  { label: 'Telegram', to: '#' },
+  { label: 'GitHub', to: 'https://github.com/contr4s/Cruxa' },
 ];
-
-import { Reveal } from '../ui/Reveal';
 
 export function Footer() {
   return (
@@ -19,9 +14,9 @@ export function Footer() {
       </span>
       <div className="footer-links">
         {footerLinks.map((link) => (
-          <Link key={link.label} to={link.to} className="footer-link">
+          <a key={link.label} href={link.to} target="_blank" rel="noopener noreferrer" className="footer-link">
             {link.label}
-          </Link>
+          </a>
         ))}
       </div>
     </footer>

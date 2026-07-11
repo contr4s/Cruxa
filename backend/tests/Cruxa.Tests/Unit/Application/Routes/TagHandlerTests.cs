@@ -1,6 +1,7 @@
 using Cruxa.Application.Features.Routes.Handlers;
 using Cruxa.Application.Features.Routes.Contracts;
 using Cruxa.Application.Features.Routes.Queries;
+using Cruxa.Application.Features.Ascents.DTOs;
 using Cruxa.Domain.Entities;
 using FluentAssertions;
 using Moq;
@@ -27,7 +28,12 @@ public class TagHandlerTests
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().BeEquivalentTo(
-            ["bouldering", "technical", "slab"],
+            new List<TagDto>
+            {
+                new() { Name = "bouldering", Category = "default" },
+                new() { Name = "technical", Category = "default" },
+                new() { Name = "slab", Category = "default" },
+            },
             opts => opts.WithStrictOrdering());
     }
 }

@@ -117,7 +117,10 @@ logs/
 
 
 .vite/
+.env
 .env.production
+.env.local
 
 # Articles (drafts for publications)
 docs/articles/
+.kodik

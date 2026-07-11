@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { useFeed, useToggleLike, useDeletePost, useFeedSuggestions } from '../services/hooks/useFeed';
+import { useFeed, useToggleLike, useDeletePost } from '../services/hooks/useFeed';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { FeedToggle } from '../components/feed/FeedToggle';
 import { FeedUserSuggestions } from '../components/feed/FeedUserSuggestions';
@@ -28,7 +28,6 @@ export default function FeedPage() {
   const toggleLikeMutation = useToggleLike();
   const deletePost = useDeletePost();
   const { enqueueSnackbar } = useSnackbar();
-  const { data: suggestions } = useFeedSuggestions();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -93,9 +92,9 @@ export default function FeedPage() {
         </Box>
       </PageContainer>
       <AsidePanel sx={{ width: 320 }}>
-        <FeedUserSuggestions users={suggestions?.users ?? []} />
-        <FeedGymRecommendations gyms={suggestions?.gyms ?? []} />
-        <FeedRouteRecommendations routes={suggestions?.routes ?? []} />
+        <FeedUserSuggestions users={[]} />
+        <FeedGymRecommendations gyms={[]} />
+        <FeedRouteRecommendations routes={[]} />
       </AsidePanel>
       <ConfirmDialog
         open={deleteTarget !== null}

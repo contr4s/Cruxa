@@ -1,5 +1,5 @@
 import api from './api';
-import type { PostDto, CommentDto, PostDetailDto, FeedSuggestionsDto, PostAscentDto, CreateAscentRequest } from '../types/post';
+import type { PostDto, CommentDto, PostDetailDto, PostAscentDto, CreateAscentRequest } from '../types/post';
 import type { PaginatedList } from '../types/common';
 
 export async function getFeed(filter?: 'subs' | 'recommended', page = 1, pageSize = 10): Promise<PaginatedList<PostDto>> {
@@ -36,11 +36,6 @@ export async function deletePost(postId: string): Promise<void> {
 
 export async function createPost(): Promise<PostDto> {
   const response = await api.post<PostDto>('/posts');
-  return response.data;
-}
-
-export async function getFeedSuggestions(): Promise<FeedSuggestionsDto> {
-  const response = await api.get<FeedSuggestionsDto>('/feed/suggestions');
   return response.data;
 }
 

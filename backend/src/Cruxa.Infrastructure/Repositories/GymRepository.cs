@@ -30,7 +30,7 @@ public class GymRepository : IGymRepository
             .ToListAsync();
     }
 
-    public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize, string? city = null, Domain.Enums.GymSort? sort = null)
+    public async Task<(List<Gym> Items, int TotalCount)> GetAllPagedAsync(int page, int pageSize, string? city = null, Domain.Enums.GymSort? sort = null, double? lat = null, double? lon = null)
     {
         IQueryable<Gym> query = _context.Gyms.Include(g => g.Routes);
 
@@ -38,6 +38,24 @@ public class GymRepository : IGymRepository
             query = query.Where(g => g.City == city);
 
         var totalCount = await query.CountAsync();
+
+        // Distance sort: in-memory Haversine (ponytail: switch to PostGIS when >10k gyms)
+        if (sort == Domain.Enums.GymSort.Distance && lat.HasValue && lon.HasValue)
+        {
+            var allGyms = await query.ToListAsync();
+            var userCoord = Domain.ValueObjects.GeoCoordinate.Create(lat.Value, lon.Value);
+            if (userCoord.IsSuccess)
+            {
+                var withDistance = allGyms
+                    .Select(g => new { Gym = g, Distance = g.Location != null ? userCoord.Value.DistanceTo(g.Location) : double.MaxValue })
+                    .OrderBy(x => x.Distance)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(x => x.Gym)
+                    .ToList();
+                return (withDistance, totalCount);
+            }
+        }
 
         IOrderedQueryable<Gym> ordered = sort switch
         {

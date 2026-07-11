@@ -48,10 +48,10 @@ public class UsersController(
     }
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var result = await mediator.Send(new DeleteUserCommand(id));
+        var result = await mediator.Send(new DeleteUserCommand(id, currentUser.GetRequiredUserId()));
         return result.IsSuccess ? NoContent() : NotFound();
     }
 

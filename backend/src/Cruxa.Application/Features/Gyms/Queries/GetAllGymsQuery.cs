@@ -12,12 +12,16 @@ public record GetAllGymsQuery : IRequest<Result<OffsetPaginatedList<GymDto>>>
     public int PageSize { get; }
     public string? City { get; }
     public GymSort? Sort { get; }
+    public double? Lat { get; }
+    public double? Lon { get; }
 
-    public GetAllGymsQuery(int page = 1, int pageSize = 10, string? city = null, GymSort? sort = null)
+    public GetAllGymsQuery(int page = 1, int pageSize = 10, string? city = null, GymSort? sort = null, double? lat = null, double? lon = null)
     {
         Page = Math.Max(1, page);
-        PageSize = Math.Clamp(pageSize, 1, 10);
+        PageSize = Math.Clamp(pageSize, 1, 500);
         City = city;
         Sort = sort;
+        Lat = lat;
+        Lon = lon;
     }
 }

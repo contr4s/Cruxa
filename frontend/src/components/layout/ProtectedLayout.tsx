@@ -13,6 +13,8 @@ import { StartWorkoutSheet } from '../workouts/draft/StartWorkoutSheet';
 import { AscentFormModal } from '../workouts/draft/AscentFormModal';
 import { useDraftStore } from '../../stores/draftWorkoutStore';
 import { useMyDraft } from '../../services/hooks/useMyDraft';
+import { useCreateDraftPost } from '../../services/hooks/useDraftPost';
+import { getGymById } from '../../services/gyms.service';
 
 const DASHBOARD_ROUTES = ['/routesetter', '/gym-admin', '/admin'];
 
@@ -21,8 +23,21 @@ export function ProtectedLayout() {
   const location = useLocation();
   const isDashboard = DASHBOARD_ROUTES.includes(location.pathname);
   const { data: draft } = useMyDraft();
+  const { mutateAsync: createDraft } = useCreateDraftPost();
 
-  const handleStart = () => {
+  const gymMatch = location.pathname.match(/^\/gyms\/([a-f0-9-]+)/i);
+
+  const handleStart = async () => {
+    if (gymMatch) {
+      try {
+        const gymId = gymMatch[1];
+        const gym = await getGymById(gymId);
+        if (!gym) throw new Error('Gym not found');
+        const post = await createDraft(gym.id);
+        startDraft(post.id, gym.id, gym.name);
+        return;
+      } catch { /* fallback to sheet */ }
+    }
     openStartSheet();
   };
 

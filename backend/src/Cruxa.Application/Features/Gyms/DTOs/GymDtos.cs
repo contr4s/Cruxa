@@ -35,4 +35,5 @@ public class GymDto
     public int RouteCount { get; set; }
     public int ActiveRouteCount { get; set; }
     public bool IsFavorite { get; set; }
+    public double? Distance { get; set; }
 }

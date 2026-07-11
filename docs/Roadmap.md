@@ -177,12 +177,12 @@
 
 | № | Задача | Описание |
 |---|--------|----------|
-| **C1** | **Избранное (Gym Favorites)** | Сущность `UserFavoriteGym`. `POST/DELETE /api/gyms/{id}/favorite`. Фронт вызывает `toggleGymFavorite()` |
-| **C2** | **Grade Consensus** | Сущность `RouteGradeVote`. `GET /api/routes/{id}/consensus` — распределение голосов, медиана. Фронт ждёт `GradeConsensus` |
-| **C3** | **Заметки к трассе** | `PUT /api/routes/{id}/notes` — приватные заметки пользователя о трассе |
-| **C4** | **Upload Media** | `POST /api/media/upload` — multipart-загрузка, возврат `{ url }`. Интеграция с медиа трасс, постов, профилей |
-| **C5** | **Feed Suggestions** | `GET /api/feed/suggestions` — рекомендованные пользователи, трассы, залы. Фронт ждёт `FeedSuggestionsDto` |
-| **C6** | **Media Selection при публикации** | Доработка `PublishPost` — возможность указать, какие `MediaUrls` из пролазов войдут в галерею поста |
+| **C1** | **Избранное (Gym Favorites)** | Сущность `UserFavoriteGym`. `POST/DELETE /api/gyms/{id}/favorite`. Фронт вызывает `toggleGymFavorite()` | ✅ |
+| **C2** | **Grade Consensus** | Сущность `RouteGradeVote`. `GET /api/routes/{id}/consensus` — распределение голосов, медиана. Фронт ждёт `GradeConsensus` | ✅ |
+| **C3** | **Заметки к трассе** | `PUT /api/routes/{id}/notes` — приватные заметки пользователя о трассе | ✅ |
+| **C4** | **Upload Media** | `POST /api/media/upload` — multipart-загрузка, возврат `{ url }`. Интеграция с медиа трасс, постов, профилей | ❌ |
+| **C5** | **Feed Suggestions** | `GET /api/feed/suggestions` — рекомендованные пользователи, трассы, залы. Фронт ждёт `FeedSuggestionsDto` | ❌ |
+| **C6** | **Media Selection при публикации** | Доработка `PublishPost` — возможность указать, какие `MediaUrls` из пролазов войдут в галерею поста | ✅ |
 
 ---
 
@@ -192,13 +192,13 @@
 
 | № | Задача | Описание |
 |---|--------|----------|
-| **D1** | **Routesetter stats** | `GET /api/routesetters/me/stats`, `GET /api/routesetters/me/routes`, `GET /api/routesetters/me/reviews`, `GET /api/routesetters/me/gyms` |
-| **D2** | **GymAdmin дашборд** | `GET /api/gyms/{id}/admin-stats`, `GET /api/gyms/{id}/admin-routes`, `GET /api/gyms/{id}/activity`, `GET /api/gyms/{id}/setters`, `POST/DELETE /api/gyms/{id}/setters` |
-| **D3** | **Managed Gym** | `GET /api/users/me/managed-gym` — какой зал привязан к пользователю (GymAdmin) |
-| **D4** | **Admin (SuperAdmin) дашборд** | `GET /api/admin/stats`, `GET /api/admin/recent-activity`, `GET /api/admin/top-gyms`, `GET /api/admin/gyms` |
-| **D5** | **Цели (Goals)** | Сущность `UserGoal`. `GET /api/users/me/goals`, CRUD. Прогресс цели из stats |
-| **D6** | **Экспорт данных** | `GET /api/admin/export/{entity}` — CSV-экспорт залов, трасс, пользователей |
-| **D7** | **Секторы зала CRUD** | Сущность `GymSector`. `GET/POST/PUT/DELETE /api/gyms/{id}/sectors`. Привязка сектора к Route |
+| **D1** | **Routesetter stats** | `GET /api/routesetters/me/stats`, `GET /api/routesetters/me/routes`, `GET /api/routesetters/me/reviews`, `GET /api/routesetters/me/gyms` | ✅ |
+| **D2** | **GymAdmin дашборд** | `GET /api/gyms/{id}/admin-stats`, `GET /api/gyms/{id}/admin-routes`, `GET /api/gyms/{id}/activity`, `GET /api/gyms/{id}/setters`, `POST/DELETE /api/gyms/{id}/setters` | ✅ |
+| **D3** | **Managed Gym** | `GET /api/users/me/managed-gym` — какой зал привязан к пользователю (GymAdmin) | ✅ |
+| **D4** | **Admin (SuperAdmin) дашборд** | `GET /api/admin/stats`, `GET /api/admin/recent-activity`, `GET /api/admin/top-gyms`, `GET /api/admin/gyms` | ✅ |
+| **D5** | **Цели (Goals)** | Сущность `UserGoal`. `GET /api/users/me/goals`, CRUD. Прогресс цели из stats | ❌ |
+| **D6** | **Экспорт данных** | `GET /api/admin/export/{entity}` — CSV-экспорт залов, трасс, пользователей | ❌ |
+| **D7** | **Секторы зала CRUD** | Сущность `GymSector`. `GET/POST/PUT/DELETE /api/gyms/{id}/sectors`. Привязка сектора к Route | ❌ |
 
 ---
 
@@ -291,3 +291,5 @@
 4. **Фаза 6** — продвинутые фичи для вовлечения (клубы, челленджи, рейтинги, планы тренировок).
 
 > **Приоритет**: Track A → Track C → Track D → Track E. Track B (статистика) — ✅ уже работает на backend'е.
+
+**Итого:** Tracks A+B+C+D полностью реализованы. C4 (media upload), C5 (feed suggestions), D5 (goals), D6 (export), D7 (sectors) — отложены на будущие фазы.

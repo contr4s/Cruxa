@@ -22,6 +22,7 @@ export interface GymDto {
   routeCount: number;
   activeRouteCount: number;
   isFavorite: boolean;
+  distance?: number;
 }
 
 export interface GymPrice {

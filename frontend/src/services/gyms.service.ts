@@ -8,6 +8,8 @@ export interface GetGymsParams {
   sort?: string;
   page?: number;
   pageSize?: number;
+  lat?: number;
+  lon?: number;
 }
 
 export async function getGyms(params?: GetGymsParams): Promise<PaginatedList<GymDto>> {

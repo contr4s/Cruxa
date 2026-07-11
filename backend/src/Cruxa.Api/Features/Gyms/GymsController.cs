@@ -15,10 +15,10 @@ namespace Cruxa.Api.Features.Gyms;
 public class GymsController(IMediator mediator, ICurrentUserService currentUser) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? city = null, [FromQuery] string? sort = null)
+    public async Task<ActionResult<OffsetPaginatedList<GymDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? city = null, [FromQuery] string? sort = null, [FromQuery] double? lat = null, [FromQuery] double? lon = null)
     {
         var sortEnum = Enum.TryParse<GymSort>(sort, ignoreCase: true, out var parsed) ? parsed : (GymSort?)null;
-        var result = await mediator.Send(new GetAllGymsQuery(page, pageSize, city, sortEnum));
+        var result = await mediator.Send(new GetAllGymsQuery(page, pageSize, city, sortEnum, lat, lon));
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error.Message);
     }
 

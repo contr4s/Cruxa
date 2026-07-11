@@ -1,7 +1,7 @@
 import { Reveal } from '../ui/Reveal';
 
 const stats = [
-  { num: '10+', label: 'Скалодромов' },
+  { num: '50+', label: 'Городов' },
   { num: '500+', label: 'Скалолазов' },
   { num: '1 000+', label: 'Трасс в базе' },
   { num: '24/7', label: 'Доступно' },

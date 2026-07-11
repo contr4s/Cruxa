@@ -13,9 +13,7 @@
 
 В России до сих пор нет единого инструмента, где можно найти любой скалодром, записать тренировку и отследить прогресс. Залы разбросаны по Яндекс Картам, сложность меряют кто во французской шкале, кто по V-scale, кто по цветам, а результаты тренировок хранят в заметках и Excel. Cruxa собирает всё в одном месте.
 
-Я соло-разработчик и скалолаз — делаю продукт для себя и для сообщества. Проект участвует в хакатоне **Kodik Launchpad**.
-
-> 🔗 **Демо**: скоро  
+Я соло-разработчик и скалолаз — делаю продукт для себя и для сообщества. Проект участвует в хакатоне **Kodik Launchpad**.  
 
 ---
 
@@ -23,7 +21,7 @@
 
 | Фича | Описание |
 |------|----------|
-| **Каталог залов** | 50+ скалодромов Москвы и СПб, собранные парсером с climbingpro.ru. Карточка с ценами, часами работы, контактами, фото. |
+| **Каталог залов** | Скалодромы по всей России от Абакана до Ярославля, собранные парсером с climbingpro.ru. Карточка с ценами, часами работы, контактами, фото. |
 | **Единая шкала сложности** | `GradeIndex` 0–1000. Любая система сложности трасс (французская, V-scale, цветовая) приводится к общему знаменателю  — можно мерить прогресс независимо от того, в какой зал пошёл. |
 | **Дневник тренировок** | Draft → Publish: пришёл в зал, нажал «Начать тренировку», логируешь пролазы со стилем прохождения (Flash, Onsight, Redpoint…), потом одним постом публикуешь в ленту. Данные сохраняются на каждом шаге — потерял связь или сел телефон — ничего не пропадёт. |
 | **Крускор** | Elo-подобный алгоритм, который считает интегральную силу скалолаза. Учитывает грейд трасс, стиль прохождения, давность тренировок, радар из навыков. |
@@ -41,13 +39,7 @@
 | **Database** | PostgreSQL 15 |
 | **Auth** | ASP.NET Core Identity + JWT Bearer, Refresh Tokens |
 | **Frontend** | React 19, TypeScript 6, Vite 8, MUI 9, TanStack Query 5, Zustand 5, Chart.js 4, Zod 4, React Hook Form, Framer Motion, Swiper, Axios, notistack, MSW |
-| **Testing** | xUnit, Testcontainers, FluentAssertions, Bogus |
-| **Infra** | Docker, Docker Compose, nginx |
-| **Planned** | Flutter (mobile), MinIO/S3 (media storage), SignalR (real-time) |
-
----
-
-## 🏗 Архитектура
+| **Testing** | xUnit, Testcontainers, FluentAssertions, AutoBogus |
 
 ### Backend (C# .NET 10)
 
@@ -95,36 +87,52 @@ frontend/src/
 
 ---
 
-| Слой | Технологии |
-|------|-----------|
-| **Backend** | .NET 10, ASP.NET Core, Entity Framework Core 10, MediatR, FluentValidation, Mapster, Serilog |
-| **Database** | PostgreSQL 15 |
-| **Auth** | ASP.NET Core Identity + JWT Bearer, Refresh Tokens |
-| **Frontend** | React 19, TypeScript 6, Vite 8, MUI 9, TanStack Query 5, Zustand 5, Chart.js 4, Zod 4, React Hook Form, Framer Motion, Swiper, Axios, notistack, MSW |
-| **Testing** | xUnit, Testcontainers, FluentAssertions, Bogus |
-| **Infra** | Docker, Docker Compose, nginx |
-| **Planned** | Flutter (mobile), MinIO/S3 (media storage), SignalR (real-time) |
 
----
 
 ## 🚀 Быстрый старт
 
-```bash
-# Запуск API + PostgreSQL
-docker compose up -d
+### Docker (рекомендуется)
 
-# Или локально (нужна строка подключения к PostgreSQL)
-dotnet run --project src/Cruxa.Api
+```bash
+# 1. Скопируйте файл с переменными окружения
+cp .env.example .env
+
+# 2. Сборка и запуск всех сервисов
+docker compose up --build -d
+
+# Сервисы:
+# - http://localhost:80   — фронтенд (через nginx)
+# - http://localhost:5000 — API (напрямую)
+# - http://localhost:5000/scalar/v1 — Scalar UI (API документация)
+# - http://localhost:5433 — PostgreSQL
 ```
 
-API доступен по адресу `http://localhost:5000`.  
-Scalar UI: `http://localhost:5000/scalar/v1`.  
-OpenAPI-спецификация: [`docs/cruxa_api_v1.json`](docs/cruxa_api_v1.json).
+При первом запуске API автоматически применяет миграции EF Core и создаёт admin-пользователя (если настроен `AdminPasswordHash`).
 
-### Парсер
+### Локальный запуск (без Docker)
+
+**Требования:** .NET 10 SDK, PostgreSQL 15, Node.js 20.
 
 ```bash
-# Сбор данных по Москве и СПб
+# 1. База данных
+#    Создайте БД cruxa и настройте строку подключения:
+
+# 2. API
+cd backend
+dotnet run --project src/Cruxa.Api
+
+# 3. Фронтенд (в другом терминале)
+cd frontend
+npm install
+npm run dev
+```
+
+Фронтенд будет доступен на `http://localhost:5173`, API на `http://localhost:5033`.
+
+### Парсер данных
+
+```bash
+# Сбор данных по всем городам
 dotnet run --project src/Cruxa.Parser -- scrape
 
 # Загрузка собранных данных в API
@@ -132,6 +140,34 @@ dotnet run --project src/Cruxa.Parser -- seed --input data/gyms-moskva.json
 ```
 
 Подробнее: [ADR-008: Parser Architecture](docs/adr/008-parser-architecture.md).
+
+### Тестирование
+
+```bash
+# Запуск всех тестов
+dotnet test
+
+# Только unit-тесты
+dotnet test --filter "Category=Unit"
+
+# Только integration-тесты (требует Docker — Testcontainers поднимает PostgreSQL)
+dotnet test --filter "FullyQualifiedName~Integration"
+```
+
+Проект содержит **326 тестов** (219 unit + 107 integration) — доменная логика, CQRS-хендлеры, интеграция через Testcontainers с реальной PostgreSQL.
+
+### Переменные окружения
+
+| Переменная | Обязательная | Где задаётся | Описание |
+|-----------|-------------|-------------|----------|
+| `DB_CONNECTION_STRING` | ✅ | `.env` | Строка подключения к PostgreSQL |
+| `JWT_SECRET` | ✅ | `.env` | Секретный ключ JWT (32+ байт) |
+| `CORS_ORIGINS` | ✅ | `.env` | Разрешённые CORS-источники |
+| `ASPNETCORE_ENVIRONMENT` | ❌ | `.env` | `Development` (по умолчанию) или `Production` |
+| `VITE_API_BASE_URL` | ✅ | `.env.production` | Базовый URL API для фронтенда |
+| `VITE_USE_MOCK` | ❌ | `.env.development` | Включить MSW-моки (только для разработки) |
+
+> 💡 **`.env` не хранится в репозитории.** Используйте `.env.example` как шаблон: `cp .env.example .env`.
 
 ---
 
@@ -158,13 +194,19 @@ dotnet run --project src/Cruxa.Parser -- seed --input data/gyms-moskva.json
 | Этап | Статус |
 |------|--------|
 | Phase 1 — Core API (74 endpoint'а, JWT, CQRS, DDD) | ✅ |
-| Phase 2 — Парсер + база скалодромов (50+ залов) | ✅ |
-| Phase 3 — Web-фронтенд (React 19, 9 страниц, 4 роли) | ✅ |
+| Phase 2 — Парсер + база скалодромов (50+ городов) | ✅ |
+| Phase 3 — Web-фронтенд (React 19, 15 страниц, 4 роли) | ✅ |
+| Track A — Стабилизация и интеграция фронта с бэком | ✅ |
 | Track B — Статистика и Крускор | ✅ |
-| Track A/C/D/E — Интеграция фронта и бэка | 🔄 |
+| Track C — Социальные фичи (избранное, консенсус, заметки) | ✅ |
+| Track D — Ролевые дашборды (Routesetter, GymAdmin, Admin) | ✅ |
 | Phase 4 — Mobile (Flutter) | ⬜ |
 
 ---
 
-© All Rights Reserved. This source code is provided for viewing purposes only.
-
+Проект открыт для разработки и сотрудничества.
+Все права на коммерческое использование сохранены за автором.
+Контрибьюторы сохраняют права на свои изменения
+и предоставляют владельцу проекта бессрочную,
+безотзывную, неисключительную лицензию на их
+использование в любой версии продукта.

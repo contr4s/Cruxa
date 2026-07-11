@@ -4,4 +4,4 @@ using Cruxa.Domain.Common;
 
 namespace Cruxa.Application.Features.Posts.Queries;
 
-public record GetPostsByGymQuery(Guid GymId, int Page = 1, int PageSize = 20) : IRequest<Result<IEnumerable<PostDto>>>;
+public record GetPostsByGymQuery(Guid GymId, Guid? CurrentUserId = null) : IRequest<Result<IEnumerable<PostDto>>>;

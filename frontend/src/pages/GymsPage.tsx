@@ -3,6 +3,7 @@ import { Box, CircularProgress, ToggleButtonGroup, ToggleButton, useTheme } from
 import { FormatListBulleted, Map } from '@mui/icons-material';
 import { useSnackbar } from 'notistack';
 import { useInfiniteGyms, useToggleFavorite, useCities } from '../services/hooks/useGyms';
+import { useUserLocation } from '../hooks/useUserLocation';
 import { PageContainer } from '../components/layout/PageContainer';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { SkeletonCard } from '../components/ui/SkeletonCard';
@@ -15,9 +16,10 @@ export default function GymsPage() {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const [city, setCity] = useState('all');
-  const [sort, setSort] = useState('rating');
+  const [sort, setSort] = useState('routes');
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const userLoc = useUserLocation();
 
   const { data: citiesData } = useCities();
   const cityOptions = useMemo(() => [
@@ -25,7 +27,7 @@ export default function GymsPage() {
     ...(citiesData ?? []).map((c: string) => ({ value: c, label: c })),
   ], [citiesData]);
 
-  const params = useMemo(() => ({ city, sort } as const), [city, sort]);
+  const params = useMemo(() => ({ city, sort, lat: userLoc?.lat, lon: userLoc?.lon } as const), [city, sort, userLoc]);
   const {
     data: pages,
     isLoading,

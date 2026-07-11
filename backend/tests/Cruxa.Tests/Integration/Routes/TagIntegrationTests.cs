@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using Cruxa.Application.Features.Routes.DTOs;
+using Cruxa.Application.Features.Ascents.DTOs;
 using FluentAssertions;
 
 namespace Cruxa.Tests.Integration.Routes;
@@ -31,10 +32,10 @@ public class TagIntegrationTests : IntegrationTestBase
         ClearToken();
         var response = await Client.GetAsync("/api/routes/tags");
         response.EnsureSuccessStatusCode();
-        var tags = await DeserializeAsync<List<string>>(response);
+        var tags = await DeserializeAsync<List<TagDto>>(response);
 
         tags.Should().NotBeNull();
-        tags.Should().Contain(new[] { "bouldering", "technical", "overhang", "slab" });
+        tags.Select(t => t.Name).Should().Contain(new[] { "bouldering", "technical", "overhang", "slab" });
     }
 
     [Fact]
@@ -44,7 +45,7 @@ public class TagIntegrationTests : IntegrationTestBase
         // so this checks the endpoint is accessible and returns a list
         var response = await Client.GetAsync("/api/routes/tags");
         response.EnsureSuccessStatusCode();
-        var tags = await DeserializeAsync<List<string>>(response);
+        var tags = await DeserializeAsync<List<TagDto>>(response);
 
         tags.Should().NotBeNull();
         // May be empty or have tags from parallel tests

@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity, getUserByUsername, followUser, unfollowUser, isFollowing, updateUserProfile, changePassword, getFollowers, getFollowing } from '../users.service';
+import { getUserProfile, getUserStats, getKruskorHistory, getRadarSkills, getGradePyramid, getAscentDistribution, getTopRoutes, getMonthlyActivity, getUserByUsername, followUser, unfollowUser, isFollowing, updateUserProfile, changePassword, getFollowers, getFollowing, deleteAccount } from '../users.service';
 import type { UserDto, UserStats, KruskorPoint, RadarSkillsResponse, GradePyramidItem, AscentTypeDistribution, TopRoutesResponse, MonthlyActivity } from '../../types/user';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -151,5 +151,17 @@ export function useChangePassword() {
   return useMutation({
     mutationFn: ({ currentPassword, newPassword }: { currentPassword: string; newPassword: string }) =>
       changePassword(currentPassword, newPassword),
+  });
+}
+
+export function useDeleteAccount() {
+  const queryClient = useQueryClient();
+  const logout = useAuthStore((s) => s.logout);
+  return useMutation({
+    mutationFn: (userId: string) => deleteAccount(userId),
+    onSuccess: () => {
+      queryClient.clear();
+      logout();
+    },
   });
 }

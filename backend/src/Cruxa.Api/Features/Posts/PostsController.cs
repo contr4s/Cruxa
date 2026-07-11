@@ -20,7 +20,7 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<PostDto>> GetById(Guid id)
     {
-        var result = await mediator.Send(new GetPostByIdQuery(id));
+        var result = await mediator.Send(new GetPostByIdQuery(id, currentUser.GetUserId()));
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 
@@ -55,7 +55,7 @@ public class PostsController(IMediator mediator, ICurrentUserService currentUser
     [HttpGet("gym/{gymId:guid}")]
     public async Task<ActionResult<IEnumerable<PostDto>>> GetByGym(Guid gymId)
     {
-        var result = await mediator.Send(new GetPostsByGymQuery(gymId));
+        var result = await mediator.Send(new GetPostsByGymQuery(gymId, currentUser.GetUserId()));
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);
     }
 

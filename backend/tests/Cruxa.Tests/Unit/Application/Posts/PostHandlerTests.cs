@@ -115,7 +115,7 @@ public class PostHandlerTests
     public async Task GetPostById_WhenExists_ReturnsPost()
     {
         var post = CreatePost();
-        var handler = new GetPostByIdHandler(_postRepo.Object);
+        var handler = new GetPostByIdHandler(_postRepo.Object, _followerRepo.Object);
         _postRepo.Setup(r => r.GetByIdAsync(post.Id)).ReturnsAsync(post);
 
         var result = await handler.Handle(

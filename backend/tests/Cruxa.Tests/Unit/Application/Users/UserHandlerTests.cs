@@ -102,7 +102,7 @@ public class UserHandlerTests
         _userRepo.Setup(r => r.GetByIdAsync(user.Id)).ReturnsAsync(user);
 
         var result = await handler.Handle(
-            new DeleteUserCommand(Id: user.Id), CancellationToken.None);
+            new DeleteUserCommand(Id: user.Id, CurrentUserId: user.Id), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         _userRepo.Verify(r => r.DeleteAsync(user.Id));
@@ -112,11 +112,13 @@ public class UserHandlerTests
     public async Task DeleteUser_WhenNotExists_ReturnsNotFound()
     {
         var id = Guid.NewGuid();
+        var otherId = Guid.NewGuid();
         var handler = new DeleteUserHandler(_userRepo.Object);
         _userRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((User?)null);
 
+        // CurrentUserId must match Id for self-delete
         var result = await handler.Handle(
-            new DeleteUserCommand(Id: id), CancellationToken.None);
+            new DeleteUserCommand(Id: id, CurrentUserId: id), CancellationToken.None);
 
         result.IsSuccess.Should().BeFalse();
         result.Error.Code.Should().Be("NotFound");

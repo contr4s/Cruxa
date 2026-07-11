@@ -114,7 +114,7 @@ export function CommentSection({ postId, getComments, onCommentAdded }: CommentS
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 2 }}>
             {visible.map((comment) => (
-              <Box key={comment.id} sx={{ display: 'flex', gap: 1.5 }}>
+              <Box key={comment.id} sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
                 <UserLink
                   username={comment.username}
                   displayName={comment.displayName}

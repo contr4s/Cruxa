@@ -92,3 +92,7 @@ export async function getFollowing(userId: string): Promise<UserDto[]> {
   const response = await api.get<UserDto[]>(`/users/${userId}/following`);
   return response.data;
 }
+
+export async function deleteAccount(userId: string): Promise<void> {
+  await api.delete(`/users/${userId}`);
+}

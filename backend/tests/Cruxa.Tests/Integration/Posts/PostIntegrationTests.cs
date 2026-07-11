@@ -80,6 +80,8 @@ public class PostIntegrationTests : IntegrationTestBase
         var createResponse = await Client.PostAsJsonAsync("/api/posts", MakePostRequest(gym.Id), JsonOptions);
         createResponse.EnsureSuccessStatusCode();
         var created = (await DeserializeAsync<PostDto>(createResponse))!;
+        // Publish the post so it's visible
+        await Client.PutAsync($"/api/posts/{created.Id}/publish", null);
 
         ClearToken();
         var response = await Client.GetAsync($"/api/posts/user/{created.UserId}");
@@ -94,7 +96,11 @@ public class PostIntegrationTests : IntegrationTestBase
     public async Task GetByGym_ReturnsPostsForGym()
     {
         var gym = await SetupGymAsync();
-        await Client.PostAsJsonAsync("/api/posts", MakePostRequest(gym.Id), JsonOptions);
+        var createResponse = await Client.PostAsJsonAsync("/api/posts", MakePostRequest(gym.Id), JsonOptions);
+        createResponse.EnsureSuccessStatusCode();
+        var created = (await DeserializeAsync<PostDto>(createResponse))!;
+        // Publish the post so it's visible
+        await Client.PutAsync($"/api/posts/{created.Id}/publish", null);
 
         ClearToken();
         var response = await Client.GetAsync($"/api/posts/gym/{gym.Id}");

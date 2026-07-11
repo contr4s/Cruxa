@@ -9,7 +9,7 @@
 ## 🏗 Архитектура Системы
 
 ### 1. Backend Service (C# .NET 10)
-- **Тип архитектуры:** Clean Architecture (4 проекта: Domain / Application / Infrastructure / Api).
+- **Тип архитектуры:** Clean Architecture (6 проектов: Domain / Application / Infrastructure / Api / Parser / Seeder).
 - **API:** RESTful API + OpenAPI (Scalar UI).
 - **Аутентификация:** JWT на базе ASP.NET Core Identity. Refresh Tokens.
 - **CQRS:** MediatR с Pipeline Behaviors (Validation → Logging → Transaction).

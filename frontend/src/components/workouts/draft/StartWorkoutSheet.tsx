@@ -14,7 +14,7 @@ interface StartWorkoutSheetProps {
 export function StartWorkoutSheet({ open, onClose }: StartWorkoutSheetProps) {
   const { id: gymIdFromUrl } = useParams<{ id: string }>();
   const [search, setSearch] = useState('');
-  const { data: gymsData, isLoading } = useGyms({ pageSize: 50 });
+  const { data: gymsData, isLoading } = useGyms({ pageSize: 500 });
   const startDraft = useDraftStore((s) => s.startDraft);
   const { mutateAsync: createDraft, isPending } = useCreateDraftPost();
 
