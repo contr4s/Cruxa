@@ -35,6 +35,28 @@ export function MobileHeader() {
       >
         <img src="/logo.png" alt="" style={{ height: 32, marginRight: 8 }} />
         Крукса
+        {import.meta.env.VITE_APP_DEMO === 'true' && (
+          <Box
+            component="span"
+            sx={{
+              fontSize: '.55rem',
+              fontWeight: 700,
+              color: 'primary.main',
+              bgcolor: 'rgba(38, 166, 154, 0.12)',
+              border: '1px solid',
+              borderColor: 'rgba(38, 166, 154, 0.25)',
+              borderRadius: '4px',
+              px: '3px',
+              py: '1px',
+              ml: '4px',
+              textTransform: 'uppercase',
+              letterSpacing: '.3px',
+              lineHeight: 1,
+            }}
+          >
+            Демо
+          </Box>
+        )}
       </Typography>
 
       {/* Search pill */}

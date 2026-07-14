@@ -58,6 +58,7 @@ export default function LoginPage() {
       footerLinkTo="/register"
       footerExtra={import.meta.env.VITE_DEV_ACCOUNTS_ENABLED === 'true' ? (
         <button
+          type="button"
           onClick={() => setDevOpen(true)}
           style={{
             background: 'none',

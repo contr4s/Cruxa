@@ -2,11 +2,14 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useFeed, useToggleLike, useDeletePost } from '../services/hooks/useFeed';
+import { useUserStats } from '../services/hooks/useUser';
+import { useAuthStore } from '../stores/authStore';
 import { WorkoutFeed } from '../components/workouts/WorkoutFeed';
 import { FeedToggle } from '../components/feed/FeedToggle';
 import { FeedUserSuggestions } from '../components/feed/FeedUserSuggestions';
 import { FeedRouteRecommendations } from '../components/feed/FeedRouteRecommendations';
 import { FeedGymRecommendations } from '../components/feed/FeedGymRecommendations';
+import { FollowersList } from '../components/profile/FollowersList';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { StateDisplay } from '../components/ui/StateDisplay';
 import { getComments } from '../services/posts.service';
@@ -15,6 +18,10 @@ import { AsidePanel } from '../components/layout/AsidePanel';
 
 export default function FeedPage() {
   const [filter, setFilter] = useState<'subs' | 'recommended'>('subs');
+  const userId = useAuthStore((s) => s.userId);
+  const { data: stats } = useUserStats(userId ?? '');
+  const followingCount = stats?.followingCount ?? 0;
+  const [showFollowing, setShowFollowing] = useState(false);
   const {
     data: pages,
     isLoading,
@@ -70,7 +77,8 @@ export default function FeedPage() {
         <FeedToggle
           value={filter}
           onChange={setFilter}
-          subsCount={8}
+          subsCount={followingCount}
+          onSubsClick={() => setShowFollowing(true)}
         />
         <Box sx={{ mt: 2 }}>
           <WorkoutFeed
@@ -91,6 +99,14 @@ export default function FeedPage() {
           <div ref={sentinelRef} />
         </Box>
       </PageContainer>
+      {userId && showFollowing && (
+        <FollowersList
+          open={showFollowing}
+          onClose={() => setShowFollowing(false)}
+          userId={userId}
+          mode="following"
+        />
+      )}
       <AsidePanel sx={{ width: 320 }}>
         <FeedUserSuggestions users={[]} />
         <FeedGymRecommendations gyms={[]} />

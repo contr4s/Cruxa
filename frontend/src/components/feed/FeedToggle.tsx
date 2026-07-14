@@ -5,9 +5,10 @@ interface FeedToggleProps {
   value: 'subs' | 'recommended';
   onChange: (value: 'subs' | 'recommended') => void;
   subsCount?: number;
+  onSubsClick?: () => void;
 }
 
-export function FeedToggle({ value, onChange, subsCount }: FeedToggleProps) {
+export function FeedToggle({ value, onChange, subsCount, onSubsClick }: FeedToggleProps) {
   const theme = useTheme();
 
   return (
@@ -41,9 +42,19 @@ export function FeedToggle({ value, onChange, subsCount }: FeedToggleProps) {
           <Whatshot sx={{ fontSize: 16, mr: 0.5 }} /> Рекомендуемое
         </ToggleButton>
       </ToggleButtonGroup>
-      {subsCount !== undefined && (
-        <Typography sx={{ fontSize: '0.8rem', color: theme.palette.text.secondary }}>
-          Подписки · {subsCount} человек
+      {subsCount !== undefined && subsCount > 0 && (
+        <Typography
+          onClick={onSubsClick}
+          sx={{
+            fontSize: '0.78rem',
+            color: theme.palette.text.disabled,
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+            transition: 'color .2s',
+            '&:hover': { color: theme.palette.text.secondary },
+          }}
+        >
+          {subsCount} подписок
         </Typography>
       )}
     </Box>

@@ -7,6 +7,9 @@ export function Navbar() {
       <Link to="/" className="nav-logo">
         <img src="/logo.png" alt="" style={{ height: 34, verticalAlign: 'middle', marginRight: 8 }} />
         Крукса
+        {import.meta.env.VITE_APP_DEMO === 'true' && (
+          <span className="nav-badge">Демо</span>
+        )}
       </Link>
       <div className="nav-links">
         <Link to="/login" className="nav-link nav-login">Войти</Link>

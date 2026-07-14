@@ -77,6 +77,27 @@ export function Sidebar() {
           }}
         >
           Крукса
+          {import.meta.env.VITE_APP_DEMO === 'true' && (
+            <Box
+              component="span"
+              sx={{
+                fontSize: '.5rem',
+                fontWeight: 700,
+                color: 'primary.main',
+                bgcolor: 'rgba(38, 166, 154, 0.12)',
+                border: '1px solid',
+                borderColor: 'rgba(38, 166, 154, 0.25)',
+                borderRadius: '3px',
+                px: '2px',
+                ml: '4px',
+                textTransform: 'uppercase',
+                letterSpacing: '.3px',
+                lineHeight: 1,
+              }}
+            >
+              Демо
+            </Box>
+          )}
         </Typography>
       </Box>
 
