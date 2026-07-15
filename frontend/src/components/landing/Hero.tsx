@@ -65,6 +65,10 @@ export function Hero() {
             </GradientButton>
 
             <Button
+              component="a"
+              href="https://vc.ru/tribuna/3029031-ya-sdelal-strava-dlya-rossiiskih-skalolazov-kruksa"
+              target="_blank"
+              rel="noopener noreferrer"
               variant="outlined"
               sx={{
                 display: 'inline-flex',

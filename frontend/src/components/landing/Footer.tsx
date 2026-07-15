@@ -2,6 +2,7 @@ import { Reveal } from '../ui/Reveal';
 
 const footerLinks = [
   { label: 'GitHub', to: 'https://github.com/contr4s/Cruxa' },
+  { label: 'Telegram', to: 'https://telegram.me/cruxa_app' },
 ];
 
 export function Footer() {
